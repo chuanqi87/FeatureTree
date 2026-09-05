@@ -61,7 +61,24 @@
 
 叶子与父节点汇总分开计数，显式给出 unknown 分母和未覆盖范围。当前树与 inventory 均不能证明覆盖三个完整 SDK；目录未映射项和范围待定项进入发现任务，不能省略后声称平台完全覆盖或某能力独有。201 个尚未填写 excludes 的节点在本次清单中要求复核边界；不能通过机械填充排除项代替语义审查。
 
-## 更新后的确认校验
+## OpenCode 小批次交接与恢复
+
+执行契约见 `docs/opencode-worker-contract.md`。任务包命令只准备或检查文件，不启动模型、不直接修改正式知识：
+
+```bash
+.venv/bin/python scripts/research_tasks.py prepare --feature connectivity.bluetooth.le.scan.filter --model volcengine/glm-5.3
+.venv/bin/python scripts/research_tasks.py check output/research/tasks/<task_id>/task.json
+```
+
+task.json 固定单节点、知识项、指定模型、输入文件/研究规则指纹和写入边界；candidate.yaml 与 worker-report.md 在各自独立目录。没有有效基线时只允许诊断候选，禁止 confirmed 和中/高可信。`check` 通过只是结构验收，不生成语义通过记录、不合并 knowledge、不开放全量启动。
+
+协调者串行领取同节点任务，保存实际 Agent Bridge job_id、开始/结束/失败状态和报告；并发时只处理不同节点，最多两路。工作者不改公共文件、不提交 Git。先保存 Git 检查点，再分发任务；失败保留目录与 job_id，只对明确失败项恢复，不自动重试或换模型。恢复前重新校验输入，变化时生成新任务并重新复核，不改旧任务包以掩盖变化。
+
+校验规则、Schema 和研究说明也纳入 preflight 指纹。原文另以本地路径和 SHA-256 验证。Git 只保存代码、知识与精选资料；约 2.9 GB 全文库仍为本机独立数据，不在提交中。换机器要按 official-corpus.md 复制整库并验哈希，不能以 Git clone 成功当作完整迁移成功。
+
+最终预期：逐条可追溯知识与平台差异矩阵、置信度和真机需求双轴、按预算选择的复核清单、带前提和未知分母的洞察，以及没有解决的范围/文档/版本缺口。当前树 212 节点（106 叶子、106 汇总）不是三平台 SDK 的全部能力目录；小范围任务按实际选中知识项统计，不强行填满全树。无实际计费数据不报告节省比例或全量费用估计。
+
+### 证据验收边界
 
 洞察同时列出置信度、来源知识项和真机状态；新推论需独立复核，不得高于最弱关键前提。研究 confirmed 不等于真机通过。真机完成只覆盖计划中的机型、构建和条件，不能推及所有设备。
 

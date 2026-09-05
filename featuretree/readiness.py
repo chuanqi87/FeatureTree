@@ -14,6 +14,7 @@ from .corpus.store import Corpus, now
 from .paths import CONTEXTS_DIR, REPORTS_DIR
 from .pilot_review import pilot_errors
 from .research_profile import fingerprint, policy_errors, research_policy
+from .research_contract import methodology_hash
 from .storage import ROOT, Repository, write_json, write_text
 
 
@@ -22,6 +23,7 @@ def assess(repo, corpus, contexts, run_date):
     knowledge, paths = repo.knowledge()
     config = repo.config()
     policy = research_policy(repo)
+    method_hash = methodology_hash(repo.root)
     integrity = audit(repo)
     errors = list(integrity["errors"]) + policy_errors(policy)
     rows, verified_files = [], {}
@@ -60,7 +62,7 @@ def assess(repo, corpus, contexts, run_date):
                                  for p, data in platforms.items() for source in data.get("documents", []) if isinstance(source, dict))
         inputs = {"context_input_hash": context_input_hash(feature, config, policy),
                   "source_manifest_hash": fingerprint(source_manifest), "baseline_sha256": baseline_hash,
-                  "knowledge_sha256": knowledge_hash, "run_date": run_date}
+                  "knowledge_sha256": knowledge_hash, "methodology_sha256": method_hash, "run_date": run_date}
         rows.append({"feature_id": fid, "role": feature["knowledge_role"],
                      "subject_hash": subject_hash(feature), "input_hash": fingerprint(inputs), **inputs,
                      "knowledge_path": paths[fid], "context_path": str(contexts / (fid + ".json")),

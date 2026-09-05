@@ -1,0 +1,9 @@
+{
+  "source": "docs-raw",
+  "version_policy": "No fixed SDK version inferred from a live documentation index",
+  "catalog_counts": {
+    "android": 425,
+    "ios": 193,
+    "harmonyos": 1733
+  }
+}

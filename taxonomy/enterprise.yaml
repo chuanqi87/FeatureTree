@@ -1,0 +1,143 @@
+domain: enterprise
+features:
+- id: enterprise
+  level: L1
+  parent: null
+  name:
+    zh: 企业与管理
+    en: Enterprise and Management
+  definition: MDM 与工作资料。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - MDM 与工作资料。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: enterprise.mdm
+  level: L2
+  parent: enterprise
+  name:
+    zh: 设备管理
+    en: Device Management
+  definition: 企业设备策略。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/mdm/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 企业设备策略。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: enterprise.mdm.policy
+  level: L3
+  parent: enterprise.mdm
+  name:
+    zh: 管理策略
+    en: Management Policy
+  definition: 远程配置设备/应用策略。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: presence
+  knowledge_path: knowledge/enterprise/mdm/policy.yaml
+  comparison_scope:
+    includes:
+    - 远程配置设备/应用策略。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: enterprise.work_profile
+  level: L2
+  parent: enterprise
+  name:
+    zh: 工作资料
+    en: Work Profile
+  definition: 个人/工作数据隔离配置。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/work_profile/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 个人/工作数据隔离配置。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: enterprise.work_profile.isolation
+  level: L3
+  parent: enterprise.work_profile
+  name:
+    zh: 工作数据隔离
+    en: Work Data Isolation
+  definition: 工作应用与数据容器隔离。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: analog
+  knowledge_path: knowledge/enterprise/work_profile/isolation.yaml
+  comparison_scope:
+    includes:
+    - 工作应用与数据容器隔离。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

@@ -1,0 +1,5301 @@
+[
+  {
+    "native_id": "accelerate",
+    "platform": "ios",
+    "title": "accelerate",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/accelerate",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ai.on_device",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coreml$|^createml$|^vision$|^visionkit$|^soundanalysis$|^speech$|^naturallanguage$|^accelerate$|^coreai$|^foundationmodels$|^translation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "accessibility",
+    "platform": "ios",
+    "title": "accessibility",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/accessibility",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "a11y",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^accessibility；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "accountdatatransfer",
+    "platform": "ios",
+    "title": "accountdatatransfer",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/accountdatatransfer",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "accountorganizationaldatasharing",
+    "platform": "ios",
+    "title": "accountorganizationaldatasharing",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/accountorganizationaldatasharing",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "activitykit",
+    "platform": "ios",
+    "title": "activitykit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/activitykit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "app.desktop.widget",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^widgetkit$|^activitykit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "adattributionkit",
+    "platform": "ios",
+    "title": "adattributionkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/adattributionkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "commerce",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^apptrackingtransparency$|^adsupport$|^adservices$|^adattributionkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "adservices",
+    "platform": "ios",
+    "title": "adservices",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/adservices",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "commerce",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^apptrackingtransparency$|^adsupport$|^adservices$|^adattributionkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "adsupport",
+    "platform": "ios",
+    "title": "adsupport",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/adsupport",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "commerce",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^apptrackingtransparency$|^adsupport$|^adservices$|^adattributionkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "advancedcommerceapi",
+    "platform": "ios",
+    "title": "advancedcommerceapi",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/advancedcommerceapi",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "alarmkit",
+    "platform": "ios",
+    "title": "alarmkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/alarmkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "analytics-reports",
+    "platform": "ios",
+    "title": "analytics-reports",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/analytics-reports",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "appclip",
+    "platform": "ios",
+    "title": "appclip",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/appclip",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "app.install.instant",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^appclip$|^appmigrationkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "appintents",
+    "platform": "ios",
+    "title": "appintents",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/appintents",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "interop.action_dispatch.system_intents",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^appintents|^intents$|^sirikit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "appkit",
+    "platform": "ios",
+    "title": "appkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/appkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "apple-ads-platform-api",
+    "platform": "ios",
+    "title": "apple-ads-platform-api",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/apple-ads-platform-api",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "apple-school-and-business-manager-api",
+    "platform": "ios",
+    "title": "apple-school-and-business-manager-api",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/apple-school-and-business-manager-api",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "apple-silicon",
+    "platform": "ios",
+    "title": "apple-silicon",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/apple-silicon",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "apple_ads",
+    "platform": "ios",
+    "title": "apple_ads",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/apple_ads",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "applemapsserverapi",
+    "platform": "ios",
+    "title": "applemapsserverapi",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/applemapsserverapi",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "applemusicapi",
+    "platform": "ios",
+    "title": "applemusicapi",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/applemusicapi",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "applepayontheweb",
+    "platform": "ios",
+    "title": "applepayontheweb",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/applepayontheweb",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "applepencil",
+    "platform": "ios",
+    "title": "applepencil",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/applepencil",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "input",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^pencilkit$|^applepencil$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "applicationservices",
+    "platform": "ios",
+    "title": "applicationservices",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/applicationservices",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "appmigrationkit",
+    "platform": "ios",
+    "title": "appmigrationkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/appmigrationkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "app.install.instant",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^appclip$|^appmigrationkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "appstoreconnectapi",
+    "platform": "ios",
+    "title": "appstoreconnectapi",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/appstoreconnectapi",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "appstorereceipts",
+    "platform": "ios",
+    "title": "appstorereceipts",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/appstorereceipts",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "appstoreserverapi",
+    "platform": "ios",
+    "title": "appstoreserverapi",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/appstoreserverapi",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "appstoreservernotifications",
+    "platform": "ios",
+    "title": "appstoreservernotifications",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/appstoreservernotifications",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "apptrackingtransparency",
+    "platform": "ios",
+    "title": "apptrackingtransparency",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/apptrackingtransparency",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "commerce",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^apptrackingtransparency$|^adsupport$|^adservices$|^adattributionkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "arkit",
+    "platform": "ios",
+    "title": "arkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/arkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "graphics",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^arkit$|^realitykit$|^roomplan$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "authenticationservices",
+    "platform": "ios",
+    "title": "authenticationservices",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/authenticationservices",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "identity.federated",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^authenticationservices$|^signinwithapple$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "automaticassessmentconfiguration",
+    "platform": "ios",
+    "title": "automaticassessmentconfiguration",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/automaticassessmentconfiguration",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "avfaudio",
+    "platform": "ios",
+    "title": "avfaudio",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/avfaudio",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "media",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^avfoundation$|^avfaudio$|^avkit$|^videotoolbox$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "avfoundation",
+    "platform": "ios",
+    "title": "avfoundation",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/avfoundation",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "media",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^avfoundation$|^avfaudio$|^avkit$|^videotoolbox$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "avkit",
+    "platform": "ios",
+    "title": "avkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/avkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "media",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^avfoundation$|^avfaudio$|^avkit$|^videotoolbox$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "avsystemrouting",
+    "platform": "ios",
+    "title": "avsystemrouting",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/avsystemrouting",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "backgroundassets",
+    "platform": "ios",
+    "title": "backgroundassets",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/backgroundassets",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "app.background",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^backgroundtasks$|^backgroundassets$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "backgroundtasks",
+    "platform": "ios",
+    "title": "backgroundtasks",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/backgroundtasks",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "app.background",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^backgroundtasks$|^backgroundassets$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "bundleresources",
+    "platform": "ios",
+    "title": "bundleresources",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/bundleresources",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "callkit",
+    "platform": "ios",
+    "title": "callkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/callkit",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "telecom.phone",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^callkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "carplay",
+    "platform": "ios",
+    "title": "carplay",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/carplay",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "health_home.auto",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^carplay$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "cfnetwork",
+    "platform": "ios",
+    "title": "cfnetwork",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/cfnetwork",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "network",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^network$|^networkextension$|^cfnetwork$|^wifiaware$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "charts",
+    "platform": "ios",
+    "title": "charts",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/charts",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ui",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^tipkit$|^charts$|^symbols$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "cloudkit",
+    "platform": "ios",
+    "title": "cloudkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/cloudkit",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "storage.cloud",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^cloudkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "contacts",
+    "platform": "ios",
+    "title": "contacts",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/contacts",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "telecom.contacts",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^contacts$|^contactsui$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "contacts.md",
+    "platform": "ios",
+    "title": "contacts.md",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/contacts.md",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "coreai",
+    "platform": "ios",
+    "title": "coreai",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/coreai",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ai.on_device",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coreml$|^createml$|^vision$|^visionkit$|^soundanalysis$|^speech$|^naturallanguage$|^accelerate$|^coreai$|^foundationmodels$|^translation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "coreaudio",
+    "platform": "ios",
+    "title": "coreaudio",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/coreaudio",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "media",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coreaudio$|^audiotoolbox$|^audiounit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "corebluetooth",
+    "platform": "ios",
+    "title": "corebluetooth",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/corebluetooth",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "connectivity.bluetooth.le",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^corebluetooth$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "coredata",
+    "platform": "ios",
+    "title": "coredata",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/coredata",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "storage",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coredata$|^swiftdata$|^fileprovider$|^uniformtypeidentifiers$|^coretransferable$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "corefoundation",
+    "platform": "ios",
+    "title": "corefoundation",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/corefoundation",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "runtime",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^foundation$|^corefoundation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "coregraphics",
+    "platform": "ios",
+    "title": "coregraphics",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/coregraphics",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "graphics",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coregraphics$|^coreimage$|^coreanimation$|^quartzcore$|^spritekit$|^scenekit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "corehaptics",
+    "platform": "ios",
+    "title": "corehaptics",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/corehaptics",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "corelocation",
+    "platform": "ios",
+    "title": "corelocation",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/corelocation",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "location.positioning",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^corelocation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "coreml",
+    "platform": "ios",
+    "title": "coreml",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/coreml",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ai.on_device",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coreml$|^createml$|^vision$|^visionkit$|^soundanalysis$|^speech$|^naturallanguage$|^accelerate$|^coreai$|^foundationmodels$|^translation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "coremotion",
+    "platform": "ios",
+    "title": "coremotion",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/coremotion",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "sensors.motion",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coremotion$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "corenfc",
+    "platform": "ios",
+    "title": "corenfc",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/corenfc",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "connectivity.nfc",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^corenfc$|^proximityreader$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "coreservices",
+    "platform": "ios",
+    "title": "coreservices",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/coreservices",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "corespotlight",
+    "platform": "ios",
+    "title": "corespotlight",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/corespotlight",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "coretelephony",
+    "platform": "ios",
+    "title": "coretelephony",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/coretelephony",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "telecom",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coretelephony$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "coretransferable",
+    "platform": "ios",
+    "title": "coretransferable",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/coretransferable",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "storage",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coredata$|^swiftdata$|^fileprovider$|^uniformtypeidentifiers$|^coretransferable$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "createml",
+    "platform": "ios",
+    "title": "createml",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/createml",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ai.on_device",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coreml$|^createml$|^vision$|^visionkit$|^soundanalysis$|^speech$|^naturallanguage$|^accelerate$|^coreai$|^foundationmodels$|^translation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "cryptokit",
+    "platform": "ios",
+    "title": "cryptokit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/cryptokit",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "security",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^security$|^cryptokit$|^devicecheck$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "deviceactivity",
+    "platform": "ios",
+    "title": "deviceactivity",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/deviceactivity",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "devicecheck",
+    "platform": "ios",
+    "title": "devicecheck",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/devicecheck",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "security",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^security$|^cryptokit$|^devicecheck$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "devicemanagement",
+    "platform": "ios",
+    "title": "devicemanagement",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/devicemanagement",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "enterprise",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^devicemanagement$|^managedsettings$|^familycontrols$|^managedapp$|^screentime$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "dispatch",
+    "platform": "ios",
+    "title": "dispatch",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/dispatch",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "runtime",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^combine$|^swift$|^os$|^dispatch$|^synchronization$|^objectivec$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "distributed",
+    "platform": "ios",
+    "title": "distributed",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/distributed",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "docc",
+    "platform": "ios",
+    "title": "docc",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/docc",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "dockkit",
+    "platform": "ios",
+    "title": "dockkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/dockkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "driverkit",
+    "platform": "ios",
+    "title": "driverkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/driverkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "endpointsecurity",
+    "platform": "ios",
+    "title": "endpointsecurity",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/endpointsecurity",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "evaluations",
+    "platform": "ios",
+    "title": "evaluations",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/evaluations",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "eventkit",
+    "platform": "ios",
+    "title": "eventkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/eventkit",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "telecom.calendar",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^eventkit$|^eventkitui$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "exposurenotification",
+    "platform": "ios",
+    "title": "exposurenotification",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/exposurenotification",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "familycontrols",
+    "platform": "ios",
+    "title": "familycontrols",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/familycontrols",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "enterprise",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^devicemanagement$|^managedsettings$|^familycontrols$|^managedapp$|^screentime$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "fileprovider",
+    "platform": "ios",
+    "title": "fileprovider",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/fileprovider",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "storage",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coredata$|^swiftdata$|^fileprovider$|^uniformtypeidentifiers$|^coretransferable$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "financekit",
+    "platform": "ios",
+    "title": "financekit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/financekit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "foundation",
+    "platform": "ios",
+    "title": "foundation",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/foundation",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "runtime",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^foundation$|^corefoundation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "foundationmodels",
+    "platform": "ios",
+    "title": "foundationmodels",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/foundationmodels",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ai.on_device",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coreml$|^createml$|^vision$|^visionkit$|^soundanalysis$|^speech$|^naturallanguage$|^accelerate$|^coreai$|^foundationmodels$|^translation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "fskit",
+    "platform": "ios",
+    "title": "fskit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/fskit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "gamekit",
+    "platform": "ios",
+    "title": "gamekit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/gamekit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "input",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^gamekit$|^gamecontroller$|^gameplaykit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "gameplaykit",
+    "platform": "ios",
+    "title": "gameplaykit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/gameplaykit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "input",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^gamekit$|^gamecontroller$|^gameplaykit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "healthkit",
+    "platform": "ios",
+    "title": "healthkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/healthkit",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "health_home.health",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^healthkit$|^healthkitui$|^workoutkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "homekit",
+    "platform": "ios",
+    "title": "homekit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/homekit",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "health_home.home",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^homekit$|^matter$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "http-live-streaming",
+    "platform": "ios",
+    "title": "http-live-streaming",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/http-live-streaming",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "hypervisor",
+    "platform": "ios",
+    "title": "hypervisor",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/hypervisor",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "identitylookup",
+    "platform": "ios",
+    "title": "identitylookup",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/identitylookup",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "imageplayground",
+    "platform": "ios",
+    "title": "imageplayground",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/imageplayground",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "intents",
+    "platform": "ios",
+    "title": "intents",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/intents",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "interop.action_dispatch.system_intents",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^appintents|^intents$|^sirikit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "iokit",
+    "platform": "ios",
+    "title": "iokit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/iokit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "ios-ipados-release-notes",
+    "platform": "ios",
+    "title": "ios-ipados-release-notes",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/ios-ipados-release-notes",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "journalingsuggestions",
+    "platform": "ios",
+    "title": "journalingsuggestions",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/journalingsuggestions",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "kernel",
+    "platform": "ios",
+    "title": "kernel",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/kernel",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "linkpresentation",
+    "platform": "ios",
+    "title": "linkpresentation",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/linkpresentation",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "interop.share",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^linkpresentation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "localauthentication",
+    "platform": "ios",
+    "title": "localauthentication",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/localauthentication",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "security.biometrics",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^localauthentication$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "mailkit",
+    "platform": "ios",
+    "title": "mailkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/mailkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "managedapp",
+    "platform": "ios",
+    "title": "managedapp",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/managedapp",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "enterprise",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^devicemanagement$|^managedsettings$|^familycontrols$|^managedapp$|^screentime$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "managedsettings",
+    "platform": "ios",
+    "title": "managedsettings",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/managedsettings",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "enterprise",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^devicemanagement$|^managedsettings$|^familycontrols$|^managedapp$|^screentime$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "mapkit",
+    "platform": "ios",
+    "title": "mapkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/mapkit",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "location.maps",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^mapkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "mapkitjs",
+    "platform": "ios",
+    "title": "mapkitjs",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/mapkitjs",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "matter",
+    "platform": "ios",
+    "title": "matter",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/matter",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "health_home.home",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^homekit$|^matter$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "mediaaccessibility",
+    "platform": "ios",
+    "title": "mediaaccessibility",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/mediaaccessibility",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "messages",
+    "platform": "ios",
+    "title": "messages",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/messages",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "telecom.sms",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^messageui$|^messages$|^telephonymessagingkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "messageui",
+    "platform": "ios",
+    "title": "messageui",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/messageui",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "telecom.sms",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^messageui$|^messages$|^telephonymessagingkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "metal",
+    "platform": "ios",
+    "title": "metal",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/metal",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "graphics.3d",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^metal；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "metalfx",
+    "platform": "ios",
+    "title": "metalfx",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/metalfx",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "graphics.3d",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^metal；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "metalperformanceshadersgraph",
+    "platform": "ios",
+    "title": "metalperformanceshadersgraph",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "graphics.3d",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^metal；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "musickit",
+    "platform": "ios",
+    "title": "musickit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/musickit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "media",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^musickit$|^shazamkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "musicunderstanding",
+    "platform": "ios",
+    "title": "musicunderstanding",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/musicunderstanding",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "naturallanguage",
+    "platform": "ios",
+    "title": "naturallanguage",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/naturallanguage",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ai.on_device",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coreml$|^createml$|^vision$|^visionkit$|^soundanalysis$|^speech$|^naturallanguage$|^accelerate$|^coreai$|^foundationmodels$|^translation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "nearbyinteraction",
+    "platform": "ios",
+    "title": "nearbyinteraction",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/nearbyinteraction",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "distributed.nearby",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^multipeerconnectivity$|^nearbyinteraction$|^watchconnectivity$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "network",
+    "platform": "ios",
+    "title": "network",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/network",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "network",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^network$|^networkextension$|^cfnetwork$|^wifiaware$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "networkextension",
+    "platform": "ios",
+    "title": "networkextension",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/networkextension",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "network",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^network$|^networkextension$|^cfnetwork$|^wifiaware$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "networkingdriverkit",
+    "platform": "ios",
+    "title": "networkingdriverkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/networkingdriverkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "objectivec",
+    "platform": "ios",
+    "title": "objectivec",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/objectivec",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "runtime",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^combine$|^swift$|^os$|^dispatch$|^synchronization$|^objectivec$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "os",
+    "platform": "ios",
+    "title": "os",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/os",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "runtime",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^combine$|^swift$|^os$|^dispatch$|^synchronization$|^objectivec$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "passkit",
+    "platform": "ios",
+    "title": "passkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/passkit",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "commerce",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^passkit$|^walletpasses$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "pdfkit",
+    "platform": "ios",
+    "title": "pdfkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/pdfkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "storage.user_files",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^pdfkit$|^quicklook$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "pencilkit",
+    "platform": "ios",
+    "title": "pencilkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/pencilkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "input",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^pencilkit$|^applepencil$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "permissionkit",
+    "platform": "ios",
+    "title": "permissionkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/permissionkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "phase",
+    "platform": "ios",
+    "title": "phase",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/phase",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "photokit",
+    "platform": "ios",
+    "title": "photokit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/photokit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "media.library",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^photos$|^photosui$|^photokit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "photos",
+    "platform": "ios",
+    "title": "photos",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/photos",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "media.library",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^photos$|^photosui$|^photokit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "photosui",
+    "platform": "ios",
+    "title": "photosui",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/photosui",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "media.library",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^photos$|^photosui$|^photokit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "professional-video-applications",
+    "platform": "ios",
+    "title": "professional-video-applications",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/professional-video-applications",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "proximityreader",
+    "platform": "ios",
+    "title": "proximityreader",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/proximityreader",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "connectivity.nfc",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^corenfc$|^proximityreader$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "pushkit",
+    "platform": "ios",
+    "title": "pushkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/pushkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "notifications",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^usernotifications$|^pushkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "quartzcore",
+    "platform": "ios",
+    "title": "quartzcore",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/quartzcore",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "graphics",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coregraphics$|^coreimage$|^coreanimation$|^quartzcore$|^spritekit$|^scenekit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "quicklook",
+    "platform": "ios",
+    "title": "quicklook",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/quicklook",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "storage.user_files",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^pdfkit$|^quicklook$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "quicktime-file-format",
+    "platform": "ios",
+    "title": "quicktime-file-format",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/quicktime-file-format",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "realitykit",
+    "platform": "ios",
+    "title": "realitykit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/realitykit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "graphics",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^arkit$|^realitykit$|^roomplan$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "replaykit",
+    "platform": "ios",
+    "title": "replaykit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/replaykit",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "graphics.capture",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^replaykit$|^screencapturekit；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "retentionmessaging",
+    "platform": "ios",
+    "title": "retentionmessaging",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/retentionmessaging",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "roomplan",
+    "platform": "ios",
+    "title": "roomplan",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/roomplan",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "graphics",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^arkit$|^realitykit$|^roomplan$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "safari-developer-tools",
+    "platform": "ios",
+    "title": "safari-developer-tools",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/safari-developer-tools",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "safariservices",
+    "platform": "ios",
+    "title": "safariservices",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/safariservices",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "screencapturekit",
+    "platform": "ios",
+    "title": "screencapturekit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/screencapturekit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "graphics.capture",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^replaykit$|^screencapturekit；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "screencapturekit?changes=l_2_3&language=objc",
+    "platform": "ios",
+    "title": "screencapturekit?changes=l_2_3&language=objc",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/screencapturekit?changes=l_2_3&language=objc",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "graphics.capture",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^replaykit$|^screencapturekit；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "screencapturekit?changes=lat__1_5",
+    "platform": "ios",
+    "title": "screencapturekit?changes=lat__1_5",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/screencapturekit?changes=lat__1_5",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "graphics.capture",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^replaykit$|^screencapturekit；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "screentime",
+    "platform": "ios",
+    "title": "screentime",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/screentime",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "enterprise",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^devicemanagement$|^managedsettings$|^familycontrols$|^managedapp$|^screentime$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "security",
+    "platform": "ios",
+    "title": "security",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/security",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "security",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^security$|^cryptokit$|^devicecheck$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "servicemanagement",
+    "platform": "ios",
+    "title": "servicemanagement",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/servicemanagement",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "shazamkit",
+    "platform": "ios",
+    "title": "shazamkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/shazamkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "media",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^musickit$|^shazamkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "signinwithapple",
+    "platform": "ios",
+    "title": "signinwithapple",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/signinwithapple",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "identity.federated",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^authenticationservices$|^signinwithapple$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "sirikit",
+    "platform": "ios",
+    "title": "sirikit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/sirikit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "interop.action_dispatch.system_intents",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^appintents|^intents$|^sirikit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "snapshots",
+    "platform": "ios",
+    "title": "snapshots",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/snapshots",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "soundanalysis",
+    "platform": "ios",
+    "title": "soundanalysis",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/soundanalysis",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ai.on_device",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coreml$|^createml$|^vision$|^visionkit$|^soundanalysis$|^speech$|^naturallanguage$|^accelerate$|^coreai$|^foundationmodels$|^translation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "speech",
+    "platform": "ios",
+    "title": "speech",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/speech",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ai.on_device",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coreml$|^createml$|^vision$|^visionkit$|^soundanalysis$|^speech$|^naturallanguage$|^accelerate$|^coreai$|^foundationmodels$|^translation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "spritekit",
+    "platform": "ios",
+    "title": "spritekit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/spritekit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "graphics",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coregraphics$|^coreimage$|^coreanimation$|^quartzcore$|^spritekit$|^scenekit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "storekit",
+    "platform": "ios",
+    "title": "storekit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/storekit",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "commerce.iap",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^storekit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "swift",
+    "platform": "ios",
+    "title": "swift",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/swift",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "runtime",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^combine$|^swift$|^os$|^dispatch$|^synchronization$|^objectivec$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "swiftdata",
+    "platform": "ios",
+    "title": "swiftdata",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/swiftdata",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "storage",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coredata$|^swiftdata$|^fileprovider$|^uniformtypeidentifiers$|^coretransferable$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "swiftui",
+    "platform": "ios",
+    "title": "swiftui",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/swiftui",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ui.declarative",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^swiftui$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "symbols",
+    "platform": "ios",
+    "title": "symbols",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/symbols",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ui",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^tipkit$|^charts$|^symbols$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "synchronization",
+    "platform": "ios",
+    "title": "synchronization",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/synchronization",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "runtime",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^combine$|^swift$|^os$|^dispatch$|^synchronization$|^objectivec$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "systemextensions",
+    "platform": "ios",
+    "title": "systemextensions",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/systemextensions",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "technologies",
+    "platform": "ios",
+    "title": "technologies",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/technologies",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "technotes",
+    "platform": "ios",
+    "title": "technotes",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/technotes",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "telephonymessagingkit",
+    "platform": "ios",
+    "title": "telephonymessagingkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/telephonymessagingkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "telecom.sms",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^messageui$|^messages$|^telephonymessagingkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "threadnetwork",
+    "platform": "ios",
+    "title": "threadnetwork",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/threadnetwork",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "connectivity",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^threadnetwork$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "tipkit",
+    "platform": "ios",
+    "title": "tipkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/tipkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ui",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^tipkit$|^charts$|^symbols$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "translation",
+    "platform": "ios",
+    "title": "translation",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/translation",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ai.on_device",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coreml$|^createml$|^vision$|^visionkit$|^soundanalysis$|^speech$|^naturallanguage$|^accelerate$|^coreai$|^foundationmodels$|^translation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "trustinsights",
+    "platform": "ios",
+    "title": "trustinsights",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/trustinsights",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "uikit",
+    "platform": "ios",
+    "title": "uikit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/uikit",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ui.imperative",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^uikit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "uniformtypeidentifiers",
+    "platform": "ios",
+    "title": "uniformtypeidentifiers",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/uniformtypeidentifiers",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "storage",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coredata$|^swiftdata$|^fileprovider$|^uniformtypeidentifiers$|^coretransferable$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "updates",
+    "platform": "ios",
+    "title": "updates",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/updates",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "usernotifications",
+    "platform": "ios",
+    "title": "usernotifications",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/usernotifications",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "notifications",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^usernotifications$|^pushkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "videotoolbox",
+    "platform": "ios",
+    "title": "videotoolbox",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/videotoolbox",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "media",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^avfoundation$|^avfaudio$|^avkit$|^videotoolbox$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "virtualization",
+    "platform": "ios",
+    "title": "virtualization",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/virtualization",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "vision",
+    "platform": "ios",
+    "title": "vision",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/vision",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ai.on_device",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coreml$|^createml$|^vision$|^visionkit$|^soundanalysis$|^speech$|^naturallanguage$|^accelerate$|^coreai$|^foundationmodels$|^translation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "visionkit",
+    "platform": "ios",
+    "title": "visionkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/visionkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "ai.on_device",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^coreml$|^createml$|^vision$|^visionkit$|^soundanalysis$|^speech$|^naturallanguage$|^accelerate$|^coreai$|^foundationmodels$|^translation$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "visionos",
+    "platform": "ios",
+    "title": "visionos",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/visionos",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "visionos-release-notes",
+    "platform": "ios",
+    "title": "visionos-release-notes",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/visionos-release-notes",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "visualintelligence",
+    "platform": "ios",
+    "title": "visualintelligence",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/visualintelligence",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "vmnet",
+    "platform": "ios",
+    "title": "vmnet",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/vmnet",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "walletpasses",
+    "platform": "ios",
+    "title": "walletpasses",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/walletpasses",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "commerce",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^passkit$|^walletpasses$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "watchconnectivity",
+    "platform": "ios",
+    "title": "watchconnectivity",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/watchconnectivity",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "distributed.nearby",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^multipeerconnectivity$|^nearbyinteraction$|^watchconnectivity$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "watchkit",
+    "platform": "ios",
+    "title": "watchkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/watchkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "health_home",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^watchkit$|^clockkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "weatherkit",
+    "platform": "ios",
+    "title": "weatherkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/weatherkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "location",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^weatherkit；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "weatherkitrestapi",
+    "platform": "ios",
+    "title": "weatherkitrestapi",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/weatherkitrestapi",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "location",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^weatherkit；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "webkit",
+    "platform": "ios",
+    "title": "webkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/webkit",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "web.webview",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^webkit$|^webkitjs$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "webkitjs",
+    "platform": "ios",
+    "title": "webkitjs",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/webkitjs",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "web.webview",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^webkit$|^webkitjs$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "widgetkit",
+    "platform": "ios",
+    "title": "widgetkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/widgetkit",
+    "notes": "Apple documentation catalog; local landing page available",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "app.desktop.widget",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^widgetkit$|^activitykit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "included",
+    "scope_reason": "本地落地页声明 iOS 适用；具体版本与能力仍待核实",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "wifiaware",
+    "platform": "ios",
+    "title": "wifiaware",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/wifiaware",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "network",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^network$|^networkextension$|^cfnetwork$|^wifiaware$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "workoutkit",
+    "platform": "ios",
+    "title": "workoutkit",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/workoutkit",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [
+      {
+        "feature_id": "health_home.health",
+        "relationship": "catalog",
+        "verification": "candidate",
+        "method": "rule",
+        "rationale": "名称规则候选：^healthkit$|^healthkitui$|^workoutkit$；尚未确认能力语义与版本。"
+      }
+    ],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "xcode",
+    "platform": "ios",
+    "title": "xcode",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/xcode",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "xcuiautomation",
+    "platform": "ios",
+    "title": "xcuiautomation",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/xcuiautomation",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  },
+  {
+    "native_id": "xpc",
+    "platform": "ios",
+    "title": "xpc",
+    "kind": "framework",
+    "version": "unversioned local documentation snapshot; see source.sha256",
+    "url": "https://developer.apple.com/documentation/xpc",
+    "notes": "Apple documentation catalog",
+    "parent": null,
+    "layer": "unknown",
+    "visibility": "public",
+    "mappings": [],
+    "schema_version": 2,
+    "source": {
+      "local_path": "docs-raw/ios/framework-roots.txt",
+      "sha256": "8946484c45a8716d020447b154c7c724488c604418cb9098e053d5a5ede103ab",
+      "distribution": "Apple documentation catalog (platform applicability unverified)",
+      "version_pinned": false
+    },
+    "scope": "pending",
+    "scope_reason": "Apple 文档目录需要逐项确认 iOS 适用性",
+    "scope_method": "rule"
+  }
+]

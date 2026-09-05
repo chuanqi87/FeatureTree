@@ -1,0 +1,25 @@
+schema_version: 1
+version_policy: latest_stable_on_run_date
+primary_device_forms: [phone]
+other_device_forms: separate_findings
+preview_releases: exclude_from_primary_comparison
+ecosystem_versions: pin_per_node
+distribution_policy: separate_harmonyos_and_openharmony
+baseline_resolution: read_official_release_sources_at_run_start
+official_release_entrypoints:
+  android:
+    - https://developer.android.com/about/versions/17
+    - https://developer.android.com/about/versions/17/release-notes
+    - https://developer.android.com/guide/topics/manifest/uses-sdk-element
+  ios:
+    - https://developer.apple.com/documentation/ios-ipados-release-notes
+    - https://developer.apple.com/news/releases/
+  harmonyos:
+    - https://developer.huawei.com/consumer/cn/doc/doccenter-release-notes/version-number-26
+    - https://developer.huawei.com/consumer/cn/doc/doccenter-release-notes/os-new-feature-2600
+pilot_features:
+  - connectivity.bluetooth.le.scan.filter
+  - app.background.foreground_task
+  - security.permissions.runtime
+  - ui.declarative.vs_imperative
+  - distributed.softbus.fabric

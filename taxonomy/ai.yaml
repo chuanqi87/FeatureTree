@@ -1,0 +1,146 @@
+domain: ai
+features:
+- id: ai
+  level: L1
+  parent: null
+  name:
+    zh: AI与智能
+    en: AI and Intelligence
+  definition: 端侧推理与系统智能分发。
+  knowledge_role: rollup
+  layer: mixed
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 端侧推理与系统智能分发。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ai.on_device
+  level: L2
+  parent: ai
+  name:
+    zh: 端侧推理
+    en: On-Device Inference
+  definition: 设备上运行 ML 模型。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/on_device/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 设备上运行 ML 模型。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ai.on_device.runtime
+  level: L3
+  parent: ai.on_device
+  name:
+    zh: 端侧ML运行时
+    en: On-Device ML Runtime
+  definition: 加载与执行端侧模型。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  aliases:
+  - ML Kit
+  - Core ML
+  - MindSpore Lite
+  knowledge_path: knowledge/ai/on_device/runtime.yaml
+  comparison_scope:
+    includes:
+    - 加载与执行端侧模型。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ai.system
+  level: L2
+  parent: ai
+  name:
+    zh: 系统智能
+    en: System Intelligence
+  definition: 系统级建议、摘要与意图（生态/OS 混合）。
+  knowledge_role: rollup
+  layer: mixed
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/system/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 系统级建议、摘要与意图（生态/OS 混合）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ai.system.suggestions
+  level: L3
+  parent: ai.system
+  name:
+    zh: 系统智能建议
+    en: System Smart Suggestions
+  definition: 系统基于上下文的建议与快捷操作。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: presence
+  knowledge_path: knowledge/ai/system/suggestions.yaml
+  comparison_scope:
+    includes:
+    - 系统基于上下文的建议与快捷操作。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

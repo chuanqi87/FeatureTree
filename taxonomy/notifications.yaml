@@ -1,0 +1,209 @@
+domain: notifications
+features:
+- id: notifications
+  level: L1
+  parent: null
+  name:
+    zh: 通知与推送
+    en: Notifications and Push
+  definition: 本地通知展示与远程推送通道。
+  knowledge_role: rollup
+  layer: mixed
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/notifications/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 本地通知展示与远程推送通道。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: notifications.local
+  level: L2
+  parent: notifications
+  name:
+    zh: 本地通知
+    en: Local Notifications
+  definition: 由本机应用创建的通知展示（OS 层）。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/notifications/local/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 由本机应用创建的通知展示（OS 层）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: notifications.local.display
+  level: L3
+  parent: notifications.local
+  name:
+    zh: 通知展示
+    en: Notification Display
+  definition: 通知栏/横幅/锁屏通知展示与渠道。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  bindings:
+    android:
+    - kind: class
+      id: android.app.NotificationManager
+      url: https://developer.android.com/reference/android/app/NotificationManager
+      role: primary
+    ios:
+    - kind: framework
+      id: UserNotifications
+      url: https://developer.apple.com/documentation/usernotifications
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.notificationManager'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-notificationmanager
+      role: primary
+  knowledge_path: knowledge/notifications/local/display.yaml
+  comparison_scope:
+    includes:
+    - 通知栏/横幅/锁屏通知展示与渠道。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: notifications.local.actions
+  level: L3
+  parent: notifications.local
+  name:
+    zh: 通知操作按钮
+    en: Notification Actions
+  definition: 通知上的可点击操作。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  knowledge_path: knowledge/notifications/local/actions.yaml
+  comparison_scope:
+    includes:
+    - 通知上的可点击操作。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: notifications.push
+  level: L2
+  parent: notifications
+  name:
+    zh: 远程推送通道
+    en: Remote Push Channel
+  definition: 云端到设备的推送投递（生态层）。
+  knowledge_role: rollup
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/notifications/push/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 云端到设备的推送投递（生态层）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: notifications.push.channel
+  level: L3
+  parent: notifications.push
+  name:
+    zh: 推送通道
+    en: Push Delivery Channel
+  definition: FCM / APNs / Push Kit 远程消息通道。
+  knowledge_role: leaf
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  aliases:
+  - FCM
+  - APNs
+  - Push Kit
+  bindings:
+    android:
+    - kind: other
+      id: com.google.firebase.messaging
+      url: https://firebase.google.com/docs/cloud-messaging/android/client
+      role: primary
+      note: 'ecosystem: FCM'
+    ios:
+    - kind: framework
+      id: UserNotifications + APNs
+      url: https://developer.apple.com/documentation/usernotifications/registering-your-app-with-apns
+      role: primary
+    harmonyos:
+    - kind: kit
+      id: PushKit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/push-kit-introduction
+      role: primary
+  knowledge_path: knowledge/notifications/push/channel.yaml
+  comparison_scope:
+    includes:
+    - FCM / APNs / Push Kit 远程消息通道。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

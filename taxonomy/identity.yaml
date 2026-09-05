@@ -1,0 +1,143 @@
+domain: identity
+features:
+- id: identity
+  level: L1
+  parent: null
+  name:
+    zh: 身份与账号
+    en: Identity and Accounts
+  definition: 系统账号与联邦登录。
+  knowledge_role: rollup
+  layer: mixed
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/identity/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 系统账号与联邦登录。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: identity.system_account
+  level: L2
+  parent: identity
+  name:
+    zh: 系统账号
+    en: System Account
+  definition: 设备级账号框架。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/identity/system_account/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 设备级账号框架。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: identity.system_account.manager
+  level: L3
+  parent: identity.system_account
+  name:
+    zh: 账号管理
+    en: Account Manager
+  definition: 添加/查询系统账号。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: analog
+  knowledge_path: knowledge/identity/system_account/manager.yaml
+  comparison_scope:
+    includes:
+    - 添加/查询系统账号。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: identity.federated
+  level: L2
+  parent: identity
+  name:
+    zh: 联邦登录
+    en: Federated Sign-In
+  definition: 生态账号一键登录（生态层）。
+  knowledge_role: rollup
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/identity/federated/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 生态账号一键登录（生态层）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: identity.federated.platform_sign_in
+  level: L3
+  parent: identity.federated
+  name:
+    zh: 平台账号登录
+    en: Platform Account Sign-In
+  definition: Sign in with Apple / Google / Huawei 等。
+  knowledge_role: leaf
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  knowledge_path: knowledge/identity/federated/platform_sign_in.yaml
+  comparison_scope:
+    includes:
+    - Sign in with Apple / Google / Huawei 等。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

@@ -1,0 +1,171 @@
+{
+  "scope": "Endpoint probes and sample responses only; not a complete mirror or production integration.",
+  "responses": [
+    {
+      "id": "android-ble-guide",
+      "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/find-ble-devices",
+      "method": "GET",
+      "checked_at": "2026-09-05T09:34:20.942633+00:00",
+      "status": 200,
+      "final_url": "https://developer.android.com/develop/connectivity/bluetooth/ble/find-ble-devices",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 297242,
+      "sha256": "7f95a7e526cc536219282141622602a9645c38e365f9e572cda442e4d2f4d57f",
+      "local_path": "docs-raw/source-probes/2026-09-05/android-ble-guide.html"
+    },
+    {
+      "id": "android-robots",
+      "url": "https://developer.android.com/robots.txt",
+      "method": "GET",
+      "checked_at": "2026-09-05T09:34:20.943077+00:00",
+      "status": 200,
+      "final_url": "https://developer.android.com/robots.txt",
+      "content_type": "text/plain",
+      "bytes": 416,
+      "sha256": "03dd3a3eb47557a2ac4aece0416004708361acb8d22c104e170bde2c2e31fe17",
+      "local_path": "docs-raw/source-probes/2026-09-05/android-robots.txt"
+    },
+    {
+      "id": "android-sitemap",
+      "url": "https://developer.android.com/sitemap.xml",
+      "method": "GET",
+      "checked_at": "2026-09-05T09:34:20.943273+00:00",
+      "status": 200,
+      "final_url": "https://developer.android.com/sitemap.xml",
+      "content_type": "application/xml",
+      "bytes": 1373,
+      "sha256": "9be8ff4bb03467f2365b7248a2fdffde78c00484df0b77e12edc4103dea7963d",
+      "local_path": "docs-raw/source-probes/2026-09-05/android-sitemap.xml"
+    },
+    {
+      "id": "android-sdk-repository",
+      "url": "https://dl.google.com/android/repository/repository2-3.xml",
+      "method": "GET",
+      "checked_at": "2026-09-05T09:34:20.943409+00:00",
+      "status": 200,
+      "final_url": "https://dl.google.com/android/repository/repository2-3.xml",
+      "content_type": "application/xml",
+      "bytes": 413485,
+      "sha256": "fc2503ca74b0b098fa1668619ff195c0dd118b722e1680bc7c822be4b3f2276a",
+      "local_path": "docs-raw/source-probes/2026-09-05/android-sdk-repository.xml"
+    },
+    {
+      "id": "apple-corebluetooth",
+      "url": "https://developer.apple.com/documentation/corebluetooth.md",
+      "method": "GET",
+      "checked_at": "2026-09-05T09:34:21.400334+00:00",
+      "status": 200,
+      "final_url": "https://developer.apple.com/documentation/corebluetooth.md",
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 7820,
+      "sha256": "64c445e5f0fe384b767d52aee478880ba15e1e262e7a75b8056f3cc5cc9943f9",
+      "local_path": "docs-raw/source-probes/2026-09-05/apple-corebluetooth.md"
+    },
+    {
+      "id": "apple-technologies",
+      "url": "https://developer.apple.com/tutorials/data/documentation/technologies.json",
+      "method": "GET",
+      "checked_at": "2026-09-05T09:34:21.700011+00:00",
+      "status": 200,
+      "final_url": "https://developer.apple.com/tutorials/data/documentation/technologies.json",
+      "content_type": "application/json",
+      "bytes": 274514,
+      "sha256": "15cae41cec2085a2051677d43ff2d1075711e8ae7b1bbfc0c0e6aa31b402891c",
+      "local_path": "docs-raw/source-probes/2026-09-05/apple-technologies.json"
+    },
+    {
+      "id": "harmonyos-ble-reference",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble.md",
+      "method": "GET",
+      "checked_at": "2026-09-05T09:34:21.800954+00:00",
+      "status": 200,
+      "final_url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble.md",
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 290585,
+      "sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+      "local_path": "docs-raw/source-probes/2026-09-05/harmonyos-ble-reference.md"
+    },
+    {
+      "id": "harmonyos-application-guide",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/application-dev-guide.md",
+      "method": "GET",
+      "checked_at": "2026-09-05T09:34:22.241494+00:00",
+      "status": 200,
+      "final_url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/application-dev-guide.md",
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 2386,
+      "sha256": "169d9a0678a7f91573538f0c394b9a1be06cc69c7c4fd13e9bd91a136e0d3717",
+      "local_path": "docs-raw/source-probes/2026-09-05/harmonyos-application-guide.md"
+    },
+    {
+      "id": "harmonyos-guide-catalog",
+      "url": "https://svc-drcn.developer.huawei.com/community/servlet/consumer/cn/documentPortal/getCatalogTree",
+      "method": "POST",
+      "checked_at": "2026-09-05T09:34:22.397984+00:00",
+      "request_body": {
+        "language": "cn",
+        "catalogName": "harmonyos-guides",
+        "showHide": 1
+      },
+      "status": 200,
+      "final_url": "https://svc-drcn.developer.huawei.com/community/servlet/consumer/cn/documentPortal/getCatalogTree",
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 1262428,
+      "sha256": "6d00405c16dad971ee94bf5f8f4eab910f1780701f707e34e512feb6744a5649",
+      "local_path": "docs-raw/source-probes/2026-09-05/harmonyos-guide-catalog.json"
+    },
+    {
+      "id": "harmonyos-api-catalog",
+      "url": "https://svc-drcn.developer.huawei.com/community/servlet/consumer/cn/documentPortal/getCatalogTree",
+      "method": "POST",
+      "checked_at": "2026-09-05T09:34:22.417516+00:00",
+      "request_body": {
+        "language": "cn",
+        "catalogName": "harmonyos-references",
+        "showHide": 1
+      },
+      "status": 200,
+      "final_url": "https://svc-drcn.developer.huawei.com/community/servlet/consumer/cn/documentPortal/getCatalogTree",
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 1212357,
+      "sha256": "c3fe34917c94d77a97fa5e1c247f0481e0da83bc50d093d0acfc076c9ca1784e",
+      "local_path": "docs-raw/source-probes/2026-09-05/harmonyos-api-catalog.json"
+    },
+    {
+      "id": "apple-ble-guide",
+      "url": "https://developer.apple.com/documentation/CoreBluetooth/transferring-data-between-bluetooth-low-energy-devices.md",
+      "method": "GET",
+      "checked_at": "2026-09-05T09:37:28.075049+00:00",
+      "status": 200,
+      "final_url": "https://developer.apple.com/documentation/CoreBluetooth/transferring-data-between-bluetooth-low-energy-devices.md",
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 10068,
+      "sha256": "67513f7c3a365fdbbdc09cc72f00e6c193b28a2ff905986100fd495f69714f7f",
+      "local_path": "docs-raw/source-probes/2026-09-05/apple-ble-guide.md"
+    },
+    {
+      "id": "apple-central-manager",
+      "url": "https://developer.apple.com/documentation/CoreBluetooth/CBCentralManager.md",
+      "method": "GET",
+      "checked_at": "2026-09-05T09:37:28.075444+00:00",
+      "status": 200,
+      "final_url": "https://developer.apple.com/documentation/CoreBluetooth/CBCentralManager.md",
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 6067,
+      "sha256": "6e82cd25647458c5f7ff38d46de1684e6b7e3a6174706357186c35bcf68c0f80",
+      "local_path": "docs-raw/source-probes/2026-09-05/apple-central-manager.md"
+    },
+    {
+      "id": "harmonyos-offline-environment",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-no-network.md",
+      "method": "GET",
+      "checked_at": "2026-09-05T09:37:28.075616+00:00",
+      "status": 200,
+      "final_url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-no-network.md",
+      "content_type": "text/markdown; charset=utf-8",
+      "bytes": 2641,
+      "sha256": "22e35d1f7acdd16d0e57a9d580089b059184a84d63749a59c881817903a84805",
+      "local_path": "docs-raw/source-probes/2026-09-05/harmonyos-offline-environment.md"
+    }
+  ]
+}

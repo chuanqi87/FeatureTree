@@ -1,0 +1,304 @@
+domain: security
+features:
+- id: security
+  level: L1
+  parent: null
+  name:
+    zh: 安全与隐私
+    en: Security and Privacy
+  definition: 权限模型、密钥、生物识别、安全存储与数据保护。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 权限模型、密钥、生物识别、安全存储与数据保护。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: security.permissions
+  level: L2
+  parent: security
+  name:
+    zh: 权限模型
+    en: Permission Model
+  definition: 安装时/运行时权限与敏感能力授权（横切主文）。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/permissions/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 安装时/运行时权限与敏感能力授权（横切主文）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: security.permissions.runtime
+  level: L3
+  parent: security.permissions
+  name:
+    zh: 运行时权限请求
+    en: Runtime Permission Request
+  definition: 运行时向用户请求危险权限。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  leaf_at_this_level: true
+  split_justification: analog
+  bindings:
+    android:
+    - kind: class
+      id: android.content.pm.PackageManager
+      url: https://developer.android.com/reference/android/content/pm/PackageManager
+      role: related
+      note: requestPermissions
+    ios:
+    - kind: other
+      id: Info.plist usage descriptions + per-API prompts
+      url: https://developer.apple.com/documentation/uikit/requesting-access-to-protected-resources
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.abilityAccessCtrl'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-abilityaccessctrl
+      role: primary
+  knowledge_path: knowledge/security/permissions/runtime.yaml
+  comparison_scope:
+    includes:
+    - 运行时向用户请求危险权限。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: security.permissions.special
+  level: L3
+  parent: security.permissions
+  name:
+    zh: 特殊权限与设置页
+    en: Special Permissions Settings
+  definition: 需跳转系统设置的特殊授权（如所有文件、悬浮窗）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: presence
+  knowledge_path: knowledge/security/permissions/special.yaml
+  comparison_scope:
+    includes:
+    - 需跳转系统设置的特殊授权（如所有文件、悬浮窗）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: security.crypto
+  level: L2
+  parent: security
+  name:
+    zh: 密钥与密码学
+    en: Keys and Cryptography
+  definition: 密钥库与加解密原语。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/crypto/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 密钥库与加解密原语。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: security.crypto.keystore
+  level: L3
+  parent: security.crypto
+  name:
+    zh: 硬件支持密钥库
+    en: Hardware-Backed Keystore
+  definition: 系统密钥库中的密钥生成与使用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/security/crypto/keystore.yaml
+  comparison_scope:
+    includes:
+    - 系统密钥库中的密钥生成与使用。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: security.biometrics
+  level: L2
+  parent: security
+  name:
+    zh: 生物识别
+    en: Biometrics
+  definition: 指纹、面容等本地认证。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/biometrics/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 指纹、面容等本地认证。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: security.biometrics.local_auth
+  level: L3
+  parent: security.biometrics
+  name:
+    zh: 本地生物认证
+    en: Local Biometric Auth
+  definition: 解锁应用或密钥的生物识别。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  leaf_at_this_level: true
+  knowledge_path: knowledge/security/biometrics/local_auth.yaml
+  comparison_scope:
+    includes:
+    - 解锁应用或密钥的生物识别。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: security.secure_storage
+  level: L2
+  parent: security
+  name:
+    zh: 安全存储
+    en: Secure Storage
+  definition: 密钥串/凭据加密存储。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/secure_storage/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 密钥串/凭据加密存储。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: security.secure_storage.credentials
+  level: L3
+  parent: security.secure_storage
+  name:
+    zh: 凭据安全存储
+    en: Credential Secure Storage
+  definition: 密码、令牌等敏感凭据存储。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: highly_sensitive
+  leaf_at_this_level: true
+  aliases:
+  - Keychain
+  - EncryptedSharedPreferences
+  - HUKS
+  knowledge_path: knowledge/security/secure_storage/credentials.yaml
+  comparison_scope:
+    includes:
+    - 密码、令牌等敏感凭据存储。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

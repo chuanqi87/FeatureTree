@@ -1,0 +1,228 @@
+domain: graphics
+features:
+- id: graphics
+  level: L1
+  parent: null
+  name:
+    zh: 图形与渲染
+    en: Graphics and Rendering
+  definition: 2D/3D 绘制、合成、HDR 与截屏录屏。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 2D/3D 绘制、合成、HDR 与截屏录屏。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: graphics.2d
+  level: L2
+  parent: graphics
+  name:
+    zh: 二维绘制
+    en: 2D Drawing
+  definition: Canvas/矢量/位图二维绘制。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/_rollup.yaml
+  comparison_scope:
+    includes:
+    - Canvas/矢量/位图二维绘制。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: graphics.2d.canvas
+  level: L3
+  parent: graphics.2d
+  name:
+    zh: 画布绘制
+    en: Canvas Drawing
+  definition: 即时模式二维画布 API。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/graphics/2d/canvas.yaml
+  comparison_scope:
+    includes:
+    - 即时模式二维画布 API。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: graphics.3d
+  level: L2
+  parent: graphics
+  name:
+    zh: 三维与GPU
+    en: 3D and GPU
+  definition: Metal/Vulkan/OpenGL 等 GPU 渲染。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/3d/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - Metal/Vulkan/OpenGL 等 GPU 渲染。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: graphics.3d.gpu_api
+  level: L3
+  parent: graphics.3d
+  name:
+    zh: 现代GPU图形API
+    en: Modern GPU Graphics API
+  definition: 低开销 GPU 命令提交与着色器管线。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  aliases:
+  - Vulkan
+  - Metal
+  knowledge_path: knowledge/graphics/3d/gpu_api.yaml
+  comparison_scope:
+    includes:
+    - 低开销 GPU 命令提交与着色器管线。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: graphics.capture
+  level: L2
+  parent: graphics
+  name:
+    zh: 截屏与录屏
+    en: Screenshot and Screen Record
+  definition: 捕获屏幕图像或视频流。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/capture/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 捕获屏幕图像或视频流。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: graphics.capture.screenshot
+  level: L3
+  parent: graphics.capture
+  name:
+    zh: 截屏
+    en: Screenshot
+  definition: 捕获当前显示内容为图像。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  leaf_at_this_level: true
+  knowledge_path: knowledge/graphics/capture/screenshot.yaml
+  comparison_scope:
+    includes:
+    - 捕获当前显示内容为图像。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: graphics.capture.screen_record
+  level: L3
+  parent: graphics.capture
+  name:
+    zh: 屏幕录制
+    en: Screen Recording
+  definition: 持续捕获屏幕为视频。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  leaf_at_this_level: true
+  knowledge_path: knowledge/graphics/capture/screen_record.yaml
+  comparison_scope:
+    includes:
+    - 持续捕获屏幕为视频。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

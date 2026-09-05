@@ -1,0 +1,314 @@
+domain: storage
+features:
+- id: storage
+  level: L1
+  parent: null
+  name:
+    zh: 数据与存储
+    en: Data and Storage
+  definition: 沙箱文件、用户文件、数据库、键值与云同步盘。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/storage/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 沙箱文件、用户文件、数据库、键值与云同步盘。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: storage.sandbox
+  level: L2
+  parent: storage
+  name:
+    zh: 应用沙箱文件
+    en: App Sandbox Files
+  definition: 仅本应用可访问的私有文件空间。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/storage/sandbox/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 仅本应用可访问的私有文件空间。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: storage.sandbox.private_files
+  level: L3
+  parent: storage.sandbox
+  name:
+    zh: 私有文件读写
+    en: Private File IO
+  definition: 应用私有目录文件读写。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/storage/sandbox/private_files.yaml
+  comparison_scope:
+    includes:
+    - 应用私有目录文件读写。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: storage.user_files
+  level: L2
+  parent: storage
+  name:
+    zh: 用户文件访问
+    en: User File Access
+  definition: 文档、下载等用户可见文件的受控访问。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/storage/user_files/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 文档、下载等用户可见文件的受控访问。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: storage.user_files.picker
+  level: L3
+  parent: storage.user_files
+  name:
+    zh: 文档选择器
+    en: Document Picker
+  definition: 系统文件选择/保存面板。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: privacy
+  knowledge_path: knowledge/storage/user_files/picker.yaml
+  comparison_scope:
+    includes:
+    - 系统文件选择/保存面板。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: storage.db
+  level: L2
+  parent: storage
+  name:
+    zh: 结构化存储
+    en: Structured Storage
+  definition: 关系数据库与对象持久化。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/storage/db/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 关系数据库与对象持久化。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: storage.db.relational
+  level: L3
+  parent: storage.db
+  name:
+    zh: 关系数据库
+    en: Relational Database
+  definition: SQLite 类本地关系库。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/storage/db/relational.yaml
+  comparison_scope:
+    includes:
+    - SQLite 类本地关系库。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: storage.kv
+  level: L2
+  parent: storage
+  name:
+    zh: 键值存储
+    en: Key-Value Storage
+  definition: 轻量偏好与键值持久化。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/storage/kv/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 轻量偏好与键值持久化。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: storage.kv.preferences
+  level: L3
+  parent: storage.kv
+  name:
+    zh: 偏好键值
+    en: Preferences KV
+  definition: 小型配置键值存储。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/storage/kv/preferences.yaml
+  comparison_scope:
+    includes:
+    - 小型配置键值存储。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: storage.cloud
+  level: L2
+  parent: storage
+  name:
+    zh: 云端同步存储
+    en: Cloud Sync Storage
+  definition: 与账号绑定的云盘/记录同步（生态层）。
+  knowledge_role: rollup
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/storage/cloud/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 与账号绑定的云盘/记录同步（生态层）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: storage.cloud.records
+  level: L3
+  parent: storage.cloud
+  name:
+    zh: 云记录同步
+    en: Cloud Record Sync
+  definition: 结构化记录的云端同步。
+  knowledge_role: leaf
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: analog
+  aliases:
+  - CloudKit
+  - Drive
+  - Cloud DB
+  knowledge_path: knowledge/storage/cloud/records.yaml
+  comparison_scope:
+    includes:
+    - 结构化记录的云端同步。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

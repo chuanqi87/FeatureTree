@@ -1,0 +1,196 @@
+domain: device
+features:
+- id: device
+  level: L1
+  parent: null
+  name:
+    zh: 设备与系统资源
+    en: Device and System Resources
+  definition: 电量、热、显示与音频路由。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/device/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 电量、热、显示与音频路由。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: device.power
+  level: L2
+  parent: device
+  name:
+    zh: 电量
+    en: Power
+  definition: 电池状态与省电约束感知。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/device/power/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 电池状态与省电约束感知。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: device.power.battery
+  level: L3
+  parent: device.power
+  name:
+    zh: 电池状态
+    en: Battery Status
+  definition: 电量、充电状态查询与监听。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/device/power/battery.yaml
+  comparison_scope:
+    includes:
+    - 电量、充电状态查询与监听。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: device.display
+  level: L2
+  parent: device
+  name:
+    zh: 显示
+    en: Display
+  definition: 亮度、刷新率、多显。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/device/display/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 亮度、刷新率、多显。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: device.display.brightness
+  level: L3
+  parent: device.display
+  name:
+    zh: 亮度控制
+    en: Brightness Control
+  definition: 查询或建议屏幕亮度。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: presence
+  knowledge_path: knowledge/device/display/brightness.yaml
+  comparison_scope:
+    includes:
+    - 查询或建议屏幕亮度。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: device.audio_route
+  level: L2
+  parent: device
+  name:
+    zh: 音频路由
+    en: Audio Routing
+  definition: 听筒、扬声器、蓝牙音频路由。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/device/audio_route/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 听筒、扬声器、蓝牙音频路由。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: device.audio_route.output
+  level: L3
+  parent: device.audio_route
+  name:
+    zh: 音频输出路由
+    en: Audio Output Route
+  definition: 选择与监听音频输出设备。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/device/audio_route/output.yaml
+  comparison_scope:
+    includes:
+    - 选择与监听音频输出设备。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

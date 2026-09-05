@@ -1,0 +1,224 @@
+domain: distributed
+features:
+- id: distributed
+  level: L1
+  parent: null
+  name:
+    zh: 分布式与多端
+    en: Distributed and Continuity
+  definition: 接续、附近设备与分布式软总线。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 接续、附近设备与分布式软总线。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: distributed.continuity
+  level: L2
+  parent: distributed
+  name:
+    zh: 任务接续
+    en: Task Continuity
+  definition: 跨设备接续同一用户任务。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/continuity/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 跨设备接续同一用户任务。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: distributed.continuity.handoff
+  level: L3
+  parent: distributed.continuity
+  name:
+    zh: 跨设备接续
+    en: Cross-Device Handoff
+  definition: 在另一台已登录设备上继续活动。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: analog
+  aliases:
+  - Handoff
+  - App Continuity
+  knowledge_path: knowledge/distributed/continuity/handoff.yaml
+  comparison_scope:
+    includes:
+    - 在另一台已登录设备上继续活动。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: distributed.nearby
+  level: L2
+  parent: distributed
+  name:
+    zh: 附近设备
+    en: Nearby Devices
+  definition: 发现并连接附近设备。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/nearby/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 发现并连接附近设备。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: distributed.nearby.discovery
+  level: L3
+  parent: distributed.nearby
+  name:
+    zh: 附近发现
+    en: Nearby Discovery
+  definition: 发现附近对等设备。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  aliases:
+  - Nearby
+  - MultipeerConnectivity
+  - 近场通信分布式
+  knowledge_path: knowledge/distributed/nearby/discovery.yaml
+  comparison_scope:
+    includes:
+    - 发现附近对等设备。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: distributed.softbus
+  level: L2
+  parent: distributed
+  name:
+    zh: 跨设备通信
+    en: Cross-device Communication
+  definition: 建立设备间通信会话，传输数据并调用远端能力。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/softbus/_rollup.yaml
+  aliases:
+  - 分布式软总线
+  comparison_scope:
+    includes:
+    - 设备间会话
+    - 跨设备数据传输与远端调用
+    excludes:
+    - 应用界面与任务接续
+  notes: 保留历史 ID 以维持引用；节点名称和比较对象已中立化。
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: distributed.softbus.fabric
+  level: L3
+  parent: distributed.softbus
+  name:
+    zh: 跨设备调用与数据传输
+    en: Cross-device Calls and Data Transfer
+  definition: 在多个设备之间调用远端能力、传输消息或数据流，并处理连接中断。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: presence
+  aliases:
+  - 软总线
+  - Distributed Soft Bus
+  - 软总线通信织物
+  bindings:
+    harmonyos:
+    - kind: syscap
+      id: SystemCapability.DistributedHardware.DistributedHardware
+      role: primary
+      note: 示意 SysCap；以官方软总线文档为准
+  knowledge_path: knowledge/distributed/softbus/fabric.yaml
+  comparison_scope:
+    includes:
+    - 远端能力调用
+    - 消息与数据流传输
+    - 连接中断处理
+    excludes:
+    - 某一厂商总线实现的内部机制
+  notes: 保留历史 ID 以维持引用；节点名称和比较对象已中立化。
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

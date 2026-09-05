@@ -1,0 +1,23 @@
+{
+  "name": "featuretree-admin",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "test": "node --test ../tests/viewer.test.mjs && node scripts/check-render.mjs",
+    "format": "prettier --write src *.js *.json index.html"
+  },
+  "dependencies": {
+    "@ant-design/icons": "6.3.4",
+    "antd": "6.6.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "6.1.1",
+    "prettier": "3.6.2",
+    "vite": "8.2.2"
+  }
+}

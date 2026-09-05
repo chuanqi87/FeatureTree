@@ -1,0 +1,251 @@
+domain: input
+features:
+- id: input
+  level: L1
+  parent: null
+  name:
+    zh: 输入与文本
+    en: Input and Text
+  definition: 触控、键盘、IME、剪贴板与拖放。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/input/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 触控、键盘、IME、剪贴板与拖放。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: input.touch
+  level: L2
+  parent: input
+  name:
+    zh: 触控与手势
+    en: Touch and Gestures
+  definition: 触摸事件与系统手势。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/input/touch/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 触摸事件与系统手势。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: input.touch.gestures
+  level: L3
+  parent: input.touch
+  name:
+    zh: 手势识别
+    en: Gesture Recognition
+  definition: 点击、滑动、捏合等手势抽象。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/input/touch/gestures.yaml
+  comparison_scope:
+    includes:
+    - 点击、滑动、捏合等手势抽象。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: input.ime
+  level: L2
+  parent: input
+  name:
+    zh: 输入法
+    en: Input Method
+  definition: 软键盘与自定义输入法框架。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/input/ime/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 软键盘与自定义输入法框架。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: input.ime.framework
+  level: L3
+  parent: input.ime
+  name:
+    zh: 输入法框架
+    en: IME Framework
+  definition: 应用与系统输入法交互及自定义 IME。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/input/ime/framework.yaml
+  comparison_scope:
+    includes:
+    - 应用与系统输入法交互及自定义 IME。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: input.clipboard
+  level: L2
+  parent: input
+  name:
+    zh: 剪贴板
+    en: Clipboard
+  definition: 系统剪贴板读写与敏感内容提示。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/input/clipboard/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 系统剪贴板读写与敏感内容提示。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: input.clipboard.read_write
+  level: L3
+  parent: input.clipboard
+  name:
+    zh: 剪贴板读写
+    en: Clipboard Read Write
+  definition: 跨应用复制粘贴。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  leaf_at_this_level: true
+  split_justification: privacy
+  knowledge_path: knowledge/input/clipboard/read_write.yaml
+  comparison_scope:
+    includes:
+    - 跨应用复制粘贴。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: input.dragdrop
+  level: L2
+  parent: input
+  name:
+    zh: 拖放
+    en: Drag and Drop
+  definition: 应用内或跨应用拖放数据。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/input/dragdrop/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 应用内或跨应用拖放数据。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: input.dragdrop.cross_app
+  level: L3
+  parent: input.dragdrop
+  name:
+    zh: 跨应用拖放
+    en: Cross-App Drag and Drop
+  definition: 在应用窗口之间拖放内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/input/dragdrop/cross_app.yaml
+  comparison_scope:
+    includes:
+    - 在应用窗口之间拖放内容。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

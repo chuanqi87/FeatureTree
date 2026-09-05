@@ -1,0 +1,70 @@
+feature_id: notifications.local.display
+role: leaf
+status: draft
+baseline:
+  android: API 35
+  ios: UserNotifications (docs-raw/ios/frameworks/usernotifications.md)
+  harmonyos: Notification Kit notificationManager (docs-raw/harmonyos/api-index/modules/js-apis-notificationManager.md)
+  gms: n/a
+  hms: n/a
+definition: 通知栏/横幅/锁屏通知展示与渠道。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+programming_model:
+  android: NotificationChannel + NotificationManager.notify
+  ios: UNUserNotificationCenter
+  harmonyos: notificationManager.publish(NotificationRequest)（callback/Promise）；授权可用 requestEnableNotification(context)
+lifecycle_background:
+  notes: 展示本身是 OS 能力；勿与远程推送通道（FCM/APNs/Push Kit）混绑。
+permissions_privacy:
+  android: POST_NOTIFICATIONS (API 33+)
+  ios: 用户通知授权 + 焦点模式
+  harmonyos: 发布前常需 requestEnableNotification；具体权限以 Notification Kit 文档为准
+  cross_ref:
+  - security.permissions.runtime
+porting_traps:
+- from: ios
+  to: android
+  trap: 忽略通知渠道（Channel）导致用户无法精细关闭类别。
+- from: android
+  to: harmonyos
+  trap: 假设 publish 前无需用户开启通知开关（漏调 requestEnableNotification）。
+evidence:
+- platform: android
+  title: Notifications
+  url: https://developer.android.com/develop/ui/views/notifications
+  id: android-1
+- platform: ios
+  title: UserNotifications（本地）
+  url: https://developer.apple.com/documentation/usernotifications
+  id: ios-2
+  local_path: docs-raw/ios/frameworks/usernotifications.md
+  sha256: 6f8ef0f379dccbe7dbfdf74fe41758f681171a4c17d05eb176c715647a735330
+- platform: harmonyos
+  title: notificationManager.publish / requestEnableNotification
+  url: https://github.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-notification-kit/js-apis-notificationManager.md
+  id: harmonyos-3
+  local_path: docs-raw/harmonyos/api-index/modules/js-apis-notificationManager.md
+  sha256: 9f3d6ee4956f0fe506e8e594673b101610b7d1f5d5d27bd0da6a2729542bc64d
+api_surface: 渠道 ID、重要性枚举、NotificationRequest 字段命名差异。
+legacy_presence:
+  android:
+    status: full
+  ios:
+    status: full
+  harmonyos:
+    status: full
+schema_version: 2
+comparisons: []
+migration_notes:
+- v1 有无与 analog/unique 断言保存在 legacy_presence，不作为已确认结论。
+- 原正文、编辑状态及 baseline 保留；需按当前比较范围与固定版本逐项复核。
+legacy_definition: 在系统通知界面展示由本机应用创建的通知。

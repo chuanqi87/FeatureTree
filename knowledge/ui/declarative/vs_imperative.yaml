@@ -1,0 +1,50 @@
+feature_id: ui.declarative.vs_imperative
+role: leaf
+status: draft
+baseline:
+  android: API 35
+  ios: iOS 18
+  harmonyos: API 12+
+  gms: Play services BOM 24.x
+  hms: HMS / NEXT Kits
+definition: 将应用状态变化同步为界面变化，并维护状态与显示的一致性。
+presence:
+  android:
+    status: unknown
+    verification: in_review
+  ios:
+    status: unknown
+    verification: in_review
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+programming_model:
+  notes: L4 控件对比同类用户控件，非同一继承树。
+api_surface: stub
+architecture_diff: 状态驱动 vs 命令变更；导航与生命周期挂钩方式不同。
+legacy_presence:
+  android:
+    status: analog
+    rationale: Compose vs View 并存。
+  ios:
+    status: analog
+    rationale: SwiftUI vs UIKit 并存。
+  harmonyos:
+    status: analog
+    rationale: ArkUI 声明式为主。
+legacy_definition: 声明式 UI 与命令式视图系统的架构对照。
+schema_version: 2
+comparisons:
+- dimension: programming_model
+  platforms:
+  - android
+  - ios
+  result: unknown
+  verification: in_review
+  scope: 状态变化如何触发界面更新
+  rationale: 原文是框架范式对照，尚不能确认本节点任务在指定实现与版本中的差异。
+  evidence_refs: []
+migration_notes:
+- v1 有无与 analog/unique 断言保存在 legacy_presence，不作为已确认结论。
+- 原正文、编辑状态及 baseline 保留；需按当前比较范围与固定版本逐项复核。
+evidence: []

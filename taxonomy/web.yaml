@@ -1,0 +1,140 @@
+domain: web
+features:
+- id: web
+  level: L1
+  parent: null
+  name:
+    zh: Web与混合
+    en: Web and Hybrid
+  definition: 嵌入式浏览器与 JS 桥接。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/web/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 嵌入式浏览器与 JS 桥接。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: web.webview
+  level: L2
+  parent: web
+  name:
+    zh: 嵌入式Web视图
+    en: Embedded Web View
+  definition: 应用内渲染网页内容。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/web/webview/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 应用内渲染网页内容。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: web.webview.embed
+  level: L3
+  parent: web.webview
+  name:
+    zh: WebView嵌入
+    en: WebView Embed
+  definition: 嵌入浏览器引擎组件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/web/webview/embed.yaml
+  comparison_scope:
+    includes:
+    - 嵌入浏览器引擎组件。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: web.bridge
+  level: L2
+  parent: web
+  name:
+    zh: JS桥接
+    en: JS Bridge
+  definition: 原生与网页脚本互调。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/web/bridge/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 原生与网页脚本互调。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: web.bridge.native_js
+  level: L3
+  parent: web.bridge
+  name:
+    zh: 原生与JS互调
+    en: Native JS Interop
+  definition: 向页面注入接口或接收脚本回调。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/web/bridge/native_js.yaml
+  comparison_scope:
+    includes:
+    - 向页面注入接口或接收脚本回调。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

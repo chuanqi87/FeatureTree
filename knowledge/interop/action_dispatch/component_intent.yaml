@@ -1,0 +1,76 @@
+feature_id: interop.action_dispatch.component_intent
+role: leaf
+status: draft
+baseline:
+  android: Intents and Intent Filters guide (docs-raw/android/guide-pages/intents-filters.md)
+  ios: n/a for this leaf — see url_launch / system_intents
+  harmonyos: '@ohos.app.ability.Want (docs-raw/harmonyos/api-index/modules/js-apis-app-ability-want.md)'
+  gms: n/a
+  hms: n/a
+definition: 定位并调用应用组件，传递调用参数并处理无法找到目标等结果。
+presence:
+  android:
+    status: unknown
+    verification: in_review
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: in_review
+programming_model:
+  android: startActivity(Intent) / sendBroadcast；隐式需 Filter 匹配（action/category/data）
+  ios: 不适用；见 interop.action_dispatch.url_launch / system_intents
+  harmonyos: startAbility(Want)；Want 受 IPC 大小限制（API22- 100KB，API23+ 200KB）
+  notes: 假对齐高危案例，见 docs/split-gate.md。
+porting_traps:
+- from: android
+  to: ios
+  trap: 寻找 Intent Filter 等价物而忽略 URL / App Intents 分工。
+- from: android
+  to: harmonyos
+  trap: 假设隐式 Want 匹配规则与 Intent Filter（action/category/data 测试）一一对应。
+- from: android
+  to: harmonyos
+  trap: 忽略 Want IPC 载荷上限导致启动失败。
+evidence:
+- platform: android
+  title: Intents and Intent Filters（本地）
+  url: https://developer.android.com/guide/components/intents-filters
+  id: android-1
+  local_path: docs-raw/android/guide-pages/intents-filters.md
+  sha256: cb58987ed5ec099c452b24dee56f760e38d6ec5ed0e4c0362f2a4d043872ad49
+- platform: harmonyos
+  title: '@ohos.app.ability.Want'
+  url: https://github.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-ability-kit/js-apis-app-ability-want.md
+  id: harmonyos-2
+  local_path: docs-raw/harmonyos/api-index/modules/js-apis-app-ability-want.md
+  sha256: c323ccc86dc336a24c8554f7ae3a1875e993a5d6da65cd8f39c02e0024a522c1
+api_surface: action 字符串常量、Want 字段命名差异。
+legacy_presence:
+  android:
+    status: full
+    rationale: 显式/隐式 Intent、Intent Filter、PendingIntent；官方 Guide 完整描述解析规则。
+  ios:
+    status: none
+    rationale: 无统一 Intent 总线；应使用 URL 拉起或 App Intents（sibling 叶子）。
+  harmonyos:
+    status: analog
+    rationale: Want 是对象间信息传递载体（Ability Kit），可带 bundleName/abilityName/parameters；匹配与隐式规则不同于 Intent Filter。
+legacy_definition: 以动作与组件为目标的跨组件/跨应用跳转（Android Intent 模型为参照）。
+schema_version: 2
+comparisons:
+- dimension: programming_model
+  platforms:
+  - android
+  - harmonyos
+  result: different
+  verification: in_review
+  scope: 目标定位、调用参数与调用结果
+  rationale: 现有正文提示目标解析和参数载体模型不同，需按中立任务定义复核，不能只比较 Intent 与 Want 的名称。
+  evidence_refs:
+  - android-1
+  - harmonyos-2
+migration_notes:
+- v1 有无与 analog/unique 断言保存在 legacy_presence，不作为已确认结论。
+- 原正文、编辑状态及 baseline 保留；需按当前比较范围与固定版本逐项复核。

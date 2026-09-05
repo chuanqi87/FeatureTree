@@ -1,0 +1,195 @@
+domain: observability
+features:
+- id: observability
+  level: L1
+  parent: null
+  name:
+    zh: 可观测与质量
+    en: Observability and Quality
+  definition: 日志、崩溃、性能与测试钩子。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/observability/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 日志、崩溃、性能与测试钩子。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: observability.logging
+  level: L2
+  parent: observability
+  name:
+    zh: 日志
+    en: Logging
+  definition: 系统/应用日志接口。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/observability/logging/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 系统/应用日志接口。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: observability.logging.app
+  level: L3
+  parent: observability.logging
+  name:
+    zh: 应用日志
+    en: App Logging
+  definition: 应用输出诊断日志。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/observability/logging/app.yaml
+  comparison_scope:
+    includes:
+    - 应用输出诊断日志。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: observability.crash
+  level: L2
+  parent: observability
+  name:
+    zh: 崩溃与ANR
+    en: Crash and ANR
+  definition: 崩溃采集与无响应检测。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/observability/crash/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 崩溃采集与无响应检测。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: observability.crash.report
+  level: L3
+  parent: observability.crash
+  name:
+    zh: 崩溃报告
+    en: Crash Reporting
+  definition: 捕获并上报崩溃堆栈。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/observability/crash/report.yaml
+  comparison_scope:
+    includes:
+    - 捕获并上报崩溃堆栈。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: observability.perf
+  level: L2
+  parent: observability
+  name:
+    zh: 性能追踪
+    en: Performance Tracing
+  definition: 帧率、启动与自定义 trace。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/observability/perf/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 帧率、启动与自定义 trace。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: observability.perf.trace
+  level: L3
+  parent: observability.perf
+  name:
+    zh: 性能Trace
+    en: Performance Trace
+  definition: 记录性能时间线。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/observability/perf/trace.yaml
+  comparison_scope:
+    includes:
+    - 记录性能时间线。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

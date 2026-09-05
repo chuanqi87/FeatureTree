@@ -1,0 +1,202 @@
+domain: commerce
+features:
+- id: commerce
+  level: L1
+  parent: null
+  name:
+    zh: 商业与增长
+    en: Commerce and Growth
+  definition: 支付、内购、广告与分析（生态层为主）。
+  knowledge_role: rollup
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 支付、内购、广告与分析（生态层为主）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: commerce.iap
+  level: L2
+  parent: commerce
+  name:
+    zh: 应用内购买
+    en: In-App Purchase
+  definition: 数字商品内购与订阅。
+  knowledge_role: rollup
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/iap/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 数字商品内购与订阅。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: commerce.iap.products
+  level: L3
+  parent: commerce.iap
+  name:
+    zh: 内购商品
+    en: IAP Products
+  definition: 查询与购买可消耗/订阅商品。
+  knowledge_role: leaf
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  aliases:
+  - Play Billing
+  - StoreKit
+  - IAP Kit
+  knowledge_path: knowledge/commerce/iap/products.yaml
+  comparison_scope:
+    includes:
+    - 查询与购买可消耗/订阅商品。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: commerce.ads
+  level: L2
+  parent: commerce
+  name:
+    zh: 广告
+    en: Advertising
+  definition: 应用内广告展示。
+  knowledge_role: rollup
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/ads/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 应用内广告展示。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: commerce.ads.sdk
+  level: L3
+  parent: commerce.ads
+  name:
+    zh: 广告SDK
+    en: Ads SDK
+  definition: 横幅/激励等广告单元。
+  knowledge_role: leaf
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: presence
+  knowledge_path: knowledge/commerce/ads/sdk.yaml
+  comparison_scope:
+    includes:
+    - 横幅/激励等广告单元。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: commerce.analytics
+  level: L2
+  parent: commerce
+  name:
+    zh: 分析
+    en: Analytics
+  definition: 事件上报与漏斗分析。
+  knowledge_role: rollup
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/analytics/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 事件上报与漏斗分析。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: commerce.analytics.events
+  level: L3
+  parent: commerce.analytics
+  name:
+    zh: 分析事件
+    en: Analytics Events
+  definition: 自定义事件采集与上传。
+  knowledge_role: leaf
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/commerce/analytics/events.yaml
+  comparison_scope:
+    includes:
+    - 自定义事件采集与上传。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

@@ -1,0 +1,142 @@
+domain: sensors
+features:
+- id: sensors
+  level: L1
+  parent: null
+  name:
+    zh: 传感器与运动
+    en: Sensors and Motion
+  definition: 加速度、陀螺仪、环境传感器等。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/sensors/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 加速度、陀螺仪、环境传感器等。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: sensors.motion
+  level: L2
+  parent: sensors
+  name:
+    zh: 运动传感器
+    en: Motion Sensors
+  definition: 加速度计、陀螺仪、姿态。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/sensors/motion/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 加速度计、陀螺仪、姿态。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: sensors.motion.accel_gyro
+  level: L3
+  parent: sensors.motion
+  name:
+    zh: 加速度与陀螺仪
+    en: Accelerometer and Gyroscope
+  definition: 原始运动传感器读数。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/sensors/motion/accel_gyro.yaml
+  comparison_scope:
+    includes:
+    - 原始运动传感器读数。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: sensors.environment
+  level: L2
+  parent: sensors
+  name:
+    zh: 环境传感器
+    en: Environment Sensors
+  definition: 光感、气压、温度等。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/sensors/environment/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 光感、气压、温度等。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: sensors.environment.ambient
+  level: L3
+  parent: sensors.environment
+  name:
+    zh: 环境读数
+    en: Ambient Readings
+  definition: 环境光、气压等传感器。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: presence
+  knowledge_path: knowledge/sensors/environment/ambient.yaml
+  comparison_scope:
+    includes:
+    - 环境光、气压等传感器。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

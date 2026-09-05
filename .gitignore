@@ -1,0 +1,12 @@
+.venv/
+web/node_modules/
+web/dist/
+__pycache__/
+*.pyc
+.DS_Store
+docs-raw/**/*.log
+docs-raw/harmonyos/openharmony-docs/
+docs-raw/.firecrawl/**/screenshot*.png
+docs-raw/official/
+output/reports/official-documents/documents.jsonl
+output/contexts/

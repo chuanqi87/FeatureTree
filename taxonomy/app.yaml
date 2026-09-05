@@ -1,0 +1,497 @@
+domain: app
+features:
+- id: app
+  level: L1
+  parent: null
+  name:
+    zh: 应用模型
+    en: Application Model
+  definition: 应用进程与组件生命周期、后台约束、扩展点、桌面与安装更新。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 应用进程与组件生命周期、后台约束、扩展点、桌面与安装更新。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.lifecycle
+  level: L2
+  parent: app
+  name:
+    zh: 组件生命周期
+    en: Component Lifecycle
+  definition: 应用与界面组件的创建、可见、销毁与状态保存。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/lifecycle/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 应用与界面组件的创建、可见、销毁与状态保存。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.lifecycle.activity_ability
+  level: L3
+  parent: app.lifecycle
+  name:
+    zh: 界面组件生命周期
+    en: UI Component Lifecycle
+  definition: 前台界面入口组件的生命周期回调与状态恢复。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: analog
+  bindings:
+    android:
+    - kind: class
+      id: android.app.Activity
+      role: primary
+      url: https://developer.android.com/reference/android/app/Activity
+    ios:
+    - kind: class
+      id: UIKit.UIViewController
+      role: primary
+      url: https://developer.apple.com/documentation/uikit/uiviewcontroller
+    harmonyos:
+    - kind: module
+      id: '@ohos.app.ability.UIAbility'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability
+      role: primary
+      syscap: SystemCapability.Ability.AbilityRuntime.Core
+  knowledge_path: knowledge/app/lifecycle/activity_ability.yaml
+  comparison_scope:
+    includes:
+    - 前台界面入口组件的生命周期回调与状态恢复。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.lifecycle.process
+  level: L3
+  parent: app.lifecycle
+  name:
+    zh: 进程与内存回收
+    en: Process and Memory Reclamation
+  definition: 进程优先级、被杀与恢复策略。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: background
+  knowledge_path: knowledge/app/lifecycle/process.yaml
+  comparison_scope:
+    includes:
+    - 进程优先级、被杀与恢复策略。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.background
+  level: L2
+  parent: app
+  name:
+    zh: 后台执行
+    en: Background Execution
+  definition: 应用不在前台时可持续或受限执行的系统能力。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/background/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 应用不在前台时可持续或受限执行的系统能力。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.background.foreground_task
+  level: L3
+  parent: app.background
+  name:
+    zh: 前台长时任务
+    en: Foreground Long-Running Task
+  definition: 向用户明示的长时后台工作（如下载、导航）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: background
+  aliases:
+  - Foreground Service
+  - BGTaskScheduler
+  - Background Task
+  bindings:
+    android:
+    - kind: class
+      id: android.app.Service
+      url: https://developer.android.com/reference/android/app/Service
+      role: primary
+      note: Foreground service + types
+    ios:
+    - kind: framework
+      id: BackgroundTasks
+      url: https://developer.apple.com/documentation/backgroundtasks
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.resourceschedule.backgroundTaskManager'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-resourceschedule-backgroundtaskmanager
+      role: primary
+  knowledge_path: knowledge/app/background/foreground_task.yaml
+  comparison_scope:
+    includes:
+    - 向用户明示的长时后台工作（如下载、导航）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.background.deferred_work
+  level: L3
+  parent: app.background
+  name:
+    zh: 延迟与条件任务
+    en: Deferred Conditional Work
+  definition: 在网络/充电等约束下由系统调度的延迟任务。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  aliases:
+  - WorkManager
+  - BGAppRefresh
+  knowledge_path: knowledge/app/background/deferred_work.yaml
+  comparison_scope:
+    includes:
+    - 在网络/充电等约束下由系统调度的延迟任务。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.extensions
+  level: L2
+  parent: app
+  name:
+    zh: 扩展点
+    en: App Extensions
+  definition: 主应用之外由系统拉起的扩展进程/能力。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/extensions/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 主应用之外由系统拉起的扩展进程/能力。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.extensions.share
+  level: L3
+  parent: app.extensions
+  name:
+    zh: 分享扩展
+    en: Share Extension
+  definition: 向其他应用提供分享目标或接收分享内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: analog
+  knowledge_path: knowledge/app/extensions/share.yaml
+  comparison_scope:
+    includes:
+    - 向其他应用提供分享目标或接收分享内容。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.desktop
+  level: L2
+  parent: app
+  name:
+    zh: 桌面能力
+    en: Launcher Capabilities
+  definition: 图标、快捷方式、小组件等桌面入口。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/desktop/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 图标、快捷方式、小组件等桌面入口。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.desktop.widget
+  level: L3
+  parent: app.desktop
+  name:
+    zh: 桌面小组件
+    en: Home Screen Widget
+  definition: 在桌面展示的可刷新应用卡片。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  aliases:
+  - App Widget
+  - WidgetKit
+  - Form
+  knowledge_path: knowledge/app/desktop/widget.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 在桌面展示的可刷新应用卡片。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.desktop.shortcuts
+  level: L3
+  parent: app.desktop
+  name:
+    zh: 桌面快捷方式
+    en: Launcher Shortcuts
+  definition: 长按图标或系统菜单中的深链快捷入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  knowledge_path: knowledge/app/desktop/shortcuts.yaml
+  comparison_scope:
+    includes:
+    - 长按图标或系统菜单中的深链快捷入口。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.install
+  level: L2
+  parent: app
+  name:
+    zh: 安装与更新
+    en: Install and Update
+  definition: 安装包分发、更新与轻量安装形态。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/install/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 安装包分发、更新与轻量安装形态。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.install.package_update
+  level: L3
+  parent: app.install
+  name:
+    zh: 应用安装更新
+    en: App Install Update
+  definition: 完整应用的安装与版本更新。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/app/install/package_update.yaml
+  comparison_scope:
+    includes:
+    - 完整应用的安装与版本更新。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: app.install.instant
+  level: L3
+  parent: app.install
+  name:
+    zh: 轻量即用安装
+    en: Lightweight Instant Experience
+  definition: 无需完整安装即可试用的轻量应用形态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: presence
+  aliases:
+  - Instant Apps
+  - App Clips
+  - Atomic Service
+  - 元服务
+  bindings:
+    android:
+    - kind: other
+      id: com.google.android.gms.instantapps
+      url: https://developers.google.com/android/reference/com/google/android/gms/instantapps/InstantApps
+      role: primary
+      note: Google Play Instant
+    ios:
+    - kind: framework
+      id: App Clips
+      url: https://developer.apple.com/documentation/appclip
+      role: primary
+    harmonyos:
+    - kind: kit
+      id: Atomic Service
+      url: https://developer.huawei.com/consumer/cn/doc/atomic-guides/atomic-service-definition
+      role: primary
+      note: 元服务
+  knowledge_path: knowledge/app/install/instant.yaml
+  comparison_scope:
+    includes:
+    - 无需完整安装即可试用的轻量应用形态。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

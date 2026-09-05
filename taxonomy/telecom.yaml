@@ -1,0 +1,255 @@
+domain: telecom
+features:
+- id: telecom
+  level: L1
+  parent: null
+  name:
+    zh: 通信与内容
+    en: Telecom and Personal Content
+  definition: 电话短信、联系人与日历。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 电话短信、联系人与日历。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: telecom.phone
+  level: L2
+  parent: telecom
+  name:
+    zh: 电话
+    en: Telephony
+  definition: 拨号与通话状态。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/phone/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 拨号与通话状态。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: telecom.phone.dial
+  level: L3
+  parent: telecom.phone
+  name:
+    zh: 发起通话
+    en: Place Call
+  definition: 发起系统电话呼叫。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  leaf_at_this_level: true
+  knowledge_path: knowledge/telecom/phone/dial.yaml
+  comparison_scope:
+    includes:
+    - 发起系统电话呼叫。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: telecom.sms
+  level: L2
+  parent: telecom
+  name:
+    zh: 短信
+    en: SMS
+  definition: 短信发送与读取。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/sms/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 短信发送与读取。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: telecom.sms.send
+  level: L3
+  parent: telecom.sms
+  name:
+    zh: 发送短信
+    en: Send SMS
+  definition: 应用发送短信（iOS 通常仅 UI 分享）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  leaf_at_this_level: true
+  split_justification: analog
+  knowledge_path: knowledge/telecom/sms/send.yaml
+  comparison_scope:
+    includes:
+    - 应用发送短信（iOS 通常仅 UI 分享）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: telecom.contacts
+  level: L2
+  parent: telecom
+  name:
+    zh: 联系人
+    en: Contacts
+  definition: 系统通讯录访问。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/contacts/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 系统通讯录访问。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: telecom.contacts.read
+  level: L3
+  parent: telecom.contacts
+  name:
+    zh: 读取联系人
+    en: Read Contacts
+  definition: 查询通讯录条目。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  leaf_at_this_level: true
+  knowledge_path: knowledge/telecom/contacts/read.yaml
+  comparison_scope:
+    includes:
+    - 查询通讯录条目。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: telecom.calendar
+  level: L2
+  parent: telecom
+  name:
+    zh: 日历
+    en: Calendar
+  definition: 系统日历事件。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/calendar/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 系统日历事件。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: telecom.calendar.events
+  level: L3
+  parent: telecom.calendar
+  name:
+    zh: 日历事件
+    en: Calendar Events
+  definition: 读写日历事件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  leaf_at_this_level: true
+  knowledge_path: knowledge/telecom/calendar/events.yaml
+  comparison_scope:
+    includes:
+    - 读写日历事件。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

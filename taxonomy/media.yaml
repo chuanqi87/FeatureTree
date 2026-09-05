@@ -1,0 +1,330 @@
+domain: media
+features:
+- id: media
+  level: L1
+  parent: null
+  name:
+    zh: 媒体
+    en: Media
+  definition: 音视频编解码、播放、相机、图库与屏幕共享。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/media/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 音视频编解码、播放、相机、图库与屏幕共享。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: media.playback
+  level: L2
+  parent: media
+  name:
+    zh: 媒体播放
+    en: Media Playback
+  definition: 音视频播放会话与焦点。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/media/playback/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 音视频播放会话与焦点。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: media.playback.audio
+  level: L3
+  parent: media.playback
+  name:
+    zh: 音频播放
+    en: Audio Playback
+  definition: 本地或流式音频播放。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/media/playback/audio.yaml
+  comparison_scope:
+    includes:
+    - 本地或流式音频播放。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: media.playback.video
+  level: L3
+  parent: media.playback
+  name:
+    zh: 视频播放
+    en: Video Playback
+  definition: 视频渲染与控制。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/media/playback/video.yaml
+  comparison_scope:
+    includes:
+    - 视频渲染与控制。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: media.capture
+  level: L2
+  parent: media
+  name:
+    zh: 媒体采集
+    en: Media Capture
+  definition: 麦克风与相机采集。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/media/capture/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 麦克风与相机采集。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: media.capture.camera
+  level: L3
+  parent: media.capture
+  name:
+    zh: 相机捕获管线
+    en: Camera Capture Pipeline
+  definition: 预览、拍照与录像管线（多世代 API 收在知识演进）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  leaf_at_this_level: true
+  aliases:
+  - Camera2
+  - CameraX
+  - AVFoundation Capture
+  bindings:
+    android:
+    - kind: package
+      id: androidx.camera
+      url: https://developer.android.com/jetpack/androidx/releases/camera
+      role: primary
+      preferred: true
+    ios:
+    - kind: framework
+      id: AVFoundation
+      url: https://developer.apple.com/documentation/avfoundation
+      role: primary
+    harmonyos:
+    - kind: kit
+      id: CameraKit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/camera-overview
+      role: primary
+  knowledge_path: knowledge/media/capture/camera.yaml
+  comparison_scope:
+    includes:
+    - 预览、拍照与录像管线（多世代 API 收在知识演进）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: media.capture.microphone
+  level: L3
+  parent: media.capture
+  name:
+    zh: 麦克风录音
+    en: Microphone Recording
+  definition: 音频输入采集。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  leaf_at_this_level: true
+  knowledge_path: knowledge/media/capture/microphone.yaml
+  comparison_scope:
+    includes:
+    - 音频输入采集。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: media.library
+  level: L2
+  parent: media
+  name:
+    zh: 媒体库
+    en: Media Library
+  definition: 系统图库与媒体文件访问。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/media/library/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 系统图库与媒体文件访问。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: media.library.picker
+  level: L3
+  parent: media.library
+  name:
+    zh: 系统媒体选择器
+    en: System Media Picker
+  definition: 由系统 UI 选择照片/视频，减少广域存储权限。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  leaf_at_this_level: true
+  split_justification: privacy
+  knowledge_path: knowledge/media/library/picker.yaml
+  comparison_scope:
+    includes:
+    - 由系统 UI 选择照片/视频，减少广域存储权限。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: media.codec
+  level: L2
+  parent: media
+  name:
+    zh: 编解码
+    en: Codecs
+  definition: 音视频编解码器访问。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/media/codec/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 音视频编解码器访问。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: media.codec.hardware
+  level: L3
+  parent: media.codec
+  name:
+    zh: 硬件编解码
+    en: Hardware Codec
+  definition: 硬件加速编解码能力。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/media/codec/hardware.yaml
+  comparison_scope:
+    includes:
+    - 硬件加速编解码能力。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

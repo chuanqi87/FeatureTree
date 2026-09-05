@@ -1,0 +1,169 @@
+{
+  "generated_at": "2026-09-05T15:14:07.061726+00:00",
+  "captured_documents": 36386,
+  "statistics": [
+    {
+      "platform": "android",
+      "status": "excluded",
+      "count": 6,
+      "raw_bytes": 0
+    },
+    {
+      "platform": "android",
+      "status": "failed",
+      "count": 106,
+      "raw_bytes": 0
+    },
+    {
+      "platform": "android",
+      "status": "not_found",
+      "count": 361,
+      "raw_bytes": 0
+    },
+    {
+      "platform": "android",
+      "status": "pending",
+      "count": 70854,
+      "raw_bytes": 0
+    },
+    {
+      "platform": "android",
+      "status": "ready",
+      "count": 8776,
+      "raw_bytes": 3338895037
+    },
+    {
+      "platform": "android",
+      "status": "thin",
+      "count": 63,
+      "raw_bytes": 9075232
+    },
+    {
+      "platform": "harmonyos",
+      "status": "not_found",
+      "count": 741,
+      "raw_bytes": 0
+    },
+    {
+      "platform": "harmonyos",
+      "status": "ready",
+      "count": 10965,
+      "raw_bytes": 128820177
+    },
+    {
+      "platform": "harmonyos",
+      "status": "thin",
+      "count": 2093,
+      "raw_bytes": 1097637
+    },
+    {
+      "platform": "ios",
+      "status": "failed",
+      "count": 2,
+      "raw_bytes": 0
+    },
+    {
+      "platform": "ios",
+      "status": "not_found",
+      "count": 95,
+      "raw_bytes": 0
+    },
+    {
+      "platform": "ios",
+      "status": "pending",
+      "count": 75828,
+      "raw_bytes": 0
+    },
+    {
+      "platform": "ios",
+      "status": "ready",
+      "count": 13937,
+      "raw_bytes": 242128228
+    },
+    {
+      "platform": "ios",
+      "status": "thin",
+      "count": 552,
+      "raw_bytes": 2378599
+    }
+  ],
+  "verified_catalog_snapshots": 26,
+  "priority_documents": [
+    {
+      "platform": "android",
+      "status": "excluded",
+      "count": 6
+    },
+    {
+      "platform": "android",
+      "status": "failed",
+      "count": 106
+    },
+    {
+      "platform": "android",
+      "status": "not_found",
+      "count": 361
+    },
+    {
+      "platform": "android",
+      "status": "ready",
+      "count": 8776
+    },
+    {
+      "platform": "android",
+      "status": "thin",
+      "count": 63
+    },
+    {
+      "platform": "harmonyos",
+      "status": "not_found",
+      "count": 741
+    },
+    {
+      "platform": "harmonyos",
+      "status": "ready",
+      "count": 10965
+    },
+    {
+      "platform": "harmonyos",
+      "status": "thin",
+      "count": 2093
+    },
+    {
+      "platform": "ios",
+      "status": "failed",
+      "count": 2
+    },
+    {
+      "platform": "ios",
+      "status": "not_found",
+      "count": 95
+    },
+    {
+      "platform": "ios",
+      "status": "ready",
+      "count": 13937
+    },
+    {
+      "platform": "ios",
+      "status": "thin",
+      "count": 552
+    }
+  ],
+  "integrity_verified": true,
+  "integrity_errors": [],
+  "all_discovered_bodies_captured": false,
+  "complete_offline_mirror": false,
+  "semantic_or_version_verification_complete": false,
+  "definitions": {
+    "ready": "Readable official body indexed; claims and versions still require verification",
+    "thin": "Captured but insufficient standalone text; retained for navigation",
+    "partial": "Structured source captured; normalized rendering has unsupported types",
+    "pending": "Discovered URL not yet fetched",
+    "not_found": "Requested body representations returned 404/410; this does not prove the navigation page or platform capability is absent",
+    "failed": "Network or parsing error; inspect error and retry",
+    "blocked": "Remote authentication/access response; no bypass attempted",
+    "excluded": "Non-document resource excluded by the official document URL rules"
+  },
+  "priority_scope": "Current guides, framework/Kit/module pages and explicitly cited sources; deeper symbol pages and historical Android API diffs may be retrieved on demand."
+}

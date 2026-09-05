@@ -1,0 +1,148 @@
+domain: runtime
+features:
+- id: runtime
+  level: L1
+  parent: null
+  name:
+    zh: 运行时与国际化
+    en: Runtime and Internationalization
+  definition: 并发模型作横切；国际化与本地化。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/runtime/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 并发模型作横切；国际化与本地化。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: runtime.concurrency
+  level: L2
+  parent: runtime
+  name:
+    zh: 并发模型
+    en: Concurrency Model
+  definition: 线程/协程/actor 等并发横切主文，叶子能力只引用。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/runtime/concurrency/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 线程/协程/actor 等并发横切主文，叶子能力只引用。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: runtime.concurrency.overview
+  level: L3
+  parent: runtime.concurrency
+  name:
+    zh: 异步任务调度与协作
+    en: Asynchronous Task Coordination
+  definition: 创建、调度和协调异步任务，处理取消、结果传递与共享状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: analog
+  knowledge_path: knowledge/runtime/concurrency/overview.yaml
+  aliases:
+  - 并发模型综述
+  comparison_scope:
+    includes:
+    - 任务调度
+    - 取消与结果传递
+    - 共享状态协调
+    excludes:
+    - 特定语言语法与标准库全集
+  notes: 保留历史 ID 以维持引用；节点名称和比较对象已中立化。
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: runtime.i18n
+  level: L2
+  parent: runtime
+  name:
+    zh: 国际化
+    en: Internationalization
+  definition: 语言、区域、格式化。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/runtime/i18n/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 语言、区域、格式化。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: runtime.i18n.locale
+  level: L3
+  parent: runtime.i18n
+  name:
+    zh: 语言区域
+    en: Locale
+  definition: 应用语言与区域格式。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/runtime/i18n/locale.yaml
+  comparison_scope:
+    includes:
+    - 应用语言与区域格式。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

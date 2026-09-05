@@ -1,0 +1,549 @@
+domain: ui
+features:
+- id: ui
+  level: L1
+  parent: null
+  name:
+    zh: 界面与窗口
+    en: UI and Windowing
+  definition: 布局、控件、导航、窗口形态与主题。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 布局、控件、导航、窗口形态与主题。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.declarative
+  level: L2
+  parent: ui
+  name:
+    zh: 声明式UI框架
+    en: Declarative UI Framework
+  definition: 以状态驱动描述界面的声明式框架。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  aliases:
+  - Jetpack Compose
+  - SwiftUI
+  - ArkUI
+  knowledge_path: knowledge/ui/declarative/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 以状态驱动描述界面的声明式框架。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.imperative
+  level: L2
+  parent: ui
+  name:
+    zh: 命令式视图系统
+    en: Imperative View System
+  definition: 以命令式构建与变更视图树的系统。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  aliases:
+  - Android View
+  - UIKit
+  knowledge_path: knowledge/ui/imperative/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 显式创建、更新与销毁界面对象
+    excludes:
+    - 与声明式框架的总体比较文章
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.declarative.vs_imperative
+  level: L3
+  parent: ui.declarative
+  name:
+    zh: 状态驱动界面更新
+    en: State-driven UI Updates
+  definition: 将应用状态变化同步为界面变化，并维护状态与显示的一致性。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: analog
+  bindings:
+    android:
+    - kind: package
+      id: androidx.compose.ui
+      url: https://developer.android.com/reference/kotlin/androidx/compose/ui/package-summary
+      role: primary
+      note: 声明式
+    ios:
+    - kind: framework
+      id: SwiftUI
+      url: https://developer.apple.com/documentation/swiftui
+      role: primary
+    - kind: framework
+      id: UIKit
+      url: https://developer.apple.com/documentation/uikit
+      role: related
+    harmonyos:
+    - kind: kit
+      id: ArkUI
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkui-overview
+      role: primary
+  knowledge_path: knowledge/ui/declarative/vs_imperative.yaml
+  aliases:
+  - 声明式与命令式模型对照
+  comparison_scope:
+    includes:
+    - 状态与界面绑定
+    - 更新触发与更新范围
+    - 状态保存与组件生命周期的协作
+    excludes:
+    - 按钮等具体控件的属性全集
+  notes: 保留历史 ID 以维持引用；节点名称和比较对象已中立化。
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.controls
+  level: L2
+  parent: ui
+  name:
+    zh: 控件类别
+    en: Control Categories
+  definition: 面向用户的标准控件类别（非属性级）。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 面向用户的标准控件类别（非属性级）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.controls.button
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 按钮
+    en: Button
+  definition: 跨框架同类用户控件：按钮。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  knowledge_path: knowledge/ui/controls/button.yaml
+  comparison_scope:
+    includes:
+    - 表达可点击操作
+    - 触发动作和表达交互状态
+    excludes:
+    - 每个框架的属性与修饰符全集
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.controls.list
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 列表
+    en: List
+  definition: 跨框架同类用户控件：列表。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  knowledge_path: knowledge/ui/controls/list.yaml
+  comparison_scope:
+    includes:
+    - 跨框架同类用户控件：列表。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.controls.navigation_bar
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 导航栏
+    en: Navigation Bar
+  definition: 跨框架同类用户控件：导航栏。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  knowledge_path: knowledge/ui/controls/navigation_bar.yaml
+  comparison_scope:
+    includes:
+    - 跨框架同类用户控件：导航栏。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.controls.dialog
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 弹层对话框
+    en: Dialog Overlay
+  definition: 跨框架同类用户控件：弹层对话框。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  knowledge_path: knowledge/ui/controls/dialog.yaml
+  comparison_scope:
+    includes:
+    - 跨框架同类用户控件：弹层对话框。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.controls.text_field
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 文本输入框
+    en: Text Field
+  definition: 跨框架同类用户控件：文本输入框。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  knowledge_path: knowledge/ui/controls/text_field.yaml
+  comparison_scope:
+    includes:
+    - 跨框架同类用户控件：文本输入框。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.controls.image
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 图像视图
+    en: Image View
+  definition: 跨框架同类用户控件：图像视图。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  knowledge_path: knowledge/ui/controls/image.yaml
+  comparison_scope:
+    includes:
+    - 跨框架同类用户控件：图像视图。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.navigation
+  level: L2
+  parent: ui
+  name:
+    zh: 导航栈
+    en: Navigation Stack
+  definition: 页面栈、路由与返回栈管理。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/navigation/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 页面栈、路由与返回栈管理。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.navigation.stack
+  level: L3
+  parent: ui.navigation
+  name:
+    zh: 页面导航栈
+    en: Page Navigation Stack
+  definition: 压栈/出栈式页面导航。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/ui/navigation/stack.yaml
+  comparison_scope:
+    includes:
+    - 压栈/出栈式页面导航。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.window
+  level: L2
+  parent: ui
+  name:
+    zh: 窗口与多窗
+    en: Window and Multi-Window
+  definition: 窗口、分屏、画中画与自由窗。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/window/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 窗口、分屏、画中画与自由窗。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.window.multiwindow
+  level: L3
+  parent: ui.window
+  name:
+    zh: 分屏与多窗
+    en: Split and Multi-Window
+  definition: 同时显示多个应用窗口或分屏。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: presence
+  knowledge_path: knowledge/ui/window/multiwindow.yaml
+  comparison_scope:
+    includes:
+    - 同时显示多个应用窗口或分屏。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.window.pip
+  level: L3
+  parent: ui.window
+  name:
+    zh: 画中画
+    en: Picture in Picture
+  definition: 悬浮小窗持续播放或展示内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: task
+  knowledge_path: knowledge/ui/window/pip.yaml
+  comparison_scope:
+    includes:
+    - 悬浮小窗持续播放或展示内容。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.theme
+  level: L2
+  parent: ui
+  name:
+    zh: 主题与外观
+    en: Theme and Appearance
+  definition: 深色模式、动态取色与系统外观。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/theme/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 深色模式、动态取色与系统外观。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: ui.theme.dark_mode
+  level: L3
+  parent: ui.theme
+  name:
+    zh: 深色模式
+    en: Dark Mode
+  definition: 跟随或强制深色/浅色外观。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/ui/theme/dark_mode.yaml
+  comparison_scope:
+    includes:
+    - 跟随或强制深色/浅色外观。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

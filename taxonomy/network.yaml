@@ -1,0 +1,253 @@
+domain: network
+features:
+- id: network
+  level: L1
+  parent: null
+  name:
+    zh: 网络
+    en: Networking
+  definition: HTTP、套接字、DNS、热点与 VPN。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/network/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - HTTP、套接字、DNS、热点与 VPN。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: network.http
+  level: L2
+  parent: network
+  name:
+    zh: HTTP客户端
+    en: HTTP Client
+  definition: 应用层 HTTP/HTTPS 请求。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/network/http/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 应用层 HTTP/HTTPS 请求。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: network.http.client
+  level: L3
+  parent: network.http
+  name:
+    zh: HTTP请求
+    en: HTTP Request
+  definition: 发起与管理 HTTP 请求。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/network/http/client.yaml
+  comparison_scope:
+    includes:
+    - 发起与管理 HTTP 请求。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: network.socket
+  level: L2
+  parent: network
+  name:
+    zh: 套接字
+    en: Sockets
+  definition: TCP/UDP 原始套接字。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/network/socket/_rollup.yaml
+  comparison_scope:
+    includes:
+    - TCP/UDP 原始套接字。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: network.socket.tcp_udp
+  level: L3
+  parent: network.socket
+  name:
+    zh: TCP与UDP
+    en: TCP and UDP
+  definition: 面向连接与数据报套接字。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  knowledge_path: knowledge/network/socket/tcp_udp.yaml
+  comparison_scope:
+    includes:
+    - 面向连接与数据报套接字。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: network.vpn
+  level: L2
+  parent: network
+  name:
+    zh: VPN
+    en: VPN
+  definition: 应用层 VPN 服务扩展。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/network/vpn/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 应用层 VPN 服务扩展。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: network.vpn.app_vpn
+  level: L3
+  parent: network.vpn
+  name:
+    zh: 应用VPN扩展
+    en: App VPN Extension
+  definition: 应用提供的系统 VPN 通道。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: presence
+  knowledge_path: knowledge/network/vpn/app_vpn.yaml
+  comparison_scope:
+    includes:
+    - 应用提供的系统 VPN 通道。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: network.hotspot
+  level: L2
+  parent: network
+  name:
+    zh: 热点与网络共享
+    en: Hotspot and Tethering
+  definition: 本地热点与网络共享控制。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/network/hotspot/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 本地热点与网络共享控制。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: network.hotspot.local
+  level: L3
+  parent: network.hotspot
+  name:
+    zh: 本地热点
+    en: Local Hotspot
+  definition: 开启设备本地热点。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: presence
+  knowledge_path: knowledge/network/hotspot/local.yaml
+  comparison_scope:
+    includes:
+    - 开启设备本地热点。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

@@ -1,0 +1,247 @@
+domain: location
+features:
+- id: location
+  level: L1
+  parent: null
+  name:
+    zh: 位置与地理
+    en: Location and Geospatial
+  definition: 定位、地理围栏与地图（含生态地图）。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 定位、地理围栏与地图（含生态地图）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: location.positioning
+  level: L2
+  parent: location
+  name:
+    zh: 定位
+    en: Positioning
+  definition: 获取设备地理位置。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/positioning/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 获取设备地理位置。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: location.positioning.foreground
+  level: L3
+  parent: location.positioning
+  name:
+    zh: 前台定位
+    en: Foreground Location
+  definition: 应用可见时获取位置。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  leaf_at_this_level: true
+  knowledge_path: knowledge/location/positioning/foreground.yaml
+  comparison_scope:
+    includes:
+    - 应用可见时获取位置。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: location.positioning.background
+  level: L3
+  parent: location.positioning
+  name:
+    zh: 后台定位
+    en: Background Location
+  definition: 应用不可见时持续或间歇获取位置。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: highly_sensitive
+  leaf_at_this_level: true
+  split_justification: privacy
+  bindings:
+    android:
+    - kind: other
+      id: com.google.android.gms.location
+      url: https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient
+      role: primary
+      note: Fused location / background
+    ios:
+    - kind: framework
+      id: CoreLocation
+      url: https://developer.apple.com/documentation/corelocation
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.geoLocationManager'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  knowledge_path: knowledge/location/positioning/background.yaml
+  comparison_scope:
+    includes:
+    - 应用不可见时持续或间歇获取位置。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: location.geofence
+  level: L2
+  parent: location
+  name:
+    zh: 地理围栏
+    en: Geofencing
+  definition: 进出地理区域时的系统回调。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/geofence/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 进出地理区域时的系统回调。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: location.geofence.region
+  level: L3
+  parent: location.geofence
+  name:
+    zh: 区域围栏
+    en: Region Geofence
+  definition: 圆形/多边形区域进出事件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  leaf_at_this_level: true
+  knowledge_path: knowledge/location/geofence/region.yaml
+  comparison_scope:
+    includes:
+    - 圆形/多边形区域进出事件。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: location.maps
+  level: L2
+  parent: location
+  name:
+    zh: 地图展示
+    en: Maps Display
+  definition: 地图 SDK 展示与标注（生态层）。
+  knowledge_role: rollup
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 地图 SDK 展示与标注（生态层）。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: location.maps.sdk
+  level: L3
+  parent: location.maps
+  name:
+    zh: 地图SDK
+    en: Maps SDK
+  definition: 嵌入式地图渲染与交互。
+  knowledge_role: leaf
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  aliases:
+  - Google Maps SDK
+  - MapKit
+  - Map Kit
+  knowledge_path: knowledge/location/maps/sdk.yaml
+  comparison_scope:
+    includes:
+    - 嵌入式地图渲染与交互。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

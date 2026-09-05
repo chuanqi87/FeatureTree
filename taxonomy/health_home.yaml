@@ -1,0 +1,207 @@
+domain: health_home
+features:
+- id: health_home
+  level: L1
+  parent: null
+  name:
+    zh: 健康运动家居车
+    en: Health Fitness Home Auto
+  definition: 健康、运动、家居与车载扩展；形态用属性区分。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - watch
+  - auto
+  - iot
+  privacy_class: none
+  knowledge_path: knowledge/health_home/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 健康、运动、家居与车载扩展；形态用属性区分。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: health_home.health
+  level: L2
+  parent: health_home
+  name:
+    zh: 健康数据
+    en: Health Data
+  definition: 健康指标读写。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - watch
+  privacy_class: none
+  knowledge_path: knowledge/health_home/health/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 健康指标读写。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: health_home.health.records
+  level: L3
+  parent: health_home.health
+  name:
+    zh: 健康记录
+    en: Health Records
+  definition: 步数、心率等健康记录访问。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - watch
+  privacy_class: highly_sensitive
+  leaf_at_this_level: true
+  aliases:
+  - Health Connect
+  - HealthKit
+  knowledge_path: knowledge/health_home/health/records.yaml
+  comparison_scope:
+    includes:
+    - 步数、心率等健康记录访问。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: health_home.home
+  level: L2
+  parent: health_home
+  name:
+    zh: 智能家居
+    en: Smart Home
+  definition: 家居设备发现与控制。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - iot
+  privacy_class: none
+  knowledge_path: knowledge/health_home/home/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 家居设备发现与控制。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: health_home.home.accessories
+  level: L3
+  parent: health_home.home
+  name:
+    zh: 家居配件控制
+    en: Home Accessory Control
+  definition: 控制灯、锁等家居配件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - iot
+  privacy_class: none
+  leaf_at_this_level: true
+  aliases:
+  - HomeKit
+  - Matter
+  knowledge_path: knowledge/health_home/home/accessories.yaml
+  comparison_scope:
+    includes:
+    - 控制灯、锁等家居配件。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: health_home.auto
+  level: L2
+  parent: health_home
+  name:
+    zh: 车载投影
+    en: Automotive Projection
+  definition: 手机应用在车机上的投影/适配。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - auto
+  privacy_class: none
+  knowledge_path: knowledge/health_home/auto/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 手机应用在车机上的投影/适配。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: health_home.auto.projection
+  level: L3
+  parent: health_home.auto
+  name:
+    zh: 车机应用投影
+    en: Car App Projection
+  definition: Android Auto / CarPlay / 车机 Kit 类能力。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - auto
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: presence
+  knowledge_path: knowledge/health_home/auto/projection.yaml
+  comparison_scope:
+    includes:
+    - Android Auto / CarPlay / 车机 Kit 类能力。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

@@ -1,0 +1,32 @@
+{
+  "android": {
+    "total": 425,
+    "included": 347,
+    "excluded": 78,
+    "pending_scope": 0,
+    "candidate_catalog": 233,
+    "candidate_capability": 2,
+    "confirmed_capability": 0,
+    "unmapped_included": 112
+  },
+  "ios": {
+    "total": 193,
+    "included": 35,
+    "excluded": 4,
+    "pending_scope": 154,
+    "candidate_catalog": 35,
+    "candidate_capability": 0,
+    "confirmed_capability": 0,
+    "unmapped_included": 0
+  },
+  "harmonyos": {
+    "total": 1733,
+    "included": 1293,
+    "excluded": 440,
+    "pending_scope": 0,
+    "candidate_catalog": 1008,
+    "candidate_capability": 5,
+    "confirmed_capability": 0,
+    "unmapped_included": 280
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "filters": {
+    "domain": "",
+    "role": "",
+    "confidence": "high",
+    "device_review": "required",
+    "limit": 20
+  },
+  "total_matching_claims": 0,
+  "selected_claims": 0,
+  "omitted_claims": 0,
+  "feature_ids": [],
+  "summary": {
+    "level": "unassessed",
+    "counts": {
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "unassessed": 0
+    },
+    "total": 0,
+    "device_states": {},
+    "required_pending": 0,
+    "recommended_pending": 0
+  },
+  "claims": [],
+  "scope_hash": "5ea3326b574be9292529eb2f0c69d999941b1005b3c307417fffa960170fadb4",
+  "notice": "仅定义待分析/复核范围，不启动任务。实测通过仅限计划中的设备、版本与条件；未评估不等于无需实测。"
+}

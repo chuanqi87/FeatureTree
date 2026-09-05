@@ -1,0 +1,51 @@
+feature_id: app.background.foreground_task
+role: leaf
+status: draft
+baseline:
+  android: API 35
+  ios: iOS 18
+  harmonyos: API 12+
+  gms: Play services BOM 24.x
+  hms: HMS / NEXT Kits
+definition: 向用户明示的长时后台工作（如下载、导航）。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+programming_model:
+  notes: stub — 待按域填写入口对象与异步模型。
+api_surface: stub
+lifecycle_background:
+  android: 必须展示持续通知；类型错误会导致限制。
+  ios: 系统调度，不可假设无限运行。
+  harmonyos: 长时任务申请与能效管控。
+permissions_privacy:
+  cross_ref:
+  - notifications.local.display
+  - security.permissions.runtime
+porting_traps:
+- from: android
+  to: ios
+  trap: 用前台服务思维实现 iOS 任意后台循环。
+legacy_presence:
+  android:
+    status: full
+    rationale: Foreground Service + 类型
+  ios:
+    status: analog
+    rationale: BGTaskScheduler / 特定后台模式，不是 FGS 等价物。
+  harmonyos:
+    status: full
+schema_version: 2
+comparisons: []
+migration_notes:
+- v1 有无与 analog/unique 断言保存在 legacy_presence，不作为已确认结论。
+- 原正文、编辑状态及 baseline 保留；需按当前比较范围与固定版本逐项复核。
+evidence: []
+legacy_definition: 向用户明示的长时任务，允许在一定策略下继续执行。

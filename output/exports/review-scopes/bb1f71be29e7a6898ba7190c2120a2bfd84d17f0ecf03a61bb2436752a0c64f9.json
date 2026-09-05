@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "filters": {
+    "domain": "connectivity.bluetooth.le.scan.filter",
+    "role": "",
+    "confidence": "unassessed",
+    "device_review": "",
+    "limit": 5
+  },
+  "total_matching_claims": 24,
+  "selected_claims": 5,
+  "omitted_claims": 19,
+  "feature_ids": [
+    "connectivity.bluetooth.le.scan.filter"
+  ],
+  "summary": {
+    "level": "unassessed",
+    "counts": {
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "unassessed": 5
+    },
+    "total": 5,
+    "device_states": {
+      "unassessed": 5
+    },
+    "required_pending": 0,
+    "recommended_pending": 0
+  },
+  "claims": [
+    {
+      "feature_id": "connectivity.bluetooth.le.scan.filter",
+      "name_zh": "BLE扫描过滤",
+      "role": "leaf",
+      "knowledge_path": "knowledge/connectivity/bluetooth/le/scan/filter.yaml",
+      "claim_id": "comparison:api_surface:android:harmonyos",
+      "kind": "comparison",
+      "dimension": "api_surface",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "statement": "尚未形成已核实结论",
+      "scope": {
+        "includes": [
+          "按条件筛选扫描结果",
+          "过滤条件的组合与执行位置"
+        ],
+        "excludes": [
+          "批量结果交付",
+          "后台执行资格"
+        ]
+      },
+      "basis": null,
+      "assessed_by": null,
+      "assessed_at": null,
+      "result": "unknown",
+      "verification": "unreviewed",
+      "confidence": "unassessed",
+      "confidence_rationale": "尚未逐条评估证据和适用范围",
+      "device_requirement": "unassessed",
+      "device_state": "unassessed",
+      "contexts": {
+        "android": null,
+        "harmonyos": null
+      },
+      "missing_requirements": [],
+      "device_review": {},
+      "evidence": [],
+      "input_hash": "3f7e4f4b9f7279d5c1e90d493021c5bcd05d9c8970c09b92e2d50163c478dc27",
+      "priority": 3
+    },
+    {
+      "feature_id": "connectivity.bluetooth.le.scan.filter",
+      "name_zh": "BLE扫描过滤",
+      "role": "leaf",
+      "knowledge_path": "knowledge/connectivity/bluetooth/le/scan/filter.yaml",
+      "claim_id": "comparison:api_surface:android:ios",
+      "kind": "comparison",
+      "dimension": "api_surface",
+      "platforms": [
+        "android",
+        "ios"
+      ],
+      "statement": "历史资料提示条件种类和过滤执行位置不同，需固定 SDK、设备与扫描模式后核实。",
+      "scope": "扫描过滤条件与执行位置",
+      "basis": null,
+      "assessed_by": null,
+      "assessed_at": null,
+      "result": "different",
+      "verification": "in_review",
+      "confidence": "unassessed",
+      "confidence_rationale": "尚未逐条评估证据和适用范围",
+      "device_requirement": "unassessed",
+      "device_state": "unassessed",
+      "contexts": {
+        "android": null,
+        "ios": null
+      },
+      "missing_requirements": [],
+      "device_review": {},
+      "evidence": [
+        {
+          "platform": "android",
+          "title": "Find BLE devices（本地）",
+          "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/find-ble-devices",
+          "id": "android-1",
+          "local_path": "docs-raw/android/guide-pages/find-ble-devices.md",
+          "sha256": "8261fbe7ec5820c0db98ccea87495138ea78cd27c5e036db1c8869a42b034db0"
+        },
+        {
+          "platform": "ios",
+          "title": "Core Bluetooth（本地 docs-raw）",
+          "url": "https://developer.apple.com/documentation/corebluetooth",
+          "id": "ios-2",
+          "local_path": "docs-raw/ios/frameworks/corebluetooth.md",
+          "sha256": "d8b01630431e414fef21df4167935d5877670d6fd7600a61d1b0a74e8d57dca7"
+        }
+      ],
+      "input_hash": "7deedcf78570224a1610025d8356bf5c66364932bed3b8d6da12242e172ac9c3",
+      "priority": 3
+    },
+    {
+      "feature_id": "connectivity.bluetooth.le.scan.filter",
+      "name_zh": "BLE扫描过滤",
+      "role": "leaf",
+      "knowledge_path": "knowledge/connectivity/bluetooth/le/scan/filter.yaml",
+      "claim_id": "comparison:api_surface:harmonyos:ios",
+      "kind": "comparison",
+      "dimension": "api_surface",
+      "platforms": [
+        "harmonyos",
+        "ios"
+      ],
+      "statement": "尚未形成已核实结论",
+      "scope": {
+        "includes": [
+          "按条件筛选扫描结果",
+          "过滤条件的组合与执行位置"
+        ],
+        "excludes": [
+          "批量结果交付",
+          "后台执行资格"
+        ]
+      },
+      "basis": null,
+      "assessed_by": null,
+      "assessed_at": null,
+      "result": "unknown",
+      "verification": "unreviewed",
+      "confidence": "unassessed",
+      "confidence_rationale": "尚未逐条评估证据和适用范围",
+      "device_requirement": "unassessed",
+      "device_state": "unassessed",
+      "contexts": {
+        "harmonyos": null,
+        "ios": null
+      },
+      "missing_requirements": [],
+      "device_review": {},
+      "evidence": [],
+      "input_hash": "458d7c8960a48650a715b491ec752e1a81c8a8c66c3e8d034f307ce72a323f7e",
+      "priority": 3
+    },
+    {
+      "feature_id": "connectivity.bluetooth.le.scan.filter",
+      "name_zh": "BLE扫描过滤",
+      "role": "leaf",
+      "knowledge_path": "knowledge/connectivity/bluetooth/le/scan/filter.yaml",
+      "claim_id": "comparison:availability:android:harmonyos",
+      "kind": "comparison",
+      "dimension": "availability",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "statement": "尚未形成已核实结论",
+      "scope": {
+        "includes": [
+          "按条件筛选扫描结果",
+          "过滤条件的组合与执行位置"
+        ],
+        "excludes": [
+          "批量结果交付",
+          "后台执行资格"
+        ]
+      },
+      "basis": null,
+      "assessed_by": null,
+      "assessed_at": null,
+      "result": "unknown",
+      "verification": "unreviewed",
+      "confidence": "unassessed",
+      "confidence_rationale": "尚未逐条评估证据和适用范围",
+      "device_requirement": "unassessed",
+      "device_state": "unassessed",
+      "contexts": {
+        "android": null,
+        "harmonyos": null
+      },
+      "missing_requirements": [],
+      "device_review": {},
+      "evidence": [],
+      "input_hash": "3f7e4f4b9f7279d5c1e90d493021c5bcd05d9c8970c09b92e2d50163c478dc27",
+      "priority": 3
+    },
+    {
+      "feature_id": "connectivity.bluetooth.le.scan.filter",
+      "name_zh": "BLE扫描过滤",
+      "role": "leaf",
+      "knowledge_path": "knowledge/connectivity/bluetooth/le/scan/filter.yaml",
+      "claim_id": "comparison:availability:android:ios",
+      "kind": "comparison",
+      "dimension": "availability",
+      "platforms": [
+        "android",
+        "ios"
+      ],
+      "statement": "尚未形成已核实结论",
+      "scope": {
+        "includes": [
+          "按条件筛选扫描结果",
+          "过滤条件的组合与执行位置"
+        ],
+        "excludes": [
+          "批量结果交付",
+          "后台执行资格"
+        ]
+      },
+      "basis": null,
+      "assessed_by": null,
+      "assessed_at": null,
+      "result": "unknown",
+      "verification": "unreviewed",
+      "confidence": "unassessed",
+      "confidence_rationale": "尚未逐条评估证据和适用范围",
+      "device_requirement": "unassessed",
+      "device_state": "unassessed",
+      "contexts": {
+        "android": null,
+        "ios": null
+      },
+      "missing_requirements": [],
+      "device_review": {},
+      "evidence": [],
+      "input_hash": "25ed52df3b0d5f75efd8590b6cfbae1c8610216e7e73a84dc7eac0988dc09b5d",
+      "priority": 3
+    }
+  ],
+  "scope_hash": "bb1f71be29e7a6898ba7190c2120a2bfd84d17f0ecf03a61bb2436752a0c64f9",
+  "notice": "仅定义待分析/复核范围，不启动任务。实测通过仅限计划中的设备、版本与条件；未评估不等于无需实测。"
+}

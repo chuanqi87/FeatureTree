@@ -1,0 +1,46 @@
+feature_id: security.permissions.runtime
+role: leaf
+status: draft
+baseline:
+  android: API 35
+  ios: iOS 18
+  harmonyos: API 12+
+  gms: Play services BOM 24.x
+  hms: HMS / NEXT Kits
+definition: 运行时向用户请求危险权限。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+programming_model:
+  android: requestPermissions / Activity Result API
+  ios: 各框架 request* + Info.plist 用途键
+  harmonyos: abilityAccessCtrl requestPermissions
+api_surface: stub
+permissions_privacy:
+  notes: 其他叶子只 cross_ref 本节点，禁止复述整套权限矩阵。
+porting_traps:
+- from: android
+  to: ios
+  trap: 寻找统一 requestPermissions 而漏配用途字符串导致拒批。
+legacy_presence:
+  android:
+    status: full
+  ios:
+    status: analog
+    rationale: 按 API 触发用途说明弹窗，无统一 permission group 请求 API。
+  harmonyos:
+    status: full
+schema_version: 2
+comparisons: []
+migration_notes:
+- v1 有无与 analog/unique 断言保存在 legacy_presence，不作为已确认结论。
+- 原正文、编辑状态及 baseline 保留；需按当前比较范围与固定版本逐项复核。
+evidence: []
+legacy_definition: 在运行时向用户请求访问敏感能力的授权（横切主文）。

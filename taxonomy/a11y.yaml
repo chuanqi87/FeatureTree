@@ -1,0 +1,145 @@
+domain: a11y
+features:
+- id: a11y
+  level: L1
+  parent: null
+  name:
+    zh: 无障碍
+    en: Accessibility
+  definition: 无障碍服务与辅助技术；控件叶子引用本域，不复述框架。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 无障碍服务与辅助技术；控件叶子引用本域，不复述框架。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: a11y.framework
+  level: L2
+  parent: a11y
+  name:
+    zh: 无障碍框架
+    en: Accessibility Framework
+  definition: 无障碍树、焦点与服务。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/framework/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 无障碍树、焦点与服务。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: a11y.framework.tree
+  level: L3
+  parent: a11y.framework
+  name:
+    zh: 无障碍树与语义
+    en: Accessibility Tree and Semantics
+  definition: 向辅助技术暴露语义属性。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  aliases:
+  - TalkBack
+  - VoiceOver
+  - 无障碍
+  knowledge_path: knowledge/a11y/framework/tree.yaml
+  comparison_scope:
+    includes:
+    - 向辅助技术暴露语义属性。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: a11y.service
+  level: L2
+  parent: a11y
+  name:
+    zh: 无障碍服务
+    en: Accessibility Service
+  definition: 第三方无障碍服务扩展。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/service/_rollup.yaml
+  comparison_scope:
+    includes:
+    - 第三方无障碍服务扩展。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+- id: a11y.service.extension
+  level: L3
+  parent: a11y.service
+  name:
+    zh: 无障碍服务扩展
+    en: Accessibility Service Extension
+  definition: 应用作为无障碍服务观察并操作界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  leaf_at_this_level: true
+  split_justification: presence
+  knowledge_path: knowledge/a11y/service/extension.yaml
+  comparison_scope:
+    includes:
+    - 应用作为无障碍服务观察并操作界面。
+    excludes: []
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface

@@ -29,6 +29,9 @@ def official_source_error(url, platform, distribution):
         return None
     if host not in allowed.get(platform, set()):
         return f"Source is not an allowed official source for {platform}: {host}"
+    if platform == "ios" and host == "developer.apple.com" and re.match(
+            r"/documentation/(?:visionos|macos|watchos|tvos|ipados)(?:/|$)", parsed.path, re.I):
+        return "Explicit non-iOS documentation path; use the iOS-specific or shared framework source"
     if platform == "android" and host in {"firebase.google.com", "developers.google.com"}:
         if re.search(r"/(?:ios(?:-[^/]+)?|ios-sdk|swift|web|unity|flutter)(?:/|$)", parsed.path, re.I):
             return "Explicit non-Android ecosystem documentation; retrieve the Android-specific source"

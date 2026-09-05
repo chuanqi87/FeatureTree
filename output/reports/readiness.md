@@ -1,6 +1,6 @@
 # 全量分析启动检查
 
-检查时间：2026-09-05T15:46:41.105391+00:00；运行日期：2026-09-05。
+检查时间：2026-09-05T17:34:49.716192+00:00；运行日期：2026-09-06。
 
 研究输入可用：True。全量分析放行：False。
 
@@ -12,7 +12,7 @@
 
 ## 尚未满足的全量启动条件
 
-- Official stable release/SDK baseline for 2026-09-05 has not been resolved: output/research/baseline.json
+- Official stable release/SDK baseline for 2026-09-06 has not been resolved: output/research/baseline.json
 - Pilot connectivity.bluetooth.le.scan.filter: missing or stale pilot review; reviewer and scope/evidence review notes required; every investigated claim needs confidence and physical-device review assessment
 - Pilot app.background.foreground_task: missing or stale pilot review; reviewer and scope/evidence review notes required; every investigated claim needs confidence and physical-device review assessment
 - Pilot distributed.softbus.fabric: missing or stale pilot review; reviewer and scope/evidence review notes required; every investigated claim needs confidence and physical-device review assessment

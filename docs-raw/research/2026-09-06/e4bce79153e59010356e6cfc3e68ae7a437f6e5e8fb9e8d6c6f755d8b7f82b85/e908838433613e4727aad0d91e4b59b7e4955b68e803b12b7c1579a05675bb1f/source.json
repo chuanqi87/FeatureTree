@@ -1,0 +1,13 @@
+{
+  "id": "e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85",
+  "url": "https://developer.apple.com/documentation/backgroundtasks/performing-long-running-tasks-on-ios-and-ipados",
+  "platform": "ios",
+  "title": "Performing long-running tasks on iOS and iPadOS",
+  "local_path": "docs-raw/research/2026-09-06/e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85/e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f/document.md",
+  "sha256": "e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f",
+  "raw_sha256": "3de20d4abcaef707801d51ee10d264c208d885a98139e05241d0a153625a3048",
+  "raw_path": "docs-raw/research/2026-09-06/e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85/e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f/source.gz",
+  "fetched_at": "2026-09-05T10:18:40.977833+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

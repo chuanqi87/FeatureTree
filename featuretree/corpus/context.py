@@ -12,7 +12,7 @@ from .search import search, terms
 from .store import now
 
 
-CONTEXT_VERSION = 2
+CONTEXT_VERSION = 3
 
 
 def context_input_hash(feature, config, policy):

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-05T15:14:07.061726+00:00",
-  "captured_documents": 36386,
+  "generated_at": "2026-09-05T17:36:43.459717+00:00",
+  "captured_documents": 36389,
   "statistics": [
     {
       "platform": "android",
@@ -23,14 +23,14 @@
     {
       "platform": "android",
       "status": "pending",
-      "count": 70854,
+      "count": 70853,
       "raw_bytes": 0
     },
     {
       "platform": "android",
       "status": "ready",
-      "count": 8776,
-      "raw_bytes": 3338895037
+      "count": 8777,
+      "raw_bytes": 3341192870
     },
     {
       "platform": "android",
@@ -41,7 +41,7 @@
     {
       "platform": "harmonyos",
       "status": "not_found",
-      "count": 741,
+      "count": 743,
       "raw_bytes": 0
     },
     {
@@ -77,8 +77,8 @@
     {
       "platform": "ios",
       "status": "ready",
-      "count": 13937,
-      "raw_bytes": 242128228
+      "count": 13939,
+      "raw_bytes": 242132023
     },
     {
       "platform": "ios",
@@ -107,7 +107,7 @@
     {
       "platform": "android",
       "status": "ready",
-      "count": 8776
+      "count": 8777
     },
     {
       "platform": "android",
@@ -117,7 +117,7 @@
     {
       "platform": "harmonyos",
       "status": "not_found",
-      "count": 741
+      "count": 743
     },
     {
       "platform": "harmonyos",
@@ -142,7 +142,7 @@
     {
       "platform": "ios",
       "status": "ready",
-      "count": 13937
+      "count": 13939
     },
     {
       "platform": "ios",

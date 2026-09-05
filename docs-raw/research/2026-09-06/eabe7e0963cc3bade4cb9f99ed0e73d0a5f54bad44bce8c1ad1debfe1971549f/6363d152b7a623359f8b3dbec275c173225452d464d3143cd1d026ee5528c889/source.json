@@ -1,0 +1,13 @@
+{
+  "id": "eabe7e0963cc3bade4cb9f99ed0e73d0a5f54bad44bce8c1ad1debfe1971549f",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributed-abilityconnectionmanager",
+  "platform": "harmonyos",
+  "title": "@ohos.distributedsched.abilityConnectionManager (应用多端协同管理)",
+  "local_path": "docs-raw/research/2026-09-06/eabe7e0963cc3bade4cb9f99ed0e73d0a5f54bad44bce8c1ad1debfe1971549f/6363d152b7a623359f8b3dbec275c173225452d464d3143cd1d026ee5528c889/document.md",
+  "sha256": "6363d152b7a623359f8b3dbec275c173225452d464d3143cd1d026ee5528c889",
+  "raw_sha256": "f149885b5afcadf310fad6ec4e260d690773a2221c74ec8c8288f8086f433543",
+  "raw_path": "docs-raw/research/2026-09-06/eabe7e0963cc3bade4cb9f99ed0e73d0a5f54bad44bce8c1ad1debfe1971549f/6363d152b7a623359f8b3dbec275c173225452d464d3143cd1d026ee5528c889/source.gz",
+  "fetched_at": "2026-09-05T10:27:16.527781+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

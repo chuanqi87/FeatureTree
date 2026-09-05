@@ -1,0 +1,10 @@
+{
+  "url": "https://developer.apple.com/news/releases/",
+  "request_body": null,
+  "retrieved_at": "2026-09-05T16:43:29.316552+00:00",
+  "sha256": "e239d4020d2c744c4c833430f47355205cbe7d14d58949ee3b120cf32558056a",
+  "bytes": 250347,
+  "path": "docs-raw/research/2026-09-06/apple-releases.html",
+  "archive_path": "docs-raw/research/2026-09-06/history/e239d4020d2c744c4c833430f47355205cbe7d14d58949ee3b120cf32558056a/apple-releases.html.gz",
+  "status": 200
+}

@@ -1,0 +1,14 @@
+{
+  "url": "https://svc-drcn.developer.huawei.com/community/servlet/consumer/cn/documentPortal/getCatalogTree",
+  "request_body": {
+    "language": "cn",
+    "catalogName": "harmonyos-releases",
+    "showHide": 1
+  },
+  "retrieved_at": "2026-09-05T16:43:28.220432+00:00",
+  "sha256": "772d4e18ec42099de80fc29d367869996dc833db4b97d103ded52b8b510f3e16",
+  "bytes": 273253,
+  "path": "docs-raw/research/2026-09-06/huawei-release-catalog.json",
+  "archive_path": "docs-raw/research/2026-09-06/history/772d4e18ec42099de80fc29d367869996dc833db4b97d103ded52b8b510f3e16/huawei-release-catalog.json.gz",
+  "status": 200
+}

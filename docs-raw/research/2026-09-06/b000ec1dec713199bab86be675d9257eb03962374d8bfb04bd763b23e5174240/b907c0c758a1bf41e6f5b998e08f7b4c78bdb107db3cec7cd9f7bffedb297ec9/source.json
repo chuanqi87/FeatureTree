@@ -1,0 +1,13 @@
+{
+  "id": "b000ec1dec713199bab86be675d9257eb03962374d8bfb04bd763b23e5174240",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributeddevicemanager",
+  "platform": "harmonyos",
+  "title": "@ohos.distributedDeviceManager (设备管理)",
+  "local_path": "docs-raw/research/2026-09-06/b000ec1dec713199bab86be675d9257eb03962374d8bfb04bd763b23e5174240/b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9/document.md",
+  "sha256": "b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9",
+  "raw_sha256": "f7754bcab32e4e4134e58b39a674d385833fec7f0aca70edd81412fcaf4222ba",
+  "raw_path": "docs-raw/research/2026-09-06/b000ec1dec713199bab86be675d9257eb03962374d8bfb04bd763b23e5174240/b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9/source.gz",
+  "fetched_at": "2026-09-05T10:27:17.190280+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

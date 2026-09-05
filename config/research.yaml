@@ -15,6 +15,9 @@ official_release_entrypoints:
     - https://developer.apple.com/documentation/ios-ipados-release-notes
     - https://developer.apple.com/news/releases/
   harmonyos:
+    - https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/overview-2600
+    - https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/version-number-26
+    - https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/os-new-feature-2600
     - https://developer.huawei.com/consumer/cn/doc/doccenter-release-notes/version-number-26
     - https://developer.huawei.com/consumer/cn/doc/doccenter-release-notes/os-new-feature-2600
 pilot_features:

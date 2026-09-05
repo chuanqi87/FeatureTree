@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "task_id": "f73d166208bd0a96ccb65998622a0bfd723a7b39fb584339f9ccc8901c97c04b",
+  "feature_id": "ui.declarative.vs_imperative",
+  "model": "volcengine/glm-5.3",
+  "run_date": "2026-09-06",
+  "inputs": {
+    "feature": "cb932adbe04e26abbc80ac8b884b43fb5683cba1a3037eece773da658e18da71",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "86e4259bd857433a8e79c933b64af3d0adbb17c1c183e20201408d826830138a",
+    "methodology": "06c9bac24a8a4b77ddc0d8995831160b207cda634b9066f0147740f82dbb6511",
+    "knowledge": "d508a707c46ea5c1e7616c7cdfce9836320425e0ee31a0478e2286ce377c5c6b",
+    "baseline": null
+  },
+  "mode": "diagnostic_pilot",
+  "baseline_errors": [
+    "Official stable release/SDK baseline for 2026-09-06 has not been resolved: output/research/baseline.json"
+  ],
+  "knowledge_path": "knowledge/ui/declarative/vs_imperative.yaml",
+  "context_path": "output/contexts/ui.declarative.vs_imperative.json",
+  "candidate_path": "output/research/tasks/f73d166208bd0a96ccb65998622a0bfd723a7b39fb584339f9ccc8901c97c04b/candidate.yaml",
+  "report_path": "output/research/tasks/f73d166208bd0a96ccb65998622a0bfd723a7b39fb584339f9ccc8901c97c04b/worker-report.md",
+  "contract": "docs/opencode-worker-contract.md",
+  "claim_ids": [
+    "support:android",
+    "support:harmonyos",
+    "support:ios",
+    "comparison:availability:android:harmonyos",
+    "comparison:availability:android:ios",
+    "comparison:availability:harmonyos:ios",
+    "comparison:programming_model:android:harmonyos",
+    "comparison:programming_model:android:ios",
+    "comparison:programming_model:harmonyos:ios",
+    "comparison:lifecycle_background:android:harmonyos",
+    "comparison:lifecycle_background:android:ios",
+    "comparison:lifecycle_background:harmonyos:ios",
+    "comparison:permissions_privacy:android:harmonyos",
+    "comparison:permissions_privacy:android:ios",
+    "comparison:permissions_privacy:harmonyos:ios",
+    "comparison:limits_precision:android:harmonyos",
+    "comparison:limits_precision:android:ios",
+    "comparison:limits_precision:harmonyos:ios",
+    "comparison:device_forms:android:harmonyos",
+    "comparison:device_forms:android:ios",
+    "comparison:device_forms:harmonyos:ios",
+    "comparison:api_surface:android:harmonyos",
+    "comparison:api_surface:android:ios",
+    "comparison:api_surface:harmonyos:ios"
+  ],
+  "budget": {
+    "max_bodies": 15,
+    "max_fetches": 6,
+    "max_attempts": 1,
+    "hard_provider_cost_cap": false
+  },
+  "production_write_authorized": false
+}

@@ -4,11 +4,21 @@
 
 ## 输入与写入边界
 
+先看任务阶段：命令行默认 `stage: evidence`，先提交不超过 1200 中文字的 worker-report.md：每平台一条带 URL、正文章节、路径、SHA、获取时间的文档观察；两个具体差异候选或反例；缺口与真机计划。最多 6 篇正文、3 次按需抓取、约 5 分钟。此阶段不写 candidate.yaml、不填 24 个槽位、不研究校验实现代码。报告落盘通过仅表示交付存在，仍需证据与语义复核。
+
+证据报告复核后才以 `--stage candidate` 准备结构化候选。允许 `--claim` 指定单节点内的精确知识项，未选中的陈述、上下文和引用不得受改动影响；需要调整共享上下文时先明确依赖范围。未指定知识项为全节点选择，可新增关键 facts。一次结构化任务优先限制为 3–5 个已研究项，复杂结论单独做。下面的完整 YAML 要求仅适用于 candidate 阶段。
+
+两阶段都不会自动放行正式知识。软时长不是 provider 硬计费上限；超时由协调者取消。取消后的日志、输入与使用量保留，不把失败重跑伪装成首次成功。
+
+来源元数据由 `.venv/bin/python scripts/export_research_sources.py <官方URL...>` 从资料库验哈希后导出；也可 `--notes <报告路径>` 提取证据表。返回的 source-indexes 清单关联随 Git 保存的精选原文与原始响应。不手抄长哈希、不缩写本地路径。此命令只验证快照，不生成章节摘录或适用性判断；这两项仍需作者阅读、协调者复核。
+
+特别核对 can/must、编译 SDK/target SDK/系统版本、单接口/整个模块的区别。报告不得把预览 SDK 放入正式版主比较或主测试计划，不得从语言框架的传输抽象推断系统缺少其他框架。手机之外的用例单独列附录；模拟器结果不能计入人工真机完成。
+
 先完整阅读 AGENTS.md、docs/official-documentation-entrypoints.md、docs/sources.md、docs/official-corpus.md、docs/knowledge-confidence.md、docs/comparison-model.md。再阅读任务包、目标 taxonomy 节点和原 knowledge。
 
 必须执行 `.venv/bin/python scripts/official_docs.py context <feature_id>`，检查 binding_source_gaps，并读取相关官方正文。检索片段、目录、历史文章均不能替代证据。可以使用 official_docs.py 的 search / locate / fetch / read 按需补查；不启动整库 crawl。新增正文由资料库保存原始响应与哈希。
 
-仅允许编辑任务包指定的 candidate.yaml 和 worker-report.md；不编辑正式 knowledge、taxonomy、Schema、公共基线、汇总输出或别人的任务文件，不提交 Git，不调用其他模型或代理。上下文和按需抓取缓存属于允许的工具副作用，不是额外知识写入权。
+仅允许手工编辑任务包指定的 candidate.yaml 和 worker-report.md；不编辑正式 knowledge、taxonomy、Schema、公共基线、汇总输出或别人的任务文件，不提交 Git，不调用其他模型或代理。上下文、按需抓取缓存、来源导出命令生成的精选快照和元数据属于允许的工具副作用，不是额外知识写入权；已有知识项不得删除。
 
 候选 YAML 从原 knowledge 的完整结构开始，保留历史字段。只研究任务包指定的节点和知识项；为每个平台支持项和全部指定比较槽位逐项记录结论、证据、评级与真机需求。关键新增事实使用 facts。不要用脚本批量套用同一句缺口/结论；每个维度必须有具体调查说明。
 

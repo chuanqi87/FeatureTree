@@ -1,0 +1,13 @@
+{
+  "id": "aa12024f3842c7f912fbb6b94042ab66e362ee0b1540d565ed29b8c918cdd345",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-resourceschedule-backgroundtaskmanager",
+  "platform": "harmonyos",
+  "title": "@ohos.resourceschedule.backgroundTaskManager (后台任务管理)",
+  "local_path": "docs-raw/research/2026-09-06/aa12024f3842c7f912fbb6b94042ab66e362ee0b1540d565ed29b8c918cdd345/c90d7a65a2cb86c6ffaf74b68304a9573973882780911bf5ab55c29063814f40/document.md",
+  "sha256": "c90d7a65a2cb86c6ffaf74b68304a9573973882780911bf5ab55c29063814f40",
+  "raw_sha256": "99f921885319f3e808b4da7d03a2395558b6ab3586cf9e8ee8bf4f2f75144803",
+  "raw_path": "docs-raw/research/2026-09-06/aa12024f3842c7f912fbb6b94042ab66e362ee0b1540d565ed29b8c918cdd345/c90d7a65a2cb86c6ffaf74b68304a9573973882780911bf5ab55c29063814f40/source.gz",
+  "fetched_at": "2026-09-05T10:27:50.968078+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

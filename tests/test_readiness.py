@@ -138,6 +138,14 @@ class ContextReadinessTests(unittest.TestCase):
         self.assertEqual(result["applicability_exclusions"][0]["reason"], "explicitly_non_ios")
         self.assertEqual(result["documents"][0]["applicability"], "unknown")
 
+    def test_non_ios_url_is_excluded_even_without_availability_metadata(self):
+        self.save("https://developer.apple.com/documentation/visionos/sample", {}, "# Sample\nSample visionOS behavior.")
+        self.save("https://developer.apple.com/documentation/uikit/sample", {}, "# Sample\nSample shared candidate.")
+        result = candidates(self.corpus, feature(), "ios", 5)
+        self.assertEqual(len(result["documents"]), 1)
+        self.assertIn("/uikit/", result["documents"][0]["url"])
+        self.assertIn("non-iOS", official_source_error("https://developer.apple.com/documentation/visionos/sample", "ios", "iOS"))
+
     def test_duplicate_body_does_not_fill_multiple_candidate_slots(self):
         for name in ("one", "two"):
             self.save("https://developer.android.com/reference/" + name)

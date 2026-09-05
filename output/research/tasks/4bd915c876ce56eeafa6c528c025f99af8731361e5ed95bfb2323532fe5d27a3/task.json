@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "task_id": "4bd915c876ce56eeafa6c528c025f99af8731361e5ed95bfb2323532fe5d27a3",
+  "feature_id": "connectivity.bluetooth.le.scan.filter",
+  "model": "volcengine/glm-5.3",
+  "run_date": "2026-09-06",
+  "inputs": {
+    "feature": "a5db022a9d52ba23312c138dfa9137431a2e632d6da821cadce8df46f0316c67",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "86e4259bd857433a8e79c933b64af3d0adbb17c1c183e20201408d826830138a",
+    "methodology": "06c9bac24a8a4b77ddc0d8995831160b207cda634b9066f0147740f82dbb6511",
+    "knowledge": "d83bbbae35897f4186f6f74ff5e2ea74a7edad6ed859858c9d18274c4443a679",
+    "baseline": null
+  },
+  "mode": "diagnostic_pilot",
+  "baseline_errors": [
+    "Official stable release/SDK baseline for 2026-09-06 has not been resolved: output/research/baseline.json"
+  ],
+  "knowledge_path": "knowledge/connectivity/bluetooth/le/scan/filter.yaml",
+  "context_path": "output/contexts/connectivity.bluetooth.le.scan.filter.json",
+  "candidate_path": "output/research/tasks/4bd915c876ce56eeafa6c528c025f99af8731361e5ed95bfb2323532fe5d27a3/candidate.yaml",
+  "report_path": "output/research/tasks/4bd915c876ce56eeafa6c528c025f99af8731361e5ed95bfb2323532fe5d27a3/worker-report.md",
+  "contract": "docs/opencode-worker-contract.md",
+  "claim_ids": [
+    "support:android",
+    "support:harmonyos",
+    "support:ios",
+    "comparison:availability:android:harmonyos",
+    "comparison:availability:android:ios",
+    "comparison:availability:harmonyos:ios",
+    "comparison:programming_model:android:harmonyos",
+    "comparison:programming_model:android:ios",
+    "comparison:programming_model:harmonyos:ios",
+    "comparison:lifecycle_background:android:harmonyos",
+    "comparison:lifecycle_background:android:ios",
+    "comparison:lifecycle_background:harmonyos:ios",
+    "comparison:permissions_privacy:android:harmonyos",
+    "comparison:permissions_privacy:android:ios",
+    "comparison:permissions_privacy:harmonyos:ios",
+    "comparison:limits_precision:android:harmonyos",
+    "comparison:limits_precision:android:ios",
+    "comparison:limits_precision:harmonyos:ios",
+    "comparison:device_forms:android:harmonyos",
+    "comparison:device_forms:android:ios",
+    "comparison:device_forms:harmonyos:ios",
+    "comparison:api_surface:android:harmonyos",
+    "comparison:api_surface:android:ios",
+    "comparison:api_surface:harmonyos:ios"
+  ],
+  "budget": {
+    "max_bodies": 15,
+    "max_fetches": 6,
+    "max_attempts": 1,
+    "hard_provider_cost_cap": false
+  },
+  "production_write_authorized": false
+}

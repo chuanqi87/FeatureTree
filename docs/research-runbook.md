@@ -67,6 +67,7 @@
 
 ```bash
 .venv/bin/python scripts/research_tasks.py prepare --feature connectivity.bluetooth.le.scan.filter --model volcengine/glm-5.3
+.venv/bin/python scripts/research_tasks.py prepare --feature connectivity.bluetooth.le.scan.filter --model volcengine/glm-5.3 --stage candidate --claim support:android
 .venv/bin/python scripts/research_tasks.py check output/research/tasks/<task_id>/task.json
 ```
 
@@ -79,6 +80,8 @@ task.json 固定单节点、知识项、指定模型、输入文件/研究规则
 最终预期：逐条可追溯知识与平台差异矩阵、置信度和真机需求双轴、按预算选择的复核清单、带前提和未知分母的洞察，以及没有解决的范围/文档/版本缺口。当前树 212 节点（106 叶子、106 汇总）不是三平台 SDK 的全部能力目录；小范围任务按实际选中知识项统计，不强行填满全树。无实际计费数据不报告节省比例或全量费用估计。
 
 ### 证据验收边界
+
+`prepare` 默认只生成证据报告阶段；`check` 的 `delivery_valid` 仅表示报告文件存在且任务输入未变化。结构化候选阶段使用 `structurally_valid`，也不是语义通过。两者的 `production_accepted` 始终为 false。章节解读（例如 can 不能改写为 must）、版本条件和负面结论范围必须独立阅读复核。2026-09-06 的实跑与修正见 `output/reports/pilot-review-2026-09-06.md`。
 
 洞察同时列出置信度、来源知识项和真机状态；新推论需独立复核，不得高于最弱关键前提。研究 confirmed 不等于真机通过。真机完成只覆盖计划中的机型、构建和条件，不能推及所有设备。
 

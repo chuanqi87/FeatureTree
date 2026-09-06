@@ -1,0 +1,18 @@
+{
+  "probe_id": "da04fa16e8805cff9053f53112f794617ecef8249cccfdc79c8caae6cbd4d476",
+  "reviewer": "Codex",
+  "evaluation_type": "targeted_regression_not_random_sample",
+  "worker_given_prior_answers": false,
+  "scope": "Three background-task document interpretation questions; not full node production",
+  "delivery_target": "Valid structured answer within approximately five minutes, without coordinator rewriting model content",
+  "criteria": [
+    {"id": "android-modal-version", "check": "Separates built-with SDK Q can from targeting P permission and targeting UPSIDE_DOWN_CAKE type requirement; no general background survival guarantee", "source_id": "android-service", "lines": [[1368, 1375], [1385, 1405]]},
+    {"id": "ios-cancel-distinction", "check": "Separates system-interface cancellation expiration handler from closing app in app switcher without indication; retains foreground/user-action requirement", "source_id": "ios-continued-task", "lines": [[7, 21], [170, 172]]},
+    {"id": "harmony-notification-exception", "check": "Reads overview together with AUDIO_PLAYBACK API20/AVSession and API19-and-earlier notification conditions; no blanket claim about all notification deletion paths", "source_id": "harmony-continuous-task", "lines": [[7, 9], [37, 51]]},
+    {"id": "scope-baseline-honesty", "check": "No latest-stable confirmation from document snapshot, unsupported inference, full-node completion or invented device results"},
+    {"id": "device-triage", "check": "Separates static document gaps from actual behavior checks; required/recommended have actionable unexecuted plans, not_required is limited to the static statement"},
+    {"id": "citation-coverage", "check": "Every material observation and qualifier has relevant supplied source spans, not just a valid but unrelated line range"}
+  ],
+  "production_acceptance_authorized": false,
+  "notes": ["The coordinator selected relevant source ranges before delegation; preparation effort is additional to model runtime.", "Do not extrapolate full analysis cost or accuracy from this single targeted run."]
+}

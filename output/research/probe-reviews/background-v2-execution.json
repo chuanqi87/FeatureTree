@@ -1,0 +1,42 @@
+{
+  "probe_id": "da04fa16e8805cff9053f53112f794617ecef8249cccfdc79c8caae6cbd4d476",
+  "job_id": "task-mtp3shgx-x9ifwt",
+  "status": "completed",
+  "started_at": "2026-09-06T00:58:40.169Z",
+  "completed_at": "2026-09-06T01:03:50.617Z",
+  "session_id": "ses_f8bc67e2effeEQZALD45qzFnla",
+  "requested_model": "volcengine/glm-5.3",
+  "elapsed_seconds": 310.448,
+  "first_response_written_at": "2026-09-06T01:03:29.528Z",
+  "first_response_seconds": 289.359,
+  "first_check_at": "2026-09-06T01:03:34.045Z",
+  "first_check_passed": true,
+  "model_attempts": 1,
+  "worker_response_writes": 1,
+  "coordinator_response_edits": 0,
+  "observed_usage": [
+    {
+      "assistant_messages": 8,
+      "model": "glm-5.3",
+      "provider": "volcengine",
+      "input_tokens": 69664,
+      "output_tokens": 4634,
+      "reasoning_tokens": 17261,
+      "cache_read_tokens": 236672,
+      "reported_cost": 0
+    }
+  ],
+  "actual_bill": "unavailable; reported_cost=0 is not proof of free usage",
+  "tool_calls": {
+    "read": 7,
+    "bash": 3,
+    "write": 1,
+    "total": 11
+  },
+  "response_path": "output/research/probes/da04fa16e8805cff9053f53112f794617ecef8249cccfdc79c8caae6cbd4d476/response.json",
+  "response_sha256": "5731586ed7181a2e1a6a7fb6f2ba1d132dcbbd82722ebac8c864806d30420310",
+  "execution_log": "output/research/probe-reviews/background-v2-events.log",
+  "production_accepted": false,
+  "physical_device_tests_performed": false,
+  "comparison_limit": "Targeted reading of three preselected source bodies; not the same scope as the earlier six-source research report. Coordinator preparation effort is additional."
+}

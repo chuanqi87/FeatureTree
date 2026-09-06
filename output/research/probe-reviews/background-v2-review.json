@@ -1,0 +1,65 @@
+{
+  "probe_id": "da04fa16e8805cff9053f53112f794617ecef8249cccfdc79c8caae6cbd4d476",
+  "response_sha256": "5731586ed7181a2e1a6a7fb6f2ba1d132dcbbd82722ebac8c864806d30420310",
+  "reviewed_by": "Codex",
+  "review_date": "2026-09-06",
+  "review_type": "independent targeted document review, not physical testing",
+  "response_contract_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "decision": "Core document distinctions improved; device plans and citation completeness need changes. Do not directly hand these cases to a tester.",
+  "criteria": [
+    {"id": "android-modal-version", "status": "pass", "notes": "Preserved built-with SDK Q can versus target P permission and target UDC type requirement. Explicitly lists exceptions and survival guarantees as not established."},
+    {"id": "ios-cancel-distinction", "status": "pass", "notes": "Distinguishes interface cancellation from app-switcher closing without notification, with user-action/foreground preconditions. Ancillary wording still needs tightening."},
+    {"id": "harmony-notification-exception", "status": "pass", "notes": "Identifies notification publisher/version distinctions and does not use the overview alone to prove AVSession and every task type behave identically."},
+    {"id": "scope-baseline-honesty", "status": "pass", "notes": "All answers remain low, latest-stable scope unresolved, no unsupported-platform assertion or claimed physical results. These are three questions, not a complete node."},
+    {"id": "device-triage", "status": "needs_changes", "notes": "Static document questions are separated from device work, but proposed HarmonyOS cases omit important preconditions and assert an unproven audio outcome."},
+    {"id": "citation-coverage", "status": "needs_changes", "notes": "All 17 citation ranges match the supplied bytes. However, the HarmonyOS muting/freezing claim is in line 45, which no citation covers; a real line reference alone does not prove coverage."}
+  ],
+  "required_changes": [
+    {
+      "id": "device-audio-precondition",
+      "question_id": "harmony-notification-scope",
+      "field": "device_review.cases[0].conditions",
+      "issue": "The no-AVSession audio case does not specify a stream type for which AVSession is not required. Using the listed media/game streams would violate the cited precondition and confound the observation.",
+      "source_id": "harmony-continuous-task",
+      "source_lines": [[41, 45]],
+      "action": "First verify an eligible non-AVSession stream/task in official documentation; otherwise defer this case. Record stream type and valid baseline."
+    },
+    {
+      "id": "device-audio-outcome",
+      "question_id": "harmony-notification-scope",
+      "field": "device_review.cases[0].expected",
+      "issue": "Stopping the long-running task is rewritten as guaranteed audio stopping. Line 7 only specifies stopping the long-running task.",
+      "source_id": "harmony-continuous-task",
+      "source_lines": [[7, 7]],
+      "action": "Measure task cancellation and audio playback separately. Treat audio outcome as observation pending evidence, not the documented pass criterion."
+    },
+    {
+      "id": "missing-citation",
+      "question_id": "harmony-notification-scope",
+      "field": "observation, conditions[4], citations",
+      "issue": "Muting/freezing and foreground recovery are mentioned without citing their supplied paragraph.",
+      "source_id": "harmony-continuous-task",
+      "source_lines": [[45, 45]],
+      "action": "Add a precise citation to line 45 or remove this nonessential detail."
+    },
+    {
+      "id": "device-sample-boundary",
+      "question_id": "harmony-notification-scope",
+      "field": "device_review.cases[1].expected, device_review.cases[2].conditions",
+      "issue": "A device observation cannot establish an official API contract; the transfer case also needs to distinguish system-managed and non-managed transfer.",
+      "source_id": "harmony-continuous-task",
+      "source_lines": [[19, 19], [33, 35]],
+      "action": "Report only behavior of the selected phone/build, and specify a supported transfer implementation before execution."
+    }
+  ],
+  "wording_notes": [
+    "HarmonyOS API19-and-earlier wording should retain the subject 'background-task module', not imply no notification from any publisher.",
+    "For iOS, say normal completion returns success; do not imply all non-user-cancelled tasks succeed, because line 170 also lists code errors and system expiration.",
+    "The proposed BGTask protocol label is not established by the supplied body; describe it neutrally as the referenced API until checked.",
+    "Reading every other Service method is not a prerequisite for this bounded question; keep possible future module research separate from required missing evidence."
+  ],
+  "original_answer_modified": false,
+  "manual_test_execution_authorized_by_this_review": false
+}

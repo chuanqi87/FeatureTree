@@ -1,0 +1,500 @@
+{
+  "probe_id": "da04fa16e8805cff9053f53112f794617ecef8249cccfdc79c8caae6cbd4d476",
+  "response_sha256": "5731586ed7181a2e1a6a7fb6f2ba1d132dcbbd82722ebac8c864806d30420310",
+  "response_contract_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": [],
+  "answers": [
+    {
+      "question_id": "android-fgs-conditions",
+      "observation": "本段区分三类版本前提：targeting API P+ 须声明 FOREGROUND_SERVICE 权限；built with SDK Q+（编译 SDK）可用 manifest 属性 foregroundServiceType 指定类型；'Beginning with SDK Version S/UDC' 叠加 targeting S+/UDC+：S+ 禁止从后台启动前台服务，UDC+ 未指定有效类型禁止启动。另须先 startService 且通知 id 非 0，四类异常均以 target API 为触发条件。",
+      "conditions": [
+        "服务必须已由 Context.startService(Intent) 启动，startForeground 调用本身不使服务进入 started 状态",
+        "target SDK 为 Build.VERSION_CODES.P 或更高：须请求 Manifest.permission.FOREGROUND_SERVICE 权限",
+        "编译 SDK（built with SDK version）为 Build.VERSION_CODES.Q 或更高：可在 manifest 的 service 元素用 R.attr.foregroundServiceType 指定前台服务类型，多标志可 OR",
+        "target SDK 为 Build.VERSION_CODES.S 或更高：不允许从后台启动前台服务，受限时抛 ForegroundServiceStartNotAllowedException",
+        "target SDK 为 Build.VERSION_CODES.UPSIDE_DOWN_CAKE 或更高：必须声明有效 foregroundServiceType，未设置/无效分别抛 MissingForegroundServiceTypeException、InvalidForegroundServiceTypeException",
+        "target SDK UDC+ 且缺少指定类型对应权限时抛 SecurityException",
+        "通知参数 id 必须非 0，notification 为向用户展示的通知"
+      ],
+      "not_established": [
+        "从后台启动前台服务的豁免情形（具体例外清单）不能由本段独立得出，正文仅给出 Behavior changes: Apps targeting Android 12 链接",
+        "各前台服务类型对应的具体权限要求未在本段列出，SecurityException 所指权限无法据此确定",
+        "前台服务进程存活或被杀的保证、while-in-use 限制、Android 14 dataSync 等类型的超时与配额不能由本段得出",
+        "'Beginning with SDK Version S/UDC' 是否指设备系统版本本段未单独定义，需链接的行为变更正文核实",
+        "三参数重载 startForeground(int, Notification, int) 与 stopForeground 等契约不在本段，不能据本段覆盖整个 Service 模块",
+        "本段为接口参考快照，未结合 2026-09-06 启动基线，最新 Android 正式版上的实际执行不能据此确认"
+      ],
+      "missing_requirements": [
+        "需补读 Behavior changes: Apps targeting Android 12 与 Behavior changes: Apps targeting Android 14 官方正文",
+        "需补各前台服务类型对应权限（FOREGROUND_SERVICE_* 系列）的官方参考清单",
+        "启动基线 output/research/baseline.json 未解析，最新正式版与 compile/target SDK 组合待固定",
+        "需补 Service 类其余方法正文以覆盖模块级结论（本题仅单一方法重载）"
+      ],
+      "confidence": "low",
+      "confidence_reason": "仅基于 startForeground(int, Notification) 单一重载的缓存快照作静态解释；被链接的行为变更文档、类型权限清单与启动基线均缺失，适用版本与运行行为均未核实，故置信度低。",
+      "citations": [
+        {
+          "source_id": "android-service",
+          "locator": "Service.startForeground(int, Notification) 签名，Added in API level 5",
+          "start_line": 1343,
+          "end_line": 1350,
+          "source": {
+            "id": "23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643",
+            "url": "https://developer.android.com/reference/android/app/Service",
+            "platform": "android",
+            "title": "Service",
+            "local_path": "docs-raw/research/2026-09-06/23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643/8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1/document.md",
+            "sha256": "8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1",
+            "raw_sha256": "7f56c0ba023f8b331fb20a225daa38e7babb5e2ce235308893f43154da8ab0c6",
+            "raw_path": "docs-raw/research/2026-09-06/23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643/8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1/source.gz",
+            "fetched_at": "2026-09-05T14:47:49.477262+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "### startForeground\n\nAdded in [API level 5](https://developer.android.com/guide/topics/manifest/uses-sdk-element#ApiLevels)\n\n```\npublic final void startForeground (int id, \n                Notification notification)\n```"
+        },
+        {
+          "source_id": "android-service",
+          "locator": "须先 startService；targeting P+ 须请求 FOREGROUND_SERVICE 权限",
+          "start_line": 1363,
+          "end_line": 1370,
+          "source": {
+            "id": "23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643",
+            "url": "https://developer.android.com/reference/android/app/Service",
+            "platform": "android",
+            "title": "Service",
+            "local_path": "docs-raw/research/2026-09-06/23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643/8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1/document.md",
+            "sha256": "8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1",
+            "raw_sha256": "7f56c0ba023f8b331fb20a225daa38e7babb5e2ce235308893f43154da8ab0c6",
+            "raw_path": "docs-raw/research/2026-09-06/23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643/8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1/source.gz",
+            "fetched_at": "2026-09-05T14:47:49.477262+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "Note that calling this method does *not* put the service in the started state\nitself, even though the name sounds like it. You must always call\n`startService(Intent)` first to tell the system it should keep the service running,\nand then use this method to tell it to keep it running harder.\n\nApps targeting API `Build.VERSION_CODES.P` or later must request\nthe permission `Manifest.permission.FOREGROUND_SERVICE` in order to use\nthis API."
+        },
+        {
+          "source_id": "android-service",
+          "locator": "built with SDK Q+ 可指定 foregroundServiceType",
+          "start_line": 1372,
+          "end_line": 1375,
+          "source": {
+            "id": "23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643",
+            "url": "https://developer.android.com/reference/android/app/Service",
+            "platform": "android",
+            "title": "Service",
+            "local_path": "docs-raw/research/2026-09-06/23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643/8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1/document.md",
+            "sha256": "8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1",
+            "raw_sha256": "7f56c0ba023f8b331fb20a225daa38e7babb5e2ce235308893f43154da8ab0c6",
+            "raw_path": "docs-raw/research/2026-09-06/23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643/8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1/source.gz",
+            "fetched_at": "2026-09-05T14:47:49.477262+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "Apps built with SDK version `Build.VERSION_CODES.Q` or later can specify\nthe foreground service types using attribute `R.attr.foregroundServiceType` in\nservice element of manifest file. The value of attribute\n`R.attr.foregroundServiceType` can be multiple flags ORed together."
+        },
+        {
+          "source_id": "android-service",
+          "locator": "Beginning with SDK Version S，targeting S+ 不允许从后台启动前台服务",
+          "start_line": 1377,
+          "end_line": 1383,
+          "source": {
+            "id": "23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643",
+            "url": "https://developer.android.com/reference/android/app/Service",
+            "platform": "android",
+            "title": "Service",
+            "local_path": "docs-raw/research/2026-09-06/23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643/8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1/document.md",
+            "sha256": "8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1",
+            "raw_sha256": "7f56c0ba023f8b331fb20a225daa38e7babb5e2ce235308893f43154da8ab0c6",
+            "raw_path": "docs-raw/research/2026-09-06/23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643/8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1/source.gz",
+            "fetched_at": "2026-09-05T14:47:49.477262+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "**Note:**\nBeginning with SDK Version `Build.VERSION_CODES.S`,\napps targeting SDK Version `Build.VERSION_CODES.S`\nor higher are not allowed to start foreground services from the background.\nSee\n[Behavior changes: Apps targeting Android 12](https://developer.android.com/about/versions/12/behavior-changes-12)\nfor more details."
+        },
+        {
+          "source_id": "android-service",
+          "locator": "Beginning with UPSIDE_DOWN_CAKE，targeting UDC+ 须指定有效类型",
+          "start_line": 1385,
+          "end_line": 1393,
+          "source": {
+            "id": "23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643",
+            "url": "https://developer.android.com/reference/android/app/Service",
+            "platform": "android",
+            "title": "Service",
+            "local_path": "docs-raw/research/2026-09-06/23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643/8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1/document.md",
+            "sha256": "8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1",
+            "raw_sha256": "7f56c0ba023f8b331fb20a225daa38e7babb5e2ce235308893f43154da8ab0c6",
+            "raw_path": "docs-raw/research/2026-09-06/23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643/8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1/source.gz",
+            "fetched_at": "2026-09-05T14:47:49.477262+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "**Note:**\nBeginning with SDK Version `Build.VERSION_CODES.UPSIDE_DOWN_CAKE`,\napps targeting SDK Version `Build.VERSION_CODES.UPSIDE_DOWN_CAKE`\nor higher are not allowed to start foreground services without specifying a valid\nforeground service type in the manifest attribute\n`R.attr.foregroundServiceType`.\nSee\n[Behavior changes: Apps targeting Android 14](https://developer.android.com/about/versions/14/behavior-changes-14)\nfor more details."
+        },
+        {
+          "source_id": "android-service",
+          "locator": "参数表（id 不得为 0）与 Throws 四类异常条件",
+          "start_line": 1395,
+          "end_line": 1405,
+          "source": {
+            "id": "23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643",
+            "url": "https://developer.android.com/reference/android/app/Service",
+            "platform": "android",
+            "title": "Service",
+            "local_path": "docs-raw/research/2026-09-06/23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643/8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1/document.md",
+            "sha256": "8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1",
+            "raw_sha256": "7f56c0ba023f8b331fb20a225daa38e7babb5e2ce235308893f43154da8ab0c6",
+            "raw_path": "docs-raw/research/2026-09-06/23718a0245a0703b35f163c856bc713db487089958014b7ec3ab2cbfc1cb8643/8840497d51841fe15c7d2a06ec7501a05ee261fcec099c68f95900dd6ec18db1/source.gz",
+            "fetched_at": "2026-09-05T14:47:49.477262+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "| Parameters | |\n| --- | --- |\n| `id` | `int`: The identifier for this notification as per `NotificationManager.notify(int, Notification)`; must not be 0. |\n| `notification` | `Notification`: The Notification to be displayed. |\n\n| Throws | |\n| --- | --- |\n| `ForegroundServiceStartNotAllowedException` | If the app targeting API is `Build.VERSION_CODES.S` or later, and the service is restricted from becoming foreground service due to background restriction. |\n| `InvalidForegroundServiceTypeException` | If the app targeting API is `Build.VERSION_CODES.UPSIDE_DOWN_CAKE` or later, and the manifest attribute `R.attr.foregroundServiceType` is set to invalid types(i.e. `ServiceInfo.FOREGROUND_SERVICE_TYPE_NONE`). |\n| `MissingForegroundServiceTypeException` | If the app targeting API is `Build.VERSION_CODES.UPSIDE_DOWN_CAKE` or later, and the manifest attribute `R.attr.foregroundServiceType` is not set. |\n| `SecurityException` | If the app targeting API is `Build.VERSION_CODES.UPSIDE_DOWN_CAKE` or later and doesn't have the permission to start the foreground service with the specified type in the manifest attribute `R.attr.foregroundServiceType`. |"
+        }
+      ],
+      "device_review": {
+        "requirement": "not_required",
+        "reason": "仅针对 startForeground(int, Notification) 单一重载的静态文档契约（权限、类型、编译/target/系统前提区分）整理及不可推出结论的识别；后台启动实际执行与进程存活属运行观测，本题未作答，也未据此确认任何平台行为。",
+        "cases": []
+      }
+    },
+    {
+      "question_id": "ios-cancellation-paths",
+      "observation": "文章明示两条取消路径契约：用户经系统界面/Live Activity 取消连续后台任务时，框架调用该任务 expirationHandler，应用按失败处理，未取消则完成时经 completion handler 返回成功；用户在 app 切换器关闭应用时，系统取消所有运行中任务，但应用不会收到取消指示。触发前提：BGContinuedProcessingTask 须在前台启动，且仅能响应人的动作（如点按钮）发起。",
+      "conditions": [
+        "任务须在前台启动且仅响应人的动作（如点击按钮）发起，不同于其他 BGTask 子类",
+        "系统界面取消路径：框架调用 expirationHandler，应用处理失败；未被取消则完成时经 completion handler 收到 success 状态",
+        "资源受限时可设置任务无法立即处理时直接失败，否则系统排队尽快开始",
+        "app 切换器关闭应用：系统取消所有运行中任务，应用不收到取消指示",
+        "应用须定期上报进度，系统据此在界面给出可能停滞任务的取消建议"
+      ],
+      "not_established": [
+        "BGContinuedProcessingTask 的最低 iOS/iPadOS 版本与机型适用性：包内行段无 availability 元数据，不能证明手机版本覆盖",
+        "expirationHandler 的实际调用时序、切换器关闭后任务终止时点等运行保证不能由本文证明",
+        "'supported devices' 的 GPU 支持范围未在包内列出",
+        "本文仅覆盖连续后台任务一种类型；BGTaskScheduler 其他子类及 iOS 前台长时任务整体支持情况不能由本文证明",
+        "任务注册与提交失败分支不在包内行段，两张流程图仅为图片占位，细节无法读取"
+      ],
+      "missing_requirements": [
+        "需补 BGContinuedProcessingTask 及 BGTask 协议参考页的 availability 与平台元数据以确认 iOS 适用版本",
+        "需补任务注册与调度要求正文以核实触发前提的完整条件",
+        "启动基线未解析，iOS 最新正式版适用性待固定"
+      ],
+      "confidence": "low",
+      "confidence_reason": "两条取消路径契约出自指南正文可静态对读，但包内无版本适用元数据与其他 BGTask 正文，手机版本与运行保证均未核实，故置信度低。",
+      "citations": [
+        {
+          "source_id": "ios-continued-task",
+          "locator": "Overview：BGContinuedProcessingTask 前台启动、仅响应用户动作、后台可用网络/CPU/GPU",
+          "start_line": 7,
+          "end_line": 9,
+          "source": {
+            "id": "e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85",
+            "url": "https://developer.apple.com/documentation/backgroundtasks/performing-long-running-tasks-on-ios-and-ipados",
+            "platform": "ios",
+            "title": "Performing long-running tasks on iOS and iPadOS",
+            "local_path": "docs-raw/research/2026-09-06/e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85/e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f/document.md",
+            "sha256": "e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f",
+            "raw_sha256": "3de20d4abcaef707801d51ee10d264c208d885a98139e05241d0a153625a3048",
+            "raw_path": "docs-raw/research/2026-09-06/e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85/e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f/source.gz",
+            "fetched_at": "2026-09-05T10:18:40.977833+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "On iOS and iPadOS, apps can execute long-running jobs using the Continuous Background Task ([`BGContinuedProcessingTask`](/documentation/BackgroundTasks/BGContinuedProcessingTask)), which enables your app’s critical work that can take minutes or more, to complete in the background if a person backgrounds the app before the job completes.\n\nUnlike other [`BGTask`](/documentation/BackgroundTasks/BGTask) subclasses, [`BGContinuedProcessingTask`](/documentation/BackgroundTasks/BGContinuedProcessingTask) starts in the foreground. In addition, your app needs to run the task only in response to someone’s action, such as tapping a button. If a person backgrounds the app before the task completes, a continuous background task can still perform operations, for example, Core ML processing or sensor data analysis, that leverage the GPU (on supported devices). In the background, continuous background tasks can also use the network and perform intenstive CPU-based operations, for example, image processing with Core Image, Vision, and Accelerate. Example tasks include:"
+        },
+        {
+          "source_id": "ios-continued-task",
+          "locator": "资源受限时可设任务立即失败，否则排队尽快开始",
+          "start_line": 15,
+          "end_line": 15,
+          "source": {
+            "id": "e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85",
+            "url": "https://developer.apple.com/documentation/backgroundtasks/performing-long-running-tasks-on-ios-and-ipados",
+            "platform": "ios",
+            "title": "Performing long-running tasks on iOS and iPadOS",
+            "local_path": "docs-raw/research/2026-09-06/e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85/e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f/document.md",
+            "sha256": "e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f",
+            "raw_sha256": "3de20d4abcaef707801d51ee10d264c208d885a98139e05241d0a153625a3048",
+            "raw_path": "docs-raw/research/2026-09-06/e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85/e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f/source.gz",
+            "fetched_at": "2026-09-05T10:18:40.977833+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "For added flexibility, you can set the system to fail any task if, under resource constraints, the system can’t begin processing the task immediately. Otherwise, the system queues the task to begin as soon as possible."
+        },
+        {
+          "source_id": "ios-continued-task",
+          "locator": "系统界面取消：框架调用 expirationHandler；否则 completion handler 返回成功",
+          "start_line": 19,
+          "end_line": 21,
+          "source": {
+            "id": "e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85",
+            "url": "https://developer.apple.com/documentation/backgroundtasks/performing-long-running-tasks-on-ios-and-ipados",
+            "platform": "ios",
+            "title": "Performing long-running tasks on iOS and iPadOS",
+            "local_path": "docs-raw/research/2026-09-06/e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85/e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f/document.md",
+            "sha256": "e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f",
+            "raw_sha256": "3de20d4abcaef707801d51ee10d264c208d885a98139e05241d0a153625a3048",
+            "raw_path": "docs-raw/research/2026-09-06/e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85/e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f/source.gz",
+            "fetched_at": "2026-09-05T10:18:40.977833+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "When the system runs a continuous background task and a person backgrounds the app, the system keeps them informed of the task’s progress through a system interface. For power and performance considerations, people can cancel a continuous background task if they desire, through the interface. Your app regularly reports progress of the task, which enables the system to make informed suggestions through the interface about possibly stuck tasks that a person can cancel.\n\nIf a person cancels a task through the interface, the framework invokes the task’s expiration handler and the app handles the failure. Otherwise, the framework returns control to the app’s completion handler with a success status."
+        },
+        {
+          "source_id": "ios-continued-task",
+          "locator": "Report progress：系统以 Live Activity 展示任务，人可经其取消停滞任务",
+          "start_line": 116,
+          "end_line": 118,
+          "source": {
+            "id": "e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85",
+            "url": "https://developer.apple.com/documentation/backgroundtasks/performing-long-running-tasks-on-ios-and-ipados",
+            "platform": "ios",
+            "title": "Performing long-running tasks on iOS and iPadOS",
+            "local_path": "docs-raw/research/2026-09-06/e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85/e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f/document.md",
+            "sha256": "e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f",
+            "raw_sha256": "3de20d4abcaef707801d51ee10d264c208d885a98139e05241d0a153625a3048",
+            "raw_path": "docs-raw/research/2026-09-06/e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85/e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f/source.gz",
+            "fetched_at": "2026-09-05T10:18:40.977833+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "## Report progress\n\nThe system displays the job and other continuous background tasks in a Live Activity to inform people of background task progress. It’s important to display accurate progress, as a person can cancel a task through the Live Activity widget if the task appears to be stuck."
+        },
+        {
+          "source_id": "ios-continued-task",
+          "locator": "任务可因系统过期失败；Note：切换器关闭应用时任务被取消且应用不收到取消指示",
+          "start_line": 170,
+          "end_line": 172,
+          "source": {
+            "id": "e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85",
+            "url": "https://developer.apple.com/documentation/backgroundtasks/performing-long-running-tasks-on-ios-and-ipados",
+            "platform": "ios",
+            "title": "Performing long-running tasks on iOS and iPadOS",
+            "local_path": "docs-raw/research/2026-09-06/e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85/e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f/document.md",
+            "sha256": "e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f",
+            "raw_sha256": "3de20d4abcaef707801d51ee10d264c208d885a98139e05241d0a153625a3048",
+            "raw_path": "docs-raw/research/2026-09-06/e4bce79153e59010356e6cfc3e68ae7a437f6e5e8fb9e8d6c6f755d8b7f82b85/e908838433613e4727aad0d91e4b59b7e4955b68e803b12b7c1579a05675bb1f/source.gz",
+            "fetched_at": "2026-09-05T10:18:40.977833+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "A task can fail if your code encounters an error or the system expires your task, as occurs when a person cancels the task in the system UI.\n\n> Note: The system cancels any running tasks if a person closes the app in the app switcher, but the app doesn’t receive an indication of cancellation in that case."
+        }
+      ],
+      "device_review": {
+        "requirement": "not_required",
+        "reason": "仅针对文章正文明示的两条取消路径契约对比与触发前提整理这一静态判断；取消实际时序、版本适用性与运行保证列为缺口，本题未做任何实测结论。",
+        "cases": []
+      }
+    },
+    {
+      "question_id": "harmony-notification-scope",
+      "observation": "概述称申请成功后通知栏显示关联消息，用户删除通知时系统自动停止长时任务，该句未限定类型与版本。AUDIO_PLAYBACK 分段显示不能一概而论：API 20+ 不接 AVSession 时由后台任务模块发通知，接入后改由 AVSession 发通知，API 19 及之前不发；媒体/游戏流类型必须接 AVSession，否则退后台被静音冻结。故通知与取消的关联不能直接推广到所有类型和版本。",
+      "conditions": [
+        "概述契约：长时任务申请成功后通知栏显示关联消息，用户删除消息时系统自动停止长时任务（正文未限定任务类型与版本）",
+        "播放 STREAM_USAGE_MUSIC/MOVIE/AUDIOBOOK/GAME 流类型：必须接入 AVSession 并申请 AUDIO_PLAYBACK 长时任务",
+        "其他用户可感知播放任务：须申请 AUDIO_PLAYBACK 长时任务，无需接入 AVSession",
+        "API version 20 起：不接 AVSession 由后台任务模块发通知栏通知；接入后由 AVSession 发通知；API 19 及之前后台任务模块不发通知",
+        "不满足接入规范：退后台播放被系统静音并冻结，重新切回前台才恢复",
+        "退后台时若设备没有有效音频播放，应用可能被系统冻结",
+        "DATA_TRANSFER 进度通知类型必须为实况窗，首次更新超过 10 分钟未更新则数据传输长时任务被取消"
+      ],
+      "not_established": [
+        "接入 AVSession 后删除 AVSession 通知是否同样触发系统停止长时任务，包内行段未说明，概述句能否覆盖该场景未证实",
+        "删除通知停止任务对 DATA_TRANSFER（实况窗）、VOIP、TASK_KEEPING 等其他类型是否同样成立，包内无逐类型证据",
+        "指南正文未标注自身适用的 HarmonyOS 发行版/API 范围；表内分段多为元服务或特定类型起始版本，不能证明手机最新版本行为",
+        "系统一致性校验的具体判定与长时任务实际存活时长等运行观测不能由本文证明"
+      ],
+      "missing_requirements": [
+        "需补 @ohos.resourceschedule.backgroundTaskManager API 参考正文（含 startBackgroundRunning 示例与通知类型说明）",
+        "需补 AVSession 概览/参考正文以核实接入后通知与取消的归属",
+        "需逐类型核对指南/API 分段的通知关联证据（如 DATA_TRANSFER 实况窗要求）",
+        "启动基线未解析，HarmonyOS 手机最新正式版与 API 版本组合待固定"
+      ],
+      "confidence": "low",
+      "confidence_reason": "概述与 AUDIO_PLAYBACK 分段可静态对读并得出不可一概而论的判断，但逐类型与版本适用未核实，AVSession 场景缺正文且无启动基线；属诊断性解释，未确认任何版本行为。",
+      "citations": [
+        {
+          "source_id": "harmony-continuous-task",
+          "locator": "概述：通知栏显示关联消息，用户删除通知时系统自动停止长时任务",
+          "start_line": 7,
+          "end_line": 9,
+          "source": {
+            "id": "e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/continuous-task",
+            "platform": "harmonyos",
+            "title": "长时任务(ArkTS)",
+            "local_path": "docs-raw/research/2026-09-06/e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6/ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81/document.md",
+            "sha256": "ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81",
+            "raw_sha256": "bc64536b1981b3fccd2cc15eb281128fa3fbff6ee0e53cb3e7b93de6b7b054bd",
+            "raw_path": "docs-raw/research/2026-09-06/e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6/ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "应用退至后台后，在后台需要长时间运行用户可感知的任务，如播放音乐、导航等。为防止应用进程被挂起，导致对应功能异常，可以申请长时任务，使应用在后台长时间运行。在长时任务中，支持同时申请多种类型的任务，也可以对任务类型进行更新。应用退至后台执行业务时，系统会做一致性校验，确保应用在执行相应的长时任务。应用在申请长时任务成功后，通知栏会显示与长时任务相关联的消息，用户删除通知栏消息时，系统会自动停止长时任务。  \n![](https://media:201787905910841154)  \n应用退至后台后，在不同类型设备上生命周期变化存在差异，详见[不同设备UIAbility生命周期的差异化行为](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/window-lifecycle#不同设备uiability生命周期的差异化行为)。  "
+        },
+        {
+          "source_id": "harmony-continuous-task",
+          "locator": "表1：长时任务类型与逐项 API 分段说明",
+          "start_line": 19,
+          "end_line": 29,
+          "source": {
+            "id": "e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/continuous-task",
+            "platform": "harmonyos",
+            "title": "长时任务(ArkTS)",
+            "local_path": "docs-raw/research/2026-09-06/e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6/ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81/document.md",
+            "sha256": "ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81",
+            "raw_sha256": "bc64536b1981b3fccd2cc15eb281128fa3fbff6ee0e53cb3e7b93de6b7b054bd",
+            "raw_path": "docs-raw/research/2026-09-06/e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6/ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "|DATA_TRANSFER|数据传输。|dataTransfer|非托管形式的上传、下载，如在浏览器后台上传或下载数据。|\n|AUDIO_PLAYBACK|音视频播放。 说明： 从API version 12开始，支持在元服务中使用。|audioPlayback|音频、视频在后台播放，音视频投播。|\n|AUDIO_RECORDING|录制。|audioRecording|录音、录屏退后台。|\n|LOCATION|定位导航。 说明： 从API版本26.0.0开始，支持在元服务中使用。|location|定位、导航。|\n|BLUETOOTH_INTERACTION|蓝牙相关业务。|bluetoothInteraction|通过蓝牙传输文件时退后台。|\n|MULTI_DEVICE_CONNECTION|多设备互联。 说明： 从API version 12开始，支持在元服务中使用。|multiDeviceConnection|分布式业务连接、投播。|\n|VOIP|音视频通话。 说明： 从API version 13开始支持。|voip|某些聊天类应用（具有音视频业务）音频、视频通话时退后台。|\n|TASK_KEEPING|计算任务。 说明： 从API version 21开始，对非PC/2in1设备但申请了ACL权限为[ohos.permission.KEEP_BACKGROUND_RUNNING_SYSTEM](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/restricted-permissions#ohospermissionkeep_background_running_system)的应用开放；对PC/2in1设备，应用不需要申请ACL权限。API version 20及之前版本，仅对PC/2in1设备开放。|taskKeeping|如杀毒软件。|\n|MODE_AV_PLAYBACK_AND_RECORD|多媒体相关业务。 说明： 从API version 22开始支持。 从API版本26.0.0开始，支持在元服务中使用。|avPlaybackAndRecord|音视频播放，录制，音视频通话时退后台。在上述三种场景下，选择本类型或对应类型的长时任务均可。例如：音视频播放场景下，选择AUDIO_PLAYBACK或者MODE_AV_PLAYBACK_AND_RECORD任意一个即可。|\n|MODE_SPECIAL_SCENARIO_PROCESSING|特殊场景类型（仅对Phone、Tablet、PC/2in1设备开放）。 说明： 从API version 22开始支持。|specialScenarioProcessing|在后台进行导出媒体文件，使用三方投播组件在后台进行投播，应用在后台有室内运动场景。|\n|MODE_NEARLINK|星闪业务。 起始版本： 26.0.0|nearlink|通过星闪传输文件时退后台。|"
+        },
+        {
+          "source_id": "harmony-continuous-task",
+          "locator": "DATA_TRANSFER：进度通知须为实况窗，首次更新超 10 分钟任务被取消",
+          "start_line": 33,
+          "end_line": 35,
+          "source": {
+            "id": "e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/continuous-task",
+            "platform": "harmonyos",
+            "title": "长时任务(ArkTS)",
+            "local_path": "docs-raw/research/2026-09-06/e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6/ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81/document.md",
+            "sha256": "ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81",
+            "raw_sha256": "bc64536b1981b3fccd2cc15eb281128fa3fbff6ee0e53cb3e7b93de6b7b054bd",
+            "raw_path": "docs-raw/research/2026-09-06/e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6/ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "* 在数据传输时，若应用使用[@ohos.request (上传下载)](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-request)托管给系统，即使申请DATA_TRANSFER的后台任务，应用退后台时还是会被挂起。\n\n* 在数据传输时，应用需要更新进度，如果进度长时间（首次更新超过10分钟）未更新，数据传输的长时任务会被取消。更新进度的通知类型必须为实况窗，具体实现可参考[startBackgroundRunning()](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-resourceschedule-backgroundtaskmanager#backgroundtaskmanagerstartbackgroundrunning12)中的示例。"
+        },
+        {
+          "source_id": "harmony-continuous-task",
+          "locator": "AUDIO_PLAYBACK：流类型须接 AVSession；其他播放任务无需接入",
+          "start_line": 41,
+          "end_line": 43,
+          "source": {
+            "id": "e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/continuous-task",
+            "platform": "harmonyos",
+            "title": "长时任务(ArkTS)",
+            "local_path": "docs-raw/research/2026-09-06/e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6/ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81/document.md",
+            "sha256": "ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81",
+            "raw_sha256": "bc64536b1981b3fccd2cc15eb281128fa3fbff6ee0e53cb3e7b93de6b7b054bd",
+            "raw_path": "docs-raw/research/2026-09-06/e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6/ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "* 当应用需要在后台播放媒体类型（流类型为STREAM_USAGE_MUSIC、STREAM_USAGE_MOVIE和STREAM_USAGE_AUDIOBOOK）和游戏类型（流类型为STREAM_USAGE_GAME）时，必须接入媒体会话服务（[AVSession](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/avsession-overview)）并申请AUDIO_PLAYBACK类型长时任务。\n\n* 除了上述播放类型，针对用户可感知的其他播放任务，如果应用需要在后台长时间运行该任务，必须申请AUDIO_PLAYBACK类型长时任务，无需接入AVSession。"
+        },
+        {
+          "source_id": "harmony-continuous-task",
+          "locator": "API 20 起通知发送方差异（后台任务模块/AVSession），API 19 及之前不发通知",
+          "start_line": 47,
+          "end_line": 47,
+          "source": {
+            "id": "e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/continuous-task",
+            "platform": "harmonyos",
+            "title": "长时任务(ArkTS)",
+            "local_path": "docs-raw/research/2026-09-06/e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6/ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81/document.md",
+            "sha256": "ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81",
+            "raw_sha256": "bc64536b1981b3fccd2cc15eb281128fa3fbff6ee0e53cb3e7b93de6b7b054bd",
+            "raw_path": "docs-raw/research/2026-09-06/e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6/ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "* 从API version 20开始，申请AUDIO_PLAYBACK类型长时任务但不接入AVSession，申请长时任务成功后会在通知栏显示通知；接入AVSession后，后台任务模块不会发送通知栏通知，由AVSession发送通知。对于API version 19及之前的版本，后台任务模块不会在通知栏显示通知。"
+        },
+        {
+          "source_id": "harmony-continuous-task",
+          "locator": "退后台无有效音频播放时应用可能被系统冻结",
+          "start_line": 49,
+          "end_line": 49,
+          "source": {
+            "id": "e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/continuous-task",
+            "platform": "harmonyos",
+            "title": "长时任务(ArkTS)",
+            "local_path": "docs-raw/research/2026-09-06/e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6/ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81/document.md",
+            "sha256": "ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81",
+            "raw_sha256": "bc64536b1981b3fccd2cc15eb281128fa3fbff6ee0e53cb3e7b93de6b7b054bd",
+            "raw_path": "docs-raw/research/2026-09-06/e15b3ea0c4d2625a248a1de57f7a7a154c4c4163fed8231a2aa4bc67cbd610b6/ce5ab504bc0cc373926da12de86d2e84130a29471e14ea5214655f89b975ec81/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+          },
+          "excerpt": "* 应用申请AUDIO_PLAYBACK类型长时任务，退至后台时，如果设备没有有效音频播放，应用可能被系统冻结。"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "概述与 AUDIO_PLAYBACK 分段的静态差异已可判断，但'删除通知即停止长时任务'的实际执行在手机上（尤其接入 AVSession 后通知归属变化、实况窗类型）可能存在实现差异，值得按代表性环境抽样；抽样前应先补 AVSession 与 backgroundTaskManager API 参考文档。",
+        "cases": [
+          {
+            "device_model": "待选：HarmonyOS 手机（API version 20 及以上，具体型号待启动基线解析后固定）",
+            "os_build": "待定：HarmonyOS 正式版构建（待启动基线解析后固定）",
+            "conditions": [
+              "应用申请 AUDIO_PLAYBACK 长时任务且不接入 AVSession",
+              "应用退至后台持续播放音频",
+              "通知栏显示后台任务模块发送的通知"
+            ],
+            "steps": [
+              "前台启动应用并申请 AUDIO_PLAYBACK 长时任务",
+              "退至后台播放音频，确认通知栏出现关联通知",
+              "在通知栏删除该通知消息",
+              "观察长时任务状态与后台播放是否被系统停止"
+            ],
+            "expected": "删除通知后系统自动停止长时任务，后台播放停止（核对概述句在无 AVSession 场景的实际执行）"
+          },
+          {
+            "device_model": "待选：HarmonyOS 手机（API version 20 及以上，具体型号待启动基线解析后固定）",
+            "os_build": "待定：HarmonyOS 正式版构建（待启动基线解析后固定）",
+            "conditions": [
+              "应用接入 AVSession 并申请 AUDIO_PLAYBACK 长时任务",
+              "退后台播放 STREAM_USAGE_MUSIC 流类型音频",
+              "通知栏通知由 AVSession 发送"
+            ],
+            "steps": [
+              "接入 AVSession 后申请长时任务并退后台播放",
+              "确认通知栏通知由 AVSession 发送",
+              "删除该通知",
+              "观察长时任务与后台播放是否被系统停止"
+            ],
+            "expected": "待观察：包内文档未明示该场景删除通知是否停止任务，记录实际行为以补契约或确认差异"
+          },
+          {
+            "device_model": "待选：HarmonyOS 手机（具体型号与 API 版本待启动基线解析后固定）",
+            "os_build": "待定：HarmonyOS 正式版构建（待启动基线解析后固定）",
+            "conditions": [
+              "应用申请 DATA_TRANSFER 长时任务",
+              "进度通知使用实况窗类型并持续更新"
+            ],
+            "steps": [
+              "申请 DATA_TRANSFER 并退后台传输数据",
+              "确认实况窗进度通知显示",
+              "删除实况窗通知",
+              "观察传输长时任务是否被系统停止"
+            ],
+            "expected": "待观察：概述句是否覆盖实况窗通知场景未在包内证实，记录实际行为"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "ea53ddfe0e7e91e6d73399bb166641486f7882790079ba80f30381af8809488b",
+  "url": "https://developer.apple.com/documentation/metal/mixing-metal-and-opengl-rendering-in-a-view",
+  "platform": "ios",
+  "title": "Mixing Metal and OpenGL rendering in a view",
+  "local_path": "docs-raw/research/2026-09-06/ea53ddfe0e7e91e6d73399bb166641486f7882790079ba80f30381af8809488b/15ccd221c18b897069eb18690102c5abcd403ece7a74e0bfaab7a6f1ee3bea0e/document.md",
+  "sha256": "15ccd221c18b897069eb18690102c5abcd403ece7a74e0bfaab7a6f1ee3bea0e",
+  "raw_sha256": "e2a579e8568d3cdbce799c7cc9e3b16d6498f20376e3ca301c563870954b2d29",
+  "raw_path": "docs-raw/research/2026-09-06/ea53ddfe0e7e91e6d73399bb166641486f7882790079ba80f30381af8809488b/15ccd221c18b897069eb18690102c5abcd403ece7a74e0bfaab7a6f1ee3bea0e/source.gz",
+  "fetched_at": "2026-09-05T10:24:01.121528+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

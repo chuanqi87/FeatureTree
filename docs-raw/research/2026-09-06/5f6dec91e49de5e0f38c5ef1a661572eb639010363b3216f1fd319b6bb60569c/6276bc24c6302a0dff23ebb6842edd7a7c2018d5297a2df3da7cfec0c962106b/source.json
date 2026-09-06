@@ -1,0 +1,13 @@
+{
+  "id": "5f6dec91e49de5e0f38c5ef1a661572eb639010363b3216f1fd319b6bb60569c",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-locationkit-hdc",
+  "platform": "harmonyos",
+  "title": "Location Kit",
+  "local_path": "docs-raw/research/2026-09-06/5f6dec91e49de5e0f38c5ef1a661572eb639010363b3216f1fd319b6bb60569c/6276bc24c6302a0dff23ebb6842edd7a7c2018d5297a2df3da7cfec0c962106b/document.md",
+  "sha256": "6276bc24c6302a0dff23ebb6842edd7a7c2018d5297a2df3da7cfec0c962106b",
+  "raw_sha256": "deb3d8e9ce2e45e20349f1cba43250d961c1041263dbd5f314a0d98028c9878d",
+  "raw_path": "docs-raw/research/2026-09-06/5f6dec91e49de5e0f38c5ef1a661572eb639010363b3216f1fd319b6bb60569c/6276bc24c6302a0dff23ebb6842edd7a7c2018d5297a2df3da7cfec0c962106b/source.gz",
+  "fetched_at": "2026-09-05T11:02:06.925318+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "7396afdc7414968ffc39736288fcabfc4eaf58698446247d83a62ccdff8bb064",
+  "url": "https://developer.android.com/topic/architecture/views/dependency-injection/manual-views",
+  "platform": "android",
+  "title": "Manual dependency injection (Views)",
+  "local_path": "docs-raw/research/2026-09-06/7396afdc7414968ffc39736288fcabfc4eaf58698446247d83a62ccdff8bb064/e2ac10785d8dcc2f29959ff5179fec7f99d966ab385004e468549bde282c8b37/document.md",
+  "sha256": "e2ac10785d8dcc2f29959ff5179fec7f99d966ab385004e468549bde282c8b37",
+  "raw_sha256": "e40206ace4d8e66f79cf8fb631347febb870df8d747a8eb2f68f6d2537e629b8",
+  "raw_path": "docs-raw/research/2026-09-06/7396afdc7414968ffc39736288fcabfc4eaf58698446247d83a62ccdff8bb064/e2ac10785d8dcc2f29959ff5179fec7f99d966ab385004e468549bde282c8b37/source.gz",
+  "fetched_at": "2026-09-05T10:36:46.688675+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

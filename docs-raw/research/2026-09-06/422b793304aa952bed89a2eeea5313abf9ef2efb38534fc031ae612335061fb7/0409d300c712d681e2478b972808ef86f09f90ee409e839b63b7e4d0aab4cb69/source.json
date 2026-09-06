@@ -1,0 +1,13 @@
+{
+  "id": "422b793304aa952bed89a2eeea5313abf9ef2efb38534fc031ae612335061fb7",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/audio-runtime-debugging-info",
+  "platform": "harmonyos",
+  "title": "使用音频快照获取问题定位信息",
+  "local_path": "docs-raw/research/2026-09-06/422b793304aa952bed89a2eeea5313abf9ef2efb38534fc031ae612335061fb7/0409d300c712d681e2478b972808ef86f09f90ee409e839b63b7e4d0aab4cb69/document.md",
+  "sha256": "0409d300c712d681e2478b972808ef86f09f90ee409e839b63b7e4d0aab4cb69",
+  "raw_sha256": "72e54fc22b184334df27ecec24676d69417c675c5b5544a9e4fca427dccd0d21",
+  "raw_path": "docs-raw/research/2026-09-06/422b793304aa952bed89a2eeea5313abf9ef2efb38534fc031ae612335061fb7/0409d300c712d681e2478b972808ef86f09f90ee409e839b63b7e4d0aab4cb69/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

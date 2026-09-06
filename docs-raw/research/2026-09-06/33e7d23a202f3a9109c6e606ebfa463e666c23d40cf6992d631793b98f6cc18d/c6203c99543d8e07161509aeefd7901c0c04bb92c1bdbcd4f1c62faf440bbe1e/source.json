@@ -1,0 +1,13 @@
+{
+  "id": "33e7d23a202f3a9109c6e606ebfa463e666c23d40cf6992d631793b98f6cc18d",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/bgtask-design-formula",
+  "platform": "harmonyos",
+  "title": "Background Tasks Kit接入规范",
+  "local_path": "docs-raw/research/2026-09-06/33e7d23a202f3a9109c6e606ebfa463e666c23d40cf6992d631793b98f6cc18d/c6203c99543d8e07161509aeefd7901c0c04bb92c1bdbcd4f1c62faf440bbe1e/document.md",
+  "sha256": "c6203c99543d8e07161509aeefd7901c0c04bb92c1bdbcd4f1c62faf440bbe1e",
+  "raw_sha256": "a037db87be3e49d63992253661ddf24e3ae005fd7532462f6f208847ff02218e",
+  "raw_path": "docs-raw/research/2026-09-06/33e7d23a202f3a9109c6e606ebfa463e666c23d40cf6992d631793b98f6cc18d/c6203c99543d8e07161509aeefd7901c0c04bb92c1bdbcd4f1c62faf440bbe1e/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

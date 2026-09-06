@@ -1,0 +1,537 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "ui.theme",
+    "level": "L2",
+    "parent": "ui",
+    "name": {
+      "zh": "主题与外观",
+      "en": "Theme and Appearance"
+    },
+    "definition": "深色模式、动态取色与系统外观。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/ui/theme/_rollup.yaml",
+    "comparison_scope": {
+      "includes": [
+        "深色模式、动态取色与系统外观。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "d61af54cc3ad86bc24b345f10f54b3af6636df5005205de8450e9eabe3e39168",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "559f1c12fed3164eda4e5ffdc6f509191987b6b64afcd99bed375701eb680e28",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/develop/ui/compose/designsystems/migrate-xml-theme-to-compose",
+      "platform": "android",
+      "title": "Migrate XML themes to Material 3 in Compose",
+      "local_path": "docs-raw/research/2026-09-06/f285c144e096aaeb175427765c39e565525e5fe6a16ad8346f484671fc591272/291f1681f26e6ae49fe832976a23a41e2279942263093f984801ef6d372e6ee7/document.md",
+      "sha256": "291f1681f26e6ae49fe832976a23a41e2279942263093f984801ef6d372e6ee7",
+      "raw_sha256": "8d2cdf79a92923a2184dc018377b90222bb06ed7e9b9364fe84bb59915bd1ded",
+      "raw_path": "docs-raw/research/2026-09-06/f285c144e096aaeb175427765c39e565525e5fe6a16ad8346f484671fc591272/291f1681f26e6ae49fe832976a23a41e2279942263093f984801ef6d372e6ee7/source.gz",
+      "fetched_at": "2026-09-05T10:24:56.497696+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 184,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 14,
+          "truncated": false
+        },
+        {
+          "start_line": 15,
+          "end_line": 24,
+          "truncated": false
+        },
+        {
+          "start_line": 25,
+          "end_line": 31,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/studio/intro/new-ui",
+      "platform": "android",
+      "title": "New UI in Android Studio",
+      "local_path": "docs-raw/research/2026-09-06/76b0406fce20971485c117b62d5e9ef011043aec1807b00d29deabb7e7afcf89/33151fd2a183c03020251eba7496ee371ff2a499c0926995551a178f7ab63ee4/document.md",
+      "sha256": "33151fd2a183c03020251eba7496ee371ff2a499c0926995551a178f7ab63ee4",
+      "raw_sha256": "6f3a6f705c74d7ad8c160c6e78583183c243587c0146a40daa244b07eadcdbd8",
+      "raw_path": "docs-raw/research/2026-09-06/76b0406fce20971485c117b62d5e9ef011043aec1807b00d29deabb7e7afcf89/33151fd2a183c03020251eba7496ee371ff2a499c0926995551a178f7ab63ee4/source.gz",
+      "fetched_at": "2026-09-05T10:34:55.692998+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 267,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 7,
+          "truncated": false
+        },
+        {
+          "start_line": 8,
+          "end_line": 15,
+          "truncated": false
+        },
+        {
+          "start_line": 16,
+          "end_line": 21,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/tvml/tv-theme",
+      "platform": "ios",
+      "title": "tv-theme",
+      "local_path": "docs-raw/research/2026-09-06/297a282eb87a825e98a3c7f053c1e6c519b641e01fd08e3c4c454d2716d67920/30d5af1a2e71ed8a59c0054adff55d6165601a28dc03330f115b80d8bbc0d9ba/document.md",
+      "sha256": "30d5af1a2e71ed8a59c0054adff55d6165601a28dc03330f115b80d8bbc0d9ba",
+      "raw_sha256": "9e1cc5588cc01ab7b64b8e054cf177311fd646c96056f5aa69a294475fca6bb8",
+      "raw_path": "docs-raw/research/2026-09-06/297a282eb87a825e98a3c7f053c1e6c519b641e01fd08e3c4c454d2716d67920/30d5af1a2e71ed8a59c0054adff55d6165601a28dc03330f115b80d8bbc0d9ba/source.gz",
+      "fetched_at": "2026-09-05T11:19:40.460302+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 29,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 21,
+          "truncated": false
+        },
+        {
+          "start_line": 22,
+          "end_line": 29,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/uikit/uitraitdefinition-64c15",
+      "platform": "ios",
+      "title": "UITraitDefinition",
+      "local_path": "docs-raw/research/2026-09-06/31ec2b73f15f82bc396a16f742df17ee12df7f8fd8194a715ac90cfc6eda384b/0a43856e8441db1da01c2d70b4b2ea2c5327829b9824f55db37ad5e62e18cd39/document.md",
+      "sha256": "0a43856e8441db1da01c2d70b4b2ea2c5327829b9824f55db37ad5e62e18cd39",
+      "raw_sha256": "8e194665c6cac32c548957e3980acabba780cb5123f478a56a4d802a53558bdd",
+      "raw_path": "docs-raw/research/2026-09-06/31ec2b73f15f82bc396a16f742df17ee12df7f8fd8194a715ac90cfc6eda384b/0a43856e8441db1da01c2d70b4b2ea2c5327829b9824f55db37ad5e62e18cd39/source.gz",
+      "fetched_at": "2026-09-05T11:22:17.966018+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 119,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 50,
+          "truncated": false
+        },
+        {
+          "start_line": 51,
+          "end_line": 52,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/theme_skinning",
+      "platform": "harmonyos",
+      "title": "设置应用内主题换肤",
+      "local_path": "docs-raw/research/2026-09-06/e35b3f156b1e6104ce7314c32e4f3194a991a009de2c331a319314936f531121/8935a43cd2e9a2b547f8cdadc78f4eb1017c695bbab0ad29d6bd7a26311552c8/document.md",
+      "sha256": "8935a43cd2e9a2b547f8cdadc78f4eb1017c695bbab0ad29d6bd7a26311552c8",
+      "raw_sha256": "5f869343d74fee6ee51246740cc426c0f5ab6d38dcd4c14cd75c849978de7a76",
+      "raw_path": "docs-raw/research/2026-09-06/e35b3f156b1e6104ce7314c32e4f3194a991a009de2c331a319314936f531121/8935a43cd2e9a2b547f8cdadc78f4eb1017c695bbab0ad29d6bd7a26311552c8/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 399,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 27,
+          "truncated": false
+        },
+        {
+          "start_line": 28,
+          "end_line": 202,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ui",
+      "platform": "harmonyos",
+      "title": "UI界面",
+      "local_path": "docs-raw/research/2026-09-06/46e2943476675dfb060d39955423ab1e3e3b6840b187e3ad72069b1549121596/41fb6b105b4d53ae5f9cb658ddb70e1d31561a9536606d69eeb5db814f77b6c6/document.md",
+      "sha256": "41fb6b105b4d53ae5f9cb658ddb70e1d31561a9536606d69eeb5db814f77b6c6",
+      "raw_sha256": "e229c934850a1ff9acb0e6598ecb334be010791237a3d3d8e00fdaea16c401bf",
+      "raw_path": "docs-raw/research/2026-09-06/46e2943476675dfb060d39955423ab1e3e3b6840b187e3ad72069b1549121596/41fb6b105b4d53ae5f9cb658ddb70e1d31561a9536606d69eeb5db814f77b6c6/source.gz",
+      "fetched_at": "2026-09-05T10:29:17.704124+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 29,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 29,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:43:10.604129+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "3912de593ee4e20552f9ddef5e620218155ccfd3a467a601646d3f746fd82740"
+}

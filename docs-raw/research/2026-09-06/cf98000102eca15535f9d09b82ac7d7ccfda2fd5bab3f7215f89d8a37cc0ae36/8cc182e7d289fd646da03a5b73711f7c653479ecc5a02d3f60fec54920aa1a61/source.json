@@ -1,0 +1,13 @@
+{
+  "id": "cf98000102eca15535f9d09b82ac7d7ccfda2fd5bab3f7215f89d8a37cc0ae36",
+  "url": "https://developer.apple.com/documentation/cryptokit/storing-cryptokit-keys-in-the-keychain",
+  "platform": "ios",
+  "title": "Storing CryptoKit Keys in the Keychain",
+  "local_path": "docs-raw/research/2026-09-06/cf98000102eca15535f9d09b82ac7d7ccfda2fd5bab3f7215f89d8a37cc0ae36/8cc182e7d289fd646da03a5b73711f7c653479ecc5a02d3f60fec54920aa1a61/document.md",
+  "sha256": "8cc182e7d289fd646da03a5b73711f7c653479ecc5a02d3f60fec54920aa1a61",
+  "raw_sha256": "cae913def0a64b6abfa826c18fba027b7ec915829c478e5e7c016d7bdf1ffccf",
+  "raw_path": "docs-raw/research/2026-09-06/cf98000102eca15535f9d09b82ac7d7ccfda2fd5bab3f7215f89d8a37cc0ae36/8cc182e7d289fd646da03a5b73711f7c653479ecc5a02d3f60fec54920aa1a61/source.gz",
+  "fetched_at": "2026-09-05T10:21:33.383438+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

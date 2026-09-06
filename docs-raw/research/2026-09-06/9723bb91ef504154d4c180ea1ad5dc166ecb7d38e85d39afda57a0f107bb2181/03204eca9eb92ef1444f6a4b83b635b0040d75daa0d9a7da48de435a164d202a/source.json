@@ -1,0 +1,13 @@
+{
+  "id": "9723bb91ef504154d4c180ea1ad5dc166ecb7d38e85d39afda57a0f107bb2181",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-osaccount",
+  "platform": "harmonyos",
+  "title": "@ohos.account.osAccount (系统账号管理)",
+  "local_path": "docs-raw/research/2026-09-06/9723bb91ef504154d4c180ea1ad5dc166ecb7d38e85d39afda57a0f107bb2181/03204eca9eb92ef1444f6a4b83b635b0040d75daa0d9a7da48de435a164d202a/document.md",
+  "sha256": "03204eca9eb92ef1444f6a4b83b635b0040d75daa0d9a7da48de435a164d202a",
+  "raw_sha256": "715c5b58594c0f4edbf5cd46e06dbaa4f804b0c1539e7a110c97e704394f6a51",
+  "raw_path": "docs-raw/research/2026-09-06/9723bb91ef504154d4c180ea1ad5dc166ecb7d38e85d39afda57a0f107bb2181/03204eca9eb92ef1444f6a4b83b635b0040d75daa0d9a7da48de435a164d202a/source.gz",
+  "fetched_at": "2026-09-05T10:27:46.537032+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

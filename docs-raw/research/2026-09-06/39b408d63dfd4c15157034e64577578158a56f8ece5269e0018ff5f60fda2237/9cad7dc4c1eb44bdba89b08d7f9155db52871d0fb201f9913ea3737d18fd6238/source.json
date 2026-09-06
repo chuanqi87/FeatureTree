@@ -1,0 +1,13 @@
+{
+  "id": "39b408d63dfd4c15157034e64577578158a56f8ece5269e0018ff5f60fda2237",
+  "url": "https://developer.android.com/identity/sign-in/single-tap-biometric",
+  "platform": "android",
+  "title": "Integrate single tap passkey creation and sign-in with biometric prompts",
+  "local_path": "docs-raw/research/2026-09-06/39b408d63dfd4c15157034e64577578158a56f8ece5269e0018ff5f60fda2237/9cad7dc4c1eb44bdba89b08d7f9155db52871d0fb201f9913ea3737d18fd6238/document.md",
+  "sha256": "9cad7dc4c1eb44bdba89b08d7f9155db52871d0fb201f9913ea3737d18fd6238",
+  "raw_sha256": "d74fb9fa344a2df4e8e2d13476b28fda1d82e196312ae0fba5aabab235e99f1b",
+  "raw_path": "docs-raw/research/2026-09-06/39b408d63dfd4c15157034e64577578158a56f8ece5269e0018ff5f60fda2237/9cad7dc4c1eb44bdba89b08d7f9155db52871d0fb201f9913ea3737d18fd6238/source.gz",
+  "fetched_at": "2026-09-05T10:32:38.928809+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

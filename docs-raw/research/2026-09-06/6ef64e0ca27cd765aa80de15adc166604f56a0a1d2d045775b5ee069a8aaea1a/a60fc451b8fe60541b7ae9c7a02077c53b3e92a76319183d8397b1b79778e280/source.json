@@ -1,0 +1,13 @@
+{
+  "id": "6ef64e0ca27cd765aa80de15adc166604f56a0a1d2d045775b5ee069a8aaea1a",
+  "url": "https://developer.apple.com/documentation/metrickit/track-performance-by-app-state-using-metrickit",
+  "platform": "ios",
+  "title": "Track performance by app state using MetricKit",
+  "local_path": "docs-raw/research/2026-09-06/6ef64e0ca27cd765aa80de15adc166604f56a0a1d2d045775b5ee069a8aaea1a/a60fc451b8fe60541b7ae9c7a02077c53b3e92a76319183d8397b1b79778e280/document.md",
+  "sha256": "a60fc451b8fe60541b7ae9c7a02077c53b3e92a76319183d8397b1b79778e280",
+  "raw_sha256": "184af34a4cc6ae0ed82641852b0c80b7c4d86e899cd6da3a5a30715491f3eb1b",
+  "raw_path": "docs-raw/research/2026-09-06/6ef64e0ca27cd765aa80de15adc166604f56a0a1d2d045775b5ee069a8aaea1a/a60fc451b8fe60541b7ae9c7a02077c53b3e92a76319183d8397b1b79778e280/source.gz",
+  "fetched_at": "2026-09-05T10:24:12.718707+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

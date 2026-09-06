@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-09-06T04:10:37.206566+00:00",
+  "features": 1,
+  "with_three_platform_candidates": 1,
+  "rows": [
+    {
+      "feature_id": "connectivity.bluetooth.le.scan.background",
+      "candidate_document_counts": {
+        "android": 2,
+        "ios": 2,
+        "harmonyos": 2
+      },
+      "missing_platform_candidates": [],
+      "binding_source_gap_counts": {
+        "android": 0,
+        "ios": 0,
+        "harmonyos": 0
+      },
+      "version_and_claim_verification": "pending"
+    }
+  ]
+}

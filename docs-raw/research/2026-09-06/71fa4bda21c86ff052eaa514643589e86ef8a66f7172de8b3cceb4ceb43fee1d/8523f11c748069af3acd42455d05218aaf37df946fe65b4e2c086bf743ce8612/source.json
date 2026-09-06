@@ -1,0 +1,13 @@
+{
+  "id": "71fa4bda21c86ff052eaa514643589e86ef8a66f7172de8b3cceb4ceb43fee1d",
+  "url": "https://developer.apple.com/documentation/technotes/tn3128-starting-shareplay-without-an-existing-facetime-call",
+  "platform": "ios",
+  "title": "TN3128: Starting SharePlay without an existing FaceTime call",
+  "local_path": "docs-raw/research/2026-09-06/71fa4bda21c86ff052eaa514643589e86ef8a66f7172de8b3cceb4ceb43fee1d/8523f11c748069af3acd42455d05218aaf37df946fe65b4e2c086bf743ce8612/document.md",
+  "sha256": "8523f11c748069af3acd42455d05218aaf37df946fe65b4e2c086bf743ce8612",
+  "raw_sha256": "bde187d713880b41518705cdc3b0bb6296fd859d5e1c3e0c06fd2bdd20223caa",
+  "raw_path": "docs-raw/research/2026-09-06/71fa4bda21c86ff052eaa514643589e86ef8a66f7172de8b3cceb4ceb43fee1d/8523f11c748069af3acd42455d05218aaf37df946fe65b4e2c086bf743ce8612/source.gz",
+  "fetched_at": "2026-09-05T10:26:46.514414+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

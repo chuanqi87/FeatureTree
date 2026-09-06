@@ -1,0 +1,13 @@
+{
+  "id": "690497a4aa998390a7ba116e899e4cdb54f75f90787a565cd79af2cab4f82e71",
+  "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/scanforperipherals(withservices:options:)",
+  "platform": "ios",
+  "title": "scanForPeripherals(withServices:options:)",
+  "local_path": "docs-raw/research/2026-09-06/690497a4aa998390a7ba116e899e4cdb54f75f90787a565cd79af2cab4f82e71/24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f/document.md",
+  "sha256": "24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f",
+  "raw_sha256": "8a312560a9e41fd54dceb4e81887bbc519ff956ad83a615a9e14047f0aacfc2d",
+  "raw_path": "docs-raw/research/2026-09-06/690497a4aa998390a7ba116e899e4cdb54f75f90787a565cd79af2cab4f82e71/24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f/source.gz",
+  "fetched_at": "2026-09-05T16:45:20.610016+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

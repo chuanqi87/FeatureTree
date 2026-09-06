@@ -1,0 +1,13 @@
+{
+  "id": "c78339bd9108a07c8bfba5c97b1729f330689f4b494b2154782804c4784e3f40",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wifimanagerext",
+  "platform": "harmonyos",
+  "title": "@ohos.wifiManagerExt (WLAN扩展接口)",
+  "local_path": "docs-raw/research/2026-09-06/c78339bd9108a07c8bfba5c97b1729f330689f4b494b2154782804c4784e3f40/e347463d3781c9c363cbe993991d9f8c91f74fe945dd06f95709779bbb68c561/document.md",
+  "sha256": "e347463d3781c9c363cbe993991d9f8c91f74fe945dd06f95709779bbb68c561",
+  "raw_sha256": "41a2dd2bc91aa269972e7d7ef8d81b2c5b015ff9e9f24202298f7e3f6434527f",
+  "raw_path": "docs-raw/research/2026-09-06/c78339bd9108a07c8bfba5c97b1729f330689f4b494b2154782804c4784e3f40/e347463d3781c9c363cbe993991d9f8c91f74fe945dd06f95709779bbb68c561/source.gz",
+  "fetched_at": "2026-09-05T10:28:07.534792+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

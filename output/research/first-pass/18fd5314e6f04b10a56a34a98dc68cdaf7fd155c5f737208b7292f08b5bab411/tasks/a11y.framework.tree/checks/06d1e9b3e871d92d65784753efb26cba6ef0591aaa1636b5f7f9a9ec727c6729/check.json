@@ -1,0 +1,9 @@
+{
+  "task_id": "2f78975e520258412557cd41a22db7993a0f670b9e5b6f904bb8ea75b694dd52",
+  "feature_id": "a11y.framework.tree",
+  "response_sha256": "d3a15bc0705c6c8d095244c149f2cc957da522b1bd1dd433cd896aa6c8252ce7",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

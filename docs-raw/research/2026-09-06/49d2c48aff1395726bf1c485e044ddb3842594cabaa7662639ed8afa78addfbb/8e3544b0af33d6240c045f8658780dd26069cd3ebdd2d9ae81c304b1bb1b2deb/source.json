@@ -1,0 +1,13 @@
+{
+  "id": "49d2c48aff1395726bf1c485e044ddb3842594cabaa7662639ed8afa78addfbb",
+  "url": "https://developer.android.com/training/wearables/user-input/wear-ime",
+  "platform": "android",
+  "title": "Create input method editors on Wear",
+  "local_path": "docs-raw/research/2026-09-06/49d2c48aff1395726bf1c485e044ddb3842594cabaa7662639ed8afa78addfbb/8e3544b0af33d6240c045f8658780dd26069cd3ebdd2d9ae81c304b1bb1b2deb/document.md",
+  "sha256": "8e3544b0af33d6240c045f8658780dd26069cd3ebdd2d9ae81c304b1bb1b2deb",
+  "raw_sha256": "8f0db3a70b5fadaa21b2cfa35e843c419acc3a8fce2fefb4906149bdf096dd75",
+  "raw_path": "docs-raw/research/2026-09-06/49d2c48aff1395726bf1c485e044ddb3842594cabaa7662639ed8afa78addfbb/8e3544b0af33d6240c045f8658780dd26069cd3ebdd2d9ae81c304b1bb1b2deb/source.gz",
+  "fetched_at": "2026-09-05T10:39:07.725200+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

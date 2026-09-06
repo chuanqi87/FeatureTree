@@ -1,0 +1,13 @@
+{
+  "id": "a8b280e67b0aadacbed6c6a6d293d78b8a855cd7d2f5f930705e700f523cd085",
+  "url": "https://developer.apple.com/documentation/devicemanagement/transferring-management-of-apps-to-declarative-management",
+  "platform": "ios",
+  "title": "Transferring management of apps to declarative management",
+  "local_path": "docs-raw/research/2026-09-06/a8b280e67b0aadacbed6c6a6d293d78b8a855cd7d2f5f930705e700f523cd085/4d7150f21112d8d8ee1e4b2d67c350e79be1b316342f004ce8ea2d9756361372/document.md",
+  "sha256": "4d7150f21112d8d8ee1e4b2d67c350e79be1b316342f004ce8ea2d9756361372",
+  "raw_sha256": "729bd226e27365091484deedbe89ab9967cee73baebff1ecd454b3bf1ba4addf",
+  "raw_path": "docs-raw/research/2026-09-06/a8b280e67b0aadacbed6c6a6d293d78b8a855cd7d2f5f930705e700f523cd085/4d7150f21112d8d8ee1e4b2d67c350e79be1b316342f004ce8ea2d9756361372/source.gz",
+  "fetched_at": "2026-09-05T10:51:29.295371+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

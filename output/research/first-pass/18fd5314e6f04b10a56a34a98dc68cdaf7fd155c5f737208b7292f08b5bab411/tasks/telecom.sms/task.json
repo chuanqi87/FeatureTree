@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "telecom.sms",
+    "level": "L2",
+    "parent": "telecom",
+    "name": {
+      "zh": "短信",
+      "en": "SMS"
+    },
+    "definition": "短信发送与读取。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/telecom/sms/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "短信发送与读取。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "caafdd1a1a371d4f54edd37b63f299a594bb08b8853f727ff5f2b363a064aa1e",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "97cf5e675ba3c2c35807720277973c64cea908117ad777f8d0680b25de5b3d4e",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developers.google.com/identity/sms-retriever/user-consent/overview",
+      "platform": "android",
+      "title": "One-tap SMS verification with the SMS User Consent API",
+      "local_path": "docs-raw/research/2026-09-06/45518fe87f5415ef811747a95d1563dab61e74ceb8a573f0728d85e6aab04a5d/74a6c5c75ca5b00ef6a84dbcd3d1c03e30e76a83fedc767143fec8b69b87df97/document.md",
+      "sha256": "74a6c5c75ca5b00ef6a84dbcd3d1c03e30e76a83fedc767143fec8b69b87df97",
+      "raw_sha256": "59d62f00071716a10042d1ec3af2491e2e2870ff64c6f9f107a349eb15b319e8",
+      "raw_path": "docs-raw/research/2026-09-06/45518fe87f5415ef811747a95d1563dab61e74ceb8a573f0728d85e6aab04a5d/74a6c5c75ca5b00ef6a84dbcd3d1c03e30e76a83fedc767143fec8b69b87df97/source.gz",
+      "fetched_at": "2026-09-05T10:50:57.881878+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 67,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 14,
+          "truncated": false
+        },
+        {
+          "start_line": 15,
+          "end_line": 43,
+          "truncated": false
+        },
+        {
+          "start_line": 44,
+          "end_line": 67,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developers.google.com/identity/sms-retriever/overview",
+      "platform": "android",
+      "title": "Automatic SMS Verification with the SMS Retriever API",
+      "local_path": "docs-raw/research/2026-09-06/91f5270208faed1ae1884dfb8f221497cba139083daa710a2948d19bc3d01856/8b846b2780c60e0c8a3dc8167aa994771ca50cdcf8b0656e333534aea501e2f6/document.md",
+      "sha256": "8b846b2780c60e0c8a3dc8167aa994771ca50cdcf8b0656e333534aea501e2f6",
+      "raw_sha256": "8859432e3a6a9cdb62d2645c7f239c20b3ee554a7c860609d17885d20379597d",
+      "raw_path": "docs-raw/research/2026-09-06/91f5270208faed1ae1884dfb8f221497cba139083daa710a2948d19bc3d01856/8b846b2780c60e0c8a3dc8167aa994771ca50cdcf8b0656e333534aea501e2f6/source.gz",
+      "fetched_at": "2026-09-05T10:50:57.339344+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 34,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 34,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/identitylookup",
+      "platform": "ios",
+      "title": "SMS and Call Reporting",
+      "local_path": "docs-raw/research/2026-09-06/73216826073a1f5683c646dd2790894a37a548e20d5a88887fd1cccb3d237407/2c3f04b2eb90d2130c26830b03eba57072d894e772e6724613e57b32c7ec29a2/document.md",
+      "sha256": "2c3f04b2eb90d2130c26830b03eba57072d894e772e6724613e57b32c7ec29a2",
+      "raw_sha256": "ae35094e10b8ad98f9a2ff2caf6a29c4fabc271c7f4fbdc0d872b91bf81d3d99",
+      "raw_path": "docs-raw/research/2026-09-06/73216826073a1f5683c646dd2790894a37a548e20d5a88887fd1cccb3d237407/2c3f04b2eb90d2130c26830b03eba57072d894e772e6724613e57b32c7ec29a2/source.gz",
+      "fetched_at": "2026-09-05T10:32:26.285072+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 63,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 14,
+          "truncated": false
+        },
+        {
+          "start_line": 15,
+          "end_line": 16,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/security/enabling-autofill-for-domain-bound-sms-codes",
+      "platform": "ios",
+      "title": "Enabling AutoFill for domain-bound SMS codes",
+      "local_path": "docs-raw/research/2026-09-06/1cfe1f0369ae9222a5ee9c35592ba41a08bb90ba93d7a7353fac6d316e9e9dfe/ba0662d3aeaca8c201cc8f563ed346590dd657e3290dc8e1ce39bc62272a4ccb/document.md",
+      "sha256": "ba0662d3aeaca8c201cc8f563ed346590dd657e3290dc8e1ce39bc62272a4ccb",
+      "raw_sha256": "e3d506eca0a5c97684645205f5e880e09aaf2fa93db465d01c4d8cba9e4023e9",
+      "raw_path": "docs-raw/research/2026-09-06/1cfe1f0369ae9222a5ee9c35592ba41a08bb90ba93d7a7353fac6d316e9e9dfe/ba0662d3aeaca8c201cc8f563ed346590dd657e3290dc8e1ce39bc62272a4ccb/source.gz",
+      "fetched_at": "2026-09-05T11:18:31.536731+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 41,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 14,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-sms",
+      "platform": "harmonyos",
+      "title": "@ohos.telephony.sms (短信服务)",
+      "local_path": "docs-raw/research/2026-09-06/665cf4926104421fa93b4a306a2f20f411d1d1cddcba8e6528d50c85b7c78ce4/6c739d0d913523388045d9ffcc65a0f4a58f82328bec07833fb6cba3bfb2626d/document.md",
+      "sha256": "6c739d0d913523388045d9ffcc65a0f4a58f82328bec07833fb6cba3bfb2626d",
+      "raw_sha256": "f29d90b0a180fc2478b5761cfa83d6805a94dbd8c80a4862bfdc8a460633ef1f",
+      "raw_path": "docs-raw/research/2026-09-06/665cf4926104421fa93b4a306a2f20f411d1d1cddcba8e6528d50c85b7c78ce4/6c739d0d913523388045d9ffcc65a0f4a58f82328bec07833fb6cba3bfb2626d/source.gz",
+      "fetched_at": "2026-09-05T10:27:56.361646+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 559,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 11,
+          "truncated": false
+        },
+        {
+          "start_line": 12,
+          "end_line": 12,
+          "truncated": true
+        },
+        {
+          "start_line": 18,
+          "end_line": 65,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inputmethod-extension-ability",
+      "platform": "harmonyos",
+      "title": "@ohos.InputMethodExtensionAbility (InputMethodExtensionAbility)",
+      "local_path": "docs-raw/research/2026-09-06/37969301e6fb9bb53ec002878f13fbddc8a61293887f1a28c0db1cd36c6ca7ab/eb5f8cafd26d3af24fc2e7fab6438b749b423911ccf110d6500a528a4dab4533/document.md",
+      "sha256": "eb5f8cafd26d3af24fc2e7fab6438b749b423911ccf110d6500a528a4dab4533",
+      "raw_sha256": "8bdb4d68f14f22d71e2cb8e8cec45fc3bf39d2c70abd3428d4f5d52b7261ea46",
+      "raw_path": "docs-raw/research/2026-09-06/37969301e6fb9bb53ec002878f13fbddc8a61293887f1a28c0db1cd36c6ca7ab/eb5f8cafd26d3af24fc2e7fab6438b749b423911ccf110d6500a528a4dab4533/source.gz",
+      "fetched_at": "2026-09-05T10:27:35.136786+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 204,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 20,
+          "truncated": false
+        },
+        {
+          "start_line": 21,
+          "end_line": 42,
+          "truncated": false
+        },
+        {
+          "start_line": 43,
+          "end_line": 48,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:43:05.683347+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "76fe54fa523fce434332155178ff1a699d7da463a94531e020c2479ec4038378"
+}

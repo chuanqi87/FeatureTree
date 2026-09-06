@@ -1,0 +1,862 @@
+{
+  "task_id": "aed0ca5ef137f27d1a8899fd80fc931f9e52242ef41ea997572d338c88ef72dc",
+  "feature_id": "connectivity.bluetooth.le.scan.background",
+  "stage": "first_pass",
+  "summary": "Android 与 iOS 均有后台 BLE 扫描的直接官方文档：Android 后台使用扫描 API 需应用进程存活，进程未运行时可用 PendingIntent 版 startScan 投递匹配结果；iOS 需 bluetooth-central 后台模式、后台必须指定 serviceUUIDs 且扫描选项无效，iOS 26+ 可借 Live Activity 保留前台扫描特权。HarmonyOS @ohos.bluetooth.ble 仅文档化回调式 startBLEScan 机制，全文未见后台/前台表述，只能 possible_mapping。版本基线未固定，全部 low，真机未验证。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "官方《Communicate in the background》指南明示：应用不可见时使用 BluetoothLeScanner 或 CompanionDeviceManager 没有限制，但需应用进程存活；进程未运行时 BluetoothLeScanner 可改用 PendingIntent 版 startScan 在匹配设备出现时投递结果，官方不建议周期性调度扫描。android.bluetooth.le 包自 API 21 提供 BluetoothLeScanner/ScanFilter/ScanSettings/ScanCallback。",
+      "version_scope": "developer.android.com 当前指南（抓取 2026-09-05），正文提及 Android 10+/12+ 行为变化；android.bluetooth.le 包 API 21+；未固定 API Level 与手机基线。",
+      "conditions": [
+        "后台使用扫描 API 无限制但需应用进程存活（回调式）",
+        "进程未运行时可改用 PendingIntent 版 startScan 接收匹配过滤设备的结果",
+        "外设必须在广播中才能经 PendingIntent 唤醒应用",
+        "通用后台工作规则同样适用于蓝牙任务；Android 12+ 有前台服务启动限制",
+        "官方不建议周期性调度扫描（无论设备在不在范围都会周期唤醒进程）"
+      ],
+      "gaps": [
+        "BluetoothLeScanner.startScan(List, ScanSettings, PendingIntent) 重载的 API 参考正文未在本包读取",
+        "BLUETOOTH_SCAN 等权限要求及其版本演变未在本包正文核实",
+        "Doze/应用待机对后台扫描的具体配额与停止条件未在读取正文展开",
+        "未固定 Android 版本基线，指南所述行为与具体版本的对应需后续核对"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "Find a device > In the background：进程存活要求与 PendingIntent 扫描",
+          "start_line": 43,
+          "end_line": 64,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/background",
+            "platform": "android",
+            "title": "Communicate in the background",
+            "local_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/document.md",
+            "sha256": "182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf",
+            "raw_sha256": "46f0a27ee7bc79e0991e096e446e5aa5190d214e58242f2754889894af9cd174",
+            "raw_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/source.gz",
+            "fetched_at": "2026-09-05T10:24:14.792416+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 199,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 24,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 43,
+                "end_line": 66,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### In the background\n\nThere is no limitation on using either of these APIs while the app is not\nvisible, but they do both need your app process to be alive. If the app process\nis not running, you can use the following workarounds:\n\n* For `BluetoothLeScanner`: Call\n  [`startScan()`](https://developer.android.com/reference/android/bluetooth/le/BluetoothLeScanner#startScan(java.util.List%3Candroid.bluetooth.le.ScanFilter%3E,%20android.bluetooth.le.ScanSettings,%20android.app.PendingIntent))\n  with a [`PendingIntent`](https://developer.android.com/reference/android/app/PendingIntent) object instead\n  of a [`ScanCallback`](https://developer.android.com/reference/android/bluetooth/le/ScanCallback) object to\n  get notified when a device matching your filter is scanned.\n  ([Sample](https://github.com/android/platform-samples/blob/main/samples/connectivity/bluetooth/ble/src/main/java/com/example/platform/connectivity/bluetooth/ble/BLEScanIntentSample.kt#L163))\n* For `CompanionDeviceManager`: Follow the guidance in [Keep companion apps\n  awake](https://developer.android.com/develop/connectivity/bluetooth/companion-device-pairing#keep-awake) to\n  wake the app and keep it awake while a previously associated device is in\n  range.\n  ([Sample](https://github.com/android/platform-samples/blob/main/samples/connectivity/bluetooth/companion/src/main/java/com/example/platform/connectivity/bluetooth/cdm/CompanionDeviceSampleService.kt#L40))\n\n**Note:** Scheduling periodic scans to find devices is discouraged. That approach is\nless efficient because it starts the app process periodically regardless of\nwhether a device is in range. The methods described in this guide ensure that a\ndevice is in range before waking up the app process."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Note：通用后台工作规则适用于蓝牙任务",
+          "start_line": 19,
+          "end_line": 21,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/background",
+            "platform": "android",
+            "title": "Communicate in the background",
+            "local_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/document.md",
+            "sha256": "182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf",
+            "raw_sha256": "46f0a27ee7bc79e0991e096e446e5aa5190d214e58242f2754889894af9cd174",
+            "raw_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/source.gz",
+            "fetched_at": "2026-09-05T10:24:14.792416+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 199,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 24,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 43,
+                "end_line": 66,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "**Note:** The [general guidance for background\nwork](https://developer.android.com/develop/background-work/background-tasks) on Android applies for\nBluetooth-related work too."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "android.bluetooth.le 包 Added in API level 21",
+          "start_line": 3,
+          "end_line": 3,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/reference/android/bluetooth/le/package-summary",
+            "platform": "android",
+            "title": "android.bluetooth.le",
+            "local_path": "docs-raw/research/2026-09-06/8bf2861bd368b8203e11b4e4842429aa3b8f64bb66c89c8c2df52844912dafb5/887ae99c2ead2aa5fd260a0d530b2a81f655bf0a2d294561fd2fcadb0f87b309/document.md",
+            "sha256": "887ae99c2ead2aa5fd260a0d530b2a81f655bf0a2d294561fd2fcadb0f87b309",
+            "raw_sha256": "4d9a0e2b2c037a842c305114de0e20d3f28f70c52a56756cc829800ab4dd3edd",
+            "raw_path": "docs-raw/research/2026-09-06/8bf2861bd368b8203e11b4e4842429aa3b8f64bb66c89c8c2df52844912dafb5/887ae99c2ead2aa5fd260a0d530b2a81f655bf0a2d294561fd2fcadb0f87b309/source.gz",
+            "fetched_at": "2026-09-05T10:39:42.849773+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 62,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 62,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Added in [API level 21](https://developer.android.com/guide/topics/manifest/uses-sdk-element#ApiLevels)"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Classes：BluetoothLeScanner 提供 BLE 扫描操作",
+          "start_line": 26,
+          "end_line": 26,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/reference/android/bluetooth/le/package-summary",
+            "platform": "android",
+            "title": "android.bluetooth.le",
+            "local_path": "docs-raw/research/2026-09-06/8bf2861bd368b8203e11b4e4842429aa3b8f64bb66c89c8c2df52844912dafb5/887ae99c2ead2aa5fd260a0d530b2a81f655bf0a2d294561fd2fcadb0f87b309/document.md",
+            "sha256": "887ae99c2ead2aa5fd260a0d530b2a81f655bf0a2d294561fd2fcadb0f87b309",
+            "raw_sha256": "4d9a0e2b2c037a842c305114de0e20d3f28f70c52a56756cc829800ab4dd3edd",
+            "raw_path": "docs-raw/research/2026-09-06/8bf2861bd368b8203e11b4e4842429aa3b8f64bb66c89c8c2df52844912dafb5/887ae99c2ead2aa5fd260a0d530b2a81f655bf0a2d294561fd2fcadb0f87b309/source.gz",
+            "fetched_at": "2026-09-05T10:39:42.849773+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 62,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 62,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "| [BluetoothLeScanner](https://developer.android.com/reference/android/bluetooth/le/BluetoothLeScanner) | This class provides methods to perform scan related operations for Bluetooth LE devices. |"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "机制已由官方指南明示（进程存活、PendingIntent、前台服务限制），但 Doze/厂商电源管理对后台扫描的实际停止与结果投递时序未量化，真机可验证；非本轮必需。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "documented_mechanism",
+      "observation": "Core Bluetooth 文档明示：声明 bluetooth-central 后台模式即可后台扫描，但必须显式指定 serviceUUIDs，且 CBCentralManager 扫描选项在后台无效；iOS 26+ 若已实例化 CBManager 并启动 Live Activity，可在后台保留前台同等扫描特权（无 UUID 扫描、禁用去重过滤）；iPad apps 运行于 macOS 不支持蓝牙后台模式。scanForPeripherals 新参数会覆盖旧参数。",
+      "version_scope": "框架页提及 iOS 26（Live Activity）与 iOS 13+（NSBluetoothAlwaysUsageDescription，链接后应用）；scanForPeripherals 快照未标注 availability；未固定 iOS 版本基线。",
+      "conditions": [
+        "需在应用中指定 bluetooth-central 后台模式",
+        "后台扫描必须显式指定一个或多个 serviceUUIDs",
+        "CBCentralManager 扫描选项在后台无效",
+        "iOS 26+ 需实例化 CBManager 并在进入后台前启动 Live Activity 才保留前台特权",
+        "iPad apps 运行在 macOS 上不支持 Core Bluetooth 后台执行模式"
+      ],
+      "gaps": [
+        "bluetooth-central 模式的声明步骤正文（如 Choosing background modes）未在本包读取",
+        "后台扫描的系统调度、时长限制与终止条件未在读取正文说明",
+        "scanForPeripherals 快照无 availability 元数据，iOS 适用版本需用符号页/DocC JSON 核实",
+        "Apple 目录含 macOS 等其他平台，本包仅读框架页与一个方法页，需逐符号核对 iOS 适用性"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "ios-2",
+          "locator": "Discussion：bluetooth-central 后台模式、serviceUUIDs 要求、扫描选项后台无效",
+          "start_line": 26,
+          "end_line": 28,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/scanforperipherals(withservices:options:)",
+            "platform": "ios",
+            "title": "scanForPeripherals(withServices:options:)",
+            "local_path": "docs-raw/research/2026-09-06/690497a4aa998390a7ba116e899e4cdb54f75f90787a565cd79af2cab4f82e71/24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f/document.md",
+            "sha256": "24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f",
+            "raw_sha256": "8a312560a9e41fd54dceb4e81887bbc519ff956ad83a615a9e14047f0aacfc2d",
+            "raw_path": "docs-raw/research/2026-09-06/690497a4aa998390a7ba116e899e4cdb54f75f90787a565cd79af2cab4f82e71/24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f/source.gz",
+            "fetched_at": "2026-09-05T16:45:20.610016+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 32,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 18,
+                "truncated": false
+              },
+              {
+                "start_line": 19,
+                "end_line": 32,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "If the central manager is actively scanning with one set of parameters and it receives another set to scan, the new parameters override the previous set. When the central manager discovers a peripheral, it calls the [`centralManager(_:didDiscover:advertisementData:rssi:)`](/documentation/CoreBluetooth/CBCentralManagerDelegate/centralManager(_:didDiscover:advertisementData:rssi:)) method of its delegate object.\n\nYour app can scan for Bluetooth devices in the background by specifying the `bluetooth-central` background mode. To do this, your app must explicitly scan for one or more services by specifying them in the `serviceUUIDs` parameter. The [`CBCentralManager`](/documentation/CoreBluetooth/CBCentralManager) scan option has no effect while scanning in the background."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Discussion：serviceUUIDs 过滤语义与新参数覆盖旧参数",
+          "start_line": 21,
+          "end_line": 26,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/scanforperipherals(withservices:options:)",
+            "platform": "ios",
+            "title": "scanForPeripherals(withServices:options:)",
+            "local_path": "docs-raw/research/2026-09-06/690497a4aa998390a7ba116e899e4cdb54f75f90787a565cd79af2cab4f82e71/24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f/document.md",
+            "sha256": "24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f",
+            "raw_sha256": "8a312560a9e41fd54dceb4e81887bbc519ff956ad83a615a9e14047f0aacfc2d",
+            "raw_path": "docs-raw/research/2026-09-06/690497a4aa998390a7ba116e899e4cdb54f75f90787a565cd79af2cab4f82e71/24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f/source.gz",
+            "fetched_at": "2026-09-05T16:45:20.610016+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 32,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 18,
+                "truncated": false
+              },
+              {
+                "start_line": 19,
+                "end_line": 32,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "You can provide an array of [`CBUUID`](/documentation/CoreBluetooth/CBUUID) objects — representing service UUIDs — in the `serviceUUIDs` parameter. When you do, the central manager returns only peripherals that advertise the services you specify. If the `serviceUUIDs` parameter is `nil`, this method returns all discovered peripherals, regardless of their supported services.\n\n> Note:\n> The recommended practice is to populate the `serviceUUIDs` parameter rather than leaving it `nil`.\n\nIf the central manager is actively scanning with one set of parameters and it receives another set to scan, the new parameters override the previous set. When the central manager discovers a peripheral, it calls the [`centralManager(_:didDiscover:advertisementData:rssi:)`](/documentation/CoreBluetooth/CBCentralManagerDelegate/centralManager(_:didDiscover:advertisementData:rssi:)) method of its delegate object."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Overview：iPad apps on macOS 不支持蓝牙后台模式；iOS 26 Live Activity 后台保留前台特权",
+          "start_line": 11,
+          "end_line": 16,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/corebluetooth",
+            "platform": "ios",
+            "title": "Core Bluetooth",
+            "local_path": "docs-raw/research/2026-09-06/da051d17545089ced2b56b67e62e9594e772ba9edcac36f533d6ef2bb98dd449/248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03/document.md",
+            "sha256": "248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03",
+            "raw_sha256": "64c445e5f0fe384b767d52aee478880ba15e1e262e7a75b8056f3cc5cc9943f9",
+            "raw_path": "docs-raw/research/2026-09-06/da051d17545089ced2b56b67e62e9594e772ba9edcac36f533d6ef2bb98dd449/248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.400334+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 183,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 5,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 23,
+                "end_line": 36,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Core Bluetooth background execution modes aren’t supported in iPad apps running on macOS.\n\nIn iOS 26 and later, your app can continue certain activities in the background if the app starts a Live Activity before it goes to the background.\nIf your app has an instantiated [`CBManager`](/documentation/CoreBluetooth/CBManager) and starts a Live Activity, it can use the same privileges while in the background that it uses when it is in the foreground.\nThis means activities like scanning without providing service UUID’s and scanning with duplicates filter disabled will be allowed while in the background.\nFor more information about creating Live Activities, see [ActivityKit](https://developer.apple.com/documentation/ActivityKit)."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Important：iOS 13+ 链接后需 NSBluetoothAlwaysUsageDescription",
+          "start_line": 18,
+          "end_line": 19,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/corebluetooth",
+            "platform": "ios",
+            "title": "Core Bluetooth",
+            "local_path": "docs-raw/research/2026-09-06/da051d17545089ced2b56b67e62e9594e772ba9edcac36f533d6ef2bb98dd449/248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03/document.md",
+            "sha256": "248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03",
+            "raw_sha256": "64c445e5f0fe384b767d52aee478880ba15e1e262e7a75b8056f3cc5cc9943f9",
+            "raw_path": "docs-raw/research/2026-09-06/da051d17545089ced2b56b67e62e9594e772ba9edcac36f533d6ef2bb98dd449/248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.400334+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 183,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 5,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 23,
+                "end_line": 36,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "> Important:\n> Your app will crash if its `Info.plist` doesn’t include usage description keys for the types of data it needs to access. To access Core Bluetooth APIs on apps linked on or after iOS 13, include the <doc://com.apple.documentation/documentation/BundleResources/Information-Property-List/NSBluetoothAlwaysUsageDescription> key. In iOS 12 and earlier, include <doc://com.apple.documentation/documentation/BundleResources/Information-Property-List/NSBluetoothPeripheralUsageDescription> to access Bluetooth peripheral data."
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "后台模式与 UUID 过滤为声明式机制，可静态核实；但系统对后台扫描的实际调度、终止行为及 iOS 26 Live Activity 特权边界需真机确认；非本轮必需。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "possible_mapping",
+      "observation": "@ohos.bluetooth.ble 模块文档化 startBLEScan/stopBLEScan：需 ohos.permission.ACCESS_BLUETOOTH、仅 Stage 模型、SystemCapability.Communication.Bluetooth.Core，单路扫描（多路需 API 15+ BleScanner），结果经 on('BLEDeviceFind') 回调。但全文 6077 行未见任何后台/前台扫描行为表述，后台可用性与挂起/唤醒条件未文档化，扫描接口只能视为可能映射。",
+      "version_scope": "模块首批接口 API 10+，正文提及 BleScanner（API 15+）与 API 23 权限说明；HarmonyOS 具体发行版/SDK 版本未固定；harmonyos-2 为历史 API 迁移 diff 记录。",
+      "conditions": [
+        "需 ohos.permission.ACCESS_BLUETOOTH 权限",
+        "仅可在 Stage 模型下使用",
+        "startBLEScan 单路扫描，下次调用前需先 stopBLEScan",
+        "设备需具备 SystemCapability.Communication.Bluetooth.Core 且蓝牙开启"
+      ],
+      "gaps": [
+        "@ohos.bluetooth.ble 全文（6077 行）无后台/前台扫描表述，后台扫描可用性未知",
+        "HarmonyOS 后台任务（长时任务/应用挂起）与蓝牙扫描的关系需读后台任务指南核实，本包未含该资料",
+        "未固定 HarmonyOS 发行版与 API 版本基线",
+        "OpenHarmony 与 HarmonyOS 发行版行为差异未核对"
+      ],
+      "confidence": "low",
+      "evidence_strength": "indirect",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "ble.startBLEScan：发起扫描、单路限制、权限与 Stage 模型约束",
+          "start_line": 288,
+          "end_line": 304,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 288,
+                "end_line": 356,
+                "truncated": false
+              },
+              {
+                "start_line": 397,
+                "end_line": 411,
+                "truncated": true
+              },
+              {
+                "start_line": 532,
+                "end_line": 535,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### ble.startBLEScan\n\nstartBLEScan(filters: Array\\<ScanFilter\\>, options?: ScanOptions): void\n\n发起BLE扫描流程。\n\n* 扫描结果会通过[ble.on('BLEDeviceFind')](#bleonbledevicefind)的回调函数获取到。只能扫描BLE设备，调用[ble.stopBLEScan](#blestopblescan)可以停止该方法开启的扫描流程。\n* 该接口只支持单路扫描，即应用同时只能调用一次，下一次调用前，需要先调用[ble.stopBLEScan](#blestopblescan)停止上一次的扫描流程。\n* 若需要使用多路扫描，可使用[BleScanner](#blescanner15)。\n\n需要权限：ohos.permission.ACCESS_BLUETOOTH\n\n元服务API：从API version 12开始，该接口支持在元服务中使用。\n\n系统能力：SystemCapability.Communication.Bluetooth.Core\n\n模型约束：此接口仅可在Stage模型下使用。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "扫描结果经 on('BLEDeviceFind') 回调获取",
+          "start_line": 294,
+          "end_line": 294,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 288,
+                "end_line": 356,
+                "truncated": false
+              },
+              {
+                "start_line": 397,
+                "end_line": 411,
+                "truncated": true
+              },
+              {
+                "start_line": 532,
+                "end_line": 535,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "* 扫描结果会通过[ble.on('BLEDeviceFind')](#bleonbledevicefind)的回调函数获取到。只能扫描BLE设备，调用[ble.stopBLEScan](#blestopblescan)可以停止该方法开启的扫描流程。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "模块首批接口从 API version 10 开始支持",
+          "start_line": 5,
+          "end_line": 5,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 288,
+                "end_line": 356,
+                "truncated": false
+              },
+              {
+                "start_line": 397,
+                "end_line": 411,
+                "truncated": true
+              },
+              {
+                "start_line": 532,
+                "end_line": 535,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "* 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "API diff：startBLEScan 新增于 @ohos.bluetooth.ble（历史接口迁移记录）",
+          "start_line": 1141,
+          "end_line": 1141,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-connectivitykit-hdc",
+            "platform": "harmonyos",
+            "title": "Connectivity Kit",
+            "local_path": "docs-raw/research/2026-09-06/2109fe40f58867ec8100889d1e8d97b14e6004735ab69a9b598b1ccef451165f/61ed7d37c963ecd55ca636b57c784bcc6362dd366cf2a7b4e1ad3c5c095073ee/document.md",
+            "sha256": "61ed7d37c963ecd55ca636b57c784bcc6362dd366cf2a7b4e1ad3c5c095073ee",
+            "raw_sha256": "e8b3d0f62327d3a92dcb96a5fa16d121262b8c119ef55213c26c4640d710a874",
+            "raw_path": "docs-raw/research/2026-09-06/2109fe40f58867ec8100889d1e8d97b14e6004735ab69a9b598b1ccef451165f/61ed7d37c963ecd55ca636b57c784bcc6362dd366cf2a7b4e1ad3c5c095073ee/source.gz",
+            "fetched_at": "2026-09-05T11:01:32.042523+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1601,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 42,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "|新增API|NA|类名：ble； API声明：function startBLEScan(filters: Array\\<ScanFilter\\>, options?: ScanOptions): void; 差异内容：function startBLEScan(filters: Array\\<ScanFilter\\>, options?: ScanOptions): void;|api/@ohos.bluetooth.ble.d.ts|"
+        }
+      ],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "静态文档未说明后台扫描行为，无法基于本包资料评估真机验证方案；需先补读 HarmonyOS 后台任务/长时任务指南再分类。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "lifecycle_background",
+      "statement": "后台扫描的进程存活要求与结果投递机制可能不同：Android 指南明示后台使用 BluetoothLeScanner 需应用进程存活、进程未运行时改用 PendingIntent 投递匹配结果；iOS 明示以 bluetooth-central 后台模式在后台扫描并接收委托回调。",
+      "platforms": [
+        "android",
+        "ios"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "In the background：进程存活要求与 PendingIntent 版 startScan",
+          "start_line": 43,
+          "end_line": 58,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/background",
+            "platform": "android",
+            "title": "Communicate in the background",
+            "local_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/document.md",
+            "sha256": "182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf",
+            "raw_sha256": "46f0a27ee7bc79e0991e096e446e5aa5190d214e58242f2754889894af9cd174",
+            "raw_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/source.gz",
+            "fetched_at": "2026-09-05T10:24:14.792416+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 199,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 24,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 43,
+                "end_line": 66,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### In the background\n\nThere is no limitation on using either of these APIs while the app is not\nvisible, but they do both need your app process to be alive. If the app process\nis not running, you can use the following workarounds:\n\n* For `BluetoothLeScanner`: Call\n  [`startScan()`](https://developer.android.com/reference/android/bluetooth/le/BluetoothLeScanner#startScan(java.util.List%3Candroid.bluetooth.le.ScanFilter%3E,%20android.bluetooth.le.ScanSettings,%20android.app.PendingIntent))\n  with a [`PendingIntent`](https://developer.android.com/reference/android/app/PendingIntent) object instead\n  of a [`ScanCallback`](https://developer.android.com/reference/android/bluetooth/le/ScanCallback) object to\n  get notified when a device matching your filter is scanned.\n  ([Sample](https://github.com/android/platform-samples/blob/main/samples/connectivity/bluetooth/ble/src/main/java/com/example/platform/connectivity/bluetooth/ble/BLEScanIntentSample.kt#L163))\n* For `CompanionDeviceManager`: Follow the guidance in [Keep companion apps\n  awake](https://developer.android.com/develop/connectivity/bluetooth/companion-device-pairing#keep-awake) to\n  wake the app and keep it awake while a previously associated device is in\n  range."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Discussion：指定 bluetooth-central 后台模式可在后台扫描",
+          "start_line": 26,
+          "end_line": 28,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/scanforperipherals(withservices:options:)",
+            "platform": "ios",
+            "title": "scanForPeripherals(withServices:options:)",
+            "local_path": "docs-raw/research/2026-09-06/690497a4aa998390a7ba116e899e4cdb54f75f90787a565cd79af2cab4f82e71/24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f/document.md",
+            "sha256": "24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f",
+            "raw_sha256": "8a312560a9e41fd54dceb4e81887bbc519ff956ad83a615a9e14047f0aacfc2d",
+            "raw_path": "docs-raw/research/2026-09-06/690497a4aa998390a7ba116e899e4cdb54f75f90787a565cd79af2cab4f82e71/24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f/source.gz",
+            "fetched_at": "2026-09-05T16:45:20.610016+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 32,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 18,
+                "truncated": false
+              },
+              {
+                "start_line": 19,
+                "end_line": 32,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "If the central manager is actively scanning with one set of parameters and it receives another set to scan, the new parameters override the previous set. When the central manager discovers a peripheral, it calls the [`centralManager(_:didDiscover:advertisementData:rssi:)`](/documentation/CoreBluetooth/CBCentralManagerDelegate/centralManager(_:didDiscover:advertisementData:rssi:)) method of its delegate object.\n\nYour app can scan for Bluetooth devices in the background by specifying the `bluetooth-central` background mode. To do this, your app must explicitly scan for one or more services by specifying them in the `serviceUUIDs` parameter. The [`CBCentralManager`](/documentation/CoreBluetooth/CBCentralManager) scan option has no effect while scanning in the background."
+        }
+      ],
+      "open_questions": [
+        "HarmonyOS 后台扫描是否存在、结果如何投递未知（本包资料无后台表述）",
+        "iOS bluetooth-central 模式下进程被系统终止后扫描是否持续，未在读取正文说明"
+      ]
+    },
+    {
+      "dimension": "limits_precision",
+      "statement": "后台扫描的过滤参数约束可能不同：iOS 文档明示后台必须显式指定 serviceUUIDs 且扫描选项（如去重过滤）在后台无效；Android 指南的后台 PendingIntent 扫描未强制要求服务 UUID 过滤（过滤用于匹配投递）；HarmonyOS filters 可为 null 仅建议填写且未区分前后台。",
+      "platforms": [
+        "ios",
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "ios-2",
+          "locator": "Discussion：后台必须指定 serviceUUIDs，扫描选项无效",
+          "start_line": 21,
+          "end_line": 28,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/scanforperipherals(withservices:options:)",
+            "platform": "ios",
+            "title": "scanForPeripherals(withServices:options:)",
+            "local_path": "docs-raw/research/2026-09-06/690497a4aa998390a7ba116e899e4cdb54f75f90787a565cd79af2cab4f82e71/24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f/document.md",
+            "sha256": "24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f",
+            "raw_sha256": "8a312560a9e41fd54dceb4e81887bbc519ff956ad83a615a9e14047f0aacfc2d",
+            "raw_path": "docs-raw/research/2026-09-06/690497a4aa998390a7ba116e899e4cdb54f75f90787a565cd79af2cab4f82e71/24bdafc40e68c9735183ff4fa376d828a06c71ce94ee366b3af903f87e40526f/source.gz",
+            "fetched_at": "2026-09-05T16:45:20.610016+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 32,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 18,
+                "truncated": false
+              },
+              {
+                "start_line": 19,
+                "end_line": 32,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "You can provide an array of [`CBUUID`](/documentation/CoreBluetooth/CBUUID) objects — representing service UUIDs — in the `serviceUUIDs` parameter. When you do, the central manager returns only peripherals that advertise the services you specify. If the `serviceUUIDs` parameter is `nil`, this method returns all discovered peripherals, regardless of their supported services.\n\n> Note:\n> The recommended practice is to populate the `serviceUUIDs` parameter rather than leaving it `nil`.\n\nIf the central manager is actively scanning with one set of parameters and it receives another set to scan, the new parameters override the previous set. When the central manager discovers a peripheral, it calls the [`centralManager(_:didDiscover:advertisementData:rssi:)`](/documentation/CoreBluetooth/CBCentralManagerDelegate/centralManager(_:didDiscover:advertisementData:rssi:)) method of its delegate object.\n\nYour app can scan for Bluetooth devices in the background by specifying the `bluetooth-central` background mode. To do this, your app must explicitly scan for one or more services by specifying them in the `serviceUUIDs` parameter. The [`CBCentralManager`](/documentation/CoreBluetooth/CBCentralManager) scan option has no effect while scanning in the background."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "In the background：PendingIntent 版 startScan 按过滤条件投递",
+          "start_line": 49,
+          "end_line": 54,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/background",
+            "platform": "android",
+            "title": "Communicate in the background",
+            "local_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/document.md",
+            "sha256": "182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf",
+            "raw_sha256": "46f0a27ee7bc79e0991e096e446e5aa5190d214e58242f2754889894af9cd174",
+            "raw_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/source.gz",
+            "fetched_at": "2026-09-05T10:24:14.792416+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 199,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 24,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 43,
+                "end_line": 66,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "* For `BluetoothLeScanner`: Call\n  [`startScan()`](https://developer.android.com/reference/android/bluetooth/le/BluetoothLeScanner#startScan(java.util.List%3Candroid.bluetooth.le.ScanFilter%3E,%20android.bluetooth.le.ScanSettings,%20android.app.PendingIntent))\n  with a [`PendingIntent`](https://developer.android.com/reference/android/app/PendingIntent) object instead\n  of a [`ScanCallback`](https://developer.android.com/reference/android/bluetooth/le/ScanCallback) object to\n  get notified when a device matching your filter is scanned.\n  ([Sample](https://github.com/android/platform-samples/blob/main/samples/connectivity/bluetooth/ble/src/main/java/com/example/platform/connectivity/bluetooth/ble/BLEScanIntentSample.kt#L163))"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "startBLEScan filters 参数：null 扫描全部但不建议",
+          "start_line": 310,
+          "end_line": 310,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 288,
+                "end_line": 356,
+                "truncated": false
+              },
+              {
+                "start_line": 397,
+                "end_line": 411,
+                "truncated": true
+              },
+              {
+                "start_line": 532,
+                "end_line": 535,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "|filters|Array\\<[ScanFilter](#scanfilter)\\>|是|表示扫描结果过滤策略集合，符合过滤条件的设备会被保留。 -若该参数设置为null，将扫描所有可发现的周边BLE设备，但是不建议使用此方式，可能扫描到非预期设备，并增加功耗。|"
+        }
+      ],
+      "open_questions": [
+        "Android 后台扫描是否受扫描频次/配额或 Doze 限制，未在读取正文量化",
+        "HarmonyOS 若支持后台扫描是否强制过滤条件，完全未知"
+      ]
+    },
+    {
+      "dimension": "lifecycle_background",
+      "statement": "后台扫描特权的豁免路径可能不同：iOS 26+ 文档化 CBManager 实例加 Live Activity 可在后台保留前台扫描特权（无 UUID 扫描、禁用去重过滤）；Android 指南以后台限制加前台服务 connectedDevice 类型/CompanionDeviceManager/PendingIntent 为后台路径，读取资料中未见同类 Live Activity 式豁免。",
+      "platforms": [
+        "ios",
+        "android"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "Overview：iOS 26+ Live Activity 保留前台同等扫描特权",
+          "start_line": 13,
+          "end_line": 16,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/corebluetooth",
+            "platform": "ios",
+            "title": "Core Bluetooth",
+            "local_path": "docs-raw/research/2026-09-06/da051d17545089ced2b56b67e62e9594e772ba9edcac36f533d6ef2bb98dd449/248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03/document.md",
+            "sha256": "248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03",
+            "raw_sha256": "64c445e5f0fe384b767d52aee478880ba15e1e262e7a75b8056f3cc5cc9943f9",
+            "raw_path": "docs-raw/research/2026-09-06/da051d17545089ced2b56b67e62e9594e772ba9edcac36f533d6ef2bb98dd449/248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.400334+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 183,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 5,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 23,
+                "end_line": 36,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "In iOS 26 and later, your app can continue certain activities in the background if the app starts a Live Activity before it goes to the background.\nIf your app has an instantiated [`CBManager`](/documentation/CoreBluetooth/CBManager) and starts a Live Activity, it can use the same privileges while in the background that it uses when it is in the foreground.\nThis means activities like scanning without providing service UUID’s and scanning with duplicates filter disabled will be allowed while in the background.\nFor more information about creating Live Activities, see [ActivityKit](https://developer.apple.com/documentation/ActivityKit)."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Connect to a device > In the background：connectedDevice 前台服务与 PendingIntent 启动限制",
+          "start_line": 130,
+          "end_line": 144,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/background",
+            "platform": "android",
+            "title": "Communicate in the background",
+            "local_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/document.md",
+            "sha256": "182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf",
+            "raw_sha256": "46f0a27ee7bc79e0991e096e446e5aa5190d214e58242f2754889894af9cd174",
+            "raw_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/source.gz",
+            "fetched_at": "2026-09-05T10:24:14.792416+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 199,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 24,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 43,
+                "end_line": 66,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "* Start a foreground service with the `connectedDevice` type.\n  + If the connection needs to be kept alive as long as possible to perform a\n    task, such as data syncing or polling from the peripheral devices, you need\n    to start a foreground service following the guidance in [Support for\n    long-running\n    workers](https://developer.android.com/develop/background-work/background-tasks/persistent/how-to/long-running#long-running).\n    However, [foreground service launch restrictions](https://developer.android.com/develop/background-work/services/fgs/restrictions-bg-start)\n    apply starting in Android 12.\n* Call `startScan()` with a `PendingIntent` object as described in [Find a\n  device](https://developer.android.com/develop/connectivity/bluetooth/ble/background#find-device) to wake your process up when the device is present. The\n  peripheral device must be advertising.\n  + We recommend that you start a Worker and a Job. This might be interrupted by\n    the system and thus it can only support short duration communication.\n  + In versions lower than Android 12 you can start a foreground service\n    directly from the `PendingIntent` object."
+        }
+      ],
+      "open_questions": [
+        "HarmonyOS 是否存在同类后台特权延续机制未知",
+        "iOS 26 Live Activity 特权的具体边界、降级与回收条件未在读取正文展开"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "HarmonyOS：@ohos.bluetooth.ble API 参考无后台/前台扫描表述，后台任务（长时任务/挂起）指南与蓝牙扫描的关系未读取，后台可用性未知",
+    "Android：startScan(PendingIntent) 重载 API 参考、BLUETOOTH_SCAN 等权限要求与 Doze/配额影响未在本包核实",
+    "iOS：bluetooth-central 声明步骤正文与后台扫描系统终止条件未读取；scanForPeripherals 快照无 availability 元数据，iOS 适用版本待核",
+    "三平台最新正式版与手机基线均未固定，本包结论均为 first_pass 文档初判，不代表最新版本行为",
+    "平板形态仅 iOS 有 iPad apps on macOS 一句例外说明；Android/HarmonyOS 平板后台扫描行为未单独说明"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "HarmonyOS 后台扫描完全缺乏文档依据属高风险映射（无法判断支持与否），且 Android/iOS 后台机制涉及进程存活模型、权限与过滤约束的关键差异，需优先精研补证。"
+  }
+}

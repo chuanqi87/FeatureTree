@@ -1,0 +1,13 @@
+{
+  "id": "6d3ef94b1419ded8b1ab749bb72822c694af4f8c0fc7213b09ba97f0e6f63aad",
+  "url": "https://developer.apple.com/documentation/uikit/coordinating-multiple-gesture-recognizers",
+  "platform": "ios",
+  "title": "Coordinating multiple gesture recognizers",
+  "local_path": "docs-raw/research/2026-09-06/6d3ef94b1419ded8b1ab749bb72822c694af4f8c0fc7213b09ba97f0e6f63aad/d85f62153834d360b537e77018b1f44b90c04e57f4c63e60b796f03338985edc/document.md",
+  "sha256": "d85f62153834d360b537e77018b1f44b90c04e57f4c63e60b796f03338985edc",
+  "raw_sha256": "6ae451a450247037713af777d3962a38be093edf339edcb48180a85c95d76a18",
+  "raw_path": "docs-raw/research/2026-09-06/6d3ef94b1419ded8b1ab749bb72822c694af4f8c0fc7213b09ba97f0e6f63aad/d85f62153834d360b537e77018b1f44b90c04e57f4c63e60b796f03338985edc/source.gz",
+  "fetched_at": "2026-09-05T11:19:48.526756+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

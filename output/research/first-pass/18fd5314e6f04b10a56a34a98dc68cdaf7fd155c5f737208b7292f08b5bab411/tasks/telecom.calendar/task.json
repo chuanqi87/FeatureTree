@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "telecom.calendar",
+    "level": "L2",
+    "parent": "telecom",
+    "name": {
+      "zh": "日历",
+      "en": "Calendar"
+    },
+    "definition": "系统日历事件。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/telecom/calendar/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "系统日历事件。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "b17df6d0b4c2a5e0bac641c2a560d69f7b2542d6092c437bc9fef08f2ceeafe8",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "5e3cf23a21e0fc371303a67b285daaecedcb56bf67c540d3f72f0f3267c50466",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/identity/providers/calendar-provider",
+      "platform": "android",
+      "title": "Calendar provider overview",
+      "local_path": "docs-raw/research/2026-09-06/f83247e1d7b4c05bb3127a7fc545a84c5050d668f6a02f6ded453a6259b27017/f034999143197f3f9e0c0cde635faf57e6cb8067e50621c75fcc015e381975a1/document.md",
+      "sha256": "f034999143197f3f9e0c0cde635faf57e6cb8067e50621c75fcc015e381975a1",
+      "raw_sha256": "332ccc9b90256ec6d4003ceb598d9401aeb3d034eb123af61a8f1eb72ddfc066",
+      "raw_path": "docs-raw/research/2026-09-06/f83247e1d7b4c05bb3127a7fc545a84c5050d668f6a02f6ded453a6259b27017/f034999143197f3f9e0c0cde635faf57e6cb8067e50621c75fcc015e381975a1/source.gz",
+      "fetched_at": "2026-09-05T10:32:34.525503+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 1014,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 21,
+          "truncated": false
+        },
+        {
+          "start_line": 22,
+          "end_line": 25,
+          "truncated": true
+        },
+        {
+          "start_line": 98,
+          "end_line": 112,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/guide/topics/providers/calendar-provider",
+      "platform": "android",
+      "title": "Calendar provider overview",
+      "local_path": "docs-raw/research/2026-09-06/35f985f00dd82c2ba2f62be693d47e76a9c37728c0153966239664a49745d1ef/c039bfbc2caa117d85bdae60e1e13cbe0b95a864dd045491065ca6d8a3b15829/document.md",
+      "sha256": "c039bfbc2caa117d85bdae60e1e13cbe0b95a864dd045491065ca6d8a3b15829",
+      "raw_sha256": "22f25777ae50c8a96f9982c5933922faa2e4bcc844bebe1045e7c63b9b575dc0",
+      "raw_path": "docs-raw/research/2026-09-06/35f985f00dd82c2ba2f62be693d47e76a9c37728c0153966239664a49745d1ef/c039bfbc2caa117d85bdae60e1e13cbe0b95a864dd045491065ca6d8a3b15829/source.gz",
+      "fetched_at": "2026-09-05T10:44:35.598802+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 1014,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 21,
+          "truncated": false
+        },
+        {
+          "start_line": 22,
+          "end_line": 25,
+          "truncated": true
+        },
+        {
+          "start_line": 98,
+          "end_line": 112,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/appintents/app-schema-domain-calendar",
+      "platform": "ios",
+      "title": "Calendar",
+      "local_path": "docs-raw/research/2026-09-06/a496ca3d69fbd05582ecbc3096df227d05283955cddd2fd3668f8e2706dc0f3f/48e977ce12bd2bdfcb65e802c32e5a9317e4177833668911d646e9d4aa4d00f3/document.md",
+      "sha256": "48e977ce12bd2bdfcb65e802c32e5a9317e4177833668911d646e9d4aa4d00f3",
+      "raw_sha256": "a122379334105cd456302e46693c20e2b9c2a9e749c0103bcd8a69ae710d6710",
+      "raw_path": "docs-raw/research/2026-09-06/a496ca3d69fbd05582ecbc3096df227d05283955cddd2fd3668f8e2706dc0f3f/48e977ce12bd2bdfcb65e802c32e5a9317e4177833668911d646e9d4aa4d00f3/source.gz",
+      "fetched_at": "2026-09-05T10:33:31.602618+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 93,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 22,
+          "truncated": false
+        },
+        {
+          "start_line": 23,
+          "end_line": 24,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/eventkit/accessing-calendar-using-eventkit-and-eventkitui",
+      "platform": "ios",
+      "title": "Accessing Calendar using EventKit and EventKitUI",
+      "local_path": "docs-raw/research/2026-09-06/617b1bf80c9c14114f1c4aa564d1a4b7a8922795f0183b109e4c8cd84aa77a73/fc9c64bdd7328a3b2a5228700e4fee1657ad9a40e5c1413ee93f0b6fc6586e8d/document.md",
+      "sha256": "fc9c64bdd7328a3b2a5228700e4fee1657ad9a40e5c1413ee93f0b6fc6586e8d",
+      "raw_sha256": "820996218d583ef1b9c3969833e577fccdad38ba688f3e24a3182e797148edad",
+      "raw_path": "docs-raw/research/2026-09-06/617b1bf80c9c14114f1c4aa564d1a4b7a8922795f0183b109e4c8cd84aa77a73/fc9c64bdd7328a3b2a5228700e4fee1657ad9a40e5c1413ee93f0b6fc6586e8d/source.gz",
+      "fetched_at": "2026-09-05T10:21:56.242893+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 284,
+      "suggested_sections": [
+        {
+          "start_line": 5,
+          "end_line": 22,
+          "truncated": false
+        },
+        {
+          "start_line": 32,
+          "end_line": 84,
+          "truncated": false
+        },
+        {
+          "start_line": 85,
+          "end_line": 100,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/atomic-ascf/apis-calendar",
+      "platform": "harmonyos",
+      "title": "日历",
+      "local_path": "docs-raw/research/2026-09-06/b880099f9b1ab35383a0aedc39b0d55543c57d14aa740518ddbc95bfc8a7eb64/114c01e2ea3d9a64ffc3fed8cf24a7cd85557eddeef8ae0d8a076456182049bb/document.md",
+      "sha256": "114c01e2ea3d9a64ffc3fed8cf24a7cd85557eddeef8ae0d8a076456182049bb",
+      "raw_sha256": "6b1e1d3ddb9e3abd81962bd9dffaad21e5d6ba2cdbda5ddbae86206dc075ec71",
+      "raw_path": "docs-raw/research/2026-09-06/b880099f9b1ab35383a0aedc39b0d55543c57d14aa740518ddbc95bfc8a7eb64/114c01e2ea3d9a64ffc3fed8cf24a7cd85557eddeef8ae0d8a076456182049bb/source.gz",
+      "fetched_at": "2026-09-05T10:45:41.835956+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 107,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 53,
+          "truncated": false
+        },
+        {
+          "start_line": 54,
+          "end_line": 107,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-calendarkit-b065",
+      "platform": "harmonyos",
+      "title": "Calendar Kit",
+      "local_path": "docs-raw/research/2026-09-06/693c06793acba1a8b1077ed051caa14c0696746f387039656d4bc1937a219f3f/fd84134cf62e4d68f0eb8246cf6d714f6aa178a11e06d167d90a04633ea668a8/document.md",
+      "sha256": "fd84134cf62e4d68f0eb8246cf6d714f6aa178a11e06d167d90a04633ea668a8",
+      "raw_sha256": "59eaa0775dc92e61c8ba8b6a2ce3eed8dc6c4547ef34530ff2ebc50b19d931f5",
+      "raw_path": "docs-raw/research/2026-09-06/693c06793acba1a8b1077ed051caa14c0696746f387039656d4bc1937a219f3f/fd84134cf62e4d68f0eb8246cf6d714f6aa178a11e06d167d90a04633ea668a8/source.gz",
+      "fetched_at": "2026-09-05T11:01:21.330654+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 19,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 19,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:43:04.450425+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "0342d78b15cfc77341530d39233e565b370b2a927c1cb9ae29fcde494f526560"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "2d414563e79ae036b7a2a9e76dcda0f0889ebbc52e2fa49d90aa826566e54ea3",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-system-bluetooth",
+  "platform": "harmonyos",
+  "title": "@system.bluetooth (蓝牙)",
+  "local_path": "docs-raw/research/2026-09-06/2d414563e79ae036b7a2a9e76dcda0f0889ebbc52e2fa49d90aa826566e54ea3/f6e505187387f44577c106e27da3f92dfa1205d416c1464bc63529043715ebee/document.md",
+  "sha256": "f6e505187387f44577c106e27da3f92dfa1205d416c1464bc63529043715ebee",
+  "raw_sha256": "7ef3c5a35531d17b536d3c55baa1637b529ee337f9871a4ffe7fed08966c03d3",
+  "raw_path": "docs-raw/research/2026-09-06/2d414563e79ae036b7a2a9e76dcda0f0889ebbc52e2fa49d90aa826566e54ea3/f6e505187387f44577c106e27da3f92dfa1205d416c1464bc63529043715ebee/source.gz",
+  "fetched_at": "2026-09-05T10:27:58.127034+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

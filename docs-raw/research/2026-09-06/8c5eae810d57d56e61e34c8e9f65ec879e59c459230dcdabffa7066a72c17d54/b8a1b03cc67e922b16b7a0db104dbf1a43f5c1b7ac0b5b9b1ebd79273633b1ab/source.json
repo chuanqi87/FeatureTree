@@ -1,0 +1,13 @@
+{
+  "id": "8c5eae810d57d56e61e34c8e9f65ec879e59c459230dcdabffa7066a72c17d54",
+  "url": "https://developer.apple.com/documentation/network/recording-a-wi-fi-packet-trace",
+  "platform": "ios",
+  "title": "Recording a Wi-Fi Packet Trace",
+  "local_path": "docs-raw/research/2026-09-06/8c5eae810d57d56e61e34c8e9f65ec879e59c459230dcdabffa7066a72c17d54/b8a1b03cc67e922b16b7a0db104dbf1a43f5c1b7ac0b5b9b1ebd79273633b1ab/document.md",
+  "sha256": "b8a1b03cc67e922b16b7a0db104dbf1a43f5c1b7ac0b5b9b1ebd79273633b1ab",
+  "raw_sha256": "423bfb26d67315e56c868b0ff07f3467d006c0a9c9fa3a2b593edf4109d9d3d4",
+  "raw_path": "docs-raw/research/2026-09-06/8c5eae810d57d56e61e34c8e9f65ec879e59c459230dcdabffa7066a72c17d54/b8a1b03cc67e922b16b7a0db104dbf1a43f5c1b7ac0b5b9b1ebd79273633b1ab/source.gz",
+  "fetched_at": "2026-09-05T11:16:40.933949+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

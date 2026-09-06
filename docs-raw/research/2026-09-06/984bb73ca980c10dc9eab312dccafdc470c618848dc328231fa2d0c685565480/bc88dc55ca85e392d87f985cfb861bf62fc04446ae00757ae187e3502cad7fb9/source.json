@@ -1,0 +1,13 @@
+{
+  "id": "984bb73ca980c10dc9eab312dccafdc470c618848dc328231fa2d0c685565480",
+  "url": "https://developer.android.com/topic/performance/memory/guide/java-memory",
+  "platform": "android",
+  "title": "Analyzing Java memory",
+  "local_path": "docs-raw/research/2026-09-06/984bb73ca980c10dc9eab312dccafdc470c618848dc328231fa2d0c685565480/bc88dc55ca85e392d87f985cfb861bf62fc04446ae00757ae187e3502cad7fb9/document.md",
+  "sha256": "bc88dc55ca85e392d87f985cfb861bf62fc04446ae00757ae187e3502cad7fb9",
+  "raw_sha256": "aad06df1918466b15edbf44dd5638621a93780a925714b071f0f0dc2f0b91ec8",
+  "raw_path": "docs-raw/research/2026-09-06/984bb73ca980c10dc9eab312dccafdc470c618848dc328231fa2d0c685565480/bc88dc55ca85e392d87f985cfb861bf62fc04446ae00757ae187e3502cad7fb9/source.gz",
+  "fetched_at": "2026-09-05T10:37:40.628002+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

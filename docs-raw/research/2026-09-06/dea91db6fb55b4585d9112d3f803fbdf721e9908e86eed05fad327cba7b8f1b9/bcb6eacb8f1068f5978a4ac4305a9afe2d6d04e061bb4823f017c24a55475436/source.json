@@ -1,0 +1,13 @@
+{
+  "id": "dea91db6fb55b4585d9112d3f803fbdf721e9908e86eed05fad327cba7b8f1b9",
+  "url": "https://developer.apple.com/documentation/widgetkit/updating-widgets-with-widgetkit-push-notifications",
+  "platform": "ios",
+  "title": "Updating widgets with WidgetKit push notifications",
+  "local_path": "docs-raw/research/2026-09-06/dea91db6fb55b4585d9112d3f803fbdf721e9908e86eed05fad327cba7b8f1b9/bcb6eacb8f1068f5978a4ac4305a9afe2d6d04e061bb4823f017c24a55475436/document.md",
+  "sha256": "bcb6eacb8f1068f5978a4ac4305a9afe2d6d04e061bb4823f017c24a55475436",
+  "raw_sha256": "a280789834f1e4f0acbd9275f55955b7912c8cff903374b048a9960117d3b07b",
+  "raw_path": "docs-raw/research/2026-09-06/dea91db6fb55b4585d9112d3f803fbdf721e9908e86eed05fad327cba7b8f1b9/bcb6eacb8f1068f5978a4ac4305a9afe2d6d04e061bb4823f017c24a55475436/source.gz",
+  "fetched_at": "2026-09-05T11:22:54.523050+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "d1fe94ab90d048afb4733acbe30dd0877400c5363ccf3bafb1c81ab7559b83ea",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager",
+  "platform": "harmonyos",
+  "title": "@ohos.geoLocationManager (位置服务)",
+  "local_path": "docs-raw/research/2026-09-06/d1fe94ab90d048afb4733acbe30dd0877400c5363ccf3bafb1c81ab7559b83ea/84be238af82892c72011f67b079a8a05cb746f0ab1646010e73dd1004d303f51/document.md",
+  "sha256": "84be238af82892c72011f67b079a8a05cb746f0ab1646010e73dd1004d303f51",
+  "raw_sha256": "71552aaac11ff104780b55857edb19e02ba3d8e324bf10a8a6732836fd170b83",
+  "raw_path": "docs-raw/research/2026-09-06/d1fe94ab90d048afb4733acbe30dd0877400c5363ccf3bafb1c81ab7559b83ea/84be238af82892c72011f67b079a8a05cb746f0ab1646010e73dd1004d303f51/source.gz",
+  "fetched_at": "2026-09-05T10:27:27.633891+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

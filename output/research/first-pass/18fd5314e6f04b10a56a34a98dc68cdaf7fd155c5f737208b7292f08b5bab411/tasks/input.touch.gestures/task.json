@@ -1,0 +1,543 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "input.touch.gestures",
+    "level": "L3",
+    "parent": "input.touch",
+    "name": {
+      "zh": "手势识别",
+      "en": "Gesture Recognition"
+    },
+    "definition": "点击、滑动、捏合等手势抽象。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "knowledge_path": "knowledge/input/touch/gestures.yaml",
+    "comparison_scope": {
+      "includes": [
+        "点击、滑动、捏合等手势抽象。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "d15b9f49704a1bca5fc7856f8b791d3a00bd885553e14bfbda1ffafaf5078dd6",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "15c10c038ac1045273844d49cc6755033ac71e2924d84453d8405b380b02b513",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developers.google.com/ml-kit/vision/digital-ink-recognition",
+      "platform": "android",
+      "title": "Digital ink recognition",
+      "local_path": "docs-raw/research/2026-09-06/6ecd4d1b13ea0f10e641fc87b92459f62a17e8676dcc754aed3e4720a5059c21/48bdd9fe770ee8b1621f1c686b9a59cc46a6ef3d64b2bbe210a29a27beaf9108/document.md",
+      "sha256": "48bdd9fe770ee8b1621f1c686b9a59cc46a6ef3d64b2bbe210a29a27beaf9108",
+      "raw_sha256": "44049364df7140484b2cb36185d5c7da06df5b4537df95695e6a9a4f6b9c4ff7",
+      "raw_path": "docs-raw/research/2026-09-06/6ecd4d1b13ea0f10e641fc87b92459f62a17e8676dcc754aed3e4720a5059c21/48bdd9fe770ee8b1621f1c686b9a59cc46a6ef3d64b2bbe210a29a27beaf9108/source.gz",
+      "fetched_at": "2026-09-05T10:51:04.043287+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 146,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 26,
+          "truncated": false
+        },
+        {
+          "start_line": 27,
+          "end_line": 47,
+          "truncated": false
+        },
+        {
+          "start_line": 48,
+          "end_line": 49,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/develop/ui/compose/touch-input/stylus-input/advanced-stylus-features",
+      "platform": "android",
+      "title": "Advanced stylus features",
+      "local_path": "docs-raw/research/2026-09-06/40a1316512afa34b14dc56f04ba1a3c9cc22c9b020536b812c04b7dfbfafb340/bc03161b74a3618d94235fd82e5247891962bb26e7ba3d288a981db8197ab9f9/document.md",
+      "sha256": "bc03161b74a3618d94235fd82e5247891962bb26e7ba3d288a981db8197ab9f9",
+      "raw_sha256": "1ba79224893da24d04b7e65a5d3c8f29a5851d22cd477e76b4f02061dc993e2e",
+      "raw_path": "docs-raw/research/2026-09-06/40a1316512afa34b14dc56f04ba1a3c9cc22c9b020536b812c04b7dfbfafb340/bc03161b74a3618d94235fd82e5247891962bb26e7ba3d288a981db8197ab9f9/source.gz",
+      "fetched_at": "2026-09-05T10:25:43.975225+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 705,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 3,
+          "truncated": true
+        },
+        {
+          "start_line": 81,
+          "end_line": 110,
+          "truncated": false
+        },
+        {
+          "start_line": 129,
+          "end_line": 155,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/uikit/allowing-the-simultaneous-recognition-of-multiple-gestures",
+      "platform": "ios",
+      "title": "Allowing the simultaneous recognition of multiple gestures",
+      "local_path": "docs-raw/research/2026-09-06/6f1aeaef538344b4f7e342a3e74defcd74bb662f1bf5daa9a189f922f5ac5563/d01d7ee4675dd2c96234333a61504b2f672a8ba3baefb27b0578ccee8439d880/document.md",
+      "sha256": "d01d7ee4675dd2c96234333a61504b2f672a8ba3baefb27b0578ccee8439d880",
+      "raw_sha256": "b6f32f2b52dcc3721d2639dfdebf2948a20296201916bf587ab19d522ca6fe27",
+      "raw_path": "docs-raw/research/2026-09-06/6f1aeaef538344b4f7e342a3e74defcd74bb662f1bf5daa9a189f922f5ac5563/d01d7ee4675dd2c96234333a61504b2f672a8ba3baefb27b0578ccee8439d880/source.gz",
+      "fetched_at": "2026-09-05T11:22:04.117221+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 44,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 44,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/uikit/coordinating-multiple-gesture-recognizers",
+      "platform": "ios",
+      "title": "Coordinating multiple gesture recognizers",
+      "local_path": "docs-raw/research/2026-09-06/6d3ef94b1419ded8b1ab749bb72822c694af4f8c0fc7213b09ba97f0e6f63aad/d85f62153834d360b537e77018b1f44b90c04e57f4c63e60b796f03338985edc/document.md",
+      "sha256": "d85f62153834d360b537e77018b1f44b90c04e57f4c63e60b796f03338985edc",
+      "raw_sha256": "6ae451a450247037713af777d3962a38be093edf339edcb48180a85c95d76a18",
+      "raw_path": "docs-raw/research/2026-09-06/6d3ef94b1419ded8b1ab749bb72822c694af4f8c0fc7213b09ba97f0e6f63aad/d85f62153834d360b537e77018b1f44b90c04e57f4c63e60b796f03338985edc/source.gz",
+      "fetched_at": "2026-09-05T11:19:48.526756+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 31,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 12,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkweb-glossary",
+      "platform": "harmonyos",
+      "title": "ArkWeb术语",
+      "local_path": "docs-raw/research/2026-09-06/5491321ec1ea3c1e3c0f2f7326cb18098588365a64a131f8627ebb63ada71f32/497c2ec5e4924a541d2c34cf8036c974cb77edb35a3b77926b09f19e038779c5/document.md",
+      "sha256": "497c2ec5e4924a541d2c34cf8036c974cb77edb35a3b77926b09f19e038779c5",
+      "raw_sha256": "9626fcac5711acfe8cf173d07f396201d2bd1a756e9c6071c46911e1d3bb0abb",
+      "raw_path": "docs-raw/research/2026-09-06/5491321ec1ea3c1e3c0f2f7326cb18098588365a64a131f8627ebb63ada71f32/497c2ec5e4924a541d2c34cf8036c974cb77edb35a3b77926b09f19e038779c5/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 417,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-gesture-events-combined-gestures",
+      "platform": "harmonyos",
+      "title": "组合手势",
+      "local_path": "docs-raw/research/2026-09-06/d3bd1700cf6bb64526369445d87b80f710f5953f389d7a6f7c021e18fc39a4dd/b29aa77f542935a71b7732ae2942bb32d993d4231540ab890ca8cdc6459f3bd2/document.md",
+      "sha256": "b29aa77f542935a71b7732ae2942bb32d993d4231540ab890ca8cdc6459f3bd2",
+      "raw_sha256": "e3799de43f6ae8e59e4acba4eef1405519dd44c961348d6aa0c255a3847f7936",
+      "raw_path": "docs-raw/research/2026-09-06/d3bd1700cf6bb64526369445d87b80f710f5953f389d7a6f7c021e18fc39a4dd/b29aa77f542935a71b7732ae2942bb32d993d4231540ab890ca8cdc6459f3bd2/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 261,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 12,
+          "truncated": false
+        },
+        {
+          "start_line": 13,
+          "end_line": 99,
+          "truncated": false
+        },
+        {
+          "start_line": 100,
+          "end_line": 148,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:34.296640+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "eca2a60cb5eebad0a39234b16c70d195bcb69276c4c472d83fb9a929344302b6"
+}

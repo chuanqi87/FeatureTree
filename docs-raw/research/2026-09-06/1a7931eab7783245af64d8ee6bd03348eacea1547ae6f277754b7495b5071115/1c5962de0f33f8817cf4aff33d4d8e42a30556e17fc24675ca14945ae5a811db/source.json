@@ -1,0 +1,13 @@
+{
+  "id": "1a7931eab7783245af64d8ee6bd03348eacea1547ae6f277754b7495b5071115",
+  "url": "https://developer.android.com/develop/sensors-and-location/location/battery",
+  "platform": "android",
+  "title": "About background location and battery life",
+  "local_path": "docs-raw/research/2026-09-06/1a7931eab7783245af64d8ee6bd03348eacea1547ae6f277754b7495b5071115/1c5962de0f33f8817cf4aff33d4d8e42a30556e17fc24675ca14945ae5a811db/document.md",
+  "sha256": "1c5962de0f33f8817cf4aff33d4d8e42a30556e17fc24675ca14945ae5a811db",
+  "raw_sha256": "9715e00aad77e9f711d54d255c9ad63bae4e0934d8e54fc652ca3dba76a90b63",
+  "raw_path": "docs-raw/research/2026-09-06/1a7931eab7783245af64d8ee6bd03348eacea1547ae6f277754b7495b5071115/1c5962de0f33f8817cf4aff33d4d8e42a30556e17fc24675ca14945ae5a811db/source.gz",
+  "fetched_at": "2026-09-05T10:24:35.027232+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

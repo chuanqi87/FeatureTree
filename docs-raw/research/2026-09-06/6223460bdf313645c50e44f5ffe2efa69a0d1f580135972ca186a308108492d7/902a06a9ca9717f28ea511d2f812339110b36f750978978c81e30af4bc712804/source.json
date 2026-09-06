@@ -1,0 +1,13 @@
+{
+  "id": "6223460bdf313645c50e44f5ffe2efa69a0d1f580135972ca186a308108492d7",
+  "url": "https://developer.apple.com/documentation/security/protecting-user-data-with-app-sandbox",
+  "platform": "ios",
+  "title": "Protecting user data with App Sandbox",
+  "local_path": "docs-raw/research/2026-09-06/6223460bdf313645c50e44f5ffe2efa69a0d1f580135972ca186a308108492d7/902a06a9ca9717f28ea511d2f812339110b36f750978978c81e30af4bc712804/document.md",
+  "sha256": "902a06a9ca9717f28ea511d2f812339110b36f750978978c81e30af4bc712804",
+  "raw_sha256": "8049ddbeac893e81186da86ba4474f39a77cc8fb86e7cdd7064b36e47926f0fc",
+  "raw_path": "docs-raw/research/2026-09-06/6223460bdf313645c50e44f5ffe2efa69a0d1f580135972ca186a308108492d7/902a06a9ca9717f28ea511d2f812339110b36f750978978c81e30af4bc712804/source.gz",
+  "fetched_at": "2026-09-05T11:18:35.076345+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

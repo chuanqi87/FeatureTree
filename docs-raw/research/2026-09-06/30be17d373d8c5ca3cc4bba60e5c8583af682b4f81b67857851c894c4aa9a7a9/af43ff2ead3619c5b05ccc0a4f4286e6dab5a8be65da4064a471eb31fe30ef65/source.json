@@ -1,0 +1,13 @@
+{
+  "id": "30be17d373d8c5ca3cc4bba60e5c8583af682b4f81b67857851c894c4aa9a7a9",
+  "url": "https://developer.apple.com/documentation/appstoreconnectapi/in-app-purchase",
+  "platform": "ios",
+  "title": "In-App Purchase",
+  "local_path": "docs-raw/research/2026-09-06/30be17d373d8c5ca3cc4bba60e5c8583af682b4f81b67857851c894c4aa9a7a9/af43ff2ead3619c5b05ccc0a4f4286e6dab5a8be65da4064a471eb31fe30ef65/document.md",
+  "sha256": "af43ff2ead3619c5b05ccc0a4f4286e6dab5a8be65da4064a471eb31fe30ef65",
+  "raw_sha256": "ce5f8a0dda40c287f791651d44d8eb9d47bd26d381ba46714aa8c932763202d2",
+  "raw_path": "docs-raw/research/2026-09-06/30be17d373d8c5ca3cc4bba60e5c8583af682b4f81b67857851c894c4aa9a7a9/af43ff2ead3619c5b05ccc0a4f4286e6dab5a8be65da4064a471eb31fe30ef65/source.gz",
+  "fetched_at": "2026-09-05T10:38:34.981980+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

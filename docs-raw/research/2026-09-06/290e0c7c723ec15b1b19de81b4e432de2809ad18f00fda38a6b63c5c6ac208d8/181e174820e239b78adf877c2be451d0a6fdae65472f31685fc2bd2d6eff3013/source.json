@@ -1,0 +1,13 @@
+{
+  "id": "290e0c7c723ec15b1b19de81b4e432de2809ad18f00fda38a6b63c5c6ac208d8",
+  "url": "https://developer.android.com/distribute/aep/aep-req-picture-in-picture",
+  "platform": "android",
+  "title": "AEP guideline: Picture in Picture Support (PiP)",
+  "local_path": "docs-raw/research/2026-09-06/290e0c7c723ec15b1b19de81b4e432de2809ad18f00fda38a6b63c5c6ac208d8/181e174820e239b78adf877c2be451d0a6fdae65472f31685fc2bd2d6eff3013/document.md",
+  "sha256": "181e174820e239b78adf877c2be451d0a6fdae65472f31685fc2bd2d6eff3013",
+  "raw_sha256": "be5ea37925e30a804f9397e30c038d0d5ae8649a6fd4b13d452747b3dff146ba",
+  "raw_path": "docs-raw/research/2026-09-06/290e0c7c723ec15b1b19de81b4e432de2809ad18f00fda38a6b63c5c6ac208d8/181e174820e239b78adf877c2be451d0a6fdae65472f31685fc2bd2d6eff3013/source.gz",
+  "fetched_at": "2026-09-05T10:27:08.920906+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "b4d76e091e8e56f5ac36c7dfc1220002e1095e6bb91e3b2ca58e4e20ce8c71b3",
+  "url": "https://developer.android.com/develop/ui/views/touch-and-input/gestures",
+  "platform": "android",
+  "title": "Use touch gestures",
+  "local_path": "docs-raw/research/2026-09-06/b4d76e091e8e56f5ac36c7dfc1220002e1095e6bb91e3b2ca58e4e20ce8c71b3/0820a85b3f0fe77f6778b2291a7145921d71f0d4dea5fe170663e3b16dddb203/document.md",
+  "sha256": "0820a85b3f0fe77f6778b2291a7145921d71f0d4dea5fe170663e3b16dddb203",
+  "raw_sha256": "9b4b9eec88e6819b73fc890a6758432d7a330101a933ee0eb92fae0a149b0a37",
+  "raw_path": "docs-raw/research/2026-09-06/b4d76e091e8e56f5ac36c7dfc1220002e1095e6bb91e3b2ca58e4e20ce8c71b3/0820a85b3f0fe77f6778b2291a7145921d71f0d4dea5fe170663e3b16dddb203/source.gz",
+  "fetched_at": "2026-09-05T10:26:24.925231+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

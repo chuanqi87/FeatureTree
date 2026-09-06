@@ -1,0 +1,13 @@
+{
+  "id": "58fdda6a222fb0a0fd3e099b4bc1b5d79b5238fc9af5c44b73e339368347f028",
+  "url": "https://firebase.google.com/docs/functions/terminate-functions",
+  "platform": "android",
+  "title": "Sync, async, and promises",
+  "local_path": "docs-raw/research/2026-09-06/58fdda6a222fb0a0fd3e099b4bc1b5d79b5238fc9af5c44b73e339368347f028/cfda9fa21a84e5e67e6000a148bd0af940e2625a56abacd1eaf2e191d1d435e1/document.md",
+  "sha256": "cfda9fa21a84e5e67e6000a148bd0af940e2625a56abacd1eaf2e191d1d435e1",
+  "raw_sha256": "b84cfa80dc8d7e5e68fc1d51e6142a8ba8383e5b45a8ba6fb2bd21fbf6c8d407",
+  "raw_path": "docs-raw/research/2026-09-06/58fdda6a222fb0a0fd3e099b4bc1b5d79b5238fc9af5c44b73e339368347f028/cfda9fa21a84e5e67e6000a148bd0af940e2625a56abacd1eaf2e191d1d435e1/source.gz",
+  "fetched_at": "2026-09-05T11:07:19.934948+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

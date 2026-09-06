@@ -1,0 +1,13 @@
+{
+  "id": "81a0b00fd02641c9c9e208cd5aa0ef63874615ffb8951bf0ffe1d6dbef908f5e",
+  "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothpagescanrepetitionmode-constants-dctr",
+  "platform": "ios",
+  "title": "BluetoothPageScanRepetitionMode constants",
+  "local_path": "docs-raw/research/2026-09-06/81a0b00fd02641c9c9e208cd5aa0ef63874615ffb8951bf0ffe1d6dbef908f5e/846fd92db69956da4c31ca8bcd18e3f98d58da385f12c3007d005cca85ad1890/document.md",
+  "sha256": "846fd92db69956da4c31ca8bcd18e3f98d58da385f12c3007d005cca85ad1890",
+  "raw_sha256": "3ac062d4dc39a21bf13259588d2c3beb3cde5e888a082b4eec902a749619cb8f",
+  "raw_path": "docs-raw/research/2026-09-06/81a0b00fd02641c9c9e208cd5aa0ef63874615ffb8951bf0ffe1d6dbef908f5e/846fd92db69956da4c31ca8bcd18e3f98d58da385f12c3007d005cca85ad1890/source.gz",
+  "fetched_at": "2026-09-05T10:52:07.224079+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

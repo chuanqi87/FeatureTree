@@ -1,0 +1,13 @@
+{
+  "id": "bf520c81ed0082fa509c715028c2df0f6a69edbd0717973ab61c50d255ee48e5",
+  "url": "https://developer.android.com/games/engines/unity/unity-symbolicate",
+  "platform": "android",
+  "title": "Symbolicate Android crashes and ANR for Unity games",
+  "local_path": "docs-raw/research/2026-09-06/bf520c81ed0082fa509c715028c2df0f6a69edbd0717973ab61c50d255ee48e5/413f47aefd333c9a14e1250fe15040c92415fda0c3436d7d96d9cc26f3fd273c/document.md",
+  "sha256": "413f47aefd333c9a14e1250fe15040c92415fda0c3436d7d96d9cc26f3fd273c",
+  "raw_sha256": "ba248baa645dd31e17f147a44e6c7bf6c610509c27a87343e3a7dd93d7366f8e",
+  "raw_path": "docs-raw/research/2026-09-06/bf520c81ed0082fa509c715028c2df0f6a69edbd0717973ab61c50d255ee48e5/413f47aefd333c9a14e1250fe15040c92415fda0c3436d7d96d9cc26f3fd273c/source.gz",
+  "fetched_at": "2026-09-05T10:27:35.221764+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

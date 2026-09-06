@@ -1,0 +1,13 @@
+{
+  "id": "30a9ea16e70976a9ccb084278d3a11cc429f4438c384ba3eec6e6567c6d974e5",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-huks",
+  "platform": "harmonyos",
+  "title": "@ohos.security.huks (通用密钥库系统)",
+  "local_path": "docs-raw/research/2026-09-06/30a9ea16e70976a9ccb084278d3a11cc429f4438c384ba3eec6e6567c6d974e5/38a4f2d9325567b477e684e2d5ad2ab88f23ba600fc4ef8a13a6994d32a8e96e/document.md",
+  "sha256": "38a4f2d9325567b477e684e2d5ad2ab88f23ba600fc4ef8a13a6994d32a8e96e",
+  "raw_sha256": "314ee43d48f42b70eed65f5d68becfd59debdb6fa8d86689dd0b7a94e091108f",
+  "raw_path": "docs-raw/research/2026-09-06/30a9ea16e70976a9ccb084278d3a11cc429f4438c384ba3eec6e6567c6d974e5/38a4f2d9325567b477e684e2d5ad2ab88f23ba600fc4ef8a13a6994d32a8e96e/source.gz",
+  "fetched_at": "2026-09-05T10:27:31.383404+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

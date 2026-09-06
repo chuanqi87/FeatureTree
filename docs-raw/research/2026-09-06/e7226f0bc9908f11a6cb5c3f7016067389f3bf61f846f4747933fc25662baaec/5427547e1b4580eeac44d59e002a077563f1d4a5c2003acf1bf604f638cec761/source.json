@@ -1,0 +1,13 @@
+{
+  "id": "e7226f0bc9908f11a6cb5c3f7016067389f3bf61f846f4747933fc25662baaec",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/push-servicenotification",
+  "platform": "harmonyos",
+  "title": "serviceNotification（服务通知）",
+  "local_path": "docs-raw/research/2026-09-06/e7226f0bc9908f11a6cb5c3f7016067389f3bf61f846f4747933fc25662baaec/5427547e1b4580eeac44d59e002a077563f1d4a5c2003acf1bf604f638cec761/document.md",
+  "sha256": "5427547e1b4580eeac44d59e002a077563f1d4a5c2003acf1bf604f638cec761",
+  "raw_sha256": "26c89f0bfcd9efa370870d84dbd9a12dfc2ee63f4dd403443b5b90334f2a00d7",
+  "raw_path": "docs-raw/research/2026-09-06/e7226f0bc9908f11a6cb5c3f7016067389f3bf61f846f4747933fc25662baaec/5427547e1b4580eeac44d59e002a077563f1d4a5c2003acf1bf604f638cec761/source.gz",
+  "fetched_at": "2026-09-05T10:28:48.501879+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

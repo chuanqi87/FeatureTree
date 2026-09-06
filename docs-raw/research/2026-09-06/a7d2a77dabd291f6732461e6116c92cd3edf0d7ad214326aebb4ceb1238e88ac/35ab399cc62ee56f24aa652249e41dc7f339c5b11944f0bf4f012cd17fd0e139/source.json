@@ -1,0 +1,13 @@
+{
+  "id": "a7d2a77dabd291f6732461e6116c92cd3edf0d7ad214326aebb4ceb1238e88ac",
+  "url": "https://developer.android.com/training/cars/parked/auto",
+  "platform": "android",
+  "title": "Add support for Android Auto to your parked app",
+  "local_path": "docs-raw/research/2026-09-06/a7d2a77dabd291f6732461e6116c92cd3edf0d7ad214326aebb4ceb1238e88ac/35ab399cc62ee56f24aa652249e41dc7f339c5b11944f0bf4f012cd17fd0e139/document.md",
+  "sha256": "35ab399cc62ee56f24aa652249e41dc7f339c5b11944f0bf4f012cd17fd0e139",
+  "raw_sha256": "fe66ff3838f2794da285645541c8d68ab1cee9bd2d13ae3f1f6f01369931173a",
+  "raw_path": "docs-raw/research/2026-09-06/a7d2a77dabd291f6732461e6116c92cd3edf0d7ad214326aebb4ceb1238e88ac/35ab399cc62ee56f24aa652249e41dc7f339c5b11944f0bf4f012cd17fd0e139/source.gz",
+  "fetched_at": "2026-09-05T10:38:11.603974+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "281fa3469bf06f8a37ad5ebb017478b36b525193431b69beb64d67aeffc3b5c7",
+  "url": "https://developer.apple.com/documentation/metal/improving-ray-tracing-data-access-using-per-primitive-data",
+  "platform": "ios",
+  "title": "Improving ray-tracing data access using per-primitive data",
+  "local_path": "docs-raw/research/2026-09-06/281fa3469bf06f8a37ad5ebb017478b36b525193431b69beb64d67aeffc3b5c7/2198a9ec197d2c5e8d9b6c3b808b70f9fd416e26d01b22ad3e5f4089f507e845/document.md",
+  "sha256": "2198a9ec197d2c5e8d9b6c3b808b70f9fd416e26d01b22ad3e5f4089f507e845",
+  "raw_sha256": "c45240518becab3fccdebe64dfbf99c122dee07d4145c787236b3c360302201d",
+  "raw_path": "docs-raw/research/2026-09-06/281fa3469bf06f8a37ad5ebb017478b36b525193431b69beb64d67aeffc3b5c7/2198a9ec197d2c5e8d9b6c3b808b70f9fd416e26d01b22ad3e5f4089f507e845/source.gz",
+  "fetched_at": "2026-09-05T11:16:26.209593+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

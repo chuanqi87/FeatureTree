@@ -1,0 +1,13 @@
+{
+  "id": "94cbeff72f4945b0f7ba3b4c496d5952cce413703dae21535ba849b37987d815",
+  "url": "https://firebase.google.com/docs/firestore/ttl",
+  "platform": "android",
+  "title": "Manage data retention with TTL policies",
+  "local_path": "docs-raw/research/2026-09-06/94cbeff72f4945b0f7ba3b4c496d5952cce413703dae21535ba849b37987d815/4d19f55397884f4a3c79d3ec0a728c1c598808ad58aa0c9fd0e889768815df58/document.md",
+  "sha256": "4d19f55397884f4a3c79d3ec0a728c1c598808ad58aa0c9fd0e889768815df58",
+  "raw_sha256": "198934a586dbffe52e9e0b16f69094d0c1d735a7ee7f5ffbec229b93682daac6",
+  "raw_path": "docs-raw/research/2026-09-06/94cbeff72f4945b0f7ba3b4c496d5952cce413703dae21535ba849b37987d815/4d19f55397884f4a3c79d3ec0a728c1c598808ad58aa0c9fd0e889768815df58/source.gz",
+  "fetched_at": "2026-09-05T11:13:19.266781+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

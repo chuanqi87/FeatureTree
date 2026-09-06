@@ -1,0 +1,13 @@
+{
+  "id": "eb61cba7d5296e24041738a72c7901a213a643ac9d7f4ea9ac7d88f58111d598",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hitracemeter-guidelines-arkts",
+  "platform": "harmonyos",
+  "title": "使用HiTraceMeter跟踪性能（ArkTS）",
+  "local_path": "docs-raw/research/2026-09-06/eb61cba7d5296e24041738a72c7901a213a643ac9d7f4ea9ac7d88f58111d598/0a883ac965c38248c0acc02e21251714408e63b1548ae0891d4056fd689a4df7/document.md",
+  "sha256": "0a883ac965c38248c0acc02e21251714408e63b1548ae0891d4056fd689a4df7",
+  "raw_sha256": "3bab006572ee2ed96d65dcc01258f1aef9786dd68528eaf7d22ecb4629b6eb46",
+  "raw_path": "docs-raw/research/2026-09-06/eb61cba7d5296e24041738a72c7901a213a643ac9d7f4ea9ac7d88f58111d598/0a883ac965c38248c0acc02e21251714408e63b1548ae0891d4056fd689a4df7/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

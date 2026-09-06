@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "device.power.battery",
+    "level": "L3",
+    "parent": "device.power",
+    "name": {
+      "zh": "电池状态",
+      "en": "Battery Status"
+    },
+    "definition": "电量、充电状态查询与监听。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "knowledge_path": "knowledge/device/power/battery.yaml",
+    "comparison_scope": {
+      "includes": [
+        "电量、充电状态查询与监听。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "8d771a95d99854e532f06580e99b7dc3098819d8f9f84fb6460d529da2bd572b",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "96a64273cd3c6c723e2d4f3ea417613a3d310d2c6b18ff45d335133a42787930",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/training/monitoring-device-state/battery-monitoring",
+      "platform": "android",
+      "title": "Monitor the Battery Level and Charging State",
+      "local_path": "docs-raw/research/2026-09-06/c327dfa2a8a063d97b31bc0cfbc171bbe0f5ad9927b9f2e66b13a4b20f93f348/4bfe5a6748112e208e87f4fec16aa464c428d07e45cb83f6cd1b986bcba3fe51/document.md",
+      "sha256": "4bfe5a6748112e208e87f4fec16aa464c428d07e45cb83f6cd1b986bcba3fe51",
+      "raw_sha256": "6da3e1f903b2624c2306229002f4b4670d02df1fbdd87920c19f443a7ee46f25",
+      "raw_path": "docs-raw/research/2026-09-06/c327dfa2a8a063d97b31bc0cfbc171bbe0f5ad9927b9f2e66b13a4b20f93f348/4bfe5a6748112e208e87f4fec16aa464c428d07e45cb83f6cd1b986bcba3fe51/source.gz",
+      "fetched_at": "2026-09-05T10:38:26.943637+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 149,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 15,
+          "truncated": false
+        },
+        {
+          "start_line": 16,
+          "end_line": 26,
+          "truncated": false
+        },
+        {
+          "start_line": 27,
+          "end_line": 34,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/training/wearables/kids/develop",
+      "platform": "android",
+      "title": "Develop experiences for kids on Wear OS",
+      "local_path": "docs-raw/research/2026-09-06/212f0a27e292948f930431e9a82670ec8ad64ed1a3c02644562dfbdb9be239de/863a4d12c4199fdffbb53dfe97f488b4a8fe66e670a7c7d2a6b2432b04eb50b4/document.md",
+      "sha256": "863a4d12c4199fdffbb53dfe97f488b4a8fe66e670a7c7d2a6b2432b04eb50b4",
+      "raw_sha256": "048522987208ffa6839fa627f51091056eb6107717b44824be08ca15dacd0327",
+      "raw_path": "docs-raw/research/2026-09-06/212f0a27e292948f930431e9a82670ec8ad64ed1a3c02644562dfbdb9be239de/863a4d12c4199fdffbb53dfe97f488b4a8fe66e670a7c7d2a6b2432b04eb50b4/source.gz",
+      "fetched_at": "2026-09-05T10:39:03.439570+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 113,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 16,
+          "truncated": false
+        },
+        {
+          "start_line": 17,
+          "end_line": 24,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/devicemanagement/handling-notnow-status-responses",
+      "platform": "ios",
+      "title": "Handling NotNow status responses",
+      "local_path": "docs-raw/research/2026-09-06/5fa72861657226132431c5178bb9a08b32cc58ceb2ca05932ea89c93082a1e89/b6f3c7f96446115d97c1eab190ba00886a60c5619f67ea8659e09b9809ee6b63/document.md",
+      "sha256": "b6f3c7f96446115d97c1eab190ba00886a60c5619f67ea8659e09b9809ee6b63",
+      "raw_sha256": "e91d2c551fdd68635d20cc196932f9e151270f3cc98087e1f23f7f37d8442d8a",
+      "raw_path": "docs-raw/research/2026-09-06/5fa72861657226132431c5178bb9a08b32cc58ceb2ca05932ea89c93082a1e89/b6f3c7f96446115d97c1eab190ba00886a60c5619f67ea8659e09b9809ee6b63/source.gz",
+      "fetched_at": "2026-09-05T10:50:23.316952+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 38,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 16,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/hiddriverkit/battery-system-enum",
+      "platform": "ios",
+      "title": "Battery System",
+      "local_path": "docs-raw/research/2026-09-06/9d6ef2f9c9ec3a7962b11535c928e528308acdd06217bb4bd6c8e3a6ca4b5aa1/83dc022018040665e725a721b0e42bdb6a6d359e9eece54cc179264eaa186089/document.md",
+      "sha256": "83dc022018040665e725a721b0e42bdb6a6d359e9eece54cc179264eaa186089",
+      "raw_sha256": "7b4b4110514fc9f9e54cfad6b92f6f0054b7f40bd4a6c67a6f43b093e58452a4",
+      "raw_path": "docs-raw/research/2026-09-06/9d6ef2f9c9ec3a7962b11535c928e528308acdd06217bb4bd6c8e3a6ca4b5aa1/83dc022018040665e725a721b0e42bdb6a6d359e9eece54cc179264eaa186089/source.gz",
+      "fetched_at": "2026-09-05T10:51:49.215071+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 197,
+      "suggested_sections": [
+        {
+          "start_line": 7,
+          "end_line": 158,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-resourceschedule-workscheduler",
+      "platform": "harmonyos",
+      "title": "@ohos.resourceschedule.workScheduler (延迟任务调度)",
+      "local_path": "docs-raw/research/2026-09-06/491259a88306ba124f59aedf149917da063afd42ae7786710dcdf9f677b49d4d/7f62e34902bf04c4bca602623ce49d1ec62844b657344601a11dbfd9368943b0/document.md",
+      "sha256": "7f62e34902bf04c4bca602623ce49d1ec62844b657344601a11dbfd9368943b0",
+      "raw_sha256": "82020740f57e22273fe7963852cc5e07ee0355f6690efd287cfc2fba3d912109",
+      "raw_path": "docs-raw/research/2026-09-06/491259a88306ba124f59aedf149917da063afd42ae7786710dcdf9f677b49d4d/7f62e34902bf04c4bca602623ce49d1ec62844b657344601a11dbfd9368943b0/source.gz",
+      "fetched_at": "2026-09-05T10:27:51.356781+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 564,
+      "suggested_sections": [
+        {
+          "start_line": 15,
+          "end_line": 69,
+          "truncated": false
+        },
+        {
+          "start_line": 70,
+          "end_line": 79,
+          "truncated": true
+        },
+        {
+          "start_line": 125,
+          "end_line": 166,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-battery-info",
+      "platform": "harmonyos",
+      "title": "@ohos.batteryInfo (电量信息)",
+      "local_path": "docs-raw/research/2026-09-06/04099ebdd642639ec7c388b58af04fed97ecfcc80689772a2f2199cdef2dcf56/44649031c909b6364c125f846336597edf59d51d7252c984f3e95143221a8549/document.md",
+      "sha256": "44649031c909b6364c125f846336597edf59d51d7252c984f3e95143221a8549",
+      "raw_sha256": "bac6c9db082923a28bc4416193db99e3a60396334c73f9070652a55d77d5418e",
+      "raw_path": "docs-raw/research/2026-09-06/04099ebdd642639ec7c388b58af04fed97ecfcc80689772a2f2199cdef2dcf56/44649031c909b6364c125f846336597edf59d51d7252c984f3e95143221a8549/source.gz",
+      "fetched_at": "2026-09-05T10:27:02.324405+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 144,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 12,
+          "truncated": false
+        },
+        {
+          "start_line": 13,
+          "end_line": 67,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:23.479507+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "58d15a0cb3771c4ca9b86d17c1d09c7da815e0f7963167a96f7b50f8a51d4303"
+}

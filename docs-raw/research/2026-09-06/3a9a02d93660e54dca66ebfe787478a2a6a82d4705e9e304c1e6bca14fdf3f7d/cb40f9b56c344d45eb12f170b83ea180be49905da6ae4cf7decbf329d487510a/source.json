@@ -1,0 +1,13 @@
+{
+  "id": "3a9a02d93660e54dca66ebfe787478a2a6a82d4705e9e304c1e6bca14fdf3f7d",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-provide-and-consume",
+  "platform": "harmonyos",
+  "title": "@Provide装饰器和@Consume装饰器：与后代组件双向同步",
+  "local_path": "docs-raw/research/2026-09-06/3a9a02d93660e54dca66ebfe787478a2a6a82d4705e9e304c1e6bca14fdf3f7d/cb40f9b56c344d45eb12f170b83ea180be49905da6ae4cf7decbf329d487510a/document.md",
+  "sha256": "cb40f9b56c344d45eb12f170b83ea180be49905da6ae4cf7decbf329d487510a",
+  "raw_sha256": "4ea4182fce4acab937525ad26b54335198f03e784c150b6b86fd807bd4f47111",
+  "raw_path": "docs-raw/research/2026-09-06/3a9a02d93660e54dca66ebfe787478a2a6a82d4705e9e304c1e6bca14fdf3f7d/cb40f9b56c344d45eb12f170b83ea180be49905da6ae4cf7decbf329d487510a/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "6d41c41c1d59e6141f4b06329b59c7b6f215b286bc5b9c5536a0f8a54cce7fbf",
+  "url": "https://firebase.google.com/docs/cloud-messaging/android/client",
+  "platform": "android",
+  "title": "Get started with Firebase Cloud Messaging in Android apps",
+  "local_path": "docs-raw/research/2026-09-06/6d41c41c1d59e6141f4b06329b59c7b6f215b286bc5b9c5536a0f8a54cce7fbf/08e372a5685ae73a75d12013e629c7b09c8f580d8f8d494f96532ab2dba91e46/document.md",
+  "sha256": "08e372a5685ae73a75d12013e629c7b09c8f580d8f8d494f96532ab2dba91e46",
+  "raw_sha256": "66498d6eb6a842f751bd78578226cec9da72c496a03b8a23d4531227b2937756",
+  "raw_path": "docs-raw/research/2026-09-06/6d41c41c1d59e6141f4b06329b59c7b6f215b286bc5b9c5536a0f8a54cce7fbf/08e372a5685ae73a75d12013e629c7b09c8f580d8f8d494f96532ab2dba91e46/source.gz",
+  "fetched_at": "2026-09-05T10:51:13.759252+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

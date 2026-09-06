@@ -1,0 +1,13 @@
+{
+  "id": "bd64942465b3c08077e1d43ae1c7bd769108556209ba9e105f1b5c90cb57def6",
+  "url": "https://firebase.google.com/docs/projects/cloud-logging-export",
+  "platform": "android",
+  "title": "Export Firebase data into Cloud Logging",
+  "local_path": "docs-raw/research/2026-09-06/bd64942465b3c08077e1d43ae1c7bd769108556209ba9e105f1b5c90cb57def6/9211378a39be1db20406273ff3ec428a1d8edbad572c42eff3d7b83e7f6a7c75/document.md",
+  "sha256": "9211378a39be1db20406273ff3ec428a1d8edbad572c42eff3d7b83e7f6a7c75",
+  "raw_sha256": "97636c34c7e361959488eb7e6663a63daf916cd959ab3d3ac64410c732baf760",
+  "raw_path": "docs-raw/research/2026-09-06/bd64942465b3c08077e1d43ae1c7bd769108556209ba9e105f1b5c90cb57def6/9211378a39be1db20406273ff3ec428a1d8edbad572c42eff3d7b83e7f6a7c75/source.gz",
+  "fetched_at": "2026-09-05T11:24:27.724755+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "location.positioning.foreground",
+    "level": "L3",
+    "parent": "location.positioning",
+    "name": {
+      "zh": "前台定位",
+      "en": "Foreground Location"
+    },
+    "definition": "应用可见时获取位置。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "sensitive",
+    "leaf_at_this_level": true,
+    "knowledge_path": "knowledge/location/positioning/foreground.yaml",
+    "comparison_scope": {
+      "includes": [
+        "应用可见时获取位置。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "1a716659ff9d87ca57e5135736a23769f95b830ea8ee578972d4e4ddbe9f9b23",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "0878baf68afff10396dbf109fc048e3985761a0343e42ed3cc034899ca6d0cfb",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/training/location/permissions",
+      "platform": "android",
+      "title": "Request location permissions",
+      "local_path": "docs-raw/research/2026-09-06/f73543c64afb833efc97e0cedb89fd782af4854f2c3803a6402fa07fee61d88c/cfa7e43413837d62a52144504b01cea561022ac5feabc57b2ef574f351487d7b/document.md",
+      "sha256": "cfa7e43413837d62a52144504b01cea561022ac5feabc57b2ef574f351487d7b",
+      "raw_sha256": "fed66c9dae9e2730afced7d4ba98db097c0ea2375975d85c54eaf0b77a54d55c",
+      "raw_path": "docs-raw/research/2026-09-06/f73543c64afb833efc97e0cedb89fd782af4854f2c3803a6402fa07fee61d88c/cfa7e43413837d62a52144504b01cea561022ac5feabc57b2ef574f351487d7b/source.gz",
+      "fetched_at": "2026-09-05T10:49:25.199855+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 184,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 11,
+          "truncated": false
+        },
+        {
+          "start_line": 12,
+          "end_line": 18,
+          "truncated": false
+        },
+        {
+          "start_line": 19,
+          "end_line": 86,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/develop/sensors-and-location/location/permissions",
+      "platform": "android",
+      "title": "Request location permissions",
+      "local_path": "docs-raw/research/2026-09-06/ca13cb0884affa0626d178dbc6c986d8d6d1bb1c1b9463e3937da25bac3f7394/cb69215d332cc495846443aca4f6846e1748814193e3534c42f97057b9c02d35/document.md",
+      "sha256": "cb69215d332cc495846443aca4f6846e1748814193e3534c42f97057b9c02d35",
+      "raw_sha256": "b8f0dbe531e1292312c7cc419ac2cd16e0fe8c87db773856c7bf111433a3feb1",
+      "raw_path": "docs-raw/research/2026-09-06/ca13cb0884affa0626d178dbc6c986d8d6d1bb1c1b9463e3937da25bac3f7394/cb69215d332cc495846443aca4f6846e1748814193e3534c42f97057b9c02d35/source.gz",
+      "fetched_at": "2026-09-05T10:24:36.192613+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 184,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 11,
+          "truncated": false
+        },
+        {
+          "start_line": 12,
+          "end_line": 18,
+          "truncated": false
+        },
+        {
+          "start_line": 19,
+          "end_line": 86,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/corelocation/handling-location-updates-in-the-background",
+      "platform": "ios",
+      "title": "Handling location updates in the background",
+      "local_path": "docs-raw/research/2026-09-06/088a47cfd18a48f81c814f1db81c6d1bab1e25737d9537ed86d1a21302ff1b00/90e4a00cd85d42c7497b58c2ea87352604ed44ec00eedad39975b8cda0266776/document.md",
+      "sha256": "90e4a00cd85d42c7497b58c2ea87352604ed44ec00eedad39975b8cda0266776",
+      "raw_sha256": "bd5471ff0a26a3fa70c41dce2374169fe93c943262c314e3804c0e51546e38d6",
+      "raw_path": "docs-raw/research/2026-09-06/088a47cfd18a48f81c814f1db81c6d1bab1e25737d9537ed86d1a21302ff1b00/90e4a00cd85d42c7497b58c2ea87352604ed44ec00eedad39975b8cda0266776/source.gz",
+      "fetched_at": "2026-09-05T10:19:23.344135+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 41,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 17,
+          "truncated": false
+        },
+        {
+          "start_line": 18,
+          "end_line": 23,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/appclip/creating-app-clip-codes-with-the-app-clip-code-generator",
+      "platform": "ios",
+      "title": "Creating App Clip Codes with the App Clip Code Generator",
+      "local_path": "docs-raw/research/2026-09-06/f1a3943238f80e41cbb13efc5a429839718fc6bfa4fc6321cbba7bea4bee417b/462e9c07b80010532cfa5e2c664d787be9bf5f45293c0e3bf97fe34321d988d7/document.md",
+      "sha256": "462e9c07b80010532cfa5e2c664d787be9bf5f45293c0e3bf97fe34321d988d7",
+      "raw_sha256": "b9f1d6e95f090f77696d49c57c0e63003983ae8a6fbace40eca28a871c6d6503",
+      "raw_path": "docs-raw/research/2026-09-06/f1a3943238f80e41cbb13efc5a429839718fc6bfa4fc6321cbba7bea4bee417b/462e9c07b80010532cfa5e2c664d787be9bf5f45293c0e3bf97fe34321d988d7/source.gz",
+      "fetched_at": "2026-09-05T10:33:28.187247+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 169,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 22,
+          "truncated": false
+        },
+        {
+          "start_line": 23,
+          "end_line": 24,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-reasonable-gps-use",
+      "platform": "harmonyos",
+      "title": "GPS资源合理使用",
+      "local_path": "docs-raw/research/2026-09-06/0ed0cb182003f8d2549fad89797db62de7713f23c95e365379beabb26bc74836/ed52646a317a6a2f1866f83c35fa1bf6a1dacdc58bbfeb40b5d655d4b33b9787/document.md",
+      "sha256": "ed52646a317a6a2f1866f83c35fa1bf6a1dacdc58bbfeb40b5d655d4b33b9787",
+      "raw_sha256": "1ed25de5af2cdd68cad8afe2b73cfb90e779999b0b925e1f97f19916d93303ad",
+      "raw_path": "docs-raw/research/2026-09-06/0ed0cb182003f8d2549fad89797db62de7713f23c95e365379beabb26bc74836/ed52646a317a6a2f1866f83c35fa1bf6a1dacdc58bbfeb40b5d655d4b33b9787/source.gz",
+      "fetched_at": "2026-09-05T10:40:30.727486+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 51,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 51,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/realtime-monitor",
+      "platform": "harmonyos",
+      "title": "性能问题定界：实时监控",
+      "local_path": "docs-raw/research/2026-09-06/c32bed045a85ec3ce02cc4734671e3c2be1cedc0db23a8fa5c857d567d2dd4e6/4f6aaec2d5188afe864c90c697a40f9036b30505ed94d5d60b532e6edb729d30/document.md",
+      "sha256": "4f6aaec2d5188afe864c90c697a40f9036b30505ed94d5d60b532e6edb729d30",
+      "raw_sha256": "71099b594d33a79914bbb7801c1f8c5b393d02b3c4416f12455ba9c13ac9adb1",
+      "raw_path": "docs-raw/research/2026-09-06/c32bed045a85ec3ce02cc4734671e3c2be1cedc0db23a8fa5c857d567d2dd4e6/4f6aaec2d5188afe864c90c697a40f9036b30505ed94d5d60b532e6edb729d30/source.gz",
+      "fetched_at": "2026-09-05T10:24:37.631299+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 91,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 50,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:45.028011+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "1e390fc4114ebf343fc7bf27bebba4a7775aa116c5a80ed5e27c94536d1d5c15"
+}

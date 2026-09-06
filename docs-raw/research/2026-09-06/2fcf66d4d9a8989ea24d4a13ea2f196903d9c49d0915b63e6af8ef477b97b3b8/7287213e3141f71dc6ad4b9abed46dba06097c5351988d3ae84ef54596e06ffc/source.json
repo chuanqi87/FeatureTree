@@ -1,0 +1,13 @@
+{
+  "id": "2fcf66d4d9a8989ea24d4a13ea2f196903d9c49d0915b63e6af8ef477b97b3b8",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/crypto-ml-dsa-sign-sig-verify",
+  "platform": "harmonyos",
+  "title": "使用ML-DSA密钥对签名验签(ArkTS)",
+  "local_path": "docs-raw/research/2026-09-06/2fcf66d4d9a8989ea24d4a13ea2f196903d9c49d0915b63e6af8ef477b97b3b8/7287213e3141f71dc6ad4b9abed46dba06097c5351988d3ae84ef54596e06ffc/document.md",
+  "sha256": "7287213e3141f71dc6ad4b9abed46dba06097c5351988d3ae84ef54596e06ffc",
+  "raw_sha256": "724e859d3a350b91a0db1b0a11bbff1b1a588b153195bc9ef6d3bb5f9be95069",
+  "raw_path": "docs-raw/research/2026-09-06/2fcf66d4d9a8989ea24d4a13ea2f196903d9c49d0915b63e6af8ef477b97b3b8/7287213e3141f71dc6ad4b9abed46dba06097c5351988d3ae84ef54596e06ffc/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

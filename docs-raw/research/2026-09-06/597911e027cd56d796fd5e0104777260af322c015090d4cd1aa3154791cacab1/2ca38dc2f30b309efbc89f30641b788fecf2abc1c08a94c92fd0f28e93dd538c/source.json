@@ -1,0 +1,13 @@
+{
+  "id": "597911e027cd56d796fd5e0104777260af322c015090d4cd1aa3154791cacab1",
+  "url": "https://developer.android.com/develop/connectivity/usb",
+  "platform": "android",
+  "title": "USB host and accessory overview",
+  "local_path": "docs-raw/research/2026-09-06/597911e027cd56d796fd5e0104777260af322c015090d4cd1aa3154791cacab1/2ca38dc2f30b309efbc89f30641b788fecf2abc1c08a94c92fd0f28e93dd538c/document.md",
+  "sha256": "2ca38dc2f30b309efbc89f30641b788fecf2abc1c08a94c92fd0f28e93dd538c",
+  "raw_sha256": "5d51c84e3fd35fa996bf682828a3ff41323687836914aa58c2adc29771d88727",
+  "raw_path": "docs-raw/research/2026-09-06/597911e027cd56d796fd5e0104777260af322c015090d4cd1aa3154791cacab1/2ca38dc2f30b309efbc89f30641b788fecf2abc1c08a94c92fd0f28e93dd538c/source.gz",
+  "fetched_at": "2026-09-05T10:24:23.812131+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

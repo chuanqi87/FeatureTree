@@ -1,0 +1,13 @@
+{
+  "id": "c855d40140c78ebad2285acfd3d703a601d2b0925bf0a2de122f592eac300075",
+  "url": "https://developer.apple.com/documentation/cloudkit/inspecting-and-editing-an-icloud-container-s-schema",
+  "platform": "ios",
+  "title": "Inspecting and Editing an iCloud Container’s Schema",
+  "local_path": "docs-raw/research/2026-09-06/c855d40140c78ebad2285acfd3d703a601d2b0925bf0a2de122f592eac300075/75f85b83aba81f6436f32374c2cf143f279956861976dd4dcaee73a04e4d48f5/document.md",
+  "sha256": "75f85b83aba81f6436f32374c2cf143f279956861976dd4dcaee73a04e4d48f5",
+  "raw_sha256": "691bc32567c22f52edd3b9df559fe14afb9ac03887fd9531faf2a8d86932dfae",
+  "raw_path": "docs-raw/research/2026-09-06/c855d40140c78ebad2285acfd3d703a601d2b0925bf0a2de122f592eac300075/75f85b83aba81f6436f32374c2cf143f279956861976dd4dcaee73a04e4d48f5/source.gz",
+  "fetched_at": "2026-09-05T10:45:39.528416+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "a9e4d17d71aeeb1762eb99c75007d32c10fffb73726db1835afa2dd7acd43956",
+  "url": "https://developer.apple.com/documentation/metal/assessing-multi-gpu-and-multi-display-setups-on-an-intel-based-mac",
+  "platform": "ios",
+  "title": "Assessing multi-GPU and multidisplay setups on an Intel-based Mac",
+  "local_path": "docs-raw/research/2026-09-06/a9e4d17d71aeeb1762eb99c75007d32c10fffb73726db1835afa2dd7acd43956/26e5d49edf2aaee3fdc66197f987ef71d1b00b8d4f59e5c73bb2ccc9ec0a6b6a/document.md",
+  "sha256": "26e5d49edf2aaee3fdc66197f987ef71d1b00b8d4f59e5c73bb2ccc9ec0a6b6a",
+  "raw_sha256": "91374d73fe10b8d26226b15205acc2d87b44466b7d6c572011004f8b9f828e96",
+  "raw_path": "docs-raw/research/2026-09-06/a9e4d17d71aeeb1762eb99c75007d32c10fffb73726db1835afa2dd7acd43956/26e5d49edf2aaee3fdc66197f987ef71d1b00b8d4f59e5c73bb2ccc9ec0a6b6a/source.gz",
+  "fetched_at": "2026-09-05T11:16:58.634130+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

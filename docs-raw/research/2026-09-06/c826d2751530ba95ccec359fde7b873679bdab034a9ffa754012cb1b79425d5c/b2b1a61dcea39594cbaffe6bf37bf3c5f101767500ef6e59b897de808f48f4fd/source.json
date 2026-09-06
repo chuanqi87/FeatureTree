@@ -1,0 +1,13 @@
+{
+  "id": "c826d2751530ba95ccec359fde7b873679bdab034a9ffa754012cb1b79425d5c",
+  "url": "https://developer.android.com/identity/sign-in/credential-manager-siwg-implementation",
+  "platform": "android",
+  "title": "Implement Sign in with Google",
+  "local_path": "docs-raw/research/2026-09-06/c826d2751530ba95ccec359fde7b873679bdab034a9ffa754012cb1b79425d5c/b2b1a61dcea39594cbaffe6bf37bf3c5f101767500ef6e59b897de808f48f4fd/document.md",
+  "sha256": "b2b1a61dcea39594cbaffe6bf37bf3c5f101767500ef6e59b897de808f48f4fd",
+  "raw_sha256": "767bd4edf049d98f086e09a93f7f7296b3a89114f282521f9a15fd246fffbe61",
+  "raw_path": "docs-raw/research/2026-09-06/c826d2751530ba95ccec359fde7b873679bdab034a9ffa754012cb1b79425d5c/b2b1a61dcea39594cbaffe6bf37bf3c5f101767500ef6e59b897de808f48f4fd/source.gz",
+  "fetched_at": "2026-09-05T10:32:36.641407+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

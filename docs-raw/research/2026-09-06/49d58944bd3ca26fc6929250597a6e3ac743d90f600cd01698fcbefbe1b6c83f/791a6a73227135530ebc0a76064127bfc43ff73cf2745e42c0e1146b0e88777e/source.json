@@ -1,0 +1,13 @@
+{
+  "id": "49d58944bd3ca26fc6929250597a6e3ac743d90f600cd01698fcbefbe1b6c83f",
+  "url": "https://developer.android.com/jetpack/androidx/releases/camera",
+  "platform": "android",
+  "title": "CameraX",
+  "local_path": "docs-raw/research/2026-09-06/49d58944bd3ca26fc6929250597a6e3ac743d90f600cd01698fcbefbe1b6c83f/791a6a73227135530ebc0a76064127bfc43ff73cf2745e42c0e1146b0e88777e/document.md",
+  "sha256": "791a6a73227135530ebc0a76064127bfc43ff73cf2745e42c0e1146b0e88777e",
+  "raw_sha256": "d8c59ddb56361b6b1584564ad55c71d9ff6d821639c6784af38cc61b2c37693a",
+  "raw_path": "docs-raw/research/2026-09-06/49d58944bd3ca26fc6929250597a6e3ac743d90f600cd01698fcbefbe1b6c83f/791a6a73227135530ebc0a76064127bfc43ff73cf2745e42c0e1146b0e88777e/source.gz",
+  "fetched_at": "2026-09-05T10:32:46.177595+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

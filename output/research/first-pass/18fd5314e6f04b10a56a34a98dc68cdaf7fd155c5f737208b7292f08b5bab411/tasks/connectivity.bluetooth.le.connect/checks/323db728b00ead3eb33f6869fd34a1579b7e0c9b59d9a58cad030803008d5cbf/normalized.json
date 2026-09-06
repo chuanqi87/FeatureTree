@@ -1,0 +1,910 @@
+{
+  "task_id": "8b0a1ef46dde7c7c3b60b2fe00abfbfd698084a6e5237363b0f4b35d7cd61388",
+  "feature_id": "connectivity.bluetooth.le.connect",
+  "stage": "first_pass",
+  "summary": "三平台均读到 BLE/GATT 连接机制：Android 概述明示权限→扫描→连接 GATT server 流程；iOS 仅 MIDI 场景明示 CoreBluetooth 扫描连接与 iOS 16+ 系统自动重连；HarmonyOS 接口级明示 GattClientDevice.connect、GattSetting/GattServer.connect(autoConnect) 及 ACCESS_BLUETOOTH 权限与 API 10/26 版本。基线未固定，全部 low；Android 连接指南与 iOS Core Bluetooth 正文缺失为主要缺口。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "BLE 概述明示：声明权限后经 BluetoothAdapter 确认蓝牙可用并扫描，发现设备后通过连接其 GATT server 建立通信，之后按服务/特征传输数据；平台内建 central 角色支持。连接 API 细节未入包。",
+      "version_scope": "未固定基线；快照（2026-09-05）为 developer.android.com BLE 概述，正文未标注 API Level 或最低 Android 版本",
+      "conditions": [
+        "应用需先在 manifest 声明多项蓝牙权限（概述明示，具体权限清单正文未读）",
+        "本机蓝牙可用并完成 BLE 设备发现（扫描）后连接对端 GATT server",
+        "本机通常为 central/GATT client 角色，概述亦提及可作 GATT server（BluetoothGattServer）"
+      ],
+      "gaps": [
+        "connect-gatt-server 指南与 BluetoothGatt/BluetoothDevice.connectGatt API 参考未入冻结源，连接 API 形态、autoConnect、连接参数均未核实",
+        "概述未标注适用 API Level/Android 版本，与当前正式版对应关系未核实",
+        "后台连接限制、连接数量上限、超时行为未在已读正文出现",
+        "包内 android-2（Cross-Device SDK secure-connection）为生态层设备间连接，与本节点 BLE 外设连接不直接相关，未用于结论"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Bluetooth Low Energy > 开篇平台支持声明（central 角色 API）",
+          "start_line": 3,
+          "end_line": 5,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/ble-overview",
+            "platform": "android",
+            "title": "Bluetooth Low Energy",
+            "local_path": "docs-raw/research/2026-09-06/4d03b0ad4de53cce5fa8e8f7d2580c816f4c912bb7b46e57a703929ef906c15e/294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f/document.md",
+            "sha256": "294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f",
+            "raw_sha256": "dac20834463b0a0eac43ed961ba98f974502431e8726ad1897db76beec803091",
+            "raw_path": "docs-raw/research/2026-09-06/4d03b0ad4de53cce5fa8e8f7d2580c816f4c912bb7b46e57a703929ef906c15e/294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f/source.gz",
+            "fetched_at": "2026-09-05T10:24:14.825262+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 110,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 40,
+                "truncated": false
+              },
+              {
+                "start_line": 41,
+                "end_line": 79,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Android provides built-in platform support for Bluetooth Low Energy (BLE) in the\ncentral role and provides APIs that apps can use to discover devices, query for\nservices, and transmit information."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Bluetooth Low Energy > The basics（权限→扫描→连接 GATT server 流程）",
+          "start_line": 25,
+          "end_line": 39,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/ble-overview",
+            "platform": "android",
+            "title": "Bluetooth Low Energy",
+            "local_path": "docs-raw/research/2026-09-06/4d03b0ad4de53cce5fa8e8f7d2580c816f4c912bb7b46e57a703929ef906c15e/294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f/document.md",
+            "sha256": "294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f",
+            "raw_sha256": "dac20834463b0a0eac43ed961ba98f974502431e8726ad1897db76beec803091",
+            "raw_path": "docs-raw/research/2026-09-06/4d03b0ad4de53cce5fa8e8f7d2580c816f4c912bb7b46e57a703929ef906c15e/294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f/source.gz",
+            "fetched_at": "2026-09-05T10:24:14.825262+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 110,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 40,
+                "truncated": false
+              },
+              {
+                "start_line": 41,
+                "end_line": 79,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## The basics\n\nFor BLE-enabled devices to transmit data between each other, they must first\nform a channel of communication. Use of the Bluetooth LE APIs requires you to\n[declare several permissions](https://developer.android.com/develop/connectivity/bluetooth/bt-permissions)\nin your manifest file. Once your app has permission to use Bluetooth, your app\nneeds to access the `BluetoothAdapter` and\n[determine if Bluetooth is available on the device](https://developer.android.com/develop/connectivity/bluetooth/setup)\nIf Bluetooth is available, the device will\n[scan for nearby BLE devices](https://developer.android.com/develop/connectivity/bluetooth/ble/find-ble-devices).\nOnce a device is found, the capabilities of the BLE device are discovered by\n[connecting to the GATT server on the BLE device](https://developer.android.com/develop/connectivity/bluetooth/ble/connect-gatt-server).\nOnce a connection is made,\n[data can be transferred with the connected device](https://developer.android.com/develop/connectivity/bluetooth/ble/transfer-ble-data)\nbased on the available services and characteristics."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Bluetooth Low Energy > Roles and responsibilities（central/peripheral 与 GATT client/server）",
+          "start_line": 80,
+          "end_line": 110,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/ble-overview",
+            "platform": "android",
+            "title": "Bluetooth Low Energy",
+            "local_path": "docs-raw/research/2026-09-06/4d03b0ad4de53cce5fa8e8f7d2580c816f4c912bb7b46e57a703929ef906c15e/294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f/document.md",
+            "sha256": "294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f",
+            "raw_sha256": "dac20834463b0a0eac43ed961ba98f974502431e8726ad1897db76beec803091",
+            "raw_path": "docs-raw/research/2026-09-06/4d03b0ad4de53cce5fa8e8f7d2580c816f4c912bb7b46e57a703929ef906c15e/294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f/source.gz",
+            "fetched_at": "2026-09-05T10:24:14.825262+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 110,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 40,
+                "truncated": false
+              },
+              {
+                "start_line": 41,
+                "end_line": 79,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Roles and responsibilities\n\nWhen a device interacts with a BLE device, roles and responsibilities are\ndivided in two different ways:\n\n* **Central versus peripheral.** This applies to the BLE connection itself—the\n  device in the central role scans, looking for advertisement, and the device in\n  the peripheral role advertises. Two devices that only support the peripheral\n  role can't talk to each other, and neither can two devices that only support\n  the central role.\n* **GATT server versus GATT client.** This determines how the two devices talk\n  to each other after they've established the connection. The device in the\n  client role sends requests for data, and the device in the server role\n  fulfills them.\n\nTo understand the distinction between the central-peripheral and server-client\nrole divisions, consider an example where you have an Android phone and a\nBLE-enabled activity tracker that reports sensor data back to the phone.\n\n* The phone—the *central* device—actively scans for BLE devices. The activity\n  tracker—the *peripheral* device—advertises and waits to receive a request for\n  connection.\n* After the phone and the activity tracker have established a connection, they\n  start transferring GATT metadata to each other. In this case, the app running\n  on the phone sends requests for data, so it acts as the *GATT client*. The\n  activity tracker fulfills those requests, so it acts as the *GATT server*.\n\nAn alternative design of the app might involve the phone playing the GATT server\nrole instead. See\n[`BluetoothGattServer`](https://developer.android.com/reference/android/bluetooth/BluetoothGattServer) for\nmore information."
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "概述级文档可确认机制存在，但连接建立时序、运行时权限行为及与扫描的衔接需真机核实；本轮为文档初判，未做实测。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "documented_mechanism",
+      "observation": "仅读到 Core MIDI 的 MIDI Bluetooth 页：iOS 16+（并列 macOS 13+）系统自动重连支持配对的 BLE MIDI 外设；不配对设备由 Core MIDI 经 CoreBluetooth 扫描并连接、确认 MIDI 服务。通用 BLE 连接 API 正文未读到。",
+      "version_scope": "快照（2026-09-05）明示 iOS 16 or later 适用于系统自动重连，同页并列 macOS 13 or later；为 Apple 多平台目录，iOS 适用性在本页明示",
+      "conditions": [
+        "系统自动重连：iOS 16+ 且外设支持配对",
+        "应用侧连接：外设不支持配对时经 CoreBluetooth 扫描并连接，需确认外设含 BLE MIDI 服务与 MIDI I/O characteristic",
+        "已读范围限 BLE MIDI profile 场景，不能推广为通用 BLE 外设连接行为"
+      ],
+      "gaps": [
+        "Core Bluetooth（CBCentralManager.connect 等）API 参考未入冻结源，通用 BLE 连接仅能由 MIDI 场景间接推断",
+        "应用侧所需蓝牙权限/授权要求未在已读正文出现（不能据此断言无需权限）",
+        "系统自动重连是否仅限 MIDI profile 未确认",
+        "包内 ios-2（XPC connections）为进程间通信，与本节点无关，未用于结论"
+      ],
+      "confidence": "low",
+      "evidence_strength": "indirect",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "MIDI Bluetooth > 页面主题（连接 BLE MIDI 外设）",
+          "start_line": 1,
+          "end_line": 3,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coremidi/midi-bluetooth",
+            "platform": "ios",
+            "title": "MIDI Bluetooth",
+            "local_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/document.md",
+            "sha256": "ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3",
+            "raw_sha256": "4e089953fe61886b72b7eafaffd19fbe65e8acf0d7d99d178326811c18f71271",
+            "raw_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/source.gz",
+            "fetched_at": "2026-09-05T10:19:31.589071+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 37,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 21,
+                "end_line": 22,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "# MIDI Bluetooth\n\nConnect to Bluetooth Low Energy MIDI peripherals."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "MIDI Bluetooth > Discussion（iOS 16+/macOS 13+ 自动重连；CoreBluetooth 连接三步骤与断连 API）",
+          "start_line": 5,
+          "end_line": 17,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coremidi/midi-bluetooth",
+            "platform": "ios",
+            "title": "MIDI Bluetooth",
+            "local_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/document.md",
+            "sha256": "ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3",
+            "raw_sha256": "4e089953fe61886b72b7eafaffd19fbe65e8acf0d7d99d178326811c18f71271",
+            "raw_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/source.gz",
+            "fetched_at": "2026-09-05T10:19:31.589071+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 37,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 21,
+                "end_line": 22,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Discussion\n\nIn macOS 13 or later and iOS 16 or later, the system automatically reconnects Bluetooth Low Energy (BLE) MIDI peripherals when powered on, if the device supports pairing. Previously, it was necessary to use Audio MIDI Setup to establish BLE MIDI connections.\n\nFor devices that don’t support pairing, [`Core MIDI`](/documentation/CoreMIDI) can enable <doc://com.apple.documentation/documentation/CoreBluetooth> connections for input/output (I/O).\n\nThis API enables connection of BLE MIDI peripherals that don’t support pairing using <doc://com.apple.documentation/documentation/CoreBluetooth> with the following steps:\n\n1. Scan for and connect to a BLE MIDI peripheral.\n2. Confirm the peripheral has a BLE MIDI service.\n3. Confirm the BLE MIDI service on the peripheral has a MIDI I/O characteristic for the MIDI service.\n\nOnce a BLE MIDI peripheral connects — and you confirm that it possess both the BLE MIDI service and BLE MIDI I/O characteristic — call [`MIDIBluetoothDriverActivateAllConnections()`](/documentation/CoreMIDI/MIDIBluetoothDriverActivateAllConnections()) to have [`Core MIDI`](/documentation/CoreMIDI) enable I/O on those connections."
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "已读证据仅 MIDI 场景与系统重连行为，通用 BLE 连接在 iOS 真机上的表现需待 Core Bluetooth 文档补读后实测确认；本轮未做实测。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "HarmonyOS（华为官网）API 参考明示：ble.createGattClientDevice 创建 client 实例后调用 connect() 主动发起 GATT 连接，经 on('BLEConnectionStateChange') 感知结果；需 ACCESS_BLUETOOTH 权限、Stage 模型；GattSetting 重载与 GattServer.connect(autoConnect) 自 API 26 起。",
+      "version_scope": "华为官网 harmonyos-references（HarmonyOS，非 OpenHarmony）：模块首批接口 API 10 起；connect 与状态回调元服务 API 12 起；GattSetting 重载与 GattServer.connect 起始 API 26.0.0；对应商用发行版本号未核实",
+      "conditions": [
+        "需要 ohos.permission.ACCESS_BLUETOOTH 权限（拒绝报 201）",
+        "仅可在 Stage 模型使用",
+        "对端地址需来自 BLE 扫描结果，且对端 BLE 广播须可连接",
+        "GattSetting 的 transport 默认 TRANSPORT_LE，不能设为 TRANSPORT_UNKNOWN（API 26 重载）",
+        "2in1 设备未插近距离芯片时 API 26 重载报 801 能力不支持"
+      ],
+      "gaps": [
+        "连接时序、超时、重试策略与并发连接数量上限未在已读正文确认",
+        "BLEConnectionChangeState 结构与 connect 成功判定的具体状态值未读全文",
+        "API 26.0.0 对应的商用 HarmonyOS 正式发行版本号未核实（基线未固定）",
+        "phone/tablet 形态上的实际连接行为未验证（本轮无实测）"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "@ohos.bluetooth.ble > 模块说明（基于 GATT 的连接与传输，首批接口 API 10 起）",
+          "start_line": 1,
+          "end_line": 5,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 136,
+                "end_line": 189,
+                "truncated": false
+              },
+              {
+                "start_line": 235,
+                "end_line": 236,
+                "truncated": true
+              },
+              {
+                "start_line": 2607,
+                "end_line": 2635,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "# @ohos.bluetooth.ble (蓝牙ble模块)\n\n本模块提供了基于低功耗蓝牙（Bluetooth Low Energy，[BLE](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/terminology#ble)）技术的蓝牙能力，支持发起BLE扫描、发送BLE广播报文、以及基于通用属性协议（Generic Attribute Profile，[GATT](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/terminology#gatt)）的连接和传输数据。适用于智能穿戴设备、健康监测、物联网设备互联等低功耗短距离无线通信场景，有助于降低设备功耗、延长续航时间。  \n![](https://media:201787906836296194)  \n* 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "ble.createGattClientDevice（创建 client 端、地址来自扫描、广播须可连接）",
+          "start_line": 89,
+          "end_line": 97,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 136,
+                "end_line": 189,
+                "truncated": false
+              },
+              {
+                "start_line": 235,
+                "end_line": 236,
+                "truncated": true
+              },
+              {
+                "start_line": 2607,
+                "end_line": 2635,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### ble.createGattClientDevice\n\ncreateGattClientDevice(deviceId: string): GattClientDevice\n\n创建[GattClientDevice](#gattclientdevice)实例，表示GATT连接中的client端。\n\n* 该接口仅支持BLE传输类型，若需自定义传输类型[BluetoothTransport](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-connection#bluetoothtransport)，可使用[createGattClientDevice](#blecreategattclientdevice-1)。\n* 通过该实例可以操作client端行为，如调用[connect](#connect)向对端设备发起连接，调用[getServices](#getservices)获取对端设备支持的所有服务能力。\n* 创建该实例所需要的设备地址表示server端设备。可以通过[ble.startBLEScan](#blestartblescan)或[BleScanner](#blescanner15)的[startScan](#startscan15)接口获取server端设备地址，且需保证server端设备的BLE广播是可连接的。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "ble.createGattClientDevice（GattSetting 重载，起始版本 26.0.0）",
+          "start_line": 136,
+          "end_line": 146,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 136,
+                "end_line": 189,
+                "truncated": false
+              },
+              {
+                "start_line": 235,
+                "end_line": 236,
+                "truncated": true
+              },
+              {
+                "start_line": 2607,
+                "end_line": 2635,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### ble.createGattClientDevice\n\ncreateGattClientDevice(deviceId: string, setting: GattSetting): GattClientDevice\n\n创建[GattClientDevice](#gattclientdevice)实例，表示GATT连接中的client端，可通过[GattSetting](#gattsetting)设置GATT连接参数。\n\n* 通过该实例可以操作client端行为，如调用[connect](#connect)向对端设备发起连接，调用[getServices](#getservices)获取对端设备支持的所有服务能力。\n* 创建该实例所需要的设备地址表示server端设备。可以通过[ble.startBLEScan](#blestartblescan)或[BleScanner](#blescanner15)的[startScan](#startscan15)接口获取server端设备地址，且需保证server端设备的BLE广播是可连接的。\n* 通过[GattSetting](#gattsetting)设置连接的传输类型transport时，若不清楚设备的传输类型[BluetoothTransport](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-connection#bluetoothtransport)，默认为[TRANSPORT_LE](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-connection#bluetoothtransport)，但不能设置为[TRANSPORT_UNKNOWN](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-connection#bluetoothtransport)（未知的设备传输方式），否则无法成功创建[GattClientDevice](#gattclientdevice)实例。\n\n起始版本：26.0.0"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "GattServer.connect（server 端发起连接，autoConnect 参数，起始版本 26.0.0）",
+          "start_line": 1899,
+          "end_line": 1924,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 136,
+                "end_line": 189,
+                "truncated": false
+              },
+              {
+                "start_line": 235,
+                "end_line": 236,
+                "truncated": true
+              },
+              {
+                "start_line": 2607,
+                "end_line": 2635,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### connect\n\nconnect(deviceId: string, autoConnect?: boolean): void\n\n调用方充当GATT客户端，发起和远端BLE设备连接，通过参数autoConnect设置是否直接连接到远端设备或者在远端设备可用时自动重连。\n\n* 若要实现在远端设备可用时自动重连（即[autoConnect](#gattsetting)为true），需保证client端[createGattClientDevice](#blecreategattclientdevice-1)发起连接，并设置[autoConnect](#gattsetting)为true。\n* server端可通过订阅[on('BLEConnectionStateChange')](#onbleconnectionstatechange)事件感知连接状态。\n* 当server端想要断开连接时，可主动调用[disconnect](#disconnect)。\n\n起始版本：26.0.0\n\n需要权限：ohos.permission.ACCESS_BLUETOOTH\n\n系统能力：SystemCapability.Communication.Bluetooth.Core\n\n元服务API：从API版本26.0.0开始，该接口支持在元服务中使用。\n\n模型约束：此接口仅可在Stage模型下使用。\n\n参数：  \n\n|参数名|类型|必填|说明|\n|:----------|:------|:-|:-----------------------------------------------------------------------|\n|deviceId|string|是|对端设备的MAC地址，例如：\"XX:XX:XX:XX:XX:XX\"。|\n|autoConnect|boolean|否|是否直接连接到远端设备或者在远端设备可用时自动连接。true表示在远端设备可用时自动连接，false表示直接连接到远端设备。默认值为false。|"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "GattClientDevice > connect（client 端发起 GATT 连接，需 ACCESS_BLUETOOTH）",
+          "start_line": 3033,
+          "end_line": 3048,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 136,
+                "end_line": 189,
+                "truncated": false
+              },
+              {
+                "start_line": 235,
+                "end_line": 236,
+                "truncated": true
+              },
+              {
+                "start_line": 2607,
+                "end_line": 2635,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### connect\n\nconnect(): void\n\nclient端主动发起和server蓝牙设备的GATT协议连接。\n\n* 远端设备地址已通过[createGattClientDevice](#blecreategattclientdevice)方法中的deviceId参数指定。\n* client可通过订阅[on('BLEConnectionStateChange')](#onbleconnectionstatechange)事件来感知连接是否成功。\n\n需要权限：ohos.permission.ACCESS_BLUETOOTH\n\n元服务API：从API version 12开始，该接口支持在元服务中使用。\n\n系统能力：SystemCapability.Communication.Bluetooth.Core\n\n模型约束：此接口仅可在Stage模型下使用。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "GattClientDevice > on('BLEConnectionStateChange')（client 订阅连接状态变化）",
+          "start_line": 4637,
+          "end_line": 4656,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 136,
+                "end_line": 189,
+                "truncated": false
+              },
+              {
+                "start_line": 235,
+                "end_line": 236,
+                "truncated": true
+              },
+              {
+                "start_line": 2607,
+                "end_line": 2635,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### on('BLEConnectionStateChange')\n\non(type: 'BLEConnectionStateChange', callback: Callback\\<BLEConnectionChangeState\\>): void\n\nclient端订阅GATT profile协议的连接状态变化事件。使用Callback异步回调。\n\n需要权限：ohos.permission.ACCESS_BLUETOOTH\n\n元服务API：从API version 12开始，该接口支持在元服务中使用。\n\n系统能力：SystemCapability.Communication.Bluetooth.Core\n\n模型约束：此接口仅可在Stage模型下使用。\n\n参数：  \n\n|参数名|类型|必填|说明|\n|:-------|:----------------------------------------------------------------|:-|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|\n|type|string|是|事件回调类型，支持的事件为'BLEConnectionStateChange'，表示连接状态变化事件。 client和server端之间的连接状态发生变化时，触发该事件。 当client端调用[connect](#connect)或[disconnect](#disconnect)时，可能引起连接状态发生变化。|\n|callback|Callback\\<[BLEConnectionChangeState](#bleconnectionchangestate)\\>|是|指定订阅的回调函数，会携带连接状态信息。|"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "API 参考已明示接口、权限与错误码，但连接成功率、回调时序、2in1/手机形态差异及 API 26 行为需真机验证；本轮未做实测。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "lifecycle_background",
+      "statement": "自动重连层级假设：iOS 对支持配对的 BLE MIDI 外设在 iOS 16+ 由系统自动重连（can 行为，系统层）；HarmonyOS 的自动重连由应用在 GattSetting/GattServer.connect 中以 autoConnect 参数显式开启（must 显式配置，应用层）。两平台自动重连的触发层级与适用范围（MIDI profile vs 通用 GATT）可能不同。",
+      "platforms": [
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "MIDI Bluetooth > Discussion（iOS 16+ 系统自动重连配对设备）",
+          "start_line": 5,
+          "end_line": 9,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coremidi/midi-bluetooth",
+            "platform": "ios",
+            "title": "MIDI Bluetooth",
+            "local_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/document.md",
+            "sha256": "ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3",
+            "raw_sha256": "4e089953fe61886b72b7eafaffd19fbe65e8acf0d7d99d178326811c18f71271",
+            "raw_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/source.gz",
+            "fetched_at": "2026-09-05T10:19:31.589071+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 37,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 21,
+                "end_line": 22,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Discussion\n\nIn macOS 13 or later and iOS 16 or later, the system automatically reconnects Bluetooth Low Energy (BLE) MIDI peripherals when powered on, if the device supports pairing. Previously, it was necessary to use Audio MIDI Setup to establish BLE MIDI connections.\n\nFor devices that don’t support pairing, [`Core MIDI`](/documentation/CoreMIDI) can enable <doc://com.apple.documentation/documentation/CoreBluetooth> connections for input/output (I/O)."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "GattServer.connect（autoConnect 参数说明）",
+          "start_line": 1899,
+          "end_line": 1924,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 136,
+                "end_line": 189,
+                "truncated": false
+              },
+              {
+                "start_line": 235,
+                "end_line": 236,
+                "truncated": true
+              },
+              {
+                "start_line": 2607,
+                "end_line": 2635,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### connect\n\nconnect(deviceId: string, autoConnect?: boolean): void\n\n调用方充当GATT客户端，发起和远端BLE设备连接，通过参数autoConnect设置是否直接连接到远端设备或者在远端设备可用时自动重连。\n\n* 若要实现在远端设备可用时自动重连（即[autoConnect](#gattsetting)为true），需保证client端[createGattClientDevice](#blecreategattclientdevice-1)发起连接，并设置[autoConnect](#gattsetting)为true。\n* server端可通过订阅[on('BLEConnectionStateChange')](#onbleconnectionstatechange)事件感知连接状态。\n* 当server端想要断开连接时，可主动调用[disconnect](#disconnect)。\n\n起始版本：26.0.0\n\n需要权限：ohos.permission.ACCESS_BLUETOOTH\n\n系统能力：SystemCapability.Communication.Bluetooth.Core\n\n元服务API：从API版本26.0.0开始，该接口支持在元服务中使用。\n\n模型约束：此接口仅可在Stage模型下使用。\n\n参数：  \n\n|参数名|类型|必填|说明|\n|:----------|:------|:-|:-----------------------------------------------------------------------|\n|deviceId|string|是|对端设备的MAC地址，例如：\"XX:XX:XX:XX:XX:XX\"。|\n|autoConnect|boolean|否|是否直接连接到远端设备或者在远端设备可用时自动连接。true表示在远端设备可用时自动连接，false表示直接连接到远端设备。默认值为false。|"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "ble.createGattClientDevice（GattSetting.autoConnect 示例，API 26）",
+          "start_line": 136,
+          "end_line": 146,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 136,
+                "end_line": 189,
+                "truncated": false
+              },
+              {
+                "start_line": 235,
+                "end_line": 236,
+                "truncated": true
+              },
+              {
+                "start_line": 2607,
+                "end_line": 2635,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### ble.createGattClientDevice\n\ncreateGattClientDevice(deviceId: string, setting: GattSetting): GattClientDevice\n\n创建[GattClientDevice](#gattclientdevice)实例，表示GATT连接中的client端，可通过[GattSetting](#gattsetting)设置GATT连接参数。\n\n* 通过该实例可以操作client端行为，如调用[connect](#connect)向对端设备发起连接，调用[getServices](#getservices)获取对端设备支持的所有服务能力。\n* 创建该实例所需要的设备地址表示server端设备。可以通过[ble.startBLEScan](#blestartblescan)或[BleScanner](#blescanner15)的[startScan](#startscan15)接口获取server端设备地址，且需保证server端设备的BLE广播是可连接的。\n* 通过[GattSetting](#gattsetting)设置连接的传输类型transport时，若不清楚设备的传输类型[BluetoothTransport](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-connection#bluetoothtransport)，默认为[TRANSPORT_LE](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-connection#bluetoothtransport)，但不能设置为[TRANSPORT_UNKNOWN](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-connection#bluetoothtransport)（未知的设备传输方式），否则无法成功创建[GattClientDevice](#gattclientdevice)实例。\n\n起始版本：26.0.0"
+        }
+      ],
+      "open_questions": [
+        "iOS 系统自动重连是否仅限 MIDI profile 未确认",
+        "Android 侧 autoConnect 行为未读（connect-gatt-server 指南未入包），无法纳入本假设",
+        "HarmonyOS autoConnect=true 的实际重连时机与耗电行为未验证"
+      ]
+    },
+    {
+      "dimension": "programming_model",
+      "statement": "连接发起角色假设：HarmonyOS 明示两类发起接口——client 端 GattClientDevice.connect()（对端地址在创建实例时固定）与 server 端 GattServer.connect(deviceId, autoConnect)（API 26 起，本机作 GATT server 仍可主动发起）；Android 概述将连接描述为 central 设备发现后连接对端 GATT server，并提及手机可作 GATT server（BluetoothGattServer），但该角色能否主动发起连接未在已读正文说明。双方'本机作为 server 角色发起连接'的能力与 API 形态可能存在差异。",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Roles and responsibilities（central/peripheral、GATT server 角色与 BluetoothGattServer 提及）",
+          "start_line": 80,
+          "end_line": 110,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/ble-overview",
+            "platform": "android",
+            "title": "Bluetooth Low Energy",
+            "local_path": "docs-raw/research/2026-09-06/4d03b0ad4de53cce5fa8e8f7d2580c816f4c912bb7b46e57a703929ef906c15e/294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f/document.md",
+            "sha256": "294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f",
+            "raw_sha256": "dac20834463b0a0eac43ed961ba98f974502431e8726ad1897db76beec803091",
+            "raw_path": "docs-raw/research/2026-09-06/4d03b0ad4de53cce5fa8e8f7d2580c816f4c912bb7b46e57a703929ef906c15e/294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f/source.gz",
+            "fetched_at": "2026-09-05T10:24:14.825262+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 110,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 40,
+                "truncated": false
+              },
+              {
+                "start_line": 41,
+                "end_line": 79,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Roles and responsibilities\n\nWhen a device interacts with a BLE device, roles and responsibilities are\ndivided in two different ways:\n\n* **Central versus peripheral.** This applies to the BLE connection itself—the\n  device in the central role scans, looking for advertisement, and the device in\n  the peripheral role advertises. Two devices that only support the peripheral\n  role can't talk to each other, and neither can two devices that only support\n  the central role.\n* **GATT server versus GATT client.** This determines how the two devices talk\n  to each other after they've established the connection. The device in the\n  client role sends requests for data, and the device in the server role\n  fulfills them.\n\nTo understand the distinction between the central-peripheral and server-client\nrole divisions, consider an example where you have an Android phone and a\nBLE-enabled activity tracker that reports sensor data back to the phone.\n\n* The phone—the *central* device—actively scans for BLE devices. The activity\n  tracker—the *peripheral* device—advertises and waits to receive a request for\n  connection.\n* After the phone and the activity tracker have established a connection, they\n  start transferring GATT metadata to each other. In this case, the app running\n  on the phone sends requests for data, so it acts as the *GATT client*. The\n  activity tracker fulfills those requests, so it acts as the *GATT server*.\n\nAn alternative design of the app might involve the phone playing the GATT server\nrole instead. See\n[`BluetoothGattServer`](https://developer.android.com/reference/android/bluetooth/BluetoothGattServer) for\nmore information."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "GattClientDevice > connect（client 端发起，地址由创建实例指定）",
+          "start_line": 3033,
+          "end_line": 3040,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 136,
+                "end_line": 189,
+                "truncated": false
+              },
+              {
+                "start_line": 235,
+                "end_line": 236,
+                "truncated": true
+              },
+              {
+                "start_line": 2607,
+                "end_line": 2635,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### connect\n\nconnect(): void\n\nclient端主动发起和server蓝牙设备的GATT协议连接。\n\n* 远端设备地址已通过[createGattClientDevice](#blecreategattclientdevice)方法中的deviceId参数指定。\n* client可通过订阅[on('BLEConnectionStateChange')](#onbleconnectionstatechange)事件来感知连接是否成功。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "GattServer.connect（调用方充当 GATT 客户端发起连接，API 26 起）",
+          "start_line": 1899,
+          "end_line": 1909,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 136,
+                "end_line": 189,
+                "truncated": false
+              },
+              {
+                "start_line": 235,
+                "end_line": 236,
+                "truncated": true
+              },
+              {
+                "start_line": 2607,
+                "end_line": 2635,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### connect\n\nconnect(deviceId: string, autoConnect?: boolean): void\n\n调用方充当GATT客户端，发起和远端BLE设备连接，通过参数autoConnect设置是否直接连接到远端设备或者在远端设备可用时自动重连。\n\n* 若要实现在远端设备可用时自动重连（即[autoConnect](#gattsetting)为true），需保证client端[createGattClientDevice](#blecreategattclientdevice-1)发起连接，并设置[autoConnect](#gattsetting)为true。\n* server端可通过订阅[on('BLEConnectionStateChange')](#onbleconnectionstatechange)事件感知连接状态。\n* 当server端想要断开连接时，可主动调用[disconnect](#disconnect)。\n\n起始版本：26.0.0"
+        }
+      ],
+      "open_questions": [
+        "Android BluetoothGattServer 是否支持主动发起连接需读 API 参考确认",
+        "HarmonyOS GattServer.connect 与 GattClientDevice.connect 的适用场景区别",
+        "iOS 端对应能力未读到正文，未纳入本假设"
+      ]
+    },
+    {
+      "dimension": "permissions_privacy",
+      "statement": "权限模型假设：Android 概述要求应用在 manifest 声明多项蓝牙权限后方可使用 BLE API（声明位置为清单）；HarmonyOS 在 connect() 接口级明示需 ohos.permission.ACCESS_BLUETOOTH（权限拒绝报 201，运行时校验）；iOS 已读正文（MIDI Bluetooth）未提及应用侧权限要求（系统自动重连不涉及应用声明）。三平台连接外设所需权限的声明位置、粒度与校验时机可能不同。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "The basics（使用 BLE API 需在 manifest 声明多项权限）",
+          "start_line": 25,
+          "end_line": 39,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/ble-overview",
+            "platform": "android",
+            "title": "Bluetooth Low Energy",
+            "local_path": "docs-raw/research/2026-09-06/4d03b0ad4de53cce5fa8e8f7d2580c816f4c912bb7b46e57a703929ef906c15e/294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f/document.md",
+            "sha256": "294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f",
+            "raw_sha256": "dac20834463b0a0eac43ed961ba98f974502431e8726ad1897db76beec803091",
+            "raw_path": "docs-raw/research/2026-09-06/4d03b0ad4de53cce5fa8e8f7d2580c816f4c912bb7b46e57a703929ef906c15e/294b09396e5cd041a9b75fb637a470d29a0362808b28669e04ed753dc1b80c0f/source.gz",
+            "fetched_at": "2026-09-05T10:24:14.825262+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 110,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 40,
+                "truncated": false
+              },
+              {
+                "start_line": 41,
+                "end_line": 79,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## The basics\n\nFor BLE-enabled devices to transmit data between each other, they must first\nform a channel of communication. Use of the Bluetooth LE APIs requires you to\n[declare several permissions](https://developer.android.com/develop/connectivity/bluetooth/bt-permissions)\nin your manifest file. Once your app has permission to use Bluetooth, your app\nneeds to access the `BluetoothAdapter` and\n[determine if Bluetooth is available on the device](https://developer.android.com/develop/connectivity/bluetooth/setup)\nIf Bluetooth is available, the device will\n[scan for nearby BLE devices](https://developer.android.com/develop/connectivity/bluetooth/ble/find-ble-devices).\nOnce a device is found, the capabilities of the BLE device are discovered by\n[connecting to the GATT server on the BLE device](https://developer.android.com/develop/connectivity/bluetooth/ble/connect-gatt-server).\nOnce a connection is made,\n[data can be transferred with the connected device](https://developer.android.com/develop/connectivity/bluetooth/ble/transfer-ble-data)\nbased on the available services and characteristics."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "MIDI Bluetooth > Discussion（全文未提及应用侧权限要求）",
+          "start_line": 5,
+          "end_line": 17,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coremidi/midi-bluetooth",
+            "platform": "ios",
+            "title": "MIDI Bluetooth",
+            "local_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/document.md",
+            "sha256": "ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3",
+            "raw_sha256": "4e089953fe61886b72b7eafaffd19fbe65e8acf0d7d99d178326811c18f71271",
+            "raw_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/source.gz",
+            "fetched_at": "2026-09-05T10:19:31.589071+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 37,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 21,
+                "end_line": 22,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Discussion\n\nIn macOS 13 or later and iOS 16 or later, the system automatically reconnects Bluetooth Low Energy (BLE) MIDI peripherals when powered on, if the device supports pairing. Previously, it was necessary to use Audio MIDI Setup to establish BLE MIDI connections.\n\nFor devices that don’t support pairing, [`Core MIDI`](/documentation/CoreMIDI) can enable <doc://com.apple.documentation/documentation/CoreBluetooth> connections for input/output (I/O).\n\nThis API enables connection of BLE MIDI peripherals that don’t support pairing using <doc://com.apple.documentation/documentation/CoreBluetooth> with the following steps:\n\n1. Scan for and connect to a BLE MIDI peripheral.\n2. Confirm the peripheral has a BLE MIDI service.\n3. Confirm the BLE MIDI service on the peripheral has a MIDI I/O characteristic for the MIDI service.\n\nOnce a BLE MIDI peripheral connects — and you confirm that it possess both the BLE MIDI service and BLE MIDI I/O characteristic — call [`MIDIBluetoothDriverActivateAllConnections()`](/documentation/CoreMIDI/MIDIBluetoothDriverActivateAllConnections()) to have [`Core MIDI`](/documentation/CoreMIDI) enable I/O on those connections."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "GattClientDevice > connect（需要 ohos.permission.ACCESS_BLUETOOTH，错误码 201）",
+          "start_line": 3033,
+          "end_line": 3060,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble",
+            "platform": "harmonyos",
+            "title": "@ohos.bluetooth.ble (蓝牙ble模块)",
+            "local_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/document.md",
+            "sha256": "f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f",
+            "raw_sha256": "ebfa16f13e3f7f0a770d008a84e0d0cfa8dba3a208bb2e93461ee7cb1d89beed",
+            "raw_path": "docs-raw/research/2026-09-06/6e6414130ed086b50e471ca1a481b91cffb004f30cc485edfc18ac1a40f8f8d5/f1d80db2df10406273b22c90053098e4370a49f6924dd1618d93759c7d19ce2f/source.gz",
+            "fetched_at": "2026-09-05T09:34:21.800954+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 6077,
+            "suggested_sections": [
+              {
+                "start_line": 136,
+                "end_line": 189,
+                "truncated": false
+              },
+              {
+                "start_line": 235,
+                "end_line": 236,
+                "truncated": true
+              },
+              {
+                "start_line": 2607,
+                "end_line": 2635,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### connect\n\nconnect(): void\n\nclient端主动发起和server蓝牙设备的GATT协议连接。\n\n* 远端设备地址已通过[createGattClientDevice](#blecreategattclientdevice)方法中的deviceId参数指定。\n* client可通过订阅[on('BLEConnectionStateChange')](#onbleconnectionstatechange)事件来感知连接是否成功。\n\n需要权限：ohos.permission.ACCESS_BLUETOOTH\n\n元服务API：从API version 12开始，该接口支持在元服务中使用。\n\n系统能力：SystemCapability.Communication.Bluetooth.Core\n\n模型约束：此接口仅可在Stage模型下使用。\n\n错误码：\n\n以下错误码的详细介绍请参见[通用错误码说明文档](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/errorcode-universal)和[蓝牙服务子系统错误码](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/errorcode-bluetoothmanager)。  \n\n|错误码ID|错误信息|\n|:------|:------------------------|\n|201|Permission denied.|\n|801|Capability not supported.|\n|2900001|Service stopped.|\n|2900003|Bluetooth disabled.|\n|2900099|Operation failed.|"
+        }
+      ],
+      "open_questions": [
+        "Android 具体权限清单（如 BLUETOOTH_CONNECT 运行时权限）正文未读",
+        "iOS Core Bluetooth 权限/授权要求未读，不能断言 iOS 无权限要求",
+        "HarmonyOS ACCESS_BLUETOOTH 的申请与授权方式（安装授予或用户授权）未确认"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "Android：connect-gatt-server 指南与 BluetoothGatt/BluetoothDevice.connectGatt API 参考未入冻结源，连接 API 形态、autoConnect、连接参数（transport/PHY）均未核实。",
+    "iOS：Core Bluetooth（CBCentralManager.connect）正文未入冻结源，通用 BLE 外设连接仅能由 MIDI 场景间接推断。",
+    "三平台最新正式版基线未固定（version_baseline unresolved），已读快照与当前手机系统/API Level 对应关系未核实。",
+    "连接数量上限、超时、后台连接限制、断连重试策略在已读正文均未覆盖。",
+    "包内 android-2（Cross-Device SDK）与 harmonyos-2（碰一碰）源与本节点范围（与外设建立 BLE 连接）不直接相关，未用于结论。"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "Android 连接 API 与 iOS Core Bluetooth 核心正文缺失，当前映射依赖概述与 MIDI 场景推断，属高风险映射；HarmonyOS 已有接口级证据但 API 26 发行版本与行为待核实。为关键缺口，精研应优先补齐两平台正文并固定基线。"
+  }
+}

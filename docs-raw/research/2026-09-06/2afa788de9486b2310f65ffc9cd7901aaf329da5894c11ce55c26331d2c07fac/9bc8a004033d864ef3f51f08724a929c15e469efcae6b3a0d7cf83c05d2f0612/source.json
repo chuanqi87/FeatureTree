@@ -1,0 +1,13 @@
+{
+  "id": "2afa788de9486b2310f65ffc9cd7901aaf329da5894c11ce55c26331d2c07fac",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/use-napi-asynchronous-task",
+  "platform": "harmonyos",
+  "title": "使用Node-API接口进行异步任务开发",
+  "local_path": "docs-raw/research/2026-09-06/2afa788de9486b2310f65ffc9cd7901aaf329da5894c11ce55c26331d2c07fac/9bc8a004033d864ef3f51f08724a929c15e469efcae6b3a0d7cf83c05d2f0612/document.md",
+  "sha256": "9bc8a004033d864ef3f51f08724a929c15e469efcae6b3a0d7cf83c05d2f0612",
+  "raw_sha256": "18d32bb0f55b038c001c86e85dd8ad60083e083544a0c66172e29ed95cc2911f",
+  "raw_path": "docs-raw/research/2026-09-06/2afa788de9486b2310f65ffc9cd7901aaf329da5894c11ce55c26331d2c07fac/9bc8a004033d864ef3f51f08724a929c15e469efcae6b3a0d7cf83c05d2f0612/source.gz",
+  "fetched_at": "2026-09-05T10:25:03.303253+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "6170a57b92e45c73a1b02ce830f3648b5c24eaa0bb60b1863d68e9ac2082f34f",
+  "url": "https://developer.apple.com/documentation/networkextension/wi-fi-configuration",
+  "platform": "ios",
+  "title": "Wi-Fi configuration",
+  "local_path": "docs-raw/research/2026-09-06/6170a57b92e45c73a1b02ce830f3648b5c24eaa0bb60b1863d68e9ac2082f34f/9ca92a3b60bee13681ff3b9dccd2c6da4540df6d3f3b73d28f4a6b17b41280f3/document.md",
+  "sha256": "9ca92a3b60bee13681ff3b9dccd2c6da4540df6d3f3b73d28f4a6b17b41280f3",
+  "raw_sha256": "efb2f421d64a37617ec7d4e98de850c9f616cc4bf6a6e47ca7deae60d39e970c",
+  "raw_path": "docs-raw/research/2026-09-06/6170a57b92e45c73a1b02ce830f3648b5c24eaa0bb60b1863d68e9ac2082f34f/9ca92a3b60bee13681ff3b9dccd2c6da4540df6d3f3b73d28f4a6b17b41280f3/source.gz",
+  "fetched_at": "2026-09-05T10:24:25.793005+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

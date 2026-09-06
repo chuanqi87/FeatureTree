@@ -1,0 +1,13 @@
+{
+  "id": "ca37a23567adacb096f41c96a6f44ac235d5b104c00c82da4dc02d4c378a097d",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-usb-deprecated",
+  "platform": "harmonyos",
+  "title": "@ohos.usb (USB管理)",
+  "local_path": "docs-raw/research/2026-09-06/ca37a23567adacb096f41c96a6f44ac235d5b104c00c82da4dc02d4c378a097d/b521b4bd0e2465c09f9e47bb1b168f3d716676744c651cd34d89cec549c8ce26/document.md",
+  "sha256": "b521b4bd0e2465c09f9e47bb1b168f3d716676744c651cd34d89cec549c8ce26",
+  "raw_sha256": "3dbe94eb50d8744952bf70fae54232d87d79b1e45bb0e26386caf51a8160c0a0",
+  "raw_path": "docs-raw/research/2026-09-06/ca37a23567adacb096f41c96a6f44ac235d5b104c00c82da4dc02d4c378a097d/b521b4bd0e2465c09f9e47bb1b168f3d716676744c651cd34d89cec549c8ce26/source.gz",
+  "fetched_at": "2026-09-05T10:28:04.426831+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

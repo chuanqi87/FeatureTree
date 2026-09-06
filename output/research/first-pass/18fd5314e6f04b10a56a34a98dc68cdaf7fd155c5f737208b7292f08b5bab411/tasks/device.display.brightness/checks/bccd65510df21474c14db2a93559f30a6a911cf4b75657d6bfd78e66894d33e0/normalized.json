@@ -1,0 +1,772 @@
+{
+  "task_id": "66c5cd3d8fc44dde9e5b950a143f69232bfe062956f61373dd5c5adbdd84b31b",
+  "feature_id": "device.display.brightness",
+  "stage": "first_pass",
+  "summary": "Android 与 HarmonyOS 读到窗口级亮度机制：Camera2 屏幕闪光指南用 WindowManager.LayoutParams.screenBrightness 读前值、设 1f 并恢复；鸿蒙长视频指南用 Window.setWindowBrightness()（示例值域 0.0–1.0），HDR Vivid FAQ 提 XComponent hdrBrightness()。iOS 两篇冻结来源均为图像处理与工具调用示例，无屏幕亮度证据，记 unknown。三平台均未读到系统级亮度查询/建议 API 正文；版本基线未固定，全部 low。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "屏幕闪光指南 'Maximize screen brightness' 节明示：修改屏幕亮度的一种直接方式是设置 Activity Window 的 WindowManager.LayoutParams.screenBrightness；Kotlin/Java 示例先读当前值、设为 1f、结束时恢复。另一篇低光增强 AE 文档只涉及相机预览流亮度，与屏幕亮度无关。",
+      "version_scope": "未固定基线；screenBrightness 在本文未标注 API Level（同篇相机 AE 模式标注 API 28+/Android 15，但属相机域）。快照获取于 2026-09-05，最新正式版适用性未核实。",
+      "conditions": [
+        "窗口级机制：通过 Activity Window 的 WindowManager.LayoutParams 生效，作用域为该窗口而非系统全局。",
+        "指南场景为前置相机屏幕闪光：白色覆盖层加亮度最大化，拍摄后由应用负责恢复原值。",
+        "示例需持有 Activity/Window 引用，读取前值 screenBrightness 后写入 1f 并回写 attributes。"
+      ],
+      "gaps": [
+        "未读到系统级亮度查询/建议 API 正文（如 Settings.System.SCREEN_BRIGHTNESS、BrightnessInfo/BrightnessConfiguration），节点定义的'查询或建议'范围未覆盖。",
+        "screenBrightness 合法范围、默认值 -1.0f 语义及与系统自动亮度的交互未在本文声明，需读 WindowManager.LayoutParams API 参考。",
+        "android-1（低光增强 AE）仅相机预览亮度，与本节点无关；Android 有效绑定仅 1 篇。",
+        "启动日最新正式版与 API Level 适用性未核实。"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "Screen flash > General workflow step 1 (Screen brightness is maximized)",
+          "start_line": 29,
+          "end_line": 33,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/media/camera/camera2/screen-flash-implementation-guidelines",
+            "platform": "android",
+            "title": "Screen flash",
+            "local_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/document.md",
+            "sha256": "27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08",
+            "raw_sha256": "47acc3811342c89d52b1fcbedf326385d69f054fb7cd69f2601e187e5f7dc512",
+            "raw_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/source.gz",
+            "fetched_at": "2026-09-05T10:33:33.732948+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 739,
+            "suggested_sections": [
+              {
+                "start_line": 14,
+                "end_line": 47,
+                "truncated": false
+              },
+              {
+                "start_line": 73,
+                "end_line": 79,
+                "truncated": false
+              },
+              {
+                "start_line": 80,
+                "end_line": 104,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "1. Apply UI changes required for screen flash, which can provide sufficient\n   light for taking photo using the device screen. For general use cases, Google\n   suggests the following UI changes, as used in our tests:\n   * App screen is covered with a white color overlay.\n   * Screen brightness is maximized."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Camera2 sample codes > Maximize screen brightness (screenBrightness WindowManager parameter)",
+          "start_line": 73,
+          "end_line": 78,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/media/camera/camera2/screen-flash-implementation-guidelines",
+            "platform": "android",
+            "title": "Screen flash",
+            "local_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/document.md",
+            "sha256": "27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08",
+            "raw_sha256": "47acc3811342c89d52b1fcbedf326385d69f054fb7cd69f2601e187e5f7dc512",
+            "raw_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/source.gz",
+            "fetched_at": "2026-09-05T10:33:33.732948+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 739,
+            "suggested_sections": [
+              {
+                "start_line": 14,
+                "end_line": 47,
+                "truncated": false
+              },
+              {
+                "start_line": 73,
+                "end_line": 79,
+                "truncated": false
+              },
+              {
+                "start_line": 80,
+                "end_line": 104,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Maximize screen brightness\n\nThere are multiple ways to change screen brightness in an Android app. One\ndirect way is to change the\n[screenBrightness](https://developer.android.com/media/camera/camera2/(/reference/android/view/WindowManager.LayoutParams#screenBrightness)) WindowManager parameter in the\n[Activity Window](https://developer.android.com/reference/android/app/Activity#getWindow()) reference."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Maximize screen brightness Kotlin sample (read previousBrightness, set 1f, restore)",
+          "start_line": 83,
+          "end_line": 102,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/media/camera/camera2/screen-flash-implementation-guidelines",
+            "platform": "android",
+            "title": "Screen flash",
+            "local_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/document.md",
+            "sha256": "27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08",
+            "raw_sha256": "47acc3811342c89d52b1fcbedf326385d69f054fb7cd69f2601e187e5f7dc512",
+            "raw_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/source.gz",
+            "fetched_at": "2026-09-05T10:33:33.732948+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 739,
+            "suggested_sections": [
+              {
+                "start_line": 14,
+                "end_line": 47,
+                "truncated": false
+              },
+              {
+                "start_line": 73,
+                "end_line": 79,
+                "truncated": false
+              },
+              {
+                "start_line": 80,
+                "end_line": 104,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "private var previousBrightness: Float = -1.0f\n\nprivate fun maximizeScreenBrightness() {\n    activity?.window?.let { window ->\n        window.attributes?.apply {\n            previousBrightness = screenBrightness\n            screenBrightness = 1f\n            window.attributes = this\n        }\n    }\n}\n\nprivate fun restoreScreenBrightness() {\n    activity?.window?.let { window ->\n        window.attributes?.apply {\n            screenBrightness = previousBrightness\n            window.attributes = this\n        }\n    }\n}"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Low Light Boost AE Mode intro (camera preview stream brightness, not screen)",
+          "start_line": 3,
+          "end_line": 6,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/media/camera/lowlight/low-light-boost-ae",
+            "platform": "android",
+            "title": "Low Light Boost Auto Exposure Mode",
+            "local_path": "docs-raw/research/2026-09-06/0bb242e2627c1b93ce761cd0bf35015290b55bdabf60335d2f2e84112a7e1bda/c0aeded3b109552f9a7e9c08fdd9ec613f5689e68f642d0f0e1d2920aad56f19/document.md",
+            "sha256": "c0aeded3b109552f9a7e9c08fdd9ec613f5689e68f642d0f0e1d2920aad56f19",
+            "raw_sha256": "b388cdd7a2e1f629fcd1e2089f9135a0dac4154d0ece3b96741090a792fa3463",
+            "raw_path": "docs-raw/research/2026-09-06/0bb242e2627c1b93ce761cd0bf35015290b55bdabf60335d2f2e84112a7e1bda/c0aeded3b109552f9a7e9c08fdd9ec613f5689e68f642d0f0e1d2920aad56f19/source.gz",
+            "fetched_at": "2026-09-05T10:33:37.142224+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 206,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 3,
+                "truncated": true
+              },
+              {
+                "start_line": 33,
+                "end_line": 45,
+                "truncated": false
+              },
+              {
+                "start_line": 46,
+                "end_line": 61,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Android 15 introduces *Low Light Boost Auto Exposure (AE) Mode*, a new\nauto-exposure mode available to both [Camera 2](https://developer.android.com/media/camera/camera2) and the [night mode camera\nextension](https://developer.android.com/reference/android/hardware/camera2/CameraExtensionCharacteristics#EXTENSION_NIGHT). Low Light Boost AE Mode automatically adjusts the brightness of\nthe Preview stream in low-light conditions. This is different from how the night"
+        }
+      ],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "机制可静态判读；窗口亮度覆盖在真机上与系统自动亮度、系统设置的交互及恢复行为未评估，本轮仅分类不设计用例。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "unknown",
+      "observation": "两篇冻结来源中的 brightness 分别是 vImage gamma 曲线调整图像像素亮度/对比度、FoundationModels 工具调用示例里智能灯 0–100 参数，均非屏幕亮度控制；未读到任何 iOS 屏幕亮度 API 正文，本轮无法建立判断。",
+      "version_scope": "无屏幕亮度相关正文可判版本；两篇来源（Accelerate/vImage 示例、Evaluations 指南）均不含本节点的版本或 iOS 适用性信息。",
+      "conditions": [
+        "无相关适用条件可记录：已读两篇来源均为图像处理与模型工具调用示例，不涉及屏幕亮度。"
+      ],
+      "gaps": [
+        "冻结来源中无 iOS 屏幕亮度 API 正文（如 UIScreen.brightness 相关页面），无法初判支持形态；未检索到不等于不支持。",
+        "需检索 Apple 官方目录中屏幕亮度符号并逐符号核对 iOS 适用性与最低系统版本。",
+        "已读来源仅证明 brightness 一词出现在图像处理与工具调用语境，不构成屏幕亮度证据。"
+      ],
+      "confidence": "low",
+      "evidence_strength": "missing",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "Adjusting the brightness and contrast of an image > Overview (vImage gamma response curve, image pixel brightness)",
+          "start_line": 5,
+          "end_line": 11,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/accelerate/adjusting-the-brightness-and-contrast-of-an-image",
+            "platform": "ios",
+            "title": "Adjusting the brightness and contrast of an image",
+            "local_path": "docs-raw/research/2026-09-06/eb336a2527c55e9a552382b4e51bcae718125697f6ca878f090ca8167ab25c9e/b51c951c444837df1f1b77cf912bf6165a0a6dd585e65110033dc136847f28d8/document.md",
+            "sha256": "b51c951c444837df1f1b77cf912bf6165a0a6dd585e65110033dc136847f28d8",
+            "raw_sha256": "6dddeced8fa2927f8eb93ca7d720da5c3a31d424ed2a1f352050d180348901ae",
+            "raw_path": "docs-raw/research/2026-09-06/eb336a2527c55e9a552382b4e51bcae718125697f6ca878f090ca8167ab25c9e/b51c951c444837df1f1b77cf912bf6165a0a6dd585e65110033dc136847f28d8/source.gz",
+            "fetched_at": "2026-09-05T10:15:58.294864+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 212,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 12,
+                "truncated": false
+              },
+              {
+                "start_line": 13,
+                "end_line": 28,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Overview\n\nThis sample code project uses the vImage piecewise gamma function to adjust the response curve (that is, the value of an output pixel based on the value of the corresponding input pixel) of an 8-bit RGB image. Changing the shape of the response curve changes the brightness and contrast of an image.\n\nYou can use a piecewise gamma function to apply either a linear or an exponential response curve to pixels in an image based on their value.\n\nThis app displays a sample image and uses a [SwiftUI](https://developer.apple.com/xcode/swiftui/) <doc://com.apple.documentation/documentation/SwiftUI/Picker> control to apply different preset linear (labeled L1 to L4) and exponential (labeled E1 to E3) response curves. This sample code project demonstrates how different response curves affect an image by changing its brightness and contrast."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Define your tools > SetLights example (smart-light brightness 0-100 argument)",
+          "start_line": 17,
+          "end_line": 33,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/evaluations/evaluating-tool-calling-behavior",
+            "platform": "ios",
+            "title": "Evaluating tool-calling behavior",
+            "local_path": "docs-raw/research/2026-09-06/5caf4a06ebfd14570b6397513fa108ffbf728f3d9b8ad5feb862c70e73c8e123/68d15e230a5de6b5f4b71fd99ad157b32513454dff03aa2fc6b1968d9c746110/document.md",
+            "sha256": "68d15e230a5de6b5f4b71fd99ad157b32513454dff03aa2fc6b1968d9c746110",
+            "raw_sha256": "e4a1751f5930cf794a0fc71f1793929b0b3806b14fa96e63b0d19f16873940cf",
+            "raw_path": "docs-raw/research/2026-09-06/5caf4a06ebfd14570b6397513fa108ffbf728f3d9b8ad5feb862c70e73c8e123/68d15e230a5de6b5f4b71fd99ad157b32513454dff03aa2fc6b1968d9c746110/source.gz",
+            "fetched_at": "2026-09-05T10:21:55.948272+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 406,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 6,
+                "truncated": true
+              },
+              {
+                "start_line": 13,
+                "end_line": 48,
+                "truncated": false
+              },
+              {
+                "start_line": 49,
+                "end_line": 124,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "This example defines a home automation tool that takes a string and a numeric argument:\n\n```swift\nimport FoundationModels\n\nstruct SetLights: Tool {\n    let name = \"set_lights\"\n    let description = \"Controls lights in a room. Brightness 0 means off, 100 means full.\"\n\n    // The arguments the model passes to the tool.\n    @Generable\n    struct Arguments {\n        @Guide(description: \"Which room, e.g. 'living room', 'bedroom', 'all'\")\n        var room: String\n        @Guide(description: \"Brightness from 0 (off) to 100 (full)\")\n        var brightness: Int\n    }"
+        }
+      ],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "无 iOS 屏幕亮度相关证据，真机需求无从评估。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "长视频指南'亮度控制'章给出 Slider+PanGesture 手势调亮度的完整示例：取主窗口后 await setWindowBrightness(value)，值 clamp 0.0–1.0；HDR Vivid 指南 FAQ 另给出 XComponent hdrBrightness()（锚点 hdrbrightness20）调 HDR 视频组件亮度并回链该章。",
+      "version_scope": "未固定基线；setWindowBrightness 链接锚点为 setwindowbrightness9、hdrBrightness 锚点为 hdrbrightness20（链接示意 API 9/20，正文未明示版本），HarmonyOS 具体发行版与 SDK 版本未核实。快照获取于 2026-09-04。",
+      "conditions": [
+        "窗口级机制：经 windowStage.getMainWindowSync() 获取主窗口后 await 调用 setWindowBrightness()。",
+        "示例为横屏视频播放手势场景，Slider min 0/max 1，值 clamp 到 0.0–1.0。",
+        "hdrBrightness() 为 XComponent 组件级 HDR 视频播放亮度，仅 FAQ 一句话提及。"
+      ],
+      "gaps": [
+        "未读 @ohos.window setWindowBrightness 的 API 参考正文（权限、错误码、参数范围、查询接口如 getWindowBrightness）。",
+        "系统级亮度设置/查询接口未见正文，节点'查询或建议'范围未覆盖；指南示例仅窗口级。",
+        "hdrBrightness() 仅 FAQ 一句话与锚点，未读 XComponent 参考正文核实参数与版本。",
+        "HarmonyOS 具体发行版与 SDK 版本未核实，锚点 API 9/20 不能替代版本说明。"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "亮度控制 > 场景描述/实现原理（Slider+PanGesture 调用 setWindowBrightness）",
+          "start_line": 23,
+          "end_line": 33,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/avplayer-long-video",
+            "platform": "harmonyos",
+            "title": "基于AVPlayer播放长视频实践",
+            "local_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/document.md",
+            "sha256": "f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e",
+            "raw_sha256": "d883cfb5788574e6af5df27493675510596f2277ce13c6cd266cbd58b4fa8b18",
+            "raw_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 883,
+            "suggested_sections": [
+              {
+                "start_line": 35,
+                "end_line": 127,
+                "truncated": false
+              },
+              {
+                "start_line": 369,
+                "end_line": 459,
+                "truncated": false
+              },
+              {
+                "start_line": 472,
+                "end_line": 500,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### 亮度控制\n\n#### 场景描述\n\n用户在横屏播放视频时可通过手势滑动调节屏幕亮度。\n\n![](https://media:201788198737754682)  \n\n#### 实现原理\n\n使用[Slider组件](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-slider)设置亮度面板，绑定[PanGesture](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-gestures-pangesture)滑动手势事件，当Pan手势在移动过程中调用[setWindowBrightness()](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-window-window#setwindowbrightness9)方法，实现上滑增加亮度、下滑减少亮度的功能。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "亮度控制 > 开发步骤1 Slider(min 0/max 1) 与 await mainWin.setWindowBrightness(value)",
+          "start_line": 42,
+          "end_line": 65,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/avplayer-long-video",
+            "platform": "harmonyos",
+            "title": "基于AVPlayer播放长视频实践",
+            "local_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/document.md",
+            "sha256": "f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e",
+            "raw_sha256": "d883cfb5788574e6af5df27493675510596f2277ce13c6cd266cbd58b4fa8b18",
+            "raw_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 883,
+            "suggested_sections": [
+              {
+                "start_line": 35,
+                "end_line": 127,
+                "truncated": false
+              },
+              {
+                "start_line": 369,
+                "end_line": 459,
+                "truncated": false
+              },
+              {
+                "start_line": 472,
+                "end_line": 500,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "       Slider({\n         value: this.screenBrightness,\n         min: 0,\n         max: 1,\n         step: 0.05,\n         style: SliderStyle.NONE,\n         direction: Axis.Vertical,\n         reverse: true\n       })\n         .visibility(this.visible ? Visibility.Visible : Visibility.Hidden)\n         .height(160)\n         .selectedColor(Color.White)\n         .trackColor(Color.Black)\n         .trackThickness(40)\n         .onChange(async (value: number) => {\n           this.screenBrightness = value;\n           let windowStage: window.WindowStage = AppStorage.get(KeyConstants.KEY_WINDOW_STAGE) as window.WindowStage;\n           try {\n             let mainWin: window.Window = windowStage.getMainWindowSync();\n             await mainWin.setWindowBrightness(value);\n           } catch (exception) {\n             Logger.error(TAG, `getMainWindowSync failed: code: ${exception.code}, message: ${exception.message}`);\n           }\n         })"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "亮度控制 > 开发步骤2 PanGesture 手势与 0.0–1.0 clamp",
+          "start_line": 87,
+          "end_line": 102,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/avplayer-long-video",
+            "platform": "harmonyos",
+            "title": "基于AVPlayer播放长视频实践",
+            "local_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/document.md",
+            "sha256": "f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e",
+            "raw_sha256": "d883cfb5788574e6af5df27493675510596f2277ce13c6cd266cbd58b4fa8b18",
+            "raw_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 883,
+            "suggested_sections": [
+              {
+                "start_line": 35,
+                "end_line": 127,
+                "truncated": false
+              },
+              {
+                "start_line": 369,
+                "end_line": 459,
+                "truncated": false
+              },
+              {
+                "start_line": 472,
+                "end_line": 500,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "2. 在视频播放界面绑定PanGesture滑动手势事件，设置触发条件为仅在屏幕右侧区域且垂直方向滑动Pan手势时，调用setWindowBrightness()方法，实现亮度的调节。此处setScreenBrightness()为setWindowBrightness()的封装。\n\n   ```\n   private processGesture(event: GestureEvent) {\n     if (event.fingerList.length === 0) {\n       return;\n     }\n     if (event.fingerList[0].globalX > (this.getUIContext().px2vp(this.screenWidth / 2))) {\n       if (this.isInputtingBulletComment) {\n         return;\n       }\n       this.visible = true;\n       let curBrightness = this.screenBrightness - this.getUIContext().vp2px(event.offsetY) / this.screenHeight;\n       curBrightness = this.getValidValue(curBrightness, 0.0, 1.0);\n       this.screenBrightness = curBrightness;\n       this.setScreenBrightness(this.screenBrightness);"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "常见问题 > 在播放HDR Vivid视频时如何调节视频的亮度（hdrBrightness() 方案）",
+          "start_line": 663,
+          "end_line": 667,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hdr-vivid-video-play-recording",
+            "platform": "harmonyos",
+            "title": "HDR Vivid视频播放与录制开发实践",
+            "local_path": "docs-raw/research/2026-09-06/b6b903dd4466bcf788cde0673a03db3cc306b94535b74796bc14949d5929d530/7caea65afd493b166039cba8ca693b8cfeceda0c16e7273f48fb1f2a0644a82b/document.md",
+            "sha256": "7caea65afd493b166039cba8ca693b8cfeceda0c16e7273f48fb1f2a0644a82b",
+            "raw_sha256": "adb1e54c037cf05a5134a6c8da7466e601688db4b6586bd8beeb4a5bfcfdf9d6",
+            "raw_path": "docs-raw/research/2026-09-06/b6b903dd4466bcf788cde0673a03db3cc306b94535b74796bc14949d5929d530/7caea65afd493b166039cba8ca693b8cfeceda0c16e7273f48fb1f2a0644a82b/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 675,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 17,
+                "truncated": false
+              },
+              {
+                "start_line": 18,
+                "end_line": 19,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 在播放HDR Vivid视频时，如何调节视频的亮度\n\n方案1：可以参考文档使用[hdrBrightness()](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-xcomponent#hdrbrightness20)实现用于调整组件播放HDR视频的亮度。\n\n方案2：参考[基于AVPlayer播放长视频实践](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/avplayer-long-video)中[亮度控制](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/avplayer-long-video#亮度控制)章节。  "
+        }
+      ],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "机制可静态判读；真机上窗口亮度与系统自动亮度交互、HDR 场景下 hdrBrightness 实际效果未评估，本轮不设计用例。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "programming_model",
+      "statement": "Android 与 HarmonyOS 均提供应用可用的窗口级亮度设置，但接口形态不同：Android 为 Activity Window 的 WindowManager.LayoutParams.screenBrightness 属性（赋值并回写 attributes，可读回前值）；HarmonyOS 为 window.Window 的 setWindowBrightness() 异步方法。iOS 侧无证据，不参与本假设。",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "Maximize screen brightness (screenBrightness WindowManager parameter in Activity Window)",
+          "start_line": 73,
+          "end_line": 78,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/media/camera/camera2/screen-flash-implementation-guidelines",
+            "platform": "android",
+            "title": "Screen flash",
+            "local_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/document.md",
+            "sha256": "27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08",
+            "raw_sha256": "47acc3811342c89d52b1fcbedf326385d69f054fb7cd69f2601e187e5f7dc512",
+            "raw_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/source.gz",
+            "fetched_at": "2026-09-05T10:33:33.732948+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 739,
+            "suggested_sections": [
+              {
+                "start_line": 14,
+                "end_line": 47,
+                "truncated": false
+              },
+              {
+                "start_line": 73,
+                "end_line": 79,
+                "truncated": false
+              },
+              {
+                "start_line": 80,
+                "end_line": 104,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Maximize screen brightness\n\nThere are multiple ways to change screen brightness in an Android app. One\ndirect way is to change the\n[screenBrightness](https://developer.android.com/media/camera/camera2/(/reference/android/view/WindowManager.LayoutParams#screenBrightness)) WindowManager parameter in the\n[Activity Window](https://developer.android.com/reference/android/app/Activity#getWindow()) reference."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Kotlin sample (previousBrightness = screenBrightness; screenBrightness = 1f)",
+          "start_line": 83,
+          "end_line": 102,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/media/camera/camera2/screen-flash-implementation-guidelines",
+            "platform": "android",
+            "title": "Screen flash",
+            "local_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/document.md",
+            "sha256": "27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08",
+            "raw_sha256": "47acc3811342c89d52b1fcbedf326385d69f054fb7cd69f2601e187e5f7dc512",
+            "raw_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/source.gz",
+            "fetched_at": "2026-09-05T10:33:33.732948+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 739,
+            "suggested_sections": [
+              {
+                "start_line": 14,
+                "end_line": 47,
+                "truncated": false
+              },
+              {
+                "start_line": 73,
+                "end_line": 79,
+                "truncated": false
+              },
+              {
+                "start_line": 80,
+                "end_line": 104,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "private var previousBrightness: Float = -1.0f\n\nprivate fun maximizeScreenBrightness() {\n    activity?.window?.let { window ->\n        window.attributes?.apply {\n            previousBrightness = screenBrightness\n            screenBrightness = 1f\n            window.attributes = this\n        }\n    }\n}\n\nprivate fun restoreScreenBrightness() {\n    activity?.window?.let { window ->\n        window.attributes?.apply {\n            screenBrightness = previousBrightness\n            window.attributes = this\n        }\n    }\n}"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "亮度控制 > 实现原理（调用 setWindowBrightness() 方法）",
+          "start_line": 31,
+          "end_line": 33,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/avplayer-long-video",
+            "platform": "harmonyos",
+            "title": "基于AVPlayer播放长视频实践",
+            "local_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/document.md",
+            "sha256": "f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e",
+            "raw_sha256": "d883cfb5788574e6af5df27493675510596f2277ce13c6cd266cbd58b4fa8b18",
+            "raw_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 883,
+            "suggested_sections": [
+              {
+                "start_line": 35,
+                "end_line": 127,
+                "truncated": false
+              },
+              {
+                "start_line": 369,
+                "end_line": 459,
+                "truncated": false
+              },
+              {
+                "start_line": 472,
+                "end_line": 500,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### 实现原理\n\n使用[Slider组件](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-slider)设置亮度面板，绑定[PanGesture](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-gestures-pangesture)滑动手势事件，当Pan手势在移动过程中调用[setWindowBrightness()](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-window-window#setwindowbrightness9)方法，实现上滑增加亮度、下滑减少亮度的功能。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "开发步骤1（await mainWin.setWindowBrightness(value)）",
+          "start_line": 56,
+          "end_line": 65,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/avplayer-long-video",
+            "platform": "harmonyos",
+            "title": "基于AVPlayer播放长视频实践",
+            "local_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/document.md",
+            "sha256": "f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e",
+            "raw_sha256": "d883cfb5788574e6af5df27493675510596f2277ce13c6cd266cbd58b4fa8b18",
+            "raw_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 883,
+            "suggested_sections": [
+              {
+                "start_line": 35,
+                "end_line": 127,
+                "truncated": false
+              },
+              {
+                "start_line": 369,
+                "end_line": 459,
+                "truncated": false
+              },
+              {
+                "start_line": 472,
+                "end_line": 500,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "         .onChange(async (value: number) => {\n           this.screenBrightness = value;\n           let windowStage: window.WindowStage = AppStorage.get(KeyConstants.KEY_WINDOW_STAGE) as window.WindowStage;\n           try {\n             let mainWin: window.Window = windowStage.getMainWindowSync();\n             await mainWin.setWindowBrightness(value);\n           } catch (exception) {\n             Logger.error(TAG, `getMainWindowSync failed: code: ${exception.code}, message: ${exception.message}`);\n           }\n         })"
+        }
+      ],
+      "open_questions": [
+        "两者作用域是否严格等价（单窗口覆盖 vs 影响系统亮度）需读各自 API 参考核实。",
+        "Android 属性默认值 -1 语义与 HarmonyOS 未设置态语义待核。",
+        "iOS 对应机制（如 UIScreen 亮度属性）缺失，待补 Apple 官方正文后才能扩展为三方比较。"
+      ]
+    },
+    {
+      "dimension": "limits_precision",
+      "statement": "HarmonyOS 指南明示亮度取值范围 0.0–1.0（Slider min 0/max 1，getValidValue clamp 0.0–1.0）；Android 指南仅示例 screenBrightness = 1f 与恢复前值（初始 -1.0f），未声明合法范围与精度。两侧范围/精度语义是否一致未经 API 参考核实。",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "开发步骤1 Slider({min: 0, max: 1})",
+          "start_line": 42,
+          "end_line": 46,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/avplayer-long-video",
+            "platform": "harmonyos",
+            "title": "基于AVPlayer播放长视频实践",
+            "local_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/document.md",
+            "sha256": "f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e",
+            "raw_sha256": "d883cfb5788574e6af5df27493675510596f2277ce13c6cd266cbd58b4fa8b18",
+            "raw_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 883,
+            "suggested_sections": [
+              {
+                "start_line": 35,
+                "end_line": 127,
+                "truncated": false
+              },
+              {
+                "start_line": 369,
+                "end_line": 459,
+                "truncated": false
+              },
+              {
+                "start_line": 472,
+                "end_line": 500,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "       Slider({\n         value: this.screenBrightness,\n         min: 0,\n         max: 1,\n         step: 0.05,"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "开发步骤2（getValidValue(curBrightness, 0.0, 1.0)）",
+          "start_line": 99,
+          "end_line": 102,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/avplayer-long-video",
+            "platform": "harmonyos",
+            "title": "基于AVPlayer播放长视频实践",
+            "local_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/document.md",
+            "sha256": "f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e",
+            "raw_sha256": "d883cfb5788574e6af5df27493675510596f2277ce13c6cd266cbd58b4fa8b18",
+            "raw_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 883,
+            "suggested_sections": [
+              {
+                "start_line": 35,
+                "end_line": 127,
+                "truncated": false
+              },
+              {
+                "start_line": 369,
+                "end_line": 459,
+                "truncated": false
+              },
+              {
+                "start_line": 472,
+                "end_line": 500,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "       let curBrightness = this.screenBrightness - this.getUIContext().vp2px(event.offsetY) / this.screenHeight;\n       curBrightness = this.getValidValue(curBrightness, 0.0, 1.0);\n       this.screenBrightness = curBrightness;\n       this.setScreenBrightness(this.screenBrightness);"
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Kotlin sample（previousBrightness: Float = -1.0f; screenBrightness = 1f）",
+          "start_line": 83,
+          "end_line": 102,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/media/camera/camera2/screen-flash-implementation-guidelines",
+            "platform": "android",
+            "title": "Screen flash",
+            "local_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/document.md",
+            "sha256": "27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08",
+            "raw_sha256": "47acc3811342c89d52b1fcbedf326385d69f054fb7cd69f2601e187e5f7dc512",
+            "raw_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/source.gz",
+            "fetched_at": "2026-09-05T10:33:33.732948+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 739,
+            "suggested_sections": [
+              {
+                "start_line": 14,
+                "end_line": 47,
+                "truncated": false
+              },
+              {
+                "start_line": 73,
+                "end_line": 79,
+                "truncated": false
+              },
+              {
+                "start_line": 80,
+                "end_line": 104,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "private var previousBrightness: Float = -1.0f\n\nprivate fun maximizeScreenBrightness() {\n    activity?.window?.let { window ->\n        window.attributes?.apply {\n            previousBrightness = screenBrightness\n            screenBrightness = 1f\n            window.attributes = this\n        }\n    }\n}\n\nprivate fun restoreScreenBrightness() {\n    activity?.window?.let { window ->\n        window.attributes?.apply {\n            screenBrightness = previousBrightness\n            window.attributes = this\n        }\n    }\n}"
+        }
+      ],
+      "open_questions": [
+        "Android screenBrightness 的合法范围（历史 0.0–1.0 约定）与 -1 默认值语义需读 WindowManager.LayoutParams 参考。",
+        "HarmonyOS setWindowBrightness 的参数范围仅见指南示例，需读 @ohos.window API 参考确认。",
+        "两平台步进/精度与真机量化级数差异未评估。"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "节点定义为'查询或建议屏幕亮度'，而已读机制均为应用窗口级设置/恢复；系统级亮度查询与建议接口在三平台冻结来源中均缺失。",
+    "iOS 在冻结来源中完全无屏幕亮度相关正文，本轮保持 unknown，不得推出不支持。",
+    "版本基线未固定（unresolved），全部结论仅基于 2026-09-04/05 快照，未核实启动日最新正式版与手机基线。",
+    "绑定来源偏向相机屏幕闪光与视频播放场景，通用亮度控制指南与 API 参考正文未纳入本轮冻结集。"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "iOS 零证据且三平台均缺系统级亮度查询/建议 API 正文，属关键缺口与高风险映射：不能把窗口级设置机制等同节点全范围，需优先补 Apple 屏幕亮度符号与三平台系统级接口正文并核实版本。"
+  }
+}

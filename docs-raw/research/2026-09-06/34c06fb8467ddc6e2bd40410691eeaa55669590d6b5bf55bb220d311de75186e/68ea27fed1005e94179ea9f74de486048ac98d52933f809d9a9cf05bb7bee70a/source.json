@@ -1,0 +1,13 @@
+{
+  "id": "34c06fb8467ddc6e2bd40410691eeaa55669590d6b5bf55bb220d311de75186e",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/devicesecurity-audit-acquireallauthclientsinfo-arkts",
+  "platform": "harmonyos",
+  "title": "阻断类客户端信息查询场景",
+  "local_path": "docs-raw/research/2026-09-06/34c06fb8467ddc6e2bd40410691eeaa55669590d6b5bf55bb220d311de75186e/68ea27fed1005e94179ea9f74de486048ac98d52933f809d9a9cf05bb7bee70a/document.md",
+  "sha256": "68ea27fed1005e94179ea9f74de486048ac98d52933f809d9a9cf05bb7bee70a",
+  "raw_sha256": "15fdc4ed1b93adf1be4c48270d06d0f674f5707652fe611282b74e7f08c39289",
+  "raw_path": "docs-raw/research/2026-09-06/34c06fb8467ddc6e2bd40410691eeaa55669590d6b5bf55bb220d311de75186e/68ea27fed1005e94179ea9f74de486048ac98d52933f809d9a9cf05bb7bee70a/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

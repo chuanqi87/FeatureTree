@@ -1,0 +1,13 @@
+{
+  "id": "3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b",
+  "url": "https://developer.android.com/media/camera/camera2/screen-flash-implementation-guidelines",
+  "platform": "android",
+  "title": "Screen flash",
+  "local_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/document.md",
+  "sha256": "27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08",
+  "raw_sha256": "47acc3811342c89d52b1fcbedf326385d69f054fb7cd69f2601e187e5f7dc512",
+  "raw_path": "docs-raw/research/2026-09-06/3ca18d0c22601a53ff5522ed02f1928ff266176f0b8c2a4567049e54206a262b/27d64b115785dfb475836630cfb5329d32c935c8b756bcef086fb346f7dd4a08/source.gz",
+  "fetched_at": "2026-09-05T10:33:33.732948+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

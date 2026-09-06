@@ -1,0 +1,13 @@
+{
+  "id": "40b84baef016ce392cc17199798c70eedf111a7fa3d42f79fad5cb10c5895126",
+  "url": "https://developer.android.com/privacy-and-security/key-verifier/key-verifier",
+  "platform": "android",
+  "title": "Android System Key Verifier",
+  "local_path": "docs-raw/research/2026-09-06/40b84baef016ce392cc17199798c70eedf111a7fa3d42f79fad5cb10c5895126/0e6a4631015c7253856a2cf6890e30f1beb4cc28fb622debe9eb5e77d02035db/document.md",
+  "sha256": "0e6a4631015c7253856a2cf6890e30f1beb4cc28fb622debe9eb5e77d02035db",
+  "raw_sha256": "2fdbeff42352a2280be6dcf745682d3384164361518ff189d31dc50c85a306cd",
+  "raw_path": "docs-raw/research/2026-09-06/40b84baef016ce392cc17199798c70eedf111a7fa3d42f79fad5cb10c5895126/0e6a4631015c7253856a2cf6890e30f1beb4cc28fb622debe9eb5e77d02035db/source.gz",
+  "fetched_at": "2026-09-05T10:34:21.284098+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

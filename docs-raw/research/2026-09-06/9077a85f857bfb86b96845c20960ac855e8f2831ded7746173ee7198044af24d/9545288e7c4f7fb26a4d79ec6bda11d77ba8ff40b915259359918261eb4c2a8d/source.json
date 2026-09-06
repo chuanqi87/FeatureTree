@@ -1,0 +1,13 @@
+{
+  "id": "9077a85f857bfb86b96845c20960ac855e8f2831ded7746173ee7198044af24d",
+  "url": "https://developer.android.com/studio/run/emulator-networking-voice",
+  "platform": "android",
+  "title": "Send a voice call or SMS to another emulator instance",
+  "local_path": "docs-raw/research/2026-09-06/9077a85f857bfb86b96845c20960ac855e8f2831ded7746173ee7198044af24d/9545288e7c4f7fb26a4d79ec6bda11d77ba8ff40b915259359918261eb4c2a8d/document.md",
+  "sha256": "9545288e7c4f7fb26a4d79ec6bda11d77ba8ff40b915259359918261eb4c2a8d",
+  "raw_sha256": "6581728f17998e66ecacd337642f5b4f44e9495fd172a5c99971ea135d9e6e76",
+  "raw_path": "docs-raw/research/2026-09-06/9077a85f857bfb86b96845c20960ac855e8f2831ded7746173ee7198044af24d/9545288e7c4f7fb26a4d79ec6bda11d77ba8ff40b915259359918261eb4c2a8d/source.gz",
+  "fetched_at": "2026-09-05T10:36:03.314264+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

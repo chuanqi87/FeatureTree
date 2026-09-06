@@ -1,0 +1,13 @@
+{
+  "id": "ba951554b669dc247de131676139bf0d1285a01d9587fa89a310414ad6cb09e3",
+  "url": "https://developer.apple.com/documentation/metal/accelerating-ray-tracing-using-metal",
+  "platform": "ios",
+  "title": "Accelerating ray tracing using Metal",
+  "local_path": "docs-raw/research/2026-09-06/ba951554b669dc247de131676139bf0d1285a01d9587fa89a310414ad6cb09e3/d0a81ecf9041ecd02be79f77ebf340752b4eaff797e430f2a01b7c6d1e90a9fa/document.md",
+  "sha256": "d0a81ecf9041ecd02be79f77ebf340752b4eaff797e430f2a01b7c6d1e90a9fa",
+  "raw_sha256": "35cef84c8341731161152ccf633f52f5fb8bc4147645c2a71d913d80bf23fa3b",
+  "raw_path": "docs-raw/research/2026-09-06/ba951554b669dc247de131676139bf0d1285a01d9587fa89a310414ad6cb09e3/d0a81ecf9041ecd02be79f77ebf340752b4eaff797e430f2a01b7c6d1e90a9fa/source.gz",
+  "fetched_at": "2026-09-05T10:23:51.337406+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

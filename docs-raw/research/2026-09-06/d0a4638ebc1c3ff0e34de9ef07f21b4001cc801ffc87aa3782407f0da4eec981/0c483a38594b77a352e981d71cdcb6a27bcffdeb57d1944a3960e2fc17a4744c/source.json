@@ -1,0 +1,13 @@
+{
+  "id": "d0a4638ebc1c3ff0e34de9ef07f21b4001cc801ffc87aa3782407f0da4eec981",
+  "url": "https://firebase.google.com/docs/perf-mon/custom-code-traces",
+  "platform": "android",
+  "title": "Add custom monitoring for specific app code",
+  "local_path": "docs-raw/research/2026-09-06/d0a4638ebc1c3ff0e34de9ef07f21b4001cc801ffc87aa3782407f0da4eec981/0c483a38594b77a352e981d71cdcb6a27bcffdeb57d1944a3960e2fc17a4744c/document.md",
+  "sha256": "0c483a38594b77a352e981d71cdcb6a27bcffdeb57d1944a3960e2fc17a4744c",
+  "raw_sha256": "a4005f80634554c1323519ae26f61377897784feaf8931b1ff48fcf9261ed23d",
+  "raw_path": "docs-raw/research/2026-09-06/d0a4638ebc1c3ff0e34de9ef07f21b4001cc801ffc87aa3782407f0da4eec981/0c483a38594b77a352e981d71cdcb6a27bcffdeb57d1944a3960e2fc17a4744c/source.gz",
+  "fetched_at": "2026-09-05T11:07:31.722975+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

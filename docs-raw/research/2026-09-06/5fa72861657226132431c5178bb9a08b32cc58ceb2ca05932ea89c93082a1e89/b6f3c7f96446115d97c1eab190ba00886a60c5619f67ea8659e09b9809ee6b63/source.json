@@ -1,0 +1,13 @@
+{
+  "id": "5fa72861657226132431c5178bb9a08b32cc58ceb2ca05932ea89c93082a1e89",
+  "url": "https://developer.apple.com/documentation/devicemanagement/handling-notnow-status-responses",
+  "platform": "ios",
+  "title": "Handling NotNow status responses",
+  "local_path": "docs-raw/research/2026-09-06/5fa72861657226132431c5178bb9a08b32cc58ceb2ca05932ea89c93082a1e89/b6f3c7f96446115d97c1eab190ba00886a60c5619f67ea8659e09b9809ee6b63/document.md",
+  "sha256": "b6f3c7f96446115d97c1eab190ba00886a60c5619f67ea8659e09b9809ee6b63",
+  "raw_sha256": "e91d2c551fdd68635d20cc196932f9e151270f3cc98087e1f23f7f37d8442d8a",
+  "raw_path": "docs-raw/research/2026-09-06/5fa72861657226132431c5178bb9a08b32cc58ceb2ca05932ea89c93082a1e89/b6f3c7f96446115d97c1eab190ba00886a60c5619f67ea8659e09b9809ee6b63/source.gz",
+  "fetched_at": "2026-09-05T10:50:23.316952+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

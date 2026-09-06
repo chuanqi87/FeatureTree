@@ -1,0 +1,9 @@
+{
+  "task_id": "cd3955fb94e686a090474cde2c0c8b0a2cbfb0141cd782061e40ab3f2435a6a2",
+  "feature_id": "device.audio_route.output",
+  "response_sha256": "bf647690374decc317eb20a0b5f6612dcb87be46f4927b39a0743cc460131887",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

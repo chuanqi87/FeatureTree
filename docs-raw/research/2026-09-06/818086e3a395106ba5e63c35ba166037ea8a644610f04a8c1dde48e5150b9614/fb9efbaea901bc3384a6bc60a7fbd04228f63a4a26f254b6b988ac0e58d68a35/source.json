@@ -1,0 +1,13 @@
+{
+  "id": "818086e3a395106ba5e63c35ba166037ea8a644610f04a8c1dde48e5150b9614",
+  "url": "https://developer.apple.com/documentation/usernotifications/registering-your-app-with-apns",
+  "platform": "ios",
+  "title": "Registering your app with APNs",
+  "local_path": "docs-raw/research/2026-09-06/818086e3a395106ba5e63c35ba166037ea8a644610f04a8c1dde48e5150b9614/fb9efbaea901bc3384a6bc60a7fbd04228f63a4a26f254b6b988ac0e58d68a35/document.md",
+  "sha256": "fb9efbaea901bc3384a6bc60a7fbd04228f63a4a26f254b6b988ac0e58d68a35",
+  "raw_sha256": "5b431ac7969956a428542201e707afa3f5e19f96f97daeefcd13bb09bf888a1d",
+  "raw_path": "docs-raw/research/2026-09-06/818086e3a395106ba5e63c35ba166037ea8a644610f04a8c1dde48e5150b9614/fb9efbaea901bc3384a6bc60a7fbd04228f63a4a26f254b6b988ac0e58d68a35/source.gz",
+  "fetched_at": "2026-09-05T11:22:33.221162+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

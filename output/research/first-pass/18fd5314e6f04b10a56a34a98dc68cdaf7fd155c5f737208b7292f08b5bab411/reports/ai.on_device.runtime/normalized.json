@@ -1,0 +1,1246 @@
+{
+  "task_id": "67fa393b736fe965ac16c476cd2fe7d9a9679f86a188bcde08b2b7fccc346b4d",
+  "feature_id": "ai.on_device.runtime",
+  "stage": "first_pass",
+  "summary": "三平台均读到官方端侧模型执行机制：Android LiteRT 经 Google Play services 分发并配 delegates/Acceleration Service；iOS Core ML 为平台框架统一调度 CPU/GPU/Neural Engine；HarmonyOS MindSpore Lite 经 NNRt 异构调度、要求 .ms 模型。均属机制级初判，三平台版本基线未固定；包内 ios-2（SwiftData/CoreData）与 harmonyos-2（ML-DSA 密码学）与本节点无关。差异假设聚焦分发方式、模型格式、加速暴露。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "官方文档将 LiteRT 定位为 Android 官方 ML 推理运行时，经 Google Play services 分发运行时与 GPU/NPU delegates，并提供 Acceleration Service 在运行时选择最优硬件配置；androidx 包索引含 camera.mlkit.vision 条目（CameraX 与 ML Kit 集成）。",
+      "version_scope": "developer.android.com/ai/custom 快照（2026-09-05）；未核对 Android API Level、Google Play services 与 LiteRT 版本要求",
+      "conditions": [
+        "运行时与 delegates 经 Google Play services 获取（生态服务，非系统 SDK），以确保最新稳定版并减小应用体积",
+        "GPU delegate 已提供；自定义/NPU delegate 依赖合作伙伴经 Play services 分发",
+        "Acceleration Service API 在运行时选择最优硬件加速配置，无需关心底层硬件与驱动"
+      ],
+      "gaps": [
+        "最低 Android 版本/API Level、Play services 与 LiteRT 版本要求未在来源中说明",
+        "LiteRT 所用模型格式与转换工具链未在冻结来源中说明",
+        "系统 SDK 层推理运行时（如 NNAPI）与 LiteRT/Play services 的关系未覆盖",
+        "不依赖 Play services 的运行时打包路径无证据",
+        "手机/平板设备形态与后台/内存限制未说明"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Use LiteRT on Android — LiteRT for ML runtime（Android's official ML inference runtime）",
+          "start_line": 11,
+          "end_line": 14,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/ai/custom",
+            "platform": "android",
+            "title": "Use LiteRT on Android",
+            "local_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/document.md",
+            "sha256": "a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0",
+            "raw_sha256": "034c1323190c159e81866308e68fbb8b1270902d11db70737a09a14c376625d6",
+            "raw_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/source.gz",
+            "fetched_at": "2026-09-05T10:22:20.093171+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 46,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 15,
+                "truncated": false
+              },
+              {
+                "start_line": 16,
+                "end_line": 26,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## LiteRT for ML runtime\n\nUse LiteRT with Google Play services, Android's official ML inference runtime,\nto run high-performance ML inference in your app. [Learn more](https://ai.google.dev/edge/lite/android)"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Hardware Acceleration with LiteRT Delegates",
+          "start_line": 16,
+          "end_line": 25,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/ai/custom",
+            "platform": "android",
+            "title": "Use LiteRT on Android",
+            "local_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/document.md",
+            "sha256": "a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0",
+            "raw_sha256": "034c1323190c159e81866308e68fbb8b1270902d11db70737a09a14c376625d6",
+            "raw_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/source.gz",
+            "fetched_at": "2026-09-05T10:22:20.093171+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 46,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 15,
+                "truncated": false
+              },
+              {
+                "start_line": 16,
+                "end_line": 26,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Hardware Acceleration with LiteRT Delegates\n\nUse LiteRT Delegates distributed using Google Play services to run accelerated\nML on specialized hardware such as GPUs or NPUs. This helps you deliver more\nfluid, lower latency user experiences to your users by accessing advanced\non-device compute capabilities.\n\nWe provide support for GPU delegates, and we're working with partners\nto provide access to their custom delegates using Google Play services to\nsupport advanced use cases. [Learn more](https://ai.google.dev/edge/lite/android/play_services#hardware-acceleration)"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Enabled by Google Play services",
+          "start_line": 27,
+          "end_line": 31,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/ai/custom",
+            "platform": "android",
+            "title": "Use LiteRT on Android",
+            "local_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/document.md",
+            "sha256": "a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0",
+            "raw_sha256": "034c1323190c159e81866308e68fbb8b1270902d11db70737a09a14c376625d6",
+            "raw_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/source.gz",
+            "fetched_at": "2026-09-05T10:22:20.093171+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 46,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 15,
+                "truncated": false
+              },
+              {
+                "start_line": 16,
+                "end_line": 26,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Enabled by Google Play services\n\nUse Google Play services to access the LiteRT runtime and delegates. This\nensures use of the latest stable versions while minimizing impact to your app's\nbinary size. [Learn more](https://ai.google.dev/edge/lite/android/play_services)"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Acceleration Service",
+          "start_line": 42,
+          "end_line": 46,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/ai/custom",
+            "platform": "android",
+            "title": "Use LiteRT on Android",
+            "local_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/document.md",
+            "sha256": "a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0",
+            "raw_sha256": "034c1323190c159e81866308e68fbb8b1270902d11db70737a09a14c376625d6",
+            "raw_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/source.gz",
+            "fetched_at": "2026-09-05T10:22:20.093171+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 46,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 15,
+                "truncated": false
+              },
+              {
+                "start_line": 16,
+                "end_line": 26,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Acceleration Service\n\nThe Acceleration Service API lets you to safely pick the optimal hardware\nacceleration configuration at runtime without having to worry about the\nunderlying device hardware and drivers. [Learn more](https://ai.google.dev/edge/lite/android/acceleration_service)"
+        },
+        {
+          "source_id": "android-2",
+          "locator": "androidx.camera.mlkit.vision 包条目（CameraX 与 ML Kit 集成）",
+          "start_line": 79,
+          "end_line": 79,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/reference/androidx/packages",
+            "platform": "android",
+            "title": "Package Index",
+            "local_path": "docs-raw/research/2026-09-06/cffe4ef5853116da4539edb1c40190529e7ef378a3a767b420ba621250a78590/86b6e1ac7ed814a469280beb09b79706e1b00f948eb9039db22674103450fd08/document.md",
+            "sha256": "86b6e1ac7ed814a469280beb09b79706e1b00f948eb9039db22674103450fd08",
+            "raw_sha256": "37476c65a62c2d695dae902fd635a931671e8e2ca6a4e97f4c01d32ade1b1df6",
+            "raw_path": "docs-raw/research/2026-09-06/cffe4ef5853116da4539edb1c40190529e7ef378a3a767b420ba621250a78590/86b6e1ac7ed814a469280beb09b79706e1b00f948eb9039db22674103450fd08/source.gz",
+            "fetched_at": "2026-09-05T10:40:25.979792+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 678,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 160,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "| `androidx.camera.mlkit.vision` | A library providing a seamless integration between CameraX and Google's ML Kit library. |"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "LiteRT 运行时与 GPU/NPU delegate 实际可用性、Acceleration Service 选配结果依赖具体设备硬件、驱动与 Play services 版本，静态文档无法核实；本轮仅文档初判，不设计用例。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "documented_mechanism",
+      "observation": "Core ML 框架页记载：以统一模型表示在设备端做预测与训练/微调，自动利用 CPU/GPU/Neural Engine，模型须为 Core ML 格式（Create ML 训练或 Core ML Tools 转换），支持运行时下载编译模型与模型加密，栈基于 Accelerate/BNNS 与 Metal Performance Shaders。",
+      "version_scope": "developer.apple.com/documentation/coreml 快照（2026-09-05，版权 2026）；框架落地页无 iOS 最低版本元数据，符号级 availability 未核对",
+      "conditions": [
+        "模型须为 Core ML 格式：Create ML 训练或经 Core ML Tools 从其他框架转换",
+        "推理与微调在设备端执行，文档称无需网络连接",
+        "支持在用户设备上运行时动态下载并编译模型；提供 compute device/plan/policy 与 MLTensor API"
+      ],
+      "gaps": [
+        "框架落地页无 iOS 最低可用版本，需逐符号核对 availability（Apple 目录含多平台）",
+        "CoreAI（最新架构与推理技术）与 Core ML 的边界、版本与适用条件未在来源中说明",
+        "后台执行限制与内存/模型大小上限未覆盖",
+        "权限要求仅有设备端执行/无需网络的间接描述，无正式权限章节"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "Core ML — Overview（integrate machine learning models, all on a person's device）",
+          "start_line": 5,
+          "end_line": 7,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coreml",
+            "platform": "ios",
+            "title": "Core ML",
+            "local_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/document.md",
+            "sha256": "061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992",
+            "raw_sha256": "57f6a98f5ea52d5298a3a4739917ba120385b679dd718fce10bece7d803f64fb",
+            "raw_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/source.gz",
+            "fetched_at": "2026-09-05T10:30:09.483693+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 299,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 26,
+                "end_line": 52,
+                "truncated": false
+              },
+              {
+                "start_line": 53,
+                "end_line": 72,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "## Overview\n\nUse [`Core ML`](/documentation/CoreML) to integrate machine learning models into your app. [`Core ML`](/documentation/CoreML) provides a unified representation for all models. Your app uses [`Core ML`](/documentation/CoreML) APIs and user data to make predictions, and to train or fine-tune models, all on a person’s device."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Overview — Create ML/Core ML Tools 模型格式与设备端再训练",
+          "start_line": 13,
+          "end_line": 13,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coreml",
+            "platform": "ios",
+            "title": "Core ML",
+            "local_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/document.md",
+            "sha256": "061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992",
+            "raw_sha256": "57f6a98f5ea52d5298a3a4739917ba120385b679dd718fce10bece7d803f64fb",
+            "raw_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/source.gz",
+            "fetched_at": "2026-09-05T10:30:09.483693+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 299,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 26,
+                "end_line": 52,
+                "truncated": false
+              },
+              {
+                "start_line": 53,
+                "end_line": 72,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "You build and train a model with the [Create ML app](https://developer.apple.com/machine-learning/create-ml/) bundled with Xcode. Models trained using <doc://com.apple.documentation/documentation/CreateML> are in the [`Core ML`](/documentation/CoreML) model format and are ready to use in your app. Alternatively, you can use a wide variety of other machine learning libraries and then use [Core ML Tools](https://coremltools.readme.io) to convert the model into the [`Core ML`](/documentation/CoreML) format. Once a model is on a person’s device, you can use [`Core ML`](/documentation/CoreML) to retrain or fine-tune it on-device, with that person’s data."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Overview — CPU/GPU/Neural Engine 优化与设备端隐私",
+          "start_line": 15,
+          "end_line": 15,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coreml",
+            "platform": "ios",
+            "title": "Core ML",
+            "local_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/document.md",
+            "sha256": "061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992",
+            "raw_sha256": "57f6a98f5ea52d5298a3a4739917ba120385b679dd718fce10bece7d803f64fb",
+            "raw_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/source.gz",
+            "fetched_at": "2026-09-05T10:30:09.483693+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 299,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 26,
+                "end_line": 52,
+                "truncated": false
+              },
+              {
+                "start_line": 53,
+                "end_line": 72,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "[`Core ML`](/documentation/CoreML) optimizes on-device performance by leveraging the CPU, GPU, and Neural Engine while minimizing its memory footprint and power consumption. Running a model strictly on a person’s device removes any need for a network connection, which helps keep a person’s data private and your app responsive."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Overview — 框架栈：Vision/NaturalLanguage/Speech/SoundAnalysis 之基础，构建于 Accelerate/BNNS 与 Metal Performance Shaders",
+          "start_line": 17,
+          "end_line": 17,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coreml",
+            "platform": "ios",
+            "title": "Core ML",
+            "local_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/document.md",
+            "sha256": "061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992",
+            "raw_sha256": "57f6a98f5ea52d5298a3a4739917ba120385b679dd718fce10bece7d803f64fb",
+            "raw_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/source.gz",
+            "fetched_at": "2026-09-05T10:30:09.483693+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 299,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 26,
+                "end_line": 52,
+                "truncated": false
+              },
+              {
+                "start_line": 53,
+                "end_line": 72,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "The framework is the foundation for domain-specific frameworks and functionality. It supports <doc://com.apple.documentation/documentation/Vision> for analyzing images, <doc://com.apple.documentation/documentation/NaturalLanguage> for processing text, <doc://com.apple.documentation/documentation/Speech> for converting audio to text, and <doc://com.apple.documentation/documentation/SoundAnalysis> for identifying sounds in audio. [`Core ML`](/documentation/CoreML) itself builds on top of low-level primitives like <doc://com.apple.documentation/documentation/Accelerate> and <doc://com.apple.documentation/documentation/Accelerate/bnns-library>, as well as <doc://com.apple.documentation/documentation/MetalPerformanceShaders>."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Topics — Core ML models / MLModel",
+          "start_line": 41,
+          "end_line": 43,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coreml",
+            "platform": "ios",
+            "title": "Core ML",
+            "local_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/document.md",
+            "sha256": "061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992",
+            "raw_sha256": "57f6a98f5ea52d5298a3a4739917ba120385b679dd718fce10bece7d803f64fb",
+            "raw_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/source.gz",
+            "fetched_at": "2026-09-05T10:30:09.483693+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 299,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 26,
+                "end_line": 52,
+                "truncated": false
+              },
+              {
+                "start_line": 53,
+                "end_line": 72,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "[`MLModel`](/documentation/CoreML/MLModel)\n\nAn encapsulation of all the details of your machine learning model."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Topics — App integration: Downloading and Compiling a Model on the User's Device",
+          "start_line": 89,
+          "end_line": 91,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coreml",
+            "platform": "ios",
+            "title": "Core ML",
+            "local_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/document.md",
+            "sha256": "061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992",
+            "raw_sha256": "57f6a98f5ea52d5298a3a4739917ba120385b679dd718fce10bece7d803f64fb",
+            "raw_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/source.gz",
+            "fetched_at": "2026-09-05T10:30:09.483693+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 299,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 26,
+                "end_line": 52,
+                "truncated": false
+              },
+              {
+                "start_line": 53,
+                "end_line": 72,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "[Downloading and Compiling a Model on the User’s Device](/documentation/CoreML/downloading-and-compiling-a-model-on-the-user-s-device)\n\nInstall Core ML models on the user’s device dynamically at runtime."
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "Neural Engine 可用性、compute plan 实际调度与运行时下载编译行为依赖具体设备与 iOS 版本，需实机核实；本轮仅文档初判，未核对符号级 availability。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "MindSpore Lite Kit 术语页记载端侧运行机制：Context 配置硬件与线程，模型经转换工具生成 .ms 格式，NNRt 为系统跨芯片推理运行时连通 NPU 等加速芯片，异构推理不支持算子回退 CPU，Float16 仅 CPU/GPU，另有端侧训练流程与离线模型机制。",
+      "version_scope": "developer.huawei.com harmonyos-guides 快照（2026-09-04）；适用 HarmonyOS API 版本与发行版（HarmonyOS/OpenHarmony）未标注",
+      "conditions": [
+        "模型须由转换工具从 ONNX/CAFFE/TFLITE/TF/PyTorch/MindIR 转为 .ms 端侧格式，或使用硬件厂商离线模型",
+        "NPU 加速须配置 NNRt；异构推理中不支持的算子回退 CPU 执行",
+        "Float16 推理仅 CPU/GPU 设备可用；算子支持以 ONNX Opset18 支持列表为准"
+      ],
+      "gaps": [
+        "术语页非 API 参考：js-apis-mindspore-lite 等接口、权限、错误码正文未读取",
+        "适用 HarmonyOS API 版本与发行版（HarmonyOS/OpenHarmony）未标注",
+        "手机/平板设备形态、后台与内存限制未覆盖",
+        "包内 harmonyos-2（ML-DSA 签名验签）为后量子密码主题，与本节点无关，不能作为本节点证据"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Context；上下文（运行时配置对象：硬件设备类型、线程数、绑核）",
+          "start_line": 5,
+          "end_line": 7,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-term",
+            "platform": "harmonyos",
+            "title": "MindSpore Lite Kit术语",
+            "local_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/document.md",
+            "sha256": "32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273",
+            "raw_sha256": "be4ccd270f604638684e848f4bdd154ae7a86ecb5be5c1a9de89c28a65f594ad",
+            "raw_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### Context；上下文\n\nMindSpore Lite运行时的配置对象，用于指定推理或训练的硬件设备类型、线程数、绑核策略等运行参数，在模型加载编译前创建并传入。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Float16；半精度（仅 CPU/GPU 设备可用）",
+          "start_line": 19,
+          "end_line": 19,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-term",
+            "platform": "harmonyos",
+            "title": "MindSpore Lite Kit术语",
+            "local_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/document.md",
+            "sha256": "32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273",
+            "raw_sha256": "be4ccd270f604638684e848f4bdd154ae7a86ecb5be5c1a9de89c28a65f594ad",
+            "raw_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "IEEE 754标准定义的一种浮点数数据类型，在计算机中使用16比特（2字节）存储，因此称为Float16或FP16，它的存储位数只有单精度浮点数的一半，也称为Half（半精度）。这种数据类型适合对精度要求不高的场景，例如人工神经网络领域。Float16推理模式表示推理的时候用半精度进行推理，仅CPU/GPU设备可用，可在减少内存占用和计算量的同时保持较高的推理精度。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Heterogeneous Inference；异构推理（NNRt 加速芯片与 CPU 分派、回退）",
+          "start_line": 23,
+          "end_line": 25,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-term",
+            "platform": "harmonyos",
+            "title": "MindSpore Lite Kit术语",
+            "local_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/document.md",
+            "sha256": "32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273",
+            "raw_sha256": "be4ccd270f604638684e848f4bdd154ae7a86ecb5be5c1a9de89c28a65f594ad",
+            "raw_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### Heterogeneous Inference；异构推理\n\n将模型中的不同算子调度到不同类型的硬件（如NNRt加速芯片与CPU）上分别执行推理的方式，优先将算子调度到加速硬件，不支持的算子回退到CPU执行，以兼顾推理性能与算子兼容性。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Model Conversion；模型转换（ONNX/CAFFE/TFLITE/TF/PyTorch/MindIR 转 .ms）",
+          "start_line": 29,
+          "end_line": 31,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-term",
+            "platform": "harmonyos",
+            "title": "MindSpore Lite Kit术语",
+            "local_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/document.md",
+            "sha256": "32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273",
+            "raw_sha256": "be4ccd270f604638684e848f4bdd154ae7a86ecb5be5c1a9de89c28a65f594ad",
+            "raw_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### Model Conversion；模型转换\n\nMindSpore Lite部署流程的第一阶段，使用模型转换工具将第三方框架模型（ONNX、CAFFE、TFLITE、TF、PyTorch等）或MindIR模型转换为.ms格式的端侧模型文件，以便在MindSpore Lite上进行推理或训练。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "NNRt；神经网络运行时（HarmonyOS 跨芯片推理运行时，连通上层框架与加速芯片）",
+          "start_line": 43,
+          "end_line": 45,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-term",
+            "platform": "harmonyos",
+            "title": "MindSpore Lite Kit术语",
+            "local_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/document.md",
+            "sha256": "32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273",
+            "raw_sha256": "be4ccd270f604638684e848f4bdd154ae7a86ecb5be5c1a9de89c28a65f594ad",
+            "raw_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### NNRt；神经网络运行时\n\nNeural Network Runtime的缩写，HarmonyOS面向AI领域的跨芯片推理计算运行时，作为中间桥梁连通上层AI推理框架和底层加速芯片，实现AI模型的跨芯片推理计算。MindSpore Lite支持配置NNRt使能AI专用芯片（如NPU）加速推理。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "On-device Training；端侧训练（独立训练开发流程与 API 体系）",
+          "start_line": 53,
+          "end_line": 55,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-term",
+            "platform": "harmonyos",
+            "title": "MindSpore Lite Kit术语",
+            "local_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/document.md",
+            "sha256": "32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273",
+            "raw_sha256": "be4ccd270f604638684e848f4bdd154ae7a86ecb5be5c1a9de89c28a65f594ad",
+            "raw_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### On-device Training；端侧训练\n\n在端侧设备上对模型进行训练，使模型在实际业务场景中自适应用户行为。MindSpore Lite提供独立的训练开发流程和API体系（训练配置、训练模式设置、模型导出等），与推理流程形成对照。  "
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "NNRt/NPU 加速与算子回退行为依赖具体芯片与设备，术语页不含设备与版本条件，需实机核实；本轮仅文档初判，不设计用例。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "availability",
+      "statement": "运行时获取与更新机制的文档描述不同：Android 官方文档明示 LiteRT 运行时与 delegates 经 Google Play services 分发并保持最新稳定版（生态服务路径）；HarmonyOS 文档将 NNRt 描述为系统级跨芯片推理运行时；iOS Core ML 以平台框架栈描述（构建于 Accelerate/BNNS 与 MPS），未提及外部服务分发依赖。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Enabled by Google Play services（最新稳定版、减小应用体积）",
+          "start_line": 27,
+          "end_line": 31,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/ai/custom",
+            "platform": "android",
+            "title": "Use LiteRT on Android",
+            "local_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/document.md",
+            "sha256": "a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0",
+            "raw_sha256": "034c1323190c159e81866308e68fbb8b1270902d11db70737a09a14c376625d6",
+            "raw_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/source.gz",
+            "fetched_at": "2026-09-05T10:22:20.093171+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 46,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 15,
+                "truncated": false
+              },
+              {
+                "start_line": 16,
+                "end_line": 26,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Enabled by Google Play services\n\nUse Google Play services to access the LiteRT runtime and delegates. This\nensures use of the latest stable versions while minimizing impact to your app's\nbinary size. [Learn more](https://ai.google.dev/edge/lite/android/play_services)"
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Overview — 框架栈（Accelerate/BNNS、Metal Performance Shaders）",
+          "start_line": 17,
+          "end_line": 17,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coreml",
+            "platform": "ios",
+            "title": "Core ML",
+            "local_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/document.md",
+            "sha256": "061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992",
+            "raw_sha256": "57f6a98f5ea52d5298a3a4739917ba120385b679dd718fce10bece7d803f64fb",
+            "raw_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/source.gz",
+            "fetched_at": "2026-09-05T10:30:09.483693+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 299,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 26,
+                "end_line": 52,
+                "truncated": false
+              },
+              {
+                "start_line": 53,
+                "end_line": 72,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "The framework is the foundation for domain-specific frameworks and functionality. It supports <doc://com.apple.documentation/documentation/Vision> for analyzing images, <doc://com.apple.documentation/documentation/NaturalLanguage> for processing text, <doc://com.apple.documentation/documentation/Speech> for converting audio to text, and <doc://com.apple.documentation/documentation/SoundAnalysis> for identifying sounds in audio. [`Core ML`](/documentation/CoreML) itself builds on top of low-level primitives like <doc://com.apple.documentation/documentation/Accelerate> and <doc://com.apple.documentation/documentation/Accelerate/bnns-library>, as well as <doc://com.apple.documentation/documentation/MetalPerformanceShaders>."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "NNRt；神经网络运行时（HarmonyOS 面向 AI 领域的跨芯片推理计算运行时）",
+          "start_line": 43,
+          "end_line": 45,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-term",
+            "platform": "harmonyos",
+            "title": "MindSpore Lite Kit术语",
+            "local_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/document.md",
+            "sha256": "32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273",
+            "raw_sha256": "be4ccd270f604638684e848f4bdd154ae7a86ecb5be5c1a9de89c28a65f594ad",
+            "raw_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### NNRt；神经网络运行时\n\nNeural Network Runtime的缩写，HarmonyOS面向AI领域的跨芯片推理计算运行时，作为中间桥梁连通上层AI推理框架和底层加速芯片，实现AI模型的跨芯片推理计算。MindSpore Lite支持配置NNRt使能AI专用芯片（如NPU）加速推理。  "
+        }
+      ],
+      "open_questions": [
+        "LiteRT 是否存在不依赖 Google Play services 的打包/回退路径",
+        "MindSpore Lite Kit 的具体获取方式（SDK/Kit 版本、商用与开源发行版差异）未在来源中说明",
+        "Core ML 与 NNRt 的运行时更新是否随系统版本发布，需版本级证据"
+      ]
+    },
+    {
+      "dimension": "programming_model",
+      "statement": "模型格式与转换要求不同（文档明示）：iOS 要求 Core ML 格式（Create ML 训练或 Core ML Tools 转换）；HarmonyOS 要求经模型转换工具生成 MindSpore Lite 的 .ms 端侧格式（源自 ONNX/CAFFE/TFLITE/TF/PyTorch/MindIR）；Android 冻结来源未说明 LiteRT 模型格式，暂不纳入本假设比较。",
+      "platforms": [
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "Overview — Create ML/Core ML Tools 转换为 Core ML 格式",
+          "start_line": 13,
+          "end_line": 13,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coreml",
+            "platform": "ios",
+            "title": "Core ML",
+            "local_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/document.md",
+            "sha256": "061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992",
+            "raw_sha256": "57f6a98f5ea52d5298a3a4739917ba120385b679dd718fce10bece7d803f64fb",
+            "raw_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/source.gz",
+            "fetched_at": "2026-09-05T10:30:09.483693+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 299,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 26,
+                "end_line": 52,
+                "truncated": false
+              },
+              {
+                "start_line": 53,
+                "end_line": 72,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "You build and train a model with the [Create ML app](https://developer.apple.com/machine-learning/create-ml/) bundled with Xcode. Models trained using <doc://com.apple.documentation/documentation/CreateML> are in the [`Core ML`](/documentation/CoreML) model format and are ready to use in your app. Alternatively, you can use a wide variety of other machine learning libraries and then use [Core ML Tools](https://coremltools.readme.io) to convert the model into the [`Core ML`](/documentation/CoreML) format. Once a model is on a person’s device, you can use [`Core ML`](/documentation/CoreML) to retrain or fine-tune it on-device, with that person’s data."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Model Conversion；模型转换（部署流程第一阶段，转 .ms）",
+          "start_line": 29,
+          "end_line": 31,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-term",
+            "platform": "harmonyos",
+            "title": "MindSpore Lite Kit术语",
+            "local_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/document.md",
+            "sha256": "32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273",
+            "raw_sha256": "be4ccd270f604638684e848f4bdd154ae7a86ecb5be5c1a9de89c28a65f594ad",
+            "raw_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### Model Conversion；模型转换\n\nMindSpore Lite部署流程的第一阶段，使用模型转换工具将第三方框架模型（ONNX、CAFFE、TFLITE、TF、PyTorch等）或MindIR模型转换为.ms格式的端侧模型文件，以便在MindSpore Lite上进行推理或训练。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "MS Model；MS模型（.ms 端侧优化格式）",
+          "start_line": 37,
+          "end_line": 39,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-term",
+            "platform": "harmonyos",
+            "title": "MindSpore Lite Kit术语",
+            "local_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/document.md",
+            "sha256": "32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273",
+            "raw_sha256": "be4ccd270f604638684e848f4bdd154ae7a86ecb5be5c1a9de89c28a65f594ad",
+            "raw_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### MS Model；MS模型\n\nMindSpore Lite专用的端侧模型格式，文件后缀为.ms，针对端侧资源受限场景进行了ROM/RAM/推理时延等综合指标充分优化过的一种模型格式。由模型转换工具将第三方框架模型（ONNX、CAFFE、TFLITE等）或MindIR模型转换生成，可直接用于MindSpore Lite推理或训练。  "
+        }
+      ],
+      "open_questions": [
+        "LiteRT 所用模型格式与转换工具链需补 Android 来源后才能三平台比较",
+        "各格式算子覆盖与量化支持差异：HarmonyOS 提及训练后量化（INT8）与 ONNX Opset18 支持列表，iOS 快照未说明量化细节"
+      ]
+    },
+    {
+      "dimension": "api_surface",
+      "statement": "硬件加速的暴露方式不同：Android 经 Play services 分发 LiteRT delegates（GPU 已支持、自定义 NPU delegate 依赖合作伙伴）并以 Acceleration Service 运行时选择最优配置；iOS 由 Core ML 统一调度 CPU/GPU/Neural Engine 并暴露 compute device/plan/policy API；HarmonyOS 经 NNRt 异构调度、不支持算子回退 CPU，且 Float16 推理仅 CPU/GPU 可用。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Hardware Acceleration with LiteRT Delegates（GPU/NPU、伙伴自定义 delegate）",
+          "start_line": 16,
+          "end_line": 25,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/ai/custom",
+            "platform": "android",
+            "title": "Use LiteRT on Android",
+            "local_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/document.md",
+            "sha256": "a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0",
+            "raw_sha256": "034c1323190c159e81866308e68fbb8b1270902d11db70737a09a14c376625d6",
+            "raw_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/source.gz",
+            "fetched_at": "2026-09-05T10:22:20.093171+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 46,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 15,
+                "truncated": false
+              },
+              {
+                "start_line": 16,
+                "end_line": 26,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Hardware Acceleration with LiteRT Delegates\n\nUse LiteRT Delegates distributed using Google Play services to run accelerated\nML on specialized hardware such as GPUs or NPUs. This helps you deliver more\nfluid, lower latency user experiences to your users by accessing advanced\non-device compute capabilities.\n\nWe provide support for GPU delegates, and we're working with partners\nto provide access to their custom delegates using Google Play services to\nsupport advanced use cases. [Learn more](https://ai.google.dev/edge/lite/android/play_services#hardware-acceleration)"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Acceleration Service（运行时选择最优硬件加速配置）",
+          "start_line": 42,
+          "end_line": 46,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/ai/custom",
+            "platform": "android",
+            "title": "Use LiteRT on Android",
+            "local_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/document.md",
+            "sha256": "a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0",
+            "raw_sha256": "034c1323190c159e81866308e68fbb8b1270902d11db70737a09a14c376625d6",
+            "raw_path": "docs-raw/research/2026-09-06/19296fc8761e073935762e3840477988dea3152b8c72827f1143be5e25155f12/a719227240bafc60d95ae81535e82db8f84d454bf2ab3a517d8462f7b1ebc9b0/source.gz",
+            "fetched_at": "2026-09-05T10:22:20.093171+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 46,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 15,
+                "truncated": false
+              },
+              {
+                "start_line": 16,
+                "end_line": 26,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Acceleration Service\n\nThe Acceleration Service API lets you to safely pick the optimal hardware\nacceleration configuration at runtime without having to worry about the\nunderlying device hardware and drivers. [Learn more](https://ai.google.dev/edge/lite/android/acceleration_service)"
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Overview — leveraging the CPU, GPU, and Neural Engine",
+          "start_line": 15,
+          "end_line": 15,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coreml",
+            "platform": "ios",
+            "title": "Core ML",
+            "local_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/document.md",
+            "sha256": "061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992",
+            "raw_sha256": "57f6a98f5ea52d5298a3a4739917ba120385b679dd718fce10bece7d803f64fb",
+            "raw_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/source.gz",
+            "fetched_at": "2026-09-05T10:30:09.483693+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 299,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 26,
+                "end_line": 52,
+                "truncated": false
+              },
+              {
+                "start_line": 53,
+                "end_line": 72,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "[`Core ML`](/documentation/CoreML) optimizes on-device performance by leveraging the CPU, GPU, and Neural Engine while minimizing its memory footprint and power consumption. Running a model strictly on a person’s device removes any need for a network connection, which helps keep a person’s data private and your app responsive."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Topics — Compute devices / Compute plan（MLComputeDevice、MLComputePlan、MLComputePolicy）",
+          "start_line": 107,
+          "end_line": 131,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/coreml",
+            "platform": "ios",
+            "title": "Core ML",
+            "local_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/document.md",
+            "sha256": "061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992",
+            "raw_sha256": "57f6a98f5ea52d5298a3a4739917ba120385b679dd718fce10bece7d803f64fb",
+            "raw_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/source.gz",
+            "fetched_at": "2026-09-05T10:30:09.483693+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 299,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 26,
+                "end_line": 52,
+                "truncated": false
+              },
+              {
+                "start_line": 53,
+                "end_line": 72,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "### Compute devices\n\n[`MLComputeDevice`](/documentation/CoreML/MLComputeDevice)\n\nCompute devices for framework operations.\n\n[`MLCPUComputeDevice`](/documentation/CoreML/MLCPUComputeDevice)\n\nAn object that represents a CPU compute device.\n\n[`MLGPUComputeDevice`](/documentation/CoreML/MLGPUComputeDevice)\n\nAn object that represents a GPU compute device.\n\n[`MLNeuralEngineComputeDevice`](/documentation/CoreML/MLNeuralEngineComputeDevice)\n\nAn object that represents a Neural Engine compute device.\n\n[`MLComputeDeviceProtocol`](/documentation/CoreML/MLComputeDeviceProtocol)\n\nAn interface that represents a compute device type.\n\n[`MLAllComputeDevices`](/documentation/CoreML/MLAllComputeDevices)\n\nReturns an array that contains all of the compute devices that are accessible."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Float16；半精度（仅 CPU/GPU 设备可用）",
+          "start_line": 19,
+          "end_line": 19,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-term",
+            "platform": "harmonyos",
+            "title": "MindSpore Lite Kit术语",
+            "local_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/document.md",
+            "sha256": "32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273",
+            "raw_sha256": "be4ccd270f604638684e848f4bdd154ae7a86ecb5be5c1a9de89c28a65f594ad",
+            "raw_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "IEEE 754标准定义的一种浮点数数据类型，在计算机中使用16比特（2字节）存储，因此称为Float16或FP16，它的存储位数只有单精度浮点数的一半，也称为Half（半精度）。这种数据类型适合对精度要求不高的场景，例如人工神经网络领域。Float16推理模式表示推理的时候用半精度进行推理，仅CPU/GPU设备可用，可在减少内存占用和计算量的同时保持较高的推理精度。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Heterogeneous Inference；异构推理（算子回退 CPU）",
+          "start_line": 23,
+          "end_line": 25,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-term",
+            "platform": "harmonyos",
+            "title": "MindSpore Lite Kit术语",
+            "local_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/document.md",
+            "sha256": "32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273",
+            "raw_sha256": "be4ccd270f604638684e848f4bdd154ae7a86ecb5be5c1a9de89c28a65f594ad",
+            "raw_path": "docs-raw/research/2026-09-06/86b81f12bb92d3d3f0af932704ee89ee0e0796ba504fb137458f1c580d6f4bdc/32347d31529b1e6f0530ee424ea29d9eff897a46e67837bc6d04f6993fabf273/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### Heterogeneous Inference；异构推理\n\n将模型中的不同算子调度到不同类型的硬件（如NNRt加速芯片与CPU）上分别执行推理的方式，优先将算子调度到加速硬件，不支持的算子回退到CPU执行，以兼顾推理性能与算子兼容性。  "
+        }
+      ],
+      "open_questions": [
+        "三平台 NPU/Neural Engine 的算子覆盖范围与回退行为是否可比",
+        "各平台精度模式（FP16/INT8）支持矩阵需逐平台核对 API 参考",
+        "Acceleration Service 与 NNRt 的硬件选择策略能否类比，需行为级证据"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "三平台版本基线均未固定：Android API Level/Play services 版本、iOS 符号级 availability、HarmonyOS API 版本与发行版标注缺失",
+    "lifecycle_background 与 limits_precision 维度（后台执行、内存/模型大小上限、精度矩阵）在三平台冻结来源中均无正文",
+    "permissions_privacy 维度仅 iOS 有设备端执行/无需网络的间接描述，其余平台无权限章节正文",
+    "Android 侧 ML Kit 与 LiteRT 关系、系统 SDK 层运行时未覆盖；包内 ios-2（SwiftData/CoreData 持久化）与 harmonyos-2（ML-DSA 密码学）为不相关来源",
+    "device_forms 维度（手机/平板）三平台来源均未说明适用设备形态"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "分发机制差异（Android 生态服务 vs iOS/HarmonyOS 系统集成）与模型格式映射属高风险比较点，且三平台 API 参考级证据（LiteRT 版本要求与模型格式、Core ML 符号 availability、MindSpore Lite API 文档与版本）全部缺失，需正式精研优先核对。"
+  }
+}

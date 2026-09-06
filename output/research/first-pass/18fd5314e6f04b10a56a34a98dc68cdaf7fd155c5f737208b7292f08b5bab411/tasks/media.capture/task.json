@@ -1,0 +1,547 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "media.capture",
+    "level": "L2",
+    "parent": "media",
+    "name": {
+      "zh": "媒体采集",
+      "en": "Media Capture"
+    },
+    "definition": "麦克风与相机采集。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/media/capture/_rollup.yaml",
+    "comparison_scope": {
+      "includes": [
+        "麦克风与相机采集。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "975196b6ad3f98395dfc76d9229378f0d875130398ea62a2c6e844fbfd84d061",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "05b975f3a84899a0f0d58eb82f6a5c25ca2055943906fd634507e54bd51c267b",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/media/platform/av-capture",
+      "platform": "android",
+      "title": "Capture video and audio playback",
+      "local_path": "docs-raw/research/2026-09-06/6841928382ca1b438cbe10432c9b920a311d2adcd1112f28d5fb74a78d930d3c/8ef3228047fddcc860e640a6ccaf4354d867cf16fab8b9bca395ba9ea24fedc6/document.md",
+      "sha256": "8ef3228047fddcc860e640a6ccaf4354d867cf16fab8b9bca395ba9ea24fedc6",
+      "raw_sha256": "6552f9ae4135f3f9a3ecbbde74c64e87ec8522da845308ad490e1ccfdf6cef5f",
+      "raw_path": "docs-raw/research/2026-09-06/6841928382ca1b438cbe10432c9b920a311d2adcd1112f28d5fb74a78d930d3c/8ef3228047fddcc860e640a6ccaf4354d867cf16fab8b9bca395ba9ea24fedc6/source.gz",
+      "fetched_at": "2026-09-05T10:33:59.955193+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 186,
+      "suggested_sections": [
+        {
+          "start_line": 10,
+          "end_line": 31,
+          "truncated": false
+        },
+        {
+          "start_line": 32,
+          "end_line": 39,
+          "truncated": true
+        },
+        {
+          "start_line": 60,
+          "end_line": 84,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/social-and-messaging/guides/media-creation",
+      "platform": "android",
+      "title": "About media creation, capture, and sharing",
+      "local_path": "docs-raw/research/2026-09-06/0c85f255a1b4b4bccb8d826c7b39d7cb298e6e5aa3db345223183fdf632f5500/e3ab8e92df5fa17676cb0d416f698a27e645198cd9c92ff9ae4487453d679196/document.md",
+      "sha256": "e3ab8e92df5fa17676cb0d416f698a27e645198cd9c92ff9ae4487453d679196",
+      "raw_sha256": "21436713c947fbf1c68cd9f8de94d41dd902b3850f482081a27ac44b99248ce0",
+      "raw_path": "docs-raw/research/2026-09-06/0c85f255a1b4b4bccb8d826c7b39d7cb298e6e5aa3db345223183fdf632f5500/e3ab8e92df5fa17676cb0d416f698a27e645198cd9c92ff9ae4487453d679196/source.gz",
+      "fetched_at": "2026-09-05T10:34:40.581176+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 67,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 13,
+          "truncated": false
+        },
+        {
+          "start_line": 14,
+          "end_line": 32,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/avfoundation/capture-setup",
+      "platform": "ios",
+      "title": "Capture setup",
+      "local_path": "docs-raw/research/2026-09-06/c121374ae20b14067ae4c1522bf80162af0aef351b0e22c36f2c476e63d003c0/6b2b71cefae13ea3924f66bfc3f4764a731c109dd9e7e6fc9e187ec50768d71a/document.md",
+      "sha256": "6b2b71cefae13ea3924f66bfc3f4764a731c109dd9e7e6fc9e187ec50768d71a",
+      "raw_sha256": "bf60867fca11f0c675ec53689bc4212bc5ffd753633ad3733521140bff711b64",
+      "raw_path": "docs-raw/research/2026-09-06/c121374ae20b14067ae4c1522bf80162af0aef351b0e22c36f2c476e63d003c0/6b2b71cefae13ea3924f66bfc3f4764a731c109dd9e7e6fc9e187ec50768d71a/source.gz",
+      "fetched_at": "2026-09-05T10:18:27.649472+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 237,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 5,
+          "end_line": 20,
+          "truncated": false
+        },
+        {
+          "start_line": 21,
+          "end_line": 22,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/avfoundation/setting-up-a-capture-session",
+      "platform": "ios",
+      "title": "Setting up a capture session",
+      "local_path": "docs-raw/research/2026-09-06/8de15703ec0f52c4a4739aa4c2ea50693bdfdfbaa44de0079c0450ac9818aa21/e074e3a23a61306014eea029d467b166ddf3d400b3199218797a84005c32cb0a/document.md",
+      "sha256": "e074e3a23a61306014eea029d467b166ddf3d400b3199218797a84005c32cb0a",
+      "raw_sha256": "cb3a5893f1e7acc197ed9d056dce4345d4f575df7d4253887ac02bb42109a67e",
+      "raw_path": "docs-raw/research/2026-09-06/8de15703ec0f52c4a4739aa4c2ea50693bdfdfbaa44de0079c0450ac9818aa21/e074e3a23a61306014eea029d467b166ddf3d400b3199218797a84005c32cb0a/source.gz",
+      "fetched_at": "2026-09-05T10:44:38.085881+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 87,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 48,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-native-avscreen-capture-base-h",
+      "platform": "harmonyos",
+      "title": "native_avscreen_capture_base.h",
+      "local_path": "docs-raw/research/2026-09-06/0ad944dcbb792b7eb418e98ae1c1a52a08d69a1169f785725d61df98b85f7b82/f9430731835f1d8a2da5ec794712bbdccc8df901af6df2f88fef9b25b88fbbbd/document.md",
+      "sha256": "f9430731835f1d8a2da5ec794712bbdccc8df901af6df2f88fef9b25b88fbbbd",
+      "raw_sha256": "27376d70a5ff9f49abc4d87339924fc192b5528fce93b29799834077f72947fb",
+      "raw_path": "docs-raw/research/2026-09-06/0ad944dcbb792b7eb418e98ae1c1a52a08d69a1169f785725d61df98b85f7b82/f9430731835f1d8a2da5ec794712bbdccc8df901af6df2f88fef9b25b88fbbbd/source.gz",
+      "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 635,
+      "suggested_sections": [
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": true
+        },
+        {
+          "start_line": 85,
+          "end_line": 107,
+          "truncated": false
+        },
+        {
+          "start_line": 245,
+          "end_line": 278,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avscreencapture-arkts",
+      "platform": "harmonyos",
+      "title": "使用AVScreenCaptureRecorder录屏写文件(ArkTS)",
+      "local_path": "docs-raw/research/2026-09-06/86a830193c5e84245b1dd51de1712db9ea4e13d27283d64c21668574c1b7e107/8ae1162d92a3187feb3006f04751075ea99a9829621025facc7c9540d3d1378b/document.md",
+      "sha256": "8ae1162d92a3187feb3006f04751075ea99a9829621025facc7c9540d3d1378b",
+      "raw_sha256": "2e1db618bfd9f16e8b3de19eb249068110511b4df38d1dc1fd65f5b098b657d5",
+      "raw_path": "docs-raw/research/2026-09-06/86a830193c5e84245b1dd51de1712db9ea4e13d27283d64c21668574c1b7e107/8ae1162d92a3187feb3006f04751075ea99a9829621025facc7c9540d3d1378b/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 348,
+      "suggested_sections": [
+        {
+          "start_line": 17,
+          "end_line": 18,
+          "truncated": true
+        },
+        {
+          "start_line": 29,
+          "end_line": 192,
+          "truncated": false
+        },
+        {
+          "start_line": 193,
+          "end_line": 220,
+          "truncated": true
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:45.548331+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "c193fb56f4075e4bb8016036c39561ca762add4f5a7ef0e59a20247de53385e2"
+}

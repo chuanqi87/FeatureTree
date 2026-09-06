@@ -1,0 +1,13 @@
+{
+  "id": "efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419",
+  "url": "https://developer.apple.com/documentation/coremidi/midi-bluetooth",
+  "platform": "ios",
+  "title": "MIDI Bluetooth",
+  "local_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/document.md",
+  "sha256": "ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3",
+  "raw_sha256": "4e089953fe61886b72b7eafaffd19fbe65e8acf0d7d99d178326811c18f71271",
+  "raw_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/source.gz",
+  "fetched_at": "2026-09-05T10:19:31.589071+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

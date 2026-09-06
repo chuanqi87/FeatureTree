@@ -1,0 +1,13 @@
+{
+  "id": "58d04b9814c3c766757cf73c9b33a829e0476d54e8215e92c2968b7461db47af",
+  "url": "https://developer.apple.com/documentation/technotes/tn3106-customizing-uinavigationbar-appearance",
+  "platform": "ios",
+  "title": "TN3106: Customizing the appearance of UINavigationBar",
+  "local_path": "docs-raw/research/2026-09-06/58d04b9814c3c766757cf73c9b33a829e0476d54e8215e92c2968b7461db47af/7532ffce683424cd3da57691441b4d2b5b5c2163a59784a4742cc693e46cd839/document.md",
+  "sha256": "7532ffce683424cd3da57691441b4d2b5b5c2163a59784a4742cc693e46cd839",
+  "raw_sha256": "31315c61aaebaeb5c87b9db4ffcff27d4dfb1d3c114591116f31695f8e5e673d",
+  "raw_path": "docs-raw/research/2026-09-06/58d04b9814c3c766757cf73c9b33a829e0476d54e8215e92c2968b7461db47af/7532ffce683424cd3da57691441b4d2b5b5c2163a59784a4742cc693e46cd839/source.gz",
+  "fetched_at": "2026-09-05T10:26:42.548965+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

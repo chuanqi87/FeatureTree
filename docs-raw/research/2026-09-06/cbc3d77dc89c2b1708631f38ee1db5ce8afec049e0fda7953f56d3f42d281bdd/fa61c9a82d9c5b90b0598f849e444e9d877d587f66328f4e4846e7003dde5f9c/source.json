@@ -1,0 +1,13 @@
+{
+  "id": "cbc3d77dc89c2b1708631f38ee1db5ce8afec049e0fda7953f56d3f42d281bdd",
+  "url": "https://developer.apple.com/documentation/authenticationservices/authentication-process",
+  "platform": "ios",
+  "title": "Authentication process",
+  "local_path": "docs-raw/research/2026-09-06/cbc3d77dc89c2b1708631f38ee1db5ce8afec049e0fda7953f56d3f42d281bdd/fa61c9a82d9c5b90b0598f849e444e9d877d587f66328f4e4846e7003dde5f9c/document.md",
+  "sha256": "fa61c9a82d9c5b90b0598f849e444e9d877d587f66328f4e4846e7003dde5f9c",
+  "raw_sha256": "c528e7e913d3882839a3c8d8ec639e941f5cf8c8ea8d227d0c408df6f3d15c65",
+  "raw_path": "docs-raw/research/2026-09-06/cbc3d77dc89c2b1708631f38ee1db5ce8afec049e0fda7953f56d3f42d281bdd/fa61c9a82d9c5b90b0598f849e444e9d877d587f66328f4e4846e7003dde5f9c/source.gz",
+  "fetched_at": "2026-09-05T10:44:21.193895+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

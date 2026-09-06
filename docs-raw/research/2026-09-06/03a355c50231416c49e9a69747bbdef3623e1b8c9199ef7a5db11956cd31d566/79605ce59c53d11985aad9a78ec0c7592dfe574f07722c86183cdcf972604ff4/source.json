@@ -1,0 +1,13 @@
+{
+  "id": "03a355c50231416c49e9a69747bbdef3623e1b8c9199ef7a5db11956cd31d566",
+  "url": "https://developer.apple.com/documentation/nearbyinteraction/discovering-peers-with-multipeer-connectivity",
+  "platform": "ios",
+  "title": "Discovering peers with Multipeer Connectivity",
+  "local_path": "docs-raw/research/2026-09-06/03a355c50231416c49e9a69747bbdef3623e1b8c9199ef7a5db11956cd31d566/79605ce59c53d11985aad9a78ec0c7592dfe574f07722c86183cdcf972604ff4/document.md",
+  "sha256": "79605ce59c53d11985aad9a78ec0c7592dfe574f07722c86183cdcf972604ff4",
+  "raw_sha256": "6c51ef70e11acbfbe6946866e9cd34fd8b2278377c1c3068d58188092eab5d16",
+  "raw_path": "docs-raw/research/2026-09-06/03a355c50231416c49e9a69747bbdef3623e1b8c9199ef7a5db11956cd31d566/79605ce59c53d11985aad9a78ec0c7592dfe574f07722c86183cdcf972604ff4/source.gz",
+  "fetched_at": "2026-09-05T10:24:17.195529+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

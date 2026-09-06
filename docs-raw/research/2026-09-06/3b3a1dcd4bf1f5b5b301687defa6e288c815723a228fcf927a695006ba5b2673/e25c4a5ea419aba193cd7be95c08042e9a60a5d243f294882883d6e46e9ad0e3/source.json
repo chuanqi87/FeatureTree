@@ -1,0 +1,13 @@
+{
+  "id": "3b3a1dcd4bf1f5b5b301687defa6e288c815723a228fcf927a695006ba5b2673",
+  "url": "https://developer.android.com/games/develop/vulkan/overview",
+  "platform": "android",
+  "title": "Use Vulkan for graphics",
+  "local_path": "docs-raw/research/2026-09-06/3b3a1dcd4bf1f5b5b301687defa6e288c815723a228fcf927a695006ba5b2673/e25c4a5ea419aba193cd7be95c08042e9a60a5d243f294882883d6e46e9ad0e3/document.md",
+  "sha256": "e25c4a5ea419aba193cd7be95c08042e9a60a5d243f294882883d6e46e9ad0e3",
+  "raw_sha256": "e129aec9e6971b106d045e6c415360fe781a06f516675d4b458277bdc84c805d",
+  "raw_path": "docs-raw/research/2026-09-06/3b3a1dcd4bf1f5b5b301687defa6e288c815723a228fcf927a695006ba5b2673/e25c4a5ea419aba193cd7be95c08042e9a60a5d243f294882883d6e46e9ad0e3/source.gz",
+  "fetched_at": "2026-09-05T10:27:28.427434+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "c6129e8bd3fd0716672a18ba6379b73f853bce544d9d538581b1d5563d59b7b1",
+  "url": "https://developer.android.com/develop/connectivity/wifi/localonlyhotspot",
+  "platform": "android",
+  "title": "Use a local-only Wi-Fi hotspot",
+  "local_path": "docs-raw/research/2026-09-06/c6129e8bd3fd0716672a18ba6379b73f853bce544d9d538581b1d5563d59b7b1/eb4d4155868d4bb2bf54fec5ac631ddde3e8f6749126493bbbe741666ec94fbc/document.md",
+  "sha256": "eb4d4155868d4bb2bf54fec5ac631ddde3e8f6749126493bbbe741666ec94fbc",
+  "raw_sha256": "cc1e16221b9f50c9411e9c43cdcf6480ce2fbe87ec54d5bcb44211e686518031",
+  "raw_path": "docs-raw/research/2026-09-06/c6129e8bd3fd0716672a18ba6379b73f853bce544d9d538581b1d5563d59b7b1/eb4d4155868d4bb2bf54fec5ac631ddde3e8f6749126493bbbe741666ec94fbc/source.gz",
+  "fetched_at": "2026-09-05T10:24:24.730894+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

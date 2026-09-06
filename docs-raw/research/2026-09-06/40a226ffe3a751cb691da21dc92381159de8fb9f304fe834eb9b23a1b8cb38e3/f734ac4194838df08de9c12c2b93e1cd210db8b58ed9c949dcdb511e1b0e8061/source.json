@@ -1,0 +1,13 @@
+{
+  "id": "40a226ffe3a751cb691da21dc92381159de8fb9f304fe834eb9b23a1b8cb38e3",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/avscreencapture-screen-recording-arkts",
+  "platform": "harmonyos",
+  "title": "基于AVScreenCapture实现屏幕录制（ArkTS）",
+  "local_path": "docs-raw/research/2026-09-06/40a226ffe3a751cb691da21dc92381159de8fb9f304fe834eb9b23a1b8cb38e3/f734ac4194838df08de9c12c2b93e1cd210db8b58ed9c949dcdb511e1b0e8061/document.md",
+  "sha256": "f734ac4194838df08de9c12c2b93e1cd210db8b58ed9c949dcdb511e1b0e8061",
+  "raw_sha256": "9f4e6f5996513b8d101897db558592925afa9427ff397ae29021e08b27d20b63",
+  "raw_path": "docs-raw/research/2026-09-06/40a226ffe3a751cb691da21dc92381159de8fb9f304fe834eb9b23a1b8cb38e3/f734ac4194838df08de9c12c2b93e1cd210db8b58ed9c949dcdb511e1b0e8061/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "90a377e5506560741780871ba55173de0b167db7474193fbc605e4bb2a090b0b",
+  "url": "https://developer.apple.com/documentation/homekit/testing-your-app-with-the-homekit-accessory-simulator",
+  "platform": "ios",
+  "title": "Testing your app with the HomeKit Accessory Simulator",
+  "local_path": "docs-raw/research/2026-09-06/90a377e5506560741780871ba55173de0b167db7474193fbc605e4bb2a090b0b/72b869ff358da16985a9cebac997c322e3a7519ed0122967e6649fe84f332b7d/document.md",
+  "sha256": "72b869ff358da16985a9cebac997c322e3a7519ed0122967e6649fe84f332b7d",
+  "raw_sha256": "8baa6cb3210a745dc39e69ffa1d3cb888ec669fbbdf01fa1c2078c72c2d509d8",
+  "raw_path": "docs-raw/research/2026-09-06/90a377e5506560741780871ba55173de0b167db7474193fbc605e4bb2a090b0b/72b869ff358da16985a9cebac997c322e3a7519ed0122967e6649fe84f332b7d/source.gz",
+  "fetched_at": "2026-09-05T10:22:41.525495+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

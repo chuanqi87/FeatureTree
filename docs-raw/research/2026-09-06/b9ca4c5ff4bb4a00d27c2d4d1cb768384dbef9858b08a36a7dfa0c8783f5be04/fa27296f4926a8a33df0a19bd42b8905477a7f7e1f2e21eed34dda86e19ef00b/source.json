@@ -1,0 +1,13 @@
+{
+  "id": "b9ca4c5ff4bb4a00d27c2d4d1cb768384dbef9858b08a36a7dfa0c8783f5be04",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/audio-output-device-management",
+  "platform": "harmonyos",
+  "title": "查询和监听音频输出设备",
+  "local_path": "docs-raw/research/2026-09-06/b9ca4c5ff4bb4a00d27c2d4d1cb768384dbef9858b08a36a7dfa0c8783f5be04/fa27296f4926a8a33df0a19bd42b8905477a7f7e1f2e21eed34dda86e19ef00b/document.md",
+  "sha256": "fa27296f4926a8a33df0a19bd42b8905477a7f7e1f2e21eed34dda86e19ef00b",
+  "raw_sha256": "f7e7ca690e7f31a538b472b4aa329b79ec82143eadb8cf3ebe57e92190c41804",
+  "raw_path": "docs-raw/research/2026-09-06/b9ca4c5ff4bb4a00d27c2d4d1cb768384dbef9858b08a36a7dfa0c8783f5be04/fa27296f4926a8a33df0a19bd42b8905477a7f7e1f2e21eed34dda86e19ef00b/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

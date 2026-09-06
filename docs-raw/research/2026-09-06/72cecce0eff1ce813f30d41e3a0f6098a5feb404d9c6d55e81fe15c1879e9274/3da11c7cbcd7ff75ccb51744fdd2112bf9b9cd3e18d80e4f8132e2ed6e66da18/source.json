@@ -1,0 +1,13 @@
+{
+  "id": "72cecce0eff1ce813f30d41e3a0f6098a5feb404d9c6d55e81fe15c1879e9274",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/devicesecurity-trusted-auth-api",
+  "platform": "harmonyos",
+  "title": "TrustedAuthentication（数字盾服务）",
+  "local_path": "docs-raw/research/2026-09-06/72cecce0eff1ce813f30d41e3a0f6098a5feb404d9c6d55e81fe15c1879e9274/3da11c7cbcd7ff75ccb51744fdd2112bf9b9cd3e18d80e4f8132e2ed6e66da18/document.md",
+  "sha256": "3da11c7cbcd7ff75ccb51744fdd2112bf9b9cd3e18d80e4f8132e2ed6e66da18",
+  "raw_sha256": "4904a7d687aa5f206296417e56fc6bef0a852bb06e3ceebb9e96fdb6026e2818",
+  "raw_path": "docs-raw/research/2026-09-06/72cecce0eff1ce813f30d41e3a0f6098a5feb404d9c6d55e81fe15c1879e9274/3da11c7cbcd7ff75ccb51744fdd2112bf9b9cd3e18d80e4f8132e2ed6e66da18/source.gz",
+  "fetched_at": "2026-09-05T10:26:05.729392+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

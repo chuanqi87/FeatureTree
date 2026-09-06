@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "security.secure_storage",
+    "level": "L2",
+    "parent": "security",
+    "name": {
+      "zh": "安全存储",
+      "en": "Secure Storage"
+    },
+    "definition": "密钥串/凭据加密存储。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/security/secure_storage/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "密钥串/凭据加密存储。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "a0b7a9d7e46618fdeec54dcc33774d49b8af9506534903591ded2820212d0575",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "9927735948157ae2f523acbb5f76e09eed50d37f1127537e7d621693245af2b6",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://firebase.google.com/docs/firestore/enterprise/security/overview",
+      "platform": "android",
+      "title": "Secure data in Cloud Firestore",
+      "local_path": "docs-raw/research/2026-09-06/9895cc6837e2f4659f8cbbadfb48f9fe24a5bbadb13519cdcb1f2d3e99079477/1e4af66d6c3fe09a615870e8c66330971bf649e6ae027b896f0ee752fb97eba8/document.md",
+      "sha256": "1e4af66d6c3fe09a615870e8c66330971bf649e6ae027b896f0ee752fb97eba8",
+      "raw_sha256": "4a4c8d3613198f2919d1b83ec7da2fd1b4cd8a6a75eba3ba9eaa85b06f0e3629",
+      "raw_path": "docs-raw/research/2026-09-06/9895cc6837e2f4659f8cbbadfb48f9fe24a5bbadb13519cdcb1f2d3e99079477/1e4af66d6c3fe09a615870e8c66330971bf649e6ae027b896f0ee752fb97eba8/source.gz",
+      "fetched_at": "2026-09-05T11:09:28.009510+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 33,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 27,
+          "truncated": false
+        },
+        {
+          "start_line": 28,
+          "end_line": 33,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://firebase.google.com/docs/firestore/security/overview",
+      "platform": "android",
+      "title": "Secure data in Cloud Firestore",
+      "local_path": "docs-raw/research/2026-09-06/96f93489f702e90f6b7459822d2a19760d7c2b0c1ea7880a4343d916e4077fe4/2ecff5cfc34a8647f5da13b04feee4f5cc8dd2dcbec1e08d0f2b3ea9e0dc6a2a/document.md",
+      "sha256": "2ecff5cfc34a8647f5da13b04feee4f5cc8dd2dcbec1e08d0f2b3ea9e0dc6a2a",
+      "raw_sha256": "b4682fb69128996e0a162b4b10a1f643198c042deb0903b9c6c4f2e08befb42b",
+      "raw_path": "docs-raw/research/2026-09-06/96f93489f702e90f6b7459822d2a19760d7c2b0c1ea7880a4343d916e4077fe4/2ecff5cfc34a8647f5da13b04feee4f5cc8dd2dcbec1e08d0f2b3ea9e0dc6a2a/source.gz",
+      "fetched_at": "2026-09-05T11:13:17.229897+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 33,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 27,
+          "truncated": false
+        },
+        {
+          "start_line": 28,
+          "end_line": 33,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/cryptokit/storing-cryptokit-keys-in-the-keychain",
+      "platform": "ios",
+      "title": "Storing CryptoKit Keys in the Keychain",
+      "local_path": "docs-raw/research/2026-09-06/cf98000102eca15535f9d09b82ac7d7ccfda2fd5bab3f7215f89d8a37cc0ae36/8cc182e7d289fd646da03a5b73711f7c653479ecc5a02d3f60fec54920aa1a61/document.md",
+      "sha256": "8cc182e7d289fd646da03a5b73711f7c653479ecc5a02d3f60fec54920aa1a61",
+      "raw_sha256": "cae913def0a64b6abfa826c18fba027b7ec915829c478e5e7c016d7bdf1ffccf",
+      "raw_path": "docs-raw/research/2026-09-06/cf98000102eca15535f9d09b82ac7d7ccfda2fd5bab3f7215f89d8a37cc0ae36/8cc182e7d289fd646da03a5b73711f7c653479ecc5a02d3f60fec54920aa1a61/source.gz",
+      "fetched_at": "2026-09-05T10:21:33.383438+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 243,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": true
+        },
+        {
+          "start_line": 11,
+          "end_line": 12,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/safari-release-notes/safari-15_2-release-notes",
+      "platform": "ios",
+      "title": "Safari 15.2 Release Notes",
+      "local_path": "docs-raw/research/2026-09-06/4d51a3be2b7bb7c6f28c60e7f284573550e2cfbb51b0437ea9a005b2424b135a/186291ab5853cfe532ae1cd6155fdb538cfc3698d62268e6e5bdf7eb016a6237/document.md",
+      "sha256": "186291ab5853cfe532ae1cd6155fdb538cfc3698d62268e6e5bdf7eb016a6237",
+      "raw_sha256": "8e1a260222e0a3ff63eada10ba2cc67653368b27eaa34910b89f58d6c62b5d54",
+      "raw_path": "docs-raw/research/2026-09-06/4d51a3be2b7bb7c6f28c60e7f284573550e2cfbb51b0437ea9a005b2424b135a/186291ab5853cfe532ae1cd6155fdb538cfc3698d62268e6e5bdf7eb016a6237/source.gz",
+      "fetched_at": "2026-09-05T10:25:20.008136+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 65,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 10,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/devicesecurity-trusted-auth-glossary",
+      "platform": "harmonyos",
+      "title": "数字盾服务术语",
+      "local_path": "docs-raw/research/2026-09-06/db110ef7aeb6608810205bfbdb3b79f27a506254b477da3eaebe3ab411128247/f2ee8d07d058eda3681b6758b21019f247858b4e79f7d036e383da9558c97320/document.md",
+      "sha256": "f2ee8d07d058eda3681b6758b21019f247858b4e79f7d036e383da9558c97320",
+      "raw_sha256": "238173e55183a869670c17a18fbc4f024978fdeb6e5af5457981a505ad704b25",
+      "raw_path": "docs-raw/research/2026-09-06/db110ef7aeb6608810205bfbdb3b79f27a506254b477da3eaebe3ab411128247/f2ee8d07d058eda3681b6758b21019f247858b4e79f7d036e383da9558c97320/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 19,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/data-sync-with-cloud",
+      "platform": "harmonyos",
+      "title": "端云数据同步云侧环境部署指导",
+      "local_path": "docs-raw/research/2026-09-06/8af5c235ae2f492aa5c99b08c8151319d6d35304fc5671b97c31490ecffaa34b/54c5198950badbbddcfe3a6ce1d10d261acff099fa9ea1343193d7e33cd6b80b/document.md",
+      "sha256": "54c5198950badbbddcfe3a6ce1d10d261acff099fa9ea1343193d7e33cd6b80b",
+      "raw_sha256": "9523be4483e8dbdae2c9bba142ea737312dad706174cac46b08dac8d747a69d4",
+      "raw_path": "docs-raw/research/2026-09-06/8af5c235ae2f492aa5c99b08c8151319d6d35304fc5671b97c31490ecffaa34b/54c5198950badbbddcfe3a6ce1d10d261acff099fa9ea1343193d7e33cd6b80b/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 228,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 12,
+          "truncated": false
+        },
+        {
+          "start_line": 13,
+          "end_line": 39,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:59.816747+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "ae162d48fc680685300bd1afb0f4d7c80ee2479a2de2e1456f89543daf0fe5a1"
+}

@@ -1,0 +1,549 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "ui.window.multiwindow",
+    "level": "L3",
+    "parent": "ui.window",
+    "name": {
+      "zh": "分屏与多窗",
+      "en": "Split and Multi-Window"
+    },
+    "definition": "同时显示多个应用窗口或分屏。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "split_justification": "presence",
+    "knowledge_path": "knowledge/ui/window/multiwindow.yaml",
+    "comparison_scope": {
+      "includes": [
+        "同时显示多个应用窗口或分屏。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "2e36be15a1b4c095767b171135ead59781462cf5c6d62a06299fd0c1c79773d9",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "6f7c416f1f38c09a23f2c627bd53c61e46eb1a767cde4fe08db2857d2ae15e05",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/guide/topics/ui/multi-window",
+      "platform": "android",
+      "title": "Support multi-window mode",
+      "local_path": "docs-raw/research/2026-09-06/482fd3935a31bba841fc4168270ac0ee4c603bf2949d0ea6d0d5adb98bb16c83/24770651d75cd577fd23e43833166ce7f2e66c7b0a645ef413484f2b3ae05a5a/document.md",
+      "sha256": "24770651d75cd577fd23e43833166ce7f2e66c7b0a645ef413484f2b3ae05a5a",
+      "raw_sha256": "04e0071fca5e57884e7174cf37c8bd3732db4cdf790cb289ae369d10d075b744",
+      "raw_path": "docs-raw/research/2026-09-06/482fd3935a31bba841fc4168270ac0ee4c603bf2949d0ea6d0d5adb98bb16c83/24770651d75cd577fd23e43833166ce7f2e66c7b0a645ef413484f2b3ae05a5a/source.gz",
+      "fetched_at": "2026-09-05T10:45:02.862749+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 651,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 18,
+          "truncated": false
+        },
+        {
+          "start_line": 19,
+          "end_line": 66,
+          "truncated": false
+        },
+        {
+          "start_line": 297,
+          "end_line": 321,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/develop/ui/views/layout/activity-embedding",
+      "platform": "android",
+      "title": "Activity embedding",
+      "local_path": "docs-raw/research/2026-09-06/7f9a6fe05d8e68bfca8412061e75563f5cf8d75f5027d586de1a3d058b26b221/021baefe6c7794a999210d378c741b1e86dc1cea5c2732aa5f1fb02b31fc7a3c/document.md",
+      "sha256": "021baefe6c7794a999210d378c741b1e86dc1cea5c2732aa5f1fb02b31fc7a3c",
+      "raw_sha256": "60b2309c9f0593ccdcc1d5d6cb91b4104a7bd2b59908d8f233ed276ac748a48f",
+      "raw_path": "docs-raw/research/2026-09-06/7f9a6fe05d8e68bfca8412061e75563f5cf8d75f5027d586de1a3d058b26b221/021baefe6c7794a999210d378c741b1e86dc1cea5c2732aa5f1fb02b31fc7a3c/source.gz",
+      "fetched_at": "2026-09-05T10:26:04.604545+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 2229,
+      "suggested_sections": [
+        {
+          "start_line": 41,
+          "end_line": 108,
+          "truncated": false
+        },
+        {
+          "start_line": 162,
+          "end_line": 164,
+          "truncated": true
+        },
+        {
+          "start_line": 1533,
+          "end_line": 1566,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/appkit/view-management",
+      "platform": "ios",
+      "title": "View Management",
+      "local_path": "docs-raw/research/2026-09-06/5b86b74fc299ae58ce3730c6eae69bb6db6aad9ce44eb26cd14ec3311e5865c3/0ef9d53103e92451e35285b3efe2f64b1918a34763b14aba2162a3bbeb797429/document.md",
+      "sha256": "0ef9d53103e92451e35285b3efe2f64b1918a34763b14aba2162a3bbeb797429",
+      "raw_sha256": "947d95e4ee95e9d2bfef0cda0108a52359861e89dbbf8c69e5e2bdfde58dd95d",
+      "raw_path": "docs-raw/research/2026-09-06/5b86b74fc299ae58ce3730c6eae69bb6db6aad9ce44eb26cd14ec3311e5865c3/0ef9d53103e92451e35285b3efe2f64b1918a34763b14aba2162a3bbeb797429/source.gz",
+      "fetched_at": "2026-09-05T10:17:16.189747+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 71,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 20,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/technotes/tn3193-managing-the-on-device-foundation-model-s-context-window",
+      "platform": "ios",
+      "title": "TN3193: Managing the on-device foundation model’s context window",
+      "local_path": "docs-raw/research/2026-09-06/9953896d3332d1dc0b49c6f736b14dfa0bf2192f4b7350aa2fba729e33d75278/2025242685940d5688f6cf0a6d2c5b5a0d6a6bebcc947a7170f7135a75e71f7a/document.md",
+      "sha256": "2025242685940d5688f6cf0a6d2c5b5a0d6a6bebcc947a7170f7135a75e71f7a",
+      "raw_sha256": "5b58f5f91837d6305eab5e109beab5eb165f4d62cd078db5e745e6d243714dc2",
+      "raw_path": "docs-raw/research/2026-09-06/9953896d3332d1dc0b49c6f736b14dfa0bf2192f4b7350aa2fba729e33d75278/2025242685940d5688f6cf0a6d2c5b5a0d6a6bebcc947a7170f7135a75e71f7a/source.gz",
+      "fetched_at": "2026-09-05T10:26:55.989254+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 133,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 14,
+          "truncated": false
+        },
+        {
+          "start_line": 15,
+          "end_line": 16,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/window-mode-overview",
+      "platform": "harmonyos",
+      "title": "窗口模式简介",
+      "local_path": "docs-raw/research/2026-09-06/4443da911f3a21e43c33d614f65b5b7aa6bfc8cf6946e00acede491aea4ea382/da956a9c9c736fb087b72c58b5f5e6b7a0c5133d45c2e88f6f4553ee6161b9d6/document.md",
+      "sha256": "da956a9c9c736fb087b72c58b5f5e6b7a0c5133d45c2e88f6f4553ee6161b9d6",
+      "raw_sha256": "a0d8eded76902ac95848744b303a8442aa74e4760e805b763b9972441dddc7e4",
+      "raw_path": "docs-raw/research/2026-09-06/4443da911f3a21e43c33d614f65b5b7aa6bfc8cf6946e00acede491aea4ea382/da956a9c9c736fb087b72c58b5f5e6b7a0c5133d45c2e88f6f4553ee6161b9d6/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 308,
+      "suggested_sections": [
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": true
+        },
+        {
+          "start_line": 19,
+          "end_line": 24,
+          "truncated": false
+        },
+        {
+          "start_line": 108,
+          "end_line": 176,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/multi-window-support",
+      "platform": "harmonyos",
+      "title": "应用声明支持智慧多窗",
+      "local_path": "docs-raw/research/2026-09-06/592a49ce7e5ad590846543fe14d0ed8e253cc88d152ffd92792e1311942f2fb2/de4951c462107cb2d584e30493e178eac498bc9ad219b4d739bb9c266fa21cef/document.md",
+      "sha256": "de4951c462107cb2d584e30493e178eac498bc9ad219b4d739bb9c266fa21cef",
+      "raw_sha256": "d44724d17c74244c7041fa2fc2a95f421d2fac8a1e20fe0aa852449891980905",
+      "raw_path": "docs-raw/research/2026-09-06/592a49ce7e5ad590846543fe14d0ed8e253cc88d152ffd92792e1311942f2fb2/de4951c462107cb2d584e30493e178eac498bc9ad219b4d739bb9c266fa21cef/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 276,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 5,
+          "end_line": 31,
+          "truncated": false
+        },
+        {
+          "start_line": 32,
+          "end_line": 33,
+          "truncated": true
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:43:11.728049+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "8dee632d5b9adc1209e1d58c279baec6e3c650874f2fe44e2a690c9e24126b5f"
+}

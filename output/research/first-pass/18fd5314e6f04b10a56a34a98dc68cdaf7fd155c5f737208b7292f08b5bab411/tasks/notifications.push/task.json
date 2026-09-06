@@ -1,0 +1,547 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "notifications.push",
+    "level": "L2",
+    "parent": "notifications",
+    "name": {
+      "zh": "远程推送通道",
+      "en": "Remote Push Channel"
+    },
+    "definition": "云端到设备的推送投递（生态层）。",
+    "knowledge_role": "rollup",
+    "layer": "ecosystem",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/notifications/push/_rollup.yaml",
+    "comparison_scope": {
+      "includes": [
+        "云端到设备的推送投递（生态层）。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "2490b82d8824fcc4b766fe86dee1180b443db00ae89b2774d95b0013b96db7d3",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "b1e1650352fa89e7cea6d98a0ffe5bccfa627f0ac010f29fbf6c0093408da102",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/guide/topics/connectivity/cross-device-sdk/secure-connection",
+      "platform": "android",
+      "title": "Secure connection API",
+      "local_path": "docs-raw/research/2026-09-06/1a52cef03c77ce633065a5930e6230f08f24355d970806c0637e14e79e4fd1d0/e59bf7d2c06893ab7e6323a1cbcc529903c2f09dc4fd8b35e5c51bd753bd6044/document.md",
+      "sha256": "e59bf7d2c06893ab7e6323a1cbcc529903c2f09dc4fd8b35e5c51bd753bd6044",
+      "raw_sha256": "28854f87c0533d5c92e124033bd2d3f1d76d75cdd7cb1df9e0df2dc674e31da6",
+      "raw_path": "docs-raw/research/2026-09-06/1a52cef03c77ce633065a5930e6230f08f24355d970806c0637e14e79e4fd1d0/e59bf7d2c06893ab7e6323a1cbcc529903c2f09dc4fd8b35e5c51bd753bd6044/source.gz",
+      "fetched_at": "2026-09-05T10:30:02.893965+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 135,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 11,
+          "truncated": false
+        },
+        {
+          "start_line": 12,
+          "end_line": 16,
+          "truncated": false
+        },
+        {
+          "start_line": 17,
+          "end_line": 28,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/training/wearables/watch-face-push",
+      "platform": "android",
+      "title": "Watch Face Push",
+      "local_path": "docs-raw/research/2026-09-06/f12a97b2e7e478a693e31b16129e646897d0ff8f5fde901993212ee44cc05c9f/9f11555a28c4df65208ab5c6c1578464d25dbefe91bbef79499bb5db5f311078/document.md",
+      "sha256": "9f11555a28c4df65208ab5c6c1578464d25dbefe91bbef79499bb5db5f311078",
+      "raw_sha256": "7435f38376a35d1709686af8f6fa794df71a660f0850c2a1ace15390b426069f",
+      "raw_path": "docs-raw/research/2026-09-06/f12a97b2e7e478a693e31b16129e646897d0ff8f5fde901993212ee44cc05c9f/9f11555a28c4df65208ab5c6c1578464d25dbefe91bbef79499bb5db5f311078/source.gz",
+      "fetched_at": "2026-09-05T10:39:13.474911+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 255,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 5,
+          "truncated": false
+        },
+        {
+          "start_line": 6,
+          "end_line": 24,
+          "truncated": false
+        },
+        {
+          "start_line": 40,
+          "end_line": 58,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/activitykit/starting-and-updating-live-activities-with-activitykit-push-notifications",
+      "platform": "ios",
+      "title": "Starting and updating Live Activities with ActivityKit push notifications",
+      "local_path": "docs-raw/research/2026-09-06/f96e809ee5cccf8e5c60880af7da8a83cb7a5c75817063219d487867a36ef440/e16f1f6f3c033007e8713139e1c16b9149b5b60e934cb090371053cd87857e0b/document.md",
+      "sha256": "e16f1f6f3c033007e8713139e1c16b9149b5b60e934cb090371053cd87857e0b",
+      "raw_sha256": "0f3b9d2ace39f8cbba4f1f0b1612d9a94786a993dc49558c66a593e8037b168d",
+      "raw_path": "docs-raw/research/2026-09-06/f96e809ee5cccf8e5c60880af7da8a83cb7a5c75817063219d487867a36ef440/e16f1f6f3c033007e8713139e1c16b9149b5b60e934cb090371053cd87857e0b/source.gz",
+      "fetched_at": "2026-09-05T10:16:23.684103+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 371,
+      "suggested_sections": [
+        {
+          "start_line": 5,
+          "end_line": 6,
+          "truncated": true
+        },
+        {
+          "start_line": 15,
+          "end_line": 19,
+          "truncated": true
+        },
+        {
+          "start_line": 43,
+          "end_line": 44,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/pushtotalk/creating-a-push-to-talk-app",
+      "platform": "ios",
+      "title": "Creating a Push to Talk app",
+      "local_path": "docs-raw/research/2026-09-06/8f6e4fbe8974d30cbd06b58204381a34c300a39bcf30fe4c16aee7e66d5a14e9/bd89a3a72c69658ad21d0713706d41846d8aecbf1c360b759d9087fae5c09857/document.md",
+      "sha256": "bd89a3a72c69658ad21d0713706d41846d8aecbf1c360b759d9087fae5c09857",
+      "raw_sha256": "cf7764da12a82a900ea02f523675071049299db818ab84e687976b04c3cb1c64",
+      "raw_path": "docs-raw/research/2026-09-06/8f6e4fbe8974d30cbd06b58204381a34c300a39bcf30fe4c16aee7e66d5a14e9/bd89a3a72c69658ad21d0713706d41846d8aecbf1c360b759d9087fae5c09857/source.gz",
+      "fetched_at": "2026-09-05T10:24:45.398507+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 249,
+      "suggested_sections": [
+        {
+          "start_line": 22,
+          "end_line": 55,
+          "truncated": true
+        },
+        {
+          "start_line": 85,
+          "end_line": 86,
+          "truncated": true
+        },
+        {
+          "start_line": 96,
+          "end_line": 97,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/push-error-code",
+      "platform": "harmonyos",
+      "title": "ArkTS API错误码",
+      "local_path": "docs-raw/research/2026-09-06/9b31fb0362914b268887db88358702912917376801086358b6fd8bfe946517cd/d013ea6d59ad2ee2c48dd92b0f3fbc4ec8040056de8e0c10449234fb70d8c69d/document.md",
+      "sha256": "d013ea6d59ad2ee2c48dd92b0f3fbc4ec8040056de8e0c10449234fb70d8c69d",
+      "raw_sha256": "b630bcfc7f9293bcd99d579632a8bcfbec4221675b1d1d035b3e71c0838f955a",
+      "raw_path": "docs-raw/research/2026-09-06/9b31fb0362914b268887db88358702912917376801086358b6fd8bfe946517cd/d013ea6d59ad2ee2c48dd92b0f3fbc4ec8040056de8e0c10449234fb70d8c69d/source.gz",
+      "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 554,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 5,
+          "truncated": false
+        },
+        {
+          "start_line": 6,
+          "end_line": 25,
+          "truncated": false
+        },
+        {
+          "start_line": 26,
+          "end_line": 43,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/push-remote-notification-extension-ability",
+      "platform": "harmonyos",
+      "title": "RemoteNotificationExtensionAbility（通知扩展Ability）",
+      "local_path": "docs-raw/research/2026-09-06/136ced087c8887379b5d23b4048790ce7e0eefead687d5ed49974bf46df5458b/8738726bb7bdf2ac0ae5f43f362da88bda74f05ec1e5684452835e9108896056/document.md",
+      "sha256": "8738726bb7bdf2ac0ae5f43f362da88bda74f05ec1e5684452835e9108896056",
+      "raw_sha256": "48f1ff4c74826b432cfade6eee259b41f9d41d2a35d58c64afc36dc2fa6c41f7",
+      "raw_path": "docs-raw/research/2026-09-06/136ced087c8887379b5d23b4048790ce7e0eefead687d5ed49974bf46df5458b/8738726bb7bdf2ac0ae5f43f362da88bda74f05ec1e5684452835e9108896056/source.gz",
+      "fetched_at": "2026-09-05T10:28:47.905397+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 178,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 22,
+          "truncated": false
+        },
+        {
+          "start_line": 23,
+          "end_line": 26,
+          "truncated": false
+        },
+        {
+          "start_line": 27,
+          "end_line": 32,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:51.729204+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "cbc3bbbc78733bdece011772d36dd0a3b022c6a0ff9706fe6408a245a03064bc"
+}

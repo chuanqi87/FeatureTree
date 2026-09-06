@@ -1,0 +1,9 @@
+{
+  "task_id": "55098c90397fa86518288e62087d65e7acaced008697b835c292c54440e5ef51",
+  "feature_id": "commerce.analytics.events",
+  "response_sha256": "0cb68de40ab898713afd87925095f0dc75d747a9aa0fe380fc5b2a82dff1c85c",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

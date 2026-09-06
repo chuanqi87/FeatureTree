@@ -1,0 +1,13 @@
+{
+  "id": "d40697677ae9f7dcf8a9af80ecbc629926b6d9f468cb2b1d608d51a2c44aa372",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-nearlink-scan",
+  "platform": "harmonyos",
+  "title": "@ohos.nearlink.scan (星闪扫描能力)",
+  "local_path": "docs-raw/research/2026-09-06/d40697677ae9f7dcf8a9af80ecbc629926b6d9f468cb2b1d608d51a2c44aa372/26b516e7ab32f640db28d4ad857026f0c79f928bba92974e4ef01aa1d0356013/document.md",
+  "sha256": "26b516e7ab32f640db28d4ad857026f0c79f928bba92974e4ef01aa1d0356013",
+  "raw_sha256": "57db61af946647d6d48dc41006350447f9e88964a8d3c020b7b63cd87af4b95d",
+  "raw_path": "docs-raw/research/2026-09-06/d40697677ae9f7dcf8a9af80ecbc629926b6d9f468cb2b1d608d51a2c44aa372/26b516e7ab32f640db28d4ad857026f0c79f928bba92974e4ef01aa1d0356013/source.gz",
+  "fetched_at": "2026-09-05T10:27:41.923311+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

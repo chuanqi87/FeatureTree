@@ -1,0 +1,13 @@
+{
+  "id": "49a1dbf1bfa16af60c190b8003b16320ed63f394ccaf02f199df62aa86ebaa31",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-profiler-launch-case",
+  "platform": "harmonyos",
+  "title": "案例：应用冷启动首帧完成时延问题分析",
+  "local_path": "docs-raw/research/2026-09-06/49a1dbf1bfa16af60c190b8003b16320ed63f394ccaf02f199df62aa86ebaa31/68e9975c65783b3d9dcf459989bb4530a0b49ecf0700d98e453a69e25c7699af/document.md",
+  "sha256": "68e9975c65783b3d9dcf459989bb4530a0b49ecf0700d98e453a69e25c7699af",
+  "raw_sha256": "b4cfbf4e5203d35520f39fa830ecab8490f1b49e813e43d3a4be0d9cd74b86d4",
+  "raw_path": "docs-raw/research/2026-09-06/49a1dbf1bfa16af60c190b8003b16320ed63f394ccaf02f199df62aa86ebaa31/68e9975c65783b3d9dcf459989bb4530a0b49ecf0700d98e453a69e25c7699af/source.gz",
+  "fetched_at": "2026-09-05T10:23:32.392645+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

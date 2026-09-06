@@ -1,0 +1,13 @@
+{
+  "id": "8cfa065e9a503c06cb5633d03a0bc49a3f9450bdadc550742354efd2880cabe5",
+  "url": "https://developer.android.com/jetpack/androidx/releases/security",
+  "platform": "android",
+  "title": "Security",
+  "local_path": "docs-raw/research/2026-09-06/8cfa065e9a503c06cb5633d03a0bc49a3f9450bdadc550742354efd2880cabe5/e1fbe74059579db601920089103790f0b8f4373ba1cb95040d0b5d51f277d3d8/document.md",
+  "sha256": "e1fbe74059579db601920089103790f0b8f4373ba1cb95040d0b5d51f277d3d8",
+  "raw_sha256": "2bd074d79fac646b28982bede9d742b0a23ed34e9d36d09a916e6c738a2e53de",
+  "raw_path": "docs-raw/research/2026-09-06/8cfa065e9a503c06cb5633d03a0bc49a3f9450bdadc550742354efd2880cabe5/e1fbe74059579db601920089103790f0b8f4373ba1cb95040d0b5d51f277d3d8/source.gz",
+  "fetched_at": "2026-09-05T10:33:05.516098+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

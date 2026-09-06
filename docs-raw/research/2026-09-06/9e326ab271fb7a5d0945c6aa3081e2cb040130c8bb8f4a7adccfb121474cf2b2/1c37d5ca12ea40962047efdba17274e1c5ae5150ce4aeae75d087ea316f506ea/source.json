@@ -1,0 +1,13 @@
+{
+  "id": "9e326ab271fb7a5d0945c6aa3081e2cb040130c8bb8f4a7adccfb121474cf2b2",
+  "url": "https://developer.apple.com/documentation/security/app-sandbox",
+  "platform": "ios",
+  "title": "App Sandbox",
+  "local_path": "docs-raw/research/2026-09-06/9e326ab271fb7a5d0945c6aa3081e2cb040130c8bb8f4a7adccfb121474cf2b2/1c37d5ca12ea40962047efdba17274e1c5ae5150ce4aeae75d087ea316f506ea/document.md",
+  "sha256": "1c37d5ca12ea40962047efdba17274e1c5ae5150ce4aeae75d087ea316f506ea",
+  "raw_sha256": "0b92f1e46c4b801c4067a081805d1a6b6ab2a4f636dbfaffc3710a4cddb7c614",
+  "raw_path": "docs-raw/research/2026-09-06/9e326ab271fb7a5d0945c6aa3081e2cb040130c8bb8f4a7adccfb121474cf2b2/1c37d5ca12ea40962047efdba17274e1c5ae5150ce4aeae75d087ea316f506ea/source.gz",
+  "fetched_at": "2026-09-05T10:25:34.058347+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

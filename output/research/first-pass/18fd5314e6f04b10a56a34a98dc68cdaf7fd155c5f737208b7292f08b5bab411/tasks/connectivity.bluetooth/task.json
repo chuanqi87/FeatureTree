@@ -1,0 +1,533 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "connectivity.bluetooth",
+    "level": "L2",
+    "parent": "connectivity",
+    "name": {
+      "zh": "蓝牙",
+      "en": "Bluetooth"
+    },
+    "definition": "经典蓝牙与低功耗蓝牙能力簇。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/connectivity/bluetooth/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "经典蓝牙与低功耗蓝牙能力簇。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "55218498bb24c6d43f4347aac8fbac1eda6de7e58c50250fcef3d50677556fbd",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "daf4843ae9d46e6a5fd29b6fb88c00d9bb2f85b4ee9435966ad3a5e608940474",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/reference/android/bluetooth/package-summary",
+      "platform": "android",
+      "title": "android.bluetooth",
+      "local_path": "docs-raw/research/2026-09-06/e3d7e3fbc75d57ac62290aadbe5de19695812ff43ddbaadf65bc5e89988b68cb/49bf5184d33acc68d76cd344c8a38c0d7b783ac2ddc18380e96f289d566291b8/document.md",
+      "sha256": "49bf5184d33acc68d76cd344c8a38c0d7b783ac2ddc18380e96f289d566291b8",
+      "raw_sha256": "9fdce63bbd26025fd665b031ba6cd752c263e0efbbbadddae55eaae9a43db410",
+      "raw_path": "docs-raw/research/2026-09-06/e3d7e3fbc75d57ac62290aadbe5de19695812ff43ddbaadf65bc5e89988b68cb/49bf5184d33acc68d76cd344c8a38c0d7b783ac2ddc18380e96f289d566291b8/source.gz",
+      "fetched_at": "2026-09-05T10:39:42.922901+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 130,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": true
+        },
+        {
+          "start_line": 12,
+          "end_line": 19,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/develop/connectivity/bluetooth/setup",
+      "platform": "android",
+      "title": "Set up Bluetooth",
+      "local_path": "docs-raw/research/2026-09-06/1618dc2aade3206999e117156780f7b57b33e6f02bfb14c4e425eb2d5a2f05eb/94f74833069d702de2360708ca53da790e23f9c42aac873a206f318accedde3c/document.md",
+      "sha256": "94f74833069d702de2360708ca53da790e23f9c42aac873a206f318accedde3c",
+      "raw_sha256": "74ce739f0569ad041ccf4711a89b415d76a68eebd815e5a6b0a1d1ff49555570",
+      "raw_path": "docs-raw/research/2026-09-06/1618dc2aade3206999e117156780f7b57b33e6f02bfb14c4e425eb2d5a2f05eb/94f74833069d702de2360708ca53da790e23f9c42aac873a206f318accedde3c/source.gz",
+      "fetched_at": "2026-09-05T10:24:17.247362+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 131,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 131,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/corebluetooth",
+      "platform": "ios",
+      "title": "Core Bluetooth",
+      "local_path": "docs-raw/research/2026-09-06/da051d17545089ced2b56b67e62e9594e772ba9edcac36f533d6ef2bb98dd449/248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03/document.md",
+      "sha256": "248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03",
+      "raw_sha256": "64c445e5f0fe384b767d52aee478880ba15e1e262e7a75b8056f3cc5cc9943f9",
+      "raw_path": "docs-raw/research/2026-09-06/da051d17545089ced2b56b67e62e9594e772ba9edcac36f533d6ef2bb98dd449/248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03/source.gz",
+      "fetched_at": "2026-09-05T09:34:21.400334+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 183,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 20,
+          "truncated": false
+        },
+        {
+          "start_line": 21,
+          "end_line": 22,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetooth-data-types",
+      "platform": "ios",
+      "title": "IOBluetooth Data Types",
+      "local_path": "docs-raw/research/2026-09-06/2f31eebdb4107d42916818ca0607d1a06fe35f43e85c4d568daa58a38012d33b/d1595ff6d8bc956160a85c81354741be94a50ae666c724990fb39c05f29266d0/document.md",
+      "sha256": "d1595ff6d8bc956160a85c81354741be94a50ae666c724990fb39c05f29266d0",
+      "raw_sha256": "748d32f781646b824a42a436e603b9522c797d0fdbf4caf35ecb94971d771058",
+      "raw_path": "docs-raw/research/2026-09-06/2f31eebdb4107d42916818ca0607d1a06fe35f43e85c4d568daa58a38012d33b/d1595ff6d8bc956160a85c81354741be94a50ae666c724990fb39c05f29266d0/source.gz",
+      "fetched_at": "2026-09-05T10:22:54.841239+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 465,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 158,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-system-bluetooth",
+      "platform": "harmonyos",
+      "title": "@system.bluetooth (蓝牙)",
+      "local_path": "docs-raw/research/2026-09-06/2d414563e79ae036b7a2a9e76dcda0f0889ebbc52e2fa49d90aa826566e54ea3/f6e505187387f44577c106e27da3f92dfa1205d416c1464bc63529043715ebee/document.md",
+      "sha256": "f6e505187387f44577c106e27da3f92dfa1205d416c1464bc63529043715ebee",
+      "raw_sha256": "7ef3c5a35531d17b536d3c55baa1637b529ee337f9871a4ffe7fed08966c03d3",
+      "raw_path": "docs-raw/research/2026-09-06/2d414563e79ae036b7a2a9e76dcda0f0889ebbc52e2fa49d90aa826566e54ea3/f6e505187387f44577c106e27da3f92dfa1205d416c1464bc63529043715ebee/source.gz",
+      "fetched_at": "2026-09-05T10:27:58.127034+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 149,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 7,
+          "truncated": false
+        },
+        {
+          "start_line": 8,
+          "end_line": 13,
+          "truncated": false
+        },
+        {
+          "start_line": 14,
+          "end_line": 47,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-oh-bluetooth-h",
+      "platform": "harmonyos",
+      "title": "oh_bluetooth.h",
+      "local_path": "docs-raw/research/2026-09-06/5b8255df7637b7b90179a491406c8d7efcc0f36d5d97a4554f23992f8319dcbd/8a79a6390695cf2eb10898f0577831e8c7e63fcd6e1693a20b3965a5617a019a/document.md",
+      "sha256": "8a79a6390695cf2eb10898f0577831e8c7e63fcd6e1693a20b3965a5617a019a",
+      "raw_sha256": "1c7b53a928d9936e1e17ce29cf54cd00ca5e700c2feadca2f60257cb72e3c44b",
+      "raw_path": "docs-raw/research/2026-09-06/5b8255df7637b7b90179a491406c8d7efcc0f36d5d97a4554f23992f8319dcbd/8a79a6390695cf2eb10898f0577831e8c7e63fcd6e1693a20b3965a5617a019a/source.gz",
+      "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 97,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 16,
+          "truncated": false
+        },
+        {
+          "start_line": 17,
+          "end_line": 18,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:15.761308+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "2e7064da7cb99203ae3418f768976ca472394312a9390899f576d1725306c8e4"
+}

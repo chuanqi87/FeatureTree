@@ -1,0 +1,13 @@
+{
+  "id": "1a52cef03c77ce633065a5930e6230f08f24355d970806c0637e14e79e4fd1d0",
+  "url": "https://developer.android.com/guide/topics/connectivity/cross-device-sdk/secure-connection",
+  "platform": "android",
+  "title": "Secure connection API",
+  "local_path": "docs-raw/research/2026-09-06/1a52cef03c77ce633065a5930e6230f08f24355d970806c0637e14e79e4fd1d0/e59bf7d2c06893ab7e6323a1cbcc529903c2f09dc4fd8b35e5c51bd753bd6044/document.md",
+  "sha256": "e59bf7d2c06893ab7e6323a1cbcc529903c2f09dc4fd8b35e5c51bd753bd6044",
+  "raw_sha256": "28854f87c0533d5c92e124033bd2d3f1d76d75cdd7cb1df9e0df2dc674e31da6",
+  "raw_path": "docs-raw/research/2026-09-06/1a52cef03c77ce633065a5930e6230f08f24355d970806c0637e14e79e4fd1d0/e59bf7d2c06893ab7e6323a1cbcc529903c2f09dc4fd8b35e5c51bd753bd6044/source.gz",
+  "fetched_at": "2026-09-05T10:30:02.893965+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

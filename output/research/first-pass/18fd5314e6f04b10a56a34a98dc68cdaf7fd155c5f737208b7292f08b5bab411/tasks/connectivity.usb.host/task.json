@@ -1,0 +1,534 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "connectivity.usb.host",
+    "level": "L3",
+    "parent": "connectivity.usb",
+    "name": {
+      "zh": "USB主机模式",
+      "en": "USB Host Mode"
+    },
+    "definition": "设备作为 USB 主机访问配件。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "split_justification": "presence",
+    "knowledge_path": "knowledge/connectivity/usb/host.yaml",
+    "comparison_scope": {
+      "includes": [
+        "设备作为 USB 主机访问配件。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "9f7bad288dc5c382671a837a6512343e1b81d1f5fce09681d5b2995ea8ded459",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "5f75abc017b95dda4f46e19cd0c7540aa3bd5b0862c135f7e176d7898da1f1f9",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/develop/connectivity/usb",
+      "platform": "android",
+      "title": "USB host and accessory overview",
+      "local_path": "docs-raw/research/2026-09-06/597911e027cd56d796fd5e0104777260af322c015090d4cd1aa3154791cacab1/2ca38dc2f30b309efbc89f30641b788fecf2abc1c08a94c92fd0f28e93dd538c/document.md",
+      "sha256": "2ca38dc2f30b309efbc89f30641b788fecf2abc1c08a94c92fd0f28e93dd538c",
+      "raw_sha256": "5d51c84e3fd35fa996bf682828a3ff41323687836914aa58c2adc29771d88727",
+      "raw_path": "docs-raw/research/2026-09-06/597911e027cd56d796fd5e0104777260af322c015090d4cd1aa3154791cacab1/2ca38dc2f30b309efbc89f30641b788fecf2abc1c08a94c92fd0f28e93dd538c/source.gz",
+      "fetched_at": "2026-09-05T10:24:23.812131+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 61,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 46,
+          "truncated": false
+        },
+        {
+          "start_line": 47,
+          "end_line": 61,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/develop/connectivity/usb/host",
+      "platform": "android",
+      "title": "USB host overview",
+      "local_path": "docs-raw/research/2026-09-06/d3f15ff3004b2750a4f90ca01906d7f239ef42e24e23e24f544ae973efd51329/0868a2e76353e7c86a6652d42ba51ac12d0735b14d4218ddbdc35f7a3e798002/document.md",
+      "sha256": "0868a2e76353e7c86a6652d42ba51ac12d0735b14d4218ddbdc35f7a3e798002",
+      "raw_sha256": "c80eae9c6383bf08b1668dc26dd04a237b9989e6b35c6bdecccc3151138430c1",
+      "raw_path": "docs-raw/research/2026-09-06/d3f15ff3004b2750a4f90ca01906d7f239ef42e24e23e24f544ae973efd51329/0868a2e76353e7c86a6652d42ba51ac12d0735b14d4218ddbdc35f7a3e798002/source.gz",
+      "fetched_at": "2026-09-05T10:24:24.592107+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 453,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 5,
+          "truncated": false
+        },
+        {
+          "start_line": 6,
+          "end_line": 27,
+          "truncated": false
+        },
+        {
+          "start_line": 28,
+          "end_line": 62,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/usbdriverkit/registry-property-names",
+      "platform": "ios",
+      "title": "Registry Property Names",
+      "local_path": "docs-raw/research/2026-09-06/f26001906d60443ff6993a1909a02172550ab3669cf94602e73cef0aaa1b5ca3/6af4706ff53e0c8f06336862591af5077dad44dbb3a1682301f9d7bfadf4f4b1/document.md",
+      "sha256": "6af4706ff53e0c8f06336862591af5077dad44dbb3a1682301f9d7bfadf4f4b1",
+      "raw_sha256": "5b72c0293a91ee2c642c9df7d5f2902916ae6b002b9cd0e6dbf1a7faed818cbc",
+      "raw_path": "docs-raw/research/2026-09-06/f26001906d60443ff6993a1909a02172550ab3669cf94602e73cef0aaa1b5ca3/6af4706ff53e0c8f06336862591af5077dad44dbb3a1682301f9d7bfadf4f4b1/source.gz",
+      "fetched_at": "2026-09-05T10:28:04.869653+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 235,
+      "suggested_sections": [
+        {
+          "start_line": 13,
+          "end_line": 44,
+          "truncated": false
+        },
+        {
+          "start_line": 45,
+          "end_line": 66,
+          "truncated": false
+        },
+        {
+          "start_line": 67,
+          "end_line": 68,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/usbdriverkit/usbdriverkit-macros",
+      "platform": "ios",
+      "title": "USBDriverKit Macros",
+      "local_path": "docs-raw/research/2026-09-06/839536d7fed8e154c5313863e658a77f37c4fa69bb531a88a490e2b02cff3671/293b8c2b40a237a84c0907d38a3ea1f2aaeed1957cc449e5060deae5d01df713/document.md",
+      "sha256": "293b8c2b40a237a84c0907d38a3ea1f2aaeed1957cc449e5060deae5d01df713",
+      "raw_sha256": "bb9e62b4a5bc2364fe59a7e5fedb98466b5df0eafb160d2b6479afe4a47f37c1",
+      "raw_path": "docs-raw/research/2026-09-06/839536d7fed8e154c5313863e658a77f37c4fa69bb531a88a490e2b02cff3671/293b8c2b40a237a84c0907d38a3ea1f2aaeed1957cc449e5060deae5d01df713/source.gz",
+      "fetched_at": "2026-09-05T10:28:05.366444+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 139,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 139,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-basicserviceskit-hdc",
+      "platform": "harmonyos",
+      "title": "Basic Services Kit",
+      "local_path": "docs-raw/research/2026-09-06/e7539ce64de880d63de9f1c817ad8c8296df284e3787a5a343b656ecb17c0b0d/cd7d32de8beb58705509333a25586045304d5124ce968dd2b84d3f225e330f88/document.md",
+      "sha256": "cd7d32de8beb58705509333a25586045304d5124ce968dd2b84d3f225e330f88",
+      "raw_sha256": "f4f9f6b4708f74a36cc9e283eb6039288aae1086b818164574210827c25935fd",
+      "raw_path": "docs-raw/research/2026-09-06/e7539ce64de880d63de9f1c817ad8c8296df284e3787a5a343b656ecb17c0b0d/cd7d32de8beb58705509333a25586045304d5124ce968dd2b84d3f225e330f88/source.gz",
+      "fetched_at": "2026-09-05T11:01:20.129458+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 997,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 33,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/usb-glossary",
+      "platform": "harmonyos",
+      "title": "USB服务开发术语",
+      "local_path": "docs-raw/research/2026-09-06/47dac4188ef86143d09ed927e7c438303f32f70ab0c57239b20b1625e682f931/c3ae6d18ab988ad2300c2c07cbcc1a7a018c27c1a33e9630d2212e8eda4d0541/document.md",
+      "sha256": "c3ae6d18ab988ad2300c2c07cbcc1a7a018c27c1a33e9630d2212e8eda4d0541",
+      "raw_sha256": "aac288fcd667722f91a56afee1836f9c03874178e5c8be330966964f22cd47cb",
+      "raw_path": "docs-raw/research/2026-09-06/47dac4188ef86143d09ed927e7c438303f32f70ab0c57239b20b1625e682f931/c3ae6d18ab988ad2300c2c07cbcc1a7a018c27c1a33e9630d2212e8eda4d0541/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 75,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:21.368114+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "af6a73518d2bda0f4c6ae2761a0ff2d0dc5e58fb2a62f3c5404f2400f6527937"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "da051d17545089ced2b56b67e62e9594e772ba9edcac36f533d6ef2bb98dd449",
+  "url": "https://developer.apple.com/documentation/corebluetooth",
+  "platform": "ios",
+  "title": "Core Bluetooth",
+  "local_path": "docs-raw/research/2026-09-06/da051d17545089ced2b56b67e62e9594e772ba9edcac36f533d6ef2bb98dd449/248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03/document.md",
+  "sha256": "248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03",
+  "raw_sha256": "64c445e5f0fe384b767d52aee478880ba15e1e262e7a75b8056f3cc5cc9943f9",
+  "raw_path": "docs-raw/research/2026-09-06/da051d17545089ced2b56b67e62e9594e772ba9edcac36f533d6ef2bb98dd449/248c4c6af3a8e8a9658cf9e3492f6e12039b70b1fcd1fefc0d2e5d4810a49c03/source.gz",
+  "fetched_at": "2026-09-05T09:34:21.400334+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,9 @@
+{
+  "task_id": "60929253d9809e7675416fcfb85de2f377e20a29962d2234ca525f118c08eeb5",
+  "feature_id": "connectivity.bluetooth.classic",
+  "response_sha256": "7a21535ccad520b45613001cc937a8a0583f61ac4762b1fdafba1fcc98c16c7e",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

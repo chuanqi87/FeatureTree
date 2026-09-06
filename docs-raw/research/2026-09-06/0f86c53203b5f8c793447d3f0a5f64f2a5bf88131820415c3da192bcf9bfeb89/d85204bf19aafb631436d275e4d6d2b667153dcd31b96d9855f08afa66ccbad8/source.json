@@ -1,0 +1,13 @@
+{
+  "id": "0f86c53203b5f8c793447d3f0a5f64f2a5bf88131820415c3da192bcf9bfeb89",
+  "url": "https://developer.apple.com/documentation/swift/updating-an-app-to-use-swift-concurrency",
+  "platform": "ios",
+  "title": "Updating an app to use Swift concurrency",
+  "local_path": "docs-raw/research/2026-09-06/0f86c53203b5f8c793447d3f0a5f64f2a5bf88131820415c3da192bcf9bfeb89/d85204bf19aafb631436d275e4d6d2b667153dcd31b96d9855f08afa66ccbad8/document.md",
+  "sha256": "d85204bf19aafb631436d275e4d6d2b667153dcd31b96d9855f08afa66ccbad8",
+  "raw_sha256": "b45bd09dd752f8114a5f14d398f097ff160fe6aa7467a9b4dcfe40a900d3d13f",
+  "raw_path": "docs-raw/research/2026-09-06/0f86c53203b5f8c793447d3f0a5f64f2a5bf88131820415c3da192bcf9bfeb89/d85204bf19aafb631436d275e4d6d2b667153dcd31b96d9855f08afa66ccbad8/source.gz",
+  "fetched_at": "2026-09-05T10:26:09.154736+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

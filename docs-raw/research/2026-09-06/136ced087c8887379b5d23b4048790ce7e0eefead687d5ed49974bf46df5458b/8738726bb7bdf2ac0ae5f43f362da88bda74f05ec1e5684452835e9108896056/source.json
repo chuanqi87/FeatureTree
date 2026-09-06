@@ -1,0 +1,13 @@
+{
+  "id": "136ced087c8887379b5d23b4048790ce7e0eefead687d5ed49974bf46df5458b",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/push-remote-notification-extension-ability",
+  "platform": "harmonyos",
+  "title": "RemoteNotificationExtensionAbility（通知扩展Ability）",
+  "local_path": "docs-raw/research/2026-09-06/136ced087c8887379b5d23b4048790ce7e0eefead687d5ed49974bf46df5458b/8738726bb7bdf2ac0ae5f43f362da88bda74f05ec1e5684452835e9108896056/document.md",
+  "sha256": "8738726bb7bdf2ac0ae5f43f362da88bda74f05ec1e5684452835e9108896056",
+  "raw_sha256": "48f1ff4c74826b432cfade6eee259b41f9d41d2a35d58c64afc36dc2fa6c41f7",
+  "raw_path": "docs-raw/research/2026-09-06/136ced087c8887379b5d23b4048790ce7e0eefead687d5ed49974bf46df5458b/8738726bb7bdf2ac0ae5f43f362da88bda74f05ec1e5684452835e9108896056/source.gz",
+  "fetched_at": "2026-09-05T10:28:47.905397+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "1787a4b1d0138d6891aeb0331216d1baf0de1d09fc90616060e131811ab4f7c3",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-nfccontroller",
+  "platform": "harmonyos",
+  "title": "@ohos.nfc.controller (标准NFC)",
+  "local_path": "docs-raw/research/2026-09-06/1787a4b1d0138d6891aeb0331216d1baf0de1d09fc90616060e131811ab4f7c3/aa3f2bb90f16503633bd09c4fb917909413caa3ebd42158ef920e3a0710a28ee/document.md",
+  "sha256": "aa3f2bb90f16503633bd09c4fb917909413caa3ebd42158ef920e3a0710a28ee",
+  "raw_sha256": "6ff266f600e20d739c1c0c81807226700aa8bc74f433d3834b5d9e5cadf4df75",
+  "raw_path": "docs-raw/research/2026-09-06/1787a4b1d0138d6891aeb0331216d1baf0de1d09fc90616060e131811ab4f7c3/aa3f2bb90f16503633bd09c4fb917909413caa3ebd42158ef920e3a0710a28ee/source.gz",
+  "fetched_at": "2026-09-05T10:27:44.541030+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,1058 @@
+{
+  "task_id": "abf3691a24cf202e091c5cf4ca15876966dceae118ae07899ebf47d961be8304",
+  "feature_id": "app.desktop.shortcuts",
+  "stage": "first_pass",
+  "summary": "Android与HarmonyOS均读到明示的长按图标快捷方式机制：Android分静态/动态/固定三类，launcher最多同时显示4个静态+动态、设备上限各异、pinned无上限；HarmonyOS经shortcuts_config.json+module.json5 metadata静态配置，桌面最多展示4个，shortcutManager管理可见性，仅跳转UIAbility。iOS已读AppIntents App Shortcuts面向Shortcuts app/Siri/Spotlight，未见长按图标入口明示，仅算可能映射。三平台版本基线均未固定，结论全部low。提出3条差异假设：快捷方式类型与运行时能力、展示surface、数量上限机制。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "读到完整机制：静态(shortcuts.xml随APK打包)、动态(ShortcutManagerCompat运行时推送/更新/移除)、固定(API 26+ requestPinShortcut需用户确认)三类；仅主Activity可定义；大多数launcher最多同时显示4个静态+动态、设备上限不一、pinned无数量上限；长按图标查看、拖拽固定。",
+      "version_scope": "固定快捷方式需Android 8.0 (API 26)+，Support Library兼容API 25及以下；静态/动态最低API级别未在读文标明；启动日SDK/AndroidX基线未固定。",
+      "conditions": [
+        "仅主Activity(Intent.ACTION_MAIN+CATEGORY_LAUNCHER)可定义快捷方式",
+        "固定快捷方式需Android 8.0 (API 26)+，且用户经确认对话框授权",
+        "大多数launcher最多同时显示4个静态+动态；设备上限可用getMaxShortcutCountPerActivity()查询",
+        "launcher可访问快捷方式元数据，需隐藏敏感信息"
+      ],
+      "gaps": [
+        "静态/动态快捷方式最低API级别未在读文标明",
+        "启动日最新正式版SDK/AndroidX基线未固定",
+        "Google Shortcuts Integration Library等生态服务的版本与运行条件未核实"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Note: Only main activities can have shortcuts",
+          "start_line": 30,
+          "end_line": 33,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/ui/compose/system/shortcuts",
+            "platform": "android",
+            "title": "App shortcuts overview",
+            "local_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/document.md",
+            "sha256": "7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6",
+            "raw_sha256": "1d691513441af9b757e8941a701b84b948b2e442faa2bb6a5756598b9bd93719",
+            "raw_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/source.gz",
+            "fetched_at": "2026-09-05T10:25:34.793195+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": false
+              },
+              {
+                "start_line": 10,
+                "end_line": 46,
+                "truncated": false
+              },
+              {
+                "start_line": 47,
+                "end_line": 52,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "**Note:** Only main activities—activities that handle the\n[`Intent.ACTION_MAIN`](https://developer.android.com/reference/kotlin/android/content/Intent#ACTION_MAIN) action and the [`Intent.CATEGORY_LAUNCHER`](https://developer.android.com/reference/kotlin/android/content/Intent#CATEGORY_LAUNCHER)\ncategory—can have shortcuts. If an app has multiple main activities,\ndefine the set of shortcuts for each activity."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Shortcut types: static/dynamic/pinned",
+          "start_line": 35,
+          "end_line": 42,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/ui/compose/system/shortcuts",
+            "platform": "android",
+            "title": "App shortcuts overview",
+            "local_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/document.md",
+            "sha256": "7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6",
+            "raw_sha256": "1d691513441af9b757e8941a701b84b948b2e442faa2bb6a5756598b9bd93719",
+            "raw_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/source.gz",
+            "fetched_at": "2026-09-05T10:25:34.793195+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": false
+              },
+              {
+                "start_line": 10,
+                "end_line": 46,
+                "truncated": false
+              },
+              {
+                "start_line": 47,
+                "end_line": 52,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "You can publish the following types of shortcuts for your app:\n\n* *Static shortcuts* are defined in a resource file that is packaged into an\n  APK or [app bundle](https://developer.android.com/guide/app-bundle/build).\n* *Dynamic shortcuts* can be pushed, updated, and removed by your app only at\n  runtime.\n* *Pinned shortcuts* can be added to supported launchers at runtime if the\n  user grants permission."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Shortcut limitations: 4 shown, per-device max, pinned unlimited",
+          "start_line": 53,
+          "end_line": 67,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/ui/compose/system/shortcuts",
+            "platform": "android",
+            "title": "App shortcuts overview",
+            "local_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/document.md",
+            "sha256": "7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6",
+            "raw_sha256": "1d691513441af9b757e8941a701b84b948b2e442faa2bb6a5756598b9bd93719",
+            "raw_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/source.gz",
+            "fetched_at": "2026-09-05T10:25:34.793195+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": false
+              },
+              {
+                "start_line": 10,
+                "end_line": 46,
+                "truncated": false
+              },
+              {
+                "start_line": 47,
+                "end_line": 52,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Shortcut limitations\n\nMost supported launchers display up to four shortcuts at a time, including both\nstatic and dynamic shortcuts. When pushing dynamic shortcuts for display on\nGoogle's surfaces, use the [Google Shortcuts Integration Library](https://developer.android.com/develop/ui/compose/system/shortcuts/creating-shortcuts#gsi-library) to avoid\nbeing subject to the shortcut limit.\n\nIf you choose not to use the Google Shortcuts Integration Library, your app is\nsubject to the device's limit for the number of shortcuts it supports at a time.\nShortcuts published this way only appear within the Android launchers and aren't\ndiscoverable on other Google surfaces.\n\n**Note:** The maximum number of shortcuts a device supports varies. Use the\n[`getMaxShortcutCountPerActivity()`](https://developer.android.com/reference/kotlin/androidx/core/content/pm/ShortcutManagerCompat#getMaxShortcutCountPerActivity(android.content.Context)) method to determine how many shortcuts\na particular device supports."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Dynamic shortcuts: ShortcutManagerCompat push/remove",
+          "start_line": 189,
+          "end_line": 203,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/guide/topics/ui/shortcuts/creating-shortcuts",
+            "platform": "android",
+            "title": "Create shortcuts",
+            "local_path": "docs-raw/research/2026-09-06/31756d9966b13718103407861e0d539910a6c89ac852a9e607b0f5a97b5cee80/13666428f990fa67c0de01cd6470ddb1d01328936e81c48f8c4ea1678ee076b3/document.md",
+            "sha256": "13666428f990fa67c0de01cd6470ddb1d01328936e81c48f8c4ea1678ee076b3",
+            "raw_sha256": "18e7574be69c2c54b72db75cfa544d12655fee8901d22ad537ca90ae2e3a39d1",
+            "raw_path": "docs-raw/research/2026-09-06/31756d9966b13718103407861e0d539910a6c89ac852a9e607b0f5a97b5cee80/13666428f990fa67c0de01cd6470ddb1d01328936e81c48f8c4ea1678ee076b3/source.gz",
+            "fetched_at": "2026-09-05T10:45:05.453630+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 397,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 37,
+                "end_line": 77,
+                "truncated": true
+              },
+              {
+                "start_line": 189,
+                "end_line": 190,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "## Create dynamic shortcuts\n\nDynamic shortcuts provide links to specific, context-sensitive actions within\nyour app. These actions can change between uses of your app and while your app\nis running. Good uses for dynamic shortcuts include calling a specific person,\nnavigating to a specific location, and loading a game from the user's last save\npoint. You can also use dynamic shortcuts to open a conversation.\n\nThe [`ShortcutManagerCompat`](https://developer.android.com/reference/kotlin/androidx/core/content/pm/ShortcutManagerCompat) Jetpack library is a helper for the\n[`ShortcutManager`](https://developer.android.com/reference/kotlin/android/content/pm/ShortcutManager) API, which lets you manage dynamic shortcuts in your\napp. Using the `ShortcutManagerCompat` library reduces boilerplate code and\nhelps ensure that your shortcuts work consistently across Android versions. This\nlibrary is also required for pushing dynamic shortcuts so that they are eligible\nto appear on Google surfaces—like Assistant—with the [Google\nShortcuts Integration Library](https://developer.android.com/guide/topics/ui/shortcuts/creating-shortcuts#gsi-library)."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Pinned shortcuts require Android 8.0 (API 26)+ and user confirmation",
+          "start_line": 288,
+          "end_line": 298,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/guide/topics/ui/shortcuts/creating-shortcuts",
+            "platform": "android",
+            "title": "Create shortcuts",
+            "local_path": "docs-raw/research/2026-09-06/31756d9966b13718103407861e0d539910a6c89ac852a9e607b0f5a97b5cee80/13666428f990fa67c0de01cd6470ddb1d01328936e81c48f8c4ea1678ee076b3/document.md",
+            "sha256": "13666428f990fa67c0de01cd6470ddb1d01328936e81c48f8c4ea1678ee076b3",
+            "raw_sha256": "18e7574be69c2c54b72db75cfa544d12655fee8901d22ad537ca90ae2e3a39d1",
+            "raw_path": "docs-raw/research/2026-09-06/31756d9966b13718103407861e0d539910a6c89ac852a9e607b0f5a97b5cee80/13666428f990fa67c0de01cd6470ddb1d01328936e81c48f8c4ea1678ee076b3/source.gz",
+            "fetched_at": "2026-09-05T10:45:05.453630+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 397,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 37,
+                "end_line": 77,
+                "truncated": true
+              },
+              {
+                "start_line": 189,
+                "end_line": 190,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "## Create pinned shortcuts\n\nOn Android 8.0 (API level 26) and higher, you can create pinned shortcuts.\nUnlike static and dynamic shortcuts, pinned shortcuts appear in supported\nlaunchers as separate icons. Figure 1 shows the distinction between these two\ntypes of shortcuts.\n\n**Note:** When you attempt to pin a shortcut onto a supported launcher, the user\nreceives a confirmation dialog asking their permission to pin the shortcut. If\nthe user doesn't let the shortcut be pinned, the launcher cancels the request.\n"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "展示上限、长按菜单与固定流程依赖具体launcher/设备实现且版本基线未固定，建议后续精研真机核验；非本轮必需。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "possible_mapping",
+      "observation": "已读AppIntents App Shortcuts：代码定义AppShortcutsProvider静态快捷方式(app intent+标题/图像/口令短语)，安装即生效、无需自行注册，正文列出的surface为Shortcuts app、Siri、Spotlight等系统体验，另有SiriTipView/ShortcutsLink引导入口；已读正文未见主屏幕长按图标菜单展示快捷方式的明示。",
+      "version_scope": "已读正文未标注最低iOS版本与平台可用性；Apple目录含多平台，iOS适用性需逐符号核对；版本基线未固定。",
+      "conditions": [
+        "以代码定义AppShortcutsProvider，编译器生成系统所需信息",
+        "安装后即可用，无需自行注册",
+        "正文列出的surface为Shortcuts app、Siri、Spotlight等系统体验"
+      ],
+      "gaps": [
+        "长按主屏幕图标菜单是否展示App Shortcuts未读到正文证据，与节点定义的映射待确认",
+        "iOS最低版本与符号级availability未核对",
+        "运行时动态增改快捷方式的能力未在读文范围"
+      ],
+      "confidence": "low",
+      "evidence_strength": "indirect",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "Overview: App Shortcuts in Shortcuts app and system experiences, AppShortcutsProvider",
+          "start_line": 5,
+          "end_line": 24,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/appintents/app-shortcuts",
+            "platform": "ios",
+            "title": "App Shortcuts",
+            "local_path": "docs-raw/research/2026-09-06/fb1af83d3f9dab3837d68eeecf91bc9c9c5974f5e14cc78ad838cfa8c69331e8/9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94/document.md",
+            "sha256": "9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94",
+            "raw_sha256": "021007f8b432a7cc4d37b169b80b6ce629f10f20626c15db4cdaebc02c12eacc",
+            "raw_path": "docs-raw/research/2026-09-06/fb1af83d3f9dab3837d68eeecf91bc9c9c5974f5e14cc78ad838cfa8c69331e8/9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94/source.gz",
+            "fetched_at": "2026-09-05T10:17:04.504685+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 142,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 34,
+                "truncated": false
+              },
+              {
+                "start_line": 35,
+                "end_line": 36,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Overview\n\nApp Shortcuts provide a polished experience for your app intents and entities in the\nShortcuts app and other system experiences. An App Shortcut combines the action from your\napp intent with other data, such as a title, image, and spoken phrases that someone might\nuse to run the shortcut. A shortcut can also contain preconfigured parameters, so someone\ncan run the action quickly, and without having to specify additional information. For example,\na hiking app might offer an app intent to start a hike, but require you to select a trail\nbefore starting the action. Without a shortcut, someone must provide the trail information\neach time they run the intent. However, a shortcut can simplify this flow by offering to\nstart a hike on the person’s favorite trail.\n\nYou create App Shortcuts programmatically in your code, and the compiler generates the information\nthe rest of the system needs to use it. This approach means that the shortcuts you create\nare available as soon as someone installs your app, and you don’t have to register them yourself.\nSpecify your shortcuts in your code by defining a custom type that adopts the [`AppShortcutsProvider`](/documentation/AppIntents/AppShortcutsProvider)\nprotocol. Include this type in your app, app extension, Swift package, or library that you\nuse to manage your intents-related code. Inside this type, construct one or more [`AppShortcut`](/documentation/AppIntents/AppShortcut)\ntypes using static data. Define your shortcuts in the same place you define the app intents\nthat those shortcuts use."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "SiriTipView/ShortcutsLink make shortcuts available from your app",
+          "start_line": 30,
+          "end_line": 33,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/appintents/app-shortcuts",
+            "platform": "ios",
+            "title": "App Shortcuts",
+            "local_path": "docs-raw/research/2026-09-06/fb1af83d3f9dab3837d68eeecf91bc9c9c5974f5e14cc78ad838cfa8c69331e8/9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94/document.md",
+            "sha256": "9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94",
+            "raw_sha256": "021007f8b432a7cc4d37b169b80b6ce629f10f20626c15db4cdaebc02c12eacc",
+            "raw_path": "docs-raw/research/2026-09-06/fb1af83d3f9dab3837d68eeecf91bc9c9c5974f5e14cc78ad838cfa8c69331e8/9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94/source.gz",
+            "fetched_at": "2026-09-05T10:17:04.504685+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 142,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 34,
+                "truncated": false
+              },
+              {
+                "start_line": 35,
+                "end_line": 36,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Although the Shortcuts app and other system features find your shortcuts automatically, you can\nalso make them available from your app using tip views. The [`SiriTipView`](/documentation/AppIntents/SiriTipView) and [`SiriTipUIView`](/documentation/AppIntents/SiriTipUIView)\ntypes display the relevant shortcuts for the app intent you specify. You can also use a\n[`ShortcutsLink`](/documentation/AppIntents/ShortcutsLink) or [`ShortcutsUIButton`](/documentation/AppIntents/ShortcutsUIButton) to open your app’s page in the Shortcuts app."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Wind Down sample: shortcuts visible in Health app",
+          "start_line": 5,
+          "end_line": 13,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/sirikit/adding-shortcuts-for-wind-down",
+            "platform": "ios",
+            "title": "Adding Shortcuts for Wind Down",
+            "local_path": "docs-raw/research/2026-09-06/708ca06e1eb4a58f2affd398844d733b78ec5ebbe58b3774a0aa4f2c2813769c/998d215b4b78a180de73dc4263343e63aff1533a0d0206674986066a9bab8af7/document.md",
+            "sha256": "998d215b4b78a180de73dc4263343e63aff1533a0d0206674986066a9bab8af7",
+            "raw_sha256": "15b45e3e51c90db6cf17a2f4f341b9a88d9dc3c3bcb091a53503161c3ee95ac6",
+            "raw_path": "docs-raw/research/2026-09-06/708ca06e1eb4a58f2affd398844d733b78ec5ebbe58b3774a0aa4f2c2813769c/998d215b4b78a180de73dc4263343e63aff1533a0d0206674986066a9bab8af7/source.gz",
+            "fetched_at": "2026-09-05T10:25:47.519549+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 17,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 17,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Overview\n\n> Note: This sample code project is associated with WWDC20 session [10083: Integrate Your App with Wind Down](https://developer.apple.com/videos/play/wwdc2020/10083/).\n\n### Configure the Sample Code Project\n\nBefore you run the sample, select a Team account under the Signing section in the project editor for the targets `Bedtime` and `BedtimeIntents` in Xcode.\n\nOnce you run the sample project for the first time, shortcuts from the sample are visible in the Health app when you set up Sleep."
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "App Shortcuts在Siri/Spotlight/Shortcuts app及可能的长按菜单中的实际呈现需真机核对，且已读正文无版本信息；非本轮必需。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "读到明示静态快捷方式机制：resources/base/profile/shortcuts_config.json(shortcutId≤63字节/label≤255字节/icon/wants含bundleName等目标与parameters)+module.json5 abilities的metadata(name固定ohos.ability.shortcuts)；长按图标打开入口，长按列表项可拖拽至桌面；桌面最多展示4个；shortcutManager可隐藏/展示；快捷方式仅跳转至具体UIAbility。",
+      "version_scope": "华为官网HarmonyOS开发指南与最佳实践(2026-09-05快照)；正文未标明适用API/SDK起始版本，OpenHarmony与HarmonyOS发行版适用性未区分；基线未固定。",
+      "conditions": [
+        "静态配置：shortcuts_config.json+module.json5 metadata(ohos.ability.shortcuts)",
+        "长按应用图标打开快捷方式入口；长按列表项可拖拽至桌面",
+        "桌面展示快捷方式数量有上限，最多4个",
+        "快捷方式只允许跳转至具体UIAbility，无法直接跳转非入口页面"
+      ],
+      "gaps": [
+        "适用API/SDK起始版本未在读文标明",
+        "shortcutManager模块完整能力未读正文，仅链接引用",
+        "是否存在动态/固定类快捷方式未确认",
+        "OpenHarmony与HarmonyOS发行版适用性未区分"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "快捷方式启动方式：点击入口列表项、长按拖拽至桌面",
+          "start_line": 11,
+          "end_line": 18,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-desktop-shortcuts",
+            "platform": "harmonyos",
+            "title": "桌面快捷方式",
+            "local_path": "docs-raw/research/2026-09-06/c7b273716710ad2d22bafc0bda579a8294e26dcade0ce6749295565f7a396ee3/49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f/document.md",
+            "sha256": "49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f",
+            "raw_sha256": "1e4482da329bdf77740c9368e7f29362b7e6988f5e34966324571836955747e6",
+            "raw_path": "docs-raw/research/2026-09-06/c7b273716710ad2d22bafc0bda579a8294e26dcade0ce6749295565f7a396ee3/49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f/source.gz",
+            "fetched_at": "2026-09-05T10:40:26.358004+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 170,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 7,
+                "end_line": 19,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "快捷方式创建成功后支持以下启动方式：\n\n* 点击快捷方式入口列表中的\"回家\"项，即可快速打开地图应用，开启从当前位置到家的导航路线选择。 ![](https://media:901787638009989939 \"点击放大\")\n\n* 长按快捷方式入口列表中的\"回家\"项，可将其拖动至桌面，点击桌面对应图标，即可开启从当前位置到家的导航路线选择。 ![](https://media:901787638010295940 \"点击放大\")\n\n![](https://media:901787638010343941)  \n本文以单[HAP](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hap-package)包为场景，讲述了快捷方式的实现步骤。多[HAP](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hap-package)包的场景下， 步骤与单[HAP](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hap-package)包一致，都是在entry文件夹下进行shortcuts_config.json的创建和module.json5的配置。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "shortcuts标签配置：shortcutId/label/icon/wants",
+          "start_line": 24,
+          "end_line": 38,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-desktop-shortcuts",
+            "platform": "harmonyos",
+            "title": "桌面快捷方式",
+            "local_path": "docs-raw/research/2026-09-06/c7b273716710ad2d22bafc0bda579a8294e26dcade0ce6749295565f7a396ee3/49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f/document.md",
+            "sha256": "49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f",
+            "raw_sha256": "1e4482da329bdf77740c9368e7f29362b7e6988f5e34966324571836955747e6",
+            "raw_path": "docs-raw/research/2026-09-06/c7b273716710ad2d22bafc0bda579a8294e26dcade0ce6749295565f7a396ee3/49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f/source.gz",
+            "fetched_at": "2026-09-05T10:40:26.358004+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 170,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 7,
+                "end_line": 19,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "使用[shortcuts](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/module-configuration-file#shortcuts标签)来配置应用的快捷方式，其配置值为数组，包含四个子标签shortcutId、label、icon、wants。\n\n* shortcutId：标识快捷方式的ID，取值为长度不超过63字节的字符串。\n* label：标识快捷方式的标签信息，即快捷方式对外显示的文字描述信息。取值为长度不超过255字节的字符串，可以是描述性内容，也可以是标识label的资源索引。\n* icon：标识快捷方式的图标，取值为资源文件的索引。\n* [wants](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/module-configuration-file#wants标签)：标识快捷方式内定义的目标[wants](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/module-configuration-file#wants标签)信息集合，[wants](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/module-configuration-file#wants标签)中可配置如下参数：  \n\n  |属性名称|含义|\n  |:----------|:-------------------------------------------------|\n  |bundleName|表示快捷方式的目标包名。|\n  |moduleName|表示快捷方式的目标模块名。|\n  |abilityName|表示快捷方式的目标组件名。|\n  |parameters|表示拉起快捷方式时的自定义数据，仅支持配置字符串类型的数据。其中键值均最大支持1024长度的字符串。|\n\n[shortcuts](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/module-configuration-file#shortcuts标签)配置完成后，还需要在[module.json5配置文件](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/module-configuration-file)中配置[metadata](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/module-configuration-file#metadata标签)字段来指定应用的快捷方式配置文件，从而完成快捷方式的基本配置。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "快捷方式只允许跳转至具体UIAbility",
+          "start_line": 40,
+          "end_line": 40,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-desktop-shortcuts",
+            "platform": "harmonyos",
+            "title": "桌面快捷方式",
+            "local_path": "docs-raw/research/2026-09-06/c7b273716710ad2d22bafc0bda579a8294e26dcade0ce6749295565f7a396ee3/49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f/document.md",
+            "sha256": "49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f",
+            "raw_sha256": "1e4482da329bdf77740c9368e7f29362b7e6988f5e34966324571836955747e6",
+            "raw_path": "docs-raw/research/2026-09-06/c7b273716710ad2d22bafc0bda579a8294e26dcade0ce6749295565f7a396ee3/49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f/source.gz",
+            "fetched_at": "2026-09-05T10:40:26.358004+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 170,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 7,
+                "end_line": 19,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "通过在[module.json5配置文件](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/module-configuration-file)中配置[metadata](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/module-configuration-file#metadata标签)字段的快捷方式是一种在系统中创建的可以快速访问应用程序或特定功能的链接，与[卡片](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/formkit-overview)的区别在于：快捷方式只允许跳转至某个具体的UIAbility，无法直接跳转至非入口页面。  "
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "桌面展示快捷方式数量上限：最多展示4个",
+          "start_line": 9,
+          "end_line": 9,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/typical-scenario-configuration",
+            "platform": "harmonyos",
+            "title": "创建应用静态快捷方式",
+            "local_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/document.md",
+            "sha256": "c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0",
+            "raw_sha256": "5a5418243b5cef629f1943eaca357cba5db96fd229cd408d4ed15409925b579d",
+            "raw_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/source.gz",
+            "fetched_at": "2026-09-05T10:24:47.845301+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 102,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 99,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "桌面展示快捷方式的数量有上限要求，最多展示4个。  "
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "module.json5配置metadata(ohos.ability.shortcuts)及长按图标展示效果",
+          "start_line": 83,
+          "end_line": 97,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/typical-scenario-configuration",
+            "platform": "harmonyos",
+            "title": "创建应用静态快捷方式",
+            "local_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/document.md",
+            "sha256": "c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0",
+            "raw_sha256": "5a5418243b5cef629f1943eaca357cba5db96fd229cd408d4ed15409925b579d",
+            "raw_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/source.gz",
+            "fetched_at": "2026-09-05T10:24:47.845301+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 102,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 99,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "           \"metadata\": [\n             {\n               \"name\": \"ohos.ability.shortcuts\",  // 配置快捷方式，该值固定为ohos.ability.shortcuts\n               \"resource\": \"$profile:shortcuts_config\"  // 指定shortcuts信息的资源位置\n             }\n           ],\n           // ...\n         }\n       ],\n       // ...\n     },\n   }\n   ```\n\n安装应用后，长按桌面上的应用图标，图标上方会显示开发者配置的快捷方式：\"添加收藏\"和\"分享好友\"。点击相应标签，可启动对应的组件。应用配置的静态快捷方式在桌面上的展示效果如下图所示。"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "setShortcutVisibleForSelf隐藏或展示快捷方式",
+          "start_line": 100,
+          "end_line": 102,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/typical-scenario-configuration",
+            "platform": "harmonyos",
+            "title": "创建应用静态快捷方式",
+            "local_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/document.md",
+            "sha256": "c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0",
+            "raw_sha256": "5a5418243b5cef629f1943eaca357cba5db96fd229cd408d4ed15409925b579d",
+            "raw_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/source.gz",
+            "fetched_at": "2026-09-05T10:24:47.845301+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 102,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 99,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 隐藏快捷方式\n\n可以通过[setShortcutVisibleForSelf](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-shortcutmanager#shortcutmanagersetshortcutvisibleforself)接口隐藏或展示快捷方式。"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "长按入口、拖拽桌面与最多4个上限的实际表现依赖设备桌面实现且版本基线未固定，建议精研时真机核验；非本轮必需。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "programming_model",
+      "statement": "快捷方式类型与运行时能力可能不同：Android读到静态/动态/固定三类，动态类可运行时推送、更新、移除；HarmonyOS已读文档仅覆盖静态配置与shortcutManager可见性管理；iOS App Shortcuts为代码静态声明(编译期生成、安装即用)。是否支持运行时动态变更是待确认差异。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Static/dynamic/pinned shortcut types",
+          "start_line": 35,
+          "end_line": 42,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/ui/compose/system/shortcuts",
+            "platform": "android",
+            "title": "App shortcuts overview",
+            "local_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/document.md",
+            "sha256": "7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6",
+            "raw_sha256": "1d691513441af9b757e8941a701b84b948b2e442faa2bb6a5756598b9bd93719",
+            "raw_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/source.gz",
+            "fetched_at": "2026-09-05T10:25:34.793195+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": false
+              },
+              {
+                "start_line": 10,
+                "end_line": 46,
+                "truncated": false
+              },
+              {
+                "start_line": 47,
+                "end_line": 52,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "You can publish the following types of shortcuts for your app:\n\n* *Static shortcuts* are defined in a resource file that is packaged into an\n  APK or [app bundle](https://developer.android.com/guide/app-bundle/build).\n* *Dynamic shortcuts* can be pushed, updated, and removed by your app only at\n  runtime.\n* *Pinned shortcuts* can be added to supported launchers at runtime if the\n  user grants permission."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "pushDynamicShortcut/removeDynamicShortcuts runtime operations",
+          "start_line": 205,
+          "end_line": 213,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/guide/topics/ui/shortcuts/creating-shortcuts",
+            "platform": "android",
+            "title": "Create shortcuts",
+            "local_path": "docs-raw/research/2026-09-06/31756d9966b13718103407861e0d539910a6c89ac852a9e607b0f5a97b5cee80/13666428f990fa67c0de01cd6470ddb1d01328936e81c48f8c4ea1678ee076b3/document.md",
+            "sha256": "13666428f990fa67c0de01cd6470ddb1d01328936e81c48f8c4ea1678ee076b3",
+            "raw_sha256": "18e7574be69c2c54b72db75cfa544d12655fee8901d22ad537ca90ae2e3a39d1",
+            "raw_path": "docs-raw/research/2026-09-06/31756d9966b13718103407861e0d539910a6c89ac852a9e607b0f5a97b5cee80/13666428f990fa67c0de01cd6470ddb1d01328936e81c48f8c4ea1678ee076b3/source.gz",
+            "fetched_at": "2026-09-05T10:45:05.453630+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 397,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 37,
+                "end_line": 77,
+                "truncated": true
+              },
+              {
+                "start_line": 189,
+                "end_line": 190,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "The `ShortcutManagerCompat` API lets your app perform the following operations\nwith dynamic shortcuts:\n\n* **Push and update:** use [`pushDynamicShortcut()`](https://developer.android.com/reference/kotlin/androidx/core/content/pm/ShortcutManagerCompat#pushDynamicShortcut(android.content.Context,%20androidx.core.content.pm.ShortcutInfoCompat)) to publish and update\n  your dynamic shortcuts. If there are already dynamic or pinned shortcuts\n  with the same ID, each mutable shortcut updates.\n* **Remove:** remove a set of dynamic shortcuts using\n  [`removeDynamicShortcuts()`](https://developer.android.com/reference/kotlin/androidx/core/content/pm/ShortcutManagerCompat#removeDynamicShortcuts(android.content.Context,%20java.util.List%3Cjava.lang.String%3E)). Remove all dynamic shortcuts using\n  [`removeAllDynamicShortcuts()`](https://developer.android.com/reference/kotlin/androidx/core/content/pm/ShortcutManagerCompat#removeAllDynamicShortcuts(android.content.Context))."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "App Shortcuts defined in code with static data, available on install",
+          "start_line": 17,
+          "end_line": 24,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/appintents/app-shortcuts",
+            "platform": "ios",
+            "title": "App Shortcuts",
+            "local_path": "docs-raw/research/2026-09-06/fb1af83d3f9dab3837d68eeecf91bc9c9c5974f5e14cc78ad838cfa8c69331e8/9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94/document.md",
+            "sha256": "9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94",
+            "raw_sha256": "021007f8b432a7cc4d37b169b80b6ce629f10f20626c15db4cdaebc02c12eacc",
+            "raw_path": "docs-raw/research/2026-09-06/fb1af83d3f9dab3837d68eeecf91bc9c9c5974f5e14cc78ad838cfa8c69331e8/9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94/source.gz",
+            "fetched_at": "2026-09-05T10:17:04.504685+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 142,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 34,
+                "truncated": false
+              },
+              {
+                "start_line": 35,
+                "end_line": 36,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "You create App Shortcuts programmatically in your code, and the compiler generates the information\nthe rest of the system needs to use it. This approach means that the shortcuts you create\nare available as soon as someone installs your app, and you don’t have to register them yourself.\nSpecify your shortcuts in your code by defining a custom type that adopts the [`AppShortcutsProvider`](/documentation/AppIntents/AppShortcutsProvider)\nprotocol. Include this type in your app, app extension, Swift package, or library that you\nuse to manage your intents-related code. Inside this type, construct one or more [`AppShortcut`](/documentation/AppIntents/AppShortcut)\ntypes using static data. Define your shortcuts in the same place you define the app intents\nthat those shortcuts use."
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "静态快捷方式配置文件与module.json5 metadata",
+          "start_line": 73,
+          "end_line": 95,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/typical-scenario-configuration",
+            "platform": "harmonyos",
+            "title": "创建应用静态快捷方式",
+            "local_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/document.md",
+            "sha256": "c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0",
+            "raw_sha256": "5a5418243b5cef629f1943eaca357cba5db96fd229cd408d4ed15409925b579d",
+            "raw_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/source.gz",
+            "fetched_at": "2026-09-05T10:24:47.845301+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 102,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 99,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "3. 在应用的module.json5文件中配置metadata，指向快捷方式的配置文件。\n\n   ```\n   {\n     \"module\": {\n       // ...\n       \"abilities\": [\n         {\n           \"name\": \"EntryAbility\",\n           \"srcEntry\": \"./ets/entryability/EntryAbility.ets\",\n           \"metadata\": [\n             {\n               \"name\": \"ohos.ability.shortcuts\",  // 配置快捷方式，该值固定为ohos.ability.shortcuts\n               \"resource\": \"$profile:shortcuts_config\"  // 指定shortcuts信息的资源位置\n             }\n           ],\n           // ...\n         }\n       ],\n       // ...\n     },\n   }\n   ```"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "shortcutManager管理能力引用及setShortcutVisibleForSelf",
+          "start_line": 100,
+          "end_line": 102,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/typical-scenario-configuration",
+            "platform": "harmonyos",
+            "title": "创建应用静态快捷方式",
+            "local_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/document.md",
+            "sha256": "c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0",
+            "raw_sha256": "5a5418243b5cef629f1943eaca357cba5db96fd229cd408d4ed15409925b579d",
+            "raw_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/source.gz",
+            "fetched_at": "2026-09-05T10:24:47.845301+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 102,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 99,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 隐藏快捷方式\n\n可以通过[setShortcutVisibleForSelf](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-shortcutmanager#shortcutmanagersetshortcutvisibleforself)接口隐藏或展示快捷方式。"
+        }
+      ],
+      "open_questions": [
+        "HarmonyOS shortcutManager模块是否支持运行时新增/更新快捷方式",
+        "iOS App Shortcuts是否可运行时变更(已读正文称static data定义)",
+        "各能力的最低版本条件"
+      ]
+    },
+    {
+      "dimension": "availability",
+      "statement": "快捷方式展示surface可能不同：Android为受支持的launcher及assistant；iOS App Shortcuts正文列出Shortcuts app、Siri、Spotlight等系统体验，未明示主屏幕长按图标菜单；HarmonyOS明示长按图标打开入口并支持拖拽至桌面成独立图标。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "display shortcuts in a supported launcher or assistant",
+          "start_line": 3,
+          "end_line": 5,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/ui/compose/system/shortcuts",
+            "platform": "android",
+            "title": "App shortcuts overview",
+            "local_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/document.md",
+            "sha256": "7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6",
+            "raw_sha256": "1d691513441af9b757e8941a701b84b948b2e442faa2bb6a5756598b9bd93719",
+            "raw_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/source.gz",
+            "fetched_at": "2026-09-05T10:25:34.793195+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": false
+              },
+              {
+                "start_line": 10,
+                "end_line": 46,
+                "truncated": false
+              },
+              {
+                "start_line": 47,
+                "end_line": 52,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "As a developer, you can define *shortcuts* to perform specific actions in your\napp. You can display these shortcuts in a supported launcher or assistant and\nhelp your users quickly start common or recommended tasks within your app."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "system experiences like Siri, Spotlight, and the Shortcuts app",
+          "start_line": 3,
+          "end_line": 8,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/appintents/app-shortcuts",
+            "platform": "ios",
+            "title": "App Shortcuts",
+            "local_path": "docs-raw/research/2026-09-06/fb1af83d3f9dab3837d68eeecf91bc9c9c5974f5e14cc78ad838cfa8c69331e8/9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94/document.md",
+            "sha256": "9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94",
+            "raw_sha256": "021007f8b432a7cc4d37b169b80b6ce629f10f20626c15db4cdaebc02c12eacc",
+            "raw_path": "docs-raw/research/2026-09-06/fb1af83d3f9dab3837d68eeecf91bc9c9c5974f5e14cc78ad838cfa8c69331e8/9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94/source.gz",
+            "fetched_at": "2026-09-05T10:17:04.504685+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 142,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 34,
+                "truncated": false
+              },
+              {
+                "start_line": 35,
+                "end_line": 36,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Improve the experience of using your app intents and entities in system experiences like Siri, Spotlight, and the Shortcuts app.\n\n## Overview\n\nApp Shortcuts provide a polished experience for your app intents and entities in the\nShortcuts app and other system experiences. An App Shortcut combines the action from your"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "长按图标打开快捷方式入口、拖拽至桌面",
+          "start_line": 11,
+          "end_line": 18,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-desktop-shortcuts",
+            "platform": "harmonyos",
+            "title": "桌面快捷方式",
+            "local_path": "docs-raw/research/2026-09-06/c7b273716710ad2d22bafc0bda579a8294e26dcade0ce6749295565f7a396ee3/49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f/document.md",
+            "sha256": "49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f",
+            "raw_sha256": "1e4482da329bdf77740c9368e7f29362b7e6988f5e34966324571836955747e6",
+            "raw_path": "docs-raw/research/2026-09-06/c7b273716710ad2d22bafc0bda579a8294e26dcade0ce6749295565f7a396ee3/49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f/source.gz",
+            "fetched_at": "2026-09-05T10:40:26.358004+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 170,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 7,
+                "end_line": 19,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "快捷方式创建成功后支持以下启动方式：\n\n* 点击快捷方式入口列表中的\"回家\"项，即可快速打开地图应用，开启从当前位置到家的导航路线选择。 ![](https://media:901787638009989939 \"点击放大\")\n\n* 长按快捷方式入口列表中的\"回家\"项，可将其拖动至桌面，点击桌面对应图标，即可开启从当前位置到家的导航路线选择。 ![](https://media:901787638010295940 \"点击放大\")\n\n![](https://media:901787638010343941)  \n本文以单[HAP](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hap-package)包为场景，讲述了快捷方式的实现步骤。多[HAP](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hap-package)包的场景下， 步骤与单[HAP](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hap-package)包一致，都是在entry文件夹下进行shortcuts_config.json的创建和module.json5的配置。  "
+        }
+      ],
+      "open_questions": [
+        "iOS主屏幕长按图标菜单是否列出App Shortcuts(未读到正文证据)",
+        "Android assistant surface的适用条件与Google服务依赖"
+      ]
+    },
+    {
+      "dimension": "limits_precision",
+      "statement": "数量上限机制可能不同：Android大多数launcher最多同时显示4个静态+动态快捷方式，但设备上限各异、需getMaxShortcutCountPerActivity()查询，pinned无数量上限；HarmonyOS文档明示桌面最多展示4个。",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Shortcut limitations: up to four shown, per-device max varies, pinned unlimited",
+          "start_line": 53,
+          "end_line": 70,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/ui/compose/system/shortcuts",
+            "platform": "android",
+            "title": "App shortcuts overview",
+            "local_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/document.md",
+            "sha256": "7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6",
+            "raw_sha256": "1d691513441af9b757e8941a701b84b948b2e442faa2bb6a5756598b9bd93719",
+            "raw_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/source.gz",
+            "fetched_at": "2026-09-05T10:25:34.793195+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 83,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": false
+              },
+              {
+                "start_line": 10,
+                "end_line": 46,
+                "truncated": false
+              },
+              {
+                "start_line": 47,
+                "end_line": 52,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Shortcut limitations\n\nMost supported launchers display up to four shortcuts at a time, including both\nstatic and dynamic shortcuts. When pushing dynamic shortcuts for display on\nGoogle's surfaces, use the [Google Shortcuts Integration Library](https://developer.android.com/develop/ui/compose/system/shortcuts/creating-shortcuts#gsi-library) to avoid\nbeing subject to the shortcut limit.\n\nIf you choose not to use the Google Shortcuts Integration Library, your app is\nsubject to the device's limit for the number of shortcuts it supports at a time.\nShortcuts published this way only appear within the Android launchers and aren't\ndiscoverable on other Google surfaces.\n\n**Note:** The maximum number of shortcuts a device supports varies. Use the\n[`getMaxShortcutCountPerActivity()`](https://developer.android.com/reference/kotlin/androidx/core/content/pm/ShortcutManagerCompat#getMaxShortcutCountPerActivity(android.content.Context)) method to determine how many shortcuts\na particular device supports.\n\nThere is no limit to the number of pinned shortcuts users can create to your\napp. Your app can't remove pinned shortcuts, but it can [disable](https://developer.android.com/develop/ui/compose/system/shortcuts/managing-shortcuts#disable-shortcuts) them."
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "桌面展示快捷方式数量上限：最多展示4个",
+          "start_line": 9,
+          "end_line": 9,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/typical-scenario-configuration",
+            "platform": "harmonyos",
+            "title": "创建应用静态快捷方式",
+            "local_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/document.md",
+            "sha256": "c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0",
+            "raw_sha256": "5a5418243b5cef629f1943eaca357cba5db96fd229cd408d4ed15409925b579d",
+            "raw_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/source.gz",
+            "fetched_at": "2026-09-05T10:24:47.845301+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 102,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 99,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "桌面展示快捷方式的数量有上限要求，最多展示4个。  "
+        }
+      ],
+      "open_questions": [
+        "HarmonyOS的4个上限是否可经接口查询或因桌面实现而异",
+        "HarmonyOS拖拽至桌面的快捷方式数量上限未读到"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "iOS App Shortcuts与本节点'长按图标/系统菜单深链入口'的对应关系未建立，需主屏幕长按菜单行为与符号级iOS availability证据",
+    "三平台启动日最新正式版与手机基线均未固定，版本适用性结论全部待核",
+    "ShortcutManager(Android)/shortcutManager(HarmonyOS)/AppShortcutsProvider(iOS)的API参考正文未纳入本轮冻结sources，接口细节未读",
+    "动态/固定类快捷方式在HarmonyOS的存在性与iOS运行时变更能力未确认"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "iOS侧映射未建立(possible_mapping、间接证据、surface语义与节点定义不符风险高)，且三平台版本基线未固定、快捷方式类型与数量上限机制可能存在高风险差异，属关键缺口，需优先精研。"
+  }
+}

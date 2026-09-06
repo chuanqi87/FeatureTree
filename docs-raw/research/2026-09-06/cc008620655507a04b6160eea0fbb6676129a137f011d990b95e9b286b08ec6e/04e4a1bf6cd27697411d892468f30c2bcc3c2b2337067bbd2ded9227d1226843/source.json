@@ -1,0 +1,13 @@
+{
+  "id": "cc008620655507a04b6160eea0fbb6676129a137f011d990b95e9b286b08ec6e",
+  "url": "https://developer.apple.com/documentation/usernotifications/handling-notifications-and-notification-related-actions",
+  "platform": "ios",
+  "title": "Handling notifications and notification-related actions",
+  "local_path": "docs-raw/research/2026-09-06/cc008620655507a04b6160eea0fbb6676129a137f011d990b95e9b286b08ec6e/04e4a1bf6cd27697411d892468f30c2bcc3c2b2337067bbd2ded9227d1226843/document.md",
+  "sha256": "04e4a1bf6cd27697411d892468f30c2bcc3c2b2337067bbd2ded9227d1226843",
+  "raw_sha256": "1e4fb3167f5329cbe3b8b04a3c3c4f01cac483608b9c2441440967c499b11867",
+  "raw_path": "docs-raw/research/2026-09-06/cc008620655507a04b6160eea0fbb6676129a137f011d990b95e9b286b08ec6e/04e4a1bf6cd27697411d892468f30c2bcc3c2b2337067bbd2ded9227d1226843/source.gz",
+  "fetched_at": "2026-09-05T10:28:07.628036+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

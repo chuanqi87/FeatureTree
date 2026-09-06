@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "connectivity.nfc.reader",
+    "level": "L3",
+    "parent": "connectivity.nfc",
+    "name": {
+      "zh": "NFC读写",
+      "en": "NFC Reader Writer"
+    },
+    "definition": "读写 NFC 标签。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "runtime_permission",
+    "leaf_at_this_level": true,
+    "knowledge_path": "knowledge/connectivity/nfc/reader.yaml",
+    "comparison_scope": {
+      "includes": [
+        "读写 NFC 标签。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "cdc83fec56cb7779512cd7365d4d1f9f1512b36fed123f65bbb73fc05dad10fa",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "575cdef421cb5bbd331b6a81f28cb59c12bca2c363d43768dac341ab49f43504",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/develop/connectivity/nfc",
+      "platform": "android",
+      "title": "Near field communication (NFC) overview",
+      "local_path": "docs-raw/research/2026-09-06/b313e932ceb2364a01c029dab229b0e1c03e535aa5f583cc0c497c96f22a9e19/f7538bc876e9d656e04244f0728c4c2612c60f9f402a3310c20d4f6db61e1f82/document.md",
+      "sha256": "f7538bc876e9d656e04244f0728c4c2612c60f9f402a3310c20d4f6db61e1f82",
+      "raw_sha256": "4bc49287394b3758def4c5e7e0e6342829fcba6691494900b5dd30ae7ba24cb3",
+      "raw_path": "docs-raw/research/2026-09-06/b313e932ceb2364a01c029dab229b0e1c03e535aa5f583cc0c497c96f22a9e19/f7538bc876e9d656e04244f0728c4c2612c60f9f402a3310c20d4f6db61e1f82/source.gz",
+      "fetched_at": "2026-09-05T10:24:19.626460+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 46,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 46,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/develop/connectivity/nfc/hce",
+      "platform": "android",
+      "title": "Host-based card emulation overview",
+      "local_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/document.md",
+      "sha256": "a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a",
+      "raw_sha256": "3c885f79fd15a4914ab3a984a08d67df53ea1d2c36f9066df1af7a7b81f453c9",
+      "raw_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/source.gz",
+      "fetched_at": "2026-09-05T10:24:20.246506+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 713,
+      "suggested_sections": [
+        {
+          "start_line": 15,
+          "end_line": 16,
+          "truncated": true
+        },
+        {
+          "start_line": 40,
+          "end_line": 63,
+          "truncated": false
+        },
+        {
+          "start_line": 164,
+          "end_line": 165,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/corenfc",
+      "platform": "ios",
+      "title": "Core NFC",
+      "local_path": "docs-raw/research/2026-09-06/0ade070d152332462074190410cc19cbb40651b190fa03b0e0ced5ea3692f91f/80e2fb994de51be7ef40ef661ca38810b3662d938b052db6953dad2150cd92c7/document.md",
+      "sha256": "80e2fb994de51be7ef40ef661ca38810b3662d938b052db6953dad2150cd92c7",
+      "raw_sha256": "aed5eacb571c5c2c4420c91f850379ccbe360887f1f9895730b62e230768f226",
+      "raw_path": "docs-raw/research/2026-09-06/0ade070d152332462074190410cc19cbb40651b190fa03b0e0ced5ea3692f91f/80e2fb994de51be7ef40ef661ca38810b3662d938b052db6953dad2150cd92c7/source.gz",
+      "fetched_at": "2026-09-05T10:30:09.525759+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 157,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 12,
+          "truncated": false
+        },
+        {
+          "start_line": 13,
+          "end_line": 14,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/corenfc/nfcreadererror-swift.struct",
+      "platform": "ios",
+      "title": "NFCReaderError",
+      "local_path": "docs-raw/research/2026-09-06/f8665a215ade75208d415137ffd3d148abe1c2c7421ee199b4e0d30022db19d7/d2b85fc4526b5c0e42508372148bd5e623512d79db8784241ec6e9ae09a02ca3/document.md",
+      "sha256": "d2b85fc4526b5c0e42508372148bd5e623512d79db8784241ec6e9ae09a02ca3",
+      "raw_sha256": "15e5a711b63e3e15de9c9024d0bb5b6c96481a791e180148dc1c29fd163e3a50",
+      "raw_path": "docs-raw/research/2026-09-06/f8665a215ade75208d415137ffd3d148abe1c2c7421ee199b4e0d30022db19d7/d2b85fc4526b5c0e42508372148bd5e623512d79db8784241ec6e9ae09a02ca3/source.gz",
+      "fetched_at": "2026-09-05T10:46:59.963451+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 133,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 32,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-nfccontroller",
+      "platform": "harmonyos",
+      "title": "@ohos.nfc.controller (标准NFC)",
+      "local_path": "docs-raw/research/2026-09-06/1787a4b1d0138d6891aeb0331216d1baf0de1d09fc90616060e131811ab4f7c3/aa3f2bb90f16503633bd09c4fb917909413caa3ebd42158ef920e3a0710a28ee/document.md",
+      "sha256": "aa3f2bb90f16503633bd09c4fb917909413caa3ebd42158ef920e3a0710a28ee",
+      "raw_sha256": "6ff266f600e20d739c1c0c81807226700aa8bc74f433d3834b5d9e5cadf4df75",
+      "raw_path": "docs-raw/research/2026-09-06/1787a4b1d0138d6891aeb0331216d1baf0de1d09fc90616060e131811ab4f7c3/aa3f2bb90f16503633bd09c4fb917909413caa3ebd42158ef920e3a0710a28ee/source.gz",
+      "fetched_at": "2026-09-05T10:27:44.541030+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 268,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 12,
+          "truncated": false
+        },
+        {
+          "start_line": 13,
+          "end_line": 27,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/nfc-tag-access-guide",
+      "platform": "harmonyos",
+      "title": "NFC标签读写开发指南",
+      "local_path": "docs-raw/research/2026-09-06/0aa5955586fe6a698a4fc9ffa9a3bbcd5be65c56f2aa2cde7f20d25c0a9cfd87/2a19e07427e200c0fe0a23ffe491542f9f87e859012a1b2d0f4566940bb48e58/document.md",
+      "sha256": "2a19e07427e200c0fe0a23ffe491542f9f87e859012a1b2d0f4566940bb48e58",
+      "raw_sha256": "7c759c015bcfea6fbb14b19245113d9f99a25d8badd7e2fae0a6ea260c4776fc",
+      "raw_path": "docs-raw/research/2026-09-06/0aa5955586fe6a698a4fc9ffa9a3bbcd5be65c56f2aa2cde7f20d25c0a9cfd87/2a19e07427e200c0fe0a23ffe491542f9f87e859012a1b2d0f4566940bb48e58/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 453,
+      "suggested_sections": [
+        {
+          "start_line": 18,
+          "end_line": 23,
+          "truncated": true
+        },
+        {
+          "start_line": 39,
+          "end_line": 40,
+          "truncated": true
+        },
+        {
+          "start_line": 58,
+          "end_line": 81,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:21.032021+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "d09a1a19693bfbb83e61d2af5087ae1a1ac81c97bf3fa93c63f73def4944852b"
+}

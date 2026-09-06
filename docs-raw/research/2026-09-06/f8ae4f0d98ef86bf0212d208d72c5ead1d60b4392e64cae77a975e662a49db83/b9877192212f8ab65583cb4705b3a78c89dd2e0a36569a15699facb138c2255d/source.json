@@ -1,0 +1,13 @@
+{
+  "id": "f8ae4f0d98ef86bf0212d208d72c5ead1d60b4392e64cae77a975e662a49db83",
+  "url": "https://developer.android.com/develop/ui/compose/migrate/interoperability-apis/compose-in-views",
+  "platform": "android",
+  "title": "Using Compose in Views",
+  "local_path": "docs-raw/research/2026-09-06/f8ae4f0d98ef86bf0212d208d72c5ead1d60b4392e64cae77a975e662a49db83/b9877192212f8ab65583cb4705b3a78c89dd2e0a36569a15699facb138c2255d/document.md",
+  "sha256": "b9877192212f8ab65583cb4705b3a78c89dd2e0a36569a15699facb138c2255d",
+  "raw_sha256": "ec3dfafda5f7c0f68d1af1427b9ff872f41cae7b6c88bc07da23590c8ca98d40",
+  "raw_path": "docs-raw/research/2026-09-06/f8ae4f0d98ef86bf0212d208d72c5ead1d60b4392e64cae77a975e662a49db83/b9877192212f8ab65583cb4705b3a78c89dd2e0a36569a15699facb138c2255d/source.gz",
+  "fetched_at": "2026-09-05T10:25:06.502475+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

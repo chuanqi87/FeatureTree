@@ -1,0 +1,544 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "identity.system_account.manager",
+    "level": "L3",
+    "parent": "identity.system_account",
+    "name": {
+      "zh": "账号管理",
+      "en": "Account Manager"
+    },
+    "definition": "添加/查询系统账号。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "split_justification": "analog",
+    "knowledge_path": "knowledge/identity/system_account/manager.yaml",
+    "comparison_scope": {
+      "includes": [
+        "添加/查询系统账号。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "7406c8ba9bddad306b08dd2869928242ba740ca0a7e6372ce1df83c293e62b93",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "8e1fd97fffc000d4d100022c21cb8fb2d94ba23f2edbb91a7ac35301ce10ef4e",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/training/sign-in/credential-manager",
+      "platform": "android",
+      "title": "About Sign in with Google",
+      "local_path": "docs-raw/research/2026-09-06/97b1d681bed3b64cd6ccfbc167dcf0a87dada2e82b1f29c9d046af23d41cc320/76408216cb0d80775cbaaebacf41cd62e11c6dc4a78b974ff48c3db47a8c2274/document.md",
+      "sha256": "76408216cb0d80775cbaaebacf41cd62e11c6dc4a78b974ff48c3db47a8c2274",
+      "raw_sha256": "8690093d4837a8cc599e2df5831dd335a26a7a94dbafa0b81915d166aabefc33",
+      "raw_path": "docs-raw/research/2026-09-06/97b1d681bed3b64cd6ccfbc167dcf0a87dada2e82b1f29c9d046af23d41cc320/76408216cb0d80775cbaaebacf41cd62e11c6dc4a78b974ff48c3db47a8c2274/source.gz",
+      "fetched_at": "2026-09-05T10:49:45.810013+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 132,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 31,
+          "truncated": false
+        },
+        {
+          "start_line": 32,
+          "end_line": 52,
+          "truncated": false
+        },
+        {
+          "start_line": 53,
+          "end_line": 57,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/reference/android/accounts/package-summary",
+      "platform": "android",
+      "title": "android.accounts",
+      "local_path": "docs-raw/research/2026-09-06/1b1e306962308622262b3498f86ba7395d240ea5d874574ac9cc54fd68ddd437/411431bc22aa454c35547127281973b538fad48c48e98632579a4d68a8c5f31c/document.md",
+      "sha256": "411431bc22aa454c35547127281973b538fad48c48e98632579a4d68a8c5f31c",
+      "raw_sha256": "78d6742eb554a264a527e3c6cab47d38f0bdc56543bf59e02b86a89f7730c35b",
+      "raw_path": "docs-raw/research/2026-09-06/1b1e306962308622262b3498f86ba7395d240ea5d874574ac9cc54fd68ddd437/411431bc22aa454c35547127281973b538fad48c48e98632579a4d68a8c5f31c/source.gz",
+      "fetched_at": "2026-09-05T10:39:32.954300+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 58,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 11,
+          "truncated": false
+        },
+        {
+          "start_line": 12,
+          "end_line": 19,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/apple-school-and-business-manager-api/implementing-oauth-for-the-apple-school-manager-and-apple-business-api",
+      "platform": "ios",
+      "title": "Implementing OAuth for the Apple School Manager and Apple Business API",
+      "local_path": "docs-raw/research/2026-09-06/526e0367ff1bb3ec25f6fa57ac4fb5ae295b7d0648fbd22f3a93ea7b93d3b735/6aa7df794b2d175ba415ed52c86bf3ed67ceea848d15b42ef16e7c8c5615d68a/document.md",
+      "sha256": "6aa7df794b2d175ba415ed52c86bf3ed67ceea848d15b42ef16e7c8c5615d68a",
+      "raw_sha256": "00a8579d777ee3306d7277d7e91ba2075a334df034b1503e79bf62d8b2c9317f",
+      "raw_path": "docs-raw/research/2026-09-06/526e0367ff1bb3ec25f6fa57ac4fb5ae295b7d0648fbd22f3a93ea7b93d3b735/6aa7df794b2d175ba415ed52c86bf3ed67ceea848d15b42ef16e7c8c5615d68a/source.gz",
+      "fetched_at": "2026-09-05T10:17:31.158910+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 191,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 20,
+          "truncated": false
+        },
+        {
+          "start_line": 21,
+          "end_line": 22,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/videosubscriberaccount/signing-people-in-to-media-apps-automatically",
+      "platform": "ios",
+      "title": "Signing people in to their media accounts automatically",
+      "local_path": "docs-raw/research/2026-09-06/822f69b376dbc574d661881ec79dbf5df3259b223713c9a4fadb2d97644fbf12/2da535133a4985b328977b27a8c04d4625b779d41cddcabc436d2129f6062cf5/document.md",
+      "sha256": "2da535133a4985b328977b27a8c04d4625b779d41cddcabc436d2129f6062cf5",
+      "raw_sha256": "1f9597f0863cc464bb9ad337a40626d46c5303824cb1efed49739a7baf14aa0e",
+      "raw_path": "docs-raw/research/2026-09-06/822f69b376dbc574d661881ec79dbf5df3259b223713c9a4fadb2d97644fbf12/2da535133a4985b328977b27a8c04d4625b779d41cddcabc436d2129f6062cf5/source.gz",
+      "fetched_at": "2026-09-05T10:28:10.188699+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 103,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 6,
+          "truncated": true
+        },
+        {
+          "start_line": 20,
+          "end_line": 57,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-enterprise-accountmanager",
+      "platform": "harmonyos",
+      "title": "@ohos.enterprise.accountManager（账号管理）",
+      "local_path": "docs-raw/research/2026-09-06/7e3d0eef4138938a2ecf12bebb165f79569e1497c0ef0d059f7d25987e5ea5fe/a12817f937c9d6cf4aa7021d868668319fec1f39cb069fac6beecdeb690a00b0/document.md",
+      "sha256": "a12817f937c9d6cf4aa7021d868668319fec1f39cb069fac6beecdeb690a00b0",
+      "raw_sha256": "60464e0cc2487e8bfa8654cbee32d4b051b2a25cc0abecfe8392d1c12d879ad5",
+      "raw_path": "docs-raw/research/2026-09-06/7e3d0eef4138938a2ecf12bebb165f79569e1497c0ef0d059f7d25987e5ea5fe/a12817f937c9d6cf4aa7021d868668319fec1f39cb069fac6beecdeb690a00b0/source.gz",
+      "fetched_at": "2026-09-05T10:27:18.953076+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 641,
+      "suggested_sections": [
+        {
+          "start_line": 245,
+          "end_line": 333,
+          "truncated": false
+        },
+        {
+          "start_line": 334,
+          "end_line": 402,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-osaccount",
+      "platform": "harmonyos",
+      "title": "@ohos.account.osAccount (系统账号管理)",
+      "local_path": "docs-raw/research/2026-09-06/9723bb91ef504154d4c180ea1ad5dc166ecb7d38e85d39afda57a0f107bb2181/03204eca9eb92ef1444f6a4b83b635b0040d75daa0d9a7da48de435a164d202a/document.md",
+      "sha256": "03204eca9eb92ef1444f6a4b83b635b0040d75daa0d9a7da48de435a164d202a",
+      "raw_sha256": "715c5b58594c0f4edbf5cd46e06dbaa4f804b0c1539e7a110c97e704394f6a51",
+      "raw_path": "docs-raw/research/2026-09-06/9723bb91ef504154d4c180ea1ad5dc166ecb7d38e85d39afda57a0f107bb2181/03204eca9eb92ef1444f6a4b83b635b0040d75daa0d9a7da48de435a164d202a/source.gz",
+      "fetched_at": "2026-09-05T10:27:46.537032+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 3737,
+      "suggested_sections": [
+        {
+          "start_line": 13,
+          "end_line": 32,
+          "truncated": false
+        },
+        {
+          "start_line": 92,
+          "end_line": 134,
+          "truncated": false
+        },
+        {
+          "start_line": 135,
+          "end_line": 174,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:31.860696+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "73264918167747d71758a4f21aa70856190da2cd2fad7ff3422fbffe6a162d99"
+}

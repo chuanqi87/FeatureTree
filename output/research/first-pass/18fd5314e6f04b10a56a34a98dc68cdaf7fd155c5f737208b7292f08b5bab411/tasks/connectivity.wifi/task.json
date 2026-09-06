@@ -1,0 +1,537 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "connectivity.wifi",
+    "level": "L2",
+    "parent": "connectivity",
+    "name": {
+      "zh": "Wi-Fi",
+      "en": "Wi-Fi"
+    },
+    "definition": "Wi-Fi 扫描、连接与感知。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/connectivity/wifi/_rollup.yaml",
+    "comparison_scope": {
+      "includes": [
+        "Wi-Fi 扫描、连接与感知。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "7ec949e441cc72e1b45e50acbdb304da5354ceed07f0351e75ad02d2cf68ac35",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "11c993cfbdeba44c005ddfc47bbf22cc3f92a532ef0809cfed315a9d454b91d9",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/develop/connectivity/wifi/wifi-easy",
+      "platform": "android",
+      "title": "Wi-Fi Easy Connect",
+      "local_path": "docs-raw/research/2026-09-06/2e1c886e33f8b028c10cb7533dc7a17f70e8b019b70bc3935d7ed072f23684bb/327aee7295097ff54b949de1490737fe3f176c1c1a0eb10cbac9cf237fd97ca2/document.md",
+      "sha256": "327aee7295097ff54b949de1490737fe3f176c1c1a0eb10cbac9cf237fd97ca2",
+      "raw_sha256": "f5ca10ad041b4dc86e8e9dbd66a3ea91161195b55bfeb9b1791dd19efcf72678",
+      "raw_path": "docs-raw/research/2026-09-06/2e1c886e33f8b028c10cb7533dc7a17f70e8b019b70bc3935d7ed072f23684bb/327aee7295097ff54b949de1490737fe3f176c1c1a0eb10cbac9cf237fd97ca2/source.gz",
+      "fetched_at": "2026-09-05T10:24:26.212940+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 20,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 20,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/topic/performance/vitals/bg-wifi",
+      "platform": "android",
+      "title": "Excessive Wi-Fi Scanning in the Background",
+      "local_path": "docs-raw/research/2026-09-06/55cd433b94b36c91ac146a4c65f78028234c55f1f8f06eddd3d0fc3afb599d36/d55d74a56e792ebc28e672c443d1755ff18ec1cbe1748b51b2daa9c20bbf824a/document.md",
+      "sha256": "d55d74a56e792ebc28e672c443d1755ff18ec1cbe1748b51b2daa9c20bbf824a",
+      "raw_sha256": "57c8320fd23db5761524a1d683e1188c9b9d7b6dac22afd3042bed5a501b1378",
+      "raw_path": "docs-raw/research/2026-09-06/55cd433b94b36c91ac146a4c65f78028234c55f1f8f06eddd3d0fc3afb599d36/d55d74a56e792ebc28e672c443d1755ff18ec1cbe1748b51b2daa9c20bbf824a/source.gz",
+      "fetched_at": "2026-09-05T10:37:53.060695+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 74,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 12,
+          "truncated": false
+        },
+        {
+          "start_line": 13,
+          "end_line": 18,
+          "truncated": false
+        },
+        {
+          "start_line": 19,
+          "end_line": 39,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/network/recording-a-wi-fi-packet-trace",
+      "platform": "ios",
+      "title": "Recording a Wi-Fi Packet Trace",
+      "local_path": "docs-raw/research/2026-09-06/8c5eae810d57d56e61e34c8e9f65ec879e59c459230dcdabffa7066a72c17d54/b8a1b03cc67e922b16b7a0db104dbf1a43f5c1b7ac0b5b9b1ebd79273633b1ab/document.md",
+      "sha256": "b8a1b03cc67e922b16b7a0db104dbf1a43f5c1b7ac0b5b9b1ebd79273633b1ab",
+      "raw_sha256": "423bfb26d67315e56c868b0ff07f3467d006c0a9c9fa3a2b593edf4109d9d3d4",
+      "raw_path": "docs-raw/research/2026-09-06/8c5eae810d57d56e61e34c8e9f65ec879e59c459230dcdabffa7066a72c17d54/b8a1b03cc67e922b16b7a0db104dbf1a43f5c1b7ac0b5b9b1ebd79273633b1ab/source.gz",
+      "fetched_at": "2026-09-05T11:16:40.933949+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 32,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 16,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/networkextension/wi-fi-configuration",
+      "platform": "ios",
+      "title": "Wi-Fi configuration",
+      "local_path": "docs-raw/research/2026-09-06/6170a57b92e45c73a1b02ce830f3648b5c24eaa0bb60b1863d68e9ac2082f34f/9ca92a3b60bee13681ff3b9dccd2c6da4540df6d3f3b73d28f4a6b17b41280f3/document.md",
+      "sha256": "9ca92a3b60bee13681ff3b9dccd2c6da4540df6d3f3b73d28f4a6b17b41280f3",
+      "raw_sha256": "efb2f421d64a37617ec7d4e98de850c9f616cc4bf6a6e47ca7deae60d39e970c",
+      "raw_path": "docs-raw/research/2026-09-06/6170a57b92e45c73a1b02ce830f3648b5c24eaa0bb60b1863d68e9ac2082f34f/9ca92a3b60bee13681ff3b9dccd2c6da4540df6d3f3b73d28f4a6b17b41280f3/source.gz",
+      "fetched_at": "2026-09-05T10:24:25.793005+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 53,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 24,
+          "truncated": false
+        },
+        {
+          "start_line": 25,
+          "end_line": 26,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-enterprise-wifimanager",
+      "platform": "harmonyos",
+      "title": "@ohos.enterprise.wifiManager（Wi-Fi管理）",
+      "local_path": "docs-raw/research/2026-09-06/34c36b6c0b4de8de495c4fc0d652646f8eeff32f3c8d0d4013c140a46a489dcf/5c6ce8922c2c0852c6f1eae14c88d87f70dffdffba8746067d710455cec39efb/document.md",
+      "sha256": "5c6ce8922c2c0852c6f1eae14c88d87f70dffdffba8746067d710455cec39efb",
+      "raw_sha256": "49ad3f00d1d4e8f2c56ce72c0fd3664319b84257089428738fbccaeb5174de4e",
+      "raw_path": "docs-raw/research/2026-09-06/34c36b6c0b4de8de495c4fc0d652646f8eeff32f3c8d0d4013c140a46a489dcf/5c6ce8922c2c0852c6f1eae14c88d87f70dffdffba8746067d710455cec39efb/source.gz",
+      "fetched_at": "2026-09-05T10:27:22.366204+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 1174,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 25,
+          "truncated": false
+        },
+        {
+          "start_line": 32,
+          "end_line": 85,
+          "truncated": false
+        },
+        {
+          "start_line": 86,
+          "end_line": 225,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sta-development-guide",
+      "platform": "harmonyos",
+      "title": "STA模式开发指南",
+      "local_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/document.md",
+      "sha256": "b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223",
+      "raw_sha256": "d7d71d016cad09f0781e848d3167460d70e5e899c53c56c8217f4f48a300b195",
+      "raw_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 146,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 11,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:21.660660+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "15fb816d0f1ccce07b5f3d78f797cbca2e3ecf05bc4b726b52c121c71e95eeeb"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "581e6401caeea25aef80c45501d106c2cba849350ab8a5947b2edc79ad1f6b72",
+  "url": "https://developer.android.com/topic/architecture/views/lifecycle-views",
+  "platform": "android",
+  "title": "Handling lifecycles with lifecycle-aware components (Views)",
+  "local_path": "docs-raw/research/2026-09-06/581e6401caeea25aef80c45501d106c2cba849350ab8a5947b2edc79ad1f6b72/4dda445f3e9651d743ad1eea9545f837f0ae51361789e32a05f09564a831e4c9/document.md",
+  "sha256": "4dda445f3e9651d743ad1eea9545f837f0ae51361789e32a05f09564a831e4c9",
+  "raw_sha256": "973f8444ecf4d698cf9b5d4b9f740cabeec827b524561b5d562260c6d6c262e8",
+  "raw_path": "docs-raw/research/2026-09-06/581e6401caeea25aef80c45501d106c2cba849350ab8a5947b2edc79ad1f6b72/4dda445f3e9651d743ad1eea9545f837f0ae51361789e32a05f09564a831e4c9/source.gz",
+  "fetched_at": "2026-09-05T10:36:46.971278+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

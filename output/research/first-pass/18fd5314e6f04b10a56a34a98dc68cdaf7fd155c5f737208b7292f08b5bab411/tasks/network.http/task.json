@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "network.http",
+    "level": "L2",
+    "parent": "network",
+    "name": {
+      "zh": "HTTP客户端",
+      "en": "HTTP Client"
+    },
+    "definition": "应用层 HTTP/HTTPS 请求。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/network/http/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "应用层 HTTP/HTTPS 请求。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "d81063adf6da71459dc14ad05110daa23d7f4a002b463c5e258f3143eb3f9b39",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "2c1a63e9e45249e2853cc9b41659392033a802ed09ce4d768a0e585864489167",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/games/services/cpp/v2/api/group/play-games",
+      "platform": "android",
+      "title": "Play Games Services",
+      "local_path": "docs-raw/research/2026-09-06/bf5786b24936c13e5fbef6a5a8b1275887171a7f1e4a0c878430a5c281c4a8a6/c2ef948e1f2ae001b5ed6235a398c857c925a97e2ceaf4a8059ed16b366f7e34/document.md",
+      "sha256": "c2ef948e1f2ae001b5ed6235a398c857c925a97e2ceaf4a8059ed16b366f7e34",
+      "raw_sha256": "33bd076705b48cdd0177a86e1ff19c06803d6218e84c2a4e83ac333f5322d423",
+      "raw_path": "docs-raw/research/2026-09-06/bf5786b24936c13e5fbef6a5a8b1275887171a7f1e4a0c878430a5c281c4a8a6/c2ef948e1f2ae001b5ed6235a398c857c925a97e2ceaf4a8059ed16b366f7e34/source.gz",
+      "fetched_at": "2026-09-05T10:28:23.385441+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 273,
+      "suggested_sections": [
+        {
+          "start_line": 7,
+          "end_line": 25,
+          "truncated": true
+        },
+        {
+          "start_line": 37,
+          "end_line": 42,
+          "truncated": true
+        },
+        {
+          "start_line": 45,
+          "end_line": 47,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/identity/legacy/one-tap/linked-account-signin",
+      "platform": "android",
+      "title": "Linked Account Sign-In",
+      "local_path": "docs-raw/research/2026-09-06/e7e2396192b20e5692f4fe6c1bd936bd2f66f0976b2a68e9dbb9d2e748d2957e/67b0661aed28248d05823af07637c3102fd4267178f2d4d664bb8a8ae84cf399/document.md",
+      "sha256": "67b0661aed28248d05823af07637c3102fd4267178f2d4d664bb8a8ae84cf399",
+      "raw_sha256": "6ea532d6f0fae605f76e67e03232e2815002077ac4456794c0926675b0444453",
+      "raw_path": "docs-raw/research/2026-09-06/e7e2396192b20e5692f4fe6c1bd936bd2f66f0976b2a68e9dbb9d2e748d2957e/67b0661aed28248d05823af07637c3102fd4267178f2d4d664bb8a8ae84cf399/source.gz",
+      "fetched_at": "2026-09-05T10:32:32.613546+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 213,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "truncated": true
+        },
+        {
+          "start_line": 18,
+          "end_line": 27,
+          "truncated": false
+        },
+        {
+          "start_line": 47,
+          "end_line": 48,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/endpointsecurity/client",
+      "platform": "ios",
+      "title": "Client",
+      "local_path": "docs-raw/research/2026-09-06/9908aeee1907b3c857b3add6df21b2625aca750147333709e6579c19c5d19e5c/c179802220985f154641cd2d61b2ded8c770a1fc26bb0abb97c0aa008cb3e3f3/document.md",
+      "sha256": "c179802220985f154641cd2d61b2ded8c770a1fc26bb0abb97c0aa008cb3e3f3",
+      "raw_sha256": "19198f29655c3f09d8a942665f7061845de26ae592e357876f55ac8466fe1b0c",
+      "raw_path": "docs-raw/research/2026-09-06/9908aeee1907b3c857b3add6df21b2625aca750147333709e6579c19c5d19e5c/c179802220985f154641cd2d61b2ded8c770a1fc26bb0abb97c0aa008cb3e3f3/source.gz",
+      "fetched_at": "2026-09-05T10:21:49.230109+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 238,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 65,
+          "truncated": false
+        },
+        {
+          "start_line": 66,
+          "end_line": 67,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/http-live-streaming",
+      "platform": "ios",
+      "title": "HTTP Live Streaming",
+      "local_path": "docs-raw/research/2026-09-06/efc17592620895b3f79ddfc87d9f46898614979a02f97be60de2a1ea611ed425/7cecd25b289602dd760b69ae1f7bdb8b1da0a35f8a9976d78665f711b828c42f/document.md",
+      "sha256": "7cecd25b289602dd760b69ae1f7bdb8b1da0a35f8a9976d78665f711b828c42f",
+      "raw_sha256": "dfe66b043a5422bd558b4ded4ccaef7ebd87445c89c66e1d1e30009f23c7c74a",
+      "raw_path": "docs-raw/research/2026-09-06/efc17592620895b3f79ddfc87d9f46898614979a02f97be60de2a1ea611ed425/7cecd25b289602dd760b69ae1f7bdb8b1da0a35f8a9976d78665f711b828c42f/source.gz",
+      "fetched_at": "2026-09-05T10:32:24.935514+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 154,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 7,
+          "truncated": true
+        },
+        {
+          "start_line": 21,
+          "end_line": 35,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-net-websocket-h",
+      "platform": "harmonyos",
+      "title": "net_websocket.h",
+      "local_path": "docs-raw/research/2026-09-06/4f4507f60273a29efcc1e0c190c94d15f15963b7c0e17d32bb1acad3fa23e782/5af9e8c80086214acabb3d3875a6cc8145920d66f127beadd8b64aa1f013eee0/document.md",
+      "sha256": "5af9e8c80086214acabb3d3875a6cc8145920d66f127beadd8b64aa1f013eee0",
+      "raw_sha256": "e591ec1223e704934aac94047bca8fbdb358f197a76d41b830a87cfa928cb6cb",
+      "raw_path": "docs-raw/research/2026-09-06/4f4507f60273a29efcc1e0c190c94d15f15963b7c0e17d32bb1acad3fa23e782/5af9e8c80086214acabb3d3875a6cc8145920d66f127beadd8b64aa1f013eee0/source.gz",
+      "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 210,
+      "suggested_sections": [
+        {
+          "start_line": 3,
+          "end_line": 6,
+          "truncated": true
+        },
+        {
+          "start_line": 19,
+          "end_line": 25,
+          "truncated": true
+        },
+        {
+          "start_line": 32,
+          "end_line": 60,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/devicesecurity-audit-acquireallauthclientsinfo-arkts",
+      "platform": "harmonyos",
+      "title": "阻断类客户端信息查询场景",
+      "local_path": "docs-raw/research/2026-09-06/34c06fb8467ddc6e2bd40410691eeaa55669590d6b5bf55bb220d311de75186e/68ea27fed1005e94179ea9f74de486048ac98d52933f809d9a9cf05bb7bee70a/document.md",
+      "sha256": "68ea27fed1005e94179ea9f74de486048ac98d52933f809d9a9cf05bb7bee70a",
+      "raw_sha256": "15fdc4ed1b93adf1be4c48270d06d0f674f5707652fe611282b74e7f08c39289",
+      "raw_path": "docs-raw/research/2026-09-06/34c06fb8467ddc6e2bd40410691eeaa55669590d6b5bf55bb220d311de75186e/68ea27fed1005e94179ea9f74de486048ac98d52933f809d9a9cf05bb7bee70a/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 59,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 14,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:48.936023+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "44731b9818826903c8e97d3ac7019ff4630525465dd1204f38419bfe6b7638b9"
+}

@@ -1,0 +1,9 @@
+{
+  "task_id": "1edb300bfad83b29accefe4f773e242e8419a800302df9db91e77225225964b9",
+  "feature_id": "app.lifecycle.activity_ability",
+  "response_sha256": "b3a441bee556e93d296b54b9b6ff5380bd6e3bc8a0c2a9e7214291dd8acc1a1c",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

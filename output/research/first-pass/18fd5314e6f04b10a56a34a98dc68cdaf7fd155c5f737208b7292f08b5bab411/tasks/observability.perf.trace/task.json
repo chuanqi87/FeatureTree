@@ -1,0 +1,533 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "observability.perf.trace",
+    "level": "L3",
+    "parent": "observability.perf",
+    "name": {
+      "zh": "性能Trace",
+      "en": "Performance Trace"
+    },
+    "definition": "记录性能时间线。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "knowledge_path": "knowledge/observability/perf/trace.yaml",
+    "comparison_scope": {
+      "includes": [
+        "记录性能时间线。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "48650d25c0c8d18b1f2feb9799632c843d7ae718fd27b837337dc04990ad724c",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "f8f22e78bb9bedc5714a8cce377c5a00764b816cef12aa32075a05145405244e",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://firebase.google.com/docs/perf-mon/custom-code-traces",
+      "platform": "android",
+      "title": "Add custom monitoring for specific app code",
+      "local_path": "docs-raw/research/2026-09-06/d0a4638ebc1c3ff0e34de9ef07f21b4001cc801ffc87aa3782407f0da4eec981/0c483a38594b77a352e981d71cdcb6a27bcffdeb57d1944a3960e2fc17a4744c/document.md",
+      "sha256": "0c483a38594b77a352e981d71cdcb6a27bcffdeb57d1944a3960e2fc17a4744c",
+      "raw_sha256": "a4005f80634554c1323519ae26f61377897784feaf8931b1ff48fcf9261ed23d",
+      "raw_path": "docs-raw/research/2026-09-06/d0a4638ebc1c3ff0e34de9ef07f21b4001cc801ffc87aa3782407f0da4eec981/0c483a38594b77a352e981d71cdcb6a27bcffdeb57d1944a3960e2fc17a4744c/source.gz",
+      "fetched_at": "2026-09-05T11:07:31.722975+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 331,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 21,
+          "truncated": true
+        },
+        {
+          "start_line": 56,
+          "end_line": 76,
+          "truncated": false
+        },
+        {
+          "start_line": 107,
+          "end_line": 127,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/topic/performance/tracing/on-device",
+      "platform": "android",
+      "title": "Capture a system trace on a device",
+      "local_path": "docs-raw/research/2026-09-06/97d9661823c710dde92b649f408569ff539456a524959995c51ea87a01f34a4c/839d1199062cdaf2f8ce13a15795e9803b70e7cc31ce6a1e8e4ed81e30fe2502/document.md",
+      "sha256": "839d1199062cdaf2f8ce13a15795e9803b70e7cc31ce6a1e8e4ed81e30fe2502",
+      "raw_sha256": "1bbe2bf498cad1186b0e7fdb2aef08aef778df0089ed7afeff87bd5a83e1a933",
+      "raw_path": "docs-raw/research/2026-09-06/97d9661823c710dde92b649f408569ff539456a524959995c51ea87a01f34a4c/839d1199062cdaf2f8ce13a15795e9803b70e7cc31ce6a1e8e4ed81e30fe2502/source.gz",
+      "fetched_at": "2026-09-05T10:37:48.820157+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 239,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 17,
+          "truncated": false
+        },
+        {
+          "start_line": 18,
+          "end_line": 29,
+          "truncated": false
+        },
+        {
+          "start_line": 67,
+          "end_line": 103,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/xcode/measuring-your-app-s-power-use-with-power-profiler",
+      "platform": "ios",
+      "title": "Measuring your app’s power use with Power Profiler",
+      "local_path": "docs-raw/research/2026-09-06/ce5742762dbf48020926481d41c91e65e380013c1759f68ab06855efb4c4cd59/fdb07016188c753539f044d0bcd80f02645e92fb040addbe80f09db2b6d3d15c/document.md",
+      "sha256": "fdb07016188c753539f044d0bcd80f02645e92fb040addbe80f09db2b6d3d15c",
+      "raw_sha256": "39e1be0faf18690bc6fde070061bdaccae3902eb97d9a64b1b0cb2c5eb476c3a",
+      "raw_path": "docs-raw/research/2026-09-06/ce5742762dbf48020926481d41c91e65e380013c1759f68ab06855efb4c4cd59/fdb07016188c753539f044d0bcd80f02645e92fb040addbe80f09db2b6d3d15c/source.gz",
+      "fetched_at": "2026-09-05T11:23:52.098053+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 116,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 5,
+          "end_line": 6,
+          "truncated": true
+        },
+        {
+          "start_line": 18,
+          "end_line": 61,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/xcode/replaying-a-gpu-trace-file",
+      "platform": "ios",
+      "title": "Replaying a GPU trace file",
+      "local_path": "docs-raw/research/2026-09-06/cfd2b54be7883822022e075b66ed18547996bf81c0f7528d59e3cd5eb20195c7/39ad9a9319112ecce36936fb17a0eec00d554b1d458b31c934eb8cba41cf39cb/document.md",
+      "sha256": "39ad9a9319112ecce36936fb17a0eec00d554b1d458b31c934eb8cba41cf39cb",
+      "raw_sha256": "a53f1817f034dd0eaf078cd3165575bfe0dce13be70449c8696e0a83dac1bd7e",
+      "raw_path": "docs-raw/research/2026-09-06/cfd2b54be7883822022e075b66ed18547996bf81c0f7528d59e3cd5eb20195c7/39ad9a9319112ecce36936fb17a0eec00d554b1d458b31c934eb8cba41cf39cb/source.gz",
+      "fetched_at": "2026-09-05T11:23:58.381820+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 26,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 12,
+          "truncated": false
+        },
+        {
+          "start_line": 13,
+          "end_line": 26,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/performance-testing",
+      "platform": "harmonyos",
+      "title": "性能测试",
+      "local_path": "docs-raw/research/2026-09-06/fe46dcf1a13b16a74ecc30390128c59786ad03632101237e462470209c260730/b55f509323467a527b1f89aeb45701c50aa7ffd69176251ebb24d863431ef8bf/document.md",
+      "sha256": "b55f509323467a527b1f89aeb45701c50aa7ffd69176251ebb24d863431ef8bf",
+      "raw_sha256": "9aa1d3bb94108a38c1000d8769dab57d809f7196cb35d512956f7106dd57271e",
+      "raw_path": "docs-raw/research/2026-09-06/fe46dcf1a13b16a74ecc30390128c59786ad03632101237e462470209c260730/b55f509323467a527b1f89aeb45701c50aa7ffd69176251ebb24d863431ef8bf/source.gz",
+      "fetched_at": "2026-09-05T10:24:36.266176+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 529,
+      "suggested_sections": [
+        {
+          "start_line": 3,
+          "end_line": 239,
+          "truncated": false
+        },
+        {
+          "start_line": 240,
+          "end_line": 335,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-performanceanalysiskit-5111",
+      "platform": "harmonyos",
+      "title": "Performance Analysis Kit",
+      "local_path": "docs-raw/research/2026-09-06/ee07f155257182abc887a8453e12979483ac820b64f4df0e2ea5e966da1f414b/6e81bd85c50422683872dc3bef0edfd05316e8d8f718081d715dd781b9f2a32a/document.md",
+      "sha256": "6e81bd85c50422683872dc3bef0edfd05316e8d8f718081d715dd781b9f2a32a",
+      "raw_sha256": "98dec1e083709c070eaa161a3159f9eb59903efa307ae4d65f549be0dd761ca3",
+      "raw_path": "docs-raw/research/2026-09-06/ee07f155257182abc887a8453e12979483ac820b64f4df0e2ea5e966da1f414b/6e81bd85c50422683872dc3bef0edfd05316e8d8f718081d715dd781b9f2a32a/source.gz",
+      "fetched_at": "2026-09-05T11:02:33.957353+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 21,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 21,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:56.402674+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "5b86334eaee140d06594b9f44eb6b2b7499f899210a7a4f680e025cf039362c4"
+}

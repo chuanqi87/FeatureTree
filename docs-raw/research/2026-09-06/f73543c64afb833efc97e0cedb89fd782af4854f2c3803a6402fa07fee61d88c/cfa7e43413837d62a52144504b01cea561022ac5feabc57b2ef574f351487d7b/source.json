@@ -1,0 +1,13 @@
+{
+  "id": "f73543c64afb833efc97e0cedb89fd782af4854f2c3803a6402fa07fee61d88c",
+  "url": "https://developer.android.com/training/location/permissions",
+  "platform": "android",
+  "title": "Request location permissions",
+  "local_path": "docs-raw/research/2026-09-06/f73543c64afb833efc97e0cedb89fd782af4854f2c3803a6402fa07fee61d88c/cfa7e43413837d62a52144504b01cea561022ac5feabc57b2ef574f351487d7b/document.md",
+  "sha256": "cfa7e43413837d62a52144504b01cea561022ac5feabc57b2ef574f351487d7b",
+  "raw_sha256": "fed66c9dae9e2730afced7d4ba98db097c0ea2375975d85c54eaf0b77a54d55c",
+  "raw_path": "docs-raw/research/2026-09-06/f73543c64afb833efc97e0cedb89fd782af4854f2c3803a6402fa07fee61d88c/cfa7e43413837d62a52144504b01cea561022ac5feabc57b2ef574f351487d7b/source.gz",
+  "fetched_at": "2026-09-05T10:49:25.199855+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

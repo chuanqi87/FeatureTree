@@ -1,0 +1,9 @@
+{
+  "task_id": "66c5cd3d8fc44dde9e5b950a143f69232bfe062956f61373dd5c5adbdd84b31b",
+  "feature_id": "device.display.brightness",
+  "response_sha256": "54117df6fba152e9c1c6be2849d02208691b9e26bc7014307f3ab2356f9c82f6",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

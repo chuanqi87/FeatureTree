@@ -1,0 +1,13 @@
+{
+  "id": "0ed0cb182003f8d2549fad89797db62de7713f23c95e365379beabb26bc74836",
+  "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-reasonable-gps-use",
+  "platform": "harmonyos",
+  "title": "GPS资源合理使用",
+  "local_path": "docs-raw/research/2026-09-06/0ed0cb182003f8d2549fad89797db62de7713f23c95e365379beabb26bc74836/ed52646a317a6a2f1866f83c35fa1bf6a1dacdc58bbfeb40b5d655d4b33b9787/document.md",
+  "sha256": "ed52646a317a6a2f1866f83c35fa1bf6a1dacdc58bbfeb40b5d655d4b33b9787",
+  "raw_sha256": "1ed25de5af2cdd68cad8afe2b73cfb90e779999b0b925e1f97f19916d93303ad",
+  "raw_path": "docs-raw/research/2026-09-06/0ed0cb182003f8d2549fad89797db62de7713f23c95e365379beabb26bc74836/ed52646a317a6a2f1866f83c35fa1bf6a1dacdc58bbfeb40b5d655d4b33b9787/source.gz",
+  "fetched_at": "2026-09-05T10:40:30.727486+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

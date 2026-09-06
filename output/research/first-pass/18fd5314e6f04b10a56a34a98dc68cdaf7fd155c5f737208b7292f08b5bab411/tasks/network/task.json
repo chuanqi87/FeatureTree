@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "network",
+    "level": "L1",
+    "parent": null,
+    "name": {
+      "zh": "网络",
+      "en": "Networking"
+    },
+    "definition": "HTTP、套接字、DNS、热点与 VPN。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/network/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "HTTP、套接字、DNS、热点与 VPN。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "f9e2b76e75060356baaaefa5f853e4845da861808cbca4ac198463d832bfc0ca",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "aa8aaebb023e225308ba2bda4a13272bee56745ed79dfeec643f405a7ba5eb98",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/studio/run/emulator-networking",
+      "platform": "android",
+      "title": "Android Emulator networking",
+      "local_path": "docs-raw/research/2026-09-06/b3b05114e3d4771c764bd7f40a086536ecf3867ff98fa01d2b12968a2712d991/a330131a64f99ab29cdceb941a3cd6bfd52ac7ee0d3f62892180ad035730d4ba/document.md",
+      "sha256": "a330131a64f99ab29cdceb941a3cd6bfd52ac7ee0d3f62892180ad035730d4ba",
+      "raw_sha256": "b526397982d314b2a1bf3fff0ede3d98a64acf8eda94d3f355ca77a0219a0cff",
+      "raw_path": "docs-raw/research/2026-09-06/b3b05114e3d4771c764bd7f40a086536ecf3867ff98fa01d2b12968a2712d991/a330131a64f99ab29cdceb941a3cd6bfd52ac7ee0d3f62892180ad035730d4ba/source.gz",
+      "fetched_at": "2026-09-05T10:36:00.210592+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 13,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 13,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/studio/run/emulator-networking-advanced",
+      "platform": "android",
+      "title": "Advanced emulator networking features",
+      "local_path": "docs-raw/research/2026-09-06/ad0c23c982f6d3333d6106c14266415ed297bbf9672f02b778c627bcbf45b099/6ec2f71444ec10acc8e428cf2cbadb04c48c26f5644adb9d3b7f94b2936840f0/document.md",
+      "sha256": "6ec2f71444ec10acc8e428cf2cbadb04c48c26f5644adb9d3b7f94b2936840f0",
+      "raw_sha256": "96c060a8f65a4ff3906bade8a47e63b078bde0c31fae2e12099b8c8a1cffa1c2",
+      "raw_path": "docs-raw/research/2026-09-06/ad0c23c982f6d3333d6106c14266415ed297bbf9672f02b778c627bcbf45b099/6ec2f71444ec10acc8e428cf2cbadb04c48c26f5644adb9d3b7f94b2936840f0/source.gz",
+      "fetched_at": "2026-09-05T10:36:00.766239+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 102,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 24,
+          "truncated": false
+        },
+        {
+          "start_line": 25,
+          "end_line": 35,
+          "truncated": false
+        },
+        {
+          "start_line": 36,
+          "end_line": 49,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/technotes/tn3135-low-level-networking-on-watchos",
+      "platform": "ios",
+      "title": "TN3135: Low-level networking on watchOS",
+      "local_path": "docs-raw/research/2026-09-06/d003e7b9e3fcec17254d1aa9025406f942a4acebc47d192dfaf3e000fc08ec35/1c12ab02e1c2be6cde9b49050f01c66cc16375dfa5bdb091e726a6ef5e58e138/document.md",
+      "sha256": "1c12ab02e1c2be6cde9b49050f01c66cc16375dfa5bdb091e726a6ef5e58e138",
+      "raw_sha256": "891a1c9209813776d94204dec910c0eeb4f299c5c61dc03914ef7344b6fc51a7",
+      "raw_path": "docs-raw/research/2026-09-06/d003e7b9e3fcec17254d1aa9025406f942a4acebc47d192dfaf3e000fc08ec35/1c12ab02e1c2be6cde9b49050f01c66cc16375dfa5bdb091e726a6ef5e58e138/source.gz",
+      "fetched_at": "2026-09-05T10:26:47.376694+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 43,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 31,
+          "truncated": false
+        },
+        {
+          "start_line": 32,
+          "end_line": 43,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/networkingdriverkit/networkingdriverkit-constants",
+      "platform": "ios",
+      "title": "NetworkingDriverKit Constants",
+      "local_path": "docs-raw/research/2026-09-06/c0964ff00242e713cf8eeb31efffce06785c84cf30f58e61b6a6b881388b66a2/ad065e21f5beda3e64b6b3822b1cc11c558939477e0abde468ef3fa28113f4b3/document.md",
+      "sha256": "ad065e21f5beda3e64b6b3822b1cc11c558939477e0abde468ef3fa28113f4b3",
+      "raw_sha256": "091b0b059b2df62b083af7b623c32390f28ebbb7b36ab2fa423d66a73768ffe4",
+      "raw_path": "docs-raw/research/2026-09-06/c0964ff00242e713cf8eeb31efffce06785c84cf30f58e61b6a6b881388b66a2/ad065e21f5beda3e64b6b3822b1cc11c558939477e0abde468ef3fa28113f4b3/source.gz",
+      "fetched_at": "2026-09-05T10:24:25.621102+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 199,
+      "suggested_sections": [
+        {
+          "start_line": 15,
+          "end_line": 38,
+          "truncated": false
+        },
+        {
+          "start_line": 59,
+          "end_line": 76,
+          "truncated": false
+        },
+        {
+          "start_line": 87,
+          "end_line": 110,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/nearlink-constant",
+      "platform": "harmonyos",
+      "title": "constant（星闪公共常量定义）",
+      "local_path": "docs-raw/research/2026-09-06/5fdb04479abb611512802325cfe536f0f1b94102b61520468521ea2c03a36b29/c6ff0fe44721bdbec01c3b1092228c187729862b0f8c63a0a1af25d5ebe25752/document.md",
+      "sha256": "c6ff0fe44721bdbec01c3b1092228c187729862b0f8c63a0a1af25d5ebe25752",
+      "raw_sha256": "568747a79abaf0dfa7f6c63c27740b98b161d5e634241ee90bf35199fea3634d",
+      "raw_path": "docs-raw/research/2026-09-06/5fdb04479abb611512802325cfe536f0f1b94102b61520468521ea2c03a36b29/c6ff0fe44721bdbec01c3b1092228c187729862b0f8c63a0a1af25d5ebe25752/source.gz",
+      "fetched_at": "2026-09-05T10:38:34.176367+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 126,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 12,
+          "truncated": false
+        },
+        {
+          "start_line": 13,
+          "end_line": 28,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/accessorykit-introduction",
+      "platform": "harmonyos",
+      "title": "Accessory Kit简介",
+      "local_path": "docs-raw/research/2026-09-06/004a6bec07e00e1e879ddf2198a8f9adefc572b8677e7fb0db2a806554337659/9052e36d5b10d87530f361b1c7303b1a75d963a4051c19d83009b03ded14cd5f/document.md",
+      "sha256": "9052e36d5b10d87530f361b1c7303b1a75d963a4051c19d83009b03ded14cd5f",
+      "raw_sha256": "563fc564b537a8ce1d6f3ca80181a87fa9c94471a68d1ab02911822b877e6fcb",
+      "raw_path": "docs-raw/research/2026-09-06/004a6bec07e00e1e879ddf2198a8f9adefc572b8677e7fb0db2a806554337659/9052e36d5b10d87530f361b1c7303b1a75d963a4051c19d83009b03ded14cd5f/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 30,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 10,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:48.562301+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "0bad2bdf5feb416b3842f66d56d1a5f47264a225099e2ddbcbf83f7bbc9447a7"
+}

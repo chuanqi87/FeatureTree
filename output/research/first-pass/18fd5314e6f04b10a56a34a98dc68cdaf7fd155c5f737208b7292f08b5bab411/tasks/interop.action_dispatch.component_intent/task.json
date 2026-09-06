@@ -1,0 +1,564 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "interop.action_dispatch.component_intent",
+    "level": "L3",
+    "parent": "interop.action_dispatch",
+    "name": {
+      "zh": "目标组件调用",
+      "en": "Target Component Invocation"
+    },
+    "definition": "定位并调用应用组件，传递调用参数并处理无法找到目标等结果。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "split_justification": "analog",
+    "aliases": [
+      "Intent",
+      "Want",
+      "组件意图跳转"
+    ],
+    "bindings": {
+      "android": [
+        {
+          "kind": "class",
+          "id": "android.content.Intent",
+          "role": "primary",
+          "url": "https://developer.android.com/reference/android/content/Intent"
+        }
+      ],
+      "harmonyos": [
+        {
+          "kind": "module",
+          "id": "@ohos.app.ability.Want",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-want",
+          "role": "primary",
+          "note": "analog to Intent"
+        }
+      ]
+    },
+    "knowledge_path": "knowledge/interop/action_dispatch/component_intent.yaml",
+    "comparison_scope": {
+      "includes": [
+        "显式指定目标组件",
+        "按声明的能力解析目标",
+        "参数传递与调用结果"
+      ],
+      "excludes": [
+        "仅通过 URL 打开资源",
+        "智能助理触发的系统能力注册"
+      ]
+    },
+    "notes": "保留历史 ID 以维持引用；节点名称和比较对象已中立化。",
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "f8b22fd3b3fd38d5a099008cf0893d18050d1e2c5ff18fb064224512b689a613",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "4969fe736b534476d7116a91b5f78c34abe06ca6189619247167d7ff0bca8170",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/reference/android/content/Intent",
+      "platform": "android",
+      "title": "Intent",
+      "local_path": "docs-raw/research/2026-09-06/13a8ea3e9d971b1d77794de6e1a83b611f926064dc30b6436c99ce456c7c8552/d86c2529052fb9f28cab4ce85334ba9103234e295b73ad44cf4c1e32271db73c/document.md",
+      "sha256": "d86c2529052fb9f28cab4ce85334ba9103234e295b73ad44cf4c1e32271db73c",
+      "raw_sha256": "710246eb094ffe6e84b11720a88b18a364bdbcd3a85720a967f598f1ca026180",
+      "raw_path": "docs-raw/research/2026-09-06/13a8ea3e9d971b1d77794de6e1a83b611f926064dc30b6436c99ce456c7c8552/d86c2529052fb9f28cab4ce85334ba9103234e295b73ad44cf4c1e32271db73c/source.gz",
+      "fetched_at": "2026-09-05T10:15:53.075788+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 11919,
+      "suggested_sections": [
+        {
+          "start_line": 504,
+          "end_line": 565,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/guide/components/intents-filters",
+      "platform": "android",
+      "title": "Intents and intent filters",
+      "local_path": "docs-raw/research/2026-09-06/e6359ea4d6471b776e368750b5be67fd92a4a4bc3c897f5b333c7b1dacc4d501/62fe88976acc27c95b5bd2a43415427596d57ebad7d21c42f1b47975a176db34/document.md",
+      "sha256": "62fe88976acc27c95b5bd2a43415427596d57ebad7d21c42f1b47975a176db34",
+      "raw_sha256": "6c28002a68d8b292f2282c44b70203e23ff33c24b7eb6e46e80b345dbb6c4dba",
+      "raw_path": "docs-raw/research/2026-09-06/e6359ea4d6471b776e368750b5be67fd92a4a4bc3c897f5b333c7b1dacc4d501/62fe88976acc27c95b5bd2a43415427596d57ebad7d21c42f1b47975a176db34/source.gz",
+      "fetched_at": "2026-09-05T10:15:49.631718+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 1074,
+      "suggested_sections": [
+        {
+          "start_line": 98,
+          "end_line": 252,
+          "truncated": true
+        },
+        {
+          "start_line": 825,
+          "end_line": 826,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/appclip/encoding-a-url-in-an-app-clip-code",
+      "platform": "ios",
+      "title": "Encoding a URL in an App Clip Code",
+      "local_path": "docs-raw/research/2026-09-06/d798e600b3984504a1784369e15c719aaf5ae7b737464f779be1c833d09bac9b/a5b046d1c2f57c2b0726a5d585df75f4a6e1bebe549505b90a4367597cc9f3d4/document.md",
+      "sha256": "a5b046d1c2f57c2b0726a5d585df75f4a6e1bebe549505b90a4367597cc9f3d4",
+      "raw_sha256": "12a5c0a2f58974f1ba71a1ecbbbc158101e4abfe240084f377fc6bc52c90bbea",
+      "raw_path": "docs-raw/research/2026-09-06/d798e600b3984504a1784369e15c719aaf5ae7b737464f779be1c833d09bac9b/a5b046d1c2f57c2b0726a5d585df75f4a6e1bebe549505b90a4367597cc9f3d4/source.gz",
+      "fetched_at": "2026-09-05T10:17:00.466471+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 108,
+      "suggested_sections": [
+        {
+          "start_line": 5,
+          "end_line": 16,
+          "truncated": false
+        },
+        {
+          "start_line": 17,
+          "end_line": 30,
+          "truncated": false
+        },
+        {
+          "start_line": 31,
+          "end_line": 38,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/appclip/creating-an-app-clip-with-xcode",
+      "platform": "ios",
+      "title": "Creating an App Clip with Xcode",
+      "local_path": "docs-raw/research/2026-09-06/001d18d1f4e3e3dd6cdcfa1ecea6050e7a51d0d7e974ba9829bea3c30bbed36a/824a1320898eafe9ded2d4f8ffeb58a75f9268c6b694af90792e5846f825f42a/document.md",
+      "sha256": "824a1320898eafe9ded2d4f8ffeb58a75f9268c6b694af90792e5846f825f42a",
+      "raw_sha256": "ba0b38d4be76ae44a5b2bb102af8a94395526c5d2624f74b39afe626d3e3f758",
+      "raw_path": "docs-raw/research/2026-09-06/001d18d1f4e3e3dd6cdcfa1ecea6050e7a51d0d7e974ba9829bea3c30bbed36a/824a1320898eafe9ded2d4f8ffeb58a75f9268c6b694af90792e5846f825f42a/source.gz",
+      "fetched_at": "2026-09-05T10:16:59.875341+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 106,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 6,
+          "truncated": true
+        },
+        {
+          "start_line": 9,
+          "end_line": 33,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-want",
+      "platform": "harmonyos",
+      "title": "@ohos.app.ability.Want (Want)",
+      "local_path": "docs-raw/research/2026-09-06/b266b61358ba759f069d41e582a80a97e062c7734678eb7cdc2dfa4db9336384/855e1dd20eb857d78ac72274ddb4cfbce77aa4318fe106f6a77a820e0cba8aaf/document.md",
+      "sha256": "855e1dd20eb857d78ac72274ddb4cfbce77aa4318fe106f6a77a820e0cba8aaf",
+      "raw_sha256": "1478117579c06642c197f98117170be152ba9f258889f67db58b67ae875080ee",
+      "raw_path": "docs-raw/research/2026-09-06/b266b61358ba759f069d41e582a80a97e062c7734678eb7cdc2dfa4db9336384/855e1dd20eb857d78ac72274ddb4cfbce77aa4318fe106f6a77a820e0cba8aaf/source.gz",
+      "fetched_at": "2026-09-05T10:26:50.104889+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 342,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 9,
+          "end_line": 10,
+          "truncated": true
+        },
+        {
+          "start_line": 22,
+          "end_line": 76,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-ability-wantconstant",
+      "platform": "harmonyos",
+      "title": "@ohos.ability.wantConstant (wantConstant)",
+      "local_path": "docs-raw/research/2026-09-06/eaa19a0c351b17cc34725ee05361c615bb007e282c20c8e60d94f49887acc668/8dfc5061ee92ed46f255fd2bf5c6ebf9bf105661af8c597605cd17148491fdc5/document.md",
+      "sha256": "8dfc5061ee92ed46f255fd2bf5c6ebf9bf105661af8c597605cd17148491fdc5",
+      "raw_sha256": "3fc71d2d6ee93215405229ec409f45261995ff68b1bffdc6331f0d01cef1f46f",
+      "raw_path": "docs-raw/research/2026-09-06/eaa19a0c351b17cc34725ee05361c615bb007e282c20c8e60d94f49887acc668/8dfc5061ee92ed46f255fd2bf5c6ebf9bf105661af8c597605cd17148491fdc5/source.gz",
+      "fetched_at": "2026-09-05T10:26:36.294015+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 82,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 12,
+          "truncated": false
+        },
+        {
+          "start_line": 13,
+          "end_line": 47,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:35.236963+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "5467d6e34d9ac34fdfc396090bfedebd5b9a020feb4ef6ce1d5e5558a6ce267c"
+}

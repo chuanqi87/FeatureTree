@@ -1,0 +1,9 @@
+{
+  "task_id": "58d15a0cb3771c4ca9b86d17c1d09c7da815e0f7963167a96f7b50f8a51d4303",
+  "feature_id": "device.power.battery",
+  "response_sha256": "008d79ac14e7a54292cff1ee147cf4f1a4cc0acbbccd27460582536bf6bd69ba",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

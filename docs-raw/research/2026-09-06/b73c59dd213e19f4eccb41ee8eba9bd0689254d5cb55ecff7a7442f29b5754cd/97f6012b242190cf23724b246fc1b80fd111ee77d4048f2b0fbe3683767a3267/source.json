@@ -1,0 +1,13 @@
+{
+  "id": "b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd",
+  "url": "https://developer.apple.com/documentation/xcode/identifying-high-memory-use-with-jetsam-event-reports",
+  "platform": "ios",
+  "title": "Identifying high-memory use with jetsam event reports",
+  "local_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/document.md",
+  "sha256": "97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267",
+  "raw_sha256": "83af39afd9537d1490ad0b108c5bc906db2445f42f48dfe7cfbc26485c4c3ea6",
+  "raw_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/source.gz",
+  "fetched_at": "2026-09-05T11:23:48.794135+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

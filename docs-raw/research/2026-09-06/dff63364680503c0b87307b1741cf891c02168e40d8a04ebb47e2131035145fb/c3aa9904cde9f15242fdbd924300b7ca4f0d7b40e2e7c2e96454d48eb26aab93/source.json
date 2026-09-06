@@ -1,0 +1,13 @@
+{
+  "id": "dff63364680503c0b87307b1741cf891c02168e40d8a04ebb47e2131035145fb",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/jsvm-debugger-cpuprofiler-heapsnapshot",
+  "platform": "harmonyos",
+  "title": "JSVM-API调试\\&定位",
+  "local_path": "docs-raw/research/2026-09-06/dff63364680503c0b87307b1741cf891c02168e40d8a04ebb47e2131035145fb/c3aa9904cde9f15242fdbd924300b7ca4f0d7b40e2e7c2e96454d48eb26aab93/document.md",
+  "sha256": "c3aa9904cde9f15242fdbd924300b7ca4f0d7b40e2e7c2e96454d48eb26aab93",
+  "raw_sha256": "7f8c644f1886572a2fed35dd24b6ae177a295d5804c575c781f782556d10e58f",
+  "raw_path": "docs-raw/research/2026-09-06/dff63364680503c0b87307b1741cf891c02168e40d8a04ebb47e2131035145fb/c3aa9904cde9f15242fdbd924300b7ca4f0d7b40e2e7c2e96454d48eb26aab93/source.gz",
+  "fetched_at": "2026-09-05T10:24:27.039184+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "b55b0b90a296f695bfa6c764297e92dd75917f756c59176bfbbbc7d7f4898738",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-socket",
+  "platform": "harmonyos",
+  "title": "@ohos.net.socket (Socket连接)",
+  "local_path": "docs-raw/research/2026-09-06/b55b0b90a296f695bfa6c764297e92dd75917f756c59176bfbbbc7d7f4898738/9623acc0d9cfb4fce63d0aafb4d2722240de5fcfb81a1e44aae2b18c5b2729ad/document.md",
+  "sha256": "9623acc0d9cfb4fce63d0aafb4d2722240de5fcfb81a1e44aae2b18c5b2729ad",
+  "raw_sha256": "136c59856f7dffb8e0196b4f51998916c72977222fb279fa08fc5839a357dbbb",
+  "raw_path": "docs-raw/research/2026-09-06/b55b0b90a296f695bfa6c764297e92dd75917f756c59176bfbbbc7d7f4898738/9623acc0d9cfb4fce63d0aafb4d2722240de5fcfb81a1e44aae2b18c5b2729ad/source.gz",
+  "fetched_at": "2026-09-05T10:27:56.620659+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

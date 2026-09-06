@@ -1,0 +1,13 @@
+{
+  "id": "093c38ed6041707fc33a1e3bd76862dd438fe335a1dde436db552f0f3a5de4af",
+  "url": "https://developer.apple.com/documentation/localauthenticationembeddedui",
+  "platform": "ios",
+  "title": "Local Authentication Embedded UI",
+  "local_path": "docs-raw/research/2026-09-06/093c38ed6041707fc33a1e3bd76862dd438fe335a1dde436db552f0f3a5de4af/b86ebff63052f2ed04265659a78f7d16c63eb15e658eba16ef593a90485956ac/document.md",
+  "sha256": "b86ebff63052f2ed04265659a78f7d16c63eb15e658eba16ef593a90485956ac",
+  "raw_sha256": "7263c0cd592c8b80bac246bec069ca2423faa8540a0ad93300a994f53abab113",
+  "raw_path": "docs-raw/research/2026-09-06/093c38ed6041707fc33a1e3bd76862dd438fe335a1dde436db552f0f3a5de4af/b86ebff63052f2ed04265659a78f7d16c63eb15e658eba16ef593a90485956ac/source.gz",
+  "fetched_at": "2026-09-05T10:32:31.105731+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

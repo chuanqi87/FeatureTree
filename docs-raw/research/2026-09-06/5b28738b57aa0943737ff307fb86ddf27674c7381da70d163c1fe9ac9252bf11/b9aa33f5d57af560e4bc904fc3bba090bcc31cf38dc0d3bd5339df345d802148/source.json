@@ -1,0 +1,13 @@
+{
+  "id": "5b28738b57aa0943737ff307fb86ddf27674c7381da70d163c1fe9ac9252bf11",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/file-native-side",
+  "platform": "harmonyos",
+  "title": "Native侧实现文件访问",
+  "local_path": "docs-raw/research/2026-09-06/5b28738b57aa0943737ff307fb86ddf27674c7381da70d163c1fe9ac9252bf11/b9aa33f5d57af560e4bc904fc3bba090bcc31cf38dc0d3bd5339df345d802148/document.md",
+  "sha256": "b9aa33f5d57af560e4bc904fc3bba090bcc31cf38dc0d3bd5339df345d802148",
+  "raw_sha256": "689d4e67a4f57cdebb9a872a916ef6670313bae51e02da9ea162d0b2dc1d7b23",
+  "raw_path": "docs-raw/research/2026-09-06/5b28738b57aa0943737ff307fb86ddf27674c7381da70d163c1fe9ac9252bf11/b9aa33f5d57af560e4bc904fc3bba090bcc31cf38dc0d3bd5339df345d802148/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,948 @@
+{
+  "task_id": "440e34372a5e1011eb102754c4c55cca2b23ec6cdeb44dfe3571c4b321086284",
+  "feature_id": "connectivity.wifi.connect",
+  "stage": "first_pass",
+  "summary": "Android读到Wi-Fi建议API（Android 10+，应用提交建议、平台最终决定，按应用审批，建议不入保存网络列表）；HarmonyOS读到STA候选网络机制（addCandidateConfig+connectToCandidateConfig，需STA能力与GET/SET_WIFI_INFO权限，版本未注明）；iOS两篇冻结来源（Siri事件建议Markup、Wi-Fi Aware点对点配对）均未建立本节点机制。差异假设集中于连接决策归属、审批权限模型与API用例面。全部low，版本基线未固定。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "官方指南明示建议API：应用提交WifiNetworkSuggestion供设备自动连接，平台最终决定接受哪个接入点；建议不是保存网络；按应用（非按网络）用户审批，首次建议触发通知/对话框，用户拒绝即移除CHANGE_WIFI_STATE；Android 11/12增加Passpoint、企业安全强制与MAC随机化等分层行为。",
+      "version_scope": "指南写明Android 10 (API 29)+提供该API，Android 11/12有行为分层；快照2026-09-05，version_verified=false，启动日最新正式版基线unresolved，未核对当前API Level状态。",
+      "conditions": [
+        "平台最终决定接受哪个接入点（综合本应用与其他应用的输入）",
+        "建议不是保存网络、不进保存网络页；添加保存网络需ACTION_WIFI_ADD_NETWORKS并逐次用户批准",
+        "用户审批按应用而非按网络；首次建议即通知用户，用户拒绝后移除应用CHANGE_WIFI_STATE权限",
+        "setIsAppInteractionRequired(true)注释标明需位置权限；EAP-SIM类企业建议仅限运营商签名应用",
+        "Android 11+强制TLS企业建议设置CA证书与服务器域名，旧版不安全建议被忽略"
+      ],
+      "gaps": [
+        "未读WifiNetworkSuggestion/WifiManager等API参考正文，无法核对最新正式版API状态与后台广播约束",
+        "启动日最新正式版基线未固定，2026-09-05快照不能证明覆盖当前版本行为",
+        "平板设备形态条件未单独核对",
+        "用户断开/恢复自动连接的细节仅来自本指南，未经API参考或发布说明交叉核实"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Wi-Fi suggestion API介绍：Android 10+应用添加网络凭据供自动连接，平台最终决定；建议非保存网络",
+          "start_line": 3,
+          "end_line": 14,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/wifi/wifi-suggest",
+            "platform": "android",
+            "title": "Wi-Fi suggestion API for internet connectivity",
+            "local_path": "docs-raw/research/2026-09-06/940e1c6ca82197ddd0e22b8a1f4fa4e70d117b460e98663f9a75c2e11f3a4aad/8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3/document.md",
+            "sha256": "8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3",
+            "raw_sha256": "bc4c84671aced326813ffd5d23c51a5962a8d61ad6f03df1b8c9ed6413455c5e",
+            "raw_path": "docs-raw/research/2026-09-06/940e1c6ca82197ddd0e22b8a1f4fa4e70d117b460e98663f9a75c2e11f3a4aad/8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3/source.gz",
+            "fetched_at": "2026-09-05T10:24:27.826446+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 226,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 82,
+                "truncated": false
+              },
+              {
+                "start_line": 83,
+                "end_line": 85,
+                "truncated": true
+              },
+              {
+                "start_line": 132,
+                "end_line": 181,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "Devices running Android 10 (API level 29) and higher allow your app to add network\ncredentials for a device to auto-connect to a Wi-Fi access point. You can supply\nsuggestions for which network to connect to using\n[`WifiNetworkSuggestion`](https://developer.android.com/reference/android/net/wifi/WifiNetworkSuggestion).\nThe platform ultimately chooses which access point to accept based on the\ninput from your app and others.\n\n**Note:** Wi-Fi suggestions are not saved networks and will not appear in the\nsaved network page. To add a new Wi-Fi network with user completion, see the\n[`ACTION_WIFI_ADD_NETWORKS`](https://developer.android.com/reference/android/provider/Settings#ACTION_WIFI_ADD_NETWORKS)\nactivity action API. This API will prompt the user to approve the network\naddition."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Android 11/12行为分层：Passpoint建议、TLS企业安全强制、运营商签名EAP-SIM、非持久MAC随机化",
+          "start_line": 16,
+          "end_line": 46,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/wifi/wifi-suggest",
+            "platform": "android",
+            "title": "Wi-Fi suggestion API for internet connectivity",
+            "local_path": "docs-raw/research/2026-09-06/940e1c6ca82197ddd0e22b8a1f4fa4e70d117b460e98663f9a75c2e11f3a4aad/8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3/document.md",
+            "sha256": "8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3",
+            "raw_sha256": "bc4c84671aced326813ffd5d23c51a5962a8d61ad6f03df1b8c9ed6413455c5e",
+            "raw_path": "docs-raw/research/2026-09-06/940e1c6ca82197ddd0e22b8a1f4fa4e70d117b460e98663f9a75c2e11f3a4aad/8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3/source.gz",
+            "fetched_at": "2026-09-05T10:24:27.826446+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 226,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 82,
+                "truncated": false
+              },
+              {
+                "start_line": 83,
+                "end_line": 85,
+                "truncated": true
+              },
+              {
+                "start_line": 132,
+                "end_line": 181,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "On Android 11 (API level 30) and higher:\n\n* Provisioning a [`PasspointConfiguration`](https://developer.android.com/reference/android/net/wifi/hotspot2/PasspointConfiguration)\n  is supported by the suggestion API. Before Android 11,\n  provisioning a `PasspointConfiguration`\n  requires the use of the [`addOrUpdatePasspointConfiguration()`](https://developer.android.com/reference/android/net/wifi/WifiManager#addOrUpdatePasspointConfiguration(android.net.wifi.hotspot2.PasspointConfiguration))\n  API.\n* The framework enforces security requirements on TLS-based Enterprise\n  suggestions (EAP-TLS, EAP-TTLS, and EAP-PEAP); suggestions to such networks\n  must set a [`Root CA certificate`](https://developer.android.com/reference/android/net/wifi/WifiEnterpriseConfig#setCaCertificates(java.security.cert.X509Certificate%5B%5D))\n  and a [`server domain name`](https://developer.android.com/reference/android/net/wifi/WifiEnterpriseConfig#setAltSubjectMatch(java.lang.String)).\n\n**Note:** Insecure suggestions retained from an earlier version of Android are\nignored in Android 11 and higher. The suggesting app must replace\nits old suggestions with new and secure suggestions.\n\n* The framework enforces ownership requirements for EAP-SIM based Enterprise\n  suggestions (EAP-SIM, EAP-AKA, EAP-AKA-PRIME); such suggestions are\n  allowed only by apps that are carrier-signed.\n* For suggestions provided by a carrier-signed app, the framework automatically\n  assigns them a carrier ID corresponding to the app's\n  [carrier signing](https://source.android.com/devices/tech/config/uicc). Such\n  suggestions are automatically disabled if the corresponding SIM is removed\n  from the device.\n\nOn Android 12 (API level 31) and higher:\n\n* Additional privacy can be enabled via non-persistent MAC randomization,\n  which periodically re-randomizes the randomized MAC address.\n  Use [`setMacRandomizationSetting`](https://developer.android.com/reference/android/net/wifi/WifiNetworkSuggestion.Builder#setMacRandomizationSetting(int))\n  to specify the level of randomization for your network."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "首次建议的用户通知按版本区分对话框/通知，连接后设置中显示归因文本",
+          "start_line": 197,
+          "end_line": 208,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/wifi/wifi-suggest",
+            "platform": "android",
+            "title": "Wi-Fi suggestion API for internet connectivity",
+            "local_path": "docs-raw/research/2026-09-06/940e1c6ca82197ddd0e22b8a1f4fa4e70d117b460e98663f9a75c2e11f3a4aad/8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3/document.md",
+            "sha256": "8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3",
+            "raw_sha256": "bc4c84671aced326813ffd5d23c51a5962a8d61ad6f03df1b8c9ed6413455c5e",
+            "raw_path": "docs-raw/research/2026-09-06/940e1c6ca82197ddd0e22b8a1f4fa4e70d117b460e98663f9a75c2e11f3a4aad/8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3/source.gz",
+            "fetched_at": "2026-09-05T10:24:27.826446+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 226,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 82,
+                "truncated": false
+              },
+              {
+                "start_line": 83,
+                "end_line": 85,
+                "truncated": true
+              },
+              {
+                "start_line": 132,
+                "end_line": 181,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "Immediately after the app places a suggestion for the first time, the user is\nnotified. The notification type depends on the version of Android that's running\non the device:\n\n* On Android 11 (API level 30) and higher, the user sees a dialog if the app is\n  running in the foreground, and a notification if the app is running in the\n  background.\n* On Android 10 (API level 29), the user sees a notification, regardless of\n  whether the app is running in the foreground or the background.\n\nWhen the platform connects to one of the network suggestions, the settings show\ntext that attributes the network connection to the corresponding suggester app."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "用户拒绝建议通知移除CHANGE_WIFI_STATE权限，可在设置的Wi-Fi控制菜单恢复",
+          "start_line": 220,
+          "end_line": 226,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/wifi/wifi-suggest",
+            "platform": "android",
+            "title": "Wi-Fi suggestion API for internet connectivity",
+            "local_path": "docs-raw/research/2026-09-06/940e1c6ca82197ddd0e22b8a1f4fa4e70d117b460e98663f9a75c2e11f3a4aad/8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3/document.md",
+            "sha256": "8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3",
+            "raw_sha256": "bc4c84671aced326813ffd5d23c51a5962a8d61ad6f03df1b8c9ed6413455c5e",
+            "raw_path": "docs-raw/research/2026-09-06/940e1c6ca82197ddd0e22b8a1f4fa4e70d117b460e98663f9a75c2e11f3a4aad/8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3/source.gz",
+            "fetched_at": "2026-09-05T10:24:27.826446+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 226,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 82,
+                "truncated": false
+              },
+              {
+                "start_line": 83,
+                "end_line": 85,
+                "truncated": true
+              },
+              {
+                "start_line": 132,
+                "end_line": 181,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "## Changing approval status for app\n\nA user declining the network suggestion notification removes the\n`CHANGE_WIFI_STATE` permission from the app. The user can grant this approval\nlater by going into the Wi-Fi control menu (**Settings** >\n**Apps & notifications** > **Special App\naccess** > **Wi-Fi Control** > App name)."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Android 10+ Wi-Fi基础设施含建议API、网络请求API与Settings Intent API三种",
+          "start_line": 3,
+          "end_line": 7,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/develop/connectivity/wifi/wifi-infrastructure",
+            "platform": "android",
+            "title": "Wi-Fi infrastructure overview",
+            "local_path": "docs-raw/research/2026-09-06/9f8cadb3c11250d1e500d2e17dd91b13cb95fb665412191e9f966143a5edf7d2/0fb895414a288c359f762001a71675718110dbe06cc2eff3cd958e3bcb2c7556/document.md",
+            "sha256": "0fb895414a288c359f762001a71675718110dbe06cc2eff3cd958e3bcb2c7556",
+            "raw_sha256": "72d67990dcc31e93df3494b0e3ab74ee03a67d47eca8c387af351b21ad03b300",
+            "raw_path": "docs-raw/research/2026-09-06/9f8cadb3c11250d1e500d2e17dd91b13cb95fb665412191e9f966143a5edf7d2/0fb895414a288c359f762001a71675718110dbe06cc2eff3cd958e3bcb2c7556/source.gz",
+            "fetched_at": "2026-09-05T10:24:26.486575+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 57,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 7,
+                "truncated": false
+              },
+              {
+                "start_line": 8,
+                "end_line": 51,
+                "truncated": false
+              },
+              {
+                "start_line": 52,
+                "end_line": 57,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "On Android 10 and higher, the Wi-Fi infrastructure includes the Wi-Fi suggestion\nAPI for internet connectivity and the Wi-Fi network request API for peer-to-peer\nconnectivity. On Android 11 and higher, the Settings Intent API lets you\nask the user to approve adding a saved network or Passpoint configuration.\n"
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Suggestion API特征：配置非用户单独拥有、审批按应用而非按网络、面向运营商分流类应用",
+          "start_line": 13,
+          "end_line": 21,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/develop/connectivity/wifi/wifi-infrastructure",
+            "platform": "android",
+            "title": "Wi-Fi infrastructure overview",
+            "local_path": "docs-raw/research/2026-09-06/9f8cadb3c11250d1e500d2e17dd91b13cb95fb665412191e9f966143a5edf7d2/0fb895414a288c359f762001a71675718110dbe06cc2eff3cd958e3bcb2c7556/document.md",
+            "sha256": "0fb895414a288c359f762001a71675718110dbe06cc2eff3cd958e3bcb2c7556",
+            "raw_sha256": "72d67990dcc31e93df3494b0e3ab74ee03a67d47eca8c387af351b21ad03b300",
+            "raw_path": "docs-raw/research/2026-09-06/9f8cadb3c11250d1e500d2e17dd91b13cb95fb665412191e9f966143a5edf7d2/0fb895414a288c359f762001a71675718110dbe06cc2eff3cd958e3bcb2c7556/source.gz",
+            "fetched_at": "2026-09-05T10:24:26.486575+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 57,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 7,
+                "truncated": false
+              },
+              {
+                "start_line": 8,
+                "end_line": 51,
+                "truncated": false
+              },
+              {
+                "start_line": 52,
+                "end_line": 57,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "* [Suggestion API](https://developer.android.com/develop/connectivity/wifi/wifi-suggest): targets apps that\n  provision and provide internet-capable configurations. These configurations\n  are not individually owned by the user. Users can disable specific\n  configurations or disable the suggesting app, but can't delete\n  them.\n\n  + User approval is required per app, not per network suggested by the app.\n  + Intended for carrier Wi-Fi offload configuration apps and other apps that\n    may actively manage offload networks."
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "机制与系统UI行为（通知/对话框、Wi-Fi选择器断开、按应用审批、归因显示）均为文档声明，且未固定版本基线，最新正式版手机上的实际表现需后续真机复核；本轮无任何实测。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "unknown",
+      "observation": "两篇冻结来源均未建立应用建议/协助连接Wi-Fi接入点的机制：ios-1为Siri日历事件建议Markup（与Wi-Fi无关），ios-2为Wi-Fi Aware点对点设备配对连接（非接入点连接建议）。可能对应的NEHotspotConfiguration等文档不在本轮来源内，无法初判iOS是否提供同类能力。",
+      "version_scope": "未知：两篇来源均不含本节点相关的iOS版本适用信息（快照2026-09-05，version_verified=false）。",
+      "conditions": [
+        "未建立机制证据，无适用条件可记录",
+        "ios-2仅描述Wi-Fi Aware点对点配对与连接条件（DeviceDiscoveryUI/AccessorySetupKit配对后建立P2P连接），非本节点的接入点建议场景"
+      ],
+      "gaps": [
+        "NEHotspotConfiguration/NEHotspotHelper等可能对应的NetworkExtension文档未在冻结来源中，未读取",
+        "ios-1（Siri事件建议）与节点主题无关，疑似检索误绑",
+        "ios-2的P2P设备连接是否属于本节点'协助连接'范围需父级范围澄清，可能属于兄弟节点",
+        "无任何iOS版本适用性与entitlement条件证据"
+      ],
+      "confidence": "low",
+      "evidence_strength": "indirect",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "Siri Event Suggestions Markup可信数据要求（日历预订事件签名与准确性），与Wi-Fi连接建议无关",
+          "start_line": 1,
+          "end_line": 8,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/sirieventsuggestionsmarkup/providing-trusted-data",
+            "platform": "ios",
+            "title": "Providing Trusted Data",
+            "local_path": "docs-raw/research/2026-09-06/52931abe5a88e045fcedb1ff997297a9950c5d1202251925385e4d5ee374aa58/b377947a7cea09a685a68356d7b7a7b24ff8921b2d1f5e67343eab585986522c/document.md",
+            "sha256": "b377947a7cea09a685a68356d7b7a7b24ff8921b2d1f5e67343eab585986522c",
+            "raw_sha256": "c6d9165915172056580509643f606b4f79e77f0a8449602b71db4935812deadc",
+            "raw_path": "docs-raw/research/2026-09-06/52931abe5a88e045fcedb1ff997297a9950c5d1202251925385e4d5ee374aa58/b377947a7cea09a685a68356d7b7a7b24ff8921b2d1f5e67343eab585986522c/source.gz",
+            "fetched_at": "2026-09-05T10:25:47.640825+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 25,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 12,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "# Providing Trusted Data\n\nSign your content and avoid sending unnecessary or inaccurate information.\n\n## Discussion\n\nTo avoid cluttering the user’s calendar, use [`Siri Event Suggestions Markup`](/documentation/SiriEventSuggestionsMarkup) only for events that the user has booked. The system also protects the integrity of reservation data by employing security measures to ensure that no one can impersonate your domain to put events on the user’s calendar.\n"
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Wi-Fi Aware点对点配对连接：经DeviceDiscoveryUI/AccessorySetupKit配对后建立设备间安全连接，非接入点建议",
+          "start_line": 1,
+          "end_line": 14,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/wifiaware/connecting-paired-devices",
+            "platform": "ios",
+            "title": "Connecting devices for peer-to-peer Wi-Fi",
+            "local_path": "docs-raw/research/2026-09-06/ce5610ce52728f39211c7a536a81852403c2a2d225137faff829b760033eb3c4/bb7277d30de36cbab44782a36c5b922993da402381ac90f0a7a5295e2c8c468b/document.md",
+            "sha256": "bb7277d30de36cbab44782a36c5b922993da402381ac90f0a7a5295e2c8c468b",
+            "raw_sha256": "d759d750f3959d73dd0e6bb77aed9c482df49b37f9e482530ba300b706aa6667",
+            "raw_path": "docs-raw/research/2026-09-06/ce5610ce52728f39211c7a536a81852403c2a2d225137faff829b760033eb3c4/bb7277d30de36cbab44782a36c5b922993da402381ac90f0a7a5295e2c8c468b/source.gz",
+            "fetched_at": "2026-09-05T10:29:13.547614+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 135,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 15,
+                "truncated": false
+              },
+              {
+                "start_line": 16,
+                "end_line": 26,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "# Connecting devices for peer-to-peer Wi-Fi\n\nMake outgoing and accept incoming secure connections with paired devices.\n\n## Overview\n\nWith the Wi-Fi Aware™ technology, your app can securely establish peer-to-peer (P2P) connections between Wi-Fi devices. By using the Wi-Fi Aware framework, devices can discover, pair, and communicate with other nearby devices without an internet connection or access point.\n\nFor your app to pair devices, or ask the person using your app for access to existing devices, you can use either of the following two methods:\n\n- [`DeviceDiscoveryUI`](https://developer.apple.com/documentation/devicediscoveryui): Pair any kind of device for device-to-device and app-to-app use cases, such as file transfer and media streaming.\n- [`AccessorySetupKit`](https://developer.apple.com/documentation/accessorysetupkit): Pair a person’s personal hardware accessory with the accessory’s companion app, such as for setup and accessory management.\n\nAfter a person pairs a device or grants your app access to a device, the system adds the device to your app’s [`WAPairedDevice.Devices`](/documentation/WiFiAware/WAPairedDevice/Devices) collection, which is accessible through the [`allDevices`](/documentation/WiFiAware/WAPairedDevice/allDevices) APIs."
+        }
+      ],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "未建立任何机制证据，无法评估iOS侧真机需求；需先补齐可能对应API的官方文档再分类。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "STA模式开发指南明示应用侧连接机制：addCandidateConfig()添加候选网络配置，connectToCandidateConfig()连接应用自己添加的候选网络，另有移除/查询候选配置与连接状态事件接口；需STA系统能力与GET_WIFI_INFO、SET_WIFI_INFO权限并先使能WLAN。另一篇为code-linter监听默认网络变化规则，与本节点无关。指南未注明API起始版本。",
+      "version_scope": "未知：STA指南（快照2026-09-04）未注明API起始版本或HarmonyOS发行版；示例使用@kit.ConnectivityKit，另一篇用@ohos.net.connection；HarmonyOS与OpenHarmony发行版差异未核对。",
+      "conditions": [
+        "需要SystemCapability.Communication.WiFi.STA系统能力",
+        "需申请ohos.permission.GET_WIFI_INFO；建立连接还需ohos.permission.SET_WIFI_INFO",
+        "使用前需先使能设备WLAN",
+        "connectToCandidateConfig仅能连接应用自己添加的候选网络",
+        "候选配置支持removeCandidateConfig移除与getCandidateConfigs查询"
+      ],
+      "gaps": [
+        "未读js-apis-wifimanager参考正文，候选网络接口完整签名、权限、API起始版本与错误码未核实",
+        "指南未注明HarmonyOS发行版；HarmonyOS与OpenHarmony行为差异未核对",
+        "候选网络是否参与系统自动连接选择、是否有用户审批环节，读到的指南正文未说明",
+        "手机/平板设备形态条件未单独核对"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-2",
+          "locator": "STA模式简介：设备作为客户端连接AP/无线路由器访问网络",
+          "start_line": 3,
+          "end_line": 5,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sta-development-guide",
+            "platform": "harmonyos",
+            "title": "STA模式开发指南",
+            "local_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/document.md",
+            "sha256": "b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223",
+            "raw_sha256": "d7d71d016cad09f0781e848d3167460d70e5e899c53c56c8217f4f48a300b195",
+            "raw_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 146,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 7,
+                "end_line": 11,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 简介\n\nWi-Fi STA模式（Station Mode，站点模式）是无线设备作为客户端接入无线局域网（WLAN）的工作模式。在该模式下，设备（如手机、电脑、平板等）通过连接到接入点（AP，Access Point）或无线路由器，实现对网络的访问。  "
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "接口表：addCandidateConfig添加候选网络配置、connectToCandidateConfig连接应用自己添加的候选网络等",
+          "start_line": 18,
+          "end_line": 29,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sta-development-guide",
+            "platform": "harmonyos",
+            "title": "STA模式开发指南",
+            "local_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/document.md",
+            "sha256": "b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223",
+            "raw_sha256": "d7d71d016cad09f0781e848d3167460d70e5e899c53c56c8217f4f48a300b195",
+            "raw_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 146,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 7,
+                "end_line": 11,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "|接口名|功能描述|\n|:--------------------------------|:-------------------|\n|isWifiActive()|查询WLAN开关是否已使能。|\n|addCandidateConfig()|添加候选网络配置，使用前先使能WLAN。|\n|connectToCandidateConfig()|应用使用该接口连接到自己添加的候选网络。|\n|isConnected()|查询WLAN是否已连接。|\n|removeCandidateConfig()|移除候选网络配置。|\n|getCandidateConfigs()|获取候选网络配置。|\n|on(type: 'wifiStateChange')|注册WLAN状态改变事件。|\n|off(type: 'wifiStateChange')|取消注册WLAN状态改变事件。|\n|on(type: 'wifiConnectionChange')|注册WLAN连接状态改变事件。|\n|off(type: 'wifiConnectionChange')|取消注册WLAN连接状态改变事件。|"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "判断Wi-Fi状态：需SystemCapability.Communication.WiFi.STA与ohos.permission.GET_WIFI_INFO",
+          "start_line": 33,
+          "end_line": 39,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sta-development-guide",
+            "platform": "harmonyos",
+            "title": "STA模式开发指南",
+            "local_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/document.md",
+            "sha256": "b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223",
+            "raw_sha256": "d7d71d016cad09f0781e848d3167460d70e5e899c53c56c8217f4f48a300b195",
+            "raw_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 146,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 7,
+                "end_line": 11,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 判断Wi-Fi状态\n\n1. 导入需要的Wi-Fi模块。\n\n2. 需要SystemCapability.Communication.WiFi.STA系统能力。\n\n3. 需要申请权限ohos.permission.GET_WIFI_INFO。"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "建立Wi-Fi连接步骤：需STA系统能力及GET_WIFI_INFO、SET_WIFI_INFO权限",
+          "start_line": 89,
+          "end_line": 97,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sta-development-guide",
+            "platform": "harmonyos",
+            "title": "STA模式开发指南",
+            "local_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/document.md",
+            "sha256": "b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223",
+            "raw_sha256": "d7d71d016cad09f0781e848d3167460d70e5e899c53c56c8217f4f48a300b195",
+            "raw_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 146,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 7,
+                "end_line": 11,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 建立Wi-Fi连接\n\n1. 导入需要的Wi-Fi模块。\n\n2. 开启设备的Wi-Fi。\n\n3. 需要SystemCapability.Communication.WiFi.STA系统能力。\n\n4. 需要申请权限ohos.permission.GET_WIFI_INFO，ohos.permission.SET_WIFI_INFO。"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "示例代码：addCandidateConfig(config)后调用connectToCandidateConfig连接指定网络",
+          "start_line": 117,
+          "end_line": 122,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sta-development-guide",
+            "platform": "harmonyos",
+            "title": "STA模式开发指南",
+            "local_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/document.md",
+            "sha256": "b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223",
+            "raw_sha256": "d7d71d016cad09f0781e848d3167460d70e5e899c53c56c8217f4f48a300b195",
+            "raw_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 146,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 7,
+                "end_line": 11,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "     wifiManager.on(\"wifiConnectionChange\", recvWifiConnectionChangeFunc);\n     // 添加候选网络配置\n     wifiManager.addCandidateConfig(config).then(result => {\n       // 连接指定网络\n       wifiManager.connectToCandidateConfig(result);\n     });"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "code-linter规则：建议应用监听默认网络变化并切换数据传输，与本节点连接建议机制无直接关系",
+          "start_line": 1,
+          "end_line": 5,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide_listen-default-network-change",
+            "platform": "harmonyos",
+            "title": "@correctness/listen-default-network-change",
+            "local_path": "docs-raw/research/2026-09-06/5ef23d8094c33a2b689a76a4bad9af145d54d5a5c3476812ef9475118cda8953/8bedbec42927fe2e00f5de70274ea8dfd33c3765eaee24815ceb30f09e5b9249/document.md",
+            "sha256": "8bedbec42927fe2e00f5de70274ea8dfd33c3765eaee24815ceb30f09e5b9249",
+            "raw_sha256": "6938dacb690af54a5f017b808b8bad38e8f4e660650ace3bf44402b7e753f4a1",
+            "raw_path": "docs-raw/research/2026-09-06/5ef23d8094c33a2b689a76a4bad9af145d54d5a5c3476812ef9475118cda8953/8bedbec42927fe2e00f5de70274ea8dfd33c3765eaee24815ceb30f09e5b9249/source.gz",
+            "fetched_at": "2026-09-05T10:24:00.241468+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 55,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 7,
+                "end_line": 17,
+                "truncated": false
+              },
+              {
+                "start_line": 18,
+                "end_line": 21,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "# @correctness/listen-default-network-change\n\n建议应用监听默认网络的变化，关闭原有网络的数据传输，并使用新网络建立数据传输。\n\n该规则仅在联网类应用检查整个工程时才生效。  "
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "候选配置连接的接口流程已读到，但权限弹窗、候选网络实际连接行为与适用HarmonyOS版本均未核实，需后续结合API参考与真机复核；本轮无任何实测。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "programming_model",
+      "statement": "连接决策与配置归属模型可能不同：Android应用仅提交建议、由平台最终决定连接且建议不进入保存网络列表（配置非用户单独拥有）；HarmonyOS应用添加自有候选网络配置并主动连接自己添加的候选网络。两平台在谁决定连接、配置归属上可能是不同的机制形态。",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "平台最终决定接受哪个接入点；建议不是保存网络",
+          "start_line": 3,
+          "end_line": 14,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/wifi/wifi-suggest",
+            "platform": "android",
+            "title": "Wi-Fi suggestion API for internet connectivity",
+            "local_path": "docs-raw/research/2026-09-06/940e1c6ca82197ddd0e22b8a1f4fa4e70d117b460e98663f9a75c2e11f3a4aad/8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3/document.md",
+            "sha256": "8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3",
+            "raw_sha256": "bc4c84671aced326813ffd5d23c51a5962a8d61ad6f03df1b8c9ed6413455c5e",
+            "raw_path": "docs-raw/research/2026-09-06/940e1c6ca82197ddd0e22b8a1f4fa4e70d117b460e98663f9a75c2e11f3a4aad/8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3/source.gz",
+            "fetched_at": "2026-09-05T10:24:27.826446+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 226,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 82,
+                "truncated": false
+              },
+              {
+                "start_line": 83,
+                "end_line": 85,
+                "truncated": true
+              },
+              {
+                "start_line": 132,
+                "end_line": 181,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "Devices running Android 10 (API level 29) and higher allow your app to add network\ncredentials for a device to auto-connect to a Wi-Fi access point. You can supply\nsuggestions for which network to connect to using\n[`WifiNetworkSuggestion`](https://developer.android.com/reference/android/net/wifi/WifiNetworkSuggestion).\nThe platform ultimately chooses which access point to accept based on the\ninput from your app and others.\n\n**Note:** Wi-Fi suggestions are not saved networks and will not appear in the\nsaved network page. To add a new Wi-Fi network with user completion, see the\n[`ACTION_WIFI_ADD_NETWORKS`](https://developer.android.com/reference/android/provider/Settings#ACTION_WIFI_ADD_NETWORKS)\nactivity action API. This API will prompt the user to approve the network\naddition."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Suggestion API配置非用户单独拥有，用户不可删除",
+          "start_line": 13,
+          "end_line": 21,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/develop/connectivity/wifi/wifi-infrastructure",
+            "platform": "android",
+            "title": "Wi-Fi infrastructure overview",
+            "local_path": "docs-raw/research/2026-09-06/9f8cadb3c11250d1e500d2e17dd91b13cb95fb665412191e9f966143a5edf7d2/0fb895414a288c359f762001a71675718110dbe06cc2eff3cd958e3bcb2c7556/document.md",
+            "sha256": "0fb895414a288c359f762001a71675718110dbe06cc2eff3cd958e3bcb2c7556",
+            "raw_sha256": "72d67990dcc31e93df3494b0e3ab74ee03a67d47eca8c387af351b21ad03b300",
+            "raw_path": "docs-raw/research/2026-09-06/9f8cadb3c11250d1e500d2e17dd91b13cb95fb665412191e9f966143a5edf7d2/0fb895414a288c359f762001a71675718110dbe06cc2eff3cd958e3bcb2c7556/source.gz",
+            "fetched_at": "2026-09-05T10:24:26.486575+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 57,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 7,
+                "truncated": false
+              },
+              {
+                "start_line": 8,
+                "end_line": 51,
+                "truncated": false
+              },
+              {
+                "start_line": 52,
+                "end_line": 57,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "* [Suggestion API](https://developer.android.com/develop/connectivity/wifi/wifi-suggest): targets apps that\n  provision and provide internet-capable configurations. These configurations\n  are not individually owned by the user. Users can disable specific\n  configurations or disable the suggesting app, but can't delete\n  them.\n\n  + User approval is required per app, not per network suggested by the app.\n  + Intended for carrier Wi-Fi offload configuration apps and other apps that\n    may actively manage offload networks."
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "addCandidateConfig添加候选配置，connectToCandidateConfig连接应用自己添加的候选网络",
+          "start_line": 18,
+          "end_line": 29,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sta-development-guide",
+            "platform": "harmonyos",
+            "title": "STA模式开发指南",
+            "local_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/document.md",
+            "sha256": "b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223",
+            "raw_sha256": "d7d71d016cad09f0781e848d3167460d70e5e899c53c56c8217f4f48a300b195",
+            "raw_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 146,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 7,
+                "end_line": 11,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "|接口名|功能描述|\n|:--------------------------------|:-------------------|\n|isWifiActive()|查询WLAN开关是否已使能。|\n|addCandidateConfig()|添加候选网络配置，使用前先使能WLAN。|\n|connectToCandidateConfig()|应用使用该接口连接到自己添加的候选网络。|\n|isConnected()|查询WLAN是否已连接。|\n|removeCandidateConfig()|移除候选网络配置。|\n|getCandidateConfigs()|获取候选网络配置。|\n|on(type: 'wifiStateChange')|注册WLAN状态改变事件。|\n|off(type: 'wifiStateChange')|取消注册WLAN状态改变事件。|\n|on(type: 'wifiConnectionChange')|注册WLAN连接状态改变事件。|\n|off(type: 'wifiConnectionChange')|取消注册WLAN连接状态改变事件。|"
+        }
+      ],
+      "open_questions": [
+        "HarmonyOS候选网络是否也参与系统自动连接选择，未读js-apis-wifimanager无法确认",
+        "HarmonyOS候选配置与系统保存网络的关系未在读到的指南中说明",
+        "iOS侧机制未建立证据，无法纳入三方比较"
+      ]
+    },
+    {
+      "dimension": "permissions_privacy",
+      "statement": "审批与权限模型可能不同：Android按应用一次性用户审批（首次建议即通知，用户拒绝移除CHANGE_WIFI_STATE，可在设置恢复）；HarmonyOS读到的指南仅声明GET_WIFI_INFO/SET_WIFI_INFO权限与STA系统能力，未描述面向用户的审批或通知环节。",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "首次建议触发通知/对话框；用户拒绝移除CHANGE_WIFI_STATE",
+          "start_line": 197,
+          "end_line": 226,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/wifi/wifi-suggest",
+            "platform": "android",
+            "title": "Wi-Fi suggestion API for internet connectivity",
+            "local_path": "docs-raw/research/2026-09-06/940e1c6ca82197ddd0e22b8a1f4fa4e70d117b460e98663f9a75c2e11f3a4aad/8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3/document.md",
+            "sha256": "8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3",
+            "raw_sha256": "bc4c84671aced326813ffd5d23c51a5962a8d61ad6f03df1b8c9ed6413455c5e",
+            "raw_path": "docs-raw/research/2026-09-06/940e1c6ca82197ddd0e22b8a1f4fa4e70d117b460e98663f9a75c2e11f3a4aad/8cb054e421e109667304d83425fe6974d353f8e49ae7298121bed348f67625d3/source.gz",
+            "fetched_at": "2026-09-05T10:24:27.826446+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 226,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 82,
+                "truncated": false
+              },
+              {
+                "start_line": 83,
+                "end_line": 85,
+                "truncated": true
+              },
+              {
+                "start_line": 132,
+                "end_line": 181,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "Immediately after the app places a suggestion for the first time, the user is\nnotified. The notification type depends on the version of Android that's running\non the device:\n\n* On Android 11 (API level 30) and higher, the user sees a dialog if the app is\n  running in the foreground, and a notification if the app is running in the\n  background.\n* On Android 10 (API level 29), the user sees a notification, regardless of\n  whether the app is running in the foreground or the background.\n\nWhen the platform connects to one of the network suggestions, the settings show\ntext that attributes the network connection to the corresponding suggester app.\n\n## Handling user disconnects\n\nIf the user uses the Wi-Fi picker to explicitly disconnect from one of the\nnetwork suggestions when connected to it, then that network is ignored when it\nis still in range. During this period, that network will not be considered\nfor auto-connection, even if the app removes and re-adds the network suggestion\ncorresponding to the network. If the user uses the Wi-Fi picker to explicitly\nconnect to a network that was previously disconnected, then that network will be\nconsidered for auto-connection immediately.\n\n## Changing approval status for app\n\nA user declining the network suggestion notification removes the\n`CHANGE_WIFI_STATE` permission from the app. The user can grant this approval\nlater by going into the Wi-Fi control menu (**Settings** >\n**Apps & notifications** > **Special App\naccess** > **Wi-Fi Control** > App name)."
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "建立Wi-Fi连接需GET_WIFI_INFO与SET_WIFI_INFO权限及STA系统能力",
+          "start_line": 89,
+          "end_line": 97,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sta-development-guide",
+            "platform": "harmonyos",
+            "title": "STA模式开发指南",
+            "local_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/document.md",
+            "sha256": "b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223",
+            "raw_sha256": "d7d71d016cad09f0781e848d3167460d70e5e899c53c56c8217f4f48a300b195",
+            "raw_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 146,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 7,
+                "end_line": 11,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 建立Wi-Fi连接\n\n1. 导入需要的Wi-Fi模块。\n\n2. 开启设备的Wi-Fi。\n\n3. 需要SystemCapability.Communication.WiFi.STA系统能力。\n\n4. 需要申请权限ohos.permission.GET_WIFI_INFO，ohos.permission.SET_WIFI_INFO。"
+        }
+      ],
+      "open_questions": [
+        "HarmonyOS addCandidateConfig是否有用户确认弹窗，指南正文未说明，需读API参考核实",
+        "Android最新版本权限行为未对API参考核实",
+        "iOS审批机制无证据，未纳入"
+      ]
+    },
+    {
+      "dimension": "api_surface",
+      "statement": "API用例面可能不同：Android按用途分离三种API（建议API、网络请求API、ACTION_WIFI_ADD_NETWORKS添加保存网络），并在指南中说明替代已弃用的addNetwork；HarmonyOS读到的STA指南仅描述候选网络配置一条应用侧路径，未见等价的建议聚合或添加保存网络入口。",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "三种Wi-Fi API按用途分离及各自能力约束；替代已弃用addNetwork",
+          "start_line": 3,
+          "end_line": 49,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/develop/connectivity/wifi/wifi-infrastructure",
+            "platform": "android",
+            "title": "Wi-Fi infrastructure overview",
+            "local_path": "docs-raw/research/2026-09-06/9f8cadb3c11250d1e500d2e17dd91b13cb95fb665412191e9f966143a5edf7d2/0fb895414a288c359f762001a71675718110dbe06cc2eff3cd958e3bcb2c7556/document.md",
+            "sha256": "0fb895414a288c359f762001a71675718110dbe06cc2eff3cd958e3bcb2c7556",
+            "raw_sha256": "72d67990dcc31e93df3494b0e3ab74ee03a67d47eca8c387af351b21ad03b300",
+            "raw_path": "docs-raw/research/2026-09-06/9f8cadb3c11250d1e500d2e17dd91b13cb95fb665412191e9f966143a5edf7d2/0fb895414a288c359f762001a71675718110dbe06cc2eff3cd958e3bcb2c7556/source.gz",
+            "fetched_at": "2026-09-05T10:24:26.486575+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 57,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 7,
+                "truncated": false
+              },
+              {
+                "start_line": 8,
+                "end_line": 51,
+                "truncated": false
+              },
+              {
+                "start_line": 52,
+                "end_line": 57,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "On Android 10 and higher, the Wi-Fi infrastructure includes the Wi-Fi suggestion\nAPI for internet connectivity and the Wi-Fi network request API for peer-to-peer\nconnectivity. On Android 11 and higher, the Settings Intent API lets you\nask the user to approve adding a saved network or Passpoint configuration.\n\n## APIs\n\nThe three APIs target different use cases and have different capabilities and\nconstraints:\n\n* [Suggestion API](https://developer.android.com/develop/connectivity/wifi/wifi-suggest): targets apps that\n  provision and provide internet-capable configurations. These configurations\n  are not individually owned by the user. Users can disable specific\n  configurations or disable the suggesting app, but can't delete\n  them.\n\n  + User approval is required per app, not per network suggested by the app.\n  + Intended for carrier Wi-Fi offload configuration apps and other apps that\n    may actively manage offload networks.\n* [Network request API](https://developer.android.com/develop/connectivity/wifi/wifi-bootstrap): targets\n  apps that need to connect to a peer device, such as when configuring an IoT\n  device or transferring files to a camera. In such cases, the peer device\n  starts up a SoftAP and the API allows the app to guide the user to connect to\n  the device. The resulting network is not intended to provide internet access,\n  can't be used by the system, and can't be used by any app except the\n  configuring app.\n\n  + User selection and approval is required the first time a connection is made\n    to a new peer.\n  + Intended for IoT configuration apps and IoT file transfer apps.\n* [`ACTION_WIFI_ADD_NETWORKS`\n  API](https://developer.android.com/develop/connectivity/wifi/wifi-save-network-passpoint-config): allows\n  apps (with user approval) to add networks or Passpoint configurations to the\n  saved network or subscription list. These configurations are then treated as\n  if the user added them directly. For example, the user can later delete them.\n\n  + User approval is required for every request to add saved networks.\n  + Intended for apps that configure a home Access Point and need to add the\n    configuration to the user's saved network list. Apps that provision a\n    user-account Passpoint configuration, such as Enterprise, federated\n    networks, and educational institutions.\n\n**Note:** These APIs are a replacement for the deprecated\n`WifiManager.addNetwork(WifiConfiguration config)` and related APIs. The\nother deprecated APIs allowed apps to directly add and manage a Wi-Fi\nconfiguration in the saved network list. The replacement APIs provide\nuse-case-targeted alternatives."
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "STA指南接口表仅含候选网络配置、连接、查询与事件接口",
+          "start_line": 18,
+          "end_line": 29,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sta-development-guide",
+            "platform": "harmonyos",
+            "title": "STA模式开发指南",
+            "local_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/document.md",
+            "sha256": "b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223",
+            "raw_sha256": "d7d71d016cad09f0781e848d3167460d70e5e899c53c56c8217f4f48a300b195",
+            "raw_path": "docs-raw/research/2026-09-06/99086d3b7a8a766ccd9e3793c62089ee7fe33a152b198602ce7db8d6a28c6edc/b65031e7aef2801bfdc9c382a69b3c1a3ddfdde9ecd475ebd2303b0e96498223/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 146,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 7,
+                "end_line": 11,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "|接口名|功能描述|\n|:--------------------------------|:-------------------|\n|isWifiActive()|查询WLAN开关是否已使能。|\n|addCandidateConfig()|添加候选网络配置，使用前先使能WLAN。|\n|connectToCandidateConfig()|应用使用该接口连接到自己添加的候选网络。|\n|isConnected()|查询WLAN是否已连接。|\n|removeCandidateConfig()|移除候选网络配置。|\n|getCandidateConfigs()|获取候选网络配置。|\n|on(type: 'wifiStateChange')|注册WLAN状态改变事件。|\n|off(type: 'wifiStateChange')|取消注册WLAN状态改变事件。|\n|on(type: 'wifiConnectionChange')|注册WLAN连接状态改变事件。|\n|off(type: 'wifiConnectionChange')|取消注册WLAN连接状态改变事件。|"
+        }
+      ],
+      "open_questions": [
+        "HarmonyOS是否有等价的添加系统保存网络或P2P网络请求API，需查js-apis-wifimanager全文",
+        "本对比基于单一指南页面，未覆盖HarmonyOS Wi-Fi全部接口面",
+        "iOS对应API面未知，未纳入"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "iOS冻结来源均不覆盖本节点（Siri事件建议、Wi-Fi Aware P2P），NEHotspotConfiguration等可能相关文档未入包，iOS侧只能unknown",
+    "HarmonyOS未读js-apis-wifimanager API参考，候选网络接口版本、权限细节与系统级行为未核实",
+    "Android未读WifiNetworkSuggestion/WifiManager API参考，最新正式版行为未核实",
+    "版本基线unresolved：全部结论仅基于2026-09-04/05快照，不声称覆盖启动日最新正式版",
+    "Wi-Fi Aware点对点连接与本节点（接入点连接建议）的边界需父级范围澄清"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "存在关键缺口与高风险映射：iOS无任何本节点相关证据且可能对应文档缺失；HarmonyOS核心API参考未读、版本未注明；Android建议模型与HarmonyOS候选配置模型是否可比需精研核实，映射错误会直接影响比较结论。"
+  }
+}

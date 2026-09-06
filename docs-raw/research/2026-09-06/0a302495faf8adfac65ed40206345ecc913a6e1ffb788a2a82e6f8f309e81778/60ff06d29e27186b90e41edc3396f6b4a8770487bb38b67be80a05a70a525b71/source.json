@@ -1,0 +1,13 @@
+{
+  "id": "0a302495faf8adfac65ed40206345ecc913a6e1ffb788a2a82e6f8f309e81778",
+  "url": "https://developer.apple.com/documentation/widgetkit/linking-to-specific-app-scenes-from-your-widget-or-live-activity",
+  "platform": "ios",
+  "title": "Linking to specific app scenes from your widget or Live Activity",
+  "local_path": "docs-raw/research/2026-09-06/0a302495faf8adfac65ed40206345ecc913a6e1ffb788a2a82e6f8f309e81778/60ff06d29e27186b90e41edc3396f6b4a8770487bb38b67be80a05a70a525b71/document.md",
+  "sha256": "60ff06d29e27186b90e41edc3396f6b4a8770487bb38b67be80a05a70a525b71",
+  "raw_sha256": "17e2c32d4a2bd4a0fbf4b9a25e33ca79449261fff2484808c9810118d3c96784",
+  "raw_path": "docs-raw/research/2026-09-06/0a302495faf8adfac65ed40206345ecc913a6e1ffb788a2a82e6f8f309e81778/60ff06d29e27186b90e41edc3396f6b4a8770487bb38b67be80a05a70a525b71/source.gz",
+  "fetched_at": "2026-09-05T10:29:11.706947+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

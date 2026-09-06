@@ -1,0 +1,594 @@
+{
+  "task_id": "25c8411edd3ca69b2bb43665a9bc0f44055a82796783d634180b7514047f7f92",
+  "feature_id": "app.install.package_update",
+  "stage": "first_pass",
+  "summary": "首轮文档初判：仅 Android 读到应用级安装/更新机制正文（Google Play EMM API Installs，update 可远程安装或把已装应用更新到最新版本，但方法已弃用且文档明示 2025-09-30 后不可访问）；iOS 两篇分别为 SKAdNetwork 广告归因安装验证与 MDM 系统软件更新强制；HarmonyOS 两篇为 ohpm 开发期依赖更新与 MDM OTA 固件更新，均非应用级机制。三平台应用级安装/更新文档缺口并存，基线未固定，全部 low。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "Google Play EMM API v1 Installs 文档描述企业托管设备的应用安装/更新：创建 install 资源触发设备实际安装，对已有 install 调用 update 会更新到最新可用版本，不能指定版本（versionCode 只读）；get/list/update 均已弃用且文档明示 2025-09-30 后不可访问。另一篇为 Play services 安全 Provider 组件更新（ProviderInstaller），非完整应用安装。",
+      "version_scope": "Google Play EMM API v1（生态服务，非 Android 系统 SDK）；快照 2026-09-05 获取、version_verified=false；文档明示方法 2025-09-30 后不可访问（相对 2026-09-06 已过期）；未固定启动日最新正式版基线。",
+      "conditions": [
+        "企业/EMM 托管设备场景，经 Google Play 生态服务（非 Android 系统 SDK）",
+        "创建 install 需 entitlement；付费应用无可用许可证时创建失败",
+        "get/list/update 方法已弃用，文档明示 2025-09-30 后任何人不可访问",
+        "更新语义为更新到最新可用版本，不可强制指定 versionCode"
+      ],
+      "gaps": [
+        "未读 Android 系统 SDK 应用安装接口（如 PackageInstaller/安装 session）文档",
+        "未读消费侧应用自更新与 Play 应用内更新（in-app updates）文档",
+        "EMM 方法已过期，现行替代（如 Android Management API）未在本轮冻结来源中",
+        "版本基线未固定，未核对启动日最新正式版行为"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Resource representations：install 创建触发实际安装、update 更新到最新版本、versionCode 只读",
+          "start_line": 5,
+          "end_line": 17,
+          "source": {
+            "id": "android-1",
+            "url": "https://developers.google.com/android/work/play/emm-api/v1/installs",
+            "platform": "android",
+            "title": "Installs",
+            "local_path": "docs-raw/research/2026-09-06/a4862d009e868176ac073dc49bffd4a7ec57f83676b141d2b0c118a1d21fac80/49b37437faa701eecb2efdca840abd9069a09719db6124b0db6e38ddbfe4a0c6/document.md",
+            "sha256": "49b37437faa701eecb2efdca840abd9069a09719db6124b0db6e38ddbfe4a0c6",
+            "raw_sha256": "c0e58873e47d8156182fc7729c1bfbdda596889e1b58572a26e09f29838757e2",
+            "raw_path": "docs-raw/research/2026-09-06/a4862d009e868176ac073dc49bffd4a7ec57f83676b141d2b0c118a1d21fac80/49b37437faa701eecb2efdca840abd9069a09719db6124b0db6e38ddbfe4a0c6/source.gz",
+            "fetched_at": "2026-09-05T10:51:54.596982+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 68,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 36,
+                "truncated": false
+              },
+              {
+                "start_line": 37,
+                "end_line": 68,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Resource representations\n\nThe existence of an Installs resource indicates that an app is installed on a particular device (or that an install is pending).   \n  \n The API can be used to create an install resource using the [update](https://developers.google.com/android/work/play/emm-api/v1/installs/update) method. This triggers the actual install of the app on the device. If the user does not already have an entitlement for the app, then an attempt is made to create one. If this fails (for example, because the app is not free and there is no available license), then the creation of the install fails.   \n  \n The API can also be used to update an installed app. If the [update](https://developers.google.com/android/work/play/emm-api/v1/installs/update) method is used on an existing install, then the app will be updated to the latest available version.   \n  \n Note that it is not possible to force the installation of a specific version of an app: the version code is read-only.   \n  \n If a user installs an app themselves (as permitted by the enterprise), then again an install resource and possibly an entitlement resource are automatically created.   \n  \n The API can also be used to delete an install resource, which triggers the removal of the app from the device. Note that deleting an install does not automatically remove the corresponding entitlement, even if there are no remaining installs. The install resource will also be deleted if the user uninstalls the app themselves."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Methods: update（Deprecated，2025-09-30 后不可访问，请求安装最新版本）",
+          "start_line": 60,
+          "end_line": 68,
+          "source": {
+            "id": "android-1",
+            "url": "https://developers.google.com/android/work/play/emm-api/v1/installs",
+            "platform": "android",
+            "title": "Installs",
+            "local_path": "docs-raw/research/2026-09-06/a4862d009e868176ac073dc49bffd4a7ec57f83676b141d2b0c118a1d21fac80/49b37437faa701eecb2efdca840abd9069a09719db6124b0db6e38ddbfe4a0c6/document.md",
+            "sha256": "49b37437faa701eecb2efdca840abd9069a09719db6124b0db6e38ddbfe4a0c6",
+            "raw_sha256": "c0e58873e47d8156182fc7729c1bfbdda596889e1b58572a26e09f29838757e2",
+            "raw_path": "docs-raw/research/2026-09-06/a4862d009e868176ac073dc49bffd4a7ec57f83676b141d2b0c118a1d21fac80/49b37437faa701eecb2efdca840abd9069a09719db6124b0db6e38ddbfe4a0c6/source.gz",
+            "fetched_at": "2026-09-05T10:51:54.596982+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 68,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 36,
+                "truncated": false
+              },
+              {
+                "start_line": 37,
+                "end_line": 68,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "[update](https://developers.google.com/android/work/play/emm-api/v1/installs/update)\n:   **Deprecated:** New integrations cannot use this method and can refer to\n    our  [new\n    recommendations](https://developers.google.com/android/work/deprecations#recommended_alternative_3).  \n    **This method will no longer be accessible by\n    anyone after September 30, 2025.**\n    Requests to install the latest version of an app to a device. If the app\n    is already installed, then it is updated to the latest version if\n    necessary."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Patch the security provider using ProviderInstaller（安全 Provider 组件级更新，非完整应用安装）",
+          "start_line": 27,
+          "end_line": 36,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/privacy-and-security/security-gms-provider",
+            "platform": "android",
+            "title": "Update your security provider to protect against SSL exploits",
+            "local_path": "docs-raw/research/2026-09-06/f346dea09c06c9eee34f762904d50c3c5b2946685792475c1829c997c97620ed/8502bfc98fae3c3670889414f5811aa5a05149217d8bf3557350417876384578/document.md",
+            "sha256": "8502bfc98fae3c3670889414f5811aa5a05149217d8bf3557350417876384578",
+            "raw_sha256": "03f3c5f4a3408248868874653b9a6b8f12049a21f78929e4f30fdcb74fbb6725",
+            "raw_path": "docs-raw/research/2026-09-06/f346dea09c06c9eee34f762904d50c3c5b2946685792475c1829c997c97620ed/8502bfc98fae3c3670889414f5811aa5a05149217d8bf3557350417876384578/source.gz",
+            "fetched_at": "2026-09-05T10:34:33.738340+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 378,
+            "suggested_sections": [
+              {
+                "start_line": 27,
+                "end_line": 94,
+                "truncated": false
+              },
+              {
+                "start_line": 111,
+                "end_line": 114,
+                "truncated": true
+              },
+              {
+                "start_line": 149,
+                "end_line": 152,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "## Patch the security provider using ProviderInstaller\n\nTo update a device's security provider, use the\n[`ProviderInstaller`](https://developers.google.com/android/reference/com/google/android/gms/security/ProviderInstaller)\nclass. You can verify that the security provider is up to date (and update it,\nif necessary) by calling\nthat class's [`installIfNeeded()`](https://developers.google.com/android/reference/com/google/android/gms/security/ProviderInstaller#installIfNeeded(android.content.Context))\n(or [`installIfNeededAsync()`](https://developers.google.com/android/reference/com/google/android/gms/security/ProviderInstaller#installIfNeededAsync(android.content.Context,%20com.google.android.gms.security.ProviderInstaller.ProviderInstallListener)))\nmethod. This section describes these options at a high level. The sections that follow provide\nmore detailed steps and examples."
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "应用安装/更新是设备端可观察行为（安装状态迁移、更新到最新版本的实际效果），正式核实建议真机加 EMM/Play 环境实测；本轮仅文档初判，无实测。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "possible_mapping",
+      "observation": "两篇均非应用安装/更新机制正文：StoreKit 文档把『用户安装应用』作为广告归因时间窗事件并描述安装验证回传分层；DeviceManagement 文档描述系统软件更新强制的声明式阶段流程（声明同步、下载、准备、通知、安装、状态上报）。应用级安装/版本更新机制（如商店分发、MDM 应用安装命令）未见文档，仅存在待确认映射。",
+      "version_scope": "Apple 文档快照 2026-09-05 获取、version_verified=false；ios-1 分层提及 iOS 14.6/15/16.1 行为；ios-2 未标注适用系统版本，iOS 适用性未逐符号核对；未固定启动日基线。",
+      "conditions": [
+        "ios-1 面向广告网络与 StoreKit 生态，行为按 SKAdNetwork 签名版本与 iOS 14.6/15/16.1 分层",
+        "ios-2 面向 MDM 设备管理服务（声明式管理），对象是系统软件更新而非应用更新",
+        "Apple 目录跨多操作系统，ios-2 页面未明示 iOS 适用版本，需逐符号核对"
+      ],
+      "gaps": [
+        "无 App Store 应用安装/更新流程文档",
+        "无 MDM 应用安装命令与自动应用更新设置文档",
+        "ios-2 为系统更新域，与节点应用域的映射未确认",
+        "iOS 适用版本未逐符号核对；基线未固定"
+      ],
+      "confidence": "low",
+      "evidence_strength": "indirect",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "Discussion：安装事件与时间窗、安装验证回传触发条件",
+          "start_line": 5,
+          "end_line": 14,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/storekit/receiving-ad-attributions-and-postbacks",
+            "platform": "ios",
+            "title": "Receiving ad attributions and postbacks",
+            "local_path": "docs-raw/research/2026-09-06/999cb92315045dc1cb517b234cd4933b1fc5fbba2a9adc4a8b614a93883bf62a/35c4e56fbb556ac8343639d91115466104e3e6c2d359c5485706d92a6a1b2220/document.md",
+            "sha256": "35c4e56fbb556ac8343639d91115466104e3e6c2d359c5485706d92a6a1b2220",
+            "raw_sha256": "cc0fe75b7b04f662c2a2ab97ba0a8c38d2e4249c7194e93f81a7024131ca2129",
+            "raw_path": "docs-raw/research/2026-09-06/999cb92315045dc1cb517b234cd4933b1fc5fbba2a9adc4a8b614a93883bf62a/35c4e56fbb556ac8343639d91115466104e3e6c2d359c5485706d92a6a1b2220/source.gz",
+            "fetched_at": "2026-09-05T11:20:20.945996+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 76,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 35,
+                "truncated": false
+              },
+              {
+                "start_line": 36,
+                "end_line": 39,
+                "truncated": true
+              },
+              {
+                "start_line": 52,
+                "end_line": 53,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "## Discussion\n\nAd networks receive attributions in the form of install-validation postbacks. Before an ad network can receive a postback, the following events need to occur within limited time-windows:\n\n- Ad networks sign and present ads in the form of StoreKit-rendered ads, view-through ads, or attributable web ads. StoreKit records the ad impressions.\n- Users install the advertised app.\n- Users launch the app.\n- The app updates the conversion values when the user first launches the app, and continues to update it as needed.\n\nIf all these events occur within their respective time-windows, the ad impression qualifies for an install-validation postback. The following table shows the time-windows for the events:"
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Phase 1–3：SoftwareUpdateEnforcementSpecific 声明、下载与 prepared 状态（对象为系统软件更新）",
+          "start_line": 15,
+          "end_line": 38,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/devicemanagement/phases-of-software-update-enforcement",
+            "platform": "ios",
+            "title": "Phases of software update enforcement",
+            "local_path": "docs-raw/research/2026-09-06/9e9474c5c4e4e7f261eaa384fee830a346ef13c998238fa04dcc8f99a4f9320e/e0540390bf82ef2e9a3655efb16e86c1c26a189b9858f84a48bd010f20bf5462/document.md",
+            "sha256": "e0540390bf82ef2e9a3655efb16e86c1c26a189b9858f84a48bd010f20bf5462",
+            "raw_sha256": "2353f21b381538d483ba99a2c99bbae38bde57971e7d3c8a0bcc0dcc96002727",
+            "raw_path": "docs-raw/research/2026-09-06/9e9474c5c4e4e7f261eaa384fee830a346ef13c998238fa04dcc8f99a4f9320e/e0540390bf82ef2e9a3655efb16e86c1c26a189b9858f84a48bd010f20bf5462/source.gz",
+            "fetched_at": "2026-09-05T10:50:34.962310+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 75,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 15,
+                "end_line": 22,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Phase 1\n\nThe device management service regularly monitors the Apple Software Lookup Service for new releases. If it detects one, it uses the `SupportedDevices` key of the catalog and compares it to its list of managed devices to determine which devices the release is applicable to.\n\nThe device management service should also subscribe to the `softwareupdate.*` and `device.operating-system.*` status reports to automatically retrieve updates when any of those values change.\n\n![The device management service regularly monitors the Apple Software Lookup Service for new releases](images/com.apple.devicemanagement/phases-of-software-update-enforcement01@2x.png)\n\n## Phase 2\n\nThe device management service creates a [`SoftwareUpdateEnforcementSpecific`](/documentation/DeviceManagement/SoftwareUpdateEnforcementSpecific) declaration with the detected version and defines the `TargetLocalDateTime` and, optionally, the `DetailsURL` according to the organizational requirements. The device management service then sends a push notification to the device to start the synchronization of declarations. For more information, see [Integrating declarative management](/documentation/DeviceManagement/integrating-declarative-management).\n\n![The device management service creates the enforcement configuration and syncs it to the device](images/com.apple.devicemanagement/phases-of-software-update-enforcement02@2x.png)\n\n## Phase 3\n\nAfter the declaration becomes active on a device, the operating system reaches out to the Apple Software Update Catalog to retrieve the download URL and begins to download the update if it meets the requirements. The device then presents a notification to the user, and returns the following to the device management service:\n\n1. A [`StatusSoftwareUpdateInstallState`](/documentation/DeviceManagement/StatusSoftwareUpdateInstallState) value of `waiting`, which indicates the process to request the update has started.\n2. A [`StatusSoftwareUpdateInstallState`](/documentation/DeviceManagement/StatusSoftwareUpdateInstallState) value of `downloading`, which indicates the update is being downloaded by the device.\n\nIf a content caching service is available to the device, it attempts to download the software update from the content cache.\n\nAfter the device successfully downloads the update, it prepares it for installation. After this process completes, the operating system sends a [`StatusSoftwareUpdateInstallState`](/documentation/DeviceManagement/StatusSoftwareUpdateInstallState) value of `prepared` to the device management service."
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "应用安装/更新行为（含商店分发与 MDM 强制路径）最终核实需真机与对应管理/商店环境；本轮仅文档初判，无实测。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "unknown",
+      "observation": "两篇均不覆盖完整应用的安装与版本更新：ohpm update 是开发期更新工程三方库依赖的包管理器命令（semver 规则），非设备端应用安装；MDM Kit API diff 页新增的是企业 OTA 系统更新接口（OtaUpdatePolicy/UpdatePackageInfo/UpdateStatus，PackageType 为 FIRMWARE），属固件/系统更新。未能就本节点建立判断。",
+      "version_scope": "快照 2026-09-05 获取、version_verified=false；ohpm 文档提及 6.0.2.636 与 26.0.0.630 工具版本门槛；MDM diff 页（b031）为特定版本 API 变更清单，未固定 HarmonyOS 正式发行版基线。",
+      "conditions": [
+        "ohpm update 作用于开发工程依赖（oh-package.json5，semver 规则），非设备端应用安装/更新",
+        "MDM Kit 接口面向企业 admin（Want 参数），更新对象为固件包（PackageType FIRMWARE）",
+        "MDM diff 页仅 API 变更清单无正文行为说明；@ohos.enterprise 需区分 OpenHarmony 与 HarmonyOS 发行版可见性"
+      ],
+      "gaps": [
+        "未读到应用安装/更新机制文档（AppGallery 分发、bundleManager 安装接口、应用市场更新、企业应用安装）",
+        "MDM diff 页仅 API 清单，接口正文、权限与版本条件未读",
+        "OpenHarmony 与 HarmonyOS 发行版区分未核对",
+        "基线未固定，未核对启动日最新正式版"
+      ],
+      "confidence": "low",
+      "evidence_strength": "missing",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "功能描述：按 semver 规范更新本地三方库依赖（非应用安装）",
+          "start_line": 16,
+          "end_line": 19,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-ohpm-update",
+            "platform": "harmonyos",
+            "title": "ohpm update",
+            "local_path": "docs-raw/research/2026-09-06/162a8f3ffbc99ce05602cfcae04a557109baf8b859b8be28eb598bc91880215b/ccf057445b33a261c30050f4b78a0ff1b5f6c36c385d3bd2105296994e583815/document.md",
+            "sha256": "ccf057445b33a261c30050f4b78a0ff1b5f6c36c385d3bd2105296994e583815",
+            "raw_sha256": "a909d8d7b0fc9ba5339016f21118eb56737b4b5021d58c8f51f0b2f53c9f8295",
+            "raw_path": "docs-raw/research/2026-09-06/162a8f3ffbc99ce05602cfcae04a557109baf8b859b8be28eb598bc91880215b/ccf057445b33a261c30050f4b78a0ff1b5f6c36c385d3bd2105296994e583815/source.gz",
+            "fetched_at": "2026-09-05T10:23:23.588932+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 235,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 15,
+                "truncated": false
+              },
+              {
+                "start_line": 16,
+                "end_line": 19,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 功能描述\n\n根据三方库及其依赖版本号的 [semver](https://semver.org/) 规范，将本地安装的三方库更新到最新版本。若未指定三方库名称，则全量更新当前工程的依赖，且会安装缺少的三方库。  \n"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "systemManager 新增 PolicyType 枚举（含 UPDATE_TO_SPECIFIC_VERSION/POSTPONE/WINDOWS）与 OtaUpdatePolicy 接口",
+          "start_line": 12,
+          "end_line": 24,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-mdmkit-b031",
+            "platform": "harmonyos",
+            "title": "MDM Kit",
+            "local_path": "docs-raw/research/2026-09-06/ba4b2bd8d258e610a073b0b38bc2d8361b65170b8040ed3232b1aec853ee2c93/cd9baa082a438195744280356034d74fed93317be7b7f92f6008d930d900f070/document.md",
+            "sha256": "cd9baa082a438195744280356034d74fed93317be7b7f92f6008d930d900f070",
+            "raw_sha256": "34020fbdee50fd7fab2e561fc04bd099d22d56af40a51dd0bf832b13214ece87",
+            "raw_path": "docs-raw/research/2026-09-06/ba4b2bd8d258e610a073b0b38bc2d8361b65170b8040ed3232b1aec853ee2c93/cd9baa082a438195744280356034d74fed93317be7b7f92f6008d930d900f070/source.gz",
+            "fetched_at": "2026-09-05T11:02:11.449626+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 56,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 54,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "|新增API|NA|类名：systemManager； API声明： enum PolicyType 差异内容： enum PolicyType|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：PolicyType； API声明：DEFAULT = 0 差异内容：DEFAULT = 0|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：PolicyType； API声明：PROHIBIT = 1 差异内容：PROHIBIT = 1|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：PolicyType； API声明：UPDATE_TO_SPECIFIC_VERSION = 2 差异内容：UPDATE_TO_SPECIFIC_VERSION = 2|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：PolicyType； API声明：WINDOWS = 3 差异内容：WINDOWS = 3|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：PolicyType； API声明：POSTPONE = 4 差异内容：POSTPONE = 4|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明： export interface OtaUpdatePolicy 差异内容： export interface OtaUpdatePolicy|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：OtaUpdatePolicy； API声明：policyType: PolicyType; 差异内容：policyType: PolicyType;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：OtaUpdatePolicy； API声明：version: string; 差异内容：version: string;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：OtaUpdatePolicy； API声明：latestUpdateTime?: number; 差异内容：latestUpdateTime?: number;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：OtaUpdatePolicy； API声明：delayUpdateTime?: number; 差异内容：delayUpdateTime?: number;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：OtaUpdatePolicy； API声明：installStartTime?: number; 差异内容：installStartTime?: number;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：OtaUpdatePolicy； API声明：installEndTime?: number; 差异内容：installEndTime?: number;|api/@ohos.enterprise.systemManager.d.ts|"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "UpdateStatus 枚举与 setOtaUpdatePolicy/getOtaUpdatePolicy/notifyUpdatePackages/getUpdateResult 函数",
+          "start_line": 44,
+          "end_line": 56,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-mdmkit-b031",
+            "platform": "harmonyos",
+            "title": "MDM Kit",
+            "local_path": "docs-raw/research/2026-09-06/ba4b2bd8d258e610a073b0b38bc2d8361b65170b8040ed3232b1aec853ee2c93/cd9baa082a438195744280356034d74fed93317be7b7f92f6008d930d900f070/document.md",
+            "sha256": "cd9baa082a438195744280356034d74fed93317be7b7f92f6008d930d900f070",
+            "raw_sha256": "34020fbdee50fd7fab2e561fc04bd099d22d56af40a51dd0bf832b13214ece87",
+            "raw_path": "docs-raw/research/2026-09-06/ba4b2bd8d258e610a073b0b38bc2d8361b65170b8040ed3232b1aec853ee2c93/cd9baa082a438195744280356034d74fed93317be7b7f92f6008d930d900f070/source.gz",
+            "fetched_at": "2026-09-05T11:02:11.449626+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 56,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 54,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "|新增API|NA|类名：systemManager； API声明： enum UpdateStatus 差异内容： enum UpdateStatus|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdateStatus； API声明：NO_UPDATE_PACKAGE = -4 差异内容：NO_UPDATE_PACKAGE = -4|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdateStatus； API声明：UPDATE_WAITING = -3 差异内容：UPDATE_WAITING = -3|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdateStatus； API声明：UPDATING = -2 差异内容：UPDATING = -2|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdateStatus； API声明：UPDATE_FAILURE = -1 差异内容：UPDATE_FAILURE = -1|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdateStatus； API声明：UPDATE_SUCCESS = 0 差异内容：UPDATE_SUCCESS = 0|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明： interface ErrorInfo 差异内容： interface ErrorInfo|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：ErrorInfo； API声明：code: number; 差异内容：code: number;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：ErrorInfo； API声明：message: string; 差异内容：message: string;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明：function setOtaUpdatePolicy(admin: Want, policy: OtaUpdatePolicy): void; 差异内容：function setOtaUpdatePolicy(admin: Want, policy: OtaUpdatePolicy): void;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明：function getOtaUpdatePolicy(admin: Want): OtaUpdatePolicy; 差异内容：function getOtaUpdatePolicy(admin: Want): OtaUpdatePolicy;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明：function notifyUpdatePackages(admin: Want, packageInfo: UpdatePackageInfo): Promise\\<void\\>; 差异内容：function notifyUpdatePackages(admin: Want, packageInfo: UpdatePackageInfo): Promise\\<void\\>;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明：function getUpdateResult(admin: Want, version: string): Promise\\<UpdateResult\\>; 差异内容：function getUpdateResult(admin: Want, version: string): Promise\\<UpdateResult\\>;|api/@ohos.enterprise.systemManager.d.ts|"
+        }
+      ],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "未建立机制判断（未读到应用级安装/更新文档），真机需求待补充官方文档并确认域映射后再评估。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "api_surface",
+      "statement": "企业侧远程触发完整应用安装/更新的接口面（can 层面）：Android 文档明示 Google Play EMM API（生态服务）可远程安装并把已装应用更新到最新版本（方法已弃用且 2025-09-30 后不可访问）；iOS 已读文档仅见系统软件更新强制与广告归因安装验证，未见应用级远程安装/更新接口。假设两平台该接口面存在文档层面的差异，属文档缺口而非能力结论。",
+      "platforms": [
+        "android",
+        "ios"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Methods: update 请求安装最新版本，已装则更新到最新（Deprecated，2025-09-30 后不可访问）",
+          "start_line": 60,
+          "end_line": 68,
+          "source": {
+            "id": "android-1",
+            "url": "https://developers.google.com/android/work/play/emm-api/v1/installs",
+            "platform": "android",
+            "title": "Installs",
+            "local_path": "docs-raw/research/2026-09-06/a4862d009e868176ac073dc49bffd4a7ec57f83676b141d2b0c118a1d21fac80/49b37437faa701eecb2efdca840abd9069a09719db6124b0db6e38ddbfe4a0c6/document.md",
+            "sha256": "49b37437faa701eecb2efdca840abd9069a09719db6124b0db6e38ddbfe4a0c6",
+            "raw_sha256": "c0e58873e47d8156182fc7729c1bfbdda596889e1b58572a26e09f29838757e2",
+            "raw_path": "docs-raw/research/2026-09-06/a4862d009e868176ac073dc49bffd4a7ec57f83676b141d2b0c118a1d21fac80/49b37437faa701eecb2efdca840abd9069a09719db6124b0db6e38ddbfe4a0c6/source.gz",
+            "fetched_at": "2026-09-05T10:51:54.596982+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 68,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 36,
+                "truncated": false
+              },
+              {
+                "start_line": 37,
+                "end_line": 68,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "[update](https://developers.google.com/android/work/play/emm-api/v1/installs/update)\n:   **Deprecated:** New integrations cannot use this method and can refer to\n    our  [new\n    recommendations](https://developers.google.com/android/work/deprecations#recommended_alternative_3).  \n    **This method will no longer be accessible by\n    anyone after September 30, 2025.**\n    Requests to install the latest version of an app to a device. If the app\n    is already installed, then it is updated to the latest version if\n    necessary."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "『用户安装应用』作为广告归因事件（应用安装的间接证据）",
+          "start_line": 7,
+          "end_line": 14,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/storekit/receiving-ad-attributions-and-postbacks",
+            "platform": "ios",
+            "title": "Receiving ad attributions and postbacks",
+            "local_path": "docs-raw/research/2026-09-06/999cb92315045dc1cb517b234cd4933b1fc5fbba2a9adc4a8b614a93883bf62a/35c4e56fbb556ac8343639d91115466104e3e6c2d359c5485706d92a6a1b2220/document.md",
+            "sha256": "35c4e56fbb556ac8343639d91115466104e3e6c2d359c5485706d92a6a1b2220",
+            "raw_sha256": "cc0fe75b7b04f662c2a2ab97ba0a8c38d2e4249c7194e93f81a7024131ca2129",
+            "raw_path": "docs-raw/research/2026-09-06/999cb92315045dc1cb517b234cd4933b1fc5fbba2a9adc4a8b614a93883bf62a/35c4e56fbb556ac8343639d91115466104e3e6c2d359c5485706d92a6a1b2220/source.gz",
+            "fetched_at": "2026-09-05T11:20:20.945996+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 76,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 35,
+                "truncated": false
+              },
+              {
+                "start_line": 36,
+                "end_line": 39,
+                "truncated": true
+              },
+              {
+                "start_line": 52,
+                "end_line": 53,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "Ad networks receive attributions in the form of install-validation postbacks. Before an ad network can receive a postback, the following events need to occur within limited time-windows:\n\n- Ad networks sign and present ads in the form of StoreKit-rendered ads, view-through ads, or attributable web ads. StoreKit records the ad impressions.\n- Users install the advertised app.\n- Users launch the app.\n- The app updates the conversion values when the user first launches the app, and continues to update it as needed.\n\nIf all these events occur within their respective time-windows, the ad impression qualifies for an install-validation postback. The following table shows the time-windows for the events:"
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Phase 2–3：更新强制声明与下载状态（对象为系统软件更新而非应用）",
+          "start_line": 25,
+          "end_line": 38,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/devicemanagement/phases-of-software-update-enforcement",
+            "platform": "ios",
+            "title": "Phases of software update enforcement",
+            "local_path": "docs-raw/research/2026-09-06/9e9474c5c4e4e7f261eaa384fee830a346ef13c998238fa04dcc8f99a4f9320e/e0540390bf82ef2e9a3655efb16e86c1c26a189b9858f84a48bd010f20bf5462/document.md",
+            "sha256": "e0540390bf82ef2e9a3655efb16e86c1c26a189b9858f84a48bd010f20bf5462",
+            "raw_sha256": "2353f21b381538d483ba99a2c99bbae38bde57971e7d3c8a0bcc0dcc96002727",
+            "raw_path": "docs-raw/research/2026-09-06/9e9474c5c4e4e7f261eaa384fee830a346ef13c998238fa04dcc8f99a4f9320e/e0540390bf82ef2e9a3655efb16e86c1c26a189b9858f84a48bd010f20bf5462/source.gz",
+            "fetched_at": "2026-09-05T10:50:34.962310+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 75,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 15,
+                "end_line": 22,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "The device management service creates a [`SoftwareUpdateEnforcementSpecific`](/documentation/DeviceManagement/SoftwareUpdateEnforcementSpecific) declaration with the detected version and defines the `TargetLocalDateTime` and, optionally, the `DetailsURL` according to the organizational requirements. The device management service then sends a push notification to the device to start the synchronization of declarations. For more information, see [Integrating declarative management](/documentation/DeviceManagement/integrating-declarative-management).\n\n![The device management service creates the enforcement configuration and syncs it to the device](images/com.apple.devicemanagement/phases-of-software-update-enforcement02@2x.png)\n\n## Phase 3\n\nAfter the declaration becomes active on a device, the operating system reaches out to the Apple Software Update Catalog to retrieve the download URL and begins to download the update if it meets the requirements. The device then presents a notification to the user, and returns the following to the device management service:\n\n1. A [`StatusSoftwareUpdateInstallState`](/documentation/DeviceManagement/StatusSoftwareUpdateInstallState) value of `waiting`, which indicates the process to request the update has started.\n2. A [`StatusSoftwareUpdateInstallState`](/documentation/DeviceManagement/StatusSoftwareUpdateInstallState) value of `downloading`, which indicates the update is being downloaded by the device.\n\nIf a content caching service is available to the device, it attempts to download the software update from the content cache.\n\nAfter the device successfully downloads the update, it prepares it for installation. After this process completes, the operating system sends a [`StatusSoftwareUpdateInstallState`](/documentation/DeviceManagement/StatusSoftwareUpdateInstallState) value of `prepared` to the device management service."
+        }
+      ],
+      "open_questions": [
+        "iOS MDM 应用安装命令与 App Store 批量采购安装文档未检索，不能据此认为 iOS 无此能力",
+        "HarmonyOS 企业应用安装/更新文档缺失，第三平台对照未建立",
+        "Android EMM 过期方法的现行替代（如 Android Management API）未读，现行机制待补"
+      ]
+    },
+    {
+      "dimension": "programming_model",
+      "statement": "系统级更新治理编程模型（注意：两者均为系统/固件更新域，映射到本应用节点待确认）：iOS 采用声明式管理（SoftwareUpdateEnforcementSpecific 声明同步 + waiting/downloading/prepared/installing/failed 状态上报的分阶段流程）；HarmonyOS MDM Kit 为命令式策略函数（setOtaUpdatePolicy/getOtaUpdatePolicy/notifyUpdatePackages/getUpdateResult，PolicyType 含 UPDATE_TO_SPECIFIC_VERSION/POSTPONE/WINDOWS）。假设两平台系统更新管理的接口形态不同。",
+      "platforms": [
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "ios-2",
+          "locator": "Phase 2–5：声明式更新强制与 waiting/downloading/prepared/installing/failed 状态上报",
+          "start_line": 25,
+          "end_line": 52,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/devicemanagement/phases-of-software-update-enforcement",
+            "platform": "ios",
+            "title": "Phases of software update enforcement",
+            "local_path": "docs-raw/research/2026-09-06/9e9474c5c4e4e7f261eaa384fee830a346ef13c998238fa04dcc8f99a4f9320e/e0540390bf82ef2e9a3655efb16e86c1c26a189b9858f84a48bd010f20bf5462/document.md",
+            "sha256": "e0540390bf82ef2e9a3655efb16e86c1c26a189b9858f84a48bd010f20bf5462",
+            "raw_sha256": "2353f21b381538d483ba99a2c99bbae38bde57971e7d3c8a0bcc0dcc96002727",
+            "raw_path": "docs-raw/research/2026-09-06/9e9474c5c4e4e7f261eaa384fee830a346ef13c998238fa04dcc8f99a4f9320e/e0540390bf82ef2e9a3655efb16e86c1c26a189b9858f84a48bd010f20bf5462/source.gz",
+            "fetched_at": "2026-09-05T10:50:34.962310+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 75,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 15,
+                "end_line": 22,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "The device management service creates a [`SoftwareUpdateEnforcementSpecific`](/documentation/DeviceManagement/SoftwareUpdateEnforcementSpecific) declaration with the detected version and defines the `TargetLocalDateTime` and, optionally, the `DetailsURL` according to the organizational requirements. The device management service then sends a push notification to the device to start the synchronization of declarations. For more information, see [Integrating declarative management](/documentation/DeviceManagement/integrating-declarative-management).\n\n![The device management service creates the enforcement configuration and syncs it to the device](images/com.apple.devicemanagement/phases-of-software-update-enforcement02@2x.png)\n\n## Phase 3\n\nAfter the declaration becomes active on a device, the operating system reaches out to the Apple Software Update Catalog to retrieve the download URL and begins to download the update if it meets the requirements. The device then presents a notification to the user, and returns the following to the device management service:\n\n1. A [`StatusSoftwareUpdateInstallState`](/documentation/DeviceManagement/StatusSoftwareUpdateInstallState) value of `waiting`, which indicates the process to request the update has started.\n2. A [`StatusSoftwareUpdateInstallState`](/documentation/DeviceManagement/StatusSoftwareUpdateInstallState) value of `downloading`, which indicates the update is being downloaded by the device.\n\nIf a content caching service is available to the device, it attempts to download the software update from the content cache.\n\nAfter the device successfully downloads the update, it prepares it for installation. After this process completes, the operating system sends a [`StatusSoftwareUpdateInstallState`](/documentation/DeviceManagement/StatusSoftwareUpdateInstallState) value of `prepared` to the device management service.\n\n![The device retrieves the download URL and begins the download and preparation of the software update](images/com.apple.devicemanagement/phases-of-software-update-enforcement03@2x.png)\n\n## Phase 4\n\nThe device enters the notification period. Depending on when the installation is to occur, this notification may display different text and options.\n\n![The device enters the notification period to regularly inform the user](images/com.apple.devicemanagement/phases-of-software-update-enforcement04@2x.png)\n\n## Phase 5\n\nIf the user doesn’t install the update before the enforcement deadline, the device begins the installation and sends a [`StatusSoftwareUpdateInstallState`](/documentation/DeviceManagement/StatusSoftwareUpdateInstallState) value of `installing` to the device management service. Before starting the installation, a Mac with Apple silicon contacts the device management service to retrieve the bootstrap token (if one is available).\n\nIf the update succeeds, the device restarts. If the update fails, a [`StatusSoftwareUpdateInstallState`](/documentation/DeviceManagement/StatusSoftwareUpdateInstallState) value of `failed is sent. In either case, the device sends back a [`StatusSoftwareUpdateFailureReason`](/documentation/DeviceManagement/StatusSoftwareUpdateFailureReason) status report. If the update was successful, the count key has a value of 0."
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "systemManager OTA 更新策略函数与 PolicyType/OtaUpdatePolicy/UpdateStatus 等 API 新增清单",
+          "start_line": 12,
+          "end_line": 56,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-mdmkit-b031",
+            "platform": "harmonyos",
+            "title": "MDM Kit",
+            "local_path": "docs-raw/research/2026-09-06/ba4b2bd8d258e610a073b0b38bc2d8361b65170b8040ed3232b1aec853ee2c93/cd9baa082a438195744280356034d74fed93317be7b7f92f6008d930d900f070/document.md",
+            "sha256": "cd9baa082a438195744280356034d74fed93317be7b7f92f6008d930d900f070",
+            "raw_sha256": "34020fbdee50fd7fab2e561fc04bd099d22d56af40a51dd0bf832b13214ece87",
+            "raw_path": "docs-raw/research/2026-09-06/ba4b2bd8d258e610a073b0b38bc2d8361b65170b8040ed3232b1aec853ee2c93/cd9baa082a438195744280356034d74fed93317be7b7f92f6008d930d900f070/source.gz",
+            "fetched_at": "2026-09-05T11:02:11.449626+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 56,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 54,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "|新增API|NA|类名：systemManager； API声明： enum PolicyType 差异内容： enum PolicyType|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：PolicyType； API声明：DEFAULT = 0 差异内容：DEFAULT = 0|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：PolicyType； API声明：PROHIBIT = 1 差异内容：PROHIBIT = 1|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：PolicyType； API声明：UPDATE_TO_SPECIFIC_VERSION = 2 差异内容：UPDATE_TO_SPECIFIC_VERSION = 2|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：PolicyType； API声明：WINDOWS = 3 差异内容：WINDOWS = 3|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：PolicyType； API声明：POSTPONE = 4 差异内容：POSTPONE = 4|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明： export interface OtaUpdatePolicy 差异内容： export interface OtaUpdatePolicy|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：OtaUpdatePolicy； API声明：policyType: PolicyType; 差异内容：policyType: PolicyType;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：OtaUpdatePolicy； API声明：version: string; 差异内容：version: string;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：OtaUpdatePolicy； API声明：latestUpdateTime?: number; 差异内容：latestUpdateTime?: number;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：OtaUpdatePolicy； API声明：delayUpdateTime?: number; 差异内容：delayUpdateTime?: number;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：OtaUpdatePolicy； API声明：installStartTime?: number; 差异内容：installStartTime?: number;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：OtaUpdatePolicy； API声明：installEndTime?: number; 差异内容：installEndTime?: number;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明： export interface UpdatePackageInfo 差异内容： export interface UpdatePackageInfo|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdatePackageInfo； API声明：version: string; 差异内容：version: string;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdatePackageInfo； API声明：packages: Array\\<Package\\>; 差异内容：packages: Array\\<Package\\>;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdatePackageInfo； API声明：description?: PackageDescription; 差异内容：description?: PackageDescription;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明： interface Package 差异内容： interface Package|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：Package； API声明：type: PackageType; 差异内容：type: PackageType;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：Package； API声明：path: string; 差异内容：path: string;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：Package； API声明：fd?: number; 差异内容：fd?: number;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明： enum PackageType 差异内容： enum PackageType|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：PackageType； API声明：FIRMWARE = 1 差异内容：FIRMWARE = 1|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明： interface PackageDescription 差异内容： interface PackageDescription|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：PackageDescription； API声明：notify?: NotifyDescription; 差异内容：notify?: NotifyDescription;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明： interface NotifyDescription 差异内容： interface NotifyDescription|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：NotifyDescription； API声明：installTips?: string; 差异内容：installTips?: string;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：NotifyDescription； API声明：installTipsDetail?: string; 差异内容：installTipsDetail?: string;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明： interface UpdateResult 差异内容： interface UpdateResult|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdateResult； API声明：version: string; 差异内容：version: string;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdateResult； API声明：status: UpdateStatus; 差异内容：status: UpdateStatus;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdateResult； API声明：errorInfo: ErrorInfo; 差异内容：errorInfo: ErrorInfo;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明： enum UpdateStatus 差异内容： enum UpdateStatus|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdateStatus； API声明：NO_UPDATE_PACKAGE = -4 差异内容：NO_UPDATE_PACKAGE = -4|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdateStatus； API声明：UPDATE_WAITING = -3 差异内容：UPDATE_WAITING = -3|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdateStatus； API声明：UPDATING = -2 差异内容：UPDATING = -2|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdateStatus； API声明：UPDATE_FAILURE = -1 差异内容：UPDATE_FAILURE = -1|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：UpdateStatus； API声明：UPDATE_SUCCESS = 0 差异内容：UPDATE_SUCCESS = 0|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明： interface ErrorInfo 差异内容： interface ErrorInfo|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：ErrorInfo； API声明：code: number; 差异内容：code: number;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：ErrorInfo； API声明：message: string; 差异内容：message: string;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明：function setOtaUpdatePolicy(admin: Want, policy: OtaUpdatePolicy): void; 差异内容：function setOtaUpdatePolicy(admin: Want, policy: OtaUpdatePolicy): void;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明：function getOtaUpdatePolicy(admin: Want): OtaUpdatePolicy; 差异内容：function getOtaUpdatePolicy(admin: Want): OtaUpdatePolicy;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明：function notifyUpdatePackages(admin: Want, packageInfo: UpdatePackageInfo): Promise\\<void\\>; 差异内容：function notifyUpdatePackages(admin: Want, packageInfo: UpdatePackageInfo): Promise\\<void\\>;|api/@ohos.enterprise.systemManager.d.ts|\n|新增API|NA|类名：systemManager； API声明：function getUpdateResult(admin: Want, version: string): Promise\\<UpdateResult\\>; 差异内容：function getUpdateResult(admin: Want, version: string): Promise\\<UpdateResult\\>;|api/@ohos.enterprise.systemManager.d.ts|"
+        }
+      ],
+      "open_questions": [
+        "两者均为系统/固件更新域，与本节点应用域的对应关系待精研确认",
+        "HarmonyOS MDM API 参考正文（非 diff 清单）与适用发行版未读，OpenHarmony/HarmonyOS 区分未核对",
+        "iOS 声明式管理是否延伸到应用更新未读"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "消费侧应用商店安装/更新流程文档三平台均未进入本轮冻结来源",
+    "Android 系统 SDK 安装接口（PackageInstaller 等）、iOS MDM 应用安装命令、HarmonyOS 应用安装/更新接口文档缺失",
+    "版本基线未固定（unresolved），结论仅代表 2026-09-05 文档快照，不代表启动日最新正式版",
+    "已读 iOS/HarmonyOS 文档属系统更新或开发工具域，与节点应用域的映射未确认，存在错配风险"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "三平台中两平台无应用级安装/更新正文，且已读 iOS/HarmonyOS 文档属系统更新或开发工具域，存在错配到应用域的高风险映射；需优先补 App Store/MDM 应用安装与 AppGallery/bundleManager 等官方文档并核对映射与版本条件。"
+  }
+}

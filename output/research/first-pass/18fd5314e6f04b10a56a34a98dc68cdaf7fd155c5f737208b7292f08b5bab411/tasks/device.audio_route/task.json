@@ -1,0 +1,547 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "device.audio_route",
+    "level": "L2",
+    "parent": "device",
+    "name": {
+      "zh": "音频路由",
+      "en": "Audio Routing"
+    },
+    "definition": "听筒、扬声器、蓝牙音频路由。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/device/audio_route/_rollup.yaml",
+    "comparison_scope": {
+      "includes": [
+        "听筒、扬声器、蓝牙音频路由。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "5b13a4964631e822709cc95c57f7d5af5b2d1cffb689aaee03d006ad3e739fad",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "63c4b79e80f7bde88e46e24353799c6cba3f052e286e6386864ab1bba44a9c09",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/develop/connectivity/telecom/voip-app/api-updates",
+      "platform": "android",
+      "title": "Audio routing API updates in Android 14 for VoIP apps",
+      "local_path": "docs-raw/research/2026-09-06/9d9de1a3274e5448d3acd7f43d2773065f230161d5fec00b55e6511015247eb3/6cfc845f2e0439f263c430c4e4be2f02984d9392feeb872b4d618e36c59784d9/document.md",
+      "sha256": "6cfc845f2e0439f263c430c4e4be2f02984d9392feeb872b4d618e36c59784d9",
+      "raw_sha256": "745a3f577bceea665181cd7d121c3e1d472e95a2f5e70216ddc026a4cc7487a1",
+      "raw_path": "docs-raw/research/2026-09-06/9d9de1a3274e5448d3acd7f43d2773065f230161d5fec00b55e6511015247eb3/6cfc845f2e0439f263c430c4e4be2f02984d9392feeb872b4d618e36c59784d9/source.gz",
+      "fetched_at": "2026-09-05T10:24:22.782275+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 64,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 18,
+          "truncated": false
+        },
+        {
+          "start_line": 19,
+          "end_line": 30,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/media/routing",
+      "platform": "android",
+      "title": "Routing between devices",
+      "local_path": "docs-raw/research/2026-09-06/0ad0060d94da1f88fca5676906b25e6d90a738da86f4077a4dfee47665aab874/0ff572490f79345e16f4e1225c3f4f8fa107c7c43f1fc3d63a21942d0e4f1ad3/document.md",
+      "sha256": "0ff572490f79345e16f4e1225c3f4f8fa107c7c43f1fc3d63a21942d0e4f1ad3",
+      "raw_sha256": "254bc1461143b18e7588254f7758b38d3809bff5c9c815e163e9e5f83c549ec8",
+      "raw_path": "docs-raw/research/2026-09-06/0ad0060d94da1f88fca5676906b25e6d90a738da86f4077a4dfee47665aab874/0ff572490f79345e16f4e1225c3f4f8fa107c7c43f1fc3d63a21942d0e4f1ad3/source.gz",
+      "fetched_at": "2026-09-05T10:34:03.777638+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 65,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 27,
+          "truncated": false
+        },
+        {
+          "start_line": 28,
+          "end_line": 42,
+          "truncated": false
+        },
+        {
+          "start_line": 43,
+          "end_line": 65,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/avfaudio/routing-audio-to-specific-devices-in-multidevice-sessions",
+      "platform": "ios",
+      "title": "Routing audio to specific devices in multidevice sessions",
+      "local_path": "docs-raw/research/2026-09-06/388744664099779a12b76e2418c63263483bd273890f0c24a9421e931aa6139a/dd79325e3211a3a8fa67cfde36de7663dd809141ba8c7709b21020de724b0025/document.md",
+      "sha256": "dd79325e3211a3a8fa67cfde36de7663dd809141ba8c7709b21020de724b0025",
+      "raw_sha256": "c10c6fc356be5bbd18cf51ca350d9415a1c044a0311979df5af407ffadc13c0a",
+      "raw_path": "docs-raw/research/2026-09-06/388744664099779a12b76e2418c63263483bd273890f0c24a9421e931aa6139a/dd79325e3211a3a8fa67cfde36de7663dd809141ba8c7709b21020de724b0025/source.gz",
+      "fetched_at": "2026-09-05T10:18:24.270770+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 273,
+      "suggested_sections": [
+        {
+          "start_line": 5,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 114,
+          "truncated": false
+        },
+        {
+          "start_line": 115,
+          "end_line": 153,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/mediadevice/creating-a-media-device-extension",
+      "platform": "ios",
+      "title": "Creating a media device extension",
+      "local_path": "docs-raw/research/2026-09-06/609eb561f2ef66520f5fc6c6b0cf87febeaa0749cdef76d093f211c7e599a6a2/4dd155a81f8d699815ed4a43ed5a7d72f0252f1aef32fb424c9a1c9ee2408927/document.md",
+      "sha256": "4dd155a81f8d699815ed4a43ed5a7d72f0252f1aef32fb424c9a1c9ee2408927",
+      "raw_sha256": "f602e4055c029547a06e20e981802e07a030674bedbc9f00081c9bd8d3f81c13",
+      "raw_path": "docs-raw/research/2026-09-06/609eb561f2ef66520f5fc6c6b0cf87febeaa0749cdef76d093f211c7e599a6a2/4dd155a81f8d699815ed4a43ed5a7d72f0252f1aef32fb424c9a1c9ee2408927/source.gz",
+      "fetched_at": "2026-09-05T10:23:44.371978+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 403,
+      "suggested_sections": [
+        {
+          "start_line": 5,
+          "end_line": 18,
+          "truncated": false
+        },
+        {
+          "start_line": 60,
+          "end_line": 160,
+          "truncated": false
+        },
+        {
+          "start_line": 161,
+          "end_line": 191,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-native-audio-routing-manager-h",
+      "platform": "harmonyos",
+      "title": "native_audio_routing_manager.h",
+      "local_path": "docs-raw/research/2026-09-06/c8e71748573744775e50cb5c35ec3da973345a7701b4c5047348e812b849d176/031a24902ad10ef2bb3064c2fca8e45ae69e4b05e4e6130e090d312c233cc54f/document.md",
+      "sha256": "031a24902ad10ef2bb3064c2fca8e45ae69e4b05e4e6130e090d312c233cc54f",
+      "raw_sha256": "5d59a3becf66993a6c1f8cdb51e39925756c057a5dc1ed67385f03d664372852",
+      "raw_path": "docs-raw/research/2026-09-06/c8e71748573744775e50cb5c35ec3da973345a7701b4c5047348e812b849d176/031a24902ad10ef2bb3064c2fca8e45ae69e4b05e4e6130e090d312c233cc54f/source.gz",
+      "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 491,
+      "suggested_sections": [
+        {
+          "start_line": 108,
+          "end_line": 133,
+          "truncated": false
+        },
+        {
+          "start_line": 134,
+          "end_line": 136,
+          "truncated": true
+        },
+        {
+          "start_line": 238,
+          "end_line": 263,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-native-audio-device-base-h",
+      "platform": "harmonyos",
+      "title": "native_audio_device_base.h",
+      "local_path": "docs-raw/research/2026-09-06/fb0aecb485fd9d75b88cba7fbaf585e9181bf24fc98ace8e97790634d17ab617/5baf38f7b424326ae40f5330c04c75ecf15d081e71345ede066ea2a25ded47c8/document.md",
+      "sha256": "5baf38f7b424326ae40f5330c04c75ecf15d081e71345ede066ea2a25ded47c8",
+      "raw_sha256": "0feafedde984563e8bf47939441b0cb7cf5c61026467abd0609a5f5c815f1460",
+      "raw_path": "docs-raw/research/2026-09-06/fb0aecb485fd9d75b88cba7fbaf585e9181bf24fc98ace8e97790634d17ab617/5baf38f7b424326ae40f5330c04c75ecf15d081e71345ede066ea2a25ded47c8/source.gz",
+      "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 405,
+      "suggested_sections": [
+        {
+          "start_line": 19,
+          "end_line": 20,
+          "truncated": true
+        },
+        {
+          "start_line": 254,
+          "end_line": 278,
+          "truncated": false
+        },
+        {
+          "start_line": 279,
+          "end_line": 303,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:22.427154+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "ef2be90a0b7ec47c653b0df134b5f35e4569e4d56708a74f288328f50c6f3468"
+}

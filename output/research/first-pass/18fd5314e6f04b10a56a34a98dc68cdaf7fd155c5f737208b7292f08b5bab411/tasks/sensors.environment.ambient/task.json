@@ -1,0 +1,539 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "sensors.environment.ambient",
+    "level": "L3",
+    "parent": "sensors.environment",
+    "name": {
+      "zh": "环境读数",
+      "en": "Ambient Readings"
+    },
+    "definition": "环境光、气压等传感器。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "split_justification": "presence",
+    "knowledge_path": "knowledge/sensors/environment/ambient.yaml",
+    "comparison_scope": {
+      "includes": [
+        "环境光、气压等传感器。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "415f9ca4da1f626a7d32558fc165f0b68d670be7f4934eef35303c5df8d02407",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "c899b4ed59ea86360b4692f1dc5f58d58df35e86766060bd3f6782bfac018c87",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/health-and-fitness/health-services/compatibility",
+      "platform": "android",
+      "title": "Enhance app compatibility across Wear OS devices",
+      "local_path": "docs-raw/research/2026-09-06/6881f5b7d82db8b526a772e9a42480700abe42315bb956eaf60b5b423c99ae23/e169272e56950427f2e2aa2502f86188b2f4a48c9789a19b5875866dc9489e33/document.md",
+      "sha256": "e169272e56950427f2e2aa2502f86188b2f4a48c9789a19b5875866dc9489e33",
+      "raw_sha256": "0a9d45395418c6e9684931df79741d95f36c4708620e1edc9068d06248c969d8",
+      "raw_path": "docs-raw/research/2026-09-06/6881f5b7d82db8b526a772e9a42480700abe42315bb956eaf60b5b423c99ae23/e169272e56950427f2e2aa2502f86188b2f4a48c9789a19b5875866dc9489e33/source.gz",
+      "fetched_at": "2026-09-05T10:32:22.948846+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 234,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 20,
+          "truncated": false
+        },
+        {
+          "start_line": 21,
+          "end_line": 25,
+          "truncated": false
+        },
+        {
+          "start_line": 26,
+          "end_line": 54,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/guide/topics/sensors/sensors_position",
+      "platform": "android",
+      "title": "Position sensors",
+      "local_path": "docs-raw/research/2026-09-06/0b4837c06966f260117045eaaaf4645aa222effd450a8d882f80ac6e76a59d11/08b6a810ae6e9124156aa802e0a70d1d585025655e401672baf11f4625712551/document.md",
+      "sha256": "08b6a810ae6e9124156aa802e0a70d1d585025655e401672baf11f4625712551",
+      "raw_sha256": "5ca83d90564e38afb3f7cd26b27513a82cf30172d19d40c3f52fa32c9a3df535",
+      "raw_path": "docs-raw/research/2026-09-06/0b4837c06966f260117045eaaaf4645aa222effd450a8d882f80ac6e76a59d11/08b6a810ae6e9124156aa802e0a70d1d585025655e401672baf11f4625712551/source.gz",
+      "fetched_at": "2026-09-05T10:44:45.127595+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 618,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 5,
+          "truncated": true
+        },
+        {
+          "start_line": 144,
+          "end_line": 146,
+          "truncated": true
+        },
+        {
+          "start_line": 225,
+          "end_line": 312,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/technotes/tn3145-hdr-video-metadata",
+      "platform": "ios",
+      "title": "TN3145: HDR video metadata",
+      "local_path": "docs-raw/research/2026-09-06/1fed0864e27b6f98377324a8a1995d019d701973354bb06e2e61d0b4310385a3/eed5aa124b264a8c584f6418f64b5c88296bff3a59e7b81be5d84ef8e8a88e57/document.md",
+      "sha256": "eed5aa124b264a8c584f6418f64b5c88296bff3a59e7b81be5d84ef8e8a88e57",
+      "raw_sha256": "9dffa00c191e72e5cf04e38ed09a9fb3294e531964047d2ad37ed3853dada469",
+      "raw_path": "docs-raw/research/2026-09-06/1fed0864e27b6f98377324a8a1995d019d701973354bb06e2e61d0b4310385a3/eed5aa124b264a8c584f6418f64b5c88296bff3a59e7b81be5d84ef8e8a88e57/source.gz",
+      "fetched_at": "2026-09-05T10:26:48.371695+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 86,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 34,
+          "truncated": false
+        },
+        {
+          "start_line": 35,
+          "end_line": 38,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/corebluetooth/measuring-distance-between-devices-using-channel-sounding",
+      "platform": "ios",
+      "title": "Measuring distance between devices using Channel Sounding",
+      "local_path": "docs-raw/research/2026-09-06/9dc29c83ad1a51170b296a87403b967746d2c0144901c7a6f2ea73b3f5a636f0/5f487d233d657d69e686f035fe7f2ee761b8ed7f3a2c0db6a1f5ddab99f7719c/document.md",
+      "sha256": "5f487d233d657d69e686f035fe7f2ee761b8ed7f3a2c0db6a1f5ddab99f7719c",
+      "raw_sha256": "e6241396d5a1900a9a5453de6aafe0d7bc28f55fe33127014dcc09386fadac6d",
+      "raw_path": "docs-raw/research/2026-09-06/9dc29c83ad1a51170b296a87403b967746d2c0144901c7a6f2ea73b3f5a636f0/5f487d233d657d69e686f035fe7f2ee761b8ed7f3a2c0db6a1f5ddab99f7719c/source.gz",
+      "fetched_at": "2026-09-05T10:19:05.331144+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 332,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 12,
+          "truncated": false
+        },
+        {
+          "start_line": 13,
+          "end_line": 18,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/xengine-kit-introduction",
+      "platform": "harmonyos",
+      "title": "XEngine Kit简介",
+      "local_path": "docs-raw/research/2026-09-06/7e68270fbe75a9e89e87d8e7795e8818fcdbb17c59cf1288c4e46f931348c46e/dce12dbdbdf2fb882f4b010c55d2ef4b1aceedaa26168230a2099be8a67263ae/document.md",
+      "sha256": "dce12dbdbdf2fb882f4b010c55d2ef4b1aceedaa26168230a2099be8a67263ae",
+      "raw_sha256": "8daceb3788fb861e078b2b25329767119fbf26f59c95b6b98ba1ba040e8ec808",
+      "raw_path": "docs-raw/research/2026-09-06/7e68270fbe75a9e89e87d8e7795e8818fcdbb17c59cf1288c4e46f931348c46e/dce12dbdbdf2fb882f4b010c55d2ef4b1aceedaa26168230a2099be8a67263ae/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 68,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 16,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-sharekit-6102",
+      "platform": "harmonyos",
+      "title": "Share Kit",
+      "local_path": "docs-raw/research/2026-09-06/b57eb34888f44e278c77597a8b827743db2429bbe0a51deeccc5148395e12d34/45fe46a9763017d4e8dee814ee270a5ba24f23b201da0662269c72d42c0b3a67/document.md",
+      "sha256": "45fe46a9763017d4e8dee814ee270a5ba24f23b201da0662269c72d42c0b3a67",
+      "raw_sha256": "b690fc32e3e296e643d32016e73ef200ed2e00dc0d10014123ffde5b2625dbe2",
+      "raw_path": "docs-raw/research/2026-09-06/b57eb34888f44e278c77597a8b827743db2429bbe0a51deeccc5148395e12d34/45fe46a9763017d4e8dee814ee270a5ba24f23b201da0662269c72d42c0b3a67/source.gz",
+      "fetched_at": "2026-09-05T10:56:13.874303+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 26,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 26,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:43:00.720846+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "4539e4068a0a506221bda20bdd32d22251213813f25d9f970764415ea5c0d14b"
+}

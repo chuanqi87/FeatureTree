@@ -1,0 +1,13 @@
+{
+  "id": "08a6ad79e7b24ab6f656b8fc6e161abc4ebd50fd8be68b4f6390268f3e40d03c",
+  "url": "https://developer.apple.com/documentation/technotes/tn3111-ios-wifi-api-overview",
+  "platform": "ios",
+  "title": "TN3111: iOS Wi-Fi API overview",
+  "local_path": "docs-raw/research/2026-09-06/08a6ad79e7b24ab6f656b8fc6e161abc4ebd50fd8be68b4f6390268f3e40d03c/ee39a8e563608bea22cc8b77c1b89e036ed02ff2ab2c8d9c9f9f6c841782e6fe/document.md",
+  "sha256": "ee39a8e563608bea22cc8b77c1b89e036ed02ff2ab2c8d9c9f9f6c841782e6fe",
+  "raw_sha256": "8d61565ff72daecd56c2302a675245d429bec85ecc7fa30b086ba98e502ff736",
+  "raw_path": "docs-raw/research/2026-09-06/08a6ad79e7b24ab6f656b8fc6e161abc4ebd50fd8be68b4f6390268f3e40d03c/ee39a8e563608bea22cc8b77c1b89e036ed02ff2ab2c8d9c9f9f6c841782e6fe/source.gz",
+  "fetched_at": "2026-09-05T10:26:43.887695+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

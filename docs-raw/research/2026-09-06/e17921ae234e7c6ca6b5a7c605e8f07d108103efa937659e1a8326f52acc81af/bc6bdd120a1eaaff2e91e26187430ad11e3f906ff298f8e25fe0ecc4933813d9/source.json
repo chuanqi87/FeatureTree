@@ -1,0 +1,13 @@
+{
+  "id": "e17921ae234e7c6ca6b5a7c605e8f07d108103efa937659e1a8326f52acc81af",
+  "url": "https://developer.apple.com/documentation/corefoundation/cfstream-socket-security-level-constants",
+  "platform": "ios",
+  "title": "CFStream Socket Security Level Constants",
+  "local_path": "docs-raw/research/2026-09-06/e17921ae234e7c6ca6b5a7c605e8f07d108103efa937659e1a8326f52acc81af/bc6bdd120a1eaaff2e91e26187430ad11e3f906ff298f8e25fe0ecc4933813d9/document.md",
+  "sha256": "bc6bdd120a1eaaff2e91e26187430ad11e3f906ff298f8e25fe0ecc4933813d9",
+  "raw_sha256": "3bc6f55bebe5969427fe759c00fc8af95798d7d9d2c9bef1b7022b1e5481302b",
+  "raw_path": "docs-raw/research/2026-09-06/e17921ae234e7c6ca6b5a7c605e8f07d108103efa937659e1a8326f52acc81af/bc6bdd120a1eaaff2e91e26187430ad11e3f906ff298f8e25fe0ecc4933813d9/source.gz",
+  "fetched_at": "2026-09-05T10:46:17.835573+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "e69e1f817a0ba44f9773285c25d2a74a68669f0a28433a9e72179f7aadcd48c7",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-usb-ddk-api-h",
+  "platform": "harmonyos",
+  "title": "usb_ddk_api.h",
+  "local_path": "docs-raw/research/2026-09-06/e69e1f817a0ba44f9773285c25d2a74a68669f0a28433a9e72179f7aadcd48c7/301078fe6ae7071042f3e5498b169321c42aabcfaa475edc36ef0ff6f32db637/document.md",
+  "sha256": "301078fe6ae7071042f3e5498b169321c42aabcfaa475edc36ef0ff6f32db637",
+  "raw_sha256": "b13752547d4d627c45f59d4042dd624bc77bef59f210815889e937e9c8a59a2d",
+  "raw_path": "docs-raw/research/2026-09-06/e69e1f817a0ba44f9773285c25d2a74a68669f0a28433a9e72179f7aadcd48c7/301078fe6ae7071042f3e5498b169321c42aabcfaa475edc36ef0ff6f32db637/source.gz",
+  "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

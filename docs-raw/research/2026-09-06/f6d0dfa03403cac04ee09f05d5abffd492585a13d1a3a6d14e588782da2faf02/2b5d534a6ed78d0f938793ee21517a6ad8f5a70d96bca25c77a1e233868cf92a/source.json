@@ -1,0 +1,13 @@
+{
+  "id": "f6d0dfa03403cac04ee09f05d5abffd492585a13d1a3a6d14e588782da2faf02",
+  "url": "https://developer.apple.com/documentation/testing/migratingfromxctest",
+  "platform": "ios",
+  "title": "Migrating a test from XCTest",
+  "local_path": "docs-raw/research/2026-09-06/f6d0dfa03403cac04ee09f05d5abffd492585a13d1a3a6d14e588782da2faf02/2b5d534a6ed78d0f938793ee21517a6ad8f5a70d96bca25c77a1e233868cf92a/document.md",
+  "sha256": "2b5d534a6ed78d0f938793ee21517a6ad8f5a70d96bca25c77a1e233868cf92a",
+  "raw_sha256": "93322032e1f9ffce9a5828ebdb2ba55b31c6d907cbbbd4f9156daeceab6687bf",
+  "raw_path": "docs-raw/research/2026-09-06/f6d0dfa03403cac04ee09f05d5abffd492585a13d1a3a6d14e588782da2faf02/2b5d534a6ed78d0f938793ee21517a6ad8f5a70d96bca25c77a1e233868cf92a/source.gz",
+  "fetched_at": "2026-09-05T10:26:59.034867+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "5caf4a06ebfd14570b6397513fa108ffbf728f3d9b8ad5feb862c70e73c8e123",
+  "url": "https://developer.apple.com/documentation/evaluations/evaluating-tool-calling-behavior",
+  "platform": "ios",
+  "title": "Evaluating tool-calling behavior",
+  "local_path": "docs-raw/research/2026-09-06/5caf4a06ebfd14570b6397513fa108ffbf728f3d9b8ad5feb862c70e73c8e123/68d15e230a5de6b5f4b71fd99ad157b32513454dff03aa2fc6b1968d9c746110/document.md",
+  "sha256": "68d15e230a5de6b5f4b71fd99ad157b32513454dff03aa2fc6b1968d9c746110",
+  "raw_sha256": "e4a1751f5930cf794a0fc71f1793929b0b3806b14fa96e63b0d19f16873940cf",
+  "raw_path": "docs-raw/research/2026-09-06/5caf4a06ebfd14570b6397513fa108ffbf728f3d9b8ad5feb862c70e73c8e123/68d15e230a5de6b5f4b71fd99ad157b32513454dff03aa2fc6b1968d9c746110/source.gz",
+  "fetched_at": "2026-09-05T10:21:55.948272+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

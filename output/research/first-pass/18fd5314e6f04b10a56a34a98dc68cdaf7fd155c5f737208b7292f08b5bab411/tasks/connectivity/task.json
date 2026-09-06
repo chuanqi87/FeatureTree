@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "connectivity",
+    "level": "L1",
+    "parent": null,
+    "name": {
+      "zh": "连接与外设",
+      "en": "Connectivity and Peripherals"
+    },
+    "definition": "Wi-Fi、蓝牙、NFC、USB 与配件。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/connectivity/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "Wi-Fi、蓝牙、NFC、USB 与配件。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "e615dd7a4a19177b521c40ac7add9daae6e802b6ea6d7595404e3713468eb7e3",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "83e12d28dcea8df9a1e1b27e58514da2f9b25779d2a0263777a8666e7fa29176",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/develop/connectivity/overview",
+      "platform": "android",
+      "title": "Connectivity guides",
+      "local_path": "docs-raw/research/2026-09-06/2b07354ef1ea2b092017e98d47a23a1ae858178710b8cb6503b0c5858e4073cc/2ed6b53c5bc6b74be4362b3937103334bf0ca38a7dbfbea0ce7347684c209cc5/document.md",
+      "sha256": "2ed6b53c5bc6b74be4362b3937103334bf0ca38a7dbfbea0ce7347684c209cc5",
+      "raw_sha256": "702d4d197352638a9cef555a781f6f5d605a192b3e80187d441ccfd284b897b9",
+      "raw_path": "docs-raw/research/2026-09-06/2b07354ef1ea2b092017e98d47a23a1ae858178710b8cb6503b0c5858e4073cc/2ed6b53c5bc6b74be4362b3937103334bf0ca38a7dbfbea0ce7347684c209cc5/source.gz",
+      "fetched_at": "2026-09-05T10:24:20.623071+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 40,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 7,
+          "truncated": false
+        },
+        {
+          "start_line": 8,
+          "end_line": 32,
+          "truncated": false
+        },
+        {
+          "start_line": 33,
+          "end_line": 40,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/reference/android/hardware/usb/package-summary",
+      "platform": "android",
+      "title": "android.hardware.usb",
+      "local_path": "docs-raw/research/2026-09-06/4dba41ef76547c9450e1e73602fad91a5e757013a044b94de002a74a53514adb/d5f887a3b84d02322fad9af85704799219ade4750dd64345064d2d4c118ce69c/document.md",
+      "sha256": "d5f887a3b84d02322fad9af85704799219ade4750dd64345064d2d4c118ce69c",
+      "raw_sha256": "8bed35d4b260c85465b868b93cb0493f4c94b92487b3c03fdd8881693e1b9d58",
+      "raw_path": "docs-raw/research/2026-09-06/4dba41ef76547c9450e1e73602fad91a5e757013a044b94de002a74a53514adb/d5f887a3b84d02322fad9af85704799219ade4750dd64345064d2d4c118ce69c/source.gz",
+      "fetched_at": "2026-09-05T10:39:51.539609+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 47,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 22,
+          "truncated": false
+        },
+        {
+          "start_line": 23,
+          "end_line": 47,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/playgroundbluetooth/connecting_to_bluetooth_peripherals_in_swift_playgrounds",
+      "platform": "ios",
+      "title": "Connecting to Bluetooth Peripherals in Swift Playgrounds",
+      "local_path": "docs-raw/research/2026-09-06/22d7866aa74a75af11c86c702b1df004ed80fab23bc5ce38c41849f7da87573d/687b983e66680f9f662bde8f1f399aa6190742f3ef1a45144b2ad976c548f278/document.md",
+      "sha256": "687b983e66680f9f662bde8f1f399aa6190742f3ef1a45144b2ad976c548f278",
+      "raw_sha256": "0b832a686cd6fd8e583d3865c0fa38640ae086bab5d4e59510ecc436725d29a4",
+      "raw_path": "docs-raw/research/2026-09-06/22d7866aa74a75af11c86c702b1df004ed80fab23bc5ce38c41849f7da87573d/687b983e66680f9f662bde8f1f399aa6190742f3ef1a45144b2ad976c548f278/source.gz",
+      "fetched_at": "2026-09-05T10:32:10.310592+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 57,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 5,
+          "truncated": false
+        },
+        {
+          "start_line": 6,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 25,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/scsiperipheralsdriverkit",
+      "platform": "ios",
+      "title": "SCSIPeripheralsDriverKit",
+      "local_path": "docs-raw/research/2026-09-06/fb64d1716888a22e8f766a3ee95703831d3e8e2259bc8123825f578f6bb39e3c/c678da20c8b7c47d7bfcb48b53fe99c357e1f6ab8715efef9ad3e4b387c65294/document.md",
+      "sha256": "c678da20c8b7c47d7bfcb48b53fe99c357e1f6ab8715efef9ad3e4b387c65294",
+      "raw_sha256": "1956bfc2e8f981e97bc56a8892042df3948314020b918002facedc04a205344c",
+      "raw_path": "docs-raw/research/2026-09-06/fb64d1716888a22e8f766a3ee95703831d3e8e2259bc8123825f578f6bb39e3c/c678da20c8b7c47d7bfcb48b53fe99c357e1f6ab8715efef9ad3e4b387c65294/source.gz",
+      "fetched_at": "2026-09-05T10:32:49.567749+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 46,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 13,
+          "truncated": false
+        },
+        {
+          "start_line": 14,
+          "end_line": 15,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-connectivitykit-5031",
+      "platform": "harmonyos",
+      "title": "Connectivity Kit",
+      "local_path": "docs-raw/research/2026-09-06/c66f3f3fefe626d7eb95c8122809228b43f300f6262848ff4826ec9aea11df56/41e586f7b204d8cb3d803c84ff8be51257c7b82e4dc1c37249eace90fe1df0b3/document.md",
+      "sha256": "41e586f7b204d8cb3d803c84ff8be51257c7b82e4dc1c37249eace90fe1df0b3",
+      "raw_sha256": "308040f6fc95c0cefb5cca7be9230d1ae0b0422991d75d8e6bcb0f07dd78019a",
+      "raw_path": "docs-raw/research/2026-09-06/c66f3f3fefe626d7eb95c8122809228b43f300f6262848ff4826ec9aea11df56/41e586f7b204d8cb3d803c84ff8be51257c7b82e4dc1c37249eace90fe1df0b3/source.gz",
+      "fetched_at": "2026-09-05T11:01:28.741711+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 5,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 5,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-fusionconnectivity-partneragentextensioncontext",
+      "platform": "harmonyos",
+      "title": "@ohos.FusionConnectivity.PartnerAgentExtensionContext (设备状态通知能力上下文)",
+      "local_path": "docs-raw/research/2026-09-06/8010432b4450b9d3c38bd2fe9fde7a4c63025b39db2dc2c5923946a2cb56e2f7/2c637ce1e0406dbd991e90f4c107a1fd61389507476deb7b53161d81ad2e2286/document.md",
+      "sha256": "2c637ce1e0406dbd991e90f4c107a1fd61389507476deb7b53161d81ad2e2286",
+      "raw_sha256": "71773a5be742e8eaa3cd71900a24036891641b61013be37363bd1c2e9b59dca9",
+      "raw_path": "docs-raw/research/2026-09-06/8010432b4450b9d3c38bd2fe9fde7a4c63025b39db2dc2c5923946a2cb56e2f7/2c637ce1e0406dbd991e90f4c107a1fd61389507476deb7b53161d81ad2e2286/source.gz",
+      "fetched_at": "2026-09-05T10:27:26.910167+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 20,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 7,
+          "truncated": false
+        },
+        {
+          "start_line": 8,
+          "end_line": 13,
+          "truncated": false
+        },
+        {
+          "start_line": 14,
+          "end_line": 20,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:15.643148+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "e589b7b048d7ae5d490d9edd0b4cfd7c3016dad7c0921330b44d6f5634b50cab"
+}

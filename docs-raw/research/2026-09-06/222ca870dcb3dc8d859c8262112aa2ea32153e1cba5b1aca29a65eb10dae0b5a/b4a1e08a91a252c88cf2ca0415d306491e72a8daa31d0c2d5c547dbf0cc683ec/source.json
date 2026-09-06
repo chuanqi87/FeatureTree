@@ -1,0 +1,13 @@
+{
+  "id": "222ca870dcb3dc8d859c8262112aa2ea32153e1cba5b1aca29a65eb10dae0b5a",
+  "url": "https://developer.android.com/training/testing/espresso/accessibility-checking",
+  "platform": "android",
+  "title": "Accessibility checking",
+  "local_path": "docs-raw/research/2026-09-06/222ca870dcb3dc8d859c8262112aa2ea32153e1cba5b1aca29a65eb10dae0b5a/b4a1e08a91a252c88cf2ca0415d306491e72a8daa31d0c2d5c547dbf0cc683ec/document.md",
+  "sha256": "b4a1e08a91a252c88cf2ca0415d306491e72a8daa31d0c2d5c547dbf0cc683ec",
+  "raw_sha256": "3dc634f4a0e09a5fd6290c08f375186124bd6081019539fb92f80fb6f94c1faf",
+  "raw_path": "docs-raw/research/2026-09-06/222ca870dcb3dc8d859c8262112aa2ea32153e1cba5b1aca29a65eb10dae0b5a/b4a1e08a91a252c88cf2ca0415d306491e72a8daa31d0c2d5c547dbf0cc683ec/source.gz",
+  "fetched_at": "2026-09-05T10:38:36.016519+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

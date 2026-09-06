@@ -1,0 +1,13 @@
+{
+  "id": "4e29f112c0c8b164ae1c0e5391aa8c671c5a63526bab0e8a62694a69c338c796",
+  "url": "https://developer.apple.com/documentation/metal/logging-shader-debug-messages",
+  "platform": "ios",
+  "title": "Logging shader debug messages",
+  "local_path": "docs-raw/research/2026-09-06/4e29f112c0c8b164ae1c0e5391aa8c671c5a63526bab0e8a62694a69c338c796/aa68bafe47a97df27d49b4086f8fe3af2a5ef90e3016ea079b6de8aec0e55a20/document.md",
+  "sha256": "aa68bafe47a97df27d49b4086f8fe3af2a5ef90e3016ea079b6de8aec0e55a20",
+  "raw_sha256": "c31f6beabae32087b1d3e188f026561cc030265c61123c374cfc7e28c6c5d7ec",
+  "raw_path": "docs-raw/research/2026-09-06/4e29f112c0c8b164ae1c0e5391aa8c671c5a63526bab0e8a62694a69c338c796/aa68bafe47a97df27d49b4086f8fe3af2a5ef90e3016ea079b6de8aec0e55a20/source.gz",
+  "fetched_at": "2026-09-05T10:23:58.355923+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

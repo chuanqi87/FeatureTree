@@ -1,0 +1,13 @@
+{
+  "id": "180331cee14224c33d5b4fd8123240abbee0cf30519db21dc0cc2a6b6b5badc8",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-skill-introduction",
+  "platform": "harmonyos",
+  "title": "接入Skill（可选）",
+  "local_path": "docs-raw/research/2026-09-06/180331cee14224c33d5b4fd8123240abbee0cf30519db21dc0cc2a6b6b5badc8/6eaa62e53875195ab1288f8c5fc0b2d33deec1f47b3ad1b0aa8fed56b2e4f79c/document.md",
+  "sha256": "6eaa62e53875195ab1288f8c5fc0b2d33deec1f47b3ad1b0aa8fed56b2e4f79c",
+  "raw_sha256": "ac5b7d2345121cc289b32961af23262c965831b14d531a27358f8ddb8dd5925e",
+  "raw_path": "docs-raw/research/2026-09-06/180331cee14224c33d5b4fd8123240abbee0cf30519db21dc0cc2a6b6b5badc8/6eaa62e53875195ab1288f8c5fc0b2d33deec1f47b3ad1b0aa8fed56b2e4f79c/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

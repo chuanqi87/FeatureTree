@@ -1,0 +1,549 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "distributed.softbus",
+    "level": "L2",
+    "parent": "distributed",
+    "name": {
+      "zh": "跨设备通信",
+      "en": "Cross-device Communication"
+    },
+    "definition": "建立设备间通信会话，传输数据并调用远端能力。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/distributed/softbus/_rollup.yaml",
+    "aliases": [
+      "分布式软总线"
+    ],
+    "comparison_scope": {
+      "includes": [
+        "设备间会话",
+        "跨设备数据传输与远端调用"
+      ],
+      "excludes": [
+        "应用界面与任务接续"
+      ]
+    },
+    "notes": "保留历史 ID 以维持引用；节点名称和比较对象已中立化。",
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "4bd253b960103310c271d6ddabec1f9761a9366d7f418efb7eaa3b26e5594ee1",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "81c706d1bf79257168ac73c1b377f7e861194d426b11729a2403d700a90476e2",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/guide/topics/connectivity/cross-device-sdk/get-started",
+      "platform": "android",
+      "title": "Get started",
+      "local_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/document.md",
+      "sha256": "274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2",
+      "raw_sha256": "cdae76137de45f3e3989e03729bbbaccdef731bdd8a22f9125d1a5190357efde",
+      "raw_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/source.gz",
+      "fetched_at": "2026-09-05T10:30:02.235345+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 101,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 11,
+          "truncated": false
+        },
+        {
+          "start_line": 12,
+          "end_line": 24,
+          "truncated": false
+        },
+        {
+          "start_line": 25,
+          "end_line": 48,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/social-and-messaging/guides/communication/receiving-messages",
+      "platform": "android",
+      "title": "Receive messages reliably",
+      "local_path": "docs-raw/research/2026-09-06/af55f4105ad30e2202d0e75fab95c833959b39200e13e85104ed15c05033f841/5df4f3cc219f171d54720b262050c1c14af890e9c63425ecfd4939acd63c3712/document.md",
+      "sha256": "5df4f3cc219f171d54720b262050c1c14af890e9c63425ecfd4939acd63c3712",
+      "raw_sha256": "ecea11ebe7e1775ac0b31b0879ed24113c240ed38ea9863039bb8b3291ce08ed",
+      "raw_path": "docs-raw/research/2026-09-06/af55f4105ad30e2202d0e75fab95c833959b39200e13e85104ed15c05033f841/5df4f3cc219f171d54720b262050c1c14af890e9c63425ecfd4939acd63c3712/source.gz",
+      "fetched_at": "2026-09-05T10:34:39.934463+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 67,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 17,
+          "truncated": false
+        },
+        {
+          "start_line": 18,
+          "end_line": 37,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/threadnetwork",
+      "platform": "ios",
+      "title": "ThreadNetwork",
+      "local_path": "docs-raw/research/2026-09-06/e311bfffef15fa3558e8a291f464b7049eebcee00a897501b86c1c4769c6e965/518735ce17e3047d248b543774df225ad019731f44c9570a08ccfc82e3bd4d3c/document.md",
+      "sha256": "518735ce17e3047d248b543774df225ad019731f44c9570a08ccfc82e3bd4d3c",
+      "raw_sha256": "10022cc5540f569018470ebd34ff750fdbe2196f5dc4c85049bea562d7347699",
+      "raw_path": "docs-raw/research/2026-09-06/e311bfffef15fa3558e8a291f464b7049eebcee00a897501b86c1c4769c6e965/518735ce17e3047d248b543774df225ad019731f44c9570a08ccfc82e3bd4d3c/source.gz",
+      "fetched_at": "2026-09-05T10:32:58.098049+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 68,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 16,
+          "truncated": false
+        },
+        {
+          "start_line": 17,
+          "end_line": 35,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/technologyoverviews/networking-and-communication",
+      "platform": "ios",
+      "title": "Networking and communication",
+      "local_path": "docs-raw/research/2026-09-06/00bf661beb1ffaaba2b4d2ab6d460886ef48aa3ac00d35cb73abaaac8d9cb021/bf87d3cc4291b73eadba27ac41400d1b32c07109b17f1b21a122d1376136836e/document.md",
+      "sha256": "bf87d3cc4291b73eadba27ac41400d1b32c07109b17f1b21a122d1376136836e",
+      "raw_sha256": "95114c55ee7aca93b52eeb753eeee468c6b6e2f74ff8ae69a72dda28e1aa7cae",
+      "raw_path": "docs-raw/research/2026-09-06/00bf661beb1ffaaba2b4d2ab6d460886ef48aa3ac00d35cb73abaaac8d9cb021/bf87d3cc4291b73eadba27ac41400d1b32c07109b17f1b21a122d1376136836e/source.gz",
+      "fetched_at": "2026-09-05T10:26:39.338797+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 121,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 5,
+          "truncated": false
+        },
+        {
+          "start_line": 6,
+          "end_line": 8,
+          "truncated": true
+        },
+        {
+          "start_line": 14,
+          "end_line": 37,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/distributed-fs-overview",
+      "platform": "harmonyos",
+      "title": "分布式文件系统概述",
+      "local_path": "docs-raw/research/2026-09-06/c36dba5133241316ed44fe381b536e817518c90ea9b5e824c66b51c299bbeabf/22a8dafcad93328fea6a0749764e84349aea81acc275227c15c35ea06c7268b4/document.md",
+      "sha256": "22a8dafcad93328fea6a0749764e84349aea81acc275227c15c35ea06c7268b4",
+      "raw_sha256": "361e71dbd710200a546d7aee4cc22dfb484d885d1a5e965318be8524759e21f2",
+      "raw_path": "docs-raw/research/2026-09-06/c36dba5133241316ed44fe381b536e817518c90ea9b5e824c66b51c299bbeabf/22a8dafcad93328fea6a0749764e84349aea81acc275227c15c35ea06c7268b4/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 41,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 12,
+          "truncated": false
+        },
+        {
+          "start_line": 13,
+          "end_line": 41,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide_sidebar-navigation",
+      "platform": "harmonyos",
+      "title": "@cross-device-app-dev/sidebar-navigation",
+      "local_path": "docs-raw/research/2026-09-06/ed8e5cbb6756a2489af17dd3adefacd2606d78fd7bc6866e70aa0fa220f85144/65f6a9f24ecbd181da30bdb3d7803a8df938ecad144d40fdfd266333397aee10/document.md",
+      "sha256": "65f6a9f24ecbd181da30bdb3d7803a8df938ecad144d40fdfd266333397aee10",
+      "raw_sha256": "f1b53b70cc1f439e454e9b9db28b5f9aafbf4e79d08e2a0be9635e623733a39b",
+      "raw_path": "docs-raw/research/2026-09-06/ed8e5cbb6756a2489af17dd3adefacd2606d78fd7bc6866e70aa0fa220f85144/65f6a9f24ecbd181da30bdb3d7803a8df938ecad144d40fdfd266333397aee10/source.gz",
+      "fetched_at": "2026-09-05T10:24:22.487695+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 63,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 15,
+          "truncated": false
+        },
+        {
+          "start_line": 16,
+          "end_line": 19,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:24.727769+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "5706c1a277ef5571fa087c92227c70a46cc6f7e34ff0fc1e0998d597df397af6"
+}

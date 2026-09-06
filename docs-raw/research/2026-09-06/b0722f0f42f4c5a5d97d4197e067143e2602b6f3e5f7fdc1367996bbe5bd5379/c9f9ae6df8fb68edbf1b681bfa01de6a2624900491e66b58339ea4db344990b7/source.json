@@ -1,0 +1,13 @@
+{
+  "id": "b0722f0f42f4c5a5d97d4197e067143e2602b6f3e5f7fdc1367996bbe5bd5379",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ndk-picker",
+  "platform": "harmonyos",
+  "title": "使用滑动选择器 (Picker)",
+  "local_path": "docs-raw/research/2026-09-06/b0722f0f42f4c5a5d97d4197e067143e2602b6f3e5f7fdc1367996bbe5bd5379/c9f9ae6df8fb68edbf1b681bfa01de6a2624900491e66b58339ea4db344990b7/document.md",
+  "sha256": "c9f9ae6df8fb68edbf1b681bfa01de6a2624900491e66b58339ea4db344990b7",
+  "raw_sha256": "fd42c460587e4ed39863393dff6879e9b18c5289ab52c721192e73a66fe4fc61",
+  "raw_path": "docs-raw/research/2026-09-06/b0722f0f42f4c5a5d97d4197e067143e2602b6f3e5f7fdc1367996bbe5bd5379/c9f9ae6df8fb68edbf1b681bfa01de6a2624900491e66b58339ea4db344990b7/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

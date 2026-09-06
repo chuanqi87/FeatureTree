@@ -1,0 +1,9 @@
+{
+  "task_id": "b8e5605e052ab92d76f1119c60350c71a276e84e7b1b0d8f7e7cc80254783635",
+  "feature_id": "app.background.deferred_work",
+  "response_sha256": "d50535cc5095714b35dfa3bddeb2ee14e502b15ecaa660c286321a5e73ab62b7",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

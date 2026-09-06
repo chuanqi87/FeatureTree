@@ -1,0 +1,323 @@
+{
+  "task_id": "67fa393b736fe965ac16c476cd2fe7d9a9679f86a188bcde08b2b7fccc346b4d",
+  "feature_id": "ai.on_device.runtime",
+  "stage": "first_pass",
+  "summary": "三平台均读到官方端侧模型执行机制：Android LiteRT 经 Google Play services 分发并配 delegates/Acceleration Service；iOS Core ML 为平台框架统一调度 CPU/GPU/Neural Engine；HarmonyOS MindSpore Lite 经 NNRt 异构调度、要求 .ms 模型。均属机制级初判，三平台版本基线未固定；包内 ios-2（SwiftData/CoreData）与 harmonyos-2（ML-DSA 密码学）与本节点无关。差异假设聚焦分发方式、模型格式、加速暴露。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "官方文档将 LiteRT 定位为 Android 官方 ML 推理运行时，经 Google Play services 分发运行时与 GPU/NPU delegates，并提供 Acceleration Service 在运行时选择最优硬件配置；androidx 包索引含 camera.mlkit.vision 条目（CameraX 与 ML Kit 集成）。",
+      "version_scope": "developer.android.com/ai/custom 快照（2026-09-05）；未核对 Android API Level、Google Play services 与 LiteRT 版本要求",
+      "conditions": [
+        "运行时与 delegates 经 Google Play services 获取（生态服务，非系统 SDK），以确保最新稳定版并减小应用体积",
+        "GPU delegate 已提供；自定义/NPU delegate 依赖合作伙伴经 Play services 分发",
+        "Acceleration Service API 在运行时选择最优硬件加速配置，无需关心底层硬件与驱动"
+      ],
+      "gaps": [
+        "最低 Android 版本/API Level、Play services 与 LiteRT 版本要求未在来源中说明",
+        "LiteRT 所用模型格式与转换工具链未在冻结来源中说明",
+        "系统 SDK 层推理运行时（如 NNAPI）与 LiteRT/Play services 的关系未覆盖",
+        "不依赖 Play services 的运行时打包路径无证据",
+        "手机/平板设备形态与后台/内存限制未说明"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Use LiteRT on Android — LiteRT for ML runtime（Android's official ML inference runtime）",
+          "start_line": 11,
+          "end_line": 14
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Hardware Acceleration with LiteRT Delegates",
+          "start_line": 16,
+          "end_line": 25
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Enabled by Google Play services",
+          "start_line": 27,
+          "end_line": 31
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Acceleration Service",
+          "start_line": 42,
+          "end_line": 46
+        },
+        {
+          "source_id": "android-2",
+          "locator": "androidx.camera.mlkit.vision 包条目（CameraX 与 ML Kit 集成）",
+          "start_line": 79,
+          "end_line": 79
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "LiteRT 运行时与 GPU/NPU delegate 实际可用性、Acceleration Service 选配结果依赖具体设备硬件、驱动与 Play services 版本，静态文档无法核实；本轮仅文档初判，不设计用例。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "documented_mechanism",
+      "observation": "Core ML 框架页记载：以统一模型表示在设备端做预测与训练/微调，自动利用 CPU/GPU/Neural Engine，模型须为 Core ML 格式（Create ML 训练或 Core ML Tools 转换），支持运行时下载编译模型与模型加密，栈基于 Accelerate/BNNS 与 Metal Performance Shaders。",
+      "version_scope": "developer.apple.com/documentation/coreml 快照（2026-09-05，版权 2026）；框架落地页无 iOS 最低版本元数据，符号级 availability 未核对",
+      "conditions": [
+        "模型须为 Core ML 格式：Create ML 训练或经 Core ML Tools 从其他框架转换",
+        "推理与微调在设备端执行，文档称无需网络连接",
+        "支持在用户设备上运行时动态下载并编译模型；提供 compute device/plan/policy 与 MLTensor API"
+      ],
+      "gaps": [
+        "框架落地页无 iOS 最低可用版本，需逐符号核对 availability（Apple 目录含多平台）",
+        "CoreAI（最新架构与推理技术）与 Core ML 的边界、版本与适用条件未在来源中说明",
+        "后台执行限制与内存/模型大小上限未覆盖",
+        "权限要求仅有设备端执行/无需网络的间接描述，无正式权限章节"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "Core ML — Overview（integrate machine learning models, all on a person's device）",
+          "start_line": 5,
+          "end_line": 7
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Overview — Create ML/Core ML Tools 模型格式与设备端再训练",
+          "start_line": 13,
+          "end_line": 13
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Overview — CPU/GPU/Neural Engine 优化与设备端隐私",
+          "start_line": 15,
+          "end_line": 15
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Overview — 框架栈：Vision/NaturalLanguage/Speech/SoundAnalysis 之基础，构建于 Accelerate/BNNS 与 Metal Performance Shaders",
+          "start_line": 17,
+          "end_line": 17
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Topics — Core ML models / MLModel",
+          "start_line": 41,
+          "end_line": 43
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Topics — App integration: Downloading and Compiling a Model on the User's Device",
+          "start_line": 89,
+          "end_line": 91
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "Neural Engine 可用性、compute plan 实际调度与运行时下载编译行为依赖具体设备与 iOS 版本，需实机核实；本轮仅文档初判，未核对符号级 availability。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "MindSpore Lite Kit 术语页记载端侧运行机制：Context 配置硬件与线程，模型经转换工具生成 .ms 格式，NNRt 为系统跨芯片推理运行时连通 NPU 等加速芯片，异构推理不支持算子回退 CPU，Float16 仅 CPU/GPU，另有端侧训练流程与离线模型机制。",
+      "version_scope": "developer.huawei.com harmonyos-guides 快照（2026-09-04）；适用 HarmonyOS API 版本与发行版（HarmonyOS/OpenHarmony）未标注",
+      "conditions": [
+        "模型须由转换工具从 ONNX/CAFFE/TFLITE/TF/PyTorch/MindIR 转为 .ms 端侧格式，或使用硬件厂商离线模型",
+        "NPU 加速须配置 NNRt；异构推理中不支持的算子回退 CPU 执行",
+        "Float16 推理仅 CPU/GPU 设备可用；算子支持以 ONNX Opset18 支持列表为准"
+      ],
+      "gaps": [
+        "术语页非 API 参考：js-apis-mindspore-lite 等接口、权限、错误码正文未读取",
+        "适用 HarmonyOS API 版本与发行版（HarmonyOS/OpenHarmony）未标注",
+        "手机/平板设备形态、后台与内存限制未覆盖",
+        "包内 harmonyos-2（ML-DSA 签名验签）为后量子密码主题，与本节点无关，不能作为本节点证据"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Context；上下文（运行时配置对象：硬件设备类型、线程数、绑核）",
+          "start_line": 5,
+          "end_line": 7
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Float16；半精度（仅 CPU/GPU 设备可用）",
+          "start_line": 19,
+          "end_line": 19
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Heterogeneous Inference；异构推理（NNRt 加速芯片与 CPU 分派、回退）",
+          "start_line": 23,
+          "end_line": 25
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Model Conversion；模型转换（ONNX/CAFFE/TFLITE/TF/PyTorch/MindIR 转 .ms）",
+          "start_line": 29,
+          "end_line": 31
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "NNRt；神经网络运行时（HarmonyOS 跨芯片推理运行时，连通上层框架与加速芯片）",
+          "start_line": 43,
+          "end_line": 45
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "On-device Training；端侧训练（独立训练开发流程与 API 体系）",
+          "start_line": 53,
+          "end_line": 55
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "NNRt/NPU 加速与算子回退行为依赖具体芯片与设备，术语页不含设备与版本条件，需实机核实；本轮仅文档初判，不设计用例。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "availability",
+      "statement": "运行时获取与更新机制的文档描述不同：Android 官方文档明示 LiteRT 运行时与 delegates 经 Google Play services 分发并保持最新稳定版（生态服务路径）；HarmonyOS 文档将 NNRt 描述为系统级跨芯片推理运行时；iOS Core ML 以平台框架栈描述（构建于 Accelerate/BNNS 与 MPS），未提及外部服务分发依赖。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Enabled by Google Play services（最新稳定版、减小应用体积）",
+          "start_line": 27,
+          "end_line": 31
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Overview — 框架栈（Accelerate/BNNS、Metal Performance Shaders）",
+          "start_line": 17,
+          "end_line": 17
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "NNRt；神经网络运行时（HarmonyOS 面向 AI 领域的跨芯片推理计算运行时）",
+          "start_line": 43,
+          "end_line": 45
+        }
+      ],
+      "open_questions": [
+        "LiteRT 是否存在不依赖 Google Play services 的打包/回退路径",
+        "MindSpore Lite Kit 的具体获取方式（SDK/Kit 版本、商用与开源发行版差异）未在来源中说明",
+        "Core ML 与 NNRt 的运行时更新是否随系统版本发布，需版本级证据"
+      ]
+    },
+    {
+      "dimension": "programming_model",
+      "statement": "模型格式与转换要求不同（文档明示）：iOS 要求 Core ML 格式（Create ML 训练或 Core ML Tools 转换）；HarmonyOS 要求经模型转换工具生成 MindSpore Lite 的 .ms 端侧格式（源自 ONNX/CAFFE/TFLITE/TF/PyTorch/MindIR）；Android 冻结来源未说明 LiteRT 模型格式，暂不纳入本假设比较。",
+      "platforms": [
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "Overview — Create ML/Core ML Tools 转换为 Core ML 格式",
+          "start_line": 13,
+          "end_line": 13
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Model Conversion；模型转换（部署流程第一阶段，转 .ms）",
+          "start_line": 29,
+          "end_line": 31
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "MS Model；MS模型（.ms 端侧优化格式）",
+          "start_line": 37,
+          "end_line": 39
+        }
+      ],
+      "open_questions": [
+        "LiteRT 所用模型格式与转换工具链需补 Android 来源后才能三平台比较",
+        "各格式算子覆盖与量化支持差异：HarmonyOS 提及训练后量化（INT8）与 ONNX Opset18 支持列表，iOS 快照未说明量化细节"
+      ]
+    },
+    {
+      "dimension": "api_surface",
+      "statement": "硬件加速的暴露方式不同：Android 经 Play services 分发 LiteRT delegates（GPU 已支持、自定义 NPU delegate 依赖合作伙伴）并以 Acceleration Service 运行时选择最优配置；iOS 由 Core ML 统一调度 CPU/GPU/Neural Engine 并暴露 compute device/plan/policy API；HarmonyOS 经 NNRt 异构调度、不支持算子回退 CPU，且 Float16 推理仅 CPU/GPU 可用。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Hardware Acceleration with LiteRT Delegates（GPU/NPU、伙伴自定义 delegate）",
+          "start_line": 16,
+          "end_line": 25
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Acceleration Service（运行时选择最优硬件加速配置）",
+          "start_line": 42,
+          "end_line": 46
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Overview — leveraging the CPU, GPU, and Neural Engine",
+          "start_line": 15,
+          "end_line": 15
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Topics — Compute devices / Compute plan（MLComputeDevice、MLComputePlan、MLComputePolicy）",
+          "start_line": 107,
+          "end_line": 131
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Float16；半精度（仅 CPU/GPU 设备可用）",
+          "start_line": 19,
+          "end_line": 19
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Heterogeneous Inference；异构推理（算子回退 CPU）",
+          "start_line": 23,
+          "end_line": 25
+        }
+      ],
+      "open_questions": [
+        "三平台 NPU/Neural Engine 的算子覆盖范围与回退行为是否可比",
+        "各平台精度模式（FP16/INT8）支持矩阵需逐平台核对 API 参考",
+        "Acceleration Service 与 NNRt 的硬件选择策略能否类比，需行为级证据"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "三平台版本基线均未固定：Android API Level/Play services 版本、iOS 符号级 availability、HarmonyOS API 版本与发行版标注缺失",
+    "lifecycle_background 与 limits_precision 维度（后台执行、内存/模型大小上限、精度矩阵）在三平台冻结来源中均无正文",
+    "permissions_privacy 维度仅 iOS 有设备端执行/无需网络的间接描述，其余平台无权限章节正文",
+    "Android 侧 ML Kit 与 LiteRT 关系、系统 SDK 层运行时未覆盖；包内 ios-2（SwiftData/CoreData 持久化）与 harmonyos-2（ML-DSA 密码学）为不相关来源",
+    "device_forms 维度（手机/平板）三平台来源均未说明适用设备形态"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "分发机制差异（Android 生态服务 vs iOS/HarmonyOS 系统集成）与模型格式映射属高风险比较点，且三平台 API 参考级证据（LiteRT 版本要求与模型格式、Core ML 符号 availability、MindSpore Lite API 文档与版本）全部缺失，需正式精研优先核对。"
+  }
+}

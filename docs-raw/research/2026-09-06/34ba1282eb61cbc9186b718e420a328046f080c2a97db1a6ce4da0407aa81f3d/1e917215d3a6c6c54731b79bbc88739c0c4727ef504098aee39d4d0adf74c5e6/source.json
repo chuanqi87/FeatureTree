@@ -1,0 +1,13 @@
+{
+  "id": "34ba1282eb61cbc9186b718e420a328046f080c2a97db1a6ce4da0407aa81f3d",
+  "url": "https://firebase.google.com/docs/firestore/understand-reads-writes-scale",
+  "platform": "android",
+  "title": "Understand reads and writes at scale",
+  "local_path": "docs-raw/research/2026-09-06/34ba1282eb61cbc9186b718e420a328046f080c2a97db1a6ce4da0407aa81f3d/1e917215d3a6c6c54731b79bbc88739c0c4727ef504098aee39d4d0adf74c5e6/document.md",
+  "sha256": "1e917215d3a6c6c54731b79bbc88739c0c4727ef504098aee39d4d0adf74c5e6",
+  "raw_sha256": "eef62db80f8ff83ce75704e0b27383f467f12ebf94382158210ce42cc302688e",
+  "raw_path": "docs-raw/research/2026-09-06/34ba1282eb61cbc9186b718e420a328046f080c2a97db1a6ce4da0407aa81f3d/1e917215d3a6c6c54731b79bbc88739c0c4727ef504098aee39d4d0adf74c5e6/source.gz",
+  "fetched_at": "2026-09-05T11:13:19.303813+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,1132 @@
+{
+  "task_id": "d660df429333c71cf07dda1f3d5cab3223330a87b3955eee0bb130eb73f27207",
+  "feature_id": "connectivity.nfc.hce",
+  "stage": "first_pass",
+  "summary": "三平台均读到 HCE 官方机制:Android 4.4+ HostApduService 开放给任意应用;iOS 17.4+ CardSession 限 EEA 授权开发者(仅更新页,未见 API 正文);HarmonyOS cardEmulation 首批 API 6/HceService API 8+ 提供且明确禁灭屏。差异假设:准入与区域限制、灭屏行为、AID 注册与默认应用模型。置信全 low,启动日基线未固定。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "Android 4.4+ 任意应用可经 HostApduService 实现 HCE,按 AID 路由应答读卡器 APDU;AID 组分 PAYMENT/OTHER 两类,支持前台优先、默认钱包角色与 Observe Mode(Android 15+),灭屏/锁屏行为分版本。",
+      "version_scope": "指南陈述 Android 4.4(API 19)+ 支持 HCE,分版本行为涉及 Android 9/10/12/15(API 28/29/31/35);快照未标注适用上限,启动日最新正式版未核实。",
+      "conditions": [
+        "设备需具备 NFC 与 FEATURE_NFC_HOST_CARD_EMULATION 特性",
+        "服务需 manifest 声明 HOST_APDU_SERVICE、BIND_NFC_SERVICE、NFC 权限及 apduservice.xml 静态 AID 组",
+        "CATEGORY_PAYMENT 交易需为默认支付应用(Android 15+ 为钱包角色持有者)或前台调用 setPreferredService",
+        "灭屏/锁屏可用性随 Android 版本、Secure NFC 与 requireDeviceScreenOn/requireDeviceUnlock 设置变化",
+        "仅支持 ISO-DEP(ISO 14443-4)/ISO 7816-4 APDU,Nfc-A 强制、Nfc-B 可选,且仅单逻辑通道"
+      ],
+      "gaps": [
+        "未读 HostApduService/CardEmulation 等 API 参考正文,接口签名与逐项 API Level 标注未核实",
+        "Observe Mode、polling loop filter 的设备硬件与厂商支持条件未说明",
+        "android-2 与 android-1 正文相同,无增量信息;启动日最新正式版行为未核实",
+        "Secure NFC 与 requireDeviceScreenOn=false 在具体机型上的实际行为未验证"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Host-based card emulation overview > Host-based card emulation(Android 4.4+ 定义)",
+          "start_line": 8,
+          "end_line": 13,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/nfc/hce",
+            "platform": "android",
+            "title": "Host-based card emulation overview",
+            "local_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/document.md",
+            "sha256": "a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a",
+            "raw_sha256": "3c885f79fd15a4914ab3a984a08d67df53ea1d2c36f9066df1af7a7b81f453c9",
+            "raw_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/source.gz",
+            "fetched_at": "2026-09-05T10:24:20.246506+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 713,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 31,
+                "end_line": 39,
+                "truncated": false
+              },
+              {
+                "start_line": 109,
+                "end_line": 141,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Android 4.4 and higher provide an additional method of card emulation that\ndoesn't involve a secure element, called *host-based card emulation*. This\nallows any Android application to emulate a card and talk directly to the NFC\nreader. This topic describes how host-based card emulation (HCE) works on\nAndroid and how you can develop an app that emulates an NFC card using this\ntechnique."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Host-based card emulation overview > Supported NFC cards and protocols",
+          "start_line": 56,
+          "end_line": 62,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/nfc/hce",
+            "platform": "android",
+            "title": "Host-based card emulation overview",
+            "local_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/document.md",
+            "sha256": "a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a",
+            "raw_sha256": "3c885f79fd15a4914ab3a984a08d67df53ea1d2c36f9066df1af7a7b81f453c9",
+            "raw_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/source.gz",
+            "fetched_at": "2026-09-05T10:24:20.246506+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 713,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 31,
+                "end_line": 39,
+                "truncated": false
+              },
+              {
+                "start_line": 109,
+                "end_line": 141,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Specifically, Android 4.4 and higher supports emulating cards that are based on\nthe NFC-Forum ISO-DEP specification (based on ISO/IEC 14443-4) and process\nApplication Protocol Data Units (APDUs) as defined in the ISO/IEC 7816-4\nspecification. Android mandates emulating ISO-DEP only on top of the Nfc-A\n(ISO/IEC 14443-3 Type A) technology. Support for Nfc-B (ISO/IEC 14443-4 Type B)\ntechnology is optional. Figure 3 illustrates the layering of all of these\nspecifications."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Host-based card emulation overview > HCE services(基于 Service 后台运行)",
+          "start_line": 64,
+          "end_line": 74,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/nfc/hce",
+            "platform": "android",
+            "title": "Host-based card emulation overview",
+            "local_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/document.md",
+            "sha256": "a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a",
+            "raw_sha256": "3c885f79fd15a4914ab3a984a08d67df53ea1d2c36f9066df1af7a7b81f453c9",
+            "raw_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/source.gz",
+            "fetched_at": "2026-09-05T10:24:20.246506+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 713,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 31,
+                "end_line": 39,
+                "truncated": false
+              },
+              {
+                "start_line": 109,
+                "end_line": 141,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## HCE services\n\nThe HCE architecture in Android is based around Android\n[`Service`](https://developer.android.com/reference/android/app/Service) components (known as *HCE\nservices*). One of the key advantages of a service is that it can run in the\nbackground without any user interface. This is a natural fit for many HCE\napplications, like loyalty or transit cards, which the user shouldn't need to\nlaunch an app to use. Instead, tapping the device against the NFC reader starts\nthe correct service if it is not already running and executes the transaction\nin the background. Of course, you are free to launch additional UI (such as\nuser notifications) from your service when appropriate."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Host-based card emulation overview > AID groups and categories 及 CATEGORY_PAYMENT 交易条件",
+          "start_line": 109,
+          "end_line": 141,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/nfc/hce",
+            "platform": "android",
+            "title": "Host-based card emulation overview",
+            "local_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/document.md",
+            "sha256": "a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a",
+            "raw_sha256": "3c885f79fd15a4914ab3a984a08d67df53ea1d2c36f9066df1af7a7b81f453c9",
+            "raw_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/source.gz",
+            "fetched_at": "2026-09-05T10:24:20.246506+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 713,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 31,
+                "end_line": 39,
+                "truncated": false
+              },
+              {
+                "start_line": 109,
+                "end_line": 141,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### AID groups and categories\n\nYou can associate each AID group with a category. This allows Android to group\nHCE services together by category, and that in turn allows the user to set\ndefaults at the category level instead of the AID level. Avoid mentioning AIDs\nin any user-facing parts of your application, because they don't mean anything\nto the average user.\n\nAndroid 4.4 and higher supports two categories:\n\n* [`CATEGORY_PAYMENT`](https://developer.android.com/reference/android/nfc/cardemulation/CardEmulation#CATEGORY_PAYMENT)\n  (covering industry-standard payment apps)\n* [`CATEGORY_OTHER`](https://developer.android.com/reference/android/nfc/cardemulation/CardEmulation#CATEGORY_OTHER)\n  (for all other HCE apps)\n\n**Note:** Only one AID group in the `CATEGORY_PAYMENT` category can be enabled in\nthe system at any given time. Typically, this is an app that\nunderstands major credit card payment protocols and which can work at any\nmerchant.  \n  \nFor *closed-loop* payment apps that only work at one\nmerchant (such as stored-value cards), use `CATEGORY_OTHER`. AID groups in\nthis category can be always active, and can be given priority by NFC\nreaders during AID selection if necessary.\n\nApps registering AIDs under `CATEGORY_PAYMENT` can only process a transaction\nif:\n\n* The user sets the app as the default payment app (Wallet role holder on\n  Android 15+ devices), OR\n* The app is in the foreground and invokes\n  [`setPreferredService`](https://developer.android.com/reference/android/nfc/cardemulation/CardEmulation#setPreferredService(android.app.Activity,%20android.content.ComponentName)).\n"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Host-based card emulation overview > Service manifest declaration and AID registration",
+          "start_line": 246,
+          "end_line": 316,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/nfc/hce",
+            "platform": "android",
+            "title": "Host-based card emulation overview",
+            "local_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/document.md",
+            "sha256": "a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a",
+            "raw_sha256": "3c885f79fd15a4914ab3a984a08d67df53ea1d2c36f9066df1af7a7b81f453c9",
+            "raw_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/source.gz",
+            "fetched_at": "2026-09-05T10:24:20.246506+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 713,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 31,
+                "end_line": 39,
+                "truncated": false
+              },
+              {
+                "start_line": 109,
+                "end_line": 141,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Service manifest declaration and AID registration\n\nYou must declare your service in the manifest as usual, but you must add some\nadditional pieces to the service declaration as well:\n\n1. To tell the platform that it is a HCE service implementing a\n   `HostApduService` interface, add an intent filter for the\n   [`SERVICE_INTERFACE`](https://developer.android.com/reference/android/nfc/cardemulation/HostApduService#SERVICE_INTERFACE)\n   action to your service declaration.\n2. To tell the platform which AIDs groups are requested by this service, include\n   a\n   [`SERVICE_META_DATA`](https://developer.android.com/reference/android/nfc/cardemulation/HostApduService#SERVICE_META_DATA)\n   `<meta-data>` tag in the declaration of the service, pointing to an XML\n   resource with additional information about the HCE service.\n3. Set the `android:exported` attribute to `true`, and require the\n   `android.permission.BIND_NFC_SERVICE` permission in your service declaration.\n   The former ensures that the service can be bound to by external applications.\n   The latter then enforces that only external applications that hold the\n   `android.permission.BIND_NFC_SERVICE` permission can bind to your service.\n   Since `android.permission.BIND_NFC_SERVICE` is a system permission, this\n   effectively enforces that only the Android OS can bind to your service.\n\nThe following is an example of a `HostApduService` manifest declaration:\n\n```\n<service android:name=\".MyHostApduService\" android:exported=\"true\"\n         android:permission=\"android.permission.BIND_NFC_SERVICE\">\n    <intent-filter>\n        <action android:name=\"android.nfc.cardemulation.action.HOST_APDU_SERVICE\"/>\n    </intent-filter>\n    <meta-data android:name=\"android.nfc.cardemulation.host_apdu_service\"\n               android:resource=\"@xml/apduservice\"/>\n</service>\n```\n\nThis meta-data tag points to an `apduservice.xml` file. The following is an\nexample of such a file with a single AID group declaration containing two\nproprietary AIDs:\n\n```\n<host-apdu-service xmlns:android=\"http://schemas.android.com/apk/res/android\"\n           android:description=\"@string/servicedesc\"\n           android:requireDeviceUnlock=\"false\">\n    <aid-group android:description=\"@string/aiddescription\"\n               android:category=\"other\">\n        <aid-filter android:name=\"F0010203040506\"/>\n        <aid-filter android:name=\"F0394148148100\"/>\n    </aid-group>\n</host-apdu-service>\n```\n\nThe `<host-apdu-service>` tag must contain an `<android:description>` attribute\nthat contains a user-friendly description of the service that you can show in\nthe app UI. You can use the `requireDeviceUnlock` attribute to specify that the\ndevice is unlocked before you invoke this service to handle APDUs.\n\nThe `<host-apdu-service>` must contain one or more `<aid-group>` tags. Each\n`<aid-group>` tag is required to do the following:\n\n* Contain an `android:description` attribute that contains a user-friendly\n  description of the AID group, suitable for display in UI.\n* Have its `android:category` attribute set to indicate the category the AID\n  group belongs to, such as the string constants defined by `CATEGORY_PAYMENT`\n  or `CATEGORY_OTHER`.\n* Contain one or more `<aid-filter>` tags, each of which contains a single AID.\n  Specify the AID in hexadecimal format, and make sure it contains an even\n  number of characters.\n\nYour application also needs to hold the\n[`NFC`](https://developer.android.com/reference/android/Manifest.permission#NFC) permission to register as an\nHCE service."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Host-based card emulation overview > Screen off and lock-screen behavior",
+          "start_line": 460,
+          "end_line": 521,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/nfc/hce",
+            "platform": "android",
+            "title": "Host-based card emulation overview",
+            "local_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/document.md",
+            "sha256": "a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a",
+            "raw_sha256": "3c885f79fd15a4914ab3a984a08d67df53ea1d2c36f9066df1af7a7b81f453c9",
+            "raw_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/source.gz",
+            "fetched_at": "2026-09-05T10:24:20.246506+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 713,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 31,
+                "end_line": 39,
+                "truncated": false
+              },
+              {
+                "start_line": 109,
+                "end_line": 141,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Screen off and lock-screen behavior\n\nThe behavior of HCE services varies based on the version of Android running on\nthe device.\n\n### Android 15 and higher\n\nIf the default wallet app turns on Observe Mode on a device that supports it,\nthen that app overrides unlock and screen-off behavior, because it controls\nwhen a transaction can proceed. Some wallet apps might require the device to\nbe unlocked before a transaction can proceed if Observe Mode didn't detect an\nidentifiable polling loop pattern.\n\nDevelopers are encouraged to work with their reader devices to emit\nidentifiable polling loop patterns and [register to handle those\npatterns](https://developer.android.com/develop/connectivity/nfc/hce#polling-loop-filters) from their app.\n\n### Android 12 and higher\n\nIn apps that target Android 12 (API level 31) and higher, you can enable NFC\npayments without the device's screen on by setting\n[`requireDeviceScreenOn`](https://developer.android.com/reference/android/R.attr#requireDeviceScreenOn) to\n`false`.\n\n### Android 10 and higher\n\nDevices running Android 10 (API level 29) or higher support\n[Secure\nNFC](https://source.android.com/devices/tech/connect/secure-nfc). While Secure\nNFC is on, all card emulators (host applications and off-host applications) are\nunavailable when the device screen is off. While Secure NFC is off, off-host\napplications are available when the device screen is off. You can check for\nSecure NFC support using\n[`isSecureNfcSupported()`](https://developer.android.com/reference/android/nfc/NfcAdapter#isSecureNfcSupported()).\n\nOn devices running Android 10 and higher, the same functionality for setting\n`android:requireDeviceUnlock` to `true` applies as with devices\nrunning Android 9 and lower, but only when Secure NFC is turned off. That is, if\nSecure NFC is turned on, HCE services can't function from the lock-screen\nregardless of the setting of `android:requireDeviceUnlock`.\n\n### Android 9 and lower\n\nOn devices that run Android 9 (API level 28) and lower, the NFC controller and\nthe application processor are turned off completely when the screen of the\ndevice is turned off. HCE services therefore don't work when the screen is off.\n\nAlso on Android 9 and lower, HCE services can function from the lock screen.\nHowever, this is controlled by the `android:requireDeviceUnlock` attribute in\nthe `<host-apdu-service>` tag of your HCE service. By default, device unlock is\nnot required, and your service is invoked even if the device is locked.\n\nIf you set the `android:requireDeviceUnlock` attribute to `true` for your HCE\nservice, Android prompts the user to unlock the device when the following\nhappen:\n\n* the user taps an NFC reader.\n* the NFC reader selects an AID that is resolved to your service.\n\nAfter unlocking, Android shows a dialog prompting the user to tap again to\ncomplete the transaction. This is necessary because the user may have moved the\ndevice away from the NFC reader in order to unlock it."
+        }
+      ],
+      "device_review": {
+        "requirement": "required",
+        "reason": "HCE 依赖 NFC 控制器路由、灭屏功耗策略、Secure NFC 与默认钱包角色等系统行为,静态文档无法验证实际读卡器交互、厂商差异与各版本实际表现,最终确认需真机。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "documented_mechanism",
+      "observation": "iOS 17.4 起 CoreNFC CardSession 支持 EEA 内应用 HCE 非接触交易,授权开发者可经 entitlement 被用户选为默认处理者;iOS 18.1 另有基于安全元素的 SecureElementCredential 凭证卡模拟(非 HCE)。",
+      "version_scope": "文档标注 HCE/CardSession 自 iOS 17.4、NFC & SE Platform 自 iOS 18.1;未核对符号级 availability 与 iPhone/iPad 型号适用性,启动日最新 iOS 版本未核实。",
+      "conditions": [
+        "HCE 交易限欧洲经济区(EEA)",
+        "面向授权开发者,需 managed entitlement com.apple.developer.nfc.hce.default-contactless-app 才能设为默认处理者",
+        "SecureElementCredential(非 HCE 路线)需经 Apple Business Register 管理凭证与 applet",
+        "SE 凭证卡模拟需会话进入 cardEmulation 状态并持有 PresentmentIntentAssertion"
+      ],
+      "gaps": [
+        "未读 CoreNFC/CardSession API 参考正文,会话生命周期、AID 处理、后台/灭屏约束未知",
+        "entitlement 授权申请条件与 EEA 限制的执行细则未读到原文",
+        "ios-2 为安全元素凭证机制(SE),非 HCE,仅作相邻机制参考,不能证明 iOS HCE 细节",
+        "iPhone/iPad 符号级 availability 与最新 iOS 版本适用性未核对"
+      ],
+      "confidence": "low",
+      "evidence_strength": "indirect",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "Default apps updates > HCE-based contactless transactions for apps(iOS 17.4、EEA、CardSession、entitlement)",
+          "start_line": 63,
+          "end_line": 71,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/updates/defaultapps",
+            "platform": "ios",
+            "title": "Default apps updates",
+            "local_path": "docs-raw/research/2026-09-06/3f304e5d4b9c0630cd8666b1a2a91c85aec47fd0e0570bd9f5c0fde89b0c2bcc/7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7/document.md",
+            "sha256": "7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7",
+            "raw_sha256": "b927ebe7207cf30012f63c98abb6de3cf2e7e1a4c538add2d5ed734f60ccaf8b",
+            "raw_path": "docs-raw/research/2026-09-06/3f304e5d4b9c0630cd8666b1a2a91c85aec47fd0e0570bd9f5c0fde89b0c2bcc/7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7/source.gz",
+            "fetched_at": "2026-09-05T10:27:51.574171+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 114,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 15,
+                "truncated": true
+              },
+              {
+                "start_line": 19,
+                "end_line": 20,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### HCE-based contactless transactions for apps\n\niOS 17.4 introduced APIs that support contactless transactions for in-store payments, car keys, tickets, and more uses from within compatible iOS apps using host card emulation (HCE) in the European Economic Area (EEA).\n\nThe <doc://com.apple.documentation/documentation/CoreNFC/CardSession> API in the CoreNFC framework enables authorized developers to perform contactless transactions from within their app. Supported `CardSession` apps can be selected by users as their default handler for these transactions.\n\n- Learn about host card emulation apps by reading <https://developer.apple.com/support/hce-transactions-in-apps/>.\n- Use <doc://com.apple.documentation/documentation/CoreNFC/CardSession> to enable host card emulation (HCE) transactions in your app.\n- Enable your app to be the default app for HCE-based contactless NFC with the <doc://com.apple.documentation/documentation/BundleResources/Entitlements/com.apple.developer.nfc.hce.default-contactless-app> entitlement."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Default apps updates > Contactless NFC and SE platform apps(iOS 18.1 NFC & SE Platform)",
+          "start_line": 53,
+          "end_line": 61,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/updates/defaultapps",
+            "platform": "ios",
+            "title": "Default apps updates",
+            "local_path": "docs-raw/research/2026-09-06/3f304e5d4b9c0630cd8666b1a2a91c85aec47fd0e0570bd9f5c0fde89b0c2bcc/7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7/document.md",
+            "sha256": "7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7",
+            "raw_sha256": "b927ebe7207cf30012f63c98abb6de3cf2e7e1a4c538add2d5ed734f60ccaf8b",
+            "raw_path": "docs-raw/research/2026-09-06/3f304e5d4b9c0630cd8666b1a2a91c85aec47fd0e0570bd9f5c0fde89b0c2bcc/7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7/source.gz",
+            "fetched_at": "2026-09-05T10:27:51.574171+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 114,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 15,
+                "truncated": true
+              },
+              {
+                "start_line": 19,
+                "end_line": 20,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Contactless NFC and SE platform apps\n\niOS 18.1 introduced APIs that support secure contactless transactions within compatible iOS apps using the NFC & SE Platform for in-store payments, car keys, closed-loop transit, corporate badges, student IDs, home keys, hotel keys, merchant loyalty and rewards, and event tickets, with government IDs to be available at a later date.\n\nThe NFC & SE Platform is a secure solution developed by Apple that enables authorized developers to provide capabilities, such as securely adding, storing, and presenting a contactless card for NFC use cases, from within their iOS app. Supported NFC and SE platform apps can be selected by users as their default handler for these transactions.\n\n- To learn more about the NFC and SE Platform see  <https://developer.apple.com/support/nfc-se-platform/>.\n- Manage and employ Secure Element credentials with contactless transaction capabilities using <doc://com.apple.documentation/documentation/SecureElementCredential>\n- Enable your app to be the default app for contactless NFC and SE Platform transactions with the    <doc://com.apple.documentation/documentation/BundleResources/Entitlements/com.apple.developer.secure-element-credential.default-contactless-app> entitlement."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Accessing and using secure element credentials > 会话状态(management/wired/card emulation)",
+          "start_line": 51,
+          "end_line": 61,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/secureelementcredential/accessing-and-using-secure-element-credentials",
+            "platform": "ios",
+            "title": "Accessing and using secure element credentials",
+            "local_path": "docs-raw/research/2026-09-06/001dc041b172b2f6cd9d379be9a4c1dfb717ec260204798387853971a292846e/2eb41d0bb3c1df3be7e419de3e4bc5fceabb2849e4d3a35fdef6d320f7fcc301/document.md",
+            "sha256": "2eb41d0bb3c1df3be7e419de3e4bc5fceabb2849e4d3a35fdef6d320f7fcc301",
+            "raw_sha256": "583928586203fda5c379225495724e8cc33ea904ad64199749f78e2edaef909d",
+            "raw_path": "docs-raw/research/2026-09-06/001dc041b172b2f6cd9d379be9a4c1dfb717ec260204798387853971a292846e/2eb41d0bb3c1df3be7e419de3e4bc5fceabb2849e4d3a35fdef6d320f7fcc301/source.gz",
+            "fetched_at": "2026-09-05T10:25:33.920661+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 385,
+            "suggested_sections": [
+              {
+                "start_line": 210,
+                "end_line": 280,
+                "truncated": false
+              },
+              {
+                "start_line": 281,
+                "end_line": 311,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "When you first start the credential session, it’s in the default state, [`CredentialSession.State.management`](/documentation/SecureElementCredential/CredentialSession/State-swift.enum/management). In this state, you can perform the following actions:\n\n- List credentials (as shown in the above example) with [`listCredentials()`](/documentation/SecureElementCredential/CredentialSession/listCredentials()).\n- Provision new credentials with [`provisionCredential(configurationUUID:name:)`](/documentation/SecureElementCredential/CredentialSession/provisionCredential(configurationUUID:name:)).\n- Delete a credential with [`deleteCredential(_:)`](/documentation/SecureElementCredential/CredentialSession/deleteCredential(_:))\n\nBeyond the management state, there are two other credential session states:\n\n- Wired state, for communicating directly with a credential stored in the Secure Element.\n- Card emulation state, for using the credential with an NFC card reader.\n"
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Accessing and using secure element credentials > Perform card emulation(performTransaction/cardEmulation 状态)",
+          "start_line": 210,
+          "end_line": 216,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/secureelementcredential/accessing-and-using-secure-element-credentials",
+            "platform": "ios",
+            "title": "Accessing and using secure element credentials",
+            "local_path": "docs-raw/research/2026-09-06/001dc041b172b2f6cd9d379be9a4c1dfb717ec260204798387853971a292846e/2eb41d0bb3c1df3be7e419de3e4bc5fceabb2849e4d3a35fdef6d320f7fcc301/document.md",
+            "sha256": "2eb41d0bb3c1df3be7e419de3e4bc5fceabb2849e4d3a35fdef6d320f7fcc301",
+            "raw_sha256": "583928586203fda5c379225495724e8cc33ea904ad64199749f78e2edaef909d",
+            "raw_path": "docs-raw/research/2026-09-06/001dc041b172b2f6cd9d379be9a4c1dfb717ec260204798387853971a292846e/2eb41d0bb3c1df3be7e419de3e4bc5fceabb2849e4d3a35fdef6d320f7fcc301/source.gz",
+            "fetched_at": "2026-09-05T10:25:33.920661+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 385,
+            "suggested_sections": [
+              {
+                "start_line": 210,
+                "end_line": 280,
+                "truncated": false
+              },
+              {
+                "start_line": 281,
+                "end_line": 311,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "### Perform card emulation\n\nYou can also use credentials for contactless transactions with NFC card readers. Implement the [`CredentialSessionWindowSceneDelegate`](/documentation/SecureElementCredential/CredentialSessionWindowSceneDelegate) protocol in your app to receive [`CredentialSessionWindowSceneEvent`](/documentation/SecureElementCredential/CredentialSessionWindowSceneEvent) instances that describe NFC-related events. These events can occur when the device comes within range of an NFC card reader. Your app also gets an event when the person using the app performs a gesture to present an NFC display, like double-pressing the Home button or Side button.\n\nTo perform a contactless transaction, select an installed credential and then put the session into card emulation mode. In UIKit, you do this by calling [`performTransaction(using:over:options:)`](/documentation/SecureElementCredential/CredentialSession/performTransaction(using:over:options:)). In the following example, the `performNFCTransaction()` method gets exclusive use of the contactless UI with  [`acquirePresentmentAssertion()`](/documentation/SecureElementCredential/CredentialSession/acquirePresentmentAssertion()). Next, it verifies that the selected credential is installed and unwraps the current <doc://com.apple.documentation/documentation/UIKit/UIScene>  into a local variable. With these parameters, it calls `performTransaction(using:over:)` to begin the contactless transaction with the NFC reader.\n\nThe `performTransaction(using:over:)` method implicitly changes the session state to [`CredentialSession.State.cardEmulation(credential:)`](/documentation/SecureElementCredential/CredentialSession/State-swift.enum/cardEmulation(credential:)). When the transaction completes, the example returns to management mode by calling [`endCardEmulation()`](/documentation/SecureElementCredential/CredentialSession/endCardEmulation()), and relinquishes the contactless UI."
+        }
+      ],
+      "device_review": {
+        "requirement": "required",
+        "reason": "iOS HCE 限 EEA 且依赖授权 entitlement 与真机 NFC 栈,CardSession 与 Wallet/SE 平台的共存、灭屏表现需真机验证;无授权环境只能静态分析。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "@ohos.nfc.cardEmulation(首批 API 6)提供 HceService(API 8+):start/stop 动态 AID+前台优先、on('hceCmd') 收 APDU、transmit 应答;后台刷卡需静态声明 payment-aid/other-aid;明确不支持灭屏刷卡;OFFHOST 自 API 22 仅 SIM。",
+      "version_scope": "模块首批 API 6;HceService/on API 8+,start/stop/transmit/hasHceCapability API 9+,off API 18+,OFFHOST API 22+;为 HarmonyOS 文档(非 OpenHarmony),对应发行版与手机系统版本未核实。",
+      "conditions": [
+        "设备需具备 NFC 控制器芯片;有无安全单元芯片无约束",
+        "需 ohos.permission.NFC_CARD_EMULATION 权限与 SystemCapability.Communication.NFC.CardEmulation 系统能力",
+        "前台刷卡经 start() 动态注册 AID;后台刷卡需 module.json5 静态 payment-aid/other-aid 声明",
+        "前台/后台均不支持灭屏或熄屏状态下的 HCE 刷卡",
+        "actions 必须包含 ohos.nfc.cardemulation.action.HOST_APDU_SERVICE,AID name 仅接受 payment-aid/other-aid"
+      ],
+      "gaps": [
+        "on('hceCmd')/transmit 的完整参数、错误码与元服务限制未逐行核对",
+        "轻量穿戴 FA 模型差异仅部分读取;平板等设备形态适用性未单独核对",
+        "HarmonyOS 发行版与 API 6/8/9/18/22 的手机版本对应关系未核实",
+        "Other 类型 AID 冲突的用户解决流程与钱包类应用共存细节未读到"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "HCE卡模拟开发指南 > 简介(HCE/OFFHOST 定义与起始版本)",
+          "start_line": 3,
+          "end_line": 5,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/nfc-hce-guide",
+            "platform": "harmonyos",
+            "title": "HCE卡模拟开发指南",
+            "local_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/document.md",
+            "sha256": "99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a",
+            "raw_sha256": "f1e1fe03d8efc4405bfc81dc0be60e3f23ae5641af136220a1729526d59f9c55",
+            "raw_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 376,
+            "suggested_sections": [
+              {
+                "start_line": 46,
+                "end_line": 47,
+                "truncated": true
+              },
+              {
+                "start_line": 71,
+                "end_line": 165,
+                "truncated": true
+              },
+              {
+                "start_line": 205,
+                "end_line": 328,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 简介\n\n近场通信(Near Field Communication，NFC)是一种短距高频的无线电技术，在13.56MHz频率运行，通信距离一般在10厘米距离内。HCE(Host Card Emulation)，称为基于主机的卡模拟，表示不依赖安全单元芯片，电子设备上的应用程序模拟NFC卡片和NFC读卡器通信，实现NFC刷卡业务。从API version 22开始支持OFFHOST(Off Host Card Emulation)，称为基于安全单元的卡模拟，卡由设备中的一个单独芯片(称为安全单元)进行模拟。无线运营商部分SIM卡也包含安全单元。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "HCE卡模拟开发指南 > HCE应用刷卡的约束条件(灭屏不支持、NFC 控制器、权限)",
+          "start_line": 20,
+          "end_line": 27,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/nfc-hce-guide",
+            "platform": "harmonyos",
+            "title": "HCE卡模拟开发指南",
+            "local_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/document.md",
+            "sha256": "99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a",
+            "raw_sha256": "f1e1fe03d8efc4405bfc81dc0be60e3f23ae5641af136220a1729526d59f9c55",
+            "raw_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 376,
+            "suggested_sections": [
+              {
+                "start_line": 46,
+                "end_line": 47,
+                "truncated": true
+              },
+              {
+                "start_line": 71,
+                "end_line": 165,
+                "truncated": true
+              },
+              {
+                "start_line": 205,
+                "end_line": 328,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### HCE应用刷卡的约束条件\n\n1. 基于刷卡安全性考虑，不论HCE应用是前台方式还是后台方式刷卡，均不支持电子设备在灭屏或熄屏状态下的HCE刷卡操作。\n\n2. 电子设备必须具备NFC控制器芯片，才支持HCE刷卡能力。对于是否具有NFC安全单元芯片，没有约束要求。\n\n3. HCE应用程序需要声明NFC卡模拟权限，具体见示例。\n"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "HCE卡模拟开发指南 > 接口说明(hasHceCapability/start/stop/on/transmit 及起始版本)",
+          "start_line": 34,
+          "end_line": 42,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/nfc-hce-guide",
+            "platform": "harmonyos",
+            "title": "HCE卡模拟开发指南",
+            "local_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/document.md",
+            "sha256": "99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a",
+            "raw_sha256": "f1e1fe03d8efc4405bfc81dc0be60e3f23ae5641af136220a1729526d59f9c55",
+            "raw_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 376,
+            "suggested_sections": [
+              {
+                "start_line": 46,
+                "end_line": 47,
+                "truncated": true
+              },
+              {
+                "start_line": 71,
+                "end_line": 165,
+                "truncated": true
+              },
+              {
+                "start_line": 205,
+                "end_line": 328,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "|接口名|支持版本|功能描述|\n|:------------------------------------------------------------------|:------------------|:-------------------------------------------------|\n|hasHceCapability(): boolean|从API version 9开始支持|判断设备是否支持HCE卡模拟功能。|\n|isDefaultService(elementName: ElementName, type: CardType): boolean|从API version 9开始支持|判断指定的应用是否为指定业务类型的默认应用。|\n|start(elementName: ElementName, aidList: string\\[\\]): void|从API version 9开始支持|启动HCE业务功能。包括设置当前应用为前台优先，动态注册AID列表。|\n|stop(elementName: ElementName): void|从API version 9开始支持|停止HCE业务功能。包括取消APDU数据接收的订阅、退出当前应用前台优先、释放动态注册的AID列表。|\n|on(type: 'hceCmd', callback: AsyncCallback\\<number\\[\\]\\>): void|从API version 8开始支持|订阅回调，用于接收对端读卡设备发送的APDU数据。|\n|transmit(response: number\\[\\]): Promise\\<void\\>|从API version 9开始支持|发送APDU数据到对端读卡设备。|\n|off(type: 'hceCmd', callback?: AsyncCallback\\<number\\[\\]\\>): void|从API version 18开始支持|取消APDU数据接收的订阅。|"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "HCE卡模拟开发指南 > HCE应用支持前台或后台刷卡的选择(动态/静态 AID、默认付款应用)",
+          "start_line": 46,
+          "end_line": 63,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/nfc-hce-guide",
+            "platform": "harmonyos",
+            "title": "HCE卡模拟开发指南",
+            "local_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/document.md",
+            "sha256": "99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a",
+            "raw_sha256": "f1e1fe03d8efc4405bfc81dc0be60e3f23ae5641af136220a1729526d59f9c55",
+            "raw_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 376,
+            "suggested_sections": [
+              {
+                "start_line": 46,
+                "end_line": 47,
+                "truncated": true
+              },
+              {
+                "start_line": 71,
+                "end_line": 165,
+                "truncated": true
+              },
+              {
+                "start_line": 205,
+                "end_line": 328,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### HCE应用支持前台或后台刷卡的选择\n\nHCE应用开发者根据业务需要，可以选择实现前台刷卡或者后台刷卡。两种不同的刷卡方式，代码实现上会存在一些差异。\n\n* HCE应用前台刷卡\n\n1. 在配置文件module.json5中，不需要静态声明NFC读卡器选择的应用ID（AID，参考ISO/IEC 7816-4规范），而是通过[start](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cardemulation#start9)来动态注册。\n2. HCE应用的刷卡页面退出时，需要显式调用[stop](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cardemulation#stop9)来释放动态注册的AID刷卡配置项。\n\n* HCE应用后台刷卡\n\n1. 在配置文件module.json5中，需要静态声明NFC读卡器选择的应用ID（AID）。根据业务选择， 选择声明的AID是属于Payment类型，还是Other类型。\n2. 如果选择Payment类型，该HCE应用会在系统设置页面的NFC\"默认付款应用\"里出现。用户选择该HCE应用作为默认支付应用后，可实现后台无冲突刷卡功能。由于提供了默认支付应用的选项， 因此Payment类型的HCE应用，不会出现多个冲突的情况。\n3. 如果选择Other类型，该HCE应用不会出现在系统设置页面的NFC\"默认付款应用\"里，但是多个HCE应用如果都声明了相同的Other类型的AID时，会出现冲突的可能。\n4. HCE应用后台刷卡的实现，不需要调用接口start和stop。\n5. HCE应用后台刷卡建议使用单独专用的HceAbility实现，以减少[onCreate](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability#oncreate)函数耗时。\n6. HceAbility的OnCreate函数中除了[hceService.on](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cardemulation#on8)外，尽量减少其它操作。\n7. HceAbility的OnCreate函数中hceService.on要同步执行，不能异步执行，以免影响HCE通信时序。"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "@ohos.nfc.cardEmulation > 模块说明与首批 API version 6",
+          "start_line": 3,
+          "end_line": 7,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cardemulation",
+            "platform": "harmonyos",
+            "title": "@ohos.nfc.cardEmulation (标准NFC-cardEmulation)",
+            "local_path": "docs-raw/research/2026-09-06/38fc7f68549cecf5dae8d313b912aaa9042e28dcedc620baec1c035c73d606b4/b907b05612a3f1b0aa47b517efcfdce5421acfbaf66adaac85b44de7c64cbcf0/document.md",
+            "sha256": "b907b05612a3f1b0aa47b517efcfdce5421acfbaf66adaac85b44de7c64cbcf0",
+            "raw_sha256": "87165ef4697a47a4dfab8968d2e372d81bcda1a14512264e496b16606b1a687e",
+            "raw_path": "docs-raw/research/2026-09-06/38fc7f68549cecf5dae8d313b912aaa9042e28dcedc620baec1c035c73d606b4/b907b05612a3f1b0aa47b517efcfdce5421acfbaf66adaac85b44de7c64cbcf0/source.gz",
+            "fetched_at": "2026-09-05T10:27:07.157700+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 962,
+            "suggested_sections": [
+              {
+                "start_line": 9,
+                "end_line": 116,
+                "truncated": false
+              },
+              {
+                "start_line": 160,
+                "end_line": 205,
+                "truncated": false
+              },
+              {
+                "start_line": 206,
+                "end_line": 254,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "本模块主要提供NFC卡模拟业务，包括判断支持哪种卡模拟类型，HCE卡模拟的业务实现等。\n\nHCE(Host Card Emulation)，称为基于主机的卡模拟，表示不依赖安全单元芯片，应用程序模拟NFC卡片，可以通过NFC服务和NFC读卡设备通信。  \n![](https://media:201787906864220634)  \n本模块首批接口从API version 6开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。  "
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "@ohos.nfc.cardEmulation > HceService^8+^(APDU 收发实现)",
+          "start_line": 317,
+          "end_line": 319,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cardemulation",
+            "platform": "harmonyos",
+            "title": "@ohos.nfc.cardEmulation (标准NFC-cardEmulation)",
+            "local_path": "docs-raw/research/2026-09-06/38fc7f68549cecf5dae8d313b912aaa9042e28dcedc620baec1c035c73d606b4/b907b05612a3f1b0aa47b517efcfdce5421acfbaf66adaac85b44de7c64cbcf0/document.md",
+            "sha256": "b907b05612a3f1b0aa47b517efcfdce5421acfbaf66adaac85b44de7c64cbcf0",
+            "raw_sha256": "87165ef4697a47a4dfab8968d2e372d81bcda1a14512264e496b16606b1a687e",
+            "raw_path": "docs-raw/research/2026-09-06/38fc7f68549cecf5dae8d313b912aaa9042e28dcedc620baec1c035c73d606b4/b907b05612a3f1b0aa47b517efcfdce5421acfbaf66adaac85b44de7c64cbcf0/source.gz",
+            "fetched_at": "2026-09-05T10:27:07.157700+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 962,
+            "suggested_sections": [
+              {
+                "start_line": 9,
+                "end_line": 116,
+                "truncated": false
+              },
+              {
+                "start_line": 160,
+                "end_line": 205,
+                "truncated": false
+              },
+              {
+                "start_line": 206,
+                "end_line": 254,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### HceService^8+^\n\n提供HCE卡模拟的实现，主要包括接收对端读卡设备的APDU数据，并响应APDU数据到对端读卡设备。使用HCE相关接口前，必须先判断设备是否支持HCE卡模拟能力。  "
+        }
+      ],
+      "device_review": {
+        "requirement": "required",
+        "reason": "灭屏约束、AID 路由冲突、前台优先时序(hceService.on 需同步执行)等行为依赖真机 NFC 栈与实际读卡器交互验证,静态文档无法确认。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "availability",
+      "statement": "假设:HCE 准入与区域条件不同——Android 4.4+ 任意应用可实现;iOS 17.4+ 限 EEA 且需授权开发者与 managed entitlement;HarmonyOS 自 API 6/8 提供且所读文档未提区域或准入限制。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Host-based card emulation overview > Host-based card emulation(任意应用、Android 4.4+)",
+          "start_line": 8,
+          "end_line": 13,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/nfc/hce",
+            "platform": "android",
+            "title": "Host-based card emulation overview",
+            "local_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/document.md",
+            "sha256": "a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a",
+            "raw_sha256": "3c885f79fd15a4914ab3a984a08d67df53ea1d2c36f9066df1af7a7b81f453c9",
+            "raw_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/source.gz",
+            "fetched_at": "2026-09-05T10:24:20.246506+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 713,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 31,
+                "end_line": 39,
+                "truncated": false
+              },
+              {
+                "start_line": 109,
+                "end_line": 141,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Android 4.4 and higher provide an additional method of card emulation that\ndoesn't involve a secure element, called *host-based card emulation*. This\nallows any Android application to emulate a card and talk directly to the NFC\nreader. This topic describes how host-based card emulation (HCE) works on\nAndroid and how you can develop an app that emulates an NFC card using this\ntechnique."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Default apps updates > HCE-based contactless transactions for apps(EEA、授权开发者)",
+          "start_line": 63,
+          "end_line": 71,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/updates/defaultapps",
+            "platform": "ios",
+            "title": "Default apps updates",
+            "local_path": "docs-raw/research/2026-09-06/3f304e5d4b9c0630cd8666b1a2a91c85aec47fd0e0570bd9f5c0fde89b0c2bcc/7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7/document.md",
+            "sha256": "7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7",
+            "raw_sha256": "b927ebe7207cf30012f63c98abb6de3cf2e7e1a4c538add2d5ed734f60ccaf8b",
+            "raw_path": "docs-raw/research/2026-09-06/3f304e5d4b9c0630cd8666b1a2a91c85aec47fd0e0570bd9f5c0fde89b0c2bcc/7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7/source.gz",
+            "fetched_at": "2026-09-05T10:27:51.574171+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 114,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 15,
+                "truncated": true
+              },
+              {
+                "start_line": 19,
+                "end_line": 20,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### HCE-based contactless transactions for apps\n\niOS 17.4 introduced APIs that support contactless transactions for in-store payments, car keys, tickets, and more uses from within compatible iOS apps using host card emulation (HCE) in the European Economic Area (EEA).\n\nThe <doc://com.apple.documentation/documentation/CoreNFC/CardSession> API in the CoreNFC framework enables authorized developers to perform contactless transactions from within their app. Supported `CardSession` apps can be selected by users as their default handler for these transactions.\n\n- Learn about host card emulation apps by reading <https://developer.apple.com/support/hce-transactions-in-apps/>.\n- Use <doc://com.apple.documentation/documentation/CoreNFC/CardSession> to enable host card emulation (HCE) transactions in your app.\n- Enable your app to be the default app for HCE-based contactless NFC with the <doc://com.apple.documentation/documentation/BundleResources/Entitlements/com.apple.developer.nfc.hce.default-contactless-app> entitlement."
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "@ohos.nfc.cardEmulation > 模块说明(首批 API version 6)",
+          "start_line": 3,
+          "end_line": 7,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cardemulation",
+            "platform": "harmonyos",
+            "title": "@ohos.nfc.cardEmulation (标准NFC-cardEmulation)",
+            "local_path": "docs-raw/research/2026-09-06/38fc7f68549cecf5dae8d313b912aaa9042e28dcedc620baec1c035c73d606b4/b907b05612a3f1b0aa47b517efcfdce5421acfbaf66adaac85b44de7c64cbcf0/document.md",
+            "sha256": "b907b05612a3f1b0aa47b517efcfdce5421acfbaf66adaac85b44de7c64cbcf0",
+            "raw_sha256": "87165ef4697a47a4dfab8968d2e372d81bcda1a14512264e496b16606b1a687e",
+            "raw_path": "docs-raw/research/2026-09-06/38fc7f68549cecf5dae8d313b912aaa9042e28dcedc620baec1c035c73d606b4/b907b05612a3f1b0aa47b517efcfdce5421acfbaf66adaac85b44de7c64cbcf0/source.gz",
+            "fetched_at": "2026-09-05T10:27:07.157700+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 962,
+            "suggested_sections": [
+              {
+                "start_line": 9,
+                "end_line": 116,
+                "truncated": false
+              },
+              {
+                "start_line": 160,
+                "end_line": 205,
+                "truncated": false
+              },
+              {
+                "start_line": 206,
+                "end_line": 254,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "本模块主要提供NFC卡模拟业务，包括判断支持哪种卡模拟类型，HCE卡模拟的业务实现等。\n\nHCE(Host Card Emulation)，称为基于主机的卡模拟，表示不依赖安全单元芯片，应用程序模拟NFC卡片，可以通过NFC服务和NFC读卡设备通信。  \n![](https://media:201787906864220634)  \n本模块首批接口从API version 6开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "HCE卡模拟开发指南 > 简介(HCE 定义)",
+          "start_line": 3,
+          "end_line": 5,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/nfc-hce-guide",
+            "platform": "harmonyos",
+            "title": "HCE卡模拟开发指南",
+            "local_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/document.md",
+            "sha256": "99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a",
+            "raw_sha256": "f1e1fe03d8efc4405bfc81dc0be60e3f23ae5641af136220a1729526d59f9c55",
+            "raw_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 376,
+            "suggested_sections": [
+              {
+                "start_line": 46,
+                "end_line": 47,
+                "truncated": true
+              },
+              {
+                "start_line": 71,
+                "end_line": 165,
+                "truncated": true
+              },
+              {
+                "start_line": 205,
+                "end_line": 328,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 简介\n\n近场通信(Near Field Communication，NFC)是一种短距高频的无线电技术，在13.56MHz频率运行，通信距离一般在10厘米距离内。HCE(Host Card Emulation)，称为基于主机的卡模拟，表示不依赖安全单元芯片，电子设备上的应用程序模拟NFC卡片和NFC读卡器通信，实现NFC刷卡业务。从API version 22开始支持OFFHOST(Off Host Card Emulation)，称为基于安全单元的卡模拟，卡由设备中的一个单独芯片(称为安全单元)进行模拟。无线运营商部分SIM卡也包含安全单元。  "
+        }
+      ],
+      "open_questions": [
+        "iOS entitlement 授权条件与 EEA 之外是否完全不可用未读到原文",
+        "Android/HarmonyOS 是否存在未在这些文档说明的准入或区域限制",
+        "HarmonyOS API 版本与手机发行版对应关系未核实"
+      ]
+    },
+    {
+      "dimension": "lifecycle_background",
+      "statement": "假设:灭屏可用性不同——HarmonyOS 前台/后台均明确不支持灭屏刷卡;Android 分版本(Android 9- 不可用,10+ 受 Secure NFC 约束,12+ 可设 requireDeviceScreenOn=false 允许灭屏支付,15+ Observe Mode 可覆盖);iOS 灭屏行为未读到。",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Host-based card emulation overview > Screen off and lock-screen behavior",
+          "start_line": 460,
+          "end_line": 521,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/nfc/hce",
+            "platform": "android",
+            "title": "Host-based card emulation overview",
+            "local_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/document.md",
+            "sha256": "a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a",
+            "raw_sha256": "3c885f79fd15a4914ab3a984a08d67df53ea1d2c36f9066df1af7a7b81f453c9",
+            "raw_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/source.gz",
+            "fetched_at": "2026-09-05T10:24:20.246506+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 713,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 31,
+                "end_line": 39,
+                "truncated": false
+              },
+              {
+                "start_line": 109,
+                "end_line": 141,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Screen off and lock-screen behavior\n\nThe behavior of HCE services varies based on the version of Android running on\nthe device.\n\n### Android 15 and higher\n\nIf the default wallet app turns on Observe Mode on a device that supports it,\nthen that app overrides unlock and screen-off behavior, because it controls\nwhen a transaction can proceed. Some wallet apps might require the device to\nbe unlocked before a transaction can proceed if Observe Mode didn't detect an\nidentifiable polling loop pattern.\n\nDevelopers are encouraged to work with their reader devices to emit\nidentifiable polling loop patterns and [register to handle those\npatterns](https://developer.android.com/develop/connectivity/nfc/hce#polling-loop-filters) from their app.\n\n### Android 12 and higher\n\nIn apps that target Android 12 (API level 31) and higher, you can enable NFC\npayments without the device's screen on by setting\n[`requireDeviceScreenOn`](https://developer.android.com/reference/android/R.attr#requireDeviceScreenOn) to\n`false`.\n\n### Android 10 and higher\n\nDevices running Android 10 (API level 29) or higher support\n[Secure\nNFC](https://source.android.com/devices/tech/connect/secure-nfc). While Secure\nNFC is on, all card emulators (host applications and off-host applications) are\nunavailable when the device screen is off. While Secure NFC is off, off-host\napplications are available when the device screen is off. You can check for\nSecure NFC support using\n[`isSecureNfcSupported()`](https://developer.android.com/reference/android/nfc/NfcAdapter#isSecureNfcSupported()).\n\nOn devices running Android 10 and higher, the same functionality for setting\n`android:requireDeviceUnlock` to `true` applies as with devices\nrunning Android 9 and lower, but only when Secure NFC is turned off. That is, if\nSecure NFC is turned on, HCE services can't function from the lock-screen\nregardless of the setting of `android:requireDeviceUnlock`.\n\n### Android 9 and lower\n\nOn devices that run Android 9 (API level 28) and lower, the NFC controller and\nthe application processor are turned off completely when the screen of the\ndevice is turned off. HCE services therefore don't work when the screen is off.\n\nAlso on Android 9 and lower, HCE services can function from the lock screen.\nHowever, this is controlled by the `android:requireDeviceUnlock` attribute in\nthe `<host-apdu-service>` tag of your HCE service. By default, device unlock is\nnot required, and your service is invoked even if the device is locked.\n\nIf you set the `android:requireDeviceUnlock` attribute to `true` for your HCE\nservice, Android prompts the user to unlock the device when the following\nhappen:\n\n* the user taps an NFC reader.\n* the NFC reader selects an AID that is resolved to your service.\n\nAfter unlocking, Android shows a dialog prompting the user to tap again to\ncomplete the transaction. This is necessary because the user may have moved the\ndevice away from the NFC reader in order to unlock it."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "HCE卡模拟开发指南 > HCE应用刷卡的约束条件(灭屏不支持)",
+          "start_line": 20,
+          "end_line": 24,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/nfc-hce-guide",
+            "platform": "harmonyos",
+            "title": "HCE卡模拟开发指南",
+            "local_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/document.md",
+            "sha256": "99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a",
+            "raw_sha256": "f1e1fe03d8efc4405bfc81dc0be60e3f23ae5641af136220a1729526d59f9c55",
+            "raw_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 376,
+            "suggested_sections": [
+              {
+                "start_line": 46,
+                "end_line": 47,
+                "truncated": true
+              },
+              {
+                "start_line": 71,
+                "end_line": 165,
+                "truncated": true
+              },
+              {
+                "start_line": 205,
+                "end_line": 328,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### HCE应用刷卡的约束条件\n\n1. 基于刷卡安全性考虑，不论HCE应用是前台方式还是后台方式刷卡，均不支持电子设备在灭屏或熄屏状态下的HCE刷卡操作。\n\n2. 电子设备必须具备NFC控制器芯片，才支持HCE刷卡能力。对于是否具有NFC安全单元芯片，没有约束要求。"
+        }
+      ],
+      "open_questions": [
+        "iOS CardSession 灭屏/锁屏行为缺失,暂无法纳入三方比较",
+        "Android 12+ requireDeviceScreenOn=false 的设备实际支持范围与厂商差异未核实",
+        "HarmonyOS 灭屏约束是否随后续 API 版本变化未读到说明"
+      ]
+    },
+    {
+      "dimension": "programming_model",
+      "statement": "假设:AID 注册与默认应用模型不同——Android 以 manifest 静态 apduservice.xml AID 组+类别+前台 setPreferredService+钱包角色;HarmonyOS 以 module.json5 静态 payment-aid/other-aid+start() 动态 AID+系统默认付款应用;iOS 经 CardSession 会话与 default-contactless-app entitlement 由用户选默认,未见静态 AID 声明机制。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Host-based card emulation overview > Service manifest declaration and AID registration",
+          "start_line": 246,
+          "end_line": 316,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/nfc/hce",
+            "platform": "android",
+            "title": "Host-based card emulation overview",
+            "local_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/document.md",
+            "sha256": "a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a",
+            "raw_sha256": "3c885f79fd15a4914ab3a984a08d67df53ea1d2c36f9066df1af7a7b81f453c9",
+            "raw_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/source.gz",
+            "fetched_at": "2026-09-05T10:24:20.246506+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 713,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 31,
+                "end_line": 39,
+                "truncated": false
+              },
+              {
+                "start_line": 109,
+                "end_line": 141,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Service manifest declaration and AID registration\n\nYou must declare your service in the manifest as usual, but you must add some\nadditional pieces to the service declaration as well:\n\n1. To tell the platform that it is a HCE service implementing a\n   `HostApduService` interface, add an intent filter for the\n   [`SERVICE_INTERFACE`](https://developer.android.com/reference/android/nfc/cardemulation/HostApduService#SERVICE_INTERFACE)\n   action to your service declaration.\n2. To tell the platform which AIDs groups are requested by this service, include\n   a\n   [`SERVICE_META_DATA`](https://developer.android.com/reference/android/nfc/cardemulation/HostApduService#SERVICE_META_DATA)\n   `<meta-data>` tag in the declaration of the service, pointing to an XML\n   resource with additional information about the HCE service.\n3. Set the `android:exported` attribute to `true`, and require the\n   `android.permission.BIND_NFC_SERVICE` permission in your service declaration.\n   The former ensures that the service can be bound to by external applications.\n   The latter then enforces that only external applications that hold the\n   `android.permission.BIND_NFC_SERVICE` permission can bind to your service.\n   Since `android.permission.BIND_NFC_SERVICE` is a system permission, this\n   effectively enforces that only the Android OS can bind to your service.\n\nThe following is an example of a `HostApduService` manifest declaration:\n\n```\n<service android:name=\".MyHostApduService\" android:exported=\"true\"\n         android:permission=\"android.permission.BIND_NFC_SERVICE\">\n    <intent-filter>\n        <action android:name=\"android.nfc.cardemulation.action.HOST_APDU_SERVICE\"/>\n    </intent-filter>\n    <meta-data android:name=\"android.nfc.cardemulation.host_apdu_service\"\n               android:resource=\"@xml/apduservice\"/>\n</service>\n```\n\nThis meta-data tag points to an `apduservice.xml` file. The following is an\nexample of such a file with a single AID group declaration containing two\nproprietary AIDs:\n\n```\n<host-apdu-service xmlns:android=\"http://schemas.android.com/apk/res/android\"\n           android:description=\"@string/servicedesc\"\n           android:requireDeviceUnlock=\"false\">\n    <aid-group android:description=\"@string/aiddescription\"\n               android:category=\"other\">\n        <aid-filter android:name=\"F0010203040506\"/>\n        <aid-filter android:name=\"F0394148148100\"/>\n    </aid-group>\n</host-apdu-service>\n```\n\nThe `<host-apdu-service>` tag must contain an `<android:description>` attribute\nthat contains a user-friendly description of the service that you can show in\nthe app UI. You can use the `requireDeviceUnlock` attribute to specify that the\ndevice is unlocked before you invoke this service to handle APDUs.\n\nThe `<host-apdu-service>` must contain one or more `<aid-group>` tags. Each\n`<aid-group>` tag is required to do the following:\n\n* Contain an `android:description` attribute that contains a user-friendly\n  description of the AID group, suitable for display in UI.\n* Have its `android:category` attribute set to indicate the category the AID\n  group belongs to, such as the string constants defined by `CATEGORY_PAYMENT`\n  or `CATEGORY_OTHER`.\n* Contain one or more `<aid-filter>` tags, each of which contains a single AID.\n  Specify the AID in hexadecimal format, and make sure it contains an even\n  number of characters.\n\nYour application also needs to hold the\n[`NFC`](https://developer.android.com/reference/android/Manifest.permission#NFC) permission to register as an\nHCE service."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Host-based card emulation overview > Wallet applications(默认钱包角色)",
+          "start_line": 368,
+          "end_line": 389,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/nfc/hce",
+            "platform": "android",
+            "title": "Host-based card emulation overview",
+            "local_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/document.md",
+            "sha256": "a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a",
+            "raw_sha256": "3c885f79fd15a4914ab3a984a08d67df53ea1d2c36f9066df1af7a7b81f453c9",
+            "raw_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/source.gz",
+            "fetched_at": "2026-09-05T10:24:20.246506+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 713,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 31,
+                "end_line": 39,
+                "truncated": false
+              },
+              {
+                "start_line": 109,
+                "end_line": 141,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Wallet applications\n\nAndroid 15 and higher includes a default wallet app role that the user can select\nby navigating to **Settings > Apps > Default Apps**. This defines the default wallet\napplication to invoke when a payment terminal is tapped. Android considers HCE services\nthat have declared an AID group with the payment category as *wallet applications*.\n\n### Check if your app is the default wallet app\n\nApps can check whether they are the default wallet app by passing\n[`RoleManager.ROLE_WALLET`](https://developer.android.com/reference/android/app/role/RoleManager#ROLE_WALLET)\nto\n[`RoleManager.isRoleHeld()`](https://developer.android.com/reference/android/app/role/RoleManager#isRoleHeld%28java.lang.String%29).\n\nIf your app isn't the default, you can request the default wallet role by\npassing `RoleManager.ROLE_WALLET` to\n[`RoleManager.createRequestRoleIntent()`](https://developer.android.com/reference/android/app/role/RoleManager#createRequestRoleIntent(java.lang.String)).\n\n### Required assets for wallet applications\n\nTo provide a more visually attractive user experience, HCE wallet applications\nare required to provide a service banner."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "HCE卡模拟开发指南 > HCE应用支持前台或后台刷卡的选择",
+          "start_line": 46,
+          "end_line": 63,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/nfc-hce-guide",
+            "platform": "harmonyos",
+            "title": "HCE卡模拟开发指南",
+            "local_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/document.md",
+            "sha256": "99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a",
+            "raw_sha256": "f1e1fe03d8efc4405bfc81dc0be60e3f23ae5641af136220a1729526d59f9c55",
+            "raw_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 376,
+            "suggested_sections": [
+              {
+                "start_line": 46,
+                "end_line": 47,
+                "truncated": true
+              },
+              {
+                "start_line": 71,
+                "end_line": 165,
+                "truncated": true
+              },
+              {
+                "start_line": 205,
+                "end_line": 328,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### HCE应用支持前台或后台刷卡的选择\n\nHCE应用开发者根据业务需要，可以选择实现前台刷卡或者后台刷卡。两种不同的刷卡方式，代码实现上会存在一些差异。\n\n* HCE应用前台刷卡\n\n1. 在配置文件module.json5中，不需要静态声明NFC读卡器选择的应用ID（AID，参考ISO/IEC 7816-4规范），而是通过[start](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cardemulation#start9)来动态注册。\n2. HCE应用的刷卡页面退出时，需要显式调用[stop](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cardemulation#stop9)来释放动态注册的AID刷卡配置项。\n\n* HCE应用后台刷卡\n\n1. 在配置文件module.json5中，需要静态声明NFC读卡器选择的应用ID（AID）。根据业务选择， 选择声明的AID是属于Payment类型，还是Other类型。\n2. 如果选择Payment类型，该HCE应用会在系统设置页面的NFC\"默认付款应用\"里出现。用户选择该HCE应用作为默认支付应用后，可实现后台无冲突刷卡功能。由于提供了默认支付应用的选项， 因此Payment类型的HCE应用，不会出现多个冲突的情况。\n3. 如果选择Other类型，该HCE应用不会出现在系统设置页面的NFC\"默认付款应用\"里，但是多个HCE应用如果都声明了相同的Other类型的AID时，会出现冲突的可能。\n4. HCE应用后台刷卡的实现，不需要调用接口start和stop。\n5. HCE应用后台刷卡建议使用单独专用的HceAbility实现，以减少[onCreate](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability#oncreate)函数耗时。\n6. HceAbility的OnCreate函数中除了[hceService.on](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cardemulation#on8)外，尽量减少其它操作。\n7. HceAbility的OnCreate函数中hceService.on要同步执行，不能异步执行，以免影响HCE通信时序。"
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Default apps updates > HCE-based contactless transactions for apps(CardSession、默认处理者)",
+          "start_line": 63,
+          "end_line": 71,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/updates/defaultapps",
+            "platform": "ios",
+            "title": "Default apps updates",
+            "local_path": "docs-raw/research/2026-09-06/3f304e5d4b9c0630cd8666b1a2a91c85aec47fd0e0570bd9f5c0fde89b0c2bcc/7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7/document.md",
+            "sha256": "7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7",
+            "raw_sha256": "b927ebe7207cf30012f63c98abb6de3cf2e7e1a4c538add2d5ed734f60ccaf8b",
+            "raw_path": "docs-raw/research/2026-09-06/3f304e5d4b9c0630cd8666b1a2a91c85aec47fd0e0570bd9f5c0fde89b0c2bcc/7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7/source.gz",
+            "fetched_at": "2026-09-05T10:27:51.574171+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 114,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 15,
+                "truncated": true
+              },
+              {
+                "start_line": 19,
+                "end_line": 20,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### HCE-based contactless transactions for apps\n\niOS 17.4 introduced APIs that support contactless transactions for in-store payments, car keys, tickets, and more uses from within compatible iOS apps using host card emulation (HCE) in the European Economic Area (EEA).\n\nThe <doc://com.apple.documentation/documentation/CoreNFC/CardSession> API in the CoreNFC framework enables authorized developers to perform contactless transactions from within their app. Supported `CardSession` apps can be selected by users as their default handler for these transactions.\n\n- Learn about host card emulation apps by reading <https://developer.apple.com/support/hce-transactions-in-apps/>.\n- Use <doc://com.apple.documentation/documentation/CoreNFC/CardSession> to enable host card emulation (HCE) transactions in your app.\n- Enable your app to be the default app for HCE-based contactless NFC with the <doc://com.apple.documentation/documentation/BundleResources/Entitlements/com.apple.developer.nfc.hce.default-contactless-app> entitlement."
+        }
+      ],
+      "open_questions": [
+        "iOS 是否存在静态 AID 声明机制及 CardSession 会话内 AID 选择方式未读到",
+        "三平台默认应用冲突解决规则的完整比较需 API 参考正文核实",
+        "HarmonyOS Other 类型 AID 冲突的用户交互细节仅部分描述"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "本轮仅读概览指南/更新页,未读 HostApduService、CardEmulation、CardSession、NfcAdapter 等 API 参考正文",
+    "iOS HCE 证据来自默认应用更新页,CoreNFC 指南与 API 正文缺失,是最高风险映射",
+    "启动日最新正式版与手机基线未固定,各平台版本适用性均未核实",
+    "平板/iPad 与轻量穿戴等设备形态适用性未逐项核对",
+    "off-host/SE 卡模拟路线仅作相邻上下文,与 HCE 的完整对比不在本轮范围"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "iOS HCE 仅凭更新页支撑且区域/授权限制属高风险映射,CardSession API 正文缺失;三平台灭屏行为与默认应用模型差异需 API 参考及真机核实,属关键缺口。"
+  }
+}

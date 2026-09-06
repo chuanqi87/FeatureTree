@@ -1,0 +1,13 @@
+{
+  "id": "dc2e9ec2d6564e9b4050b8bde375636a11ac486c4681583f921860c7db18aee2",
+  "url": "https://developer.apple.com/documentation/authenticationservices/upgrading-account-security-with-an-account-authentication-modification-extension",
+  "platform": "ios",
+  "title": "Upgrading Account Security With an Account Authentication Modification Extension",
+  "local_path": "docs-raw/research/2026-09-06/dc2e9ec2d6564e9b4050b8bde375636a11ac486c4681583f921860c7db18aee2/0da79c410a523ccb3e89e88fc73b469fac09e3b85a1aa64ea60c3f8c3701332f/document.md",
+  "sha256": "0da79c410a523ccb3e89e88fc73b469fac09e3b85a1aa64ea60c3f8c3701332f",
+  "raw_sha256": "02175bf34cd7973c8a756289a7c701fcd4ca11a2fa70215164bb1db26b9a96fa",
+  "raw_path": "docs-raw/research/2026-09-06/dc2e9ec2d6564e9b4050b8bde375636a11ac486c4681583f921860c7db18aee2/0da79c410a523ccb3e89e88fc73b469fac09e3b85a1aa64ea60c3f8c3701332f/source.gz",
+  "fetched_at": "2026-09-05T10:18:21.305255+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

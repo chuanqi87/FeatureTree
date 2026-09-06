@@ -1,0 +1,13 @@
+{
+  "id": "17b17e4633bf0bfb9e4341a2e6cb44b29d68b5e0c60ae4e8023b9e3e4f7ac4b8",
+  "url": "https://developer.android.com/develop/connectivity/wifi/wifi-permissions",
+  "platform": "android",
+  "title": "Request permission to access nearby Wi-Fi devices",
+  "local_path": "docs-raw/research/2026-09-06/17b17e4633bf0bfb9e4341a2e6cb44b29d68b5e0c60ae4e8023b9e3e4f7ac4b8/d1f5b5a47ea48e860a74af1942ef203cc056819d5a130f92f6614117e89e49e7/document.md",
+  "sha256": "d1f5b5a47ea48e860a74af1942ef203cc056819d5a130f92f6614117e89e49e7",
+  "raw_sha256": "aa32a28ce8d8b13c224f11d0e7377bc29012ec9235765c1b6c56adceb72d8726",
+  "raw_path": "docs-raw/research/2026-09-06/17b17e4633bf0bfb9e4341a2e6cb44b29d68b5e0c60ae4e8023b9e3e4f7ac4b8/d1f5b5a47ea48e860a74af1942ef203cc056819d5a130f92f6614117e89e49e7/source.gz",
+  "fetched_at": "2026-09-05T10:24:26.472050+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

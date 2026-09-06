@@ -1,0 +1,547 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "input.clipboard",
+    "level": "L2",
+    "parent": "input",
+    "name": {
+      "zh": "剪贴板",
+      "en": "Clipboard"
+    },
+    "definition": "系统剪贴板读写与敏感内容提示。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/input/clipboard/_rollup.yaml",
+    "comparison_scope": {
+      "includes": [
+        "系统剪贴板读写与敏感内容提示。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "2e5e62dc2fb95b42787d233448850db5cd5efbc12c0526d44c70afeb9f8e0adc",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "eb1023dd7b82007671997b9b3d602e9286204c9f5bd3643da76c8a8612ae79f1",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/privacy-and-security/risks/secure-clipboard-handling",
+      "platform": "android",
+      "title": "Secure Clipboard Handling",
+      "local_path": "docs-raw/research/2026-09-06/3df04362c5c081b3fd126806219be1ee5cc8757a33e1320119d816e645492f21/4f3039617863a135dacc71c69cf165aff08b74b9d2280e8d003568096df4bf4c/document.md",
+      "sha256": "4f3039617863a135dacc71c69cf165aff08b74b9d2280e8d003568096df4bf4c",
+      "raw_sha256": "2418214d7962c915df9f34ab3b03ba55d6b3d7ba404ae3fbebcfd9cddec30741",
+      "raw_path": "docs-raw/research/2026-09-06/3df04362c5c081b3fd126806219be1ee5cc8757a33e1320119d816e645492f21/4f3039617863a135dacc71c69cf165aff08b74b9d2280e8d003568096df4bf4c/source.gz",
+      "fetched_at": "2026-09-05T10:34:28.323937+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 198,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 35,
+          "truncated": false
+        },
+        {
+          "start_line": 36,
+          "end_line": 42,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/guide/topics/text/copy-paste",
+      "platform": "android",
+      "title": "Copy and paste",
+      "local_path": "docs-raw/research/2026-09-06/254aba596d2b19751db77160216a60305b304beb45a65ff51923ef6a0c29f99a/a8e3a343fe71bea14254306bc31bf4021027d1f932e3496773f5ff9611620dcd/document.md",
+      "sha256": "a8e3a343fe71bea14254306bc31bf4021027d1f932e3496773f5ff9611620dcd",
+      "raw_sha256": "08eb45d3ad1cead15d192f82d9457d3055b8afc7f52edee6e7dfcdeb0bc07dbe",
+      "raw_path": "docs-raw/research/2026-09-06/254aba596d2b19751db77160216a60305b304beb45a65ff51923ef6a0c29f99a/a8e3a343fe71bea14254306bc31bf4021027d1f932e3496773f5ff9611620dcd/source.gz",
+      "fetched_at": "2026-09-05T10:44:46.331680+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 1279,
+      "suggested_sections": [
+        {
+          "start_line": 38,
+          "end_line": 76,
+          "truncated": false
+        },
+        {
+          "start_line": 81,
+          "end_line": 82,
+          "truncated": true
+        },
+        {
+          "start_line": 165,
+          "end_line": 181,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/virtualization/clipboard-sharing",
+      "platform": "ios",
+      "title": "Clipboard sharing",
+      "local_path": "docs-raw/research/2026-09-06/27e08bb77575b03c229cefc8f64a2f60173f4bf9dddc01f210a4378fd4279cb5/83180154be5efadb6478058bbebd0084f1e3fa59f7edf046c96d3a01affb981d/document.md",
+      "sha256": "83180154be5efadb6478058bbebd0084f1e3fa59f7edf046c96d3a01affb981d",
+      "raw_sha256": "85c89b3ff39fc59e7eed07a4eab8740759e087d8dc38f42664d6ee853fe5be65",
+      "raw_path": "docs-raw/research/2026-09-06/27e08bb77575b03c229cefc8f64a2f60173f4bf9dddc01f210a4378fd4279cb5/83180154be5efadb6478058bbebd0084f1e3fa59f7edf046c96d3a01affb981d/source.gz",
+      "fetched_at": "2026-09-05T10:28:13.991816+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 17,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 17,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/swiftui/clipboard",
+      "platform": "ios",
+      "title": "Clipboard",
+      "local_path": "docs-raw/research/2026-09-06/3a96427ced3b21c34ba085323272cee99638ce7dada3dcf902dd9ec21e808154/902564aecdb3b8fce68679e0f9cdeb35b6e732d6655d2374be998319c078e6d2/document.md",
+      "sha256": "902564aecdb3b8fce68679e0f9cdeb35b6e732d6655d2374be998319c078e6d2",
+      "raw_sha256": "90ba7bbedfedeef03675fca720a08c8b8379543cfe98f231569b6c2e039c76ce",
+      "raw_path": "docs-raw/research/2026-09-06/3a96427ced3b21c34ba085323272cee99638ce7dada3dcf902dd9ec21e808154/902564aecdb3b8fce68679e0f9cdeb35b6e732d6655d2374be998319c078e6d2/source.gz",
+      "fetched_at": "2026-09-05T10:26:15.390738+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 63,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 20,
+          "truncated": false
+        },
+        {
+          "start_line": 21,
+          "end_line": 22,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/web-clipboard",
+      "platform": "harmonyos",
+      "title": "使用Web组件与系统剪贴板交互处理网页内容",
+      "local_path": "docs-raw/research/2026-09-06/4ca35ae2709df12cfdaf3dfc8da142fc51ecc0a6aaf0133b8b5167ae6bae5f5f/7c23c02fefb847fed0226c94c31354eb7abca68db5236c758d0b5167a3d0ce8e/document.md",
+      "sha256": "7c23c02fefb847fed0226c94c31354eb7abca68db5236c758d0b5167a3d0ce8e",
+      "raw_sha256": "b9fc522d36d780d7f89a7b47421ef793e82e0e4f7d6308d013722fbe5f97b7e4",
+      "raw_path": "docs-raw/research/2026-09-06/4ca35ae2709df12cfdaf3dfc8da142fc51ecc0a6aaf0133b8b5167ae6bae5f5f/7c23c02fefb847fed0226c94c31354eb7abca68db5236c758d0b5167a3d0ce8e/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 311,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 5,
+          "end_line": 6,
+          "truncated": true
+        },
+        {
+          "start_line": 15,
+          "end_line": 189,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scenario-fusion-intelligentfilling-explain",
+      "platform": "harmonyos",
+      "title": "推荐数据源及推荐逻辑说明",
+      "local_path": "docs-raw/research/2026-09-06/7b08ef65c2649c97da13e0c78ad5813d3eafca88bf56c3e1969a51498a96a14a/f61f605238ab96c4604807e6db6739c6841afe05e046fbd8bcfc11d6cf66036b/document.md",
+      "sha256": "f61f605238ab96c4604807e6db6739c6841afe05e046fbd8bcfc11d6cf66036b",
+      "raw_sha256": "5f5ea12244261a1d4d17453c2fe233e9da14fd5d13d398e820990922e4236b68",
+      "raw_path": "docs-raw/research/2026-09-06/7b08ef65c2649c97da13e0c78ad5813d3eafca88bf56c3e1969a51498a96a14a/f61f605238ab96c4604807e6db6739c6841afe05e046fbd8bcfc11d6cf66036b/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 41,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 11,
+          "truncated": false
+        },
+        {
+          "start_line": 12,
+          "end_line": 24,
+          "truncated": false
+        },
+        {
+          "start_line": 25,
+          "end_line": 31,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:32.473488+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "652bfc3805c2bbc26bc7e38333af32820446893f463a27bd6c84f2092c697b80"
+}

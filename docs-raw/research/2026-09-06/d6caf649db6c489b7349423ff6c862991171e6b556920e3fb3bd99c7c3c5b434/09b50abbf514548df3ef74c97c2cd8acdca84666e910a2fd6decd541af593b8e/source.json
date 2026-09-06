@@ -1,0 +1,13 @@
+{
+  "id": "d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434",
+  "url": "https://developer.apple.com/documentation/uikit/uiviewcontroller",
+  "platform": "ios",
+  "title": "UIViewController",
+  "local_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/document.md",
+  "sha256": "09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e",
+  "raw_sha256": "3d820f9972aa0e17bb1f38ea709a4e8901bc033e5320fdb34d5a433239e57f18",
+  "raw_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/source.gz",
+  "fetched_at": "2026-09-05T10:15:49.375266+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

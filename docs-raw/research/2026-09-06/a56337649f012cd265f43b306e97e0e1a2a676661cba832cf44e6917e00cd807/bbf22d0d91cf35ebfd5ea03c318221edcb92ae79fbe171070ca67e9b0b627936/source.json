@@ -1,0 +1,13 @@
+{
+  "id": "a56337649f012cd265f43b306e97e0e1a2a676661cba832cf44e6917e00cd807",
+  "url": "https://developer.android.com/develop/sensors-and-location/location/geofencing",
+  "platform": "android",
+  "title": "Create and monitor geofences",
+  "local_path": "docs-raw/research/2026-09-06/a56337649f012cd265f43b306e97e0e1a2a676661cba832cf44e6917e00cd807/bbf22d0d91cf35ebfd5ea03c318221edcb92ae79fbe171070ca67e9b0b627936/document.md",
+  "sha256": "bbf22d0d91cf35ebfd5ea03c318221edcb92ae79fbe171070ca67e9b0b627936",
+  "raw_sha256": "7288976a20e15b4e00734f5f399f21316dd5e9379b7371b5ae83edb992a05e25",
+  "raw_path": "docs-raw/research/2026-09-06/a56337649f012cd265f43b306e97e0e1a2a676661cba832cf44e6917e00cd807/bbf22d0d91cf35ebfd5ea03c318221edcb92ae79fbe171070ca67e9b0b627936/source.gz",
+  "fetched_at": "2026-09-05T10:24:35.698824+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

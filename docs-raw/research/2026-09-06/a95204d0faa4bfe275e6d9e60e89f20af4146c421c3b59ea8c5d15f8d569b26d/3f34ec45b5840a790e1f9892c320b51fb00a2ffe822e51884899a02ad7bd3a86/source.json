@@ -1,0 +1,13 @@
+{
+  "id": "a95204d0faa4bfe275e6d9e60e89f20af4146c421c3b59ea8c5d15f8d569b26d",
+  "url": "https://developer.android.com/topic/libraries/architecture/workmanager/how-to/define-work",
+  "platform": "android",
+  "title": "Define work requests",
+  "local_path": "docs-raw/research/2026-09-06/a95204d0faa4bfe275e6d9e60e89f20af4146c421c3b59ea8c5d15f8d569b26d/3f34ec45b5840a790e1f9892c320b51fb00a2ffe822e51884899a02ad7bd3a86/document.md",
+  "sha256": "3f34ec45b5840a790e1f9892c320b51fb00a2ffe822e51884899a02ad7bd3a86",
+  "raw_sha256": "d2536b594b5e17547c1a723c577ab5479ca611a85b88ed18bb0ac9e48353daae",
+  "raw_path": "docs-raw/research/2026-09-06/a95204d0faa4bfe275e6d9e60e89f20af4146c421c3b59ea8c5d15f8d569b26d/3f34ec45b5840a790e1f9892c320b51fb00a2ffe822e51884899a02ad7bd3a86/source.gz",
+  "fetched_at": "2026-09-05T10:48:10.456751+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

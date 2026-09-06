@@ -1,0 +1,13 @@
+{
+  "id": "287908c6d1aa255a155888d7448937fa817ecd325d1551a86091432597aeed1e",
+  "url": "https://developer.android.com/identity/digital-credentials/credential-issuer/keystore-attestation",
+  "platform": "android",
+  "title": "Implement hardware-backed attestation for digital credentials",
+  "local_path": "docs-raw/research/2026-09-06/287908c6d1aa255a155888d7448937fa817ecd325d1551a86091432597aeed1e/251103560e3ee528fcd22c2ceeb34caa6aa34a31cf9dbcd4930b19920adf8e3b/document.md",
+  "sha256": "251103560e3ee528fcd22c2ceeb34caa6aa34a31cf9dbcd4930b19920adf8e3b",
+  "raw_sha256": "58dbb175f5e0e31392d3dde411f82687e9180cf8356173904addd38e8851d0cc",
+  "raw_path": "docs-raw/research/2026-09-06/287908c6d1aa255a155888d7448937fa817ecd325d1551a86091432597aeed1e/251103560e3ee528fcd22c2ceeb34caa6aa34a31cf9dbcd4930b19920adf8e3b/source.gz",
+  "fetched_at": "2026-09-05T10:32:32.392385+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

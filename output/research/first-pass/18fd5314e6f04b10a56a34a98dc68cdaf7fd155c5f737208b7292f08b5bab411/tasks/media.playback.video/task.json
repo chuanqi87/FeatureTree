@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "media.playback.video",
+    "level": "L3",
+    "parent": "media.playback",
+    "name": {
+      "zh": "视频播放",
+      "en": "Video Playback"
+    },
+    "definition": "视频渲染与控制。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "knowledge_path": "knowledge/media/playback/video.yaml",
+    "comparison_scope": {
+      "includes": [
+        "视频渲染与控制。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "5ee85780bb9ee2a04948000e38e38ee6fed67e74558036117f671930b117e111",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "40e417f2b61bc7908f96b12280fce788e98566582a7fa2a7fb0b17451bda88d7",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/media/grow/hdr-playback",
+      "platform": "android",
+      "title": "HDR video playback",
+      "local_path": "docs-raw/research/2026-09-06/e5e00df5a68121ee6a6afb525ddfcb5e23954058a1eb5ca7a186393ab0fd89da/e6aa9088baef8141a1e0f11e4a51866e9227b2c9c897e033a5b16f87d0310981/document.md",
+      "sha256": "e6aa9088baef8141a1e0f11e4a51866e9227b2c9c897e033a5b16f87d0310981",
+      "raw_sha256": "3a31d831bbe5401a329db3d41298be6b25ae4a457d1f99d05eb23d41ad2a0eb9",
+      "raw_path": "docs-raw/research/2026-09-06/e5e00df5a68121ee6a6afb525ddfcb5e23954058a1eb5ca7a186393ab0fd89da/e6aa9088baef8141a1e0f11e4a51866e9227b2c9c897e033a5b16f87d0310981/source.gz",
+      "fetched_at": "2026-09-05T10:33:39.733168+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 191,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 13,
+          "truncated": false
+        },
+        {
+          "start_line": 14,
+          "end_line": 22,
+          "truncated": false
+        },
+        {
+          "start_line": 23,
+          "end_line": 28,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/training/tv/playback/controls",
+      "platform": "android",
+      "title": "Playback controls on TV",
+      "local_path": "docs-raw/research/2026-09-06/945d3493d49b04fdd933348c2f5ec34394dfb5ab2bcd12d1271857117d391f69/bae285c6983db21c3122355ae0c47d4f7e74151f692360b3a7217029731e4752/document.md",
+      "sha256": "bae285c6983db21c3122355ae0c47d4f7e74151f692360b3a7217029731e4752",
+      "raw_sha256": "4f9ffca0ad6fe37a7829d4f1060f1420f1f0dc3bd7fd2fba47d0c685b93a2b93",
+      "raw_path": "docs-raw/research/2026-09-06/945d3493d49b04fdd933348c2f5ec34394dfb5ab2bcd12d1271857117d391f69/bae285c6983db21c3122355ae0c47d4f7e74151f692360b3a7217029731e4752/source.gz",
+      "fetched_at": "2026-09-05T10:38:51.465272+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 64,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 22,
+          "truncated": false
+        },
+        {
+          "start_line": 23,
+          "end_line": 36,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/webkit/delivering-video-content-for-safari",
+      "platform": "ios",
+      "title": "Delivering Video Content for Safari",
+      "local_path": "docs-raw/research/2026-09-06/7fa9f00886000dd8c12aadc5f2db9670729cdb6eccd71d8986b3634cad7203a8/ec2f63c1f513f5f6cb5c1f8881c7e78aa91819597dd3dd50c4a718589fb86e89/document.md",
+      "sha256": "ec2f63c1f513f5f6cb5c1f8881c7e78aa91819597dd3dd50c4a718589fb86e89",
+      "raw_sha256": "7b28d29ceb8ee6530bbe91faa3c1ca84fd27bd9d47a7eeb605c6fe90eb50fe19",
+      "raw_path": "docs-raw/research/2026-09-06/7fa9f00886000dd8c12aadc5f2db9670729cdb6eccd71d8986b3634cad7203a8/ec2f63c1f513f5f6cb5c1f8881c7e78aa91819597dd3dd50c4a718589fb86e89/source.gz",
+      "fetched_at": "2026-09-05T10:29:06.316951+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 121,
+      "suggested_sections": [
+        {
+          "start_line": 5,
+          "end_line": 18,
+          "truncated": false
+        },
+        {
+          "start_line": 19,
+          "end_line": 24,
+          "truncated": false
+        },
+        {
+          "start_line": 25,
+          "end_line": 32,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/realitykit/scene-content-videos",
+      "platform": "ios",
+      "title": "Videos",
+      "local_path": "docs-raw/research/2026-09-06/3e8ade71a180730cdb5a7feac9f7276c99702ac2bc6681ffa4f2ec3a4b408506/a3dc391ee667bc08a2f91d1d24b62a9fd297ba4f1417f18d4bc219ee90eff4a1/document.md",
+      "sha256": "a3dc391ee667bc08a2f91d1d24b62a9fd297ba4f1417f18d4bc219ee90eff4a1",
+      "raw_sha256": "7cbc749d12476888076df3709a6c482a68cc8207162a906d0badad813642a0a8",
+      "raw_path": "docs-raw/research/2026-09-06/3e8ade71a180730cdb5a7feac9f7276c99702ac2bc6681ffa4f2ec3a4b408506/a3dc391ee667bc08a2f91d1d24b62a9fd297ba4f1417f18d4bc219ee90eff4a1/source.gz",
+      "fetched_at": "2026-09-05T10:25:09.986026+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 79,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 20,
+          "truncated": false
+        },
+        {
+          "start_line": 21,
+          "end_line": 22,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-common-components-video-player",
+      "platform": "harmonyos",
+      "title": "视频播放 (Video)",
+      "local_path": "docs-raw/research/2026-09-06/55eff5f3e69798a031063d316111d7ba24ffb7ea54752966654ab72f9f304077/0c40f6def453cf5d3eee8f90898294983c4e75a6ba22d44a248eabb7d8a9b9b1/document.md",
+      "sha256": "0c40f6def453cf5d3eee8f90898294983c4e75a6ba22d44a248eabb7d8a9b9b1",
+      "raw_sha256": "a9c1d0878c8e73afbea80910c5fc11cf67ccc71d1952a065dbab26e5ea9b3963",
+      "raw_path": "docs-raw/research/2026-09-06/55eff5f3e69798a031063d316111d7ba24ffb7ea54752966654ab72f9f304077/0c40f6def453cf5d3eee8f90898294983c4e75a6ba22d44a248eabb7d8a9b9b1/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 498,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 188,
+          "end_line": 286,
+          "truncated": false
+        },
+        {
+          "start_line": 287,
+          "end_line": 401,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/online-video-playback-lags-optimize",
+      "platform": "harmonyos",
+      "title": "在线视频播放卡顿优化",
+      "local_path": "docs-raw/research/2026-09-06/0ed40d55e891931680f32244053c07405aea28b08a27b09273bcab8871fca439/074ba4d9c5d00ed6a2c266b5d3a7e37a42a5202b99c9b51a7c7a600e1b739470/document.md",
+      "sha256": "074ba4d9c5d00ed6a2c266b5d3a7e37a42a5202b99c9b51a7c7a600e1b739470",
+      "raw_sha256": "2a8a1321d8cb4cfe86570bfb8529bd76794a02946d0e41ed470653f17a4ce523",
+      "raw_path": "docs-raw/research/2026-09-06/0ed40d55e891931680f32244053c07405aea28b08a27b09273bcab8871fca439/074ba4d9c5d00ed6a2c266b5d3a7e37a42a5202b99c9b51a7c7a600e1b739470/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 276,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": true
+        },
+        {
+          "start_line": 12,
+          "end_line": 17,
+          "truncated": true
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:48.382091+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "33911ea53a7219fa1286ccfc6753739947a5bed33d703dc05523f50491ffe3dd"
+}

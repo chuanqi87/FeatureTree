@@ -1,0 +1,13 @@
+{
+  "id": "d042057461616c5f042eb660360d6fd1f692a8de52e84d5841a25185a24a7119",
+  "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-scenario-stability-cppcrash",
+  "platform": "harmonyos",
+  "title": "CppCrash类问题案例",
+  "local_path": "docs-raw/research/2026-09-06/d042057461616c5f042eb660360d6fd1f692a8de52e84d5841a25185a24a7119/2a5b96c251ed5f2950862d2bfb02342719ad467761298d4724d570357ca862d6/document.md",
+  "sha256": "2a5b96c251ed5f2950862d2bfb02342719ad467761298d4724d570357ca862d6",
+  "raw_sha256": "854a85df486bf38df5e0742f48edbc49e09864766271cea7d9c16091546ae2be",
+  "raw_path": "docs-raw/research/2026-09-06/d042057461616c5f042eb660360d6fd1f692a8de52e84d5841a25185a24a7119/2a5b96c251ed5f2950862d2bfb02342719ad467761298d4724d570357ca862d6/source.gz",
+  "fetched_at": "2026-09-05T10:40:32.212507+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

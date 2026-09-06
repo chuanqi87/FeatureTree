@@ -1,0 +1,13 @@
+{
+  "id": "5281bc6551ed42737281a9c431951b68877e8646dfb25d34f551995a77e20d8a",
+  "url": "https://developer.android.com/topic/performance/hardware-accel",
+  "platform": "android",
+  "title": "Hardware acceleration",
+  "local_path": "docs-raw/research/2026-09-06/5281bc6551ed42737281a9c431951b68877e8646dfb25d34f551995a77e20d8a/c27a7306b5325105152c75602c4a443bdca5507971dbc8971d5cf260797dcb0a/document.md",
+  "sha256": "c27a7306b5325105152c75602c4a443bdca5507971dbc8971d5cf260797dcb0a",
+  "raw_sha256": "98a145307bd41e901dbd130bb50fca7dbbcae42f50eef60e8fa566cfa9a08a35",
+  "raw_path": "docs-raw/research/2026-09-06/5281bc6551ed42737281a9c431951b68877e8646dfb25d34f551995a77e20d8a/c27a7306b5325105152c75602c4a443bdca5507971dbc8971d5cf260797dcb0a/source.gz",
+  "fetched_at": "2026-09-05T10:37:36.732227+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

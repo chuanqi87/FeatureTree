@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "health_home.health",
+    "level": "L2",
+    "parent": "health_home",
+    "name": {
+      "zh": "健康数据",
+      "en": "Health Data"
+    },
+    "definition": "健康指标读写。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "watch"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/health_home/health/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "健康指标读写。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "0243b428aecf11da8da09e4bdf2d156d96392fc68ba8f553eec1ff715a148d74",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "41e7d981295ebaa6d29492bc35ce8be1d065dc7d331bb9c3a05091af6d7fef2a",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/guide/health-and-fitness/health-connect",
+      "platform": "android",
+      "title": "health-connect",
+      "local_path": "docs-raw/research/2026-09-06/6914392828d98ddfaa87a10f36f9efe059cfef62413892c3a72ed48ef1c0367e/5fa665936d1266f15086773be5d5b3900939d4d87cfcde33d58ecdf816589fd0/document.md",
+      "sha256": "5fa665936d1266f15086773be5d5b3900939d4d87cfcde33d58ecdf816589fd0",
+      "raw_sha256": "d41abbfd9a0d289509fe8b902f9562099d3cb8ba0726d8deb5cb91c85d5dd3d7",
+      "raw_path": "docs-raw/research/2026-09-06/6914392828d98ddfaa87a10f36f9efe059cfef62413892c3a72ed48ef1c0367e/5fa665936d1266f15086773be5d5b3900939d4d87cfcde33d58ecdf816589fd0/source.gz",
+      "fetched_at": "2026-09-05T10:15:53.886428+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 129,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 16,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/health-and-fitness/health-connect/test/test-cases",
+      "platform": "android",
+      "title": "Test top use cases for Health Connect",
+      "local_path": "docs-raw/research/2026-09-06/5a3d4d7f6ae2ba3604063285256a3a50fe4a93933ef5076f9dcd92ffe108f3ab/043a9521c609a06018ddd2051e91386675e88aafdc9e3e01f0711b2317370034/document.md",
+      "sha256": "043a9521c609a06018ddd2051e91386675e88aafdc9e3e01f0711b2317370034",
+      "raw_sha256": "dc0cbb850cc2a3c58cace94d13c6f769d82af2a19df129ee4dca9a317dba3c1b",
+      "raw_path": "docs-raw/research/2026-09-06/5a3d4d7f6ae2ba3604063285256a3a50fe4a93933ef5076f9dcd92ffe108f3ab/043a9521c609a06018ddd2051e91386675e88aafdc9e3e01f0711b2317370034/source.gz",
+      "fetched_at": "2026-09-05T10:32:19.509687+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 451,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 14,
+          "end_line": 22,
+          "truncated": false
+        },
+        {
+          "start_line": 52,
+          "end_line": 58,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/healthkit",
+      "platform": "ios",
+      "title": "HealthKit",
+      "local_path": "docs-raw/research/2026-09-06/3893dab5db5e6f7f45a085b723037e6db3657961a4eea69346063dcc63b97225/883f335db21a8dc8e00edb35ae85cddde848db81071150b1d5b30770fc8c8b60/document.md",
+      "sha256": "883f335db21a8dc8e00edb35ae85cddde848db81071150b1d5b30770fc8c8b60",
+      "raw_sha256": "cbecd340f510173c640962db94dbb6f1948cee3ee1991d15139f6519d1755574",
+      "raw_path": "docs-raw/research/2026-09-06/3893dab5db5e6f7f45a085b723037e6db3657961a4eea69346063dcc63b97225/883f335db21a8dc8e00edb35ae85cddde848db81071150b1d5b30770fc8c8b60/source.gz",
+      "fetched_at": "2026-09-05T10:32:24.149416+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 104,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 25,
+          "truncated": false
+        },
+        {
+          "start_line": 26,
+          "end_line": 27,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/healthkit/accessing-data-from-a-smart-health-card",
+      "platform": "ios",
+      "title": "Accessing Data from a SMART Health Card",
+      "local_path": "docs-raw/research/2026-09-06/92ec53f15fcf6c5f4820df716ef49a57d28dcd6b3ac600d25bc5730ef332a977/efbf72e0b8e2dcccb63fc16be5683c0c61aef5824215e25491e607615037aa1d/document.md",
+      "sha256": "efbf72e0b8e2dcccb63fc16be5683c0c61aef5824215e25491e607615037aa1d",
+      "raw_sha256": "ebff0921b4aa1e2a669a26c94271dbe9314ae509b7eaf2af818cfb86398fa39c",
+      "raw_path": "docs-raw/research/2026-09-06/92ec53f15fcf6c5f4820df716ef49a57d28dcd6b3ac600d25bc5730ef332a977/efbf72e0b8e2dcccb63fc16be5683c0c61aef5824215e25491e607615037aa1d/source.gz",
+      "fetched_at": "2026-09-05T10:22:32.952375+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 22,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 22,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/health-body-temperature",
+      "platform": "harmonyos",
+      "title": "体温",
+      "local_path": "docs-raw/research/2026-09-06/ac414ad66ba001a4b309f8f8df72d2bc83aeb3248526d0d1931e7239b0de6615/94cf8293a1f6d3bc31b0020e5f10697410300b04ade1470177ea4903ee633ced/document.md",
+      "sha256": "94cf8293a1f6d3bc31b0020e5f10697410300b04ade1470177ea4903ee633ced",
+      "raw_sha256": "90419585d209235acee2295efaefb21de21ba4d6713e9e1f23c81ad6b3e966d2",
+      "raw_path": "docs-raw/research/2026-09-06/ac414ad66ba001a4b309f8f8df72d2bc83aeb3248526d0d1931e7239b0de6615/94cf8293a1f6d3bc31b0020e5f10697410300b04ade1470177ea4903ee633ced/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 85,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 12,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/health-api-healthdatatypes-lite",
+      "platform": "harmonyos",
+      "title": "healthDataTypes (运动健康数据类型常量)(Lite)",
+      "local_path": "docs-raw/research/2026-09-06/b40841bd58fa66c8187ffb83c932bdab54f8ce7259aa86822bafc93f7e5e2dd8/179ed5d008437499ca4c621257d4e883f32c8774b4f8b30aa60f8c46d6c7ebe6/document.md",
+      "sha256": "179ed5d008437499ca4c621257d4e883f32c8774b4f8b30aa60f8c46d6c7ebe6",
+      "raw_sha256": "bd32e11e405666055b8abad6cb1fe22030836162a84d9075f1a69a67e5534e7e",
+      "raw_path": "docs-raw/research/2026-09-06/b40841bd58fa66c8187ffb83c932bdab54f8ce7259aa86822bafc93f7e5e2dd8/179ed5d008437499ca4c621257d4e883f32c8774b4f8b30aa60f8c46d6c7ebe6/source.gz",
+      "fetched_at": "2026-09-05T10:26:24.477090+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 35,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 15,
+          "truncated": false
+        },
+        {
+          "start_line": 16,
+          "end_line": 35,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:29.680406+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "474ccbdcaa7e0b4122a0a81b3f7889f18e5896f8afdbfa0f71f19d985ed83912"
+}

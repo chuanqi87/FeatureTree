@@ -1,0 +1,13 @@
+{
+  "id": "f20205ffdc5d3b958c8fb1d6d81878cad5545f69784b3093ceed220982b372e2",
+  "url": "https://developer.android.com/games/services/unity/v2/api/struct/google-play-games/basic-api/nearby/advertising-result",
+  "platform": "android",
+  "title": "GooglePlayGames. BasicApi. Nearby. AdvertisingResult",
+  "local_path": "docs-raw/research/2026-09-06/f20205ffdc5d3b958c8fb1d6d81878cad5545f69784b3093ceed220982b372e2/bd18d9cea125ff18575b6024f1cc8265f964aa2a94a4fff14bdbee4d2431a223/document.md",
+  "sha256": "bd18d9cea125ff18575b6024f1cc8265f964aa2a94a4fff14bdbee4d2431a223",
+  "raw_sha256": "6103f5aaafc4ae9a916113eea708cd9fe8cb2c8ecbb14b30ada7fe61875da76c",
+  "raw_path": "docs-raw/research/2026-09-06/f20205ffdc5d3b958c8fb1d6d81878cad5545f69784b3093ceed220982b372e2/bd18d9cea125ff18575b6024f1cc8265f964aa2a94a4fff14bdbee4d2431a223/source.gz",
+  "fetched_at": "2026-09-05T10:28:41.817782+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

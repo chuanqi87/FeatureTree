@@ -1,0 +1,13 @@
+{
+  "id": "3893dab5db5e6f7f45a085b723037e6db3657961a4eea69346063dcc63b97225",
+  "url": "https://developer.apple.com/documentation/healthkit",
+  "platform": "ios",
+  "title": "HealthKit",
+  "local_path": "docs-raw/research/2026-09-06/3893dab5db5e6f7f45a085b723037e6db3657961a4eea69346063dcc63b97225/883f335db21a8dc8e00edb35ae85cddde848db81071150b1d5b30770fc8c8b60/document.md",
+  "sha256": "883f335db21a8dc8e00edb35ae85cddde848db81071150b1d5b30770fc8c8b60",
+  "raw_sha256": "cbecd340f510173c640962db94dbb6f1948cee3ee1991d15139f6519d1755574",
+  "raw_path": "docs-raw/research/2026-09-06/3893dab5db5e6f7f45a085b723037e6db3657961a4eea69346063dcc63b97225/883f335db21a8dc8e00edb35ae85cddde848db81071150b1d5b30770fc8c8b60/source.gz",
+  "fetched_at": "2026-09-05T10:32:24.149416+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

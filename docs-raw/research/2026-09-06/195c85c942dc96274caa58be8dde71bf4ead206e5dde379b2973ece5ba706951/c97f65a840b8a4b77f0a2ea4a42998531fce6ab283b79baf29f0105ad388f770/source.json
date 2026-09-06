@@ -1,0 +1,13 @@
+{
+  "id": "195c85c942dc96274caa58be8dde71bf4ead206e5dde379b2973ece5ba706951",
+  "url": "https://developer.apple.com/documentation/localauthentication/logging-a-user-into-your-app-with-face-id-or-touch-id",
+  "platform": "ios",
+  "title": "Logging a User into Your App with Face ID or Touch ID",
+  "local_path": "docs-raw/research/2026-09-06/195c85c942dc96274caa58be8dde71bf4ead206e5dde379b2973ece5ba706951/c97f65a840b8a4b77f0a2ea4a42998531fce6ab283b79baf29f0105ad388f770/document.md",
+  "sha256": "c97f65a840b8a4b77f0a2ea4a42998531fce6ab283b79baf29f0105ad388f770",
+  "raw_sha256": "6c954c07ca7a3986ba25bfa345bd25a06d5cf9e4c0d5cf7acbf61da55a459fcf",
+  "raw_path": "docs-raw/research/2026-09-06/195c85c942dc96274caa58be8dde71bf4ead206e5dde379b2973ece5ba706951/c97f65a840b8a4b77f0a2ea4a42998531fce6ab283b79baf29f0105ad388f770/source.gz",
+  "fetched_at": "2026-09-05T10:23:21.181990+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

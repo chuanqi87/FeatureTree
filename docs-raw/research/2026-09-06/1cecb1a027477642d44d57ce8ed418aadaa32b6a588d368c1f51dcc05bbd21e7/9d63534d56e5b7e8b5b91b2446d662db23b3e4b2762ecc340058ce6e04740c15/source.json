@@ -1,0 +1,13 @@
+{
+  "id": "1cecb1a027477642d44d57ce8ed418aadaa32b6a588d368c1f51dcc05bbd21e7",
+  "url": "https://developer.android.com/identity/sms-retriever",
+  "platform": "android",
+  "title": "Request SMS Verification in an Android App",
+  "local_path": "docs-raw/research/2026-09-06/1cecb1a027477642d44d57ce8ed418aadaa32b6a588d368c1f51dcc05bbd21e7/9d63534d56e5b7e8b5b91b2446d662db23b3e4b2762ecc340058ce6e04740c15/document.md",
+  "sha256": "9d63534d56e5b7e8b5b91b2446d662db23b3e4b2762ecc340058ce6e04740c15",
+  "raw_sha256": "a861a73f66add27790d52fd1e573781a75b84cb8cbb4732ba5c062c881a96ad1",
+  "raw_path": "docs-raw/research/2026-09-06/1cecb1a027477642d44d57ce8ed418aadaa32b6a588d368c1f51dcc05bbd21e7/9d63534d56e5b7e8b5b91b2446d662db23b3e4b2762ecc340058ce6e04740c15/source.gz",
+  "fetched_at": "2026-09-05T10:32:39.888617+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

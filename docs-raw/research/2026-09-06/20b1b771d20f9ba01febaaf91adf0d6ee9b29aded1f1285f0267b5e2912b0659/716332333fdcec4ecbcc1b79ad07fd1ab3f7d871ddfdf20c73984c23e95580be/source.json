@@ -1,0 +1,13 @@
+{
+  "id": "20b1b771d20f9ba01febaaf91adf0d6ee9b29aded1f1285f0267b5e2912b0659",
+  "url": "https://developer.apple.com/documentation/coredata/setting-up-core-data-with-cloudkit",
+  "platform": "ios",
+  "title": "Setting Up Core Data with CloudKit",
+  "local_path": "docs-raw/research/2026-09-06/20b1b771d20f9ba01febaaf91adf0d6ee9b29aded1f1285f0267b5e2912b0659/716332333fdcec4ecbcc1b79ad07fd1ab3f7d871ddfdf20c73984c23e95580be/document.md",
+  "sha256": "716332333fdcec4ecbcc1b79ad07fd1ab3f7d871ddfdf20c73984c23e95580be",
+  "raw_sha256": "feae8e0867c3715f5bfa886db3c1c3a4f5d315fbf2d5c00e3fe02648af9b19b0",
+  "raw_path": "docs-raw/research/2026-09-06/20b1b771d20f9ba01febaaf91adf0d6ee9b29aded1f1285f0267b5e2912b0659/716332333fdcec4ecbcc1b79ad07fd1ab3f7d871ddfdf20c73984c23e95580be/source.gz",
+  "fetched_at": "2026-09-05T10:46:16.146054+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

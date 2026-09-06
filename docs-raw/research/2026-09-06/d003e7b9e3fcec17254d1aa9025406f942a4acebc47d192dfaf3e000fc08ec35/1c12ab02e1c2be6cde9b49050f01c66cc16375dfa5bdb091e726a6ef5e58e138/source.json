@@ -1,0 +1,13 @@
+{
+  "id": "d003e7b9e3fcec17254d1aa9025406f942a4acebc47d192dfaf3e000fc08ec35",
+  "url": "https://developer.apple.com/documentation/technotes/tn3135-low-level-networking-on-watchos",
+  "platform": "ios",
+  "title": "TN3135: Low-level networking on watchOS",
+  "local_path": "docs-raw/research/2026-09-06/d003e7b9e3fcec17254d1aa9025406f942a4acebc47d192dfaf3e000fc08ec35/1c12ab02e1c2be6cde9b49050f01c66cc16375dfa5bdb091e726a6ef5e58e138/document.md",
+  "sha256": "1c12ab02e1c2be6cde9b49050f01c66cc16375dfa5bdb091e726a6ef5e58e138",
+  "raw_sha256": "891a1c9209813776d94204dec910c0eeb4f299c5c61dc03914ef7344b6fc51a7",
+  "raw_path": "docs-raw/research/2026-09-06/d003e7b9e3fcec17254d1aa9025406f942a4acebc47d192dfaf3e000fc08ec35/1c12ab02e1c2be6cde9b49050f01c66cc16375dfa5bdb091e726a6ef5e58e138/source.gz",
+  "fetched_at": "2026-09-05T10:26:47.376694+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

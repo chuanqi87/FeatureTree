@@ -1,0 +1,13 @@
+{
+  "id": "1cfe1f0369ae9222a5ee9c35592ba41a08bb90ba93d7a7353fac6d316e9e9dfe",
+  "url": "https://developer.apple.com/documentation/security/enabling-autofill-for-domain-bound-sms-codes",
+  "platform": "ios",
+  "title": "Enabling AutoFill for domain-bound SMS codes",
+  "local_path": "docs-raw/research/2026-09-06/1cfe1f0369ae9222a5ee9c35592ba41a08bb90ba93d7a7353fac6d316e9e9dfe/ba0662d3aeaca8c201cc8f563ed346590dd657e3290dc8e1ce39bc62272a4ccb/document.md",
+  "sha256": "ba0662d3aeaca8c201cc8f563ed346590dd657e3290dc8e1ce39bc62272a4ccb",
+  "raw_sha256": "e3d506eca0a5c97684645205f5e880e09aaf2fa93db465d01c4d8cba9e4023e9",
+  "raw_path": "docs-raw/research/2026-09-06/1cfe1f0369ae9222a5ee9c35592ba41a08bb90ba93d7a7353fac6d316e9e9dfe/ba0662d3aeaca8c201cc8f563ed346590dd657e3290dc8e1ce39bc62272a4ccb/source.gz",
+  "fetched_at": "2026-09-05T11:18:31.536731+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

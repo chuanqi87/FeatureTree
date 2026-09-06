@@ -1,0 +1,13 @@
+{
+  "id": "aa7d3da14e34004a27bad6f9ce43860c4d53c3de637a3a55360afcf5c35eda02",
+  "url": "https://developer.apple.com/documentation/messages/critical-messaging-api",
+  "platform": "ios",
+  "title": "Sending SMS messages from an app",
+  "local_path": "docs-raw/research/2026-09-06/aa7d3da14e34004a27bad6f9ce43860c4d53c3de637a3a55360afcf5c35eda02/31123f7efceff12ff46a3652e7c3f5ba1dfec8689751cf2813155a5abfe89a69/document.md",
+  "sha256": "31123f7efceff12ff46a3652e7c3f5ba1dfec8689751cf2813155a5abfe89a69",
+  "raw_sha256": "9eb22bc075210cf5ddc31a73b3f298909c8d2647dadc860db1f50531ea5b70fd",
+  "raw_path": "docs-raw/research/2026-09-06/aa7d3da14e34004a27bad6f9ce43860c4d53c3de637a3a55360afcf5c35eda02/31123f7efceff12ff46a3652e7c3f5ba1dfec8689751cf2813155a5abfe89a69/source.gz",
+  "fetched_at": "2026-09-05T10:23:50.422213+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

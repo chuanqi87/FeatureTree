@@ -1,0 +1,13 @@
+{
+  "id": "ce5610ce52728f39211c7a536a81852403c2a2d225137faff829b760033eb3c4",
+  "url": "https://developer.apple.com/documentation/wifiaware/connecting-paired-devices",
+  "platform": "ios",
+  "title": "Connecting devices for peer-to-peer Wi-Fi",
+  "local_path": "docs-raw/research/2026-09-06/ce5610ce52728f39211c7a536a81852403c2a2d225137faff829b760033eb3c4/bb7277d30de36cbab44782a36c5b922993da402381ac90f0a7a5295e2c8c468b/document.md",
+  "sha256": "bb7277d30de36cbab44782a36c5b922993da402381ac90f0a7a5295e2c8c468b",
+  "raw_sha256": "d759d750f3959d73dd0e6bb77aed9c482df49b37f9e482530ba300b706aa6667",
+  "raw_path": "docs-raw/research/2026-09-06/ce5610ce52728f39211c7a536a81852403c2a2d225137faff829b760033eb3c4/bb7277d30de36cbab44782a36c5b922993da402381ac90f0a7a5295e2c8c468b/source.gz",
+  "fetched_at": "2026-09-05T10:29:13.547614+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

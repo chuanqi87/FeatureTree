@@ -1,0 +1,13 @@
+{
+  "id": "e8b44a0df13131e264293fc49638f87a4dabb49d768af1e954272a80d2baa8e2",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-notificationmanager",
+  "platform": "harmonyos",
+  "title": "@ohos.notificationManager (NotificationManager模块)",
+  "local_path": "docs-raw/research/2026-09-06/e8b44a0df13131e264293fc49638f87a4dabb49d768af1e954272a80d2baa8e2/bd56c1bffe250e16d23e21448633b7c6dcf1b500467fd2f0a0e47db4883982a2/document.md",
+  "sha256": "bd56c1bffe250e16d23e21448633b7c6dcf1b500467fd2f0a0e47db4883982a2",
+  "raw_sha256": "767bdf4e522e6facfce603c019240774c17db546cdc9d22373b56ac31591852c",
+  "raw_path": "docs-raw/research/2026-09-06/e8b44a0df13131e264293fc49638f87a4dabb49d768af1e954272a80d2baa8e2/bd56c1bffe250e16d23e21448633b7c6dcf1b500467fd2f0a0e47db4883982a2/source.gz",
+  "fetched_at": "2026-09-05T10:27:45.674920+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

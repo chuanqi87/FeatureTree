@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "app.lifecycle",
+    "level": "L2",
+    "parent": "app",
+    "name": {
+      "zh": "组件生命周期",
+      "en": "Component Lifecycle"
+    },
+    "definition": "应用与界面组件的创建、可见、销毁与状态保存。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/app/lifecycle/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "应用与界面组件的创建、可见、销毁与状态保存。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "d06734f06468cd63e3653538863a2650155a12a912baa2ff3b20d3c4b7d0fa95",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "cd61dab3e1cb22b1d56ab3a5fa4cc1b2fe8ee49bb65e80e41c9dea12b3eed03b",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/topic/architecture/views/lifecycle-views",
+      "platform": "android",
+      "title": "Handling lifecycles with lifecycle-aware components (Views)",
+      "local_path": "docs-raw/research/2026-09-06/581e6401caeea25aef80c45501d106c2cba849350ab8a5947b2edc79ad1f6b72/4dda445f3e9651d743ad1eea9545f837f0ae51361789e32a05f09564a831e4c9/document.md",
+      "sha256": "4dda445f3e9651d743ad1eea9545f837f0ae51361789e32a05f09564a831e4c9",
+      "raw_sha256": "973f8444ecf4d698cf9b5d4b9f740cabeec827b524561b5d562260c6d6c262e8",
+      "raw_path": "docs-raw/research/2026-09-06/581e6401caeea25aef80c45501d106c2cba849350ab8a5947b2edc79ad1f6b72/4dda445f3e9651d743ad1eea9545f837f0ae51361789e32a05f09564a831e4c9/source.gz",
+      "fetched_at": "2026-09-05T10:36:46.971278+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 589,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 32,
+          "truncated": false
+        },
+        {
+          "start_line": 196,
+          "end_line": 197,
+          "truncated": true
+        },
+        {
+          "start_line": 266,
+          "end_line": 274,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/topic/libraries/data-binding/architecture",
+      "platform": "android",
+      "title": "Bind layout views to Architecture Components",
+      "local_path": "docs-raw/research/2026-09-06/7f64b1a8f2be25f8af05e42dfdd27de546e079eef0605f698a078c0d0848df6e/7fc31e764dae241389335316f4f951e0072a713d7da55f240eef6e0fef498575/document.md",
+      "sha256": "7fc31e764dae241389335316f4f951e0072a713d7da55f240eef6e0fef498575",
+      "raw_sha256": "3e86b139ab6fa536b61254c76f6b93f96d6ec86797c8fcd1c8fd1caa65235d4e",
+      "raw_path": "docs-raw/research/2026-09-06/7f64b1a8f2be25f8af05e42dfdd27de546e079eef0605f698a078c0d0848df6e/7fc31e764dae241389335316f4f951e0072a713d7da55f240eef6e0fef498575/source.gz",
+      "fetched_at": "2026-09-05T10:37:15.989762+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 295,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 14,
+          "truncated": false
+        },
+        {
+          "start_line": 15,
+          "end_line": 37,
+          "truncated": false
+        },
+        {
+          "start_line": 38,
+          "end_line": 45,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/realitykit/ecs-events",
+      "platform": "ios",
+      "title": "Events",
+      "local_path": "docs-raw/research/2026-09-06/ec51522c245afbcd0152d77adda6b1494209fc567f97e078280b7aead4e16600/c87cde8b9627471b35cf5a0988670b426fbc52e2bf8f8d729280c0991bd454d4/document.md",
+      "sha256": "c87cde8b9627471b35cf5a0988670b426fbc52e2bf8f8d729280c0991bd454d4",
+      "raw_sha256": "8175041637296362ebe46be269fb5b76f71b7b4453135a469256d2263fdf4145",
+      "raw_path": "docs-raw/research/2026-09-06/ec51522c245afbcd0152d77adda6b1494209fc567f97e078280b7aead4e16600/c87cde8b9627471b35cf5a0988670b426fbc52e2bf8f8d729280c0991bd454d4/source.gz",
+      "fetched_at": "2026-09-05T10:25:02.272076+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 95,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 20,
+          "truncated": false
+        },
+        {
+          "start_line": 21,
+          "end_line": 22,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/appclip/responding-to-invocations",
+      "platform": "ios",
+      "title": "Responding to invocations",
+      "local_path": "docs-raw/research/2026-09-06/34c970c327ed93d54a32cab5b745fc683e29aee1d00acc373169704e9f318fb5/6eb0bbe8b4aacad7f5b9067fefffbb0ca2a16d5e04743e491141f2cb464fc3c7/document.md",
+      "sha256": "6eb0bbe8b4aacad7f5b9067fefffbb0ca2a16d5e04743e491141f2cb464fc3c7",
+      "raw_sha256": "741fa17e89bdbf47aeb9a1cc8e60ab46b20b2378e8934ffb3cdd18b4d7c3c371",
+      "raw_path": "docs-raw/research/2026-09-06/34c970c327ed93d54a32cab5b745fc683e29aee1d00acc373169704e9f318fb5/6eb0bbe8b4aacad7f5b9067fefffbb0ca2a16d5e04743e491141f2cb464fc3c7/source.gz",
+      "fetched_at": "2026-09-05T10:17:02.072144+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 64,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 20,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-page-custom-components-lifecycle",
+      "platform": "harmonyos",
+      "title": "自定义组件生命周期",
+      "local_path": "docs-raw/research/2026-09-06/3a7f36fa570189e25ed01241155704cc2271c4b664debdd08fe4c4e0e8e98a22/8680eb12166f47788e0c64077e95b1a50abe9cfd35427d565205de12e99d5520/document.md",
+      "sha256": "8680eb12166f47788e0c64077e95b1a50abe9cfd35427d565205de12e99d5520",
+      "raw_sha256": "0362cc13a11115850dae2d377d384969716fe99c37a70b74e3a70d714107b9f0",
+      "raw_path": "docs-raw/research/2026-09-06/3a7f36fa570189e25ed01241155704cc2271c4b664debdd08fe4c4e0e8e98a22/8680eb12166f47788e0c64077e95b1a50abe9cfd35427d565205de12e99d5520/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 170,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 19,
+          "truncated": false
+        },
+        {
+          "start_line": 20,
+          "end_line": 31,
+          "truncated": false
+        },
+        {
+          "start_line": 32,
+          "end_line": 39,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-custom-component-new-lifecycle",
+      "platform": "harmonyos",
+      "title": "自定义组件的生命周期（推荐）",
+      "local_path": "docs-raw/research/2026-09-06/be87362b3baae2b7e03cf8f4b129027a58fed27a3a06b5cb30e2ac1b3c93c09c/299cff12c9b6096265b073d18dc2a0e2ae5ad31d86a48f4121e0a188156d937c/document.md",
+      "sha256": "299cff12c9b6096265b073d18dc2a0e2ae5ad31d86a48f4121e0a188156d937c",
+      "raw_sha256": "ffccccad3e3e73f29d5c89e03b9f00893395fdacd9bb9c1e3ca83032c67c93f7",
+      "raw_path": "docs-raw/research/2026-09-06/be87362b3baae2b7e03cf8f4b129027a58fed27a3a06b5cb30e2ac1b3c93c09c/299cff12c9b6096265b073d18dc2a0e2ae5ad31d86a48f4121e0a188156d937c/source.gz",
+      "fetched_at": "2026-09-05T10:29:14.123965+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 583,
+      "suggested_sections": [
+        {
+          "start_line": 27,
+          "end_line": 42,
+          "truncated": false
+        },
+        {
+          "start_line": 75,
+          "end_line": 100,
+          "truncated": false
+        },
+        {
+          "start_line": 101,
+          "end_line": 116,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:12.875080+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "a13a63ad6588e05dcf8a1b44514fdcce321f831bb536cddb8693ab93242f8da9"
+}

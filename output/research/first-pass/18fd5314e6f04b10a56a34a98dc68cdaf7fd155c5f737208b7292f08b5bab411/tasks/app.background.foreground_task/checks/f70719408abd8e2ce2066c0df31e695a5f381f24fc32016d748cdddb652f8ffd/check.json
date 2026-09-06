@@ -1,0 +1,13 @@
+{
+  "task_id": "4819ab741d6ffa1b4be39057443969296dbefb55590d139189da3c5fd2619fe3",
+  "feature_id": "app.background.foreground_task",
+  "response_sha256": "8a5aee8879644cfd67843c555b41e271ad78aa3cd1b0408b6df678b3611e547a",
+  "delivery_valid": false,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": [
+    "Difference outside assigned dimensions",
+    "Difference outside assigned dimensions",
+    "Difference outside assigned dimensions"
+  ]
+}

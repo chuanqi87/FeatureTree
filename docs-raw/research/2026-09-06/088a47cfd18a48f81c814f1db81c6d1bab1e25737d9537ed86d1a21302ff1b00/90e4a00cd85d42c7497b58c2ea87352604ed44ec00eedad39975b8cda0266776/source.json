@@ -1,0 +1,13 @@
+{
+  "id": "088a47cfd18a48f81c814f1db81c6d1bab1e25737d9537ed86d1a21302ff1b00",
+  "url": "https://developer.apple.com/documentation/corelocation/handling-location-updates-in-the-background",
+  "platform": "ios",
+  "title": "Handling location updates in the background",
+  "local_path": "docs-raw/research/2026-09-06/088a47cfd18a48f81c814f1db81c6d1bab1e25737d9537ed86d1a21302ff1b00/90e4a00cd85d42c7497b58c2ea87352604ed44ec00eedad39975b8cda0266776/document.md",
+  "sha256": "90e4a00cd85d42c7497b58c2ea87352604ed44ec00eedad39975b8cda0266776",
+  "raw_sha256": "bd5471ff0a26a3fa70c41dce2374169fe93c943262c314e3804c0e51546e38d6",
+  "raw_path": "docs-raw/research/2026-09-06/088a47cfd18a48f81c814f1db81c6d1bab1e25737d9537ed86d1a21302ff1b00/90e4a00cd85d42c7497b58c2ea87352604ed44ec00eedad39975b8cda0266776/source.gz",
+  "fetched_at": "2026-09-05T10:19:23.344135+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "1cec028942367bf17ade67764f676e5db50d239dfede18552e6868dd2c25ca16",
+  "url": "https://developer.apple.com/documentation/network/debugging-http-server-side-errors",
+  "platform": "ios",
+  "title": "Debugging HTTP Server-Side Errors",
+  "local_path": "docs-raw/research/2026-09-06/1cec028942367bf17ade67764f676e5db50d239dfede18552e6868dd2c25ca16/debbb5df7f73ff5940b7b679279da44773f7a1f9d44018a7ce0486687b915fe3/document.md",
+  "sha256": "debbb5df7f73ff5940b7b679279da44773f7a1f9d44018a7ce0486687b915fe3",
+  "raw_sha256": "e7ca8f5c04250954da3d802371b3835261515f9bf94d93d7a36c59e990de01e5",
+  "raw_path": "docs-raw/research/2026-09-06/1cec028942367bf17ade67764f676e5db50d239dfede18552e6868dd2c25ca16/debbb5df7f73ff5940b7b679279da44773f7a1f9d44018a7ce0486687b915fe3/source.gz",
+  "fetched_at": "2026-09-05T10:24:19.815736+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "d50c1e4327688198f4ae9380b0944aea66655f0518d8cc22fc7c23e303fff0a8",
+  "url": "https://firebase.google.com/docs/firestore/enterprise/geospatial-search",
+  "platform": "android",
+  "title": "Use geospatial queries",
+  "local_path": "docs-raw/research/2026-09-06/d50c1e4327688198f4ae9380b0944aea66655f0518d8cc22fc7c23e303fff0a8/bef04ad2fd7e288fdd81fd8ff755617616358ac679ad980aa90d1e7ca85c6c1c/document.md",
+  "sha256": "bef04ad2fd7e288fdd81fd8ff755617616358ac679ad980aa90d1e7ca85c6c1c",
+  "raw_sha256": "f864a990b8b2d8fad2aa1027e188e0922c4cb6ac524a38005b26eea5d95f29c3",
+  "raw_path": "docs-raw/research/2026-09-06/d50c1e4327688198f4ae9380b0944aea66655f0518d8cc22fc7c23e303fff0a8/bef04ad2fd7e288fdd81fd8ff755617616358ac679ad980aa90d1e7ca85c6c1c/source.gz",
+  "fetched_at": "2026-09-05T11:12:56.720364+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

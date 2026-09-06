@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "telecom.phone",
+    "level": "L2",
+    "parent": "telecom",
+    "name": {
+      "zh": "电话",
+      "en": "Telephony"
+    },
+    "definition": "拨号与通话状态。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/telecom/phone/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "拨号与通话状态。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "45eb3a3f8514c546b2a983f2b9d4fb3edbab7436524753de6ef19f3f051c0c51",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "98229f25d4bb40475b044134ccbb54b60f8cd3c8e92f9eb16fa8c7b0be766ca3",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/reference/android/telephony/package-summary",
+      "platform": "android",
+      "title": "android.telephony",
+      "local_path": "docs-raw/research/2026-09-06/ab287c419237a516dd9641facc2670f68ec447e9ada5b80d52ae3f9f4a9c4ab6/267a9c1f57ff9950ecf54594ef9bce28780b34d741745abf9b9628b5b232b2c5/document.md",
+      "sha256": "267a9c1f57ff9950ecf54594ef9bce28780b34d741745abf9b9628b5b232b2c5",
+      "raw_sha256": "1ba605a331aa16bbe3a5d50fdea7bf29de5c9ff0e7f8a7d889e2826747fa3542",
+      "raw_path": "docs-raw/research/2026-09-06/ab287c419237a516dd9641facc2670f68ec447e9ada5b80d52ae3f9f4a9c4ab6/267a9c1f57ff9950ecf54594ef9bce28780b34d741745abf9b9628b5b232b2c5/source.gz",
+      "fetched_at": "2026-09-05T10:40:20.253482+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 291,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": true
+        },
+        {
+          "start_line": 16,
+          "end_line": 43,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/reference/android/telephony/mbms/package-summary",
+      "platform": "android",
+      "title": "android.telephony.mbms",
+      "local_path": "docs-raw/research/2026-09-06/2c115a75cc0d2e9fcdd511586c9140b07eb8c8f5a8fe31680c22d54aa95014a4/dcf3d7e871b6fea6120ee4e6f6922fef3f7b277d29366239a59d3d37dcb61775/document.md",
+      "sha256": "dcf3d7e871b6fea6120ee4e6f6922fef3f7b277d29366239a59d3d37dcb61775",
+      "raw_sha256": "82e0753ff4bb0f90ba3a41d0d7504326578c27815969e39efdd0ceb3055988d0",
+      "raw_path": "docs-raw/research/2026-09-06/2c115a75cc0d2e9fcdd511586c9140b07eb8c8f5a8fe31680c22d54aa95014a4/dcf3d7e871b6fea6120ee4e6f6922fef3f7b277d29366239a59d3d37dcb61775/source.gz",
+      "fetched_at": "2026-09-05T10:40:20.788398+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 69,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 11,
+          "truncated": false
+        },
+        {
+          "start_line": 12,
+          "end_line": 18,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/coretelephony/coretelephony-macros",
+      "platform": "ios",
+      "title": "Core Telephony Macros",
+      "local_path": "docs-raw/research/2026-09-06/4e8c99851cf5016a2da7d3bd8934ed512d7f38c6d27b56a092b6af694ae86bf1/65deeafaa7956bf4484bc808cbaf5a67eeb23999c2c41754ef0f26d13ad15ed9/document.md",
+      "sha256": "65deeafaa7956bf4484bc808cbaf5a67eeb23999c2c41754ef0f26d13ad15ed9",
+      "raw_sha256": "39d9012c64d72d2fa16708086f38112495c2e83b2fd0d40efa6391204d11669d",
+      "raw_path": "docs-raw/research/2026-09-06/4e8c99851cf5016a2da7d3bd8934ed512d7f38c6d27b56a092b6af694ae86bf1/65deeafaa7956bf4484bc808cbaf5a67eeb23999c2c41754ef0f26d13ad15ed9/source.gz",
+      "fetched_at": "2026-09-05T10:49:22.980384+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 21,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 21,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/coretelephony",
+      "platform": "ios",
+      "title": "Core Telephony",
+      "local_path": "docs-raw/research/2026-09-06/b8b4e3118a11d12f5005c0a8540104d93bea98538c93a5ff8d9ace6d8cb92671/e7db66607be67fc03586bb4b6640fb161de60b10ebfe112511784a1e45dc684f/document.md",
+      "sha256": "e7db66607be67fc03586bb4b6640fb161de60b10ebfe112511784a1e45dc684f",
+      "raw_sha256": "b1240e6ae7f3415ba10c2ee02b4b08c58ed1b4d13ddc37162f947d04c1560be7",
+      "raw_path": "docs-raw/research/2026-09-06/b8b4e3118a11d12f5005c0a8540104d93bea98538c93a5ff8d9ace6d8cb92671/e7db66607be67fc03586bb4b6640fb161de60b10ebfe112511784a1e45dc684f/source.gz",
+      "fetched_at": "2026-09-05T10:30:10.141099+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 110,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 13,
+          "truncated": false
+        },
+        {
+          "start_line": 14,
+          "end_line": 15,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-telephony-radio-h",
+      "platform": "harmonyos",
+      "title": "telephony_radio.h",
+      "local_path": "docs-raw/research/2026-09-06/00d8697a60e33f0ba62345cc70d044ee5273c56c074296e5d626e40954b6fbd7/5cae21b1e86219c152c31d4858251451f27d4dcfd7cf54444140240a9d5c9890/document.md",
+      "sha256": "5cae21b1e86219c152c31d4858251451f27d4dcfd7cf54444140240a9d5c9890",
+      "raw_sha256": "0b4610dfb0af1048111b847f758d2363ac395b50fa3a23c08fef67d163aed7be",
+      "raw_path": "docs-raw/research/2026-09-06/00d8697a60e33f0ba62345cc70d044ee5273c56c074296e5d626e40954b6fbd7/5cae21b1e86219c152c31d4858251451f27d4dcfd7cf54444140240a9d5c9890/source.gz",
+      "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 83,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 16,
+          "truncated": false
+        },
+        {
+          "start_line": 17,
+          "end_line": 18,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/telephony-glossary",
+      "platform": "harmonyos",
+      "title": "Telephony Kit术语",
+      "local_path": "docs-raw/research/2026-09-06/858c1c60eda285958bab17e4468bd4b770d31812cb7bb0ad2c3a5a0b0392fc02/9b1f6a11e772fb98a91f8b3e43fac6c4c796bc958c6f3784122db411d837241a/document.md",
+      "sha256": "9b1f6a11e772fb98a91f8b3e43fac6c4c796bc958c6f3784122db411d837241a",
+      "raw_sha256": "e144c16edd1674951fd35458b68da648d6af58da43e549d7e3a0c2c5e302ee35",
+      "raw_path": "docs-raw/research/2026-09-06/858c1c60eda285958bab17e4468bd4b770d31812cb7bb0ad2c3a5a0b0392fc02/9b1f6a11e772fb98a91f8b3e43fac6c4c796bc958c6f3784122db411d837241a/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 37,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:43:05.209932+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "6c94572b154da73de7f6a680389b3ff09a27492c4b42a3e75c3ec6992ab73d7a"
+}

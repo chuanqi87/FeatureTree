@@ -1,0 +1,13 @@
+{
+  "id": "63e78c147fb96871f7863c75d56a535c52a2a25292157aec616cf1269afdd2bf",
+  "url": "https://developer.apple.com/documentation/coremotion/getting-raw-gyroscope-events",
+  "platform": "ios",
+  "title": "Getting raw gyroscope events",
+  "local_path": "docs-raw/research/2026-09-06/63e78c147fb96871f7863c75d56a535c52a2a25292157aec616cf1269afdd2bf/49face2f506af66b84cef4b3118bbe21f7673aeed61e8af601074f680d451db6/document.md",
+  "sha256": "49face2f506af66b84cef4b3118bbe21f7673aeed61e8af601074f680d451db6",
+  "raw_sha256": "cb2fe8d4a7505d2d4edff7b47ce79c1958a2b5d5b1e79b01f170d6bba06fc64f",
+  "raw_path": "docs-raw/research/2026-09-06/63e78c147fb96871f7863c75d56a535c52a2a25292157aec616cf1269afdd2bf/49face2f506af66b84cef4b3118bbe21f7673aeed61e8af601074f680d451db6/source.gz",
+  "fetched_at": "2026-09-05T10:19:37.759914+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

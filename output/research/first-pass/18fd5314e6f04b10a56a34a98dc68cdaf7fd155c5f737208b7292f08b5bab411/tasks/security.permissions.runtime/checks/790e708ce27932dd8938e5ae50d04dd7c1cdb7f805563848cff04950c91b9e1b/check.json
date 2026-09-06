@@ -1,0 +1,9 @@
+{
+  "task_id": "393cfd3a3e4e1523b2556286662317dad8c3a3608049cfba50fb6983c91bbd8e",
+  "feature_id": "security.permissions.runtime",
+  "response_sha256": "0567922ade193b661cb83ab3b815895e3b188ed4df5d5ebc66cb83e870e4fa6e",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

@@ -1,0 +1,13 @@
+{
+  "id": "b123ab96a70a153f2598e468673762163621ddd334860087850313cd97d58b49",
+  "url": "https://developer.apple.com/documentation/networkextension/in-provider-networking",
+  "platform": "ios",
+  "title": "In-Provider Networking",
+  "local_path": "docs-raw/research/2026-09-06/b123ab96a70a153f2598e468673762163621ddd334860087850313cd97d58b49/0dc0a4dfbeb27c3004f7785e469e2e74731d43ca12ef2fcd445fce517b2f3dd2/document.md",
+  "sha256": "0dc0a4dfbeb27c3004f7785e469e2e74731d43ca12ef2fcd445fce517b2f3dd2",
+  "raw_sha256": "46856b74c3c9b80a82d889a1bb747b7613ff77de0af6c9214268782b9a40bbee",
+  "raw_path": "docs-raw/research/2026-09-06/b123ab96a70a153f2598e468673762163621ddd334860087850313cd97d58b49/0dc0a4dfbeb27c3004f7785e469e2e74731d43ca12ef2fcd445fce517b2f3dd2/source.gz",
+  "fetched_at": "2026-09-05T11:16:42.763785+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

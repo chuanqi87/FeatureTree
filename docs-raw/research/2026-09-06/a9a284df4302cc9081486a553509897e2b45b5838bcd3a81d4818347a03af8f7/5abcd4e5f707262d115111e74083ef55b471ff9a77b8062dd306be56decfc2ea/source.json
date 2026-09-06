@@ -1,0 +1,13 @@
+{
+  "id": "a9a284df4302cc9081486a553509897e2b45b5838bcd3a81d4818347a03af8f7",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-faqs/faqs-arkts-threading-model-12",
+  "platform": "harmonyos",
+  "title": "TaskPool创建多线程修改单例对象变量失败问题如何解决",
+  "local_path": "docs-raw/research/2026-09-06/a9a284df4302cc9081486a553509897e2b45b5838bcd3a81d4818347a03af8f7/5abcd4e5f707262d115111e74083ef55b471ff9a77b8062dd306be56decfc2ea/document.md",
+  "sha256": "5abcd4e5f707262d115111e74083ef55b471ff9a77b8062dd306be56decfc2ea",
+  "raw_sha256": "ca9c4a4a93c6377f64c8a4ec909fcf783acef60fc7d80ff78483eaf50b1466b8",
+  "raw_path": "docs-raw/research/2026-09-06/a9a284df4302cc9081486a553509897e2b45b5838bcd3a81d4818347a03af8f7/5abcd4e5f707262d115111e74083ef55b471ff9a77b8062dd306be56decfc2ea/source.gz",
+  "fetched_at": "2026-09-05T10:52:00.327597+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

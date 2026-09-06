@@ -1,0 +1,13 @@
+{
+  "id": "f346dea09c06c9eee34f762904d50c3c5b2946685792475c1829c997c97620ed",
+  "url": "https://developer.android.com/privacy-and-security/security-gms-provider",
+  "platform": "android",
+  "title": "Update your security provider to protect against SSL exploits",
+  "local_path": "docs-raw/research/2026-09-06/f346dea09c06c9eee34f762904d50c3c5b2946685792475c1829c997c97620ed/8502bfc98fae3c3670889414f5811aa5a05149217d8bf3557350417876384578/document.md",
+  "sha256": "8502bfc98fae3c3670889414f5811aa5a05149217d8bf3557350417876384578",
+  "raw_sha256": "03f3c5f4a3408248868874653b9a6b8f12049a21f78929e4f30fdcb74fbb6725",
+  "raw_path": "docs-raw/research/2026-09-06/f346dea09c06c9eee34f762904d50c3c5b2946685792475c1829c997c97620ed/8502bfc98fae3c3670889414f5811aa5a05149217d8bf3557350417876384578/source.gz",
+  "fetched_at": "2026-09-05T10:34:33.738340+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

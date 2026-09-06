@@ -1,0 +1,64 @@
+# Wi-Fi扫描 — 首轮初判
+
+低可信、未经逐条独立精审；不是最新正式版支持确认，没有真机实测。
+
+Android 文档明确 WifiManager 扫描流程、位置权限与前台/后台节流；HarmonyOS 文档给出 getScanInfoList 获取结果，但主动扫描接口 API version 10 起废弃、替代仅向系统应用开放；iOS TN3111 明示无通用 Wi-Fi 扫描 API，仅特殊用途路径（entitlement/MFi 门槛）。另 3 篇冻结来源与本节点无关。均 low 初判，版本基线未核实。
+
+## 三平台初判
+
+| 平台 | 文档信号 | 证据强弱 | 观察 | 真机需求 |
+| --- | --- | --- | --- | --- |
+| android | documented_mechanism | direct | WifiManager 提供扫描：注册 SCAN_RESULTS_AVAILABLE_ACTION 广播、startScan() 请求（需检查返回值）、getScanResults() 取结果；Android 10+ 广播对设备上任意全量扫描发出，可被动监听。权限自 8.0 起逐版收紧，Android 10+（target 29）需 ACCESS_FINE_LOCATION 且系统位置服务开启；节流为前台 4 次/2 分钟、后台应用合计 1 次/30 分钟。 | recommended |
+| ios | possible_mapping | direct | TN3111 明示 iOS 无通用 Wi-Fi 扫描与配置 API，仅特殊用途路径：NEHotspotHelper（需 Apple 授予 HotspotHelper entitlement，仅限热点集成，iOS 26 新增 hotspot helper 扩展）、NEHotspotConfigurationManager/AccessorySetupKit/HomeKit/WAC 配件路径、Core Location 用 Wi-Fi 数据定位、NEHotspotNetwork.fetchCurrent 查当前网络名（iOS 14+）。均非通用附近网络列表扫描。 | unassessed |
+| harmonyos | documented_mechanism | direct | 指南给出 getScanInfoList() 获取扫描结果、on/off('wifiScanStateChange') 注册扫描状态事件；需 SystemCapability.Communication.WiFi.STA、ohos.permission.GET_WIFI_INFO 且 Wi-Fi 开启。主动扫描接口自 API version 10 起废弃、替代接口仅向系统应用开放；前台 2 分钟内最多 4 次扫描；获取真实 BSSID 需 GET_WIFI_PEERS_MAC；PNO/周期扫描为系统行为。 | recommended |
+
+## android 条件与证据
+
+适用范围：指南按 Android 8.0 (API 26)、8.1、9 (API 28)、10+ (API 29+) 分层描述；快照获取于 2026-09-05，未核实是否覆盖最新正式版与更高 API Level 行为
+条件：startScan() 在 Android 9+/10+ 需位置权限（target 29+ 为 ACCESS_FINE_LOCATION）、CHANGE_WIFI_STATE，且系统位置服务开启；getScanResults() 另需 ACCESS_WIFI_STATE；前台应用每 2 分钟最多 4 次扫描；后台应用合计每 30 分钟 1 次（Android 9 起，Android 10+ 相同并新增开发者选项关闭节流）；Android 8.0+ 可经 CompanionDeviceManager 代为扫描附近配套设备而免位置权限；扫描可能因节流、设备空闲、硬件失败而失败；getScanResults 可能返回旧结果
+缺口：来源 android-2 为 BLE 扫描文档，与本节点无关（关键词冲突），未用作证据；未读 WifiManager API 参考正文，startScan()/getScanResults() 在最新 SDK 的废弃状态与 API Level 适用性未核实；指南分层止于 Android 10+，API 30 以上版本的行为变化未在本轮来源中体现；扫描结果字段精度（如 BSSID 是否随机化）未在所读正文覆盖
+真机分类理由：权限弹窗、位置服务开关、前台/后台节流的实际执行与广播到达行为依赖运行时环境，精研阶段需真机验证；本轮仅文档初判，未实测
+
+- [Wi-Fi scanning overview](https://developer.android.com/develop/connectivity/wifi/wifi-scan)，Wi-Fi scanning overview — WifiManager API 扫描能力概述，正文 1–5 行；获取 2026-09-05T10:24:27.485522+00:00；SHA 379ddd891d5d69406fb048ac6c16b1487030882caa9643b9eb3f140d14a44373。
+- [Wi-Fi scanning overview](https://developer.android.com/develop/connectivity/wifi/wifi-scan)，Wi-Fi scanning process — 广播注册、startScan()、getScanResults() 三步流程，正文 7–34 行；获取 2026-09-05T10:24:27.485522+00:00；SHA 379ddd891d5d69406fb048ac6c16b1487030882caa9643b9eb3f140d14a44373。
+- [Wi-Fi scanning overview](https://developer.android.com/develop/connectivity/wifi/wifi-scan)，Restrictions — Android 8.0/9 逐版收紧权限与扫描频率，正文 125–132 行；获取 2026-09-05T10:24:27.485522+00:00；SHA 379ddd891d5d69406fb048ac6c16b1487030882caa9643b9eb3f140d14a44373。
+- [Wi-Fi scanning overview](https://developer.android.com/develop/connectivity/wifi/wifi-scan)，Permissions — Android 10+ startScan()/getScanResults() 全部条件，正文 179–214 行；获取 2026-09-05T10:24:27.485522+00:00；SHA 379ddd891d5d69406fb048ac6c16b1487030882caa9643b9eb3f140d14a44373。
+- [Wi-Fi scanning overview](https://developer.android.com/develop/connectivity/wifi/wifi-scan)，Throttling — 前台 4 次/2 分钟、后台合计 1 次/30 分钟及 Android 10+ 开发者选项，正文 216–236 行；获取 2026-09-05T10:24:27.485522+00:00；SHA 379ddd891d5d69406fb048ac6c16b1487030882caa9643b9eb3f140d14a44373。
+
+## ios 条件与证据
+
+适用范围：TN3111 修订记录至 2025-08-29，正文提及 iOS 26、iOS 14、iOS 7，并声明这些 API 同样适用于 iPadOS；未逐符号核对 availability，快照获取于 2026-09-05
+条件：iOS 无通用 Wi-Fi 扫描 API（TN3111 Overview 明示）；NEHotspotHelper 需 Apple 授予 com.apple.developer.networking.HotspotHelper entitlement，且有技术与业务限制，仅限热点集成用途；配件配置路径依赖 MFi（WAC/HomeKit）或 NEHotspotConfigurationManager/AccessorySetupKit；当前网络名可经 fetchCurrent（iOS 14+）获取，旧系统用 CNCopyCurrentNetworkInfo
+缺口：来源 ios-1 为 ImageCaptureCore 图像扫描仪文档，与本节点无关（关键词冲突），未用作证据；NEHotspotHelper/NEHotspotConfigurationManager/AccessorySetupKit 符号级正文与 iOS availability 未读；NEHotspotHelper 实际可获得的网络信息范围（是否等同附近网络扫描列表）未核实；iOS 26 hotspot helper 扩展与 Wi-Fi Aware 细节超出本轮所读正文，未展开
+真机分类理由：主要路径需 Apple 授予 HotspotHelper entitlement 或 MFi 资格，普通开发者真机可验证性受限；是否需要及可行需在精研阶段先评估资格路径后再定
+
+- [TN3111: iOS Wi-Fi API overview](https://developer.apple.com/documentation/technotes/tn3111-ios-wifi-api-overview)，Overview — iOS 无通用 Wi-Fi 扫描与配置 API，特殊用途 API 也适用于 iPadOS，正文 5–9 行；获取 2026-09-05T10:26:43.887695+00:00；SHA ee39a8e563608bea22cc8b77c1b89e036ed02ff2ab2c8d9c9f9f6c841782e6fe。
+- [TN3111: iOS Wi-Fi API overview](https://developer.apple.com/documentation/technotes/tn3111-ios-wifi-api-overview)，Navigate an internet hotspot — NEHotspotHelper 需 entitlement、仅限热点集成，iOS 26 新增扩展，正文 11–19 行；获取 2026-09-05T10:26:43.887695+00:00；SHA ee39a8e563608bea22cc8b77c1b89e036ed02ff2ab2c8d9c9f9f6c841782e6fe。
+- [TN3111: iOS Wi-Fi API overview](https://developer.apple.com/documentation/technotes/tn3111-ios-wifi-api-overview)，Add an accessory — WAC/HomeKit（MFi）与 NEHotspotConfigurationManager 配件路径，正文 21–30 行；获取 2026-09-05T10:26:43.887695+00:00；SHA ee39a8e563608bea22cc8b77c1b89e036ed02ff2ab2c8d9c9f9f6c841782e6fe。
+- [TN3111: iOS Wi-Fi API overview](https://developer.apple.com/documentation/technotes/tn3111-ios-wifi-api-overview)，Location tracking / Current Wi-Fi network — Core Location 与 fetchCurrent(iOS 14+)，正文 59–65 行；获取 2026-09-05T10:26:43.887695+00:00；SHA ee39a8e563608bea22cc8b77c1b89e036ed02ff2ab2c8d9c9f9f6c841782e6fe。
+- [TN3111: iOS Wi-Fi API overview](https://developer.apple.com/documentation/technotes/tn3111-ios-wifi-api-overview)，Revision History — 2025-08-29 更新（iOS 26 内容），正文 67–74 行；获取 2026-09-05T10:26:43.887695+00:00；SHA ee39a8e563608bea22cc8b77c1b89e036ed02ff2ab2c8d9c9f9f6c841782e6fe。
+
+## harmonyos 条件与证据
+
+适用范围：指南提及 API version 9 支持、API version 10 废弃节点；未标注适用 HarmonyOS 发行版，OpenHarmony/HarmonyOS 区分未建立；快照获取于 2026-09-04
+条件：需 SystemCapability.Communication.WiFi.STA 系统能力与 ohos.permission.GET_WIFI_INFO 权限，且设备 Wi-Fi 已开启；主动扫描接口从 API version 10 起废弃，替代接口仅向系统应用开放；前台应用 2 分钟内最多发起 4 次扫描；连接过程中不允许触发扫描；温度达阈值扫描被管控；扫描结果获取真实 BSSID 需申请 ohos.permission.GET_WIFI_PEERS_MAC；PNO 扫描（未连接且息屏触发）与周期扫描为系统行为，非应用接口
+缺口：来源 harmonyos-2 为 SystemCapability.Print.PrintFramework 扫描仪 C API，与本节点无关（关键词冲突），未用作证据；指南引用的 js-apis-wifimanager（SCAN 接口）与 errorcode-wifi 参考正文未读，逐接口权限与起始版本未核实；getScanInfoList 是否主动触发扫描还是仅返回系统扫描结果，指南未完全明示；未固定 HarmonyOS 发行版/SDK 基线；tablet 形态适用性未核对
+真机分类理由：主动扫描废弃后三方应用的实际行为、4 次/2 分钟管控执行与 GET_WIFI_PEERS_MAC 的实际开放范围需真机确认；本轮仅文档初判，未实测
+
+- [Wi-Fi扫描开发指南](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-development-guide)，接口说明 — getScanInfoList()/on/off('wifiScanStateChange') 接口表，正文 14–24 行；获取 2026-09-04T09:35:09+00:00；SHA 97bfc42641c48c6657c2b9e477095c4ac8591023f02a13cfcedfa89e608c59ff。
+- [Wi-Fi扫描开发指南](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-development-guide)，开发步骤 — STA 系统能力、GET_WIFI_INFO 权限、主动扫描接口 API 10 起废弃说明，正文 28–41 行；获取 2026-09-04T09:35:09+00:00；SHA 97bfc42641c48c6657c2b9e477095c4ac8591023f02a13cfcedfa89e608c59ff。
+- [Wi-Fi扫描开发指南](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-development-guide)，示例代码 — getScanInfoList 读取 ssid/bssid/rssi/frequency 等结果字段，正文 60–78 行；获取 2026-09-04T09:35:09+00:00；SHA 97bfc42641c48c6657c2b9e477095c4ac8591023f02a13cfcedfa89e608c59ff。
+- [Wi-Fi扫描开发指南](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-development-guide)，PNO 扫描与周期扫描 — 系统触发条件（息屏未连接、亮屏连接状态），正文 89–103 行；获取 2026-09-04T09:35:09+00:00；SHA 97bfc42641c48c6657c2b9e477095c4ac8591023f02a13cfcedfa89e608c59ff。
+- [Wi-Fi扫描开发指南](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-development-guide)，扫描管控 — 前台 2 分钟 4 次、温度管控、API 10 废弃、真实 BSSID 需 GET_WIFI_PEERS_MAC，正文 105–121 行；获取 2026-09-04T09:35:09+00:00；SHA 97bfc42641c48c6657c2b9e477095c4ac8591023f02a13cfcedfa89e608c59ff。
+
+## 待验证差异假设
+
+- api_surface：第三方应用触发 Wi-Fi 扫描并获取附近网络列表的接口形态不同：Android 保留 WifiManager.startScan()/getScanResults()（受权限与节流约束，can 使用）；HarmonyOS 主动扫描接口自 API version 10 起废弃、替代接口仅向系统应用开放，三方应用经 getScanInfoList() 获取结果；iOS 明确无通用 Wi-Fi 扫描 API，仅特殊用途路径。；待核：HarmonyOS getScanInfoList 是否仅返回系统扫描缓存而不触发新扫描；Android 最新 API Level 下 startScan 的废弃或进一步限制状态；iOS NEHotspotHelper 在合规前提下能否获得附近网络列表。
+- permissions_privacy：权限/资格模型不同：Android 将扫描与位置权限（target 29+ 需 ACCESS_FINE_LOCATION）及系统位置服务开启绑定，另需 CHANGE_WIFI_STATE/ACCESS_WIFI_STATE；HarmonyOS 指南要求 GET_WIFI_INFO、真实 BSSID 另需 GET_WIFI_PEERS_MAC，未提位置权限；iOS 的 HotspotHelper 路径依赖 Apple 授予的 entitlement 而非运行时权限。；待核：ohos.permission.GET_WIFI_PEERS_MAC 是否对三方应用开放；Android target 35+ 的位置权限要求是否有新变化；HotspotHelper entitlement 的申请与审核条件细节。
+- limits_precision：扫描频率管控的表述不同：Android 9+ 前台应用每 2 分钟 4 次、后台应用合计每 30 分钟 1 次，Android 10+ 提供开发者选项关闭节流；HarmonyOS 前台同为 2 分钟 4 次，但 PNO/周期扫描由系统在特定状态触发且受温度管控，未见三方后台配额；iOS 因无通用扫描 API，所读正文未涉及三方扫描频率管控。；待核：HarmonyOS 后台三方应用是否有独立扫描配额；Android 后台 30 分钟限制在最新版本是否调整；iOS hotspot helper 路径是否存在频率或配额限制。
+
+范围缺口：6 篇冻结来源中 3 篇（android-2 BLE 扫描、ios-1 图像扫描仪、harmonyos-2 打印扫描 C API）经阅读与本节点无关，实际可用正文每平台仅 1 篇；未读 Android WifiManager API 参考正文（startScan/getScanResults 当前废弃状态与 API Level 适用性）；未读 HarmonyOS js-apis-wifimanager 与 errorcode-wifi 参考正文（逐接口权限、起始版本、错误码）；未读 Apple NEHotspotHelper/NEHotspotConfigurationManager/AccessorySetupKit 符号正文与 iOS availability；版本基线未固定：各来源 version_verified=false，不能断言对应启动日最新正式版
+
+后续优先级：P1；iOS 无通用扫描 API 与 HarmonyOS 主动扫描废弃（API 10 起、替代仅系统应用）直接决定三平台可用性结论，属高风险映射；且 3/6 来源无关导致 API 参考级证据缺失，需优先补读参考正文并真机核实
+
+逐条引用及原文摘录见同目录 normalized.json。

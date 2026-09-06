@@ -1,0 +1,13 @@
+{
+  "id": "e003bfaec94b4c68d05c816113f9755316819e4ab711d87e2ba9e831e5fa46fd",
+  "url": "https://developer.apple.com/documentation/metal/adjusting-for-gpu-memory-bandwidth-tradeoffs",
+  "platform": "ios",
+  "title": "Adjusting for GPU memory bandwidth tradeoffs",
+  "local_path": "docs-raw/research/2026-09-06/e003bfaec94b4c68d05c816113f9755316819e4ab711d87e2ba9e831e5fa46fd/769d124cdf694b5fe4d9019bb41019be40809838dde5c6fe2d7577561d6ba723/document.md",
+  "sha256": "769d124cdf694b5fe4d9019bb41019be40809838dde5c6fe2d7577561d6ba723",
+  "raw_sha256": "b22d406fc282f545e7b633ca4c0ab7d551688d7ceb21883fe636f461055dc516",
+  "raw_path": "docs-raw/research/2026-09-06/e003bfaec94b4c68d05c816113f9755316819e4ab711d87e2ba9e831e5fa46fd/769d124cdf694b5fe4d9019bb41019be40809838dde5c6fe2d7577561d6ba723/source.gz",
+  "fetched_at": "2026-09-05T11:16:58.032841+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

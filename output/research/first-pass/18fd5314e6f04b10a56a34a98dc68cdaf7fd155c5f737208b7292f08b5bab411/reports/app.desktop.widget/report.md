@@ -1,0 +1,65 @@
+# 桌面小组件 — 首轮初判
+
+低可信、未经逐条独立精审；不是最新正式版支持确认，没有真机实测。
+
+三平台均读到官方明示的桌面卡片机制：Android App Widget（RemoteViews/Glance，picker 添加、手势受限）、iOS WidgetKit（extension+SwiftUI、timeline 预算更新）、HarmonyOS ArkTS 卡片（FormExtensionAbility、共包/独立包）。刷新与打包形态存在文档级差异假设；版本基线与刷新约束未核实，全部为 low 初判。
+
+## 三平台初判
+
+| 平台 | 文档信号 | 证据强弱 | 观察 | 真机需求 |
+| --- | --- | --- | --- | --- |
+| android | documented_mechanism | direct | 官方文档明示 App Widget 机制：桌面上的 at-a-glance 视图，经 RemoteViews/XML 或 Jetpack Glance 构建；分信息/集合/控制/混合类型；用户经 widget picker 添加或应用内 pin；仅支持 touch 与垂直滑动手势、布局构建块受限；可支持用户调整大小；Android 12 起新增尺寸约束与重新配置。 | recommended |
+| ios | documented_mechanism | direct | 官方文档明示 WidgetKit 机制：以 widget extension 加入应用，SwiftUI 构建 UI、AppIntents 提供交互与配置；iPhone 主屏幕支持 small/medium/large；更新基于 timeline 预算、系统批量调度并可用 APNs 推送；点击默认启动 App、可 deep link；extension 与主 App 经 app group 共享数据；widget 可访问网络与定位。 | recommended |
+| harmonyos | documented_mechanism | direct | 官方文档明示 ArkTS 卡片机制：DevEco Studio 经 Service Widget 菜单创建（API 10+ Stage 模型），支持共包与独立卡片包（API 20 起）两种形态；form_config.json 配置规格、isDynamic 区分动态/静态卡片；FormExtensionAbility 提供创建/销毁/刷新回调，formProvider 主动更新，postCardAction 处理卡片内交互。 | recommended |
+
+## android 条件与证据
+
+适用范围：快照2026-09-05；正文标注 Android 12（API level 31）起支持集合卡片复合按钮、精细尺寸属性、响应式布局与已放置 widget 重新配置；App Widget 整体最低 API level 与 Jetpack Glance 库版本未标注，未验证是否对应最新正式版文档。
+条件：用户通过长按桌面或应用图标的 widget picker 添加 widget；应用可在合适时机引导 pin；widget 仅支持 touch 与 vertical swipe 手势，部分依赖受限手势的 UI 构建块不可用；开发者可自行决定是否支持用户调整 widget 大小；系统按 dp 尺寸范围响应 resize；Android 12 起可指定目标尺寸/最大尺寸、提供响应式与精确尺寸布局，并允许重新配置已放置的 widget；需要配置的 widget 在用户放置到桌面后立即显示配置选项
+缺口：未读 AppWidgetProvider/RemoteViews API 参考正文，App Widget 最低 API level 未核实；刷新机制（如 updatePeriodMillis、后台刷新与电池限制）未在本包正文出现，刷新约束未知；Jetpack Glance 属 AndroidX 库，其版本要求与系统 SDK 的边界未标注；平板/折叠屏仅有设计建议（尺寸分桶），具体设备行为差异未读正文；快照未验证是否对应最新正式版 Android 文档，厂商 launcher 差异未核对
+真机分类理由：添加入口、手势与尺寸机制已有官方明示，但刷新预算、跨厂商 launcher 的 resize/picker 实际表现未在文档给出，需真机核对；初判阶段不强制。
+
+- [App widgets overview](https://developer.android.com/develop/ui/views/appwidgets/overview)，App widgets overview：widgets 为桌面 at-a-glance 视图，可用 Remote View APIs+XML 或 Jetpack Glance 构建，正文 11–21 行；获取 2026-09-05T10:25:52.240833+00:00；SHA 24bbba1d178a681609e9ca5890486fdb630160ec4e0f409d5ed8d1d042ba5f6a。
+- [App widgets overview](https://developer.android.com/develop/ui/views/appwidgets/overview)，Widget limitations：仅 touch 与 vertical swipe 手势；布局构建块受 RemoteViews 限制，正文 107–128 行；获取 2026-09-05T10:25:52.240833+00:00；SHA 24bbba1d178a681609e9ca5890486fdb630160ec4e0f409d5ed8d1d042ba5f6a。
+- [App widgets overview](https://developer.android.com/develop/ui/views/appwidgets/overview)，集合卡片可垂直滚动；Android 12（API level 31）起支持复合按钮，正文 43–56 行；获取 2026-09-05T10:25:52.240833+00:00；SHA 24bbba1d178a681609e9ca5890486fdb630160ec4e0f409d5ed8d1d042ba5f6a。
+- [App widgets overview](https://developer.android.com/develop/ui/views/appwidgets/overview)，Android 12 起提供尺寸约束、响应式布局与精确尺寸布局，正文 238–251 行；获取 2026-09-05T10:25:52.240833+00:00；SHA 24bbba1d178a681609e9ca5890486fdb630160ec4e0f409d5ed8d1d042ba5f6a。
+- [App widgets overview](https://developer.android.com/develop/ui/views/appwidgets/overview)，Widget configuration by users：放置后立即配置；Android 12 支持重新配置已放置 widget，正文 253–264 行；获取 2026-09-05T10:25:52.240833+00:00；SHA 24bbba1d178a681609e9ca5890486fdb630160ec4e0f409d5ed8d1d042ba5f6a。
+- [Discovery and promotion](https://developer.android.com/design/ui/mobile/guides/widgets/discovery-promotion)，In-app discovery：应用内引导用户 pin widget 到桌面，正文 106–124 行；获取 2026-09-05T10:23:22.910813+00:00；SHA c55719a7eeb8c50a3e1268ed8cfb49792046103006d6ecf9d68f6dc15fe0858f。
+
+## ios 条件与证据
+
+适用范围：快照2026-09-05；正文提及 iOS/iPadOS 18 或更早使用 fullColor 渲染、iOS 16/macOS 13 或更早仅 large/extra-large widget 可用 SwiftUI Link；WidgetKit 整体最低 iOS 版本未在正文标注（符号级 availability 未读），未验证是否对应最新正式版文档。
+条件：以 widget extension 加入 Xcode 工程，extension 与主 App 属同一 app group 并共享容器数据；iPhone 主屏幕支持 small/medium/large 系统尺寸；extra large 不支持 iPhone（iPad 支持）；内容更新使用应用交给 WidgetKit 的 timeline，受每 App 更新预算限制，系统批量调度，并可用 APNs 推送更新；点击 widget 默认启动对应 App；可经 deep link 与 AppIntents+SwiftUI Button/Toggle 实现交互；widget 允许网络与定位访问；锁屏等常显表面需支持敏感信息 redaction
+缺口：未读 WidgetKit API 参考与符号 availability 页，iOS 最低引入版本未核实；timeline 更新预算的具体数值未在正文给出，实际刷新频率未知；iPad（tablet 形态）行为仅在平台表格出现，iPadOS 版本条件未逐项核对；iOS 18 之后版本（最新正式版）的渲染与交互变化仅有间接表述，未读对应版本说明；快照未验证是否对应最新正式版 iOS 文档
+真机分类理由：尺寸族、timeline 机制已有官方明示，但更新预算实际频率、系统调度行为与桌面渲染效果文档不透明，需真机验证；初判阶段不强制。
+
+- [Developing a WidgetKit strategy](https://developer.apple.com/documentation/widgetkit/developing-a-widgetkit-strategy)，各平台尺寸可用性表：iPhone 主屏幕 small/medium/large，extra large 不支持 iPhone，正文 33–45 行；获取 2026-09-05T10:29:11.625211+00:00；SHA f04fe7813c704d3404ed5e0b57cbc1cb93053807545dd9a73899929e0b3b2d7b。
+- [Developing a WidgetKit strategy](https://developer.apple.com/documentation/widgetkit/developing-a-widgetkit-strategy)，Leverage additional frameworks：SwiftUI 构建 UI，AppIntents 提供交互与配置，正文 47–56 行；获取 2026-09-05T10:29:11.625211+00:00；SHA f04fe7813c704d3404ed5e0b57cbc1cb93053807545dd9a73899929e0b3b2d7b。
+- [Developing a WidgetKit strategy](https://developer.apple.com/documentation/widgetkit/developing-a-widgetkit-strategy)，Provide up-to-date information：timeline 更新预算、系统批量调度、APNs 推送，正文 79–83 行；获取 2026-09-05T10:29:11.625211+00:00；SHA f04fe7813c704d3404ed5e0b57cbc1cb93053807545dd9a73899929e0b3b2d7b。
+- [Developing a WidgetKit strategy](https://developer.apple.com/documentation/widgetkit/developing-a-widgetkit-strategy)，deep link 与 AppIntents 交互；iOS 16/macOS 13 或更早仅 large/extra-large 可用 Link，正文 87–93 行；获取 2026-09-05T10:29:11.625211+00:00；SHA f04fe7813c704d3404ed5e0b57cbc1cb93053807545dd9a73899929e0b3b2d7b。
+- [Developing a WidgetKit strategy](https://developer.apple.com/documentation/widgetkit/developing-a-widgetkit-strategy)，Store shared data in a group container：extension 与主 App 经 app group 共享容器，正文 110–114 行；获取 2026-09-05T10:29:11.625211+00:00；SHA f04fe7813c704d3404ed5e0b57cbc1cb93053807545dd9a73899929e0b3b2d7b。
+- [Developing a WidgetKit strategy](https://developer.apple.com/documentation/widgetkit/developing-a-widgetkit-strategy)，Respect functional constraints：widgets 网络与定位访问为 Yes；锁屏需 redaction，正文 116–125 行；获取 2026-09-05T10:29:11.625211+00:00；SHA f04fe7813c704d3404ed5e0b57cbc1cb93053807545dd9a73899929e0b3b2d7b。
+
+## harmonyos 条件与证据
+
+适用范围：快照2026-09-04（华为 HarmonyOS 指南目录）；正文标注 API 10 及以上 Stage 模型工程可经菜单创建动态/静态卡片、API version 20 起支持独立卡片包；HarmonyOS 商业发行版与 API 10/20 的对应关系未核实，未验证是否对应最新正式版。
+条件：API 10 及以上 Stage 模型工程可在 DevEco Studio 经 Service Widget 菜单直接创建动态/静态卡片；共包方式卡片 UI 与应用代码同 module 同 HAP；独立卡片包自 API version 20 起支持，编译产物分为卡片包与应用包；卡片规格（Support dimension/Default dimension）经 form_config.json 配置，isDynamic 参数切换动态/静态卡片；FormExtensionAbility 提供卡片创建、销毁、刷新等生命周期回调；formProvider 可获取卡片信息、更新卡片、设置更新时间；postCardAction 仅可在卡片内调用，用于卡片与提供方应用间交互；独立卡片包要求应用包与卡片包版本号一致
+缺口：未读 FormExtensionAbility/formProvider/form_config.json 的 API 参考正文，刷新频率限制、卡片数量与规格上限未核实；用户将卡片添加到桌面的入口与桌面宿主行为不在本包正文；动态卡片与静态卡片的能力差异仅有链接指向，未读原文；HarmonyOS 发行版与 API 10/20 对应关系未核实，OpenHarmony 发行版未单独区分；本包第二篇来源（@Provide/@Consume 装饰器）为组件状态管理文档，与桌面卡片无直接关联，未提供本节点证据
+真机分类理由：卡片生命周期与更新 API 已有指南描述，但刷新调度策略、动态/静态卡片实际交互与桌面表现未读到限制性正文，需真机核对；初判阶段不强制。
+
+- [创建ArkTS卡片](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-ui-widget-creation)，两种创建方式：共包（同 HAP）与独立卡片包（API version 20 起），支持实时预览，正文 3–9 行；获取 2026-09-04T09:35:09+00:00；SHA 0da21fd88a0f80277053294082885a241e902ba3d17ab03ab658805c1eac8839。
+- [创建ArkTS卡片](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-ui-widget-creation)，API 10+ Stage 模型经 Service Widget 菜单创建；isDynamic 区分动态/静态卡片；规格经 form_config.json 配置，正文 25–37 行；获取 2026-09-04T09:35:09+00:00；SHA 0da21fd88a0f80277053294082885a241e902ba3d17ab03ab658805c1eac8839。
+- [创建ArkTS卡片](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-ui-widget-creation)，工程结构：FormExtensionAbility 生命周期回调、formProvider 更新、formBindingData、postCardAction 仅卡片内可调用，正文 47–61 行；获取 2026-09-04T09:35:09+00:00；SHA 0da21fd88a0f80277053294082885a241e902ba3d17ab03ab658805c1eac8839。
+- [创建ArkTS卡片](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-ui-widget-creation)，独立卡片包工程结构：entry/library 模块相互关联；应用包与卡片包版本号需一致，正文 86–98 行；获取 2026-09-04T09:35:09+00:00；SHA 0da21fd88a0f80277053294082885a241e902ba3d17ab03ab658805c1eac8839。
+
+## 待验证差异假设
+
+- programming_model：三平台均提供官方桌面卡片机制但技术载体不同：Android 为 App Widget（RemoteViews+XML 或 Jetpack Glance），iOS 为 WidgetKit widget extension+SwiftUI，HarmonyOS 为 ArkTS 卡片（FormExtensionAbility+ArkUI）。；待核：Android RemoteViews 布局限制已读，iOS 与 HarmonyOS 卡片的组件/手势限制正文未在本包，UI 能力子集对比待精研；三平台各自 UI 能力限制是否导致可实现的卡片类型差异需逐项核对 API 参考。
+- lifecycle_background：刷新模型差异假设：iOS 明示 timeline 预算+系统批量调度+APNs 推送；HarmonyOS 文档描述 FormExtensionAbility 创建/销毁/刷新回调与 formProvider 主动更新但未读预算与频率限制；两者刷新约束可能存在实质差异。；待核：Android 刷新机制（updatePeriodMillis/后台限制）本包正文未覆盖，无法纳入比较；HarmonyOS 刷新频率上限与调度策略需读 FormExtensionAbility/formProvider API 参考；iOS 更新预算具体数值未在正文，需补文档或真机验证。
+- api_surface：部署与数据共享形态差异假设：iOS widget extension 与主 App 同 app group 共享容器；HarmonyOS 支持共包/独立卡片包（API 20 起）两种形态且独立包要求应用包与卡片包版本号一致；两者的打包耦合与数据共享方式可能不同。；待核：Android widget 与应用的进程/数据共享关系（RemoteViews 宿主渲染）未在本包正文；HarmonyOS 独立卡片包的安装与分发行为需读配置与分发文档。
+
+范围缺口：版本基线未固定：三平台最新正式版与手机基线均未核实，全部结论为 low 初判；刷新/后台调度约束缺失：Android 未读到刷新正文、iOS 无预算数值、HarmonyOS 未读 API 限制；尺寸与数量限制的 API 级正文未读（form_config.json 规格、WidgetKit family、AppWidget 尺寸约束）；HarmonyOS 与 OpenHarmony 发行版未区分；Apple 来源的 iOS 适用性未逐符号核对；用户添加入口与桌面宿主（launcher/桌面）行为差异未读正文
+
+后续优先级：P2；三平台桌面卡片机制均有直接官方指南证据、平台映射风险低；但版本基线、刷新约束、尺寸与数量限制等条件性内容缺口多，需补 API 参考正文后精研。
+
+逐条引用及原文摘录见同目录 normalized.json。

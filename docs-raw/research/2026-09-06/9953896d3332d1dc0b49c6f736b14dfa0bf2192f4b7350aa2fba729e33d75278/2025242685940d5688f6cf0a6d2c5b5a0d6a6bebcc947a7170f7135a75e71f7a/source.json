@@ -1,0 +1,13 @@
+{
+  "id": "9953896d3332d1dc0b49c6f736b14dfa0bf2192f4b7350aa2fba729e33d75278",
+  "url": "https://developer.apple.com/documentation/technotes/tn3193-managing-the-on-device-foundation-model-s-context-window",
+  "platform": "ios",
+  "title": "TN3193: Managing the on-device foundation model’s context window",
+  "local_path": "docs-raw/research/2026-09-06/9953896d3332d1dc0b49c6f736b14dfa0bf2192f4b7350aa2fba729e33d75278/2025242685940d5688f6cf0a6d2c5b5a0d6a6bebcc947a7170f7135a75e71f7a/document.md",
+  "sha256": "2025242685940d5688f6cf0a6d2c5b5a0d6a6bebcc947a7170f7135a75e71f7a",
+  "raw_sha256": "5b58f5f91837d6305eab5e109beab5eb165f4d62cd078db5e745e6d243714dc2",
+  "raw_path": "docs-raw/research/2026-09-06/9953896d3332d1dc0b49c6f736b14dfa0bf2192f4b7350aa2fba729e33d75278/2025242685940d5688f6cf0a6d2c5b5a0d6a6bebcc947a7170f7135a75e71f7a/source.gz",
+  "fetched_at": "2026-09-05T10:26:55.989254+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

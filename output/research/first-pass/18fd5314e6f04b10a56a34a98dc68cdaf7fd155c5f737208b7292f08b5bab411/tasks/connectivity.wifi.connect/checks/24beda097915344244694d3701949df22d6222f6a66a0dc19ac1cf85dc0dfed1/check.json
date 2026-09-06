@@ -1,0 +1,9 @@
+{
+  "task_id": "440e34372a5e1011eb102754c4c55cca2b23ec6cdeb44dfe3571c4b321086284",
+  "feature_id": "connectivity.wifi.connect",
+  "response_sha256": "86a43a023e88c4e5e35c18a37818285a4ae2744dcc4b452834f94ecab9e6be91",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

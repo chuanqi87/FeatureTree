@@ -1,0 +1,13 @@
+{
+  "id": "d776ec3e8a4f5c168c8413c95a6d15a23e63e16aef73356e24ff7f8afec1488c",
+  "url": "https://developer.apple.com/documentation/http-live-streaming/hls-authoring-specification-for-apple-devices-appendixes",
+  "platform": "ios",
+  "title": "HTTP Live Streaming (HLS) Authoring Specification for Apple devices appendixes",
+  "local_path": "docs-raw/research/2026-09-06/d776ec3e8a4f5c168c8413c95a6d15a23e63e16aef73356e24ff7f8afec1488c/2f46d538fa018fe8e90041eddad0a45cd119084caacc02ee44e1803146a3f298/document.md",
+  "sha256": "2f46d538fa018fe8e90041eddad0a45cd119084caacc02ee44e1803146a3f298",
+  "raw_sha256": "9d47a08284d3f85761564a5c20094df4ec37197e3b4babec662aaff1347bfd9f",
+  "raw_path": "docs-raw/research/2026-09-06/d776ec3e8a4f5c168c8413c95a6d15a23e63e16aef73356e24ff7f8afec1488c/2f46d538fa018fe8e90041eddad0a45cd119084caacc02ee44e1803146a3f298/source.gz",
+  "fetched_at": "2026-09-05T10:51:54.740172+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

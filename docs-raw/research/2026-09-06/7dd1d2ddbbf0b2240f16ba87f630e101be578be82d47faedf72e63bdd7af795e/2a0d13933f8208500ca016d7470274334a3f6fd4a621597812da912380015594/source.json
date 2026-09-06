@@ -1,0 +1,13 @@
+{
+  "id": "7dd1d2ddbbf0b2240f16ba87f630e101be578be82d47faedf72e63bdd7af795e",
+  "url": "https://developer.android.com/privacy-and-security/risks/file-providers",
+  "platform": "android",
+  "title": "Improperly Exposed Directories to FileProvider",
+  "local_path": "docs-raw/research/2026-09-06/7dd1d2ddbbf0b2240f16ba87f630e101be578be82d47faedf72e63bdd7af795e/2a0d13933f8208500ca016d7470274334a3f6fd4a621597812da912380015594/document.md",
+  "sha256": "2a0d13933f8208500ca016d7470274334a3f6fd4a621597812da912380015594",
+  "raw_sha256": "550e6380eccaea8cff6451a7f89833808c5487dd029a0d88c57afd02f2ad8fe9",
+  "raw_path": "docs-raw/research/2026-09-06/7dd1d2ddbbf0b2240f16ba87f630e101be578be82d47faedf72e63bdd7af795e/2a0d13933f8208500ca016d7470274334a3f6fd4a621597812da912380015594/source.gz",
+  "fetched_at": "2026-09-05T10:34:25.722774+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

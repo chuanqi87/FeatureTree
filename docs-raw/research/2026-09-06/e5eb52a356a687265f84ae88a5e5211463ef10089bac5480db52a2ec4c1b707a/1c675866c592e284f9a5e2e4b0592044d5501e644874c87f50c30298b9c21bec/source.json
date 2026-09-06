@@ -1,0 +1,13 @@
+{
+  "id": "e5eb52a356a687265f84ae88a5e5211463ef10089bac5480db52a2ec4c1b707a",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/geofence-guidelines",
+  "platform": "harmonyos",
+  "title": "端侧GNSS围栏开发指导",
+  "local_path": "docs-raw/research/2026-09-06/e5eb52a356a687265f84ae88a5e5211463ef10089bac5480db52a2ec4c1b707a/1c675866c592e284f9a5e2e4b0592044d5501e644874c87f50c30298b9c21bec/document.md",
+  "sha256": "1c675866c592e284f9a5e2e4b0592044d5501e644874c87f50c30298b9c21bec",
+  "raw_sha256": "9c39831728ce85b793fef240edc19b116d867e7a9fa7c5b245936d69ff59a77b",
+  "raw_path": "docs-raw/research/2026-09-06/e5eb52a356a687265f84ae88a5e5211463ef10089bac5480db52a2ec4c1b707a/1c675866c592e284f9a5e2e4b0592044d5501e644874c87f50c30298b9c21bec/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

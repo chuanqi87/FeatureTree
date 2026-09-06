@@ -1,0 +1,13 @@
+{
+  "id": "2570b14a17425a40e94ed57aad5d8f1a3a6a7c72820f0d0c8409887877b8e427",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/troubleshooting-state-manage",
+  "platform": "harmonyos",
+  "title": "状态变量改变不触发组件刷新问题常用定位方法",
+  "local_path": "docs-raw/research/2026-09-06/2570b14a17425a40e94ed57aad5d8f1a3a6a7c72820f0d0c8409887877b8e427/d2b98510dfd287e3725a59c14da3cb4b7a584802758271f1a8160408c719aa57/document.md",
+  "sha256": "d2b98510dfd287e3725a59c14da3cb4b7a584802758271f1a8160408c719aa57",
+  "raw_sha256": "6d74b35a3b057f475c45b44768671fba7f18ee68bad8bcf2edca3beb052373fd",
+  "raw_path": "docs-raw/research/2026-09-06/2570b14a17425a40e94ed57aad5d8f1a3a6a7c72820f0d0c8409887877b8e427/d2b98510dfd287e3725a59c14da3cb4b7a584802758271f1a8160408c719aa57/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

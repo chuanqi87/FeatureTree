@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "graphics.3d",
+    "level": "L2",
+    "parent": "graphics",
+    "name": {
+      "zh": "三维与GPU",
+      "en": "3D and GPU"
+    },
+    "definition": "Metal/Vulkan/OpenGL 等 GPU 渲染。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/graphics/3d/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "Metal/Vulkan/OpenGL 等 GPU 渲染。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "b62ccf6dc0969bf667d9062b400e016e0a0ef519b5da128bded106ad5e1c39e8",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "8a08536ecc8410cdfeeb3410fc598bf30d0a932a5917b7726a25b7df18d1f2a7",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/develop/ui/views/graphics/webgpu",
+      "platform": "android",
+      "title": "WebGPU for Android",
+      "local_path": "docs-raw/research/2026-09-06/d4887e9394eaa154dffaaca2d5a3ead94e929dbaefd965ef14dcdcab5e07ee39/1777c30843b5d0132230c001db90138e9af1673aeb9ed69bb32932dbbf06a83c/document.md",
+      "sha256": "1777c30843b5d0132230c001db90138e9af1673aeb9ed69bb32932dbbf06a83c",
+      "raw_sha256": "85adfbcd4900305aa4dfb1f5cd7f5203611cf99e2032eccac81879ab5dce07e9",
+      "raw_path": "docs-raw/research/2026-09-06/d4887e9394eaa154dffaaca2d5a3ead94e929dbaefd965ef14dcdcab5e07ee39/1777c30843b5d0132230c001db90138e9af1673aeb9ed69bb32932dbbf06a83c/source.gz",
+      "fetched_at": "2026-09-05T10:26:00.795301+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 58,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 14,
+          "truncated": false
+        },
+        {
+          "start_line": 15,
+          "end_line": 29,
+          "truncated": false
+        },
+        {
+          "start_line": 30,
+          "end_line": 42,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/develop/ui/views/graphics/webgpu/getting-started",
+      "platform": "android",
+      "title": "Getting started with WebGPU",
+      "local_path": "docs-raw/research/2026-09-06/2b0817487c7def7edb8dec6c22b23c437f1f04aa03ae8184cd019c20f6ac0e7b/0e1b1b84e1c428cc67296fff91f205e3d7ed4e08ddc191eaf3826f34adbba2ae/document.md",
+      "sha256": "0e1b1b84e1c428cc67296fff91f205e3d7ed4e08ddc191eaf3826f34adbba2ae",
+      "raw_sha256": "cc96b9b1c920aed1a857fe65659a8f8cb28346454482d5b17f5bad66e2749c66",
+      "raw_path": "docs-raw/research/2026-09-06/2b0817487c7def7edb8dec6c22b23c437f1f04aa03ae8184cd019c20f6ac0e7b/0e1b1b84e1c428cc67296fff91f205e3d7ed4e08ddc191eaf3826f34adbba2ae/source.gz",
+      "fetched_at": "2026-09-05T10:26:00.805192+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 412,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 20,
+          "truncated": false
+        },
+        {
+          "start_line": 58,
+          "end_line": 73,
+          "truncated": false
+        },
+        {
+          "start_line": 74,
+          "end_line": 97,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/metal/adjusting-for-gpu-memory-bandwidth-tradeoffs",
+      "platform": "ios",
+      "title": "Adjusting for GPU memory bandwidth tradeoffs",
+      "local_path": "docs-raw/research/2026-09-06/e003bfaec94b4c68d05c816113f9755316819e4ab711d87e2ba9e831e5fa46fd/769d124cdf694b5fe4d9019bb41019be40809838dde5c6fe2d7577561d6ba723/document.md",
+      "sha256": "769d124cdf694b5fe4d9019bb41019be40809838dde5c6fe2d7577561d6ba723",
+      "raw_sha256": "b22d406fc282f545e7b633ca4c0ab7d551688d7ceb21883fe636f461055dc516",
+      "raw_path": "docs-raw/research/2026-09-06/e003bfaec94b4c68d05c816113f9755316819e4ab711d87e2ba9e831e5fa46fd/769d124cdf694b5fe4d9019bb41019be40809838dde5c6fe2d7577561d6ba723/source.gz",
+      "fetched_at": "2026-09-05T11:16:58.032841+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 63,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 5,
+          "end_line": 6,
+          "truncated": true
+        },
+        {
+          "start_line": 9,
+          "end_line": 24,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/metal/assessing-multi-gpu-and-multi-display-setups-on-an-intel-based-mac",
+      "platform": "ios",
+      "title": "Assessing multi-GPU and multidisplay setups on an Intel-based Mac",
+      "local_path": "docs-raw/research/2026-09-06/a9e4d17d71aeeb1762eb99c75007d32c10fffb73726db1835afa2dd7acd43956/26e5d49edf2aaee3fdc66197f987ef71d1b00b8d4f59e5c73bb2ccc9ec0a6b6a/document.md",
+      "sha256": "26e5d49edf2aaee3fdc66197f987ef71d1b00b8d4f59e5c73bb2ccc9ec0a6b6a",
+      "raw_sha256": "91374d73fe10b8d26226b15205acc2d87b44466b7d6c572011004f8b9f828e96",
+      "raw_path": "docs-raw/research/2026-09-06/a9e4d17d71aeeb1762eb99c75007d32c10fffb73726db1835afa2dd7acd43956/26e5d49edf2aaee3fdc66197f987ef71d1b00b8d4f59e5c73bb2ccc9ec0a6b6a/source.gz",
+      "fetched_at": "2026-09-05T11:16:58.634130+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 46,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 15,
+          "truncated": false
+        },
+        {
+          "start_line": 16,
+          "end_line": 46,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/games-guides/games-hismartperf-gpu-counter-0000002286844730",
+      "platform": "harmonyos",
+      "title": "GPU counter",
+      "local_path": "docs-raw/research/2026-09-06/e8cf4a26f49ad56c022c4254bcc66add8a4fbaf80cbaa445c6c42bf1556e23a3/39335007d8ca49b99f6ab017533f7046a34ebe04af7f5a99860ba1c01e3d06a1/document.md",
+      "sha256": "39335007d8ca49b99f6ab017533f7046a34ebe04af7f5a99860ba1c01e3d06a1",
+      "raw_sha256": "62b4435e7fcd4320c9c1693f49151cdf89e6bf002054dea4adabafdfb48f55a1",
+      "raw_path": "docs-raw/research/2026-09-06/e8cf4a26f49ad56c022c4254bcc66add8a4fbaf80cbaa445c6c42bf1556e23a3/39335007d8ca49b99f6ab017533f7046a34ebe04af7f5a99860ba1c01e3d06a1/source.gz",
+      "fetched_at": "2026-09-05T10:50:29.244063+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 71,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 14,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-drawing-gpu-context-h",
+      "platform": "harmonyos",
+      "title": "drawing_gpu_context.h",
+      "local_path": "docs-raw/research/2026-09-06/5ce5e3d283ce1f2221129d486af1070f7dece39a197e98a2450c25a2757e85b7/07be28a3ee4959488e9286dc6d07c2235aaccc6aa1363936404ac05e25720671/document.md",
+      "sha256": "07be28a3ee4959488e9286dc6d07c2235aaccc6aa1363936404ac05e25720671",
+      "raw_sha256": "6d5e922a15583b77ff172ec69617cdbdb8c723b60476786e414cc3f4bb592e90",
+      "raw_path": "docs-raw/research/2026-09-06/5ce5e3d283ce1f2221129d486af1070f7dece39a197e98a2450c25a2757e85b7/07be28a3ee4959488e9286dc6d07c2235aaccc6aa1363936404ac05e25720671/source.gz",
+      "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 105,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 18,
+          "truncated": false
+        },
+        {
+          "start_line": 19,
+          "end_line": 20,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:27.838987+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "85cee17d39cece72263bfc2edd1af21db6e0e0666d1ad966aa3c47232eb78e77"
+}

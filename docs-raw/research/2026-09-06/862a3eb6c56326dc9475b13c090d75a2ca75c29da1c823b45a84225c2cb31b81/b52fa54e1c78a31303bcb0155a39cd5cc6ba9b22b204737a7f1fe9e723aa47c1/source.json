@@ -1,0 +1,13 @@
+{
+  "id": "862a3eb6c56326dc9475b13c090d75a2ca75c29da1c823b45a84225c2cb31b81",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-accountkit-b035",
+  "platform": "harmonyos",
+  "title": "Account Kit",
+  "local_path": "docs-raw/research/2026-09-06/862a3eb6c56326dc9475b13c090d75a2ca75c29da1c823b45a84225c2cb31b81/b52fa54e1c78a31303bcb0155a39cd5cc6ba9b22b204737a7f1fe9e723aa47c1/document.md",
+  "sha256": "b52fa54e1c78a31303bcb0155a39cd5cc6ba9b22b204737a7f1fe9e723aa47c1",
+  "raw_sha256": "a9d5b6ed3a7f7ab527c3b2aea30ae2887acc0da897f03384aaf68cd0cc2a072a",
+  "raw_path": "docs-raw/research/2026-09-06/862a3eb6c56326dc9475b13c090d75a2ca75c29da1c823b45a84225c2cb31b81/b52fa54e1c78a31303bcb0155a39cd5cc6ba9b22b204737a7f1fe9e723aa47c1/source.gz",
+  "fetched_at": "2026-09-05T11:00:45.855535+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

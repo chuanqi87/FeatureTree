@@ -1,0 +1,543 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "storage.sandbox.private_files",
+    "level": "L3",
+    "parent": "storage.sandbox",
+    "name": {
+      "zh": "私有文件读写",
+      "en": "Private File IO"
+    },
+    "definition": "应用私有目录文件读写。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "knowledge_path": "knowledge/storage/sandbox/private_files.yaml",
+    "comparison_scope": {
+      "includes": [
+        "应用私有目录文件读写。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "0d1efe7bc200f2d6aa7461c03eaafc855a761caa0635fe67db87d875761484a5",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "2573169c4f3a568dd3c2de445dfd50145443bbe11a9205562db5dd39b964fccd",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developers.google.com/android/management/sample-app",
+      "platform": "android",
+      "title": "Sample app",
+      "local_path": "docs-raw/research/2026-09-06/4f146381618682d96528c2ca12146d4a52b35c606da3b72fff9e17162aec1349/5593e442c700c93233f4e3f3c57d2f418ad300ba4a63da796f2cfca82e30e40a/document.md",
+      "sha256": "5593e442c700c93233f4e3f3c57d2f418ad300ba4a63da796f2cfca82e30e40a",
+      "raw_sha256": "4ea43aac1b356145bf821e72b9ebb9f820166230807c6499e1983749b53be268",
+      "raw_path": "docs-raw/research/2026-09-06/4f146381618682d96528c2ca12146d4a52b35c606da3b72fff9e17162aec1349/5593e442c700c93233f4e3f3c57d2f418ad300ba4a63da796f2cfca82e30e40a/source.gz",
+      "fetched_at": "2026-09-05T10:55:13.556311+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 249,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 7,
+          "end_line": 8,
+          "truncated": true
+        },
+        {
+          "start_line": 24,
+          "end_line": 198,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developers.google.com/android/work/play/emm-api/private-apps",
+      "platform": "android",
+      "title": "Support private apps",
+      "local_path": "docs-raw/research/2026-09-06/c3ac0eee8d1efd414603b4ce35a9978ca03bfd7640fd07659d007612c22ef6ba/ae4a14481b35aa308ce3632cc68d5a1ce4088fcff8fd1f099b7ab11c6a96b251/document.md",
+      "sha256": "ae4a14481b35aa308ce3632cc68d5a1ce4088fcff8fd1f099b7ab11c6a96b251",
+      "raw_sha256": "8747786c16a9684e79894e26cc43dbb6694fbf6b26e699322113ce1acdef9337",
+      "raw_path": "docs-raw/research/2026-09-06/c3ac0eee8d1efd414603b4ce35a9978ca03bfd7640fd07659d007612c22ef6ba/ae4a14481b35aa308ce3632cc68d5a1ce4088fcff8fd1f099b7ab11c6a96b251/source.gz",
+      "fetched_at": "2026-09-05T10:53:07.963270+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 57,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 11,
+          "truncated": false
+        },
+        {
+          "start_line": 12,
+          "end_line": 22,
+          "truncated": false
+        },
+        {
+          "start_line": 23,
+          "end_line": 41,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/apple-ads-platform-api/implementing-oauth-for-the-apple-ads-platform-api",
+      "platform": "ios",
+      "title": "Implementing OAuth for the Apple Ads Platform API",
+      "local_path": "docs-raw/research/2026-09-06/31e86bc49d01d7d19ba8c84c6263a57ee7228deccab55e9344af4d9d608e242f/519871e4b67c0d48a840daa185011f5cd3e03dd39a5679c4a264ad396d1c52c3/document.md",
+      "sha256": "519871e4b67c0d48a840daa185011f5cd3e03dd39a5679c4a264ad396d1c52c3",
+      "raw_sha256": "b96245c360fda90a60568776f321ea2ab426ad90899e80951ba8665f10fc8a1c",
+      "raw_path": "docs-raw/research/2026-09-06/31e86bc49d01d7d19ba8c84c6263a57ee7228deccab55e9344af4d9d608e242f/519871e4b67c0d48a840daa185011f5cd3e03dd39a5679c4a264ad396d1c52c3/source.gz",
+      "fetched_at": "2026-09-05T10:17:25.465572+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 241,
+      "suggested_sections": [
+        {
+          "start_line": 5,
+          "end_line": 6,
+          "truncated": true
+        },
+        {
+          "start_line": 30,
+          "end_line": 54,
+          "truncated": false
+        },
+        {
+          "start_line": 55,
+          "end_line": 56,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/appstoreconnectapi/creating-keys-and-establishing-alternative-marketplace-connections",
+      "platform": "ios",
+      "title": "Creating keys and establishing alternative marketplace connections",
+      "local_path": "docs-raw/research/2026-09-06/d2f82593a142bdc9731cf068f3f12e8553f6c0abf5ce85c3935331243d7bc3da/8d045754d8ce632da02d035a07597a7305b8588f1c1ea4eb8ec9a87a22e6820e/document.md",
+      "sha256": "8d045754d8ce632da02d035a07597a7305b8588f1c1ea4eb8ec9a87a22e6820e",
+      "raw_sha256": "b3009f1a06959ec86fda5287066ee7d9ac54b863dc82efcd5f77cef3c7c8798a",
+      "raw_path": "docs-raw/research/2026-09-06/d2f82593a142bdc9731cf068f3f12e8553f6c0abf5ce85c3935331243d7bc3da/8d045754d8ce632da02d035a07597a7305b8588f1c1ea4eb8ec9a87a22e6820e/source.gz",
+      "fetched_at": "2026-09-05T10:37:50.379996+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 119,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 5,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 25,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/push-jwt-token",
+      "platform": "harmonyos",
+      "title": "基于服务账号生成鉴权令牌",
+      "local_path": "docs-raw/research/2026-09-06/979a4c3d052e0f472574d4e8a2dcc7374956100ba03d36c3c030ccae19013a7a/e09f4ce9ba08ba3272abda7a30ea67545abee0f540922dd8a7c07d1e33e894fb/document.md",
+      "sha256": "e09f4ce9ba08ba3272abda7a30ea67545abee0f540922dd8a7c07d1e33e894fb",
+      "raw_sha256": "b13c700cb4f6e7d97cee09cff3c273e360447790b9c4ac90e8f8bd507e4d0c3c",
+      "raw_path": "docs-raw/research/2026-09-06/979a4c3d052e0f472574d4e8a2dcc7374956100ba03d36c3c030ccae19013a7a/e09f4ce9ba08ba3272abda7a30ea67545abee0f540922dd8a7c07d1e33e894fb/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 606,
+      "suggested_sections": [
+        {
+          "start_line": 27,
+          "end_line": 28,
+          "truncated": true
+        },
+        {
+          "start_line": 122,
+          "end_line": 355,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-jwt-description",
+      "platform": "harmonyos",
+      "title": "生成服务端请求的token",
+      "local_path": "docs-raw/research/2026-09-06/27f3edec21da7c3c4b82f136964e98cf852632f1e57c9cfe74e2b8faccc497b6/542ee0caadaad12ec1c966b86dbbeb85f27555cdced928127b1538d9e71919b7/document.md",
+      "sha256": "542ee0caadaad12ec1c966b86dbbeb85f27555cdced928127b1538d9e71919b7",
+      "raw_sha256": "23d2d9129594bb3c80cd67daaf30e08f416ba8dac39d47d0c2e2e1bcb1e29cac",
+      "raw_path": "docs-raw/research/2026-09-06/27f3edec21da7c3c4b82f136964e98cf852632f1e57c9cfe74e2b8faccc497b6/542ee0caadaad12ec1c966b86dbbeb85f27555cdced928127b1538d9e71919b7/source.gz",
+      "fetched_at": "2026-09-05T10:37:48.949282+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 149,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 20,
+          "truncated": false
+        },
+        {
+          "start_line": 21,
+          "end_line": 33,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:43:03.199094+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "f8e67c52c33f9419968322b16a82d093934e22799e9058db23fc435afd979c20"
+}

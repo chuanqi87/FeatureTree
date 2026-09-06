@@ -1,0 +1,13 @@
+{
+  "id": "54e617aa7edbaef65b682dd8344cc0576350ffe0cf064e90504972666fb358a3",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/network-packet-analysis",
+  "platform": "harmonyos",
+  "title": "使用网络报文分析功能实现tcpdump抓包",
+  "local_path": "docs-raw/research/2026-09-06/54e617aa7edbaef65b682dd8344cc0576350ffe0cf064e90504972666fb358a3/8384b3db65ae7e95e8f1ae36cf44fe936fcb5cc62eb92e925a7c0d6263ef307b/document.md",
+  "sha256": "8384b3db65ae7e95e8f1ae36cf44fe936fcb5cc62eb92e925a7c0d6263ef307b",
+  "raw_sha256": "f4890efe28d4207e335e3d3e9e92b7e39c684edd88b61e519b7ddd5ffea24f30",
+  "raw_path": "docs-raw/research/2026-09-06/54e617aa7edbaef65b682dd8344cc0576350ffe0cf064e90504972666fb358a3/8384b3db65ae7e95e8f1ae36cf44fe936fcb5cc62eb92e925a7c0d6263ef307b/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

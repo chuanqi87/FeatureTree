@@ -1,0 +1,13 @@
+{
+  "id": "3a357930f70fc96c18ea5d3fe0a8a73e8f140567d1f7ae52730a579c67e187e6",
+  "url": "https://developer.apple.com/documentation/localauthentication",
+  "platform": "ios",
+  "title": "Local Authentication",
+  "local_path": "docs-raw/research/2026-09-06/3a357930f70fc96c18ea5d3fe0a8a73e8f140567d1f7ae52730a579c67e187e6/48280c01ff86fd57a1b98fdb0e7cccf10c0c95d0b53588f48f242dbb6e0b82af/document.md",
+  "sha256": "48280c01ff86fd57a1b98fdb0e7cccf10c0c95d0b53588f48f242dbb6e0b82af",
+  "raw_sha256": "294f15e1b26f1c177fdf61e08e43dc94ecec0a0321105283cf551a918ecb4c98",
+  "raw_path": "docs-raw/research/2026-09-06/3a357930f70fc96c18ea5d3fe0a8a73e8f140567d1f7ae52730a579c67e187e6/48280c01ff86fd57a1b98fdb0e7cccf10c0c95d0b53588f48f242dbb6e0b82af/source.gz",
+  "fetched_at": "2026-09-05T10:32:30.941604+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

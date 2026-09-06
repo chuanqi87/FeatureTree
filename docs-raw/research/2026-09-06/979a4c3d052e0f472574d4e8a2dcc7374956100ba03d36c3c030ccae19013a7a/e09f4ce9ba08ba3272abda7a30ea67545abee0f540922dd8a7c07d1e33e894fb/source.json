@@ -1,0 +1,13 @@
+{
+  "id": "979a4c3d052e0f472574d4e8a2dcc7374956100ba03d36c3c030ccae19013a7a",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/push-jwt-token",
+  "platform": "harmonyos",
+  "title": "基于服务账号生成鉴权令牌",
+  "local_path": "docs-raw/research/2026-09-06/979a4c3d052e0f472574d4e8a2dcc7374956100ba03d36c3c030ccae19013a7a/e09f4ce9ba08ba3272abda7a30ea67545abee0f540922dd8a7c07d1e33e894fb/document.md",
+  "sha256": "e09f4ce9ba08ba3272abda7a30ea67545abee0f540922dd8a7c07d1e33e894fb",
+  "raw_sha256": "b13c700cb4f6e7d97cee09cff3c273e360447790b9c4ac90e8f8bd507e4d0c3c",
+  "raw_path": "docs-raw/research/2026-09-06/979a4c3d052e0f472574d4e8a2dcc7374956100ba03d36c3c030ccae19013a7a/e09f4ce9ba08ba3272abda7a30ea67545abee0f540922dd8a7c07d1e33e894fb/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "4845235795c069f766e86454fc68e331c63fe91bb33d4893f9861941e08089c9",
+  "url": "https://developer.apple.com/documentation/hypervisor/3567078-msr_permissions-enum",
+  "platform": "ios",
+  "title": "MSR Permissions",
+  "local_path": "docs-raw/research/2026-09-06/4845235795c069f766e86454fc68e331c63fe91bb33d4893f9861941e08089c9/9842053f327272025a3334d546d429da7caa946e3de4ba220bca7ddae883882b/document.md",
+  "sha256": "9842053f327272025a3334d546d429da7caa946e3de4ba220bca7ddae883882b",
+  "raw_sha256": "4afad7e8fc856118def3dac53670c3e67ea191fa45acf19b7ff4f1b4cf05d438",
+  "raw_path": "docs-raw/research/2026-09-06/4845235795c069f766e86454fc68e331c63fe91bb33d4893f9861941e08089c9/9842053f327272025a3334d546d429da7caa946e3de4ba220bca7ddae883882b/source.gz",
+  "fetched_at": "2026-09-05T10:53:22.663917+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

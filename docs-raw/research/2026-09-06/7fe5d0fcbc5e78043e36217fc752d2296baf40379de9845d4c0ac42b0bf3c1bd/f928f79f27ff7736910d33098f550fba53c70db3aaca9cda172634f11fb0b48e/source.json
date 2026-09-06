@@ -1,0 +1,13 @@
+{
+  "id": "7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/avplayer-long-video",
+  "platform": "harmonyos",
+  "title": "基于AVPlayer播放长视频实践",
+  "local_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/document.md",
+  "sha256": "f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e",
+  "raw_sha256": "d883cfb5788574e6af5df27493675510596f2277ce13c6cd266cbd58b4fa8b18",
+  "raw_path": "docs-raw/research/2026-09-06/7fe5d0fcbc5e78043e36217fc752d2296baf40379de9845d4c0ac42b0bf3c1bd/f928f79f27ff7736910d33098f550fba53c70db3aaca9cda172634f11fb0b48e/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

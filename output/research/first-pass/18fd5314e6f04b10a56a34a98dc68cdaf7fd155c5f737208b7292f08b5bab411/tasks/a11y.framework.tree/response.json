@@ -1,0 +1,303 @@
+{
+  "task_id": "2f78975e520258412557cd41a22db7993a0f670b9e5b6f904bb8ea75b694dd52",
+  "feature_id": "a11y.framework.tree",
+  "stage": "first_pass",
+  "summary": "三平台均读到向辅助技术暴露语义的官方机制：Android Compose 并行语义树（merged/unmerged 双树、语义属性）；iOS UIKit accessibility element（label/hint/分组）与 Safari 网页内容无障碍树；HarmonyOS 服务卡片无障碍属性（API 8+）与 NDK Provider 节点树（API 13/23+）。三平台系统级树 API 正文均未读，版本基线未固定，全部 low 初判。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "Compose 文档明示组合树之外存在并行语义树，供无障碍服务与测试框架使用；语义属性（text、contentDescription、Role、stateDescription、heading、liveRegion 等）描述组件含义，mergeDescendants 控制合并，无障碍服务使用 unmerged 树；自定义低阶组件需手动提供语义。仅覆盖 Compose，未标注版本。",
+      "version_scope": "两篇来源均未标注 API Level 或 Compose 库版本（version_verified=false，快照 2026-09-05）；属 Jetpack Compose UI 无障碍文档，非系统 View 层 API；启动日基线未固定。",
+      "conditions": [
+        "来源为 Jetpack Compose（AndroidX）UI 框架文档，适用范围为 Compose 构建的应用",
+        "语义树由 Compose 组合与 Foundation/Material 组件自动填充，自定义低阶组件需手动设置",
+        "语义信息需由无障碍服务（如 TalkBack）或测试框架消费",
+        "调试依赖 Android Studio Layout Inspector、TalkBack 开发者设置 TreeDebug 或 ComposeTestRule"
+      ],
+      "gaps": [
+        "未读到系统 View 层无障碍树 API（AccessibilityNodeInfo/AccessibilityDelegate/importantForAccessibility）正文",
+        "来源未标注 API Level/Compose 版本，最新正式版支持情况未核实",
+        "语义属性全集仅以链接引用（SemanticsProperties/SemanticsActions），参考正文未读",
+        "TalkBack 等服务实际合并与播报行为未验证"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "Semantics - Semantic properties convey the meaning of the composable",
+          "start_line": 24,
+          "end_line": 28
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Semantics tree - parallel tree used by accessibility services and testing",
+          "start_line": 425,
+          "end_line": 432
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Semantics tree - custom low-level composables require manual semantics",
+          "start_line": 439,
+          "end_line": 444
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Inspect the tree - merged and unmerged trees, services use unmerged tree",
+          "start_line": 514,
+          "end_line": 521
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Debug - tools provide information about nodes and properties exposed to accessibility services",
+          "start_line": 25,
+          "end_line": 28
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "语义树结构与属性为静态文档，但服务实际如何合并 unmerged 树并播报需真机开启 TalkBack 验证；本轮仅文档初判，未执行实测。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "documented_mechanism",
+      "observation": "UIKit 文档说明标准控件默认可被 VoiceOver 朗读，自定义元素需设置 isAccessibilityElement 与 accessibilityLabel/Hint，可用 UIAccessibilityElement 分组控制阅读顺序；Safari 18.1 发行说明提及网页内容在无障碍树中的暴露修复。未见 UIKit 侧『无障碍树』API 正文。",
+      "version_scope": "Safari 18.1 发行说明明示适用 iOS 18.1/iPadOS 18.1/visionOS 2.1/macOS 15.1 等（2024-10-28 发布）；UIKit 文章未标注最低 iOS 版本；启动日基线未固定。",
+      "conditions": [
+        "UIKit 文档适用范围为标准 UIKit 控件与自定义 UI 元素，需开启 VoiceOver 交互",
+        "VoiceOver 按设备语言方向朗读，元素分组影响阅读顺序",
+        "Safari 18.1 发行说明仅覆盖 WebKit 网页内容场景的无障碍树行为",
+        "审计方式为真机/模拟器开启 VoiceOver 手动遍历界面"
+      ],
+      "gaps": [
+        "『无障碍树』直接文字证据仅见于 Safari/WebKit 网页内容发行说明，UIKit/SwiftUI 侧树概念 API 参考正文未读",
+        "accessibilityLabel/Hint、UIAccessibilityElement 等符号的 availability（最低 iOS 版本）未核实",
+        "SwiftUI 无障碍机制未覆盖",
+        "iOS 18.1 仅为 Safari 发行说明适用范围，不能代表 UIKit 文档版本"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "ios-2",
+          "locator": "Identify common accessibility issues - custom UI elements not recognized by default, grouping",
+          "start_line": 35,
+          "end_line": 39
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Update your app's accessibility - accessibilityLabel and accessibilityHint properties",
+          "start_line": 45,
+          "end_line": 47
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Add accessibility labels programmatically - isAccessibilityElement",
+          "start_line": 61,
+          "end_line": 67
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Simplify your accessibility information - grouping with UIAccessibilityElement",
+          "start_line": 78,
+          "end_line": 84
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Overview - Safari 18.1 availability for iOS 18.1 and other systems",
+          "start_line": 3,
+          "end_line": 7
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Accessibility resolved issues - content exposed in the accessibility tree",
+          "start_line": 13,
+          "end_line": 18
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "文档自身要求开启 VoiceOver 审计元素可达性与阅读顺序，实际朗读与分组效果属运行时行为；本轮未执行实测。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "服务卡片组件可设 accessibilitygroup/text/description/importance（API 8 起）并接收无障碍事件；NDK 文档明示自绘三方框架经 ArkUI_AccessibilityProvider 回调暴露无障碍节点树（根节点 parentId=-2100000 等约定），API 13 起 XComponent、API 23 起 CustomNode。主应用 ArkTS 属性指南未读。",
+      "version_scope": "文档标注 API 8（服务卡片公共属性）、API 13（XComponent 自绘接入）、API 23（CustomNode 自绘接入）；对应 HarmonyOS/OpenHarmony 发行版映射未核实；启动日基线未固定。",
+      "conditions": [
+        "harmonyos-1 为服务卡片（js-service-widget-common）场景的公共组件无障碍属性文档",
+        "NDK 自绘接入需从绘制容器获取 ArkUI_AccessibilityProvider 并注册回调（单实例或多实例）",
+        "无障碍节点须满足根节点约定：唯一根、parentId=-2100000、enabled/visible 为 true",
+        "需无障碍辅助服务（如屏幕朗读）开启后完成交互"
+      ],
+      "gaps": [
+        "harmonyos-1 为服务卡片文档，主应用 ArkTS 组件无障碍属性指南正文未读",
+        "API 8/13/23 对应的 HarmonyOS 发行版与 SDK 版本未核实",
+        "ArkUI_AccessibilityElementInfo 语义属性全集（参考页仅链接）未读",
+        "无障碍事件类型全集与屏幕朗读实际播报行为未验证"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "无障碍 - 组件无障碍属性与事件说明，从 API version 8 开始支持",
+          "start_line": 3,
+          "end_line": 5
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "无障碍属性表 - accessibilitygroup/text/description/importance",
+          "start_line": 7,
+          "end_line": 14
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "NDK 自绘制接入概述 - Provider 获取与回调注册，API 13/23 起支持",
+          "start_line": 3,
+          "end_line": 13
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "根节点约定 - elementId=-1 根节点标识、parentId=-2100000、enabled/visible 须为 true",
+          "start_line": 88,
+          "end_line": 92
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "Provider 回调契约与属性为静态文档，根节点约定、事件发送与屏幕朗读实际交互需真机开启无障碍服务验证；本轮未执行实测。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "programming_model",
+      "statement": "三平台向辅助技术暴露语义的编程模型可能不同：Android Compose 文档明示由组合自动生成并行语义树并以语义属性描述组件；iOS UIKit 文档明示以 accessibility element 属性（isAccessibilityElement/label/hint）手动标记与分组；HarmonyOS 文档明示组件无障碍属性（卡片）与 NDK Provider 回调节点树（自绘）两条接入路径。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "Semantics tree parallel to Composition, used by accessibility services",
+          "start_line": 425,
+          "end_line": 432
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "accessibilityLabel/accessibilityHint provide text VoiceOver reads",
+          "start_line": 45,
+          "end_line": 47
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "无障碍属性表 accessibilitygroup/text/description/importance",
+          "start_line": 7,
+          "end_line": 14
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "三方框架经 ArkUI_AccessibilityProvider 回调适配无障碍系统",
+          "start_line": 3,
+          "end_line": 9
+        }
+      ],
+      "open_questions": [
+        "各平台语义属性集合与默认值的逐项映射未完成",
+        "Android 系统 View 层与 iOS SwiftUI 的对应机制不在本轮来源内",
+        "HarmonyOS 主应用 ArkTS 属性与卡片属性是否一致未核实"
+      ]
+    },
+    {
+      "dimension": "api_surface",
+      "statement": "对自定义/自绘内容的语义接入机制可能不同：三者文档均要求手动补充语义，但接入面不同——Compose 用语义 modifier 补充自定义低阶组件，UIKit 需以编程方式定义 accessibility element，HarmonyOS NDK 提供显式 Provider 回调契约（节点查询、焦点、操作执行等回调与根节点硬编码约定）。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "custom low-level composables require manual semantics (calendar example)",
+          "start_line": 439,
+          "end_line": 455
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "VoiceOver doesn't recognize custom UI elements by default",
+          "start_line": 35,
+          "end_line": 39
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "自绘三方框架通过 Provider 接入（API 13 XComponent / API 23 CustomNode）",
+          "start_line": 3,
+          "end_line": 13
+        }
+      ],
+      "open_questions": [
+        "iOS 自绘内容（如 CALayer/Metal）是否存在等价 Provider 式契约未读",
+        "Android View 层等价机制（如 ExploreByTouchHelper）不在本轮来源内",
+        "HarmonyOS 声明式组件与自绘接入两条路径的语义能力是否等价未验证"
+      ]
+    },
+    {
+      "dimension": "limits_precision",
+      "statement": "树的合并语义可能不同：Android Compose 文档明示语义树存在 merged/unmerged 两种形态且无障碍服务使用 unmerged 树并自行合并；本轮 iOS 来源仅描述开发者手动分组（UIAccessibilityElement）控制阅读顺序，HarmonyOS 来源仅描述 accessibilitygroup 将组件及子组件合并为整体可选中，均未见等价双树结构描述。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "merged and unmerged semantics trees; services use unmerged tree with own merging",
+          "start_line": 514,
+          "end_line": 521
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "grouping accessibility elements to control VoiceOver reading order",
+          "start_line": 78,
+          "end_line": 84
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "accessibilitygroup 设为 true 时组件及所有子组件为整体可选中",
+          "start_line": 11,
+          "end_line": 11
+        }
+      ],
+      "open_questions": [
+        "iOS 无障碍元素树内部是否存在框架级合并策略文档未查",
+        "HarmonyOS ArkUI 无障碍树内部结构与合并规则文档未读",
+        "unmerged 树语义在 iOS/HarmonyOS 是否存在等价物未知"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "Android 侧仅读 Compose 文档，系统 View 层无障碍树 API（AccessibilityNodeInfo 等）未覆盖",
+    "iOS 侧『无障碍树』直接证据仅 Safari/WebKit 网页内容发行说明，UIKit/SwiftUI 树概念 API 正文未读",
+    "HarmonyOS 侧缺主应用 ArkTS 组件无障碍属性指南正文，发行版与 API 版本映射未核实",
+    "三平台启动日最新正式版基线未固定（version_baseline unresolved），版本适用性均待核实",
+    "本轮为 first_pass 初判，24 个比较槽与真机用例设计未涉及"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "三平台来源与节点核心范围错位（Android 仅 Compose、iOS 仅 UIKit 入门文章加 WebKit 发行说明、HarmonyOS 仅服务卡片与 NDK 自绘），各平台系统级无障碍树 API 正文均缺失，编程模型映射与版本适用风险高，需优先补读核心 API 参考后复核。"
+  }
+}

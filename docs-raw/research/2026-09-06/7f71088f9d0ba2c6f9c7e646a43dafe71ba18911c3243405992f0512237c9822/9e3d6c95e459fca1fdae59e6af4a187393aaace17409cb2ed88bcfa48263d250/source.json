@@ -1,0 +1,13 @@
+{
+  "id": "7f71088f9d0ba2c6f9c7e646a43dafe71ba18911c3243405992f0512237c9822",
+  "url": "https://developer.android.com/topic/libraries/architecture/viewmodel/viewmodel-apis",
+  "platform": "android",
+  "title": "ViewModel Scoping APIs Part of Android Jetpack .",
+  "local_path": "docs-raw/research/2026-09-06/7f71088f9d0ba2c6f9c7e646a43dafe71ba18911c3243405992f0512237c9822/9e3d6c95e459fca1fdae59e6af4a187393aaace17409cb2ed88bcfa48263d250/document.md",
+  "sha256": "9e3d6c95e459fca1fdae59e6af4a187393aaace17409cb2ed88bcfa48263d250",
+  "raw_sha256": "c9d7a468dcf8e657c10a53e436bb7a838df3d8c21e121e385a0b4e03aa21e4d7",
+  "raw_path": "docs-raw/research/2026-09-06/7f71088f9d0ba2c6f9c7e646a43dafe71ba18911c3243405992f0512237c9822/9e3d6c95e459fca1fdae59e6af4a187393aaace17409cb2ed88bcfa48263d250/source.gz",
+  "fetched_at": "2026-09-05T10:37:07.640846+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

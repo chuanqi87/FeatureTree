@@ -1,0 +1,13 @@
+{
+  "id": "959e4273606dcebee608377212ed715f8688d84ad9e6bfd9dd1a0a5bef01e184",
+  "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/connect-gatt-server",
+  "platform": "android",
+  "title": "Connect to a GATT server",
+  "local_path": "docs-raw/research/2026-09-06/959e4273606dcebee608377212ed715f8688d84ad9e6bfd9dd1a0a5bef01e184/ed8cbb13ad3490093d67e6aac935991ed8758b59b8442a45508b7031d3169270/document.md",
+  "sha256": "ed8cbb13ad3490093d67e6aac935991ed8758b59b8442a45508b7031d3169270",
+  "raw_sha256": "3578cd9246b11cc27925901cde72f3acbfc75ecef38787a9ce83decdd46fb0e8",
+  "raw_path": "docs-raw/research/2026-09-06/959e4273606dcebee608377212ed715f8688d84ad9e6bfd9dd1a0a5bef01e184/ed8cbb13ad3490093d67e6aac935991ed8758b59b8442a45508b7031d3169270/source.gz",
+  "fetched_at": "2026-09-05T10:24:14.941740+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

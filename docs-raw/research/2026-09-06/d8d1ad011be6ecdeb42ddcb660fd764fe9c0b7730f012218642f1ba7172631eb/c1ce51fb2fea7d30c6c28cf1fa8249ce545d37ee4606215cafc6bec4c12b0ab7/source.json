@@ -1,0 +1,13 @@
+{
+  "id": "d8d1ad011be6ecdeb42ddcb660fd764fe9c0b7730f012218642f1ba7172631eb",
+  "url": "https://developer.apple.com/documentation/network/implementing-netcat-with-network-framework",
+  "platform": "ios",
+  "title": "Implementing netcat with Network Framework",
+  "local_path": "docs-raw/research/2026-09-06/d8d1ad011be6ecdeb42ddcb660fd764fe9c0b7730f012218642f1ba7172631eb/c1ce51fb2fea7d30c6c28cf1fa8249ce545d37ee4606215cafc6bec4c12b0ab7/document.md",
+  "sha256": "c1ce51fb2fea7d30c6c28cf1fa8249ce545d37ee4606215cafc6bec4c12b0ab7",
+  "raw_sha256": "b9f8977775d884c54c9359ec643507902ecf2dd0bff752a6fafcb29cbc8eff84",
+  "raw_path": "docs-raw/research/2026-09-06/d8d1ad011be6ecdeb42ddcb660fd764fe9c0b7730f012218642f1ba7172631eb/c1ce51fb2fea7d30c6c28cf1fa8249ce545d37ee4606215cafc6bec4c12b0ab7/source.gz",
+  "fetched_at": "2026-09-05T10:24:20.680113+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

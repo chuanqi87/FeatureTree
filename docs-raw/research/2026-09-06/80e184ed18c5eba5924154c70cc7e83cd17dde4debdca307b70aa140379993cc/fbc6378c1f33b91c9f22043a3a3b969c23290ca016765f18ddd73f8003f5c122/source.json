@@ -1,0 +1,13 @@
+{
+  "id": "80e184ed18c5eba5924154c70cc7e83cd17dde4debdca307b70aa140379993cc",
+  "url": "https://developer.android.com/develop/connectivity/telecom/dialer-app/prevent-spoofing",
+  "platform": "android",
+  "title": "Prevent caller ID spoofing",
+  "local_path": "docs-raw/research/2026-09-06/80e184ed18c5eba5924154c70cc7e83cd17dde4debdca307b70aa140379993cc/fbc6378c1f33b91c9f22043a3a3b969c23290ca016765f18ddd73f8003f5c122/document.md",
+  "sha256": "fbc6378c1f33b91c9f22043a3a3b969c23290ca016765f18ddd73f8003f5c122",
+  "raw_sha256": "76e0816ac210be2d9f946efe592a7d439dde11674da9578a2e6524abc6e0cb93",
+  "raw_path": "docs-raw/research/2026-09-06/80e184ed18c5eba5924154c70cc7e83cd17dde4debdca307b70aa140379993cc/fbc6378c1f33b91c9f22043a3a3b969c23290ca016765f18ddd73f8003f5c122/source.gz",
+  "fetched_at": "2026-09-05T10:24:21.706104+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

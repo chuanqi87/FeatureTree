@@ -1,0 +1,13 @@
+{
+  "id": "778c2a7ab66f1dc6f14416c1d6525f00f24a8ffa51102307d6d8760e57def91e",
+  "url": "https://developer.apple.com/documentation/healthkit/accessing-a-user-s-clinical-records",
+  "platform": "ios",
+  "title": "Accessing a User’s Clinical Records",
+  "local_path": "docs-raw/research/2026-09-06/778c2a7ab66f1dc6f14416c1d6525f00f24a8ffa51102307d6d8760e57def91e/0813185dc35c64c9c17c86527a50ca314fb1db336594d4507d35660c4823d743/document.md",
+  "sha256": "0813185dc35c64c9c17c86527a50ca314fb1db336594d4507d35660c4823d743",
+  "raw_sha256": "793639ba03a295cb274b77bd27adfc6ce9f9abaf5cbdb62e18ddba4158cad7c5",
+  "raw_path": "docs-raw/research/2026-09-06/778c2a7ab66f1dc6f14416c1d6525f00f24a8ffa51102307d6d8760e57def91e/0813185dc35c64c9c17c86527a50ca314fb1db336594d4507d35660c4823d743/source.gz",
+  "fetched_at": "2026-09-05T10:22:32.641526+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

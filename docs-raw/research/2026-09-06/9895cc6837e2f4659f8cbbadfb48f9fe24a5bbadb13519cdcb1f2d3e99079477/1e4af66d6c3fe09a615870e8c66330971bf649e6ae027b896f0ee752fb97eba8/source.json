@@ -1,0 +1,13 @@
+{
+  "id": "9895cc6837e2f4659f8cbbadfb48f9fe24a5bbadb13519cdcb1f2d3e99079477",
+  "url": "https://firebase.google.com/docs/firestore/enterprise/security/overview",
+  "platform": "android",
+  "title": "Secure data in Cloud Firestore",
+  "local_path": "docs-raw/research/2026-09-06/9895cc6837e2f4659f8cbbadfb48f9fe24a5bbadb13519cdcb1f2d3e99079477/1e4af66d6c3fe09a615870e8c66330971bf649e6ae027b896f0ee752fb97eba8/document.md",
+  "sha256": "1e4af66d6c3fe09a615870e8c66330971bf649e6ae027b896f0ee752fb97eba8",
+  "raw_sha256": "4a4c8d3613198f2919d1b83ec7da2fd1b4cd8a6a75eba3ba9eaa85b06f0e3629",
+  "raw_path": "docs-raw/research/2026-09-06/9895cc6837e2f4659f8cbbadfb48f9fe24a5bbadb13519cdcb1f2d3e99079477/1e4af66d6c3fe09a615870e8c66330971bf649e6ae027b896f0ee752fb97eba8/source.gz",
+  "fetched_at": "2026-09-05T11:09:28.009510+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

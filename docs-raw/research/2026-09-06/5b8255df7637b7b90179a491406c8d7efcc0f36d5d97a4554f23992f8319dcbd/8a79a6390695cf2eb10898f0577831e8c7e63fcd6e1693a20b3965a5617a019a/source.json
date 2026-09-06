@@ -1,0 +1,13 @@
+{
+  "id": "5b8255df7637b7b90179a491406c8d7efcc0f36d5d97a4554f23992f8319dcbd",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-oh-bluetooth-h",
+  "platform": "harmonyos",
+  "title": "oh_bluetooth.h",
+  "local_path": "docs-raw/research/2026-09-06/5b8255df7637b7b90179a491406c8d7efcc0f36d5d97a4554f23992f8319dcbd/8a79a6390695cf2eb10898f0577831e8c7e63fcd6e1693a20b3965a5617a019a/document.md",
+  "sha256": "8a79a6390695cf2eb10898f0577831e8c7e63fcd6e1693a20b3965a5617a019a",
+  "raw_sha256": "1c7b53a928d9936e1e17ce29cf54cd00ca5e700c2feadca2f60257cb72e3c44b",
+  "raw_path": "docs-raw/research/2026-09-06/5b8255df7637b7b90179a491406c8d7efcc0f36d5d97a4554f23992f8319dcbd/8a79a6390695cf2eb10898f0577831e8c7e63fcd6e1693a20b3965a5617a019a/source.gz",
+  "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

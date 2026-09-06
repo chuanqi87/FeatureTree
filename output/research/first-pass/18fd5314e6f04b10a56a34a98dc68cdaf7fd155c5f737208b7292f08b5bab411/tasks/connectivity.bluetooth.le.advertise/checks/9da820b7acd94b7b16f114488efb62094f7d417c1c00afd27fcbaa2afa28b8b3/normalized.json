@@ -1,0 +1,437 @@
+{
+  "task_id": "40e08e3f6642a7609408f964daad32d8d49b681fe874ad71aa006b86f5cd44fb",
+  "feature_id": "connectivity.bluetooth.le.advertise",
+  "stage": "first_pass",
+  "summary": "三平台文档初判：HarmonyOS错误码正文直接证实BLE广播机制（startAdvertising返回广播标识符、传统广播31字节上限、扩展广播除外），但js-apis-bluetooth-ble的API参考与权限不在本包；Android两篇冻结正文（BLE后台指南、广告标识符）均未覆盖应用作为Peripheral的广播机制；iOS两篇（AdSupport、BLE MIDI）仅为中心角色或无关主题。无跨平台双方证据，差异假设为空；基线未固定，全部low。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "unknown",
+      "observation": "两篇冻结正文均未覆盖应用作为Peripheral的BLE广播机制。android-1是BLE中心角色后台指南（扫描/连接），仅在外设发现语境提及外设须在广播（140行）；android-2主题为用户可重置的广告标识符（ad tracking），与BLE广播无关。未读到任何广播API正文。",
+      "version_scope": "快照2026-09-05抓取；正文仅提及Android 10/12行为变化，未声明API Level；广播API适用版本未读到，启动日基线未固定",
+      "conditions": [
+        "android-1：BLE扫描/连接API在应用不可见时可用，但需应用进程存活（45-47行）",
+        "android-1：进程被杀后后台连接关闭；Android 12+后台启动前台服务受限（101-107行）",
+        "未读到应用作为Peripheral广播的权限或运行条件"
+      ],
+      "gaps": [
+        "缺少应用侧广播API（如BluetoothLeAdvertiser/AdvertiseData路径）参考正文，本包无该来源",
+        "广播权限（如BLUETOOTH_ADVERTISE类）与运行条件未核实",
+        "广播后台限制、可连接广播与广播数据长度约束均未读到正文",
+        "最新正式版与手机基线未固定，不能声称当前版本支持或不支持"
+      ],
+      "confidence": "low",
+      "evidence_strength": "missing",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Connect to a device > In the background（唯一advertising提法：外设须在广播，中心角色视角）",
+          "start_line": 138,
+          "end_line": 144,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/background",
+            "platform": "android",
+            "title": "Communicate in the background",
+            "local_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/document.md",
+            "sha256": "182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf",
+            "raw_sha256": "46f0a27ee7bc79e0991e096e446e5aa5190d214e58242f2754889894af9cd174",
+            "raw_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/source.gz",
+            "fetched_at": "2026-09-05T10:24:14.792416+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 199,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 24,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 43,
+                "end_line": 54,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "* Call `startScan()` with a `PendingIntent` object as described in [Find a\n  device](https://developer.android.com/develop/connectivity/bluetooth/ble/background#find-device) to wake your process up when the device is present. The\n  peripheral device must be advertising.\n  + We recommend that you start a Worker and a Job. This might be interrupted by\n    the system and thus it can only support short duration communication.\n  + In versions lower than Android 12 you can start a foreground service\n    directly from the `PendingIntent` object."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Find a device > In the background（扫描API需进程存活）",
+          "start_line": 43,
+          "end_line": 47,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/background",
+            "platform": "android",
+            "title": "Communicate in the background",
+            "local_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/document.md",
+            "sha256": "182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf",
+            "raw_sha256": "46f0a27ee7bc79e0991e096e446e5aa5190d214e58242f2754889894af9cd174",
+            "raw_path": "docs-raw/research/2026-09-06/86993ef8bc9eae731006965ea96af3d2e05bdcc819e4e741074a929756274d13/182ec066ae789fe02b98a1c9bc494ff9f92c105f42237812ec86d52f0a3e98bf/source.gz",
+            "fetched_at": "2026-09-05T10:24:14.792416+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 199,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 23,
+                "truncated": false
+              },
+              {
+                "start_line": 24,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 43,
+                "end_line": 54,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "### In the background\n\nThere is no limitation on using either of these APIs while the app is not\nvisible, but they do both need your app process to be alive. If the app process\nis not running, you can use the following workarounds:"
+        },
+        {
+          "source_id": "android-2",
+          "locator": "标题与导语（advertising ID广告标识符主题，与BLE广播无关）",
+          "start_line": 1,
+          "end_line": 12,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/identity/ad-id",
+            "platform": "android",
+            "title": "Get a user-resettable advertising ID Part of Android Jetpack .",
+            "local_path": "docs-raw/research/2026-09-06/54c3958685519c31a61ac99c5f4e9bf9fbe676c915e37706bedcc05623e6ecea/3ec63cc6c47545f1faa76fb8ea942472d84eee3dd11b8413d60a2557a6235ca1/document.md",
+            "sha256": "3ec63cc6c47545f1faa76fb8ea942472d84eee3dd11b8413d60a2557a6235ca1",
+            "raw_sha256": "a42e28bae8b4fa9b8ee0541b590c2f2879ffd010ebb70e5f81eaf6fdfcbb48fd",
+            "raw_path": "docs-raw/research/2026-09-06/54c3958685519c31a61ac99c5f4e9bf9fbe676c915e37706bedcc05623e6ecea/3ec63cc6c47545f1faa76fb8ea942472d84eee3dd11b8413d60a2557a6235ca1/source.gz",
+            "fetched_at": "2026-09-05T10:32:24.231775+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 211,
+            "suggested_sections": [
+              {
+                "start_line": 3,
+                "end_line": 28,
+                "truncated": false
+              },
+              {
+                "start_line": 29,
+                "end_line": 74,
+                "truncated": false
+              },
+              {
+                "start_line": 75,
+                "end_line": 78,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "# Get a user-resettable advertising ID Part of Android Jetpack .\n\n# Get a user-resettable advertising ID Part of [Android Jetpack](https://developer.android.com/jetpack).\n\n**Note:** If you plan to publish and distribute your app using Google Play, use the\n[ads identifier library](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient) that's available as part of Google Play services\ninstead of this library.\n\nTo protect user privacy, it's a best practice for all Android apps to work with\nuser-resettable identifiers. One such identifier is an *advertising ID*, which\nuniquely identifies a particular user for advertising use cases, such as ad\npersonalization."
+        }
+      ],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "冻结来源无广播机制正文，无法评估真机验证范围；需先补广播API参考与权限正文再判定"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "unknown",
+      "observation": "两篇均未覆盖应用作为Peripheral的广播接口。ios-1为AdSupport广告标识符框架（需配合App Tracking Transparency），与BLE广播无关；ios-2说明iOS 16+/macOS 13+系统对BLE MIDI外设的自动重连与CoreBluetooth连接步骤，均为中心角色视角。未读到CBPeripheralManager类广播接口正文。",
+      "version_scope": "快照2026-09-05抓取；ios-2提及iOS 16/macOS 13（BLE MIDI重连）、ios-1提及iOS 14.5+（广告标识符）；广播接口适用iOS版本未读到，启动日基线未固定",
+      "conditions": [
+        "ios-2：iOS 16+支持配对的BLE MIDI外设开机自动重连（7行）",
+        "ios-1：iOS 14.5+获取广告标识符需ATT授权（与BLE广播无关，9-11行）",
+        "未读到应用作为Peripheral广播的权限或运行条件"
+      ],
+      "gaps": [
+        "缺少CBPeripheralManager等广播接口正文，本包无该来源",
+        "广播接口的iOS适用性、最低系统版本与蓝牙权限说明未核实",
+        "广播后台模式与广播数据长度约束未读到正文",
+        "最新正式版与手机基线未固定，不能声称当前版本支持或不支持"
+      ],
+      "confidence": "low",
+      "evidence_strength": "missing",
+      "citations": [
+        {
+          "source_id": "ios-2",
+          "locator": "Discussion（BLE MIDI外设连接流程，中心角色）",
+          "start_line": 5,
+          "end_line": 17,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/coremidi/midi-bluetooth",
+            "platform": "ios",
+            "title": "MIDI Bluetooth",
+            "local_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/document.md",
+            "sha256": "ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3",
+            "raw_sha256": "4e089953fe61886b72b7eafaffd19fbe65e8acf0d7d99d178326811c18f71271",
+            "raw_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/source.gz",
+            "fetched_at": "2026-09-05T10:19:31.589071+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 37,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 21,
+                "end_line": 22,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Discussion\n\nIn macOS 13 or later and iOS 16 or later, the system automatically reconnects Bluetooth Low Energy (BLE) MIDI peripherals when powered on, if the device supports pairing. Previously, it was necessary to use Audio MIDI Setup to establish BLE MIDI connections.\n\nFor devices that don’t support pairing, [`Core MIDI`](/documentation/CoreMIDI) can enable <doc://com.apple.documentation/documentation/CoreBluetooth> connections for input/output (I/O).\n\nThis API enables connection of BLE MIDI peripherals that don’t support pairing using <doc://com.apple.documentation/documentation/CoreBluetooth> with the following steps:\n\n1. Scan for and connect to a BLE MIDI peripheral.\n2. Confirm the peripheral has a BLE MIDI service.\n3. Confirm the BLE MIDI service on the peripheral has a MIDI I/O characteristic for the MIDI service.\n\nOnce a BLE MIDI peripheral connects — and you confirm that it possess both the BLE MIDI service and BLE MIDI I/O characteristic — call [`MIDIBluetoothDriverActivateAllConnections()`](/documentation/CoreMIDI/MIDIBluetoothDriverActivateAllConnections()) to have [`Core MIDI`](/documentation/CoreMIDI) enable I/O on those connections."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Overview（advertisingIdentifier广告标识符）",
+          "start_line": 5,
+          "end_line": 11,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/adsupport",
+            "platform": "ios",
+            "title": "AdSupport",
+            "local_path": "docs-raw/research/2026-09-06/359ebd74cdeec59e720da3326ce54063e1e8018a0bf28fbbf8d1366287daa83d/8dfc2d5ccee28ac0d8368c703ec4ed681783469229a2a424956156392f563a10/document.md",
+            "sha256": "8dfc2d5ccee28ac0d8368c703ec4ed681783469229a2a424956156392f563a10",
+            "raw_sha256": "1b0a027eb6bcb13b2274dd8b1a722c021988a58f594b07393f0b83a977b5ad9a",
+            "raw_path": "docs-raw/research/2026-09-06/359ebd74cdeec59e720da3326ce54063e1e8018a0bf28fbbf8d1366287daa83d/8dfc2d5ccee28ac0d8368c703ec4ed681783469229a2a424956156392f563a10/source.gz",
+            "fetched_at": "2026-09-05T10:29:51.126127+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 57,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 12,
+                "truncated": false
+              },
+              {
+                "start_line": 13,
+                "end_line": 44,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Overview\n\nUse the AdSupport framework to obtain an advertising identifier. The [`advertisingIdentifier`](/documentation/AdSupport/ASIdentifierManager/advertisingIdentifier)\nis an alphanumeric string that’s unique to each device, and which you only use for\nadvertising. On devices running iOS 14.5 and later and iPadOS 14.5 and later, your\napp must support <doc://com.apple.documentation/documentation/AppTrackingTransparency> and define the purpose string <doc://com.apple.documentation/documentation/BundleResources/Information-Property-List/NSUserTrackingUsageDescription>\nbefore it can get the [`advertisingIdentifier`](/documentation/AdSupport/ASIdentifierManager/advertisingIdentifier) property."
+        }
+      ],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "冻结来源无广播接口正文，无法评估真机验证需求；需先补广播接口与权限正文再判定"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "错误码正文直接证实BLE广播机制：2902054规定传统广播报文上限31字节（扩展广播不受此限）；2902055表明存在startAdvertising接口并返回广播标识符（无效值默认0xFF），链接锚点指向js-apis-bluetooth-ble。另一篇@ohos.nearlink.advertising为星闪广播（起始版本26.0.0、NearLink.Base），属另一无线技术，不构成BLE证据。",
+      "version_scope": "错误码快照2026-09-04抓取，正文未声明适用API/SDK版本；URL锚点blestartadvertising11暗示API 11（未核实）；星闪篇起始版本26.0.0但非BLE；启动日基线未固定",
+      "conditions": [
+        "传统广播报文最大31字节，超限返回异常；该限制仅适用传统广播，不含扩展广播（974行）",
+        "广播标识符须为startAdvertising接口返回值，无效值默认0xFF（992行）",
+        "错误码正文未声明BLE广播权限要求与适用API版本"
+      ],
+      "gaps": [
+        "js-apis-bluetooth-ble的startAdvertising API参考正文不在本包，参数、权限（如ACCESS_BLUETOOTH类）与返回值未核实",
+        "startAdvertising适用API版本未核实（仅错误码文档URL锚点暗示API 11）",
+        "HarmonyOS与OpenHarmony发行版适用性未区分核实",
+        "扩展广播的接口、约束与手机设备支持范围未读到正文"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "错误码2902054 广播报文超限（传统广播31字节上限，扩展广播除外）",
+          "start_line": 962,
+          "end_line": 978,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/errorcode-bluetoothmanager",
+            "platform": "harmonyos",
+            "title": "蓝牙服务子系统错误码",
+            "local_path": "docs-raw/research/2026-09-06/cdc622e28b158d9c399a9d4176b08f0453064329591410eda06b16ad2f5e43a4/4042af7df2166c5fd6290d590a46c431c0462efbadfb5107b098efcad1ba98d6/document.md",
+            "sha256": "4042af7df2166c5fd6290d590a46c431c0462efbadfb5107b098efcad1ba98d6",
+            "raw_sha256": "667b26da23db53cf3b628789ff82ce730350a70ea56c4ed88fff12eb3b053bec",
+            "raw_path": "docs-raw/research/2026-09-06/cdc622e28b158d9c399a9d4176b08f0453064329591410eda06b16ad2f5e43a4/4042af7df2166c5fd6290d590a46c431c0462efbadfb5107b098efcad1ba98d6/source.gz",
+            "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1068,
+            "suggested_sections": [
+              {
+                "start_line": 24,
+                "end_line": 41,
+                "truncated": false
+              },
+              {
+                "start_line": 170,
+                "end_line": 189,
+                "truncated": false
+              },
+              {
+                "start_line": 666,
+                "end_line": 685,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 2902054 广播报文超限\n\n错误信息\n\nThe length of the advertising data exceeds the upper limit.\n\n错误描述\n\n广播报文超过最大长度。\n\n可能原因\n\n传统广播报文的最大长度为31字节，超过此长度将返回异常。当前，该长度限制仅适用于传统广播，不包括扩展广播。\n\n处理步骤\n\n检查广播报文是否超过最大长度限制。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "错误码2902055 广播标识符无效（引用js-apis-bluetooth-ble的startAdvertising）",
+          "start_line": 980,
+          "end_line": 996,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/errorcode-bluetoothmanager",
+            "platform": "harmonyos",
+            "title": "蓝牙服务子系统错误码",
+            "local_path": "docs-raw/research/2026-09-06/cdc622e28b158d9c399a9d4176b08f0453064329591410eda06b16ad2f5e43a4/4042af7df2166c5fd6290d590a46c431c0462efbadfb5107b098efcad1ba98d6/document.md",
+            "sha256": "4042af7df2166c5fd6290d590a46c431c0462efbadfb5107b098efcad1ba98d6",
+            "raw_sha256": "667b26da23db53cf3b628789ff82ce730350a70ea56c4ed88fff12eb3b053bec",
+            "raw_path": "docs-raw/research/2026-09-06/cdc622e28b158d9c399a9d4176b08f0453064329591410eda06b16ad2f5e43a4/4042af7df2166c5fd6290d590a46c431c0462efbadfb5107b098efcad1ba98d6/source.gz",
+            "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1068,
+            "suggested_sections": [
+              {
+                "start_line": 24,
+                "end_line": 41,
+                "truncated": false
+              },
+              {
+                "start_line": 170,
+                "end_line": 189,
+                "truncated": false
+              },
+              {
+                "start_line": 666,
+                "end_line": 685,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 2902055 广播标识符无效\n\n错误信息\n\nInvalid advertising id.\n\n错误描述\n\n广播标识符无效。\n\n可能原因\n\n传入的广播标识符应为[startAdvertising](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble#blestartadvertising11)接口返回的值，无效的广播标识符默认为0xFF。\n\n处理步骤\n\n检查传入的广播标识符是否为[startAdvertising](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble#blestartadvertising11)接口返回的有效标识符。  "
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "模块说明（星闪广播能力，起始版本26.0.0，非BLE）",
+          "start_line": 1,
+          "end_line": 5,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-nearlink-advertising",
+            "platform": "harmonyos",
+            "title": "@ohos.nearlink.advertising (星闪广播能力)",
+            "local_path": "docs-raw/research/2026-09-06/8fe32aac45b0fa5ed7ba5638e16a677ed7885d8e31fa681f189a628bf580a3e7/ab47ab72d2f5f095fbeb17ca333c9d48358445078004096fef3a0ebf8024a9ff/document.md",
+            "sha256": "ab47ab72d2f5f095fbeb17ca333c9d48358445078004096fef3a0ebf8024a9ff",
+            "raw_sha256": "e1e71e4c082ce67d0edbf307dd10fb960abd0f1a9a05f6fc7173b1620f3dbbba",
+            "raw_path": "docs-raw/research/2026-09-06/8fe32aac45b0fa5ed7ba5638e16a677ed7885d8e31fa681f189a628bf580a3e7/ab47ab72d2f5f095fbeb17ca333c9d48358445078004096fef3a0ebf8024a9ff/source.gz",
+            "fetched_at": "2026-09-05T10:27:40.751329+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 367,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 13,
+                "end_line": 27,
+                "truncated": false
+              },
+              {
+                "start_line": 137,
+                "end_line": 227,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "# @ohos.nearlink.advertising (星闪广播能力)\n\n本模块提供了发送星闪广播的相关功能，包括启动广播、停止广播、订阅广播状态等。\n\n起始版本： 26.0.0  "
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "advertising.startAdvertising（星闪广播，权限ACCESS_NEARLINK，系统NearLink.Base）",
+          "start_line": 137,
+          "end_line": 149,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-nearlink-advertising",
+            "platform": "harmonyos",
+            "title": "@ohos.nearlink.advertising (星闪广播能力)",
+            "local_path": "docs-raw/research/2026-09-06/8fe32aac45b0fa5ed7ba5638e16a677ed7885d8e31fa681f189a628bf580a3e7/ab47ab72d2f5f095fbeb17ca333c9d48358445078004096fef3a0ebf8024a9ff/document.md",
+            "sha256": "ab47ab72d2f5f095fbeb17ca333c9d48358445078004096fef3a0ebf8024a9ff",
+            "raw_sha256": "e1e71e4c082ce67d0edbf307dd10fb960abd0f1a9a05f6fc7173b1620f3dbbba",
+            "raw_path": "docs-raw/research/2026-09-06/8fe32aac45b0fa5ed7ba5638e16a677ed7885d8e31fa681f189a628bf580a3e7/ab47ab72d2f5f095fbeb17ca333c9d48358445078004096fef3a0ebf8024a9ff/source.gz",
+            "fetched_at": "2026-09-05T10:27:40.751329+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 367,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 6,
+                "truncated": false
+              },
+              {
+                "start_line": 13,
+                "end_line": 27,
+                "truncated": false
+              },
+              {
+                "start_line": 137,
+                "end_line": 227,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### advertising.startAdvertising\n\nstartAdvertising(advertisingParams: AdvertisingParams): Promise\\<number\\>\n\n发送星闪广播。使用Promise异步回调。适用于设备发现、设备信息广播等需要将本端设备能力或数据对外发布的业务场景，配合[advertising.onAdvertisingStateChange](#advertisingonadvertisingstatechange)可监听广播启停状态。\n\n起始版本： 26.0.0\n\n模型约束： 此接口仅可在Stage模型下使用。\n\n需要权限： ohos.permission.ACCESS_NEARLINK\n\n系统能力： SystemCapability.Communication.NearLink.Base"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "错误码描述的31字节上限与扩展广播行为依赖设备/芯片实现，且API适用版本未核实；精研时建议真机验证广播启停与报文长度行为"
+      }
+    }
+  ],
+  "difference_hypotheses": [],
+  "scope_gaps": [
+    "Android：应用作为Peripheral的BLE广播API正文完全缺失，android-1仅为中心角色指南，android-2为广告标识符主题（无关）",
+    "iOS：CBPeripheralManager广播正文缺失，ios-1为广告标识符框架（无关），ios-2为中心角色BLE MIDI连接",
+    "HarmonyOS：js-apis-bluetooth-ble的startAdvertising API参考缺失，权限/参数/适用版本未核实；星闪广播为另一技术不可混作BLE证据",
+    "三平台广播后台限制、可连接/不可连接广播、扩展广播支持范围等比较维度均无正文",
+    "启动日最新正式版与手机基线未固定（version_baseline unresolved），所有初判仅限冻结快照"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "Android与iOS的广播关键机制正文完全缺失，HarmonyOS仅有错误码级证据而缺API参考正文；且存在将广告标识符（advertising ID）或星闪广播误映射为BLE广播的高风险，属关键缺口，需优先补正文与版本核实"
+  }
+}

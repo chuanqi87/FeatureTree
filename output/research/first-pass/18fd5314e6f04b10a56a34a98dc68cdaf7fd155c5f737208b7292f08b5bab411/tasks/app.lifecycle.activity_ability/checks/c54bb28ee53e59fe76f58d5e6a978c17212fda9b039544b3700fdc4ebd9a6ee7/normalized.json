@@ -1,0 +1,1257 @@
+{
+  "task_id": "1edb300bfad83b29accefe4f773e242e8419a800302df9db91e77225225964b9",
+  "feature_id": "app.lifecycle.activity_ability",
+  "stage": "first_pass",
+  "summary": "三平台均读到前台界面组件生命周期官方正文：Android Activity定义七回调、四状态与三个生命期，重建后经savedInstanceState/rememberSaveable自动恢复；iOS UIViewController以视图出现/消失回调为主，状态保留为opt-in(restorationIdentifier+恢复归档)；HarmonyOS UIAbility(仅Stage模型,API9+首批)为组件级四状态，页面加载在onWindowStageCreate，onSaveState仅限appRecovery故障场景。初判回调粒度与状态恢复触发条件存在结构性差异；iOS入口组件映射与三平台版本基线是主要缺口。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "Activity为前台界面组件：官方参考定义onCreate/onStart/onRestart/onResume/onPause/onStop/onDestroy回调、active/visible/stopped/destroyed四状态与整段/可见/前台三个生命期循环；onCreate提供先前冻结状态的Bundle；指南称Activity重建后状态自动恢复(Compose rememberSaveable)，并提及后台启动Activity受系统限制。",
+      "version_scope": "未固定API Level；所读为developer.android.com当前Activity参考与生命周期指南(Android系统SDK层,非AndroidX)，未核对文档声明的适用版本。",
+      "conditions": [
+        "Activity须在AndroidManifest.xml声明<activity>",
+        "onCreate必须实现；重写回调须调用superclass",
+        "onPause实现须快速返回，否则下一个Activity无法resume",
+        "后台启动Activity受系统限制(指南提及,细则未读)"
+      ],
+      "gaps": [
+        "未核对所读参考/指南适用的API Level与最低系统版本",
+        "onSaveInstanceState/onRestoreInstanceState具体契约原文段落未读，仅见指南概述",
+        "后台启动Activity限制的豁免条件与targetSDK关系未读",
+        "多窗口模式下生命周期回调时序未读"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Activity > Activity Lifecycle(状态与回调定义,186-201为回调签名代码块)",
+          "start_line": 115,
+          "end_line": 202,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/reference/android/app/Activity",
+            "platform": "android",
+            "title": "Activity",
+            "local_path": "docs-raw/research/2026-09-06/68062e3eeadc31bc4077be382438f38574ba6ae57aa0d8e35257d6c6355027e9/4260bd7d809e9944bf8c70f388036a3fc9040991269313a261f8ba2b7917c786/document.md",
+            "sha256": "4260bd7d809e9944bf8c70f388036a3fc9040991269313a261f8ba2b7917c786",
+            "raw_sha256": "20511307c83862af3104689d2df17f99fac233031f2da38af1f67d5ae3f16416",
+            "raw_path": "docs-raw/research/2026-09-06/68062e3eeadc31bc4077be382438f38574ba6ae57aa0d8e35257d6c6355027e9/4260bd7d809e9944bf8c70f388036a3fc9040991269313a261f8ba2b7917c786/source.gz",
+            "fetched_at": "2026-09-05T10:15:53.163135+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 8633,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 17,
+                "end_line": 33,
+                "truncated": true
+              },
+              {
+                "start_line": 115,
+                "end_line": 208,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "### Activity Lifecycle\n\nActivities in the system are managed as\n[activity stacks](https://developer.android.com/guide/components/activities/tasks-and-back-stack). When a new activity is started, it is usually placed on the top of the\ncurrent stack and becomes the running activity -- the previous activity always remains\nbelow it in the stack, and will not come to the foreground again until\nthe new activity exits. There can be one or multiple activity stacks visible\non screen.\n\nAn activity has essentially four states:\n\n* If an activity is in the foreground of the screen (at the highest position of the topmost\n  stack), it is *active* or *running*. This is usually the activity that the\n  user is currently interacting with.\n* If an activity has lost focus but is still presented to the user, it is *visible*.\n  It is possible if a new non-full-sized or transparent activity has focus on top of your\n  activity, another activity has higher position in multi-window mode, or the activity\n  itself is not focusable in current windowing mode. Such activity is completely alive (it\n  maintains all state and member information and remains attached to the window manager).* If an activity is completely obscured by another activity,\n    it is *stopped* or *hidden*. It still retains all state and member\n    information, however, it is no longer visible to the user so its window is hidden\n    and it will often be killed by the system when memory is needed elsewhere.\n  * The system can drop the activity from memory by either asking it to finish,\n    or simply killing its process, making it *destroyed*. When it is displayed again\n    to the user, it must be completely restarted and restored to its previous state.\n\nThe following diagram shows the important state paths of an activity.\nThe square rectangles represent callback methods you can implement to\nperform operations when the activity moves between states. The colored\novals are major states the activity can be in.\n\n![State diagram for the Android activity lifecycle.](https://developer.android.com/images/activity_lifecycle.png)\n\nThere are three key loops you may be interested in monitoring within your\nactivity:\n\n* The **entire lifetime** of an activity happens between the first call\n  to `onCreate(Bundle)` through to a single final call\n  to `onDestroy()`. An activity will do all setup\n  of \"global\" state in onCreate(), and release all remaining resources in\n  onDestroy(). For example, if it has a thread running in the background\n  to download data from the network, it may create that thread in onCreate()\n  and then stop the thread in onDestroy().* The **visible lifetime** of an activity happens between a call to\n    `onStart()` until a corresponding call to\n    `onStop()`. During this time the user can see the\n    activity on-screen, though it may not be in the foreground and interacting\n    with the user. Between these two methods you can maintain resources that\n    are needed to show the activity to the user. For example, you can register\n    a `BroadcastReceiver` in onStart() to monitor for changes\n    that impact your UI, and unregister it in onStop() when the user no\n    longer sees what you are displaying. The onStart() and onStop() methods\n    can be called multiple times, as the activity becomes visible and hidden\n    to the user.* The **foreground lifetime** of an activity happens between a call to\n      `onResume()` until a corresponding call to\n      `onPause()`. During this time the activity is\n      visible, active and interacting with the user. An activity\n      can frequently go between the resumed and paused states -- for example when\n      the device goes to sleep, when an activity result is delivered, when a new\n      intent is delivered -- so the code in these methods should be fairly\n      lightweight.\n\nThe entire lifecycle of an activity is defined by the following\nActivity methods. All of these are hooks that you can override\nto do appropriate work when the activity changes state. All\nactivities will implement `onCreate(Bundle)`\nto do their initial setup; many will also implement\n`onPause()` to commit changes to data and\nprepare to pause interacting with the user, and `onStop()`\nto handle no longer being visible on screen. You should always\ncall up to your superclass when implementing these methods.\n\n```\npublic class Activity extends ApplicationContext {\n    protected void onCreate(Bundle savedInstanceState);\n\n    protected void onStart();\n\n    protected void onRestart();\n\n    protected void onResume();\n\n    protected void onPause();\n\n    protected void onStop();\n\n    protected void onDestroy();\n}\n```"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Activity > Activity Lifecycle 生命周期表(onCreate携带先前冻结状态Bundle;onPause killable性)",
+          "start_line": 207,
+          "end_line": 213,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/reference/android/app/Activity",
+            "platform": "android",
+            "title": "Activity",
+            "local_path": "docs-raw/research/2026-09-06/68062e3eeadc31bc4077be382438f38574ba6ae57aa0d8e35257d6c6355027e9/4260bd7d809e9944bf8c70f388036a3fc9040991269313a261f8ba2b7917c786/document.md",
+            "sha256": "4260bd7d809e9944bf8c70f388036a3fc9040991269313a261f8ba2b7917c786",
+            "raw_sha256": "20511307c83862af3104689d2df17f99fac233031f2da38af1f67d5ae3f16416",
+            "raw_path": "docs-raw/research/2026-09-06/68062e3eeadc31bc4077be382438f38574ba6ae57aa0d8e35257d6c6355027e9/4260bd7d809e9944bf8c70f388036a3fc9040991269313a261f8ba2b7917c786/source.gz",
+            "fetched_at": "2026-09-05T10:15:53.163135+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 8633,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 17,
+                "end_line": 33,
+                "truncated": true
+              },
+              {
+                "start_line": 115,
+                "end_line": 208,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "| Method | | | Description | Killable? | Next |\n| --- | --- | --- | --- | --- | --- |\n| `onCreate()` | | | Called when the activity is first created. This is where you should do all of your normal static set up: create views, bind data to lists, etc. This method also provides you with a Bundle containing the activity's previously frozen state, if there was one. Always followed by `onStart()`. | No | `onStart()` |\n|  | `onRestart()` | | Called after your activity has been stopped, prior to it being started again. Always followed by `onStart()` | No | `onStart()` |\n| `onStart()` | | Called when the activity is becoming visible to the user. Followed by `onResume()` if the activity comes to the foreground, or `onStop()` if it becomes hidden. | No | `onResume()` or `onStop()` |\n|  | `onResume()` | Called when the activity will start interacting with the user. At this point your activity is at the top of its activity stack, with user input going to it. Always followed by `onPause()`. | No | `onPause()` |\n| `onPause()` | Called when the activity loses foreground state, is no longer focusable or before transition to stopped/hidden or destroyed state. The activity is still visible to user, so it's recommended to keep it visually active and continue updating the UI. Implementations of this method must be very quick because the next activity will not be resumed until this method returns. Followed by either `onResume()` if the activity returns back to the front, or `onStop()` if it becomes invisible to the user. | **Pre-`Build.VERSION_CODES.HONEYCOMB`** | `onResume()` or  `onStop()` |"
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Activity-lifecycle concepts(核心六回调onCreate/onStart/onResume/onPause/onStop/onDestroy)",
+          "start_line": 44,
+          "end_line": 47,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/guide/components/activities/activity-lifecycle",
+            "platform": "android",
+            "title": "The activity lifecycle",
+            "local_path": "docs-raw/research/2026-09-06/4a3d93960c0beb454f4737be0d59b758406093956b1b0c8a97e3ebc456d7d3a8/2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975/document.md",
+            "sha256": "2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975",
+            "raw_sha256": "ea82596263145e26b1b3eb8638a03bdc4784f9339a87584a9aa5ee6c25f31a44",
+            "raw_path": "docs-raw/research/2026-09-06/4a3d93960c0beb454f4737be0d59b758406093956b1b0c8a97e3ebc456d7d3a8/2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975/source.gz",
+            "fetched_at": "2026-09-05T10:29:21.696442+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 654,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 41,
+                "truncated": false
+              },
+              {
+                "start_line": 42,
+                "end_line": 73,
+                "truncated": false
+              },
+              {
+                "start_line": 105,
+                "end_line": 106,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "To navigate transitions between stages of the activity lifecycle, the `Activity`\nclass provides a core set of six callbacks: [`onCreate`](https://developer.android.com/reference/kotlin/android/app/Activity#oncreate_1), [`onStart`](https://developer.android.com/reference/kotlin/android/app/Activity#onstart),\n[`onResume`](https://developer.android.com/reference/kotlin/android/app/Activity#onresume), [`onPause`](https://developer.android.com/reference/kotlin/android/app/Activity#onpause), [`onStop`](https://developer.android.com/reference/kotlin/android/app/Activity#onstop), and [`onDestroy`](https://developer.android.com/reference/kotlin/android/app/Activity#ondestroy). The\nsystem invokes each of these callbacks as the activity enters a new state."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Restore activity UI state using saved instance state(重建后自动恢复,rememberSaveable)",
+          "start_line": 521,
+          "end_line": 527,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/guide/components/activities/activity-lifecycle",
+            "platform": "android",
+            "title": "The activity lifecycle",
+            "local_path": "docs-raw/research/2026-09-06/4a3d93960c0beb454f4737be0d59b758406093956b1b0c8a97e3ebc456d7d3a8/2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975/document.md",
+            "sha256": "2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975",
+            "raw_sha256": "ea82596263145e26b1b3eb8638a03bdc4784f9339a87584a9aa5ee6c25f31a44",
+            "raw_path": "docs-raw/research/2026-09-06/4a3d93960c0beb454f4737be0d59b758406093956b1b0c8a97e3ebc456d7d3a8/2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975/source.gz",
+            "fetched_at": "2026-09-05T10:29:21.696442+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 654,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 41,
+                "truncated": false
+              },
+              {
+                "start_line": 42,
+                "end_line": 73,
+                "truncated": false
+              },
+              {
+                "start_line": 105,
+                "end_line": 106,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "### Restore activity UI state using saved instance state\n\nWhen your activity is recreated after it was previously destroyed, state\nrestoration is automatic. When you use [`rememberSaveable`](https://developer.android.com/develop/ui/compose/state#restore-ui-state), you don't need\nto write any explicit restoration logic, check for null bundles, or override\nactivity callbacks. The code that initializes and saves your state also\nseamlessly restores it when the activity comes back:"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "生命周期回调时序、进程被杀后的实际状态恢复与厂商进程策略相关，静态文档不能验证运行时行为；建议后续真机验证，本轮仅分类不设计用例。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "documented_mechanism",
+      "observation": "UIViewController管理视图层级，视图懒加载(loadView/viewDidLoad)；可见性变化触发viewWillAppear/viewIsAppearing/viewDidAppear/viewWillDisappear/viewDidDisappear等回调；状态保留为opt-in：设置restorationIdentifier后系统可在应用转后台时要求编码，恢复按restorationClass→app delegate→既有对象→storyboard顺序重建视图控制器。",
+      "version_scope": "Apple平台UIKit官方文档(正文提及iOS 8起旋转方法废弃改用viewWillTransition)；未读取各符号iOS availability元数据；未固定iOS版本。",
+      "conditions": [
+        "UIKit目录含多平台内容，iOS适用性需逐符号核对",
+        "状态保留为opt-in:需restorationIdentifier且恢复归档可用、app代理shouldRestoreApplicationState返回true",
+        "视图懒加载，首次访问view属性才加载或创建视图",
+        "界面旋转自iOS 8起经viewWillTransition(to:with:)报告"
+      ],
+      "gaps": [
+        "未读取各回调符号的iOS availability版本元数据",
+        "iOS前台入口组件归属(UISceneDelegate/UIApplicationDelegate与UIViewController分工)未在本包来源核对",
+        "SwiftUI场景官方推荐的状态恢复路径未读",
+        "状态保留在强制退出/系统回收下的行为未读"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "UIViewController > Overview(视图控制器职责与管理视图层级)",
+          "start_line": 11,
+          "end_line": 22,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/uiviewcontroller",
+            "platform": "ios",
+            "title": "UIViewController",
+            "local_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/document.md",
+            "sha256": "09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e",
+            "raw_sha256": "3d820f9972aa0e17bb1f38ea709a4e8901bc033e5320fdb34d5a433239e57f18",
+            "raw_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/source.gz",
+            "fetched_at": "2026-09-05T10:15:49.375266+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 952,
+            "suggested_sections": [
+              {
+                "start_line": 59,
+                "end_line": 60,
+                "truncated": true
+              },
+              {
+                "start_line": 72,
+                "end_line": 91,
+                "truncated": false
+              },
+              {
+                "start_line": 128,
+                "end_line": 165,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "The [`UIViewController`](/documentation/UIKit/UIViewController) class defines the shared behavior that’s common to all view controllers. You rarely create instances of the [`UIViewController`](/documentation/UIKit/UIViewController) class directly. Instead, you subclass [`UIViewController`](/documentation/UIKit/UIViewController) and add the methods and properties needed to manage the view controller’s view hierarchy.\n\nA view controller’s main responsibilities include the following:\n\n- Updating the contents of the views, usually in response to changes to the underlying data\n- Responding to user interactions with views\n- Resizing views and managing the layout of the overall interface\n- Coordinating with other objects — including other view controllers — in your app\n\nA view controller is tightly bound to the views it manages and takes part in handling events in its view hierarchy. Specifically, view controllers are [`UIResponder`](/documentation/UIKit/UIResponder) objects and are inserted into the responder chain between the view controller’s root view and that view’s superview, which typically belongs to a different view controller. If none of the view controller’s views handle an event, the view controller has the option of handling the event or passing it along to the superview.\n\nView controllers are rarely used in isolation. Instead, you often use multiple view controllers, each of which owns a portion of your app’s user interface. For example, one view controller might display a table of items while a different view controller displays the selected item from that table. Usually, only the views from one view controller are visible at a time. A view controller may present a different view controller to display a new set of views, or it may act as a container for other view controllers’ content and animate views however it wants."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Subclassing notes > Handle view-related notifications(出现/消失回调与状态转换)",
+          "start_line": 51,
+          "end_line": 57,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/uiviewcontroller",
+            "platform": "ios",
+            "title": "UIViewController",
+            "local_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/document.md",
+            "sha256": "09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e",
+            "raw_sha256": "3d820f9972aa0e17bb1f38ea709a4e8901bc033e5320fdb34d5a433239e57f18",
+            "raw_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/source.gz",
+            "fetched_at": "2026-09-05T10:15:49.375266+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 952,
+            "suggested_sections": [
+              {
+                "start_line": 59,
+                "end_line": 60,
+                "truncated": true
+              },
+              {
+                "start_line": 72,
+                "end_line": 91,
+                "truncated": false
+              },
+              {
+                "start_line": 128,
+                "end_line": 165,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "##### Handle view-related notifications\n\nWhen the visibility of its views changes, a view controller automatically calls its own methods so that subclasses can respond to the change. Use a method like [`viewIsAppearing(_:)`](/documentation/UIKit/UIViewController/viewIsAppearing(_:)) to prepare your views to appear onscreen, and use [`viewWillDisappear(_:)`](/documentation/UIKit/UIViewController/viewWillDisappear(_:)) to save changes or other state information. Use other methods to make appropriate changes.\n\nThe following image shows the possible visible states for a view controller’s views and the state transitions that can occur. Not all `will` callback methods are paired with only a `did` callback method. You need to ensure that if you start a process in a `will` callback method, you end the process in both the corresponding `did` and the opposite `will` callback method.\n\n![A diagram of four spheres arranged in a circle. The sphere on the right is labeled Appearing and has a clockwise arrow leading to the bottom sphere, which is labeled Appeared. A small dot on the arrow is labeled viewDidAppear. A clockwise arrow leads from the bottom sphere to the left sphere, which is labeled Disappearing. A small dot along the arrow is labeled viewWillDisappear. A clockwise arrow leads from the left sphere to the top sphere, which is labeled Disappeared. Two small dots along the arrow are labeled viewDidDisappear and View removed. A clockwise arrow leads from the top sphere to the right sphere. Three small dots along the arrow are labeled viewWillAppear, View added, and viewIsAppearing.](images/com.apple.uikit/media-1965800@2x.png)"
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Topics > Managing the view(view/loadView/viewDidLoad)",
+          "start_line": 128,
+          "end_line": 152,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/uiviewcontroller",
+            "platform": "ios",
+            "title": "UIViewController",
+            "local_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/document.md",
+            "sha256": "09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e",
+            "raw_sha256": "3d820f9972aa0e17bb1f38ea709a4e8901bc033e5320fdb34d5a433239e57f18",
+            "raw_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/source.gz",
+            "fetched_at": "2026-09-05T10:15:49.375266+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 952,
+            "suggested_sections": [
+              {
+                "start_line": 59,
+                "end_line": 60,
+                "truncated": true
+              },
+              {
+                "start_line": 72,
+                "end_line": 91,
+                "truncated": false
+              },
+              {
+                "start_line": 128,
+                "end_line": 165,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Managing the view\n\n[`view`](/documentation/UIKit/UIViewController/view)\n\nThe view that the controller manages.\n\n[`viewIfLoaded`](/documentation/UIKit/UIViewController/viewIfLoaded)\n\nThe view controller’s view, or `nil` if the view isn’t yet loaded.\n\n[`viewLoaded`](/documentation/UIKit/UIViewController/isViewLoaded)\n\nA Boolean value indicating whether the view is currently loaded into memory.\n\n[`-  loadView`](/documentation/UIKit/UIViewController/loadView())\n\nCreates the view that the controller manages.\n\n[`-  viewDidLoad`](/documentation/UIKit/UIViewController/viewDidLoad())\n\nCalled after the controller’s view is loaded into memory.\n\n[`-  loadViewIfNeeded`](/documentation/UIKit/UIViewController/loadViewIfNeeded())\n\nLoads the view controller’s view if it’s not loaded yet."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Support state preservation and restoration(restorationIdentifier转后台时编码)",
+          "start_line": 96,
+          "end_line": 100,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/uiviewcontroller",
+            "platform": "ios",
+            "title": "UIViewController",
+            "local_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/document.md",
+            "sha256": "09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e",
+            "raw_sha256": "3d820f9972aa0e17bb1f38ea709a4e8901bc033e5320fdb34d5a433239e57f18",
+            "raw_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/source.gz",
+            "fetched_at": "2026-09-05T10:15:49.375266+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 952,
+            "suggested_sections": [
+              {
+                "start_line": 59,
+                "end_line": 60,
+                "truncated": true
+              },
+              {
+                "start_line": 72,
+                "end_line": 91,
+                "truncated": false
+              },
+              {
+                "start_line": 128,
+                "end_line": 165,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### Support state preservation and restoration\n\nIf you assign a value to the view controller’s [`restorationIdentifier`](/documentation/UIKit/UIViewController/restorationIdentifier) property, the system may ask the view controller to encode itself when the app transitions to the background. When preserved, a view controller preserves the state of any views in its view hierarchy that also have restoration identifiers. View controllers don’t automatically save any other state. If you’re implementing a custom container view controller, you must encode any child view controllers yourself. Each child you encode must have a unique restoration identifier.\n\nFor more information about how the system determines which view controllers to preserve and restore, see [App Programming Guide for iOS](https://developer.apple.com/library/archive/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007072). To see an example of state preservation and restoration, see [Restoring your app’s state](/documentation/UIKit/restoring-your-app-s-state)."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Recreate your view controllers(UIKit重建顺序:restorationClass→app delegate→既有对象→storyboard)",
+          "start_line": 15,
+          "end_line": 26,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/uikit/about-the-ui-restoration-process",
+            "platform": "ios",
+            "title": "About the UI restoration process",
+            "local_path": "docs-raw/research/2026-09-06/e2272630cf4c2126d60f100ef7067b345f7944cb30112d6f0e3f980e7b38e412/44abd4f5146b6ebba91b6563bd44442c1494fbfe2b3c54c668665753e204d90e/document.md",
+            "sha256": "44abd4f5146b6ebba91b6563bd44442c1494fbfe2b3c54c668665753e204d90e",
+            "raw_sha256": "437d0aed39247ce6839dfe9e93c71af2aaa8f8d56713766c0dbf777910599054",
+            "raw_path": "docs-raw/research/2026-09-06/e2272630cf4c2126d60f100ef7067b345f7944cb30112d6f0e3f980e7b38e412/44abd4f5146b6ebba91b6563bd44442c1494fbfe2b3c54c668665753e204d90e/source.gz",
+            "fetched_at": "2026-09-05T11:22:03.716381+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 46,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 15,
+                "end_line": 46,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Recreate your view controllers\n\nDuring restoration, UIKit tries to create or locate view controller objects from your preserved interface. UIKit first asks you to provide the view controller object. If you don’t provide the view controller, UIKit looks for it implicitly. Here’s the sequence of steps that UIKit follows to recreate view controllers:\n\n1. **Asks the view controller’s restoration class.** A restoration class knows how to create a specific view controller. You designate a restoration class by assigning that class to the [`restorationClass`](/documentation/UIKit/UIViewController/restorationClass) property of your view controller. During restoration, UIKit calls the [`viewController(withRestorationIdentifierPath:coder:)`](/documentation/UIKit/UIViewControllerRestoration/viewController(withRestorationIdentifierPath:coder:)) method of the restoration class to request a new instance of the view controller, which your method then returns. If you return `nil`, UIKit stops trying to create the view controller and leaves it out of the restoration process.\n2. **Asks the app delegate.** If the view controller had no restoration class, UIKit calls the [`application(_:viewControllerWithRestorationIdentifierPath:coder:)`](/documentation/UIKit/UIApplicationDelegate/application(_:viewControllerWithRestorationIdentifierPath:coder:)) method of the app delegate. If you return `nil` from that method, UIKit continues searching.\n3. **Checks for an existing object.** UIKit looks for an already created view controller with the exact same restoration path.\n4. **Instantiates the view controller from your storyboards.** If it still doesn’t have the view controller, UIKit automatically instantiates it from your app’s storyboards.\n\nBefore state restoration even begins, UIKit loads your app’s default view controllers from your storyboards. Because UIKit loads these view controllers automatically, it’s better not to create them using a restoration class or your app delegate. For all other view controllers, assign a restoration class only if the view controller isn’t defined in your storyboards. You might also assign a restoration class to prevent the creation of your view controller in specific circumstances. For example, you might want to avoid displaying the view controller if the associated restoration archive refers to stale or missing data.\n\nWhen recreating view controllers in code, always reassign a value to the view controller’s [`restorationIdentifier`](/documentation/UIKit/UIViewController/restorationIdentifier) property in addition to any other initialization. Also assign a value to the [`restorationClass`](/documentation/UIKit/UIViewController/restorationClass) property as appropriate. Assigning these values at creation time ensures that the view controller will be preserved during the next cycle."
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "状态保留/恢复归档的实际触发与前后台切换回调时序需真机验证；静态文档仅描述机制，本轮仅分类不设计用例。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "UIAbility为含UI应用组件(仅Stage模型,API9+首批)：组件级四状态Create/Foreground/Background/Destroy对应onCreate/onForeground/onBackground/onDestroy，页面加载在onWindowStageCreate；onCreate仅冷启动触发并携带launchParam(含上次退出原因)；onSaveState需配合appRecovery且当前仅APP_RECOVERY故障场景；onPrepareToTerminate(10+)需权限且仅PC/2in1/Tablet执行回调。",
+      "version_scope": "华为HarmonyOS官方参考(developer.huawei.com,非OpenHarmony仓库)；模块首批API 9+，onPrepareToTerminate 10+、onWill/onDid前后台回调20+、isDestroyed 26.0.0；未固定HarmonyOS发行版与最新正式版基线。",
+      "conditions": [
+        "仅可在Stage模型下使用",
+        "onSaveState需enableAppRecovery(saveOccasion=SAVE_WHEN_ERROR)使能",
+        "onPrepareToTerminate需ohos.permission.PREPARE_APP_TERMINATE,仅PC/2in1/Tablet执行回调",
+        "onCreate仅冷启动触发,重复拉起走onNewWant(正文未读)",
+        "EmbeddedUIExtensionAbility仅多进程配置设备(2in1/Tablet)可用"
+      ],
+      "gaps": [
+        "未固定HarmonyOS最新正式版与API版本基线(任务version_baseline unresolved)",
+        "appRecovery恢复路径与wantParam回传到onCreate Want.parameters的细节未读",
+        "手机设备上onPrepareToTerminate不执行时的替代关闭流程未核对",
+        "onBackPressed/onContinue/onCollaborate等回调与状态恢复关系未读",
+        "ArkUI页面级生命周期不在本包来源范围,未读"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "UIAbility生命周期状态(Create/Foreground/Background/Destroy四状态)",
+          "start_line": 11,
+          "end_line": 20,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability",
+            "platform": "harmonyos",
+            "title": "@ohos.app.ability.UIAbility (带界面的应用组件)",
+            "local_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/document.md",
+            "sha256": "74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f",
+            "raw_sha256": "a60f1b7bade8dc78760344c80bcfd7f8f52851c18a5b6da936beca0c11b82a0f",
+            "raw_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/source.gz",
+            "fetched_at": "2026-09-05T10:26:49.555101+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1588,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 21,
+                "truncated": false
+              },
+              {
+                "start_line": 743,
+                "end_line": 798,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### UIAbility生命周期状态\n\n图1 UIAbility生命周期状态\n\n![](https://media:201787906636438016)\n\n* Create：表示UIAbility实例已创建。系统会在该状态下触发其[onCreate](#oncreate)回调函数，开发者可以在[onCreate](#oncreate)中执行初始化操作。\n* Foreground：表示UIAbility被拉到前台。系统会在该状态下触发其[onForeground](#onforeground)回调函数，开发者可以在[onForeground](#onforeground)中申请应用所需的资源。\n* Background：表示UIAbility被拉到后台。系统会在该状态下触发其[onBackground](#onbackground)回调函数，开发者可以在[onBackground](#onbackground)中释放一些应用资源。\n* Destroy：表示UIAbility实例即将销毁。系统会在该状态下触发其[onDestroy](#ondestroy)回调函数，开发者可以在[onDestroy](#ondestroy)中执行数据保存等操作。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "onCreate(仅冷启动触发;launchParam含启动原因与上次退出原因)",
+          "start_line": 57,
+          "end_line": 74,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability",
+            "platform": "harmonyos",
+            "title": "@ohos.app.ability.UIAbility (带界面的应用组件)",
+            "local_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/document.md",
+            "sha256": "74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f",
+            "raw_sha256": "a60f1b7bade8dc78760344c80bcfd7f8f52851c18a5b6da936beca0c11b82a0f",
+            "raw_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/source.gz",
+            "fetched_at": "2026-09-05T10:26:49.555101+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1588,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 21,
+                "truncated": false
+              },
+              {
+                "start_line": 743,
+                "end_line": 798,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### onCreate\n\nonCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void\n\n当UIAbility实例创建完成时，系统会触发该回调，开发者可在该回调中执行初始化逻辑（如定义变量、加载资源等）。该回调仅会在UIAbility[冷启动](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/uiability-intra-device-interaction#目标uiability冷启动)时触发。\n\n同步接口，不支持异步回调。\n\n元服务API：从API version 11开始，该接口支持在元服务中使用。\n\n系统能力：SystemCapability.Ability.AbilityRuntime.AbilityCore\n\n参数：  \n\n|参数名|类型|必填|说明|\n|:----------|:-----------------------------------------------------------------------------------------------------------------------------------------------|:-|:-------------------------|\n|want|[Want](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-want)|是|调用方拉起该UIAbility时传递的数据。|\n|launchParam|[AbilityConstant.LaunchParam](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-abilityconstant#launchparam)|是|应用启动参数，包含应用启动原因、应用上次退出原因等。|"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "onWindowStageCreate(WindowStage创建后加载页面)",
+          "start_line": 91,
+          "end_line": 105,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability",
+            "platform": "harmonyos",
+            "title": "@ohos.app.ability.UIAbility (带界面的应用组件)",
+            "local_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/document.md",
+            "sha256": "74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f",
+            "raw_sha256": "a60f1b7bade8dc78760344c80bcfd7f8f52851c18a5b6da936beca0c11b82a0f",
+            "raw_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/source.gz",
+            "fetched_at": "2026-09-05T10:26:49.555101+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1588,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 21,
+                "truncated": false
+              },
+              {
+                "start_line": 743,
+                "end_line": 798,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### onWindowStageCreate\n\nonWindowStageCreate(windowStage: window.WindowStage): void\n\n当[WindowStage](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-window-windowstage)实例创建完成后，系统会触发该回调。开发者可以在该回调中通过WindowStage加载页面。\n\n元服务API：从API version 11开始，该接口支持在元服务中使用。\n\n系统能力：SystemCapability.Ability.AbilityRuntime.AbilityCore\n\n参数：  \n\n|参数名|类型|必填|说明|\n|:----------|:--------------------------------------------------------------------------------------------------------------------|:-|:---------------|\n|windowStage|[window.WindowStage](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-window-windowstage)|是|WindowStage实例对象。|"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "onSaveState(需配合appRecovery,当前仅支持APP_RECOVERY故障场景)",
+          "start_line": 636,
+          "end_line": 653,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability",
+            "platform": "harmonyos",
+            "title": "@ohos.app.ability.UIAbility (带界面的应用组件)",
+            "local_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/document.md",
+            "sha256": "74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f",
+            "raw_sha256": "a60f1b7bade8dc78760344c80bcfd7f8f52851c18a5b6da936beca0c11b82a0f",
+            "raw_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/source.gz",
+            "fetched_at": "2026-09-05T10:26:49.555101+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1588,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 21,
+                "truncated": false
+              },
+              {
+                "start_line": 743,
+                "end_line": 798,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### onSaveState\n\nonSaveState(reason: AbilityConstant.StateType, wantParam: Record\\<string, Object\\>): AbilityConstant.OnSaveResult\n\n该接口需要与[appRecovery](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-apprecovery)配合使用。如果应用已使能故障恢复功能（即[enableAppRecovery](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-apprecovery#apprecoveryenableapprecovery)接口中的saveOccasion参数设置为SAVE_WHEN_ERROR），当应用出现故障时，系统将触发该回调来保存UIAbility的数据。  \n![](https://media:201787906636658021)  \n从API version 20开始，当[onSaveStateAsync](#onsavestateasync20)实现时，本回调函数将不执行。\n\n元服务API：从API version 11开始，该接口支持在元服务中使用。\n\n系统能力：SystemCapability.Ability.AbilityRuntime.AbilityCore\n\n参数：  \n\n|参数名|类型|必填|说明|\n|:--------|:-------------------------------------------------------------------------------------------------------------------------------------------|:-|:-------------------------------------------------------------|\n|reason|[AbilityConstant.StateType](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-abilityconstant#statetype)|是|触发应用保存状态的原因，当前仅支持APP_RECOVERY（即应用故障恢复场景）。|\n|wantParam|Record\\<string, Object\\>|是|用户自定义的应用状态数据，应用再启动时被保存在[onCreate](#oncreate)的Want.parameters中。|"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "onPrepareToTerminate(需权限;仅PC/2in1和Tablet执行回调)",
+          "start_line": 743,
+          "end_line": 758,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability",
+            "platform": "harmonyos",
+            "title": "@ohos.app.ability.UIAbility (带界面的应用组件)",
+            "local_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/document.md",
+            "sha256": "74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f",
+            "raw_sha256": "a60f1b7bade8dc78760344c80bcfd7f8f52851c18a5b6da936beca0c11b82a0f",
+            "raw_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/source.gz",
+            "fetched_at": "2026-09-05T10:26:49.555101+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1588,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 21,
+                "truncated": false
+              },
+              {
+                "start_line": 743,
+                "end_line": 798,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### onPrepareToTerminate^10+^\n\nonPrepareToTerminate(): boolean\n\n在UIAbility即将关闭前（例如用户通过点击应用窗口右上角的关闭按钮、或者通过Dock栏/托盘右键退出应用时），系统会触发该回调，用于在UIAbility正式关闭前执行其他操作。开发者可以在该回调中返回true阻拦此次关闭，然后在合适时机主动调用[terminateSelf](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inner-application-uiabilitycontext#terminateself)接口关闭。例如，询问用户是否确认关闭UIAbility，再主动销毁UIAbility。  \n![](https://media:201787906636699022)  \n* 从API version 15开始，当[UIAbility.onPrepareToTerminateAsync](#onpreparetoterminateasync15)实现时，本回调函数将不执行。当[AbilityStage.onPrepareTerminationAsync](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-abilitystage#onprepareterminationasync15)或[AbilityStage.onPrepareTermination](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-abilitystage#onpreparetermination15)实现时，在dock栏或系统托盘处右键点击关闭，本回调函数将不执行。\n* 如果应用本身或者所使用的三方框架注册了[window.WindowStage.on('windowStageClose')](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-window-windowstage#onwindowstageclose14)监听，本回调函数将不执行。\n\n需要权限：ohos.permission.PREPARE_APP_TERMINATE\n\n元服务API：从API version 11开始，该接口支持在元服务中使用。\n\n系统能力：SystemCapability.Ability.AbilityRuntime.AbilityCore\n\n设备行为差异：该接口仅在PC/2in1和Tablet设备中可正常执行回调，在其他设备上不执行回调。"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "EmbeddedUIExtensionAbility > 约束限制与生命周期(仅多进程设备;六回调)",
+          "start_line": 17,
+          "end_line": 28,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/embeddeduiextensionability",
+            "platform": "harmonyos",
+            "title": "EmbeddedUIExtensionAbility",
+            "local_path": "docs-raw/research/2026-09-06/9a3d0afba906108d0932e79044a187b4659d4880556c865000722a5a3ed8e502/2871ac26faaa67251d5b7538dcfe37e6a6d2327165084f78a043934b8e2a06c7/document.md",
+            "sha256": "2871ac26faaa67251d5b7538dcfe37e6a6d2327165084f78a043934b8e2a06c7",
+            "raw_sha256": "77ea404c68986e726bcfd82e7ef5eac7345d7887eba007175069013a7bb2060e",
+            "raw_path": "docs-raw/research/2026-09-06/9a3d0afba906108d0932e79044a187b4659d4880556c865000722a5a3ed8e502/2871ac26faaa67251d5b7538dcfe37e6a6d2327165084f78a043934b8e2a06c7/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 180,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 15,
+                "end_line": 16,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "当前EmbeddedUIExtensionAbility和EmbeddedComponent仅支持在拥有多进程配置的设备上使用，目前支持多进程配置的设备有2in1与Tablet。  \n\n#### 生命周期\n\n[EmbeddedUIExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-embeddeduiextensionability)提供了onCreate、onSessionCreate、onSessionDestroy、onForeground、onBackground和onDestroy生命周期回调，根据需要重写对应的回调方法。以下生命周期回调均继承自[UIExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiextensionability)。\n\n* onCreate：当EmbeddedUIExtensionAbility创建时回调，执行初始化业务逻辑操作。\n* onSessionCreate：当EmbeddedUIExtensionAbility界面内容对象创建后调用。\n* onSessionDestroy：当EmbeddedUIExtensionAbility界面内容对象销毁后调用。\n* onForeground：当EmbeddedUIExtensionAbility从后台转到前台时触发。\n* onBackground：当EmbeddedUIExtensionAbility从前台转到后台时触发。\n* onDestroy：当EmbeddedUIExtensionAbility销毁时回调，可以执行资源清理等操作。"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "文档明示设备形态行为差异(手机不执行onPrepareToTerminate)与故障恢复触发条件，需真机验证实际执行差异；本轮仅分类不设计用例。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "programming_model",
+      "statement": "假设(can)：三平台前台组件生命周期回调粒度结构性不同——Android Activity提供六/七个组件级可见性回调(onCreate/onStart/onResume/onPause/onStop/onDestroy)；iOS UIViewController为视图出现/消失回调(viewWillAppear等,视图懒加载经loadView/viewDidLoad)；HarmonyOS UIAbility组件级仅Create/Foreground/Background/Destroy四状态，页面加载移至onWindowStageCreate。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "Activity-lifecycle concepts(核心六回调)",
+          "start_line": 44,
+          "end_line": 47,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/guide/components/activities/activity-lifecycle",
+            "platform": "android",
+            "title": "The activity lifecycle",
+            "local_path": "docs-raw/research/2026-09-06/4a3d93960c0beb454f4737be0d59b758406093956b1b0c8a97e3ebc456d7d3a8/2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975/document.md",
+            "sha256": "2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975",
+            "raw_sha256": "ea82596263145e26b1b3eb8638a03bdc4784f9339a87584a9aa5ee6c25f31a44",
+            "raw_path": "docs-raw/research/2026-09-06/4a3d93960c0beb454f4737be0d59b758406093956b1b0c8a97e3ebc456d7d3a8/2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975/source.gz",
+            "fetched_at": "2026-09-05T10:29:21.696442+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 654,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 41,
+                "truncated": false
+              },
+              {
+                "start_line": 42,
+                "end_line": 73,
+                "truncated": false
+              },
+              {
+                "start_line": 105,
+                "end_line": 106,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "To navigate transitions between stages of the activity lifecycle, the `Activity`\nclass provides a core set of six callbacks: [`onCreate`](https://developer.android.com/reference/kotlin/android/app/Activity#oncreate_1), [`onStart`](https://developer.android.com/reference/kotlin/android/app/Activity#onstart),\n[`onResume`](https://developer.android.com/reference/kotlin/android/app/Activity#onresume), [`onPause`](https://developer.android.com/reference/kotlin/android/app/Activity#onpause), [`onStop`](https://developer.android.com/reference/kotlin/android/app/Activity#onstop), and [`onDestroy`](https://developer.android.com/reference/kotlin/android/app/Activity#ondestroy). The\nsystem invokes each of these callbacks as the activity enters a new state."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Handle view-related notifications(出现/消失回调)",
+          "start_line": 51,
+          "end_line": 57,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/uiviewcontroller",
+            "platform": "ios",
+            "title": "UIViewController",
+            "local_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/document.md",
+            "sha256": "09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e",
+            "raw_sha256": "3d820f9972aa0e17bb1f38ea709a4e8901bc033e5320fdb34d5a433239e57f18",
+            "raw_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/source.gz",
+            "fetched_at": "2026-09-05T10:15:49.375266+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 952,
+            "suggested_sections": [
+              {
+                "start_line": 59,
+                "end_line": 60,
+                "truncated": true
+              },
+              {
+                "start_line": 72,
+                "end_line": 91,
+                "truncated": false
+              },
+              {
+                "start_line": 128,
+                "end_line": 165,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "##### Handle view-related notifications\n\nWhen the visibility of its views changes, a view controller automatically calls its own methods so that subclasses can respond to the change. Use a method like [`viewIsAppearing(_:)`](/documentation/UIKit/UIViewController/viewIsAppearing(_:)) to prepare your views to appear onscreen, and use [`viewWillDisappear(_:)`](/documentation/UIKit/UIViewController/viewWillDisappear(_:)) to save changes or other state information. Use other methods to make appropriate changes.\n\nThe following image shows the possible visible states for a view controller’s views and the state transitions that can occur. Not all `will` callback methods are paired with only a `did` callback method. You need to ensure that if you start a process in a `will` callback method, you end the process in both the corresponding `did` and the opposite `will` callback method.\n\n![A diagram of four spheres arranged in a circle. The sphere on the right is labeled Appearing and has a clockwise arrow leading to the bottom sphere, which is labeled Appeared. A small dot on the arrow is labeled viewDidAppear. A clockwise arrow leads from the bottom sphere to the left sphere, which is labeled Disappearing. A small dot along the arrow is labeled viewWillDisappear. A clockwise arrow leads from the left sphere to the top sphere, which is labeled Disappeared. Two small dots along the arrow are labeled viewDidDisappear and View removed. A clockwise arrow leads from the top sphere to the right sphere. Three small dots along the arrow are labeled viewWillAppear, View added, and viewIsAppearing.](images/com.apple.uikit/media-1965800@2x.png)"
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Managing the view(懒加载loadView/viewDidLoad)",
+          "start_line": 128,
+          "end_line": 152,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/uiviewcontroller",
+            "platform": "ios",
+            "title": "UIViewController",
+            "local_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/document.md",
+            "sha256": "09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e",
+            "raw_sha256": "3d820f9972aa0e17bb1f38ea709a4e8901bc033e5320fdb34d5a433239e57f18",
+            "raw_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/source.gz",
+            "fetched_at": "2026-09-05T10:15:49.375266+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 952,
+            "suggested_sections": [
+              {
+                "start_line": 59,
+                "end_line": 60,
+                "truncated": true
+              },
+              {
+                "start_line": 72,
+                "end_line": 91,
+                "truncated": false
+              },
+              {
+                "start_line": 128,
+                "end_line": 165,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Managing the view\n\n[`view`](/documentation/UIKit/UIViewController/view)\n\nThe view that the controller manages.\n\n[`viewIfLoaded`](/documentation/UIKit/UIViewController/viewIfLoaded)\n\nThe view controller’s view, or `nil` if the view isn’t yet loaded.\n\n[`viewLoaded`](/documentation/UIKit/UIViewController/isViewLoaded)\n\nA Boolean value indicating whether the view is currently loaded into memory.\n\n[`-  loadView`](/documentation/UIKit/UIViewController/loadView())\n\nCreates the view that the controller manages.\n\n[`-  viewDidLoad`](/documentation/UIKit/UIViewController/viewDidLoad())\n\nCalled after the controller’s view is loaded into memory.\n\n[`-  loadViewIfNeeded`](/documentation/UIKit/UIViewController/loadViewIfNeeded())\n\nLoads the view controller’s view if it’s not loaded yet."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "UIAbility生命周期状态(组件级四状态)",
+          "start_line": 11,
+          "end_line": 20,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability",
+            "platform": "harmonyos",
+            "title": "@ohos.app.ability.UIAbility (带界面的应用组件)",
+            "local_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/document.md",
+            "sha256": "74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f",
+            "raw_sha256": "a60f1b7bade8dc78760344c80bcfd7f8f52851c18a5b6da936beca0c11b82a0f",
+            "raw_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/source.gz",
+            "fetched_at": "2026-09-05T10:26:49.555101+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1588,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 21,
+                "truncated": false
+              },
+              {
+                "start_line": 743,
+                "end_line": 798,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### UIAbility生命周期状态\n\n图1 UIAbility生命周期状态\n\n![](https://media:201787906636438016)\n\n* Create：表示UIAbility实例已创建。系统会在该状态下触发其[onCreate](#oncreate)回调函数，开发者可以在[onCreate](#oncreate)中执行初始化操作。\n* Foreground：表示UIAbility被拉到前台。系统会在该状态下触发其[onForeground](#onforeground)回调函数，开发者可以在[onForeground](#onforeground)中申请应用所需的资源。\n* Background：表示UIAbility被拉到后台。系统会在该状态下触发其[onBackground](#onbackground)回调函数，开发者可以在[onBackground](#onbackground)中释放一些应用资源。\n* Destroy：表示UIAbility实例即将销毁。系统会在该状态下触发其[onDestroy](#ondestroy)回调函数，开发者可以在[onDestroy](#ondestroy)中执行数据保存等操作。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "onWindowStageCreate(页面加载入口)",
+          "start_line": 91,
+          "end_line": 105,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability",
+            "platform": "harmonyos",
+            "title": "@ohos.app.ability.UIAbility (带界面的应用组件)",
+            "local_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/document.md",
+            "sha256": "74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f",
+            "raw_sha256": "a60f1b7bade8dc78760344c80bcfd7f8f52851c18a5b6da936beca0c11b82a0f",
+            "raw_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/source.gz",
+            "fetched_at": "2026-09-05T10:26:49.555101+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1588,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 21,
+                "truncated": false
+              },
+              {
+                "start_line": 743,
+                "end_line": 798,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### onWindowStageCreate\n\nonWindowStageCreate(windowStage: window.WindowStage): void\n\n当[WindowStage](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-window-windowstage)实例创建完成后，系统会触发该回调。开发者可以在该回调中通过WindowStage加载页面。\n\n元服务API：从API version 11开始，该接口支持在元服务中使用。\n\n系统能力：SystemCapability.Ability.AbilityRuntime.AbilityCore\n\n参数：  \n\n|参数名|类型|必填|说明|\n|:----------|:--------------------------------------------------------------------------------------------------------------------|:-|:---------------|\n|windowStage|[window.WindowStage](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-window-windowstage)|是|WindowStage实例对象。|"
+        }
+      ],
+      "open_questions": [
+        "iOS前台/后台切换时序实际由UISceneDelegate承担的部分未读，UIViewController作为'前台界面入口组件'对应物待确认",
+        "HarmonyOS ArkUI页面级生命周期与UIAbility回调的分工未在本包来源中",
+        "Android多窗口/分屏下回调时序与单窗口的差异待核"
+      ]
+    },
+    {
+      "dimension": "lifecycle_background",
+      "statement": "假设(can)：状态保存/恢复的触发条件不同——Android Activity重建时自动恢复先前冻结状态(onCreate的Bundle,Compose rememberSaveable免显式恢复逻辑)；iOS需opt-in(恢复归档存在且app代理shouldRestoreApplicationState返回true)才在启动过程中重建视图控制器；HarmonyOS onSaveState须先使能appRecovery且当前仅在APP_RECOVERY故障场景触发，非通用状态保存。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Activity Lifecycle生命周期表(onCreate提供先前冻结状态Bundle)",
+          "start_line": 207,
+          "end_line": 213,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/reference/android/app/Activity",
+            "platform": "android",
+            "title": "Activity",
+            "local_path": "docs-raw/research/2026-09-06/68062e3eeadc31bc4077be382438f38574ba6ae57aa0d8e35257d6c6355027e9/4260bd7d809e9944bf8c70f388036a3fc9040991269313a261f8ba2b7917c786/document.md",
+            "sha256": "4260bd7d809e9944bf8c70f388036a3fc9040991269313a261f8ba2b7917c786",
+            "raw_sha256": "20511307c83862af3104689d2df17f99fac233031f2da38af1f67d5ae3f16416",
+            "raw_path": "docs-raw/research/2026-09-06/68062e3eeadc31bc4077be382438f38574ba6ae57aa0d8e35257d6c6355027e9/4260bd7d809e9944bf8c70f388036a3fc9040991269313a261f8ba2b7917c786/source.gz",
+            "fetched_at": "2026-09-05T10:15:53.163135+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 8633,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 17,
+                "end_line": 33,
+                "truncated": true
+              },
+              {
+                "start_line": 115,
+                "end_line": 208,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "| Method | | | Description | Killable? | Next |\n| --- | --- | --- | --- | --- | --- |\n| `onCreate()` | | | Called when the activity is first created. This is where you should do all of your normal static set up: create views, bind data to lists, etc. This method also provides you with a Bundle containing the activity's previously frozen state, if there was one. Always followed by `onStart()`. | No | `onStart()` |\n|  | `onRestart()` | | Called after your activity has been stopped, prior to it being started again. Always followed by `onStart()` | No | `onStart()` |\n| `onStart()` | | Called when the activity is becoming visible to the user. Followed by `onResume()` if the activity comes to the foreground, or `onStop()` if it becomes hidden. | No | `onResume()` or `onStop()` |\n|  | `onResume()` | Called when the activity will start interacting with the user. At this point your activity is at the top of its activity stack, with user input going to it. Always followed by `onPause()`. | No | `onPause()` |\n| `onPause()` | Called when the activity loses foreground state, is no longer focusable or before transition to stopped/hidden or destroyed state. The activity is still visible to user, so it's recommended to keep it visually active and continue updating the UI. Implementations of this method must be very quick because the next activity will not be resumed until this method returns. Followed by either `onResume()` if the activity returns back to the front, or `onStop()` if it becomes invisible to the user. | **Pre-`Build.VERSION_CODES.HONEYCOMB`** | `onResume()` or  `onStop()` |"
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Restore activity UI state using saved instance state(自动恢复)",
+          "start_line": 521,
+          "end_line": 527,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/guide/components/activities/activity-lifecycle",
+            "platform": "android",
+            "title": "The activity lifecycle",
+            "local_path": "docs-raw/research/2026-09-06/4a3d93960c0beb454f4737be0d59b758406093956b1b0c8a97e3ebc456d7d3a8/2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975/document.md",
+            "sha256": "2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975",
+            "raw_sha256": "ea82596263145e26b1b3eb8638a03bdc4784f9339a87584a9aa5ee6c25f31a44",
+            "raw_path": "docs-raw/research/2026-09-06/4a3d93960c0beb454f4737be0d59b758406093956b1b0c8a97e3ebc456d7d3a8/2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975/source.gz",
+            "fetched_at": "2026-09-05T10:29:21.696442+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 654,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 41,
+                "truncated": false
+              },
+              {
+                "start_line": 42,
+                "end_line": 73,
+                "truncated": false
+              },
+              {
+                "start_line": 105,
+                "end_line": 106,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "### Restore activity UI state using saved instance state\n\nWhen your activity is recreated after it was previously destroyed, state\nrestoration is automatic. When you use [`rememberSaveable`](https://developer.android.com/develop/ui/compose/state#restore-ui-state), you don't need\nto write any explicit restoration logic, check for null bundles, or override\nactivity callbacks. The code that initializes and saves your state also\nseamlessly restores it when the activity comes back:"
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Support state preservation and restoration(restorationIdentifier)",
+          "start_line": 96,
+          "end_line": 100,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/uiviewcontroller",
+            "platform": "ios",
+            "title": "UIViewController",
+            "local_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/document.md",
+            "sha256": "09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e",
+            "raw_sha256": "3d820f9972aa0e17bb1f38ea709a4e8901bc033e5320fdb34d5a433239e57f18",
+            "raw_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/source.gz",
+            "fetched_at": "2026-09-05T10:15:49.375266+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 952,
+            "suggested_sections": [
+              {
+                "start_line": 59,
+                "end_line": 60,
+                "truncated": true
+              },
+              {
+                "start_line": 72,
+                "end_line": 91,
+                "truncated": false
+              },
+              {
+                "start_line": 128,
+                "end_line": 165,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### Support state preservation and restoration\n\nIf you assign a value to the view controller’s [`restorationIdentifier`](/documentation/UIKit/UIViewController/restorationIdentifier) property, the system may ask the view controller to encode itself when the app transitions to the background. When preserved, a view controller preserves the state of any views in its view hierarchy that also have restoration identifiers. View controllers don’t automatically save any other state. If you’re implementing a custom container view controller, you must encode any child view controllers yourself. Each child you encode must have a unique restoration identifier.\n\nFor more information about how the system determines which view controllers to preserve and restore, see [App Programming Guide for iOS](https://developer.apple.com/library/archive/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007072). To see an example of state preservation and restoration, see [Restoring your app’s state](/documentation/UIKit/restoring-your-app-s-state)."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Discussion(仅在恢复归档可用且app代理返回true时进行恢复)",
+          "start_line": 7,
+          "end_line": 13,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/uikit/about-the-ui-restoration-process",
+            "platform": "ios",
+            "title": "About the UI restoration process",
+            "local_path": "docs-raw/research/2026-09-06/e2272630cf4c2126d60f100ef7067b345f7944cb30112d6f0e3f980e7b38e412/44abd4f5146b6ebba91b6563bd44442c1494fbfe2b3c54c668665753e204d90e/document.md",
+            "sha256": "44abd4f5146b6ebba91b6563bd44442c1494fbfe2b3c54c668665753e204d90e",
+            "raw_sha256": "437d0aed39247ce6839dfe9e93c71af2aaa8f8d56713766c0dbf777910599054",
+            "raw_path": "docs-raw/research/2026-09-06/e2272630cf4c2126d60f100ef7067b345f7944cb30112d6f0e3f980e7b38e412/44abd4f5146b6ebba91b6563bd44442c1494fbfe2b3c54c668665753e204d90e/source.gz",
+            "fetched_at": "2026-09-05T11:22:03.716381+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 46,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 15,
+                "end_line": 46,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "The following diagram shows the sequence of calls that happens from the time your app launches until the time it’s restored. Restoration occurs during the middle of your app’s initialization, and it proceeds only when a state restoration archive is available and your app delegate’s [`application(_:shouldRestoreApplicationState:)`](/documentation/UIKit/UIApplicationDelegate/application(_:shouldRestoreApplicationState:)) method returns <doc://com.apple.documentation/documentation/Swift/true>.\n\n![Flow diagram of the interface restoration process.](images/com.apple.uikit/media-2934436@2x.png)\n\nThe first step in the restoration process is to create the view controller objects (either explicitly or implicitly) for your interface. The second step is to decode and restore the state of those objects. Both steps are needed to recreate your view controller hierarchy. For example, after the creation of a navigation controller and its child view controllers, there’s no immediate connection between those objects. It’s actually the navigation controller’s [`decodeRestorableState(with:)`](/documentation/UIKit/UIStateRestoring/decodeRestorableState(with:)) method that reestablishes the relationships to its child view controllers.\n\nAfter state restoration finishes, UIKit calls the app delegate’s [`application(_:didFinishLaunchingWithOptions:)`](/documentation/UIKit/UIApplicationDelegate/application(_:didFinishLaunchingWithOptions:)) method. Use that method to make any last minute changes or additions to your interface. For example, you might add a login screen to the view controller hierarchy."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "onSaveState(需appRecovery使能,仅APP_RECOVERY场景)",
+          "start_line": 636,
+          "end_line": 653,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability",
+            "platform": "harmonyos",
+            "title": "@ohos.app.ability.UIAbility (带界面的应用组件)",
+            "local_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/document.md",
+            "sha256": "74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f",
+            "raw_sha256": "a60f1b7bade8dc78760344c80bcfd7f8f52851c18a5b6da936beca0c11b82a0f",
+            "raw_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/source.gz",
+            "fetched_at": "2026-09-05T10:26:49.555101+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1588,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 21,
+                "truncated": false
+              },
+              {
+                "start_line": 743,
+                "end_line": 798,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### onSaveState\n\nonSaveState(reason: AbilityConstant.StateType, wantParam: Record\\<string, Object\\>): AbilityConstant.OnSaveResult\n\n该接口需要与[appRecovery](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-apprecovery)配合使用。如果应用已使能故障恢复功能（即[enableAppRecovery](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-apprecovery#apprecoveryenableapprecovery)接口中的saveOccasion参数设置为SAVE_WHEN_ERROR），当应用出现故障时，系统将触发该回调来保存UIAbility的数据。  \n![](https://media:201787906636658021)  \n从API version 20开始，当[onSaveStateAsync](#onsavestateasync20)实现时，本回调函数将不执行。\n\n元服务API：从API version 11开始，该接口支持在元服务中使用。\n\n系统能力：SystemCapability.Ability.AbilityRuntime.AbilityCore\n\n参数：  \n\n|参数名|类型|必填|说明|\n|:--------|:-------------------------------------------------------------------------------------------------------------------------------------------|:-|:-------------------------------------------------------------|\n|reason|[AbilityConstant.StateType](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-abilityconstant#statetype)|是|触发应用保存状态的原因，当前仅支持APP_RECOVERY（即应用故障恢复场景）。|\n|wantParam|Record\\<string, Object\\>|是|用户自定义的应用状态数据，应用再启动时被保存在[onCreate](#oncreate)的Want.parameters中。|"
+        }
+      ],
+      "open_questions": [
+        "Android onSaveInstanceState/onRestoreInstanceState契约原文段落未读，仅见指南概述",
+        "iOS系统因内存回收终止而非归档恢复时其余状态的去向未读",
+        "HarmonyOS非故障场景(系统回收/后台清理)是否存在其他状态保存机制未读"
+      ]
+    },
+    {
+      "dimension": "device_forms",
+      "statement": "假设(can)：HarmonyOS明示生命周期回调的设备形态条件——onPrepareToTerminate(10+)需权限且仅在PC/2in1/Tablet执行回调、其他设备不执行，EmbeddedUIExtensionAbility仅多进程设备(2in1/Tablet)可用；本轮所读Android Activity与iOS UIViewController生命周期文档未载明设备形态条件，两平台是否存在类似条件未证(不据此断言不存在)。",
+      "platforms": [
+        "android",
+        "harmonyos",
+        "ios"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "onPrepareToTerminate(需权限;仅PC/2in1和Tablet执行回调)",
+          "start_line": 743,
+          "end_line": 758,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability",
+            "platform": "harmonyos",
+            "title": "@ohos.app.ability.UIAbility (带界面的应用组件)",
+            "local_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/document.md",
+            "sha256": "74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f",
+            "raw_sha256": "a60f1b7bade8dc78760344c80bcfd7f8f52851c18a5b6da936beca0c11b82a0f",
+            "raw_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/source.gz",
+            "fetched_at": "2026-09-05T10:26:49.555101+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1588,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 10,
+                "truncated": false
+              },
+              {
+                "start_line": 11,
+                "end_line": 21,
+                "truncated": false
+              },
+              {
+                "start_line": 743,
+                "end_line": 798,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### onPrepareToTerminate^10+^\n\nonPrepareToTerminate(): boolean\n\n在UIAbility即将关闭前（例如用户通过点击应用窗口右上角的关闭按钮、或者通过Dock栏/托盘右键退出应用时），系统会触发该回调，用于在UIAbility正式关闭前执行其他操作。开发者可以在该回调中返回true阻拦此次关闭，然后在合适时机主动调用[terminateSelf](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inner-application-uiabilitycontext#terminateself)接口关闭。例如，询问用户是否确认关闭UIAbility，再主动销毁UIAbility。  \n![](https://media:201787906636699022)  \n* 从API version 15开始，当[UIAbility.onPrepareToTerminateAsync](#onpreparetoterminateasync15)实现时，本回调函数将不执行。当[AbilityStage.onPrepareTerminationAsync](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-abilitystage#onprepareterminationasync15)或[AbilityStage.onPrepareTermination](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-abilitystage#onpreparetermination15)实现时，在dock栏或系统托盘处右键点击关闭，本回调函数将不执行。\n* 如果应用本身或者所使用的三方框架注册了[window.WindowStage.on('windowStageClose')](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-window-windowstage#onwindowstageclose14)监听，本回调函数将不执行。\n\n需要权限：ohos.permission.PREPARE_APP_TERMINATE\n\n元服务API：从API version 11开始，该接口支持在元服务中使用。\n\n系统能力：SystemCapability.Ability.AbilityRuntime.AbilityCore\n\n设备行为差异：该接口仅在PC/2in1和Tablet设备中可正常执行回调，在其他设备上不执行回调。"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "约束限制(仅多进程配置设备2in1与Tablet)",
+          "start_line": 17,
+          "end_line": 21,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/embeddeduiextensionability",
+            "platform": "harmonyos",
+            "title": "EmbeddedUIExtensionAbility",
+            "local_path": "docs-raw/research/2026-09-06/9a3d0afba906108d0932e79044a187b4659d4880556c865000722a5a3ed8e502/2871ac26faaa67251d5b7538dcfe37e6a6d2327165084f78a043934b8e2a06c7/document.md",
+            "sha256": "2871ac26faaa67251d5b7538dcfe37e6a6d2327165084f78a043934b8e2a06c7",
+            "raw_sha256": "77ea404c68986e726bcfd82e7ef5eac7345d7887eba007175069013a7bb2060e",
+            "raw_path": "docs-raw/research/2026-09-06/9a3d0afba906108d0932e79044a187b4659d4880556c865000722a5a3ed8e502/2871ac26faaa67251d5b7538dcfe37e6a6d2327165084f78a043934b8e2a06c7/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 180,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 14,
+                "truncated": false
+              },
+              {
+                "start_line": 15,
+                "end_line": 16,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "当前EmbeddedUIExtensionAbility和EmbeddedComponent仅支持在拥有多进程配置的设备上使用，目前支持多进程配置的设备有2in1与Tablet。  \n\n#### 生命周期\n\n[EmbeddedUIExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-embeddeduiextensionability)提供了onCreate、onSessionCreate、onSessionDestroy、onForeground、onBackground和onDestroy生命周期回调，根据需要重写对应的回调方法。以下生命周期回调均继承自[UIExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiextensionability)。"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Activity Lifecycle(回调定义,未见设备形态条件)",
+          "start_line": 115,
+          "end_line": 202,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/reference/android/app/Activity",
+            "platform": "android",
+            "title": "Activity",
+            "local_path": "docs-raw/research/2026-09-06/68062e3eeadc31bc4077be382438f38574ba6ae57aa0d8e35257d6c6355027e9/4260bd7d809e9944bf8c70f388036a3fc9040991269313a261f8ba2b7917c786/document.md",
+            "sha256": "4260bd7d809e9944bf8c70f388036a3fc9040991269313a261f8ba2b7917c786",
+            "raw_sha256": "20511307c83862af3104689d2df17f99fac233031f2da38af1f67d5ae3f16416",
+            "raw_path": "docs-raw/research/2026-09-06/68062e3eeadc31bc4077be382438f38574ba6ae57aa0d8e35257d6c6355027e9/4260bd7d809e9944bf8c70f388036a3fc9040991269313a261f8ba2b7917c786/source.gz",
+            "fetched_at": "2026-09-05T10:15:53.163135+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 8633,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 17,
+                "end_line": 33,
+                "truncated": true
+              },
+              {
+                "start_line": 115,
+                "end_line": 208,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "### Activity Lifecycle\n\nActivities in the system are managed as\n[activity stacks](https://developer.android.com/guide/components/activities/tasks-and-back-stack). When a new activity is started, it is usually placed on the top of the\ncurrent stack and becomes the running activity -- the previous activity always remains\nbelow it in the stack, and will not come to the foreground again until\nthe new activity exits. There can be one or multiple activity stacks visible\non screen.\n\nAn activity has essentially four states:\n\n* If an activity is in the foreground of the screen (at the highest position of the topmost\n  stack), it is *active* or *running*. This is usually the activity that the\n  user is currently interacting with.\n* If an activity has lost focus but is still presented to the user, it is *visible*.\n  It is possible if a new non-full-sized or transparent activity has focus on top of your\n  activity, another activity has higher position in multi-window mode, or the activity\n  itself is not focusable in current windowing mode. Such activity is completely alive (it\n  maintains all state and member information and remains attached to the window manager).* If an activity is completely obscured by another activity,\n    it is *stopped* or *hidden*. It still retains all state and member\n    information, however, it is no longer visible to the user so its window is hidden\n    and it will often be killed by the system when memory is needed elsewhere.\n  * The system can drop the activity from memory by either asking it to finish,\n    or simply killing its process, making it *destroyed*. When it is displayed again\n    to the user, it must be completely restarted and restored to its previous state.\n\nThe following diagram shows the important state paths of an activity.\nThe square rectangles represent callback methods you can implement to\nperform operations when the activity moves between states. The colored\novals are major states the activity can be in.\n\n![State diagram for the Android activity lifecycle.](https://developer.android.com/images/activity_lifecycle.png)\n\nThere are three key loops you may be interested in monitoring within your\nactivity:\n\n* The **entire lifetime** of an activity happens between the first call\n  to `onCreate(Bundle)` through to a single final call\n  to `onDestroy()`. An activity will do all setup\n  of \"global\" state in onCreate(), and release all remaining resources in\n  onDestroy(). For example, if it has a thread running in the background\n  to download data from the network, it may create that thread in onCreate()\n  and then stop the thread in onDestroy().* The **visible lifetime** of an activity happens between a call to\n    `onStart()` until a corresponding call to\n    `onStop()`. During this time the user can see the\n    activity on-screen, though it may not be in the foreground and interacting\n    with the user. Between these two methods you can maintain resources that\n    are needed to show the activity to the user. For example, you can register\n    a `BroadcastReceiver` in onStart() to monitor for changes\n    that impact your UI, and unregister it in onStop() when the user no\n    longer sees what you are displaying. The onStart() and onStop() methods\n    can be called multiple times, as the activity becomes visible and hidden\n    to the user.* The **foreground lifetime** of an activity happens between a call to\n      `onResume()` until a corresponding call to\n      `onPause()`. During this time the activity is\n      visible, active and interacting with the user. An activity\n      can frequently go between the resumed and paused states -- for example when\n      the device goes to sleep, when an activity result is delivered, when a new\n      intent is delivered -- so the code in these methods should be fairly\n      lightweight.\n\nThe entire lifecycle of an activity is defined by the following\nActivity methods. All of these are hooks that you can override\nto do appropriate work when the activity changes state. All\nactivities will implement `onCreate(Bundle)`\nto do their initial setup; many will also implement\n`onPause()` to commit changes to data and\nprepare to pause interacting with the user, and `onStop()`\nto handle no longer being visible on screen. You should always\ncall up to your superclass when implementing these methods.\n\n```\npublic class Activity extends ApplicationContext {\n    protected void onCreate(Bundle savedInstanceState);\n\n    protected void onStart();\n\n    protected void onRestart();\n\n    protected void onResume();\n\n    protected void onPause();\n\n    protected void onStop();\n\n    protected void onDestroy();\n}\n```"
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Handle view-related notifications(回调定义,未见设备形态条件)",
+          "start_line": 51,
+          "end_line": 57,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/uiviewcontroller",
+            "platform": "ios",
+            "title": "UIViewController",
+            "local_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/document.md",
+            "sha256": "09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e",
+            "raw_sha256": "3d820f9972aa0e17bb1f38ea709a4e8901bc033e5320fdb34d5a433239e57f18",
+            "raw_path": "docs-raw/research/2026-09-06/d6caf649db6c489b7349423ff6c862991171e6b556920e3fb3bd99c7c3c5b434/09b50abbf514548df3ef74c97c2cd8acdca84666e910a2fd6decd541af593b8e/source.gz",
+            "fetched_at": "2026-09-05T10:15:49.375266+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 952,
+            "suggested_sections": [
+              {
+                "start_line": 59,
+                "end_line": 60,
+                "truncated": true
+              },
+              {
+                "start_line": 72,
+                "end_line": 91,
+                "truncated": false
+              },
+              {
+                "start_line": 128,
+                "end_line": 165,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "##### Handle view-related notifications\n\nWhen the visibility of its views changes, a view controller automatically calls its own methods so that subclasses can respond to the change. Use a method like [`viewIsAppearing(_:)`](/documentation/UIKit/UIViewController/viewIsAppearing(_:)) to prepare your views to appear onscreen, and use [`viewWillDisappear(_:)`](/documentation/UIKit/UIViewController/viewWillDisappear(_:)) to save changes or other state information. Use other methods to make appropriate changes.\n\nThe following image shows the possible visible states for a view controller’s views and the state transitions that can occur. Not all `will` callback methods are paired with only a `did` callback method. You need to ensure that if you start a process in a `will` callback method, you end the process in both the corresponding `did` and the opposite `will` callback method.\n\n![A diagram of four spheres arranged in a circle. The sphere on the right is labeled Appearing and has a clockwise arrow leading to the bottom sphere, which is labeled Appeared. A small dot on the arrow is labeled viewDidAppear. A clockwise arrow leads from the bottom sphere to the left sphere, which is labeled Disappearing. A small dot along the arrow is labeled viewWillDisappear. A clockwise arrow leads from the left sphere to the top sphere, which is labeled Disappeared. Two small dots along the arrow are labeled viewDidDisappear and View removed. A clockwise arrow leads from the top sphere to the right sphere. Three small dots along the arrow are labeled viewWillAppear, View added, and viewIsAppearing.](images/com.apple.uikit/media-1965800@2x.png)"
+        }
+      ],
+      "open_questions": [
+        "Android/iOS在折叠屏、分屏等设备形态下的回调差异未检索，不能断言无设备条件",
+        "HarmonyOS手机上onPrepareToTerminate不执行时的关闭流程需真机核对",
+        "关闭拦截类回调(onPrepareToTerminate)是否属于本节点'生命周期回调与状态恢复'比较范围需精研时界定"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "iOS'前台界面入口组件'映射未确认：本包绑定UIViewController,但UIKit前台生命周期由UIScene/UISceneDelegate与UIViewController分工承担，本包来源未覆盖UIScene",
+    "Android状态保存契约(onSaveInstanceState/ViewModel/SavedStateHandle)原文未读，仅见指南概述",
+    "HarmonyOS appRecovery恢复路径与ArkUI页面级生命周期原文未读",
+    "三平台最新正式版基线未固定(任务version_baseline unresolved),所读文档版本适用性待核",
+    "HarmonyOS来源为华为官网文档,未与OpenHarmony发行版分开核对"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "存在高风险映射(iOS前台入口组件归属未确认、HarmonyOS onSaveState仅限故障恢复场景与Android/iOS通用恢复的映射)及未固定版本基线；该节点是app.lifecycle下核心比较叶子，需优先精研补读关键原文。"
+  }
+}

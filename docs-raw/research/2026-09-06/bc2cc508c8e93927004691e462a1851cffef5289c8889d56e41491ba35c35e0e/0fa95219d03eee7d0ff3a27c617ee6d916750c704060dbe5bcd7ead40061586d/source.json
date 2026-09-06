@@ -1,0 +1,13 @@
+{
+  "id": "bc2cc508c8e93927004691e462a1851cffef5289c8889d56e41491ba35c35e0e",
+  "url": "https://developer.apple.com/documentation/uikit/handling-pan-gestures",
+  "platform": "ios",
+  "title": "Handling pan gestures",
+  "local_path": "docs-raw/research/2026-09-06/bc2cc508c8e93927004691e462a1851cffef5289c8889d56e41491ba35c35e0e/0fa95219d03eee7d0ff3a27c617ee6d916750c704060dbe5bcd7ead40061586d/document.md",
+  "sha256": "0fa95219d03eee7d0ff3a27c617ee6d916750c704060dbe5bcd7ead40061586d",
+  "raw_sha256": "b8f91ea5fa65c89bd5b9b9767f113370009d164836bd117ac529422ed8bc481e",
+  "raw_path": "docs-raw/research/2026-09-06/bc2cc508c8e93927004691e462a1851cffef5289c8889d56e41491ba35c35e0e/0fa95219d03eee7d0ff3a27c617ee6d916750c704060dbe5bcd7ead40061586d/source.gz",
+  "fetched_at": "2026-09-05T11:22:07.323290+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

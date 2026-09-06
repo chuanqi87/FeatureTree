@@ -1,0 +1,9 @@
+{
+  "task_id": "eeaa84c40065f51483120ce0190020deda66b7cb3f8fc23bf0c781ea15ad1fcf",
+  "feature_id": "connectivity.bluetooth.le.gatt",
+  "response_sha256": "bf81a79fbf486b3cc34fd235c8a76990731efab95991ef9a901371040fe26bed",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

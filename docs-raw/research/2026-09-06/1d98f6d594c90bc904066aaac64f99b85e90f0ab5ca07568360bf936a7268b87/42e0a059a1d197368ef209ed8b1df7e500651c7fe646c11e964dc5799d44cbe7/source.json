@@ -1,0 +1,13 @@
+{
+  "id": "1d98f6d594c90bc904066aaac64f99b85e90f0ab5ca07568360bf936a7268b87",
+  "url": "https://developer.android.com/guide/topics/connectivity/nfc/hce",
+  "platform": "android",
+  "title": "Host-based card emulation overview",
+  "local_path": "docs-raw/research/2026-09-06/1d98f6d594c90bc904066aaac64f99b85e90f0ab5ca07568360bf936a7268b87/42e0a059a1d197368ef209ed8b1df7e500651c7fe646c11e964dc5799d44cbe7/document.md",
+  "sha256": "42e0a059a1d197368ef209ed8b1df7e500651c7fe646c11e964dc5799d44cbe7",
+  "raw_sha256": "c00d4f6fe08b52a8f27826eab9d1b8fe45e0f93e85cfc4b7a1c62337bf4b3079",
+  "raw_path": "docs-raw/research/2026-09-06/1d98f6d594c90bc904066aaac64f99b85e90f0ab5ca07568360bf936a7268b87/42e0a059a1d197368ef209ed8b1df7e500651c7fe646c11e964dc5799d44cbe7/source.gz",
+  "fetched_at": "2026-09-05T10:43:36.401197+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

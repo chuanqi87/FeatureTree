@@ -1,0 +1,587 @@
+{
+  "task_id": "ca18065a9b6eb67f8fcd01f7f2453ef22edfbc771e91bd5c2745b73efe2047c5",
+  "feature_id": "distributed.softbus.fabric",
+  "stage": "first_pass",
+  "summary": "三平台文档初判：Android 读到 Cross device SDK（Developer Preview，经 Google Play Services Beta 分发，需开启 Quick Share），提供设备发现、加密双向数据共享与多设备会话，但连接中断处理与远端能力调用语义未读到；HarmonyOS 仅读到分布式设备管理基座（发现/认证/状态监听，API 10+，需 DISTRIBUTED_DATASYNC 权限），远端调用与数据传输本体 API 缺失；iOS 两篇冻结来源均不相关，无判断依据。差异假设聚焦交付形态与权限模型。全部 low 置信，未实测。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "读到 Cross device SDK（Developer Preview）：提供设备发现（含在接收设备启动目标应用）、安全通信（加密、低延迟、双向数据共享）与多设备会话（跨设备迁移/扩展体验）三类能力，经 Discovery/Sessions 类使用，异步设计；依赖 Google Play Services Beta 渠道分发。连接中断处理与远端能力调用语义未在此文档说明。",
+      "version_scope": "文档对应 Cross device SDK Developer Preview（com.google.ambient.crossdevice:crossdevice:0.1.0-preview01），经 Google Play Services Beta Program 分发；API 可能随预览版变化，未核对最新版本。",
+      "conditions": [
+        "需加入 Google Play Services Beta Program 并安装 beta 版 Play Services",
+        "需开启 Quick Share",
+        "Developer Preview，官方明示不用于生产应用，API 可能变化",
+        "SDK 抽象本地发现权限（BLUETOOTH_CONNECT/BLUETOOTH_SCAN/ACCESS_FINE_LOCATION），SDK 之外的蓝牙/位置操作仍需应用自行声明运行时权限",
+        "API 异步设计，Kotlin 用 Coroutines、Java 用 ListenableFuture"
+      ],
+      "gaps": [
+        "连接中断处理（断连检测、会话失效与恢复）未在本文档说明",
+        "「远端能力调用」语义未明确：仅读到在接收设备启动目标应用与会话迁移，未读到跨设备方法/能力调用 API 正文",
+        "数据流（stream）传输形态与消息大小/速率限制未读到",
+        "预览版版本与生产可用性未核实，未核对启动日最新正式版",
+        "依赖 Google Play Services，无 GMS 设备（如国内行货）适用性未核"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Get started：Developer Preview 开源分发与 Quick Share 前提",
+          "start_line": 3,
+          "end_line": 9,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/guide/topics/connectivity/cross-device-sdk/get-started",
+            "platform": "android",
+            "title": "Get started",
+            "local_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/document.md",
+            "sha256": "274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2",
+            "raw_sha256": "cdae76137de45f3e3989e03729bbbaccdef731bdd8a22f9125d1a5190357efde",
+            "raw_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/source.gz",
+            "fetched_at": "2026-09-05T10:30:02.235345+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 101,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 48,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "The Cross device SDK Developer Preview is distributed through an [open-source\nproject](https://github.com/google/cross-device-sdk). This preview is available for the developer community to prototype and\nvalidate multidevice experiences but is not intended for use in production\napplications.\n\n**Note:** Quick Share must be turned on to use the Cross device SDK. See\n[Share files and links with nearby devices](https://support.google.com/android/answer/9286773) to learn more."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Set up Google Play Services：Beta Program 与依赖版本",
+          "start_line": 12,
+          "end_line": 23,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/guide/topics/connectivity/cross-device-sdk/get-started",
+            "platform": "android",
+            "title": "Get started",
+            "local_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/document.md",
+            "sha256": "274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2",
+            "raw_sha256": "cdae76137de45f3e3989e03729bbbaccdef731bdd8a22f9125d1a5190357efde",
+            "raw_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/source.gz",
+            "fetched_at": "2026-09-05T10:30:02.235345+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 101,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 48,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Set up Google Play Services\n\nBefore you start coding,\n[ensure Google Play Services is installed](https://developers.google.com/android/guides/setup#check-whether-installed).\nThe Cross device SDK is in Developer Preview and is available only through the\nGoogle Play Services Beta Program. See\n[this guide](https://developers.google.com/android/guides/beta-program) on how\nto enroll in the Beta Program.\n\nOnce you enroll in the Beta Program and install the appropriate beta version of\nGoogle Play Services, you're ready to begin developing multidevice experiences\nwith the Cross device SDK."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Cross device APIs：设备发现/安全通信/多设备会话与 Discovery、Sessions 入口",
+          "start_line": 49,
+          "end_line": 59,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/guide/topics/connectivity/cross-device-sdk/get-started",
+            "platform": "android",
+            "title": "Get started",
+            "local_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/document.md",
+            "sha256": "274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2",
+            "raw_sha256": "cdae76137de45f3e3989e03729bbbaccdef731bdd8a22f9125d1a5190357efde",
+            "raw_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/source.gz",
+            "fetched_at": "2026-09-05T10:30:02.235345+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 101,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 48,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Cross device APIs\n\nEach API in the Cross device SDK is aimed at solving a common task within a\nmultidevice framework:\n\n* Device discovery: Easily find nearby devices, authorize peer-to-peer\n  communication, and start the target application on the receiving device.\n* Secure communications: Enable encrypted, low-latency, bi-directional data\n  sharing between authorized devices.\n* Multidevice sessions: Transfer or extend an application's user-experience\n  across devices."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Dependencies and permissions：发现权限抽象与 SDK 外权限声明",
+          "start_line": 39,
+          "end_line": 46,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/guide/topics/connectivity/cross-device-sdk/get-started",
+            "platform": "android",
+            "title": "Get started",
+            "local_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/document.md",
+            "sha256": "274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2",
+            "raw_sha256": "cdae76137de45f3e3989e03729bbbaccdef731bdd8a22f9125d1a5190357efde",
+            "raw_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/source.gz",
+            "fetched_at": "2026-09-05T10:30:02.235345+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 101,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 48,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "One of the benefits of using the Cross device SDK is that it abstracts away\nlocal discovery, such as `BLUETOOTH_CONNECT`, `BLUETOOTH_SCAN`, and\n`ACCESS_FINE_LOCATION`.\n\n**Note:** You still have to declare and request runtime permissions required by your\napp features and API outside of the Cross device SDK. For instance, you might\nneed `BLUETOOTH_SCAN` permission to perform a Bluetooth scan outside of the\nCross device SDK."
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "预览版 SDK 的真实设备发现、会话建立与中断表现无法由静态文档确认，且依赖 Quick Share/Play Services Beta 环境条件，正式结论前需真机验证；本轮未执行任何实测。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "unknown",
+      "observation": "冻结的两篇 iOS 来源均与本节点无关：ios-1 为 Mac 上 Metal GPU 与系统间的内存带宽取舍，ios-2 为 Apple School Manager/Apple Business 的组织内容与设备管理。未读到任何 iOS 跨设备调用、消息或数据流传输机制正文，无法建立判断，也不得据此断言 iOS 不支持。",
+      "version_scope": "不适用：未获得相关 iOS 正文，无版本条件可记录。",
+      "conditions": [
+        "无适用条件可记录：未读到相关 iOS 文档，仅确认两篇冻结来源（Metal GPU 带宽、Apple School Manager）与本节点无关"
+      ],
+      "gaps": [
+        "iOS 平台在本任务冻结来源中无跨设备调用/消息/数据流传输相关正文，需另行在 Apple 官方文档检索设备间通信相关框架并阅读正文后重评",
+        "Apple 目录包含 macOS 等多操作系统，iOS 适用性需逐符号核对，本轮未检索",
+        "来源缺失不构成不支持结论，仅为缺口"
+      ],
+      "confidence": "low",
+      "evidence_strength": "missing",
+      "citations": [],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "未读到相关 iOS 文档，无法评估真机需求；待补充官方正文后再分类。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "possible_mapping",
+      "observation": "读到 @ohos.distributedDeviceManager（API 10+，@kit.DistributedServiceKit）：提供分布式设备发现、认证绑定、可信设备列表查询与设备状态/服务死亡监听，构成分布式业务基座；设备级状态（UNKNOWN/AVAILABLE/UNAVAILABLE）与连接中断处理相关。但节点核心的远端能力调用与消息/数据流传输本体 API 未在冻结来源中，设备管理基座不能等同于调用与传输能力。",
+      "version_scope": "文档标注本模块首批接口从 API version 10 开始支持；未核对 HarmonyOS 最新正式版与启动日手机基线，亦未区分 OpenHarmony 与 HarmonyOS 发行版适用性。",
+      "conditions": [
+        "系统 Kit 形式：import { distributedDeviceManager } from '@kit.DistributedServiceKit'",
+        "查询可信设备需 ohos.permission.DISTRIBUTED_DATASYNC 权限（201 为权限校验失败错误码）",
+        "设备需通过发现与认证绑定建立可信连接后，方可用于分布式业务",
+        "不支持分布式业务的 Wearable 设备调用返回 801 错误码"
+      ],
+      "gaps": [
+        "远端能力调用与消息/数据流传输本体 API（如跨端迁移、分布式数据对象、软总线数据通道等模块）正文未读到，设备管理仅为基座，不能据此推断调用与传输行为",
+        "绑定 SysCap SystemCapability.DistributedHardware.DistributedHardware 无官方 URL（binding_source_gaps 待用 locate 补源）；实际读到文档标注的系统能力为 SystemCapability.DistributedHardware.DeviceManager",
+        "连接中断处理仅有设备级状态（UNKNOWN/AVAILABLE/UNAVAILABLE）与服务死亡监听，会话/通道级中断与恢复语义未读到",
+        "harmonyos-2（mechanicManager，API 20+，SystemCapability.Mechanic.Core）为机械体设备控制模块，仅涉特定设备类别连接监听与跟踪控制，与通用跨设备调用/传输的映射关系未确认，未纳入证据",
+        "未核对 HarmonyOS 发行版（区别于 OpenHarmony）与最新正式版的适用性"
+      ],
+      "confidence": "low",
+      "evidence_strength": "indirect",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "模块概述：发现/认证/状态监听/信息查询、信任模型、API version 10 起",
+          "start_line": 1,
+          "end_line": 14,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributeddevicemanager",
+            "platform": "harmonyos",
+            "title": "@ohos.distributedDeviceManager (设备管理)",
+            "local_path": "docs-raw/research/2026-09-06/b000ec1dec713199bab86be675d9257eb03962374d8bfb04bd763b23e5174240/b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9/document.md",
+            "sha256": "b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9",
+            "raw_sha256": "f7754bcab32e4e4134e58b39a674d385833fec7f0aca70edd81412fcaf4222ba",
+            "raw_path": "docs-raw/research/2026-09-06/b000ec1dec713199bab86be675d9257eb03962374d8bfb04bd763b23e5174240/b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9/source.gz",
+            "fetched_at": "2026-09-05T10:27:17.190280+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1322,
+            "suggested_sections": [
+              {
+                "start_line": 67,
+                "end_line": 84,
+                "truncated": true
+              },
+              {
+                "start_line": 190,
+                "end_line": 239,
+                "truncated": false
+              },
+              {
+                "start_line": 240,
+                "end_line": 241,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "# @ohos.distributedDeviceManager (设备管理)\n\n本模块提供分布式设备管理能力，包括设备的发现、认证、状态监听和信息查询等功能。设备管理基于设备信任模型，通过发现周边设备并进行认证绑定来建立可信连接，已认证的可信设备可用于分布式业务。\n\n应用可调用接口实现如下功能：\n\n* 注册和解除注册设备状态变化、设备名称变更、服务死亡等监听。\n* 发现周边设备。\n* 认证和取消认证设备。\n* 查询可信设备列表。\n* 查询本地设备信息，包括设备名称、设备类型和设备标识等。\n\n![](https://media:201787906774096061)  \n本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "DeviceStateChange：UNKNOWN/AVAILABLE/UNAVAILABLE 设备状态定义",
+          "start_line": 124,
+          "end_line": 136,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributeddevicemanager",
+            "platform": "harmonyos",
+            "title": "@ohos.distributedDeviceManager (设备管理)",
+            "local_path": "docs-raw/research/2026-09-06/b000ec1dec713199bab86be675d9257eb03962374d8bfb04bd763b23e5174240/b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9/document.md",
+            "sha256": "b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9",
+            "raw_sha256": "f7754bcab32e4e4134e58b39a674d385833fec7f0aca70edd81412fcaf4222ba",
+            "raw_path": "docs-raw/research/2026-09-06/b000ec1dec713199bab86be675d9257eb03962374d8bfb04bd763b23e5174240/b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9/source.gz",
+            "fetched_at": "2026-09-05T10:27:17.190280+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1322,
+            "suggested_sections": [
+              {
+                "start_line": 67,
+                "end_line": 84,
+                "truncated": true
+              },
+              {
+                "start_line": 190,
+                "end_line": 239,
+                "truncated": false
+              },
+              {
+                "start_line": 240,
+                "end_line": 241,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### DeviceStateChange\n\n表示设备状态。\n\n系统能力：SystemCapability.DistributedHardware.DeviceManager\n\n设备行为差异：该接口在不支持分布式业务的Wearable设备上调用会返回801错误码。  \n\n|名称|值|说明|\n|:----------|:-|:------------------------------------|\n|UNKNOWN|0|设备物理上线，此时状态未知，在状态更改为可用之前，分布式业务无法使用。|\n|AVAILABLE|1|设备可用状态，表示设备间信息已在分布式数据中同步完成，可以运行分布式业务。|\n|UNAVAILABLE|2|设备物理下线，此时状态未知。|"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "getAvailableDeviceListSync：DISTRIBUTED_DATASYNC 权限、系统能力与 Wearable 801 行为差异",
+          "start_line": 146,
+          "end_line": 156,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributeddevicemanager",
+            "platform": "harmonyos",
+            "title": "@ohos.distributedDeviceManager (设备管理)",
+            "local_path": "docs-raw/research/2026-09-06/b000ec1dec713199bab86be675d9257eb03962374d8bfb04bd763b23e5174240/b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9/document.md",
+            "sha256": "b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9",
+            "raw_sha256": "f7754bcab32e4e4134e58b39a674d385833fec7f0aca70edd81412fcaf4222ba",
+            "raw_path": "docs-raw/research/2026-09-06/b000ec1dec713199bab86be675d9257eb03962374d8bfb04bd763b23e5174240/b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9/source.gz",
+            "fetched_at": "2026-09-05T10:27:17.190280+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1322,
+            "suggested_sections": [
+              {
+                "start_line": 67,
+                "end_line": 84,
+                "truncated": true
+              },
+              {
+                "start_line": 190,
+                "end_line": 239,
+                "truncated": false
+              },
+              {
+                "start_line": 240,
+                "end_line": 241,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### getAvailableDeviceListSync\n\ngetAvailableDeviceListSync(): Array\\<DeviceBasicInfo\\>\n\n同步获取所有在线可信设备。调用前需先通过createDeviceManager创建DeviceManager实例。与getAvailableDeviceList的区别在于：本方法为同步调用，直接返回结果；getAvailableDeviceList为异步调用，通过callback或Promise返回结果。建议在需要阻塞等待结果的场景使用本方法，在不希望阻塞线程的场景使用getAvailableDeviceList。\n\n需要权限：ohos.permission.DISTRIBUTED_DATASYNC\n\n系统能力：SystemCapability.DistributedHardware.DeviceManager\n\n设备行为差异：该接口在不支持分布式业务的Wearable设备上调用会返回801错误码。"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "设备认证绑定、上下线状态迁移与分布式业务可用性依赖真实多设备环境（可信设备对、状态同步），静态文档不足以确认行为；本轮未实测。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "availability",
+      "statement": "交付形态假设：Android 侧跨设备通信以 Cross device SDK Developer Preview 形式经 Google Play Services Beta Program 分发，需开启 Quick Share 且官方明示不用于生产；HarmonyOS 侧以系统级 Kit（@kit.DistributedServiceKit，首批 API 10）提供分布式设备管理基座。两平台在该能力面的交付渠道（生态服务预览 vs 系统 Kit）与启用前提可能不同，待核实各自最新版本与生产可用性。",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Developer Preview 分发与 Quick Share 前提",
+          "start_line": 3,
+          "end_line": 9,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/guide/topics/connectivity/cross-device-sdk/get-started",
+            "platform": "android",
+            "title": "Get started",
+            "local_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/document.md",
+            "sha256": "274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2",
+            "raw_sha256": "cdae76137de45f3e3989e03729bbbaccdef731bdd8a22f9125d1a5190357efde",
+            "raw_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/source.gz",
+            "fetched_at": "2026-09-05T10:30:02.235345+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 101,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 48,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "The Cross device SDK Developer Preview is distributed through an [open-source\nproject](https://github.com/google/cross-device-sdk). This preview is available for the developer community to prototype and\nvalidate multidevice experiences but is not intended for use in production\napplications.\n\n**Note:** Quick Share must be turned on to use the Cross device SDK. See\n[Share files and links with nearby devices](https://support.google.com/android/answer/9286773) to learn more."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Google Play Services Beta Program 分发渠道",
+          "start_line": 12,
+          "end_line": 23,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/guide/topics/connectivity/cross-device-sdk/get-started",
+            "platform": "android",
+            "title": "Get started",
+            "local_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/document.md",
+            "sha256": "274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2",
+            "raw_sha256": "cdae76137de45f3e3989e03729bbbaccdef731bdd8a22f9125d1a5190357efde",
+            "raw_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/source.gz",
+            "fetched_at": "2026-09-05T10:30:02.235345+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 101,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 48,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Set up Google Play Services\n\nBefore you start coding,\n[ensure Google Play Services is installed](https://developers.google.com/android/guides/setup#check-whether-installed).\nThe Cross device SDK is in Developer Preview and is available only through the\nGoogle Play Services Beta Program. See\n[this guide](https://developers.google.com/android/guides/beta-program) on how\nto enroll in the Beta Program.\n\nOnce you enroll in the Beta Program and install the appropriate beta version of\nGoogle Play Services, you're ready to begin developing multidevice experiences\nwith the Cross device SDK."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "首批接口 API version 10 起与 @kit.DistributedServiceKit 导入",
+          "start_line": 14,
+          "end_line": 20,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributeddevicemanager",
+            "platform": "harmonyos",
+            "title": "@ohos.distributedDeviceManager (设备管理)",
+            "local_path": "docs-raw/research/2026-09-06/b000ec1dec713199bab86be675d9257eb03962374d8bfb04bd763b23e5174240/b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9/document.md",
+            "sha256": "b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9",
+            "raw_sha256": "f7754bcab32e4e4134e58b39a674d385833fec7f0aca70edd81412fcaf4222ba",
+            "raw_path": "docs-raw/research/2026-09-06/b000ec1dec713199bab86be675d9257eb03962374d8bfb04bd763b23e5174240/b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9/source.gz",
+            "fetched_at": "2026-09-05T10:27:17.190280+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1322,
+            "suggested_sections": [
+              {
+                "start_line": 67,
+                "end_line": 84,
+                "truncated": true
+              },
+              {
+                "start_line": 190,
+                "end_line": 239,
+                "truncated": false
+              },
+              {
+                "start_line": 240,
+                "end_line": 241,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。  \n\n#### 导入模块\n\n```\nimport { distributedDeviceManager } from '@kit.DistributedServiceKit';\n```"
+        }
+      ],
+      "open_questions": [
+        "Android Cross device SDK 是否已有正式版及最新版本号",
+        "HarmonyOS 侧远端调用/传输本体能力的 Kit 形态与版本门槛",
+        "Play Services 依赖在无 GMS 设备上的可用性"
+      ]
+    },
+    {
+      "dimension": "permissions_privacy",
+      "statement": "权限模型假设：Android Cross device SDK 声称抽象本地发现权限（BLUETOOTH_CONNECT/BLUETOOTH_SCAN/ACCESS_FINE_LOCATION），SDK 之外的操作仍需应用自行声明运行时权限；HarmonyOS 查询可信设备需应用显式声明 ohos.permission.DISTRIBUTED_DATASYNC。两平台权限暴露层级（SDK 内部抽象 vs 应用级分布式权限声明）与授权流程可能不同。",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "发现权限抽象与 SDK 外权限声明要求",
+          "start_line": 39,
+          "end_line": 46,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/guide/topics/connectivity/cross-device-sdk/get-started",
+            "platform": "android",
+            "title": "Get started",
+            "local_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/document.md",
+            "sha256": "274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2",
+            "raw_sha256": "cdae76137de45f3e3989e03729bbbaccdef731bdd8a22f9125d1a5190357efde",
+            "raw_path": "docs-raw/research/2026-09-06/8fab9fb440a6f4bafdda693f3acbe07366b0d108b94f79c77f3876032c2bdad3/274acded9cdf371ea9536e781c213a6f61bf6fc3c0d2cf09f1da3ed732e606d2/source.gz",
+            "fetched_at": "2026-09-05T10:30:02.235345+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 101,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 48,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "One of the benefits of using the Cross device SDK is that it abstracts away\nlocal discovery, such as `BLUETOOTH_CONNECT`, `BLUETOOTH_SCAN`, and\n`ACCESS_FINE_LOCATION`.\n\n**Note:** You still have to declare and request runtime permissions required by your\napp features and API outside of the Cross device SDK. For instance, you might\nneed `BLUETOOTH_SCAN` permission to perform a Bluetooth scan outside of the\nCross device SDK."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "getAvailableDeviceListSync：需要 ohos.permission.DISTRIBUTED_DATASYNC",
+          "start_line": 146,
+          "end_line": 156,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributeddevicemanager",
+            "platform": "harmonyos",
+            "title": "@ohos.distributedDeviceManager (设备管理)",
+            "local_path": "docs-raw/research/2026-09-06/b000ec1dec713199bab86be675d9257eb03962374d8bfb04bd763b23e5174240/b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9/document.md",
+            "sha256": "b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9",
+            "raw_sha256": "f7754bcab32e4e4134e58b39a674d385833fec7f0aca70edd81412fcaf4222ba",
+            "raw_path": "docs-raw/research/2026-09-06/b000ec1dec713199bab86be675d9257eb03962374d8bfb04bd763b23e5174240/b907c0c758a1bf41e6f5b998e08f7b4c78bdb107db3cec7cd9f7bffedb297ec9/source.gz",
+            "fetched_at": "2026-09-05T10:27:17.190280+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1322,
+            "suggested_sections": [
+              {
+                "start_line": 67,
+                "end_line": 84,
+                "truncated": true
+              },
+              {
+                "start_line": 190,
+                "end_line": 239,
+                "truncated": false
+              },
+              {
+                "start_line": 240,
+                "end_line": 241,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### getAvailableDeviceListSync\n\ngetAvailableDeviceListSync(): Array\\<DeviceBasicInfo\\>\n\n同步获取所有在线可信设备。调用前需先通过createDeviceManager创建DeviceManager实例。与getAvailableDeviceList的区别在于：本方法为同步调用，直接返回结果；getAvailableDeviceList为异步调用，通过callback或Promise返回结果。建议在需要阻塞等待结果的场景使用本方法，在不希望阻塞线程的场景使用getAvailableDeviceList。\n\n需要权限：ohos.permission.DISTRIBUTED_DATASYNC\n\n系统能力：SystemCapability.DistributedHardware.DeviceManager\n\n设备行为差异：该接口在不支持分布式业务的Wearable设备上调用会返回801错误码。"
+        }
+      ],
+      "open_questions": [
+        "HarmonyOS 认证/发现等接口是否还需其他权限",
+        "Android SDK 内部实际使用的权限与用户可见提示",
+        "两平台权限拒绝时的错误路径与恢复方式"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "iOS 无相关冻结正文：ios-1（Metal/Mac GPU 带宽）与 ios-2（Apple School Manager）均不相关，需另行检索 Apple 官方设备间通信框架文档并逐符号核对 iOS 适用性后重评",
+    "HarmonyOS 远端能力调用与消息/数据流传输本体 API（跨端迁移、分布式数据对象、软总线数据通道等）正文未读到；已读的分布式设备管理只是基座，不能推广为调用/传输支持",
+    "连接中断处理：Android 来源未说明；HarmonyOS 仅有设备级状态与服务死亡监听，会话/通道级中断恢复未读到",
+    "版本基线未固定：Android Cross device SDK 为 0.1.0-preview01 预览版，HarmonyOS 文档标注 API 10/20 起，均未核对启动日最新正式版与手机基线",
+    "绑定 SysCap SystemCapability.DistributedHardware.DistributedHardware 无官方 URL（binding_source_gaps 待补）；harmonyos-2 mechanicManager 为特定机械体控制模块，映射未确认"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "iOS 平台完全缺失相关正文（关键缺口）；HarmonyOS 核心调用/传输本体 API 与 Android 连接中断处理、远端调用语义均未读到，存在高风险映射；需优先补充官方正文检索、SysCap 绑定来源与版本核实后再精研。"
+  }
+}

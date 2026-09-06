@@ -1,0 +1,13 @@
+{
+  "id": "e3050a16208f39e8f717fa8591637580a3e4ca72ade2013e59b19ebb6eb1fbf8",
+  "url": "https://developer.android.com/guide/navigation/navigation-3/recipes/results-serializable",
+  "platform": "android",
+  "title": "Returning a Result (Serializable State-Based)",
+  "local_path": "docs-raw/research/2026-09-06/e3050a16208f39e8f717fa8591637580a3e4ca72ade2013e59b19ebb6eb1fbf8/ec5bbc63f99554157e27d451939e281f50fa2f4c6fba3f9d7c28dc79dde8ddd5/document.md",
+  "sha256": "ec5bbc63f99554157e27d451939e281f50fa2f4c6fba3f9d7c28dc79dde8ddd5",
+  "raw_sha256": "f1156bfc5a4c67b8e872c8dac8f67e0335aebe09b666fd31113f8f08f78db831",
+  "raw_path": "docs-raw/research/2026-09-06/e3050a16208f39e8f717fa8591637580a3e4ca72ade2013e59b19ebb6eb1fbf8/ec5bbc63f99554157e27d451939e281f50fa2f4c6fba3f9d7c28dc79dde8ddd5/source.gz",
+  "fetched_at": "2026-09-05T10:29:41.156468+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

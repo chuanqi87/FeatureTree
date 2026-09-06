@@ -1,0 +1,716 @@
+{
+  "task_id": "edd40cc384a36cc2ba6c021cd1cc0f0073cc283d8a554cc3f05737edff5e1c39",
+  "feature_id": "connectivity.bluetooth.le.scan.batch",
+  "stage": "first_pass",
+  "summary": "三平台冻结源均未明示BLE扫描结果的硬件/系统级批量投递机制。Android指南仅展示逐条onScanResult交付，ScanSettings未提批量参数；iOS两源离题（MDM分批检索、MIDI连接）；HarmonyOS回调为数组（Array<ScanResult>/ScanReport）疑可聚合交付，但批量语义与节能意图未文档化。全部low置信，差异假设1条，需补API参考正文。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "unknown",
+      "observation": "冻结指南仅展示BluetoothLeScanner.startScan+ScanCallback.onScanResult逐条交付结果；提及ScanSettings但未列批量/延迟上报参数；android-2的batched仅位置域(FLP setMaxWaitTime)，非BLE。未读到BLE批量交付机制。",
+      "version_scope": "指南未标注API Level；android-2适用Android 8.0 (API 26)+且属位置域；启动日基线未固定，不能断言最新正式版行为",
+      "conditions": [
+        "需Bluetooth开启，否则getBluetoothLeScanner()返回null（正文明示）",
+        "指南提示扫描耗电，建议找到即停并设时限",
+        "android-2所载batched机制属位置服务(FLP)，不可推及BLE"
+      ],
+      "gaps": [
+        "冻结源无ScanSettings/ScanCallback API参考正文，是否存在批量上报/延迟参数及其API Level未核实",
+        "硬件offload批量扫描的设备/芯片支持条件未读到",
+        "不能据此断言Android支持或不支持BLE批量交付"
+      ],
+      "confidence": "low",
+      "evidence_strength": "missing",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Find BLE devices: startScan与ScanCallback说明，结果经回调返回且扫描耗电",
+          "start_line": 3,
+          "end_line": 9,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/find-ble-devices",
+            "platform": "android",
+            "title": "Find BLE devices",
+            "local_path": "docs-raw/research/2026-09-06/e06a5c9b86a2d1a2d39d9799020e20d8b36a771ca0f61859be9b6a831528939c/054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b/document.md",
+            "sha256": "054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b",
+            "raw_sha256": "7f95a7e526cc536219282141622602a9645c38e365f9e572cda442e4d2f4d57f",
+            "raw_path": "docs-raw/research/2026-09-06/e06a5c9b86a2d1a2d39d9799020e20d8b36a771ca0f61859be9b6a831528939c/054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b/source.gz",
+            "fetched_at": "2026-09-05T09:34:20.942633+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 131,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 21,
+                "end_line": 45,
+                "truncated": false
+              },
+              {
+                "start_line": 46,
+                "end_line": 96,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "To find BLE devices, you use the\n[`startScan()`](https://developer.android.com/reference/android/bluetooth/le/BluetoothLeScanner#startScan(android.bluetooth.le.ScanCallback))\nmethod. This method takes a\n[`ScanCallback`](https://developer.android.com/reference/android/bluetooth/le/ScanCallback) as a parameter.\nYou must implement this callback, because that is how scan results are returned.\nBecause scanning is battery-intensive, you should observe the following\nguidelines:"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "BluetoothLeScanner仅在Bluetooth开启时可用，否则返回null",
+          "start_line": 76,
+          "end_line": 82,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/find-ble-devices",
+            "platform": "android",
+            "title": "Find BLE devices",
+            "local_path": "docs-raw/research/2026-09-06/e06a5c9b86a2d1a2d39d9799020e20d8b36a771ca0f61859be9b6a831528939c/054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b/document.md",
+            "sha256": "054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b",
+            "raw_sha256": "7f95a7e526cc536219282141622602a9645c38e365f9e572cda442e4d2f4d57f",
+            "raw_path": "docs-raw/research/2026-09-06/e06a5c9b86a2d1a2d39d9799020e20d8b36a771ca0f61859be9b6a831528939c/054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b/source.gz",
+            "fetched_at": "2026-09-05T09:34:20.942633+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 131,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 21,
+                "end_line": 45,
+                "truncated": false
+              },
+              {
+                "start_line": 46,
+                "end_line": 96,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "**Note:** The\n[`BluetoothLeScanner`](https://developer.android.com/reference/android/bluetooth/le/BluetoothLeScanner) is\nonly available from the\n[`BluetoothAdapter`](https://developer.android.com/reference/android/bluetooth/BluetoothAdapter) if Bluetooth\nis currently enabled on the device. If Bluetooth is not enabled, then\n[`getBluetoothLeScanner()`](https://developer.android.com/reference/android/bluetooth/BluetoothAdapter#getBluetoothLeScanner())\nreturns null."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "startScan(List<ScanFilter>, ScanSettings, ScanCallback)：ScanSettings仅称指定扫描参数，未提批量",
+          "start_line": 84,
+          "end_line": 89,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/find-ble-devices",
+            "platform": "android",
+            "title": "Find BLE devices",
+            "local_path": "docs-raw/research/2026-09-06/e06a5c9b86a2d1a2d39d9799020e20d8b36a771ca0f61859be9b6a831528939c/054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b/document.md",
+            "sha256": "054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b",
+            "raw_sha256": "7f95a7e526cc536219282141622602a9645c38e365f9e572cda442e4d2f4d57f",
+            "raw_path": "docs-raw/research/2026-09-06/e06a5c9b86a2d1a2d39d9799020e20d8b36a771ca0f61859be9b6a831528939c/054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b/source.gz",
+            "fetched_at": "2026-09-05T09:34:20.942633+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 131,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 21,
+                "end_line": 45,
+                "truncated": false
+              },
+              {
+                "start_line": 46,
+                "end_line": 96,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "To scan for only specific types of peripherals, you can instead call\n[`startScan(List<ScanFilter>, ScanSettings, ScanCallback)`](https://developer.android.com/reference/android/bluetooth/le/BluetoothLeScanner#startScan(java.util.List%3Candroid.bluetooth.le.ScanFilter%3E,%20android.bluetooth.le.ScanSettings,%20android.bluetooth.le.ScanCallback)),\nproviding a list of [`ScanFilter`](https://developer.android.com/reference/android/bluetooth/le/ScanFilter)\nobjects that restrict the devices that the scan looks for and a\n[`ScanSettings`](https://developer.android.com/reference/android/bluetooth/le/ScanSettings) object that\nspecifies parameters about the scan."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "ScanCallback实现示例：onScanResult(callbackType, result)逐条交付单条结果",
+          "start_line": 91,
+          "end_line": 108,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/find-ble-devices",
+            "platform": "android",
+            "title": "Find BLE devices",
+            "local_path": "docs-raw/research/2026-09-06/e06a5c9b86a2d1a2d39d9799020e20d8b36a771ca0f61859be9b6a831528939c/054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b/document.md",
+            "sha256": "054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b",
+            "raw_sha256": "7f95a7e526cc536219282141622602a9645c38e365f9e572cda442e4d2f4d57f",
+            "raw_path": "docs-raw/research/2026-09-06/e06a5c9b86a2d1a2d39d9799020e20d8b36a771ca0f61859be9b6a831528939c/054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b/source.gz",
+            "fetched_at": "2026-09-05T09:34:20.942633+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 131,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 21,
+                "end_line": 45,
+                "truncated": false
+              },
+              {
+                "start_line": 46,
+                "end_line": 96,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "The following code sample is an implementation of\n[`ScanCallback`](https://developer.android.com/reference/android/bluetooth/le/ScanCallback),\nwhich is the interface used to deliver BLE scan results. When results are found,\nthey are added to a list adapter in the `DeviceScanActivity` to display to the\nuser.\n\n### Kotlin\n\n```\nprivate val leDeviceListAdapter = LeDeviceListAdapter()\n// Device scan callback.\nprivate val leScanCallback: ScanCallback = object : ScanCallback() {\n    override fun onScanResult(callbackType: Int, result: ScanResult) {\n        super.onScanResult(callbackType, result)\n        leDeviceListAdapter.addDevice(result.device)\n        leDeviceListAdapter.notifyDataSetChanged()\n    }\n}"
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Background Location Limits：batched版本仅指FLP位置API，属位置域而非BLE",
+          "start_line": 55,
+          "end_line": 61,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/about/versions/oreo/background-location-limits",
+            "platform": "android",
+            "title": "Background Location Limits",
+            "local_path": "docs-raw/research/2026-09-06/7cb29865b0da573d514eea67ab35ba00bd4bd7dcdc247a90720b5baaf7c8763e/72cdbe99befb06edc2826ff13e795d6b2d01a3ff58f5a946e3a2b658898265e2/document.md",
+            "sha256": "72cdbe99befb06edc2826ff13e795d6b2d01a3ff58f5a946e3a2b658898265e2",
+            "raw_sha256": "c479bbdd10897c3f6ac7177c46fb033f9299e9f8f61e4beb3f1c57d88a9d355a",
+            "raw_path": "docs-raw/research/2026-09-06/7cb29865b0da573d514eea67ab35ba00bd4bd7dcdc247a90720b5baaf7c8763e/72cdbe99befb06edc2826ff13e795d6b2d01a3ff58f5a946e3a2b658898265e2/source.gz",
+            "fetched_at": "2026-09-05T10:22:11.511764+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 106,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 15,
+                "truncated": false
+              },
+              {
+                "start_line": 16,
+                "end_line": 25,
+                "truncated": false
+              },
+              {
+                "start_line": 26,
+                "end_line": 62,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "**Note:** If your app needs access to location history that\ncontains time-frequent updates, use the batched version of the Fused Location\nProvider API elements, such as the\n[`FusedLocationProviderApi`](https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderApi)\ninterface. When your app is running in the background, this API receives the\nuser's location more frequently than the non-batched API. Keep in mind, however,\nthat your app still receives updates in batches only a few times each hour."
+        }
+      ],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "未读到批量交付机制的文档描述，无法判断真机验证需求；需先补ScanSettings/ScanCallback参考正文"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "unknown",
+      "observation": "两源均离题：ios-1为DeviceManagement服务端记录分批检索(batchToken)；ios-2为Core MIDI连接BLE MIDI外设的步骤，仅泛称Scan for and connect，均未描述BLE扫描结果回调形态或批量交付。",
+      "version_scope": "ios-2提及macOS 13+/iOS 16+自动重连行为（非扫描交付）；扫描结果交付的iOS版本信息缺失；基线未固定",
+      "conditions": [
+        "ios-1内容属MDM服务端API域，与本节点无关",
+        "ios-2属Core MIDI域，仅涉BLE MIDI外设连接"
+      ],
+      "gaps": [
+        "缺Core Bluetooth扫描回调（如didDiscover）正文",
+        "iOS是否有扫描结果聚合/合并上报选项及其版本未核实",
+        "Apple目录需逐符号核对iOS适用性"
+      ],
+      "confidence": "low",
+      "evidence_strength": "missing",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "Retrieving a large record set: batchToken分批响应机制，属DeviceManagement服务端域",
+          "start_line": 23,
+          "end_line": 31,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/devicemanagement/retrieving-a-large-record-set",
+            "platform": "ios",
+            "title": "Retrieving a large record set",
+            "local_path": "docs-raw/research/2026-09-06/f4213d7a14297dc059e7347156333c3443a8b1d082bfc7b312923e0493073066/ae24a60596cf6fca40f798412e92d4ac363ebd41858528da740ab4d2df6e4432/document.md",
+            "sha256": "ae24a60596cf6fca40f798412e92d4ac363ebd41858528da740ab4d2df6e4432",
+            "raw_sha256": "5d85f6f80c8575650b531e907a061fcba90314fb5642f0e4c749915a0806fbd1",
+            "raw_path": "docs-raw/research/2026-09-06/f4213d7a14297dc059e7347156333c3443a8b1d082bfc7b312923e0493073066/ae24a60596cf6fca40f798412e92d4ac363ebd41858528da740ab4d2df6e4432/source.gz",
+            "fetched_at": "2026-09-05T10:52:51.279362+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 56,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 13,
+                "truncated": false
+              },
+              {
+                "start_line": 14,
+                "end_line": 22,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Handle batched responses\n\nUse a `batchToken` to retrieve multiple batches of records when the total number of records exceeds a limit.\n\nTo use a `batchToken`, your device management service should:\n\n1. Make an initial request with no `batchToken` (or `sinceModifiedToken`). This request returns all records associated with the provided `sToken`.\n2. If the number of records exceeds a server-controlled limit (on the order of several hundred), a `batchToken` value is included in the response, along with the first batch of records. Your device management service should pass this `batchToken` value in a subsequent request to get the next batch of records. As long as additional batches remain, the server returns a new `batchToken` value in its response.\n3. After receiving all records for the request, the server includes a `sinceModifiedToken` value in the response. Your device management service can pass this `sinceModifiedToken` in subsequent requests to get records modified since generating the token. If the number of modified records exceeds the limit, the response includes a `batchToken` that you can use to get the next batch of modified records."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "MIDI Bluetooth: 扫描并连接BLE MIDI外设的步骤，未描述扫描结果交付方式",
+          "start_line": 5,
+          "end_line": 17,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/coremidi/midi-bluetooth",
+            "platform": "ios",
+            "title": "MIDI Bluetooth",
+            "local_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/document.md",
+            "sha256": "ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3",
+            "raw_sha256": "4e089953fe61886b72b7eafaffd19fbe65e8acf0d7d99d178326811c18f71271",
+            "raw_path": "docs-raw/research/2026-09-06/efbde216de4a9da9a4f12a29aed778ce2579388dfc4034bf4f39f6a1e3aae419/ab572b5edaf882af58dfc263216a20694da4a1d8d1ea7aa9ae1a4f2090cbdae3/source.gz",
+            "fetched_at": "2026-09-05T10:19:31.589071+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 37,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 21,
+                "end_line": 22,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Discussion\n\nIn macOS 13 or later and iOS 16 or later, the system automatically reconnects Bluetooth Low Energy (BLE) MIDI peripherals when powered on, if the device supports pairing. Previously, it was necessary to use Audio MIDI Setup to establish BLE MIDI connections.\n\nFor devices that don’t support pairing, [`Core MIDI`](/documentation/CoreMIDI) can enable <doc://com.apple.documentation/documentation/CoreBluetooth> connections for input/output (I/O).\n\nThis API enables connection of BLE MIDI peripherals that don’t support pairing using <doc://com.apple.documentation/documentation/CoreBluetooth> with the following steps:\n\n1. Scan for and connect to a BLE MIDI peripheral.\n2. Confirm the peripheral has a BLE MIDI service.\n3. Confirm the BLE MIDI service on the peripheral has a MIDI I/O characteristic for the MIDI service.\n\nOnce a BLE MIDI peripheral connects — and you confirm that it possess both the BLE MIDI service and BLE MIDI I/O characteristic — call [`MIDIBluetoothDriverActivateAllConnections()`](/documentation/CoreMIDI/MIDIBluetoothDriverActivateAllConnections()) to have [`Core MIDI`](/documentation/CoreMIDI) enable I/O on those connections."
+        }
+      ],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "无BLE扫描结果交付机制的证据，无法评估真机验证需求"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "possible_mapping",
+      "observation": "BLE指南结果经'BLEDeviceFind'事件上报：API 15+回调ScanReport（示例scanReport.scanResult为数组），API 14及以前回调Array<ble.ScanResult>，单次事件可含多条结果，疑与聚合交付对应；但指南未说明批量语义/节能意图，ScanOptions.interval含义未解释。",
+      "version_scope": "指南区分API version 15+（多路扫描）与API 14及以前（单路）；未标对应HarmonyOS发行版；version_verified=false，基线未固定",
+      "conditions": [
+        "需申请ohos.permission.ACCESS_BLUETOOTH（正文明示）",
+        "API 15+为BleScanner多路扫描；API 14及以前仅单路",
+        "扫描消耗蓝牙硬件资源与功耗，不再需要时须主动停止"
+      ],
+      "gaps": [
+        "未读js-apis-bluetooth-ble参考中ScanReport/ScanOptions字段语义正文，interval是否为上报间隔未核实",
+        "未读到批量交付的节能意图或硬件offload说明",
+        "harmonyos-2属星闪(NearLink，起始版本26.0.0)而非BLE，不构成本节点证据"
+      ],
+      "confidence": "low",
+      "evidence_strength": "indirect",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "查找设备: API 15+扫描方式，on('BLEDeviceFind')回调参数为ble.ScanReport",
+          "start_line": 24,
+          "end_line": 43,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ble-development-guide",
+            "platform": "harmonyos",
+            "title": "查找设备",
+            "local_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/document.md",
+            "sha256": "3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d",
+            "raw_sha256": "57193a8e00c7bf563495c6413174666b8c063d56af6d0a466eb51a417367494d",
+            "raw_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 742,
+            "suggested_sections": [
+              {
+                "start_line": 22,
+                "end_line": 171,
+                "truncated": false
+              },
+              {
+                "start_line": 172,
+                "end_line": 173,
+                "truncated": true
+              },
+              {
+                "start_line": 388,
+                "end_line": 442,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "1. 订阅扫描结果上报事件\n\n* 推荐使用API version 15开始支持的扫描方式，该方式支持应用发起和管理多路扫描。该方式支持的上报事件请参考[on('BLEDeviceFind')](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble#onbledevicefind15)。\n\n```\n// 定义扫描结果上报回调函数\nfunction onReceiveEvent(scanReport: ble.ScanReport) {\n  console.info('BLE scan device find result: '+ JSON.stringify(scanReport));\n}\n\n// 创建ble扫描实例，可以管理该实例下创建的扫描流程\nlet bleScanner: ble.BleScanner = ble.createBleScanner();\n\ntry {\n  // 发起订阅\n  bleScanner.on('BLEDeviceFind', onReceiveEvent);\n} catch (err) {\n  console.error('errCode: ' + (err as BusinessError).code + ', errMessage: ' + (err as BusinessError).message);\n}\n```"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "API 14及以前扫描方式，ble.on('BLEDeviceFind')回调参数为Array<ble.ScanResult>",
+          "start_line": 45,
+          "end_line": 59,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ble-development-guide",
+            "platform": "harmonyos",
+            "title": "查找设备",
+            "local_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/document.md",
+            "sha256": "3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d",
+            "raw_sha256": "57193a8e00c7bf563495c6413174666b8c063d56af6d0a466eb51a417367494d",
+            "raw_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 742,
+            "suggested_sections": [
+              {
+                "start_line": 22,
+                "end_line": 171,
+                "truncated": false
+              },
+              {
+                "start_line": 172,
+                "end_line": 173,
+                "truncated": true
+              },
+              {
+                "start_line": 388,
+                "end_line": 442,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "* API version 14及以前支持的扫描方式只支持应用发起单路扫描。该方式支持的上报事件请参考[ble.on('BLEDeviceFind')](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble#bleonbledevicefind)。\n\n```\n// 定义扫描结果上报回调函数\nfunction onReceiveEvent(data: Array<ble.ScanResult>) {\n  console.info('BLE scan device find result: '+ JSON.stringify(data));\n}\n\ntry {\n  // 发起订阅\n  ble.on('BLEDeviceFind', onReceiveEvent);\n} catch (err) {\n  console.error('errCode: ' + (err as BusinessError).code + ', errMessage: ' + (err as BusinessError).message);\n}\n```"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "ScanOptions示例含interval/dutyMode/matchMode，指南未解释interval含义",
+          "start_line": 85,
+          "end_line": 90,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ble-development-guide",
+            "platform": "harmonyos",
+            "title": "查找设备",
+            "local_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/document.md",
+            "sha256": "3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d",
+            "raw_sha256": "57193a8e00c7bf563495c6413174666b8c063d56af6d0a466eb51a417367494d",
+            "raw_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 742,
+            "suggested_sections": [
+              {
+                "start_line": 22,
+                "end_line": 171,
+                "truncated": false
+              },
+              {
+                "start_line": 172,
+                "end_line": 173,
+                "truncated": true
+              },
+              {
+                "start_line": 388,
+                "end_line": 442,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "// 构造扫描配置参数\nlet scanOptions: ble.ScanOptions = {\n  interval: 0,\n  dutyMode: ble.ScanDuty.SCAN_MODE_LOW_POWER,\n  matchMode: ble.MatchMode.MATCH_MODE_AGGRESSIVE\n}"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "停止扫描：扫描流程消耗蓝牙硬件资源并影响功耗",
+          "start_line": 129,
+          "end_line": 131,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ble-development-guide",
+            "platform": "harmonyos",
+            "title": "查找设备",
+            "local_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/document.md",
+            "sha256": "3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d",
+            "raw_sha256": "57193a8e00c7bf563495c6413174666b8c063d56af6d0a466eb51a417367494d",
+            "raw_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 742,
+            "suggested_sections": [
+              {
+                "start_line": 22,
+                "end_line": 171,
+                "truncated": false
+              },
+              {
+                "start_line": 172,
+                "end_line": 173,
+                "truncated": true
+              },
+              {
+                "start_line": 388,
+                "end_line": 442,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "3. 停止扫描\n\n扫描流程会消耗蓝牙硬件资源和影响设备功耗。当应用不再需要该扫描时，需要主动停止。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "完整示例：scanReport.scanResult为数组（有length并按下标取结果）",
+          "start_line": 424,
+          "end_line": 431,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ble-development-guide",
+            "platform": "harmonyos",
+            "title": "查找设备",
+            "local_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/document.md",
+            "sha256": "3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d",
+            "raw_sha256": "57193a8e00c7bf563495c6413174666b8c063d56af6d0a466eb51a417367494d",
+            "raw_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 742,
+            "suggested_sections": [
+              {
+                "start_line": 22,
+                "end_line": 171,
+                "truncated": false
+              },
+              {
+                "start_line": 172,
+                "end_line": 173,
+                "truncated": true
+              },
+              {
+                "start_line": 388,
+                "end_line": 442,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "  // 1. 定义扫描结果上报回调函数\n  onReceiveEvent = (scanReport: ble.ScanReport) => {\n    console.info(TAG, 'BLE scan device find result: '+ JSON.stringify(scanReport));\n    if (scanReport.scanResult.length > 0) {\n      console.info(TAG, 'BLE scan result: ' + scanReport.scanResult[0].deviceId);\n      this.parseScanResult(scanReport.scanResult[0].data);\n    }\n  };"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "星闪scan.onDeviceFound回调返回ScanResults[]数组（NearLink非BLE，起始26.0.0）",
+          "start_line": 135,
+          "end_line": 141,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-nearlink-scan",
+            "platform": "harmonyos",
+            "title": "@ohos.nearlink.scan (星闪扫描能力)",
+            "local_path": "docs-raw/research/2026-09-06/d40697677ae9f7dcf8a9af80ecbc629926b6d9f468cb2b1d608d51a2c44aa372/26b516e7ab32f640db28d4ad857026f0c79f928bba92974e4ef01aa1d0356013/document.md",
+            "sha256": "26b516e7ab32f640db28d4ad857026f0c79f928bba92974e4ef01aa1d0356013",
+            "raw_sha256": "57db61af946647d6d48dc41006350447f9e88964a8d3c020b7b63cd87af4b95d",
+            "raw_path": "docs-raw/research/2026-09-06/d40697677ae9f7dcf8a9af80ecbc629926b6d9f468cb2b1d608d51a2c44aa372/26b516e7ab32f640db28d4ad857026f0c79f928bba92974e4ef01aa1d0356013/source.gz",
+            "fetched_at": "2026-09-05T10:27:41.923311+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 284,
+            "suggested_sections": [
+              {
+                "start_line": 13,
+                "end_line": 86,
+                "truncated": false
+              },
+              {
+                "start_line": 87,
+                "end_line": 134,
+                "truncated": false
+              },
+              {
+                "start_line": 135,
+                "end_line": 178,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### scan.onDeviceFound\n\nonDeviceFound(callback: Callback\\<ScanResults\\[\\]\\>): void\n\n订阅星闪扫描结果。使用callback异步回调。\n\n应用需具备ohos.permission.ACCESS_NEARLINK权限，方可接收此事件上报。"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "数组回调是否真实聚合多条结果、触发时机与功耗收益均未文档化，需真机观察交付粒度与节奏方可确认映射；具体用例留待精研"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "programming_model",
+      "statement": "文档层面扫描结果交付粒度不同：HarmonyOS BLE指南回调签名为数组（Array<ble.ScanResult>，ScanReport.scanResult亦为数组），单次事件可含多条结果；Android指南仅展示onScanResult单条交付且未展示批量回调。这是否为可配置批量交付机制、Android是否另有批量参数，待读API参考核实。",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "ScanCallback.onScanResult逐条交付单条结果的示例",
+          "start_line": 91,
+          "end_line": 108,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/develop/connectivity/bluetooth/ble/find-ble-devices",
+            "platform": "android",
+            "title": "Find BLE devices",
+            "local_path": "docs-raw/research/2026-09-06/e06a5c9b86a2d1a2d39d9799020e20d8b36a771ca0f61859be9b6a831528939c/054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b/document.md",
+            "sha256": "054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b",
+            "raw_sha256": "7f95a7e526cc536219282141622602a9645c38e365f9e572cda442e4d2f4d57f",
+            "raw_path": "docs-raw/research/2026-09-06/e06a5c9b86a2d1a2d39d9799020e20d8b36a771ca0f61859be9b6a831528939c/054735bff9d159c01230ee1c49befcabfb5998fadf842a227d0b8fb196d8328b/source.gz",
+            "fetched_at": "2026-09-05T09:34:20.942633+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 131,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 21,
+                "end_line": 45,
+                "truncated": false
+              },
+              {
+                "start_line": 46,
+                "end_line": 96,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "The following code sample is an implementation of\n[`ScanCallback`](https://developer.android.com/reference/android/bluetooth/le/ScanCallback),\nwhich is the interface used to deliver BLE scan results. When results are found,\nthey are added to a list adapter in the `DeviceScanActivity` to display to the\nuser.\n\n### Kotlin\n\n```\nprivate val leDeviceListAdapter = LeDeviceListAdapter()\n// Device scan callback.\nprivate val leScanCallback: ScanCallback = object : ScanCallback() {\n    override fun onScanResult(callbackType: Int, result: ScanResult) {\n        super.onScanResult(callbackType, result)\n        leDeviceListAdapter.addDevice(result.device)\n        leDeviceListAdapter.notifyDataSetChanged()\n    }\n}"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "API 14及以前回调参数为Array<ble.ScanResult>",
+          "start_line": 45,
+          "end_line": 59,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ble-development-guide",
+            "platform": "harmonyos",
+            "title": "查找设备",
+            "local_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/document.md",
+            "sha256": "3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d",
+            "raw_sha256": "57193a8e00c7bf563495c6413174666b8c063d56af6d0a466eb51a417367494d",
+            "raw_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 742,
+            "suggested_sections": [
+              {
+                "start_line": 22,
+                "end_line": 171,
+                "truncated": false
+              },
+              {
+                "start_line": 172,
+                "end_line": 173,
+                "truncated": true
+              },
+              {
+                "start_line": 388,
+                "end_line": 442,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "* API version 14及以前支持的扫描方式只支持应用发起单路扫描。该方式支持的上报事件请参考[ble.on('BLEDeviceFind')](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble#bleonbledevicefind)。\n\n```\n// 定义扫描结果上报回调函数\nfunction onReceiveEvent(data: Array<ble.ScanResult>) {\n  console.info('BLE scan device find result: '+ JSON.stringify(data));\n}\n\ntry {\n  // 发起订阅\n  ble.on('BLEDeviceFind', onReceiveEvent);\n} catch (err) {\n  console.error('errCode: ' + (err as BusinessError).code + ', errMessage: ' + (err as BusinessError).message);\n}\n```"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "完整示例中scanReport.scanResult为数组",
+          "start_line": 424,
+          "end_line": 431,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ble-development-guide",
+            "platform": "harmonyos",
+            "title": "查找设备",
+            "local_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/document.md",
+            "sha256": "3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d",
+            "raw_sha256": "57193a8e00c7bf563495c6413174666b8c063d56af6d0a466eb51a417367494d",
+            "raw_path": "docs-raw/research/2026-09-06/f2784b1d6e5e59f0d4ed1882dfe360e4cf8d6583f3a978f08fdce419b5c7f217/3ce4e86ba3a2e5d84424810429f8401b638ad97757d3d6bd83948ab2bcafd65d/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 742,
+            "suggested_sections": [
+              {
+                "start_line": 22,
+                "end_line": 171,
+                "truncated": false
+              },
+              {
+                "start_line": 172,
+                "end_line": 173,
+                "truncated": true
+              },
+              {
+                "start_line": 388,
+                "end_line": 442,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "  // 1. 定义扫描结果上报回调函数\n  onReceiveEvent = (scanReport: ble.ScanReport) => {\n    console.info(TAG, 'BLE scan device find result: '+ JSON.stringify(scanReport));\n    if (scanReport.scanResult.length > 0) {\n      console.info(TAG, 'BLE scan result: ' + scanReport.scanResult[0].deviceId);\n      this.parseScanResult(scanReport.scanResult[0].data);\n    }\n  };"
+        }
+      ],
+      "open_questions": [
+        "Android ScanSettings/ScanCallback是否存在延迟或批量上报参数（需读API参考）",
+        "HarmonyOS数组回调是否真实聚合多条结果及触发时机（interval语义待核）",
+        "两平台批量交付（若有）是否以节能为设计目的（需官方明示）"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "本节点定义为硬件/系统批量投递扫描结果以节能；三平台冻结源均未读到硬件offload或节能意图的明示说明",
+    "Android：ScanSettings/ScanCallback API参考正文不在冻结源中，批量参数与API Level未核实",
+    "iOS：Core Bluetooth扫描回调与结果交付正文缺失，无法建立任何映射",
+    "HarmonyOS：ScanReport/ScanOptions字段语义需读js-apis-bluetooth-ble参考；星闪文档不适用本BLE节点"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "三平台冻结源均未明示本节点核心机制（硬件/系统批量投递以节能）：iOS零相关证据，Android缺关键API参考，HarmonyOS映射未确认且interval语义待核——属关键缺口兼高风险映射，优先精研。"
+  }
+}

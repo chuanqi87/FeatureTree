@@ -1,0 +1,13 @@
+{
+  "id": "b048a9cd9e0f42abacf0f139994ee13312fc2c4b6573b770d6e986f33b4963bb",
+  "url": "https://developer.android.com/docs/quality-guidelines/adaptive-app-quality/tier-3",
+  "platform": "android",
+  "title": "Tier 3 — Adaptive ready",
+  "local_path": "docs-raw/research/2026-09-06/b048a9cd9e0f42abacf0f139994ee13312fc2c4b6573b770d6e986f33b4963bb/fdddb92b2c45ab4d98898f26a6e758bb698f60997c89f81a6f9dbe2dca576e80/document.md",
+  "sha256": "fdddb92b2c45ab4d98898f26a6e758bb698f60997c89f81a6f9dbe2dca576e80",
+  "raw_sha256": "cdcd11a4b9d47c749da5476197fd9c4b940cd4a58503bb090eb834d2ce90d196",
+  "raw_path": "docs-raw/research/2026-09-06/b048a9cd9e0f42abacf0f139994ee13312fc2c4b6573b770d6e986f33b4963bb/fdddb92b2c45ab4d98898f26a6e758bb698f60997c89f81a6f9dbe2dca576e80/source.gz",
+  "fetched_at": "2026-09-05T10:27:16.866406+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "70ae5c803fcdddcf4a97921ddf9f13c46ed7084c7bbdf3ec1608efbfb06b8be5",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/gameservice-nearbytransfer",
+  "platform": "harmonyos",
+  "title": "gameNearbyTransfer（游戏近场快传）",
+  "local_path": "docs-raw/research/2026-09-06/70ae5c803fcdddcf4a97921ddf9f13c46ed7084c7bbdf3ec1608efbfb06b8be5/a6325275cd35a3bf39df662b405deb82e40a0eb98f25527c883181e1bb3a74b3/document.md",
+  "sha256": "a6325275cd35a3bf39df662b405deb82e40a0eb98f25527c883181e1bb3a74b3",
+  "raw_sha256": "3e8061e171928625c6aeece7fc248e76460556d2ce52988c0004c4f6c4017220",
+  "raw_path": "docs-raw/research/2026-09-06/70ae5c803fcdddcf4a97921ddf9f13c46ed7084c7bbdf3ec1608efbfb06b8be5/a6325275cd35a3bf39df662b405deb82e40a0eb98f25527c883181e1bb3a74b3/source.gz",
+  "fetched_at": "2026-09-05T10:26:20.323512+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

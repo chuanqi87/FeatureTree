@@ -1,0 +1,13 @@
+{
+  "id": "2b0817487c7def7edb8dec6c22b23c437f1f04aa03ae8184cd019c20f6ac0e7b",
+  "url": "https://developer.android.com/develop/ui/views/graphics/webgpu/getting-started",
+  "platform": "android",
+  "title": "Getting started with WebGPU",
+  "local_path": "docs-raw/research/2026-09-06/2b0817487c7def7edb8dec6c22b23c437f1f04aa03ae8184cd019c20f6ac0e7b/0e1b1b84e1c428cc67296fff91f205e3d7ed4e08ddc191eaf3826f34adbba2ae/document.md",
+  "sha256": "0e1b1b84e1c428cc67296fff91f205e3d7ed4e08ddc191eaf3826f34adbba2ae",
+  "raw_sha256": "cc96b9b1c920aed1a857fe65659a8f8cb28346454482d5b17f5bad66e2749c66",
+  "raw_path": "docs-raw/research/2026-09-06/2b0817487c7def7edb8dec6c22b23c437f1f04aa03ae8184cd019c20f6ac0e7b/0e1b1b84e1c428cc67296fff91f205e3d7ed4e08ddc191eaf3826f34adbba2ae/source.gz",
+  "fetched_at": "2026-09-05T10:26:00.805192+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

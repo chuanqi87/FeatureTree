@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "connectivity.nfc.hce",
+    "level": "L3",
+    "parent": "connectivity.nfc",
+    "name": {
+      "zh": "主机卡模拟",
+      "en": "Host Card Emulation"
+    },
+    "definition": "应用模拟智能卡应答读卡器。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "split_justification": "presence",
+    "aliases": [
+      "HCE",
+      "Apple Pay NFC constraints"
+    ],
+    "knowledge_path": "knowledge/connectivity/nfc/hce.yaml",
+    "comparison_scope": {
+      "includes": [
+        "应用模拟智能卡应答读卡器。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "b1113bca0edc41deb4cee034c268fa86439babca73347c97034f4d8fca7c9502",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "aa736f000b0e5174db7030b0c406f8f0cecff0f3a2890eff844ae7b1373d3c29",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/develop/connectivity/nfc/hce",
+      "platform": "android",
+      "title": "Host-based card emulation overview",
+      "local_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/document.md",
+      "sha256": "a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a",
+      "raw_sha256": "3c885f79fd15a4914ab3a984a08d67df53ea1d2c36f9066df1af7a7b81f453c9",
+      "raw_path": "docs-raw/research/2026-09-06/3c281f29ada8f313e28f8b5c83ee1579863a7acfe4a067daf3db48813fe057b4/a27119a157caf10013a32f153086d69c0317c089c8135172a61c294161e7148a/source.gz",
+      "fetched_at": "2026-09-05T10:24:20.246506+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 713,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 14,
+          "truncated": false
+        },
+        {
+          "start_line": 31,
+          "end_line": 39,
+          "truncated": false
+        },
+        {
+          "start_line": 109,
+          "end_line": 141,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/guide/topics/connectivity/nfc/hce",
+      "platform": "android",
+      "title": "Host-based card emulation overview",
+      "local_path": "docs-raw/research/2026-09-06/1d98f6d594c90bc904066aaac64f99b85e90f0ab5ca07568360bf936a7268b87/42e0a059a1d197368ef209ed8b1df7e500651c7fe646c11e964dc5799d44cbe7/document.md",
+      "sha256": "42e0a059a1d197368ef209ed8b1df7e500651c7fe646c11e964dc5799d44cbe7",
+      "raw_sha256": "c00d4f6fe08b52a8f27826eab9d1b8fe45e0f93e85cfc4b7a1c62337bf4b3079",
+      "raw_path": "docs-raw/research/2026-09-06/1d98f6d594c90bc904066aaac64f99b85e90f0ab5ca07568360bf936a7268b87/42e0a059a1d197368ef209ed8b1df7e500651c7fe646c11e964dc5799d44cbe7/source.gz",
+      "fetched_at": "2026-09-05T10:43:36.401197+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 713,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 14,
+          "truncated": false
+        },
+        {
+          "start_line": 31,
+          "end_line": 39,
+          "truncated": false
+        },
+        {
+          "start_line": 109,
+          "end_line": 141,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/updates/defaultapps",
+      "platform": "ios",
+      "title": "Default apps updates",
+      "local_path": "docs-raw/research/2026-09-06/3f304e5d4b9c0630cd8666b1a2a91c85aec47fd0e0570bd9f5c0fde89b0c2bcc/7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7/document.md",
+      "sha256": "7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7",
+      "raw_sha256": "b927ebe7207cf30012f63c98abb6de3cf2e7e1a4c538add2d5ed734f60ccaf8b",
+      "raw_path": "docs-raw/research/2026-09-06/3f304e5d4b9c0630cd8666b1a2a91c85aec47fd0e0570bd9f5c0fde89b0c2bcc/7084606b591f82cd2420a8cead3fd4b5bb16a7ea9efa6cb8870ea6adac4138a7/source.gz",
+      "fetched_at": "2026-09-05T10:27:51.574171+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 114,
+      "suggested_sections": [
+        {
+          "start_line": 5,
+          "end_line": 11,
+          "truncated": false
+        },
+        {
+          "start_line": 12,
+          "end_line": 15,
+          "truncated": true
+        },
+        {
+          "start_line": 19,
+          "end_line": 20,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/secureelementcredential/accessing-and-using-secure-element-credentials",
+      "platform": "ios",
+      "title": "Accessing and using secure element credentials",
+      "local_path": "docs-raw/research/2026-09-06/001dc041b172b2f6cd9d379be9a4c1dfb717ec260204798387853971a292846e/2eb41d0bb3c1df3be7e419de3e4bc5fceabb2849e4d3a35fdef6d320f7fcc301/document.md",
+      "sha256": "2eb41d0bb3c1df3be7e419de3e4bc5fceabb2849e4d3a35fdef6d320f7fcc301",
+      "raw_sha256": "583928586203fda5c379225495724e8cc33ea904ad64199749f78e2edaef909d",
+      "raw_path": "docs-raw/research/2026-09-06/001dc041b172b2f6cd9d379be9a4c1dfb717ec260204798387853971a292846e/2eb41d0bb3c1df3be7e419de3e4bc5fceabb2849e4d3a35fdef6d320f7fcc301/source.gz",
+      "fetched_at": "2026-09-05T10:25:33.920661+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 385,
+      "suggested_sections": [
+        {
+          "start_line": 210,
+          "end_line": 280,
+          "truncated": false
+        },
+        {
+          "start_line": 281,
+          "end_line": 311,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/nfc-hce-guide",
+      "platform": "harmonyos",
+      "title": "HCE卡模拟开发指南",
+      "local_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/document.md",
+      "sha256": "99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a",
+      "raw_sha256": "f1e1fe03d8efc4405bfc81dc0be60e3f23ae5641af136220a1729526d59f9c55",
+      "raw_path": "docs-raw/research/2026-09-06/1f1b111f296af4bebd99834e83e172944b377897ea936656c759498ea4882c6a/99087fdaf7a9d9c8a3d2822e34581c1dfa6274286fa2854d63658eae24332b2a/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 376,
+      "suggested_sections": [
+        {
+          "start_line": 46,
+          "end_line": 47,
+          "truncated": true
+        },
+        {
+          "start_line": 71,
+          "end_line": 165,
+          "truncated": true
+        },
+        {
+          "start_line": 205,
+          "end_line": 328,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cardemulation",
+      "platform": "harmonyos",
+      "title": "@ohos.nfc.cardEmulation (标准NFC-cardEmulation)",
+      "local_path": "docs-raw/research/2026-09-06/38fc7f68549cecf5dae8d313b912aaa9042e28dcedc620baec1c035c73d606b4/b907b05612a3f1b0aa47b517efcfdce5421acfbaf66adaac85b44de7c64cbcf0/document.md",
+      "sha256": "b907b05612a3f1b0aa47b517efcfdce5421acfbaf66adaac85b44de7c64cbcf0",
+      "raw_sha256": "87165ef4697a47a4dfab8968d2e372d81bcda1a14512264e496b16606b1a687e",
+      "raw_path": "docs-raw/research/2026-09-06/38fc7f68549cecf5dae8d313b912aaa9042e28dcedc620baec1c035c73d606b4/b907b05612a3f1b0aa47b517efcfdce5421acfbaf66adaac85b44de7c64cbcf0/source.gz",
+      "fetched_at": "2026-09-05T10:27:07.157700+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 962,
+      "suggested_sections": [
+        {
+          "start_line": 9,
+          "end_line": 116,
+          "truncated": false
+        },
+        {
+          "start_line": 160,
+          "end_line": 205,
+          "truncated": false
+        },
+        {
+          "start_line": 206,
+          "end_line": 254,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:20.660165+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "d660df429333c71cf07dda1f3d5cab3223330a87b3955eee0bb130eb73f27207"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "7f64b1a8f2be25f8af05e42dfdd27de546e079eef0605f698a078c0d0848df6e",
+  "url": "https://developer.android.com/topic/libraries/data-binding/architecture",
+  "platform": "android",
+  "title": "Bind layout views to Architecture Components",
+  "local_path": "docs-raw/research/2026-09-06/7f64b1a8f2be25f8af05e42dfdd27de546e079eef0605f698a078c0d0848df6e/7fc31e764dae241389335316f4f951e0072a713d7da55f240eef6e0fef498575/document.md",
+  "sha256": "7fc31e764dae241389335316f4f951e0072a713d7da55f240eef6e0fef498575",
+  "raw_sha256": "3e86b139ab6fa536b61254c76f6b93f96d6ec86797c8fcd1c8fd1caa65235d4e",
+  "raw_path": "docs-raw/research/2026-09-06/7f64b1a8f2be25f8af05e42dfdd27de546e079eef0605f698a078c0d0848df6e/7fc31e764dae241389335316f4f951e0072a713d7da55f240eef6e0fef498575/source.gz",
+  "fetched_at": "2026-09-05T10:37:15.989762+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

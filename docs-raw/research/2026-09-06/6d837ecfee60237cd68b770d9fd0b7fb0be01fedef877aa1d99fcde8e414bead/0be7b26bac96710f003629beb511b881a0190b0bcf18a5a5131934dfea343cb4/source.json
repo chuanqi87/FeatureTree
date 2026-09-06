@@ -1,0 +1,13 @@
+{
+  "id": "6d837ecfee60237cd68b770d9fd0b7fb0be01fedef877aa1d99fcde8e414bead",
+  "url": "https://developer.apple.com/documentation/swiftdata/concurrencysupport",
+  "platform": "ios",
+  "title": "Concurrency support",
+  "local_path": "docs-raw/research/2026-09-06/6d837ecfee60237cd68b770d9fd0b7fb0be01fedef877aa1d99fcde8e414bead/0be7b26bac96710f003629beb511b881a0190b0bcf18a5a5131934dfea343cb4/document.md",
+  "sha256": "0be7b26bac96710f003629beb511b881a0190b0bcf18a5a5131934dfea343cb4",
+  "raw_sha256": "92093aa58d5049bcb5d2ba3698ae7d74688e5fd1d9bc24b73fa9230a097dbd35",
+  "raw_path": "docs-raw/research/2026-09-06/6d837ecfee60237cd68b770d9fd0b7fb0be01fedef877aa1d99fcde8e414bead/0be7b26bac96710f003629beb511b881a0190b0bcf18a5a5131934dfea343cb4/source.gz",
+  "fetched_at": "2026-09-05T10:26:10.144244+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

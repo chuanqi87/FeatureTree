@@ -1,0 +1,210 @@
+{
+  "task_id": "b8e5605e052ab92d76f1119c60350c71a276e84e7b1b0d8f7e7cc80254783635",
+  "feature_id": "app.background.deferred_work",
+  "stage": "first_pass",
+  "summary": "Android 读到 WorkManager 约束式延迟任务机制（NetworkType/RequiresCharging 等约束使工作推迟到条件满足，系统 doze/待机桶进一步延迟并限额）；iOS 读到 BackgroundTasks 框架目录页（BGTaskScheduler 与 BGAppRefreshTask/BGProcessingTask 任务族），约束属性与调度时机细节不在本文。HarmonyOS 冻结两篇来源（Node-API 进程内异步、企业网络管理）均与本节点无关，保留 unknown。基线未固定，全部 low，差异假设仅限 Android/iOS。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "WorkManager 以 WorkRequest 定义一次性/周期任务，Constraints（NetworkType、RequiresCharging、BatteryNotLow、DeviceIdle、StorageNotLow）使工作延迟到条件全部满足，约束失效会停止并重试；系统侧 doze/待机桶会推迟并限额 JobScheduler 任务（WorkManager 后台经其调度），充电状态可解除限制。",
+      "version_scope": "AndroidX WorkManager 库文档（文中提及 2.7.0 引入 expedited work）；系统侧行为引用 Android 9–16 变化。快照未核实具体库版本与 API Level 适用性。",
+      "conditions": [
+        "工作在全部 Constraints 满足后才运行，多约束须同时满足",
+        "周期任务最小重复间隔 15 分钟，可加 flex 区间",
+        "应用不可见时 WorkManager 经 JobScheduler 调度，受 doze/待机桶限额（如 rare 桶 24 小时滚动窗口 10 分钟）",
+        "设备充电时系统解除多数执行限额；expedited work 受系统配额限制且不能延迟调度"
+      ],
+      "gaps": [
+        "未核实当前 AndroidX WorkManager 最新正式版与本文快照的版本对应",
+        "Android 16 JobScheduler 配额变化对 WorkManager 的具体影响需按 API Level 逐一核对",
+        "Android 系统 SDK、AndroidX 库与 Google 生态服务（如 FCM）的版本与运行条件需分别固定",
+        "文档明确待机桶数值非执行时长保证，实际调度精度需实测"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "Work constraints：Constraints 使工作延迟到最优条件满足，列出 NetworkType/RequiresCharging/BatteryNotLow/DeviceIdle/StorageNotLow",
+          "start_line": 351,
+          "end_line": 362
+        },
+        {
+          "source_id": "android-2",
+          "locator": "多约束须全部满足；运行中约束失效则 WorkManager 停止并待条件满足后重试；周期任务最小间隔 15 分钟",
+          "start_line": 293,
+          "end_line": 294
+        },
+        {
+          "source_id": "android-2",
+          "locator": "多约束全部满足才运行；约束运行中失效时停止并重试",
+          "start_line": 399,
+          "end_line": 404
+        },
+        {
+          "source_id": "android-1",
+          "locator": "系统在低电状态（doze）推迟任务执行；WorkManager 在应用不可见时经 JobScheduler 调度并受限额影响",
+          "start_line": 6,
+          "end_line": 21
+        },
+        {
+          "source_id": "android-1",
+          "locator": "设备充电时系统解除待机桶执行限制",
+          "start_line": 29,
+          "end_line": 32
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "机制与约束已由官方文档明示，但文档同时声明待机桶限额非执行时长保证、实际执行依赖设备状态，调度时机与限额行为需真机核实；本轮未做实测。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "documented_mechanism",
+      "observation": "BackgroundTasks 框架提供 BGTaskScheduler 调度器与 BGAppRefreshTask（短刷新）、BGProcessingTask（数分钟级处理）等任务类型及对应 Request 类，用于后台更新与维护；本文为框架目录页，约束属性、entitlement 与调度时机细节未包含。",
+      "version_scope": "Apple BackgroundTasks 框架文档（2026 快照）；本文未给出各符号 iOS 最低版本/availability，iOS 适用版本未核实。",
+      "conditions": [
+        "需注册 launch handlers 并经 BGTaskScheduler 提交任务请求",
+        "框架定位为后台内容更新与需数分钟完成的任务，长任务可利用外部电源、网络连接",
+        "本页未含约束属性（如网络/电源要求）、Info.plist 配置与系统调度时机说明"
+      ],
+      "gaps": [
+        "BGTaskRequest/BGProcessingTaskRequest/BGAppRefreshTaskRequest 符号页（含约束属性如网络/外部电源要求）未在冻结来源中，约束表达待核",
+        "各符号 iOS availability 与最低部署版本未读到，不能确认 iOS 版本范围",
+        "系统调度时机与延迟策略（如系统何时运行任务）文档不在冻结集",
+        "本包另一来源 ios-1（Metal 示例库）与本节点无关，已排除引用"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "ios-2",
+          "locator": "Overview：框架用于后台更新与需数分钟的任务，注册 launch handlers 并调度任务",
+          "start_line": 5,
+          "end_line": 11
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "BGTaskScheduler：为应用最关键工作提供后台支持的调度类",
+          "start_line": 19,
+          "end_line": 21
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "BGProcessingTask（后台数分钟处理任务）与 BGAppRefreshTask（后台短刷新任务）",
+          "start_line": 39,
+          "end_line": 45
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "任务请求类型：BGProcessingTaskRequest、BGAppRefreshTaskRequest、BGTaskRequest",
+          "start_line": 63,
+          "end_line": 75
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "框架机制已文档化，但系统实际何时运行任务、约束条件如何生效未在本文说明，需后续读符号页并真机核实调度行为；本轮未做实测。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "unknown",
+      "observation": "冻结两篇来源均不涉及系统级约束调度的延迟任务：harmonyos-1 讲 Node-API napi_create_async_work 进程内异步（避免阻塞 ArkTS 线程），harmonyos-2 为 MDM Kit 企业网络管理 API。未读到相关机制正文，无法建立支持与否的判断。",
+      "version_scope": "无可判定机制的版本范围；harmonyos-2 标注 API 21–23（企业网络管理），与本节点无关。",
+      "conditions": [
+        "无可判定运行条件：冻结来源中无本节点机制文档"
+      ],
+      "gaps": [
+        "缺少 HarmonyOS 后台任务/延迟任务调度机制官方正文（如 resourceschedule 后台任务申请与延迟任务相关指南/API 参考），未能检索到不代表不支持",
+        "未核对 HarmonyOS 与 OpenHarmony 各自发行版的对应文档与版本条件",
+        "无法判断 HarmonyOS 是否提供网络/充电约束的延迟任务 API 及其行为差异"
+      ],
+      "confidence": "low",
+      "evidence_strength": "missing",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "场景介绍：napi_create_async_work 用于进程内耗时操作异步化，避免阻塞 ArkTS 线程；非系统级约束调度延迟任务",
+          "start_line": 3,
+          "end_line": 15
+        }
+      ],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "尚未读到 HarmonyOS 相关机制文档，无法评估机制存在性与真机验证需求，待补官方正文后再分类。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "programming_model",
+      "statement": "假设 Android 与 iOS 的约束表达模型不同：Android WorkManager 以显式 Constraints 对象（NetworkType、RequiresCharging 等必须满足的条件）声明延迟任务；iOS 以 BGTaskScheduler 的任务请求类型（BGAppRefreshTaskRequest/BGProcessingTaskRequest）组织任务，约束是否及如何声明待读符号页确认。",
+      "platforms": [
+        "android",
+        "ios"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "Work constraints 表：NetworkType/RequiresCharging 等约束使工作延迟到条件满足",
+          "start_line": 351,
+          "end_line": 360
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "任务请求类型：BGProcessingTaskRequest/BGAppRefreshTaskRequest/BGTaskRequest",
+          "start_line": 63,
+          "end_line": 75
+        }
+      ],
+      "open_questions": [
+        "iOS 请求对象的约束属性（如网络/外部电源要求）是否存在于符号页及其语义是提示还是必须条件（can/must）未证",
+        "Android 约束在 iOS 侧是否有等价配置方式需读 BGTaskRequest 符号页确认"
+      ]
+    },
+    {
+      "dimension": "limits_precision",
+      "statement": "假设系统侧调度精度策略不同：Android 文档明示 doze/待机桶会推迟并限额 JobScheduler 任务（WorkManager 受其影响，充电解除限制）；iOS 本页仅说明框架用途，未说明系统调度时机、延迟或限额策略。",
+      "platforms": [
+        "android",
+        "ios"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "低电状态推迟任务执行；WorkManager 经 JobScheduler 调度并受限额影响；充电解除限制",
+          "start_line": 6,
+          "end_line": 21
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Overview：框架用于后台更新与需数分钟任务，未说明系统调度时机",
+          "start_line": 5,
+          "end_line": 11
+        }
+      ],
+      "open_questions": [
+        "iOS 系统调度时机与延迟策略文档（如选择后台策略指南）不在冻结集，差异方向无法判定",
+        "Android 各待机桶限额随版本变化（文提及 Android 16），需按 API Level 核实后才能比较"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "HarmonyOS 平台完全缺源：冻结集中无延迟任务/后台任务调度机制正文（如 resourceschedule 相关指南与 API 参考），节点在该平台保持 unknown",
+    "iOS 缺符号级正文：BGTaskRequest 系列约束属性、availability 与配置要求未读到，约束表达能力未证",
+    "Android 版本基线未固定：WorkManager 库版本与 Android 9–16 系统行为变化的适用性未逐项核实",
+    "启动日最新正式版与手机基线未固定（version_baseline unresolved），全部结论仅限快照文本初判",
+    "本包 ios-1（Metal 示例库）与本节点主题无关，属来源选择噪声"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "HarmonyOS 侧关键缺口（无任何相关机制来源，节点三平台之一无法判断），iOS 侧机制映射依赖缺失的符号页（约束属性与 iOS 适用版本），属于高风险映射与关键缺口并存的 P1 精研项。"
+  }
+}

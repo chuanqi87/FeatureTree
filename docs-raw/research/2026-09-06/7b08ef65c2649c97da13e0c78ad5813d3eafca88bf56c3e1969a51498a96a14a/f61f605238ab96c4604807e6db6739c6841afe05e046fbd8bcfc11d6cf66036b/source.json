@@ -1,0 +1,13 @@
+{
+  "id": "7b08ef65c2649c97da13e0c78ad5813d3eafca88bf56c3e1969a51498a96a14a",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scenario-fusion-intelligentfilling-explain",
+  "platform": "harmonyos",
+  "title": "推荐数据源及推荐逻辑说明",
+  "local_path": "docs-raw/research/2026-09-06/7b08ef65c2649c97da13e0c78ad5813d3eafca88bf56c3e1969a51498a96a14a/f61f605238ab96c4604807e6db6739c6841afe05e046fbd8bcfc11d6cf66036b/document.md",
+  "sha256": "f61f605238ab96c4604807e6db6739c6841afe05e046fbd8bcfc11d6cf66036b",
+  "raw_sha256": "5f5ea12244261a1d4d17453c2fe233e9da14fd5d13d398e820990922e4236b68",
+  "raw_path": "docs-raw/research/2026-09-06/7b08ef65c2649c97da13e0c78ad5813d3eafca88bf56c3e1969a51498a96a14a/f61f605238ab96c4604807e6db6739c6841afe05e046fbd8bcfc11d6cf66036b/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,967 @@
+{
+  "task_id": "84eba8d3a29810c4b8a6701ed67fe949cbd46bf80c519c58e3fd8b170269adb6",
+  "feature_id": "commerce.iap.products",
+  "stage": "first_pass",
+  "summary": "三平台均读到内购商品查询/购买机制：Android 经 Play Billing（Unity 插件、Play Points 指南）见购买流程、延迟购买与店外购买交付；iOS StoreKit views 列四类商品、StoreView 展示并监听交易；HarmonyOS IAP Kit 有 queryEnvironmentStatus 地区前置检查与 queryProducts 单类型≤200条约束。Android 客户端查询主流程、iOS 购买 API 版本、HarmonyOS 购买流程正文未读到，全部 low 初判。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "Play Billing 提供购买工作流：Unity 插件经 GooglePlayStoreModule 接入，支持延迟购买（pending）、订阅改价确认与 proration 升降级；一次性商品须及时交付并检测店外购买，服务端可用 Onetimeproducts:list。客户端商品查询接口未读到。",
+      "version_scope": "未固定：快照未标注 Billing Library 版本；android-1 为 Unity 插件指南、android-2 为 Play Points 一次性商品指南（均 fetched 2026-09-05，version_verified=false）",
+      "conditions": [
+        "需 Google Play 商店分发并接入 Google Play Billing；android-1 证据为 Unity 插件路径，非 Kotlin 主流程",
+        "Play Points 一次性商品需先创建商品与促销配置",
+        "订阅升降级须改用 proration mode API，旧 UpdateSubscription 会抛 GooglePlayStoreUnsupportedException",
+        "延迟购买须注册监听且不得在回调中立即发货"
+      ],
+      "gaps": [
+        "客户端商品查询接口（queryProductDetails/querySkuDetails 等）正文未在冻结来源中读到",
+        "Billing Library 当前版本、最低 Play 商店版本与 API Level 条件未固定",
+        "订阅商品的完整类型集合与查询约束未读到（仅一次性商品指南）",
+        "Play Points 促销是一次性商品特例路径，不能代表全部可消耗商品行为"
+      ],
+      "confidence": "low",
+      "evidence_strength": "indirect",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Implement Google Play Billing Library features in your game（购买工作流与延迟购买）",
+          "start_line": 125,
+          "end_line": 146,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/google/play/billing/unity",
+            "platform": "android",
+            "title": "Use the Google Play Billing Library with Unity",
+            "local_path": "docs-raw/research/2026-09-06/651e5503f8abb7f1f05181e856f657a9a1694ddd5b4d5bb5316cdc7570708e13/6c6a0e7d72402761f69784872c120303d20837011532922028980fa8f208fd07/document.md",
+            "sha256": "6c6a0e7d72402761f69784872c120303d20837011532922028980fa8f208fd07",
+            "raw_sha256": "df9eee81345e2d6952392d5445f745ca27028f2173c3510d3775b6c53fbc911b",
+            "raw_path": "docs-raw/research/2026-09-06/651e5503f8abb7f1f05181e856f657a9a1694ddd5b4d5bb5316cdc7570708e13/6c6a0e7d72402761f69784872c120303d20837011532922028980fa8f208fd07/source.gz",
+            "fetched_at": "2026-09-05T10:42:34.186144+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 305,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": false
+              },
+              {
+                "start_line": 10,
+                "end_line": 18,
+                "truncated": false
+              },
+              {
+                "start_line": 19,
+                "end_line": 30,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Implement Google Play Billing Library features in your game\n\nThe Google Play Billing plugin extends Unity IAP services, so you can use the\nsame Unity APIs to manage common purchasing workflows. Note that there are some\n[minor changes to API behavior](https://developer.android.com/google/play/billing/unity#behavior-changes)\ndue to differences between the Google Play Billing Library and Unity's standard IAP\nimplementation for other app stores. If you're new to the Unity IAP APIs, see\nthe \"Making a Purchase Script\" section in the [Unity IAP\ntutorial](https://learn.unity.com/tutorial/unity-iap#5c7f8528edbc2a002053b46e)\nfor an example of how to implement basic purchasing flows.\n\nThe Google Play Billing Library also includes some features that are unique to the Google\nPlay store. You can access these features through an extended interface. The\nrest of this section describes how to implement these unique Google Play Billing Library\nfeatures in your game.\n\n### Enable deferred purchases\n\nGoogle Play supports deferred purchases—also called [pending\ntrasacations](https://developer.android.com/google/play/billing/billing_library_overview#pending) or pending\npurchases—where users can create a purchase and complete it later using cash in\nstores."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "UpdateSubscription has small API changes（proration mode 替代）",
+          "start_line": 284,
+          "end_line": 299,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/google/play/billing/unity",
+            "platform": "android",
+            "title": "Use the Google Play Billing Library with Unity",
+            "local_path": "docs-raw/research/2026-09-06/651e5503f8abb7f1f05181e856f657a9a1694ddd5b4d5bb5316cdc7570708e13/6c6a0e7d72402761f69784872c120303d20837011532922028980fa8f208fd07/document.md",
+            "sha256": "6c6a0e7d72402761f69784872c120303d20837011532922028980fa8f208fd07",
+            "raw_sha256": "df9eee81345e2d6952392d5445f745ca27028f2173c3510d3775b6c53fbc911b",
+            "raw_path": "docs-raw/research/2026-09-06/651e5503f8abb7f1f05181e856f657a9a1694ddd5b4d5bb5316cdc7570708e13/6c6a0e7d72402761f69784872c120303d20837011532922028980fa8f208fd07/source.gz",
+            "fetched_at": "2026-09-05T10:42:34.186144+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 305,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": false
+              },
+              {
+                "start_line": 10,
+                "end_line": 18,
+                "truncated": false
+              },
+              {
+                "start_line": 19,
+                "end_line": 30,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### UpdateSubscription has small API changes\n\nThe Google Play Billing plugin does not support using the\n`SubscriptionManager.UpdateSubscription()` and\n`SubscriptionManager.UpdateSubscriptionInGooglePlayStore()` methods to upgrade\nand downgrade your subscriptions. If your game calls these methods, a\n`GooglePlayStoreUnsupportedException` is thrown.\n\nThe Google Play Billing Library provides an alternative API to use in place of these\nmethods. To upgrade or downgrade a subscription, call the `UpdateSubscription()`\nmethod using proration mode:\n\n```\nvoid UpdateSubscription(Product oldProduct, Product newProduct,\n           GooglePlayStoreProrationMode prorationMode = GooglePlayStoreProrationMode.Unknown);\n```"
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Delivery timing: use Google Play Billing Library to deliver one-time items",
+          "start_line": 30,
+          "end_line": 33,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/guide/playpoints/deliver-items-one-time",
+            "platform": "android",
+            "title": "Detect and deliver one-time items",
+            "local_path": "docs-raw/research/2026-09-06/252a5b644a9085fdead85e7e66e81ac1f4f58255f0822e42b8c91e7ac4069d89/cde515724938c5478539c6e60b0dfb742b937e8a44d089a01b18d62f1edeb70f/document.md",
+            "sha256": "cde515724938c5478539c6e60b0dfb742b937e8a44d089a01b18d62f1edeb70f",
+            "raw_sha256": "2db88ddd429b4b4766a1efabfd3ffbaf0d43f45f924f2c0aba807b02c0b51855",
+            "raw_path": "docs-raw/research/2026-09-06/252a5b644a9085fdead85e7e66e81ac1f4f58255f0822e42b8c91e7ac4069d89/cde515724938c5478539c6e60b0dfb742b937e8a44d089a01b18d62f1edeb70f/source.gz",
+            "fetched_at": "2026-09-05T10:29:57.507688+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 128,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 19,
+                "truncated": false
+              },
+              {
+                "start_line": 20,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 29,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Delivery timing\n\nWhen a player exchanges Play Points for a one-time product, use\n[Google Play Billing Library](https://developer.android.com/google/play/billing/integrate) to deliver the item in a timely manner."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Detect items received outside of the game",
+          "start_line": 66,
+          "end_line": 70,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/guide/playpoints/deliver-items-one-time",
+            "platform": "android",
+            "title": "Detect and deliver one-time items",
+            "local_path": "docs-raw/research/2026-09-06/252a5b644a9085fdead85e7e66e81ac1f4f58255f0822e42b8c91e7ac4069d89/cde515724938c5478539c6e60b0dfb742b937e8a44d089a01b18d62f1edeb70f/document.md",
+            "sha256": "cde515724938c5478539c6e60b0dfb742b937e8a44d089a01b18d62f1edeb70f",
+            "raw_sha256": "2db88ddd429b4b4766a1efabfd3ffbaf0d43f45f924f2c0aba807b02c0b51855",
+            "raw_path": "docs-raw/research/2026-09-06/252a5b644a9085fdead85e7e66e81ac1f4f58255f0822e42b8c91e7ac4069d89/cde515724938c5478539c6e60b0dfb742b937e8a44d089a01b18d62f1edeb70f/source.gz",
+            "fetched_at": "2026-09-05T10:29:57.507688+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 128,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 19,
+                "truncated": false
+              },
+              {
+                "start_line": 20,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 29,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Detect items received outside of the game\n\nIf your game uses [Google Play's billing system](https://developer.android.com/google/play/billing/billing_overview), see [Detect and process\npurchases](https://developer.android.com/google/play/billing/integrate#process) to detect one-time products that are received outside of the\ngame."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Server-side best practices: Purchases.products:get / Onetimeproducts:list",
+          "start_line": 88,
+          "end_line": 100,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/guide/playpoints/deliver-items-one-time",
+            "platform": "android",
+            "title": "Detect and deliver one-time items",
+            "local_path": "docs-raw/research/2026-09-06/252a5b644a9085fdead85e7e66e81ac1f4f58255f0822e42b8c91e7ac4069d89/cde515724938c5478539c6e60b0dfb742b937e8a44d089a01b18d62f1edeb70f/document.md",
+            "sha256": "cde515724938c5478539c6e60b0dfb742b937e8a44d089a01b18d62f1edeb70f",
+            "raw_sha256": "2db88ddd429b4b4766a1efabfd3ffbaf0d43f45f924f2c0aba807b02c0b51855",
+            "raw_path": "docs-raw/research/2026-09-06/252a5b644a9085fdead85e7e66e81ac1f4f58255f0822e42b8c91e7ac4069d89/cde515724938c5478539c6e60b0dfb742b937e8a44d089a01b18d62f1edeb70f/source.gz",
+            "fetched_at": "2026-09-05T10:29:57.507688+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 128,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 19,
+                "truncated": false
+              },
+              {
+                "start_line": 20,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 29,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Server-side best practices\n\nThis section contains server-side best practices to use for Play Points\npromotions:\n\n* If you call\n  `Purchases.products: get`\n  on your server, verify whether you need to handle Play rewards exchange items\n  and other one-time products separately based on the `productId` values.\n* If you use\n  `Onetimeproducts: list`\n  on your server, verify whether you need to separate Play rewards exchange\n  items from other one-time products by `productId` values."
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "购买流程依赖 Play 商店账号、支付面板与店外购买/延迟购买场景，静态文档无法验证实际交付与确认时序；后续精研建议用沙盒账号真机验证。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "documented_mechanism",
+      "observation": "StoreKit views 支持消耗型/非消耗型/自动续期/非续期订阅四类商品，StoreView(ids:) 直接展示；经 Transaction.unfinished/currentEntitlements/updates 异步序列监听交易；可离线本地配置原型，购买经系统支付面板完成。",
+      "version_scope": "未固定：快照未标注 StoreKit 2 / 最低 iOS 版本（availability 需逐符号核对）；文档使用 StoreView、Transaction.updates 等 StoreKit 2 风格 API（fetched 2026-09-05，version_verified=false）",
+      "conditions": [
+        "商品需在 App Store Connect 配置，或先用 Xcode StoreKit 本地配置离线原型",
+        "StoreKit views 默认样式可直接展示全部四类商品，无需自定义编程",
+        "交易处理经 Transaction.unfinished/currentEntitlements/updates 异步序列",
+        "正式购买经系统支付面板接受或取消；示例交易不产生真实扣费"
+      ],
+      "gaps": [
+        "Product.purchase 等购买 API 符号级正文与 iOS 最低可用版本未核对（Apple 目录含多平台，需逐符号确认 iOS 适用性）",
+        "产品 ID 查询（Product.products(for:)）与数量限制未在快照中读到",
+        "非续期订阅仅列名，行为细节未展开",
+        "正式环境（App Store Connect 商品）与本地测试差异未核"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "ios-2",
+          "locator": "Choose your product types（consumables/non-consumables/auto-renewable/non-renewing）",
+          "start_line": 9,
+          "end_line": 16,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/storekit/getting-started-with-in-app-purchases-using-storekit-views",
+            "platform": "ios",
+            "title": "Getting started with In-App Purchase using StoreKit views",
+            "local_path": "docs-raw/research/2026-09-06/aed42c879f101c6f9cdd11f6cd86aed9c6241b54dbcad61bd9878da548506e5b/93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855/document.md",
+            "sha256": "93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855",
+            "raw_sha256": "9af70946784e0640ff09ea2d29094d4a593e85034057c31873d62177b2eedc81",
+            "raw_path": "docs-raw/research/2026-09-06/aed42c879f101c6f9cdd11f6cd86aed9c6241b54dbcad61bd9878da548506e5b/93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855/source.gz",
+            "fetched_at": "2026-09-05T10:26:00.796705+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 222,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 18,
+                "end_line": 32,
+                "truncated": false
+              },
+              {
+                "start_line": 54,
+                "end_line": 113,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "## Choose your product types\n\nStoreKit supports the following product types, and StoreKit views can display all of them without any custom programming:\n\n- Consumables: Content such as lives or gems in a game. After purchase, consumable content depletes as people use it, and people can purchase it again.\n- Non-consumables: Content such as premium features in an app. Purchased non-consumable content doesn’t expire or deplete.\n- Auto-renewable subscriptions: Recurring access to virtual content, services, and premium features in your app on an ongoing basis. An auto-renewable subscription continues to automatically renew at the end of each subscription period until people choose to cancel it.\n- Non-renewing subscriptions: Access to a service or content that lasts for a limited time, like access to an in-game battle pass. People purchase a non-renewing subscription each time they want to extend their access to the service or content."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Monitor transactions in your app（Transaction.unfinished/currentEntitlements/updates）",
+          "start_line": 54,
+          "end_line": 61,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/storekit/getting-started-with-in-app-purchases-using-storekit-views",
+            "platform": "ios",
+            "title": "Getting started with In-App Purchase using StoreKit views",
+            "local_path": "docs-raw/research/2026-09-06/aed42c879f101c6f9cdd11f6cd86aed9c6241b54dbcad61bd9878da548506e5b/93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855/document.md",
+            "sha256": "93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855",
+            "raw_sha256": "9af70946784e0640ff09ea2d29094d4a593e85034057c31873d62177b2eedc81",
+            "raw_path": "docs-raw/research/2026-09-06/aed42c879f101c6f9cdd11f6cd86aed9c6241b54dbcad61bd9878da548506e5b/93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855/source.gz",
+            "fetched_at": "2026-09-05T10:26:00.796705+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 222,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 18,
+                "end_line": 32,
+                "truncated": false
+              },
+              {
+                "start_line": 54,
+                "end_line": 113,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "## Monitor transactions in your app\n\nStoreKit provides several asynchronous sequences\nthat provide your app with information and updates.\nFor example, the class below checks\n[`unfinished`](/documentation/StoreKit/Transaction/unfinished) and [`currentEntitlements`](/documentation/StoreKit/Transaction/currentEntitlements) at startup,\nand continues to check [`updates`](/documentation/StoreKit/Transaction/updates) in the background\nwhile the app is running."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Create SwiftUI views that display your products（StoreView(ids:)）",
+          "start_line": 183,
+          "end_line": 212,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/storekit/getting-started-with-in-app-purchases-using-storekit-views",
+            "platform": "ios",
+            "title": "Getting started with In-App Purchase using StoreKit views",
+            "local_path": "docs-raw/research/2026-09-06/aed42c879f101c6f9cdd11f6cd86aed9c6241b54dbcad61bd9878da548506e5b/93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855/document.md",
+            "sha256": "93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855",
+            "raw_sha256": "9af70946784e0640ff09ea2d29094d4a593e85034057c31873d62177b2eedc81",
+            "raw_path": "docs-raw/research/2026-09-06/aed42c879f101c6f9cdd11f6cd86aed9c6241b54dbcad61bd9878da548506e5b/93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855/source.gz",
+            "fetched_at": "2026-09-05T10:26:00.796705+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 222,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 18,
+                "end_line": 32,
+                "truncated": false
+              },
+              {
+                "start_line": 54,
+                "end_line": 113,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "```swift\nimport StoreKit\nimport SwiftUI\n\nstruct AllProductsView: View {\n    // Your app's data store.\n    @Environment(Store.self) private var store: Store\n\n    var body: some View {\n        @Bindable var store = store\n        VStack {\n            // ProductID.all is an array of your product ID strings.\n            StoreView(ids: ProductID.all)\n                .storeButton(.hidden, for: .cancellation)\n                .storeButton(.visible, for: .restorePurchases)\n        }\n        .padding()\n    }\n}\n```\n\nHere, the `StoreView` view from StoreKit constructs a page and lays out a grid that contains each product, as shown in the following screenshot:\n\n![A screenshot of the StoreKitWorkflows app showing a view of all available products.](images/com.apple.storekit/getting-started-with-in-app-purchases-using-storekit-views-AllProducts~dark@2x.png)\n\nTo show a specific subset of your available products, use the same view structure,\nbut change the list of product IDs you provide to the `StoreView()`.\nSo, change `store.allProductIDs` to another array of product IDs.\nFor example, the `subscriptionProductIDs` array contains only subscription purchase types,\nso replace `store.allProductIDs` with the `subscriptionProductIDs` array to show subscriptions as shown here."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Configure and run the project（商品类型清单与支付面板购买）",
+          "start_line": 13,
+          "end_line": 34,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/storekit/understanding-storekit-workflows",
+            "platform": "ios",
+            "title": "Understanding StoreKit workflows",
+            "local_path": "docs-raw/research/2026-09-06/df61ca99a7e86ba0029f02ccd99c7a592b6f4ca85368d85ef131f20fabc52b48/68d517dffb7a07effe20a1b299a16070fc269435c8dd72d9010622f4417b2988/document.md",
+            "sha256": "68d517dffb7a07effe20a1b299a16070fc269435c8dd72d9010622f4417b2988",
+            "raw_sha256": "110a11a9ed6ccc2d709888de07f6f2803d240ce4db8041f9e1cc26c689651f4d",
+            "raw_path": "docs-raw/research/2026-09-06/df61ca99a7e86ba0029f02ccd99c7a592b6f4ca85368d85ef131f20fabc52b48/68d517dffb7a07effe20a1b299a16070fc269435c8dd72d9010622f4417b2988/source.gz",
+            "fetched_at": "2026-09-05T10:26:04.064447+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 44,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 35,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "This project comes with the following products set up locally:\n\n- A consumable item\n- A non-consumable item\n- A collection of consumable items\n- A monthly subscription\n- A yearly (annual) subscription\n- A premium yearly (annual) subscription, with a “1 month free” introductory offer.\n\nFor more information on the product types that App Store Connect supports, see [In-app purchase types](https://developer.apple.com/help/app-store-connect/reference/in-app-purchase-types/)\n\n> Note: The transactions this app demonstrates\n> don’t get information from App Store Connect\n> and don’t incur charges.\n> Xcode simulates successful transactions\n> without processing actual payments.\n\nTo see the pre-configured local StoreKit products, select the `LocalConfiguration` file in the project’s file navigator. This file lists all of the types, descriptions, and properties of the demo products the app supports.\n\nFor more information on using the `LocalConfiguration` file, including creating products and inspecting or modifying transactions, see [Testing in-app purchases with StoreKit transaction manager in Xcode](https://developer.apple.com/documentation/xcode/testing-in-app-purchases-with-storekit-transaction-manager-in-code).\n\nTo run the app, press the Xcode run button, or press command-R. To purchase any demo products, click or tap the buy button on a product, and the system presents the payment sheet that you can either accept (purchase) or cancel. The app shows the status and results of purchases on the status display near the top of the app’s window."
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "支付面板行为、交易监听时序与本地配置到 App Store Connect 正式商品的差异需 Xcode 沙盒/真机验证；静态文档未覆盖实际扣费与交付时序。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "IAP Kit 需先 queryEnvironmentStatus 判定华为账号服务地（当前仅中国境内，不含港澳台，可结算），再 queryProducts 按 productType（消耗/非消耗/自动续期订阅）查询 AppGallery Connect 配置的商品，单次仅一种类型且不超 200 条；差异页另见 createPurchase/finishPurchase/queryPurchases 及 CashierComponent 新增。",
+      "version_scope": "未固定：harmonyos-1 指南未标注 SDK/API 版本；harmonyos-2 为 IAP Kit API 差异页（URL 含 iapkit-6101，具体 HarmonyOS 发行版归属未核；fetched 2026-09-04/05，version_verified=false）",
+      "conditions": [
+        "需当前登录华为账号服务地支持数字商品服务，当前仅中国境内（香港、澳门特别行政区及中国台湾除外）可结算",
+        "商品须先在 AppGallery Connect 配置",
+        "queryProducts 单次仅能查询一种 productType，且不超过 200 条",
+        "订阅型商品 productType 须指定为 iap.ProductType.AUTORENEWABLE"
+      ],
+      "gaps": [
+        "购买主流程（createPurchase 拉起收银台）正文未读取，仅差异表条目",
+        "错误码语义未核：差异页新增 801、PURCHASE_NOT_FOUND=1001860064 等含义需读 API 参考",
+        "差异页对应的 HarmonyOS/OpenHarmony 发行版与 SDK 版本未在快照标注",
+        "queryEnvironmentStatus 失败后的降级/提示行为未读到"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "前提条件与 queryEnvironmentStatus（支持地区仅中国境内）",
+          "start_line": 5,
+          "end_line": 15,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/store-iap-distribute-query",
+            "platform": "harmonyos",
+            "title": "展示数字商品",
+            "local_path": "docs-raw/research/2026-09-06/74939c5e7d5f45b160fa28392b642416dc1aeec238db044e42449df213948438/df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94/document.md",
+            "sha256": "df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94",
+            "raw_sha256": "a09bb2a8534d5b917283dc3ba58d6574f2abd00bfa7b2a57da74d7659e408965",
+            "raw_path": "docs-raw/research/2026-09-06/74939c5e7d5f45b160fa28392b642416dc1aeec238db044e42449df213948438/df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 93,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 93,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 前提条件\n\n当前登录的华为账号所在服务地支持数字商品服务。  \n\n#### 开发步骤\n\n1. 判断当前登录的华为账号所在的服务地是否支持数字商品服务应用内支付。\n\n   在使用应用内支付之前，应用需要向IAP Kit发送[queryEnvironmentStatus](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#iapqueryenvironmentstatus)请求，以此判断用户当前登录的华为账号所在服务地是否在IAP Kit支持结算的国家/地区中。  \n   ![](https://media:201787905882527735)  \n   当前IAP Kit支持结算的国家/地区仅包括中国境内（香港特别行政区、澳门特别行政区、中国台湾除外）。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "查询商品信息：queryProducts/productType/单次200条限制",
+          "start_line": 47,
+          "end_line": 53,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/store-iap-distribute-query",
+            "platform": "harmonyos",
+            "title": "展示数字商品",
+            "local_path": "docs-raw/research/2026-09-06/74939c5e7d5f45b160fa28392b642416dc1aeec238db044e42449df213948438/df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94/document.md",
+            "sha256": "df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94",
+            "raw_sha256": "a09bb2a8534d5b917283dc3ba58d6574f2abd00bfa7b2a57da74d7659e408965",
+            "raw_path": "docs-raw/research/2026-09-06/74939c5e7d5f45b160fa28392b642416dc1aeec238db044e42449df213948438/df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 93,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 93,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "2. 查询商品信息。\n\n   通过[queryProducts](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#iapqueryproducts)来获取在[AppGallery Connect](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html)上配置的商品信息。发起请求时，需在请求参数[QueryProductsParameter](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#queryproductsparameter)中携带相关的商品ID，并根据实际配置指定其productType，订阅型商品指定其productType为[iap.ProductType.AUTORENEWABLE](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#producttype)。\n\n   当接口请求成功时，IAP Kit将返回商品信息[Product](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#product)的列表。 应用可以使用[Product](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#product)包含的商品价格、名称和描述等信息，向用户展示可供购买的商品列表。  \n   ![](https://media:201787905882555736)  \n   [queryProducts](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#iapqueryproducts)每次只能查询一种类型的商品，单次查询请勿超过200条。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "queryProducts 代码示例（CONSUMABLE/NONCONSUMABLE/AUTORENEWABLE）",
+          "start_line": 69,
+          "end_line": 77,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/store-iap-distribute-query",
+            "platform": "harmonyos",
+            "title": "展示数字商品",
+            "local_path": "docs-raw/research/2026-09-06/74939c5e7d5f45b160fa28392b642416dc1aeec238db044e42449df213948438/df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94/document.md",
+            "sha256": "df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94",
+            "raw_sha256": "a09bb2a8534d5b917283dc3ba58d6574f2abd00bfa7b2a57da74d7659e408965",
+            "raw_path": "docs-raw/research/2026-09-06/74939c5e7d5f45b160fa28392b642416dc1aeec238db044e42449df213948438/df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 93,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 93,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "       queryProducts() {\n           const queryProductParam: iap.QueryProductsParameter = {\n               // iap.ProductType.CONSUMABLE：消耗型商品;\n               // iap.ProductType.NONCONSUMABLE：非消耗型商品;\n               // productType: iap.ProductType.AUTORENEWABLE;订阅型商品\n               productType: iap.ProductType.CONSUMABLE,\n               // 查询的商品必须是开发者在AppGallery Connect网站配置的商品\n               productIds: ['ohos_consume_001']\n           };"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "iap.queryProducts/createPurchase/finishPurchase/queryPurchases 新增错误码 801",
+          "start_line": 3,
+          "end_line": 16,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-iapkit-6101",
+            "platform": "harmonyos",
+            "title": "IAP Kit",
+            "local_path": "docs-raw/research/2026-09-06/e2a3d456f0f88be4d23f627948ecc3dfe81f9e2d7d3dc9dee5616e51b0f0ed95/5c851d940e7fbdc2d41f5df3aa7eee84db8e841166bd34c27a8ffcda8eb6f3a4/document.md",
+            "sha256": "5c851d940e7fbdc2d41f5df3aa7eee84db8e841166bd34c27a8ffcda8eb6f3a4",
+            "raw_sha256": "d10388723d86b627295f6a35814cb0df62bf3a528837545011cb6b4f8f8a530d",
+            "raw_path": "docs-raw/research/2026-09-06/e2a3d456f0f88be4d23f627948ecc3dfe81f9e2d7d3dc9dee5616e51b0f0ed95/5c851d940e7fbdc2d41f5df3aa7eee84db8e841166bd34c27a8ffcda8eb6f3a4/source.gz",
+            "fetched_at": "2026-09-05T10:56:01.793739+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 31,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 31,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "|操作|旧版本|新版本|d.ts文件|\n|:----|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------|\n|新增错误码|类名：iap； API声明：function queryEnvironmentStatus(context: common.Context): Promise\\<void\\>; 差异内容：NA|类名：iap； API声明：function queryEnvironmentStatus(context: common.Context): Promise\\<void\\>; 差异内容：801|api/@hms.core.iap.d.ts|\n|新增错误码|类名：iap； API声明：function queryEnvironmentStatus(context: common.Context, callback: AsyncCallback\\<void\\>): void; 差异内容：NA|类名：iap； API声明：function queryEnvironmentStatus(context: common.Context, callback: AsyncCallback\\<void\\>): void; 差异内容：801|api/@hms.core.iap.d.ts|\n|新增错误码|类名：iap； API声明：function queryProducts(context: common.UIAbilityContext, parameter: QueryProductsParameter): Promise\\<Array\\<Product\\>\\>; 差异内容：NA|类名：iap； API声明：function queryProducts(context: common.UIAbilityContext, parameter: QueryProductsParameter): Promise\\<Array\\<Product\\>\\>; 差异内容：801|api/@hms.core.iap.d.ts|\n|新增错误码|类名：iap； API声明：function queryProducts(context: common.UIAbilityContext, parameter: QueryProductsParameter, callback: AsyncCallback\\<Array\\<Product\\>\\>): void; 差异内容：NA|类名：iap； API声明：function queryProducts(context: common.UIAbilityContext, parameter: QueryProductsParameter, callback: AsyncCallback\\<Array\\<Product\\>\\>): void; 差异内容：801|api/@hms.core.iap.d.ts|\n|新增错误码|类名：iap； API声明：function queryProducts(context: common.UIAbilityContext, productIds: string\\[\\]): Promise\\<Array\\<Product\\>\\>; 差异内容：NA|类名：iap； API声明：function queryProducts(context: common.UIAbilityContext, productIds: string\\[\\]): Promise\\<Array\\<Product\\>\\>; 差异内容：801|api/@hms.core.iap.d.ts|\n|新增错误码|类名：iap； API声明：function createPurchase(context: common.UIAbilityContext, parameter: PurchaseParameter): Promise\\<CreatePurchaseResult\\>; 差异内容：NA|类名：iap； API声明：function createPurchase(context: common.UIAbilityContext, parameter: PurchaseParameter): Promise\\<CreatePurchaseResult\\>; 差异内容：801|api/@hms.core.iap.d.ts|\n|新增错误码|类名：iap； API声明：function createPurchase(context: common.UIAbilityContext, parameter: PurchaseParameter, callback: AsyncCallback\\<CreatePurchaseResult\\>): void; 差异内容：NA|类名：iap； API声明：function createPurchase(context: common.UIAbilityContext, parameter: PurchaseParameter, callback: AsyncCallback\\<CreatePurchaseResult\\>): void; 差异内容：801|api/@hms.core.iap.d.ts|\n|新增错误码|类名：iap； API声明：function finishPurchase(context: common.UIAbilityContext, parameter: FinishPurchaseParameter): Promise\\<void\\>; 差异内容：NA|类名：iap； API声明：function finishPurchase(context: common.UIAbilityContext, parameter: FinishPurchaseParameter): Promise\\<void\\>; 差异内容：801|api/@hms.core.iap.d.ts|\n|新增错误码|类名：iap； API声明：function finishPurchase(context: common.UIAbilityContext, parameter: FinishPurchaseParameter, callback: AsyncCallback\\<void\\>): void; 差异内容：NA|类名：iap； API声明：function finishPurchase(context: common.UIAbilityContext, parameter: FinishPurchaseParameter, callback: AsyncCallback\\<void\\>): void; 差异内容：801|api/@hms.core.iap.d.ts|\n|新增错误码|类名：iap； API声明：function queryPurchases(context: common.UIAbilityContext, parameter: QueryPurchasesParameter): Promise\\<QueryPurchaseResult\\>; 差异内容：NA|类名：iap； API声明：function queryPurchases(context: common.UIAbilityContext, parameter: QueryPurchasesParameter): Promise\\<QueryPurchaseResult\\>; 差异内容：801|api/@hms.core.iap.d.ts|\n|新增错误码|类名：iap； API声明：function queryPurchases(context: common.UIAbilityContext, parameter: QueryPurchasesParameter, callback: AsyncCallback\\<QueryPurchaseResult\\>): void; 差异内容：NA|类名：iap； API声明：function queryPurchases(context: common.UIAbilityContext, parameter: QueryPurchasesParameter, callback: AsyncCallback\\<QueryPurchaseResult\\>): void; 差异内容：801|api/@hms.core.iap.d.ts|\n|新增错误码|类名：iap； API声明：function isSandboxActivated(context: common.Context): Promise\\<boolean\\>; 差异内容：NA|类名：iap； API声明：function isSandboxActivated(context: common.Context): Promise\\<boolean\\>; 差异内容：801|api/@hms.core.iap.d.ts|"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "新增 CashierComponent 与 showManagedInvoices",
+          "start_line": 17,
+          "end_line": 31,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-iapkit-6101",
+            "platform": "harmonyos",
+            "title": "IAP Kit",
+            "local_path": "docs-raw/research/2026-09-06/e2a3d456f0f88be4d23f627948ecc3dfe81f9e2d7d3dc9dee5616e51b0f0ed95/5c851d940e7fbdc2d41f5df3aa7eee84db8e841166bd34c27a8ffcda8eb6f3a4/document.md",
+            "sha256": "5c851d940e7fbdc2d41f5df3aa7eee84db8e841166bd34c27a8ffcda8eb6f3a4",
+            "raw_sha256": "d10388723d86b627295f6a35814cb0df62bf3a528837545011cb6b4f8f8a530d",
+            "raw_path": "docs-raw/research/2026-09-06/e2a3d456f0f88be4d23f627948ecc3dfe81f9e2d7d3dc9dee5616e51b0f0ed95/5c851d940e7fbdc2d41f5df3aa7eee84db8e841166bd34c27a8ffcda8eb6f3a4/source.gz",
+            "fetched_at": "2026-09-05T10:56:01.793739+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 31,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 31,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "|新增API|NA|类名：global； API声明：declare struct CashierComponent 差异内容：declare struct CashierComponent|api/@hms.core.iap.cashierComponent.d.ets|\n|新增API|NA|类名：CashierComponent； API声明：@Require @Prop params: iap.PurchaseParameter; 差异内容：@Require @Prop params: iap.PurchaseParameter;|api/@hms.core.iap.cashierComponent.d.ets|\n|新增API|NA|类名：CashierComponent； API声明：displayOptions?: cashierComponentManager.CashierDisplayOptions; 差异内容：displayOptions?: cashierComponentManager.CashierDisplayOptions;|api/@hms.core.iap.cashierComponent.d.ets|\n|新增API|NA|类名：CashierComponent； API声明：purchaseListener: cashierComponentManager.CashierListener; 差异内容：purchaseListener: cashierComponentManager.CashierListener;|api/@hms.core.iap.cashierComponent.d.ets|\n|新增API|NA|类名：CashierComponent； API声明：build(): void; 差异内容：build(): void;|api/@hms.core.iap.cashierComponent.d.ets|\n|新增API|NA|类名：global； API声明：declare namespace cashierComponentManager 差异内容：declare namespace cashierComponentManager|api/@hms.core.iap.cashierComponent.d.ets|\n|新增API|NA|类名：cashierComponentManager； API声明：interface CashierListener 差异内容：interface CashierListener|api/@hms.core.iap.cashierComponent.d.ets|\n|新增API|NA|类名：CashierListener； API声明：onPurchaseSuccess(productId: string, purchaseResult: iap.CreatePurchaseResult): void; 差异内容：onPurchaseSuccess(productId: string, purchaseResult: iap.CreatePurchaseResult): void;|api/@hms.core.iap.cashierComponent.d.ets|\n|新增API|NA|类名：CashierListener； API声明：onPurchaseFailure(productId: string, error: BusinessError\\<void\\>): void; 差异内容：onPurchaseFailure(productId: string, error: BusinessError\\<void\\>): void;|api/@hms.core.iap.cashierComponent.d.ets|\n|新增API|NA|类名：cashierComponentManager； API声明：interface CashierDisplayOptions 差异内容：interface CashierDisplayOptions|api/@hms.core.iap.cashierComponent.d.ets|\n|新增API|NA|类名：CashierDisplayOptions； API声明：backgroundColor?: ResourceColor; 差异内容：backgroundColor?: ResourceColor;|api/@hms.core.iap.cashierComponent.d.ets|\n|新增API|NA|类名：iap； API声明：function showManagedInvoices(context: common.Context, purchaseOrderId: string): Promise\\<void\\>; 差异内容：function showManagedInvoices(context: common.Context, purchaseOrderId: string): Promise\\<void\\>;|api/@hms.core.iap.d.ts|\n|新增API|NA|类名：IAPErrorCode； API声明：PURCHASE_NOT_FOUND = 1001860064 差异内容：PURCHASE_NOT_FOUND = 1001860064|api/@hms.core.iap.d.ts|\n|新增API|NA|类名：IAPErrorCode； API声明：OPERATION_NOT_SUPPORTED = 1001860065 差异内容：OPERATION_NOT_SUPPORTED = 1001860065|api/@hms.core.iap.d.ts|\n|新增kit|类名：global； API声明： 差异内容：NA|类名：global； API声明：api@hms.core.iap.cashierComponent.d.ets 差异内容：IAPKit|api/@hms.core.iap.cashierComponent.d.ets|"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "结算可用性绑定中国境内华为账号服务地，且购买/收银台链路依赖真实账号环境，静态文档无法验证；需中国区账号真机核实 queryEnvironmentStatus/queryProducts/购买链路。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "programming_model",
+      "statement": "商品类型集合可能不同：iOS StoreKit 明确四类（含非续期订阅），HarmonyOS IAP Kit 文档仅列消耗型/非消耗型/自动续期订阅三类，Android 一次性商品指南区分消耗型（consumable）与耐久型（durable）商品。",
+      "platforms": [
+        "ios",
+        "harmonyos",
+        "android"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "ios-2",
+          "locator": "Choose your product types（四类商品枚举）",
+          "start_line": 9,
+          "end_line": 16,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/storekit/getting-started-with-in-app-purchases-using-storekit-views",
+            "platform": "ios",
+            "title": "Getting started with In-App Purchase using StoreKit views",
+            "local_path": "docs-raw/research/2026-09-06/aed42c879f101c6f9cdd11f6cd86aed9c6241b54dbcad61bd9878da548506e5b/93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855/document.md",
+            "sha256": "93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855",
+            "raw_sha256": "9af70946784e0640ff09ea2d29094d4a593e85034057c31873d62177b2eedc81",
+            "raw_path": "docs-raw/research/2026-09-06/aed42c879f101c6f9cdd11f6cd86aed9c6241b54dbcad61bd9878da548506e5b/93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855/source.gz",
+            "fetched_at": "2026-09-05T10:26:00.796705+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 222,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 18,
+                "end_line": 32,
+                "truncated": false
+              },
+              {
+                "start_line": 54,
+                "end_line": 113,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "## Choose your product types\n\nStoreKit supports the following product types, and StoreKit views can display all of them without any custom programming:\n\n- Consumables: Content such as lives or gems in a game. After purchase, consumable content depletes as people use it, and people can purchase it again.\n- Non-consumables: Content such as premium features in an app. Purchased non-consumable content doesn’t expire or deplete.\n- Auto-renewable subscriptions: Recurring access to virtual content, services, and premium features in your app on an ongoing basis. An auto-renewable subscription continues to automatically renew at the end of each subscription period until people choose to cancel it.\n- Non-renewing subscriptions: Access to a service or content that lasts for a limited time, like access to an in-game battle pass. People purchase a non-renewing subscription each time they want to extend their access to the service or content."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "queryProducts 的 productType 三类枚举",
+          "start_line": 47,
+          "end_line": 53,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/store-iap-distribute-query",
+            "platform": "harmonyos",
+            "title": "展示数字商品",
+            "local_path": "docs-raw/research/2026-09-06/74939c5e7d5f45b160fa28392b642416dc1aeec238db044e42449df213948438/df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94/document.md",
+            "sha256": "df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94",
+            "raw_sha256": "a09bb2a8534d5b917283dc3ba58d6574f2abd00bfa7b2a57da74d7659e408965",
+            "raw_path": "docs-raw/research/2026-09-06/74939c5e7d5f45b160fa28392b642416dc1aeec238db044e42449df213948438/df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 93,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 93,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "2. 查询商品信息。\n\n   通过[queryProducts](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#iapqueryproducts)来获取在[AppGallery Connect](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html)上配置的商品信息。发起请求时，需在请求参数[QueryProductsParameter](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#queryproductsparameter)中携带相关的商品ID，并根据实际配置指定其productType，订阅型商品指定其productType为[iap.ProductType.AUTORENEWABLE](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#producttype)。\n\n   当接口请求成功时，IAP Kit将返回商品信息[Product](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#product)的列表。 应用可以使用[Product](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#product)包含的商品价格、名称和描述等信息，向用户展示可供购买的商品列表。  \n   ![](https://media:201787905882555736)  \n   [queryProducts](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#iapqueryproducts)每次只能查询一种类型的商品，单次查询请勿超过200条。"
+        },
+        {
+          "source_id": "android-2",
+          "locator": "durable or consumable in-app item 区分",
+          "start_line": 60,
+          "end_line": 64,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/guide/playpoints/deliver-items-one-time",
+            "platform": "android",
+            "title": "Detect and deliver one-time items",
+            "local_path": "docs-raw/research/2026-09-06/252a5b644a9085fdead85e7e66e81ac1f4f58255f0822e42b8c91e7ac4069d89/cde515724938c5478539c6e60b0dfb742b937e8a44d089a01b18d62f1edeb70f/document.md",
+            "sha256": "cde515724938c5478539c6e60b0dfb742b937e8a44d089a01b18d62f1edeb70f",
+            "raw_sha256": "2db88ddd429b4b4766a1efabfd3ffbaf0d43f45f924f2c0aba807b02c0b51855",
+            "raw_path": "docs-raw/research/2026-09-06/252a5b644a9085fdead85e7e66e81ac1f4f58255f0822e42b8c91e7ac4069d89/cde515724938c5478539c6e60b0dfb742b937e8a44d089a01b18d62f1edeb70f/source.gz",
+            "fetched_at": "2026-09-05T10:29:57.507688+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 128,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 19,
+                "truncated": false
+              },
+              {
+                "start_line": 20,
+                "end_line": 24,
+                "truncated": false
+              },
+              {
+                "start_line": 25,
+                "end_line": 29,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "\nUsers should see an animation or some visual confirmation displaying the\nincrease in their balance of in-game currency. If the item is a durable or\nconsumable in-app item, users should be directed to where the item has been\nunlocked or is available within the game."
+        }
+      ],
+      "open_questions": [
+        "Android 订阅与一次性商品的完整官方类型集合需读 Billing 类型文档核对",
+        "非续期订阅在 Android/HarmonyOS 是否存在等价类型未确认",
+        "类型枚举仅为文档快照，未核实最新正式版"
+      ]
+    },
+    {
+      "dimension": "limits_precision",
+      "statement": "商品查询约束可能不同：HarmonyOS queryProducts 单次仅能查询一种 productType 且不超 200 条；iOS 示例经 StoreView(ids:) 一次传入产品 ID 数组，未见条数或类型限制说明；Android 客户端查询约束未读到。",
+      "platforms": [
+        "harmonyos",
+        "ios"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "queryProducts 单次一种类型、不超 200 条",
+          "start_line": 47,
+          "end_line": 53,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/store-iap-distribute-query",
+            "platform": "harmonyos",
+            "title": "展示数字商品",
+            "local_path": "docs-raw/research/2026-09-06/74939c5e7d5f45b160fa28392b642416dc1aeec238db044e42449df213948438/df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94/document.md",
+            "sha256": "df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94",
+            "raw_sha256": "a09bb2a8534d5b917283dc3ba58d6574f2abd00bfa7b2a57da74d7659e408965",
+            "raw_path": "docs-raw/research/2026-09-06/74939c5e7d5f45b160fa28392b642416dc1aeec238db044e42449df213948438/df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 93,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 93,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "2. 查询商品信息。\n\n   通过[queryProducts](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#iapqueryproducts)来获取在[AppGallery Connect](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html)上配置的商品信息。发起请求时，需在请求参数[QueryProductsParameter](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#queryproductsparameter)中携带相关的商品ID，并根据实际配置指定其productType，订阅型商品指定其productType为[iap.ProductType.AUTORENEWABLE](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#producttype)。\n\n   当接口请求成功时，IAP Kit将返回商品信息[Product](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#product)的列表。 应用可以使用[Product](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#product)包含的商品价格、名称和描述等信息，向用户展示可供购买的商品列表。  \n   ![](https://media:201787905882555736)  \n   [queryProducts](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#iapqueryproducts)每次只能查询一种类型的商品，单次查询请勿超过200条。"
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "StoreView(ids:) 按产品 ID 数组展示商品",
+          "start_line": 183,
+          "end_line": 212,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/storekit/getting-started-with-in-app-purchases-using-storekit-views",
+            "platform": "ios",
+            "title": "Getting started with In-App Purchase using StoreKit views",
+            "local_path": "docs-raw/research/2026-09-06/aed42c879f101c6f9cdd11f6cd86aed9c6241b54dbcad61bd9878da548506e5b/93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855/document.md",
+            "sha256": "93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855",
+            "raw_sha256": "9af70946784e0640ff09ea2d29094d4a593e85034057c31873d62177b2eedc81",
+            "raw_path": "docs-raw/research/2026-09-06/aed42c879f101c6f9cdd11f6cd86aed9c6241b54dbcad61bd9878da548506e5b/93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855/source.gz",
+            "fetched_at": "2026-09-05T10:26:00.796705+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 222,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 18,
+                "end_line": 32,
+                "truncated": false
+              },
+              {
+                "start_line": 54,
+                "end_line": 113,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "```swift\nimport StoreKit\nimport SwiftUI\n\nstruct AllProductsView: View {\n    // Your app's data store.\n    @Environment(Store.self) private var store: Store\n\n    var body: some View {\n        @Bindable var store = store\n        VStack {\n            // ProductID.all is an array of your product ID strings.\n            StoreView(ids: ProductID.all)\n                .storeButton(.hidden, for: .cancellation)\n                .storeButton(.visible, for: .restorePurchases)\n        }\n        .padding()\n    }\n}\n```\n\nHere, the `StoreView` view from StoreKit constructs a page and lays out a grid that contains each product, as shown in the following screenshot:\n\n![A screenshot of the StoreKitWorkflows app showing a view of all available products.](images/com.apple.storekit/getting-started-with-in-app-purchases-using-storekit-views-AllProducts~dark@2x.png)\n\nTo show a specific subset of your available products, use the same view structure,\nbut change the list of product IDs you provide to the `StoreView()`.\nSo, change `store.allProductIDs` to another array of product IDs.\nFor example, the `subscriptionProductIDs` array contains only subscription purchase types,\nso replace `store.allProductIDs` with the `subscriptionProductIDs` array to show subscriptions as shown here."
+        }
+      ],
+      "open_questions": [
+        "iOS StoreKit 产品查询的数量/类型限制未在快照中说明，需读 Product.products(for:) 参考",
+        "Android queryProductDetails 的批量与类型约束需补读正文",
+        "限制可能随版本变化，基线未固定"
+      ]
+    },
+    {
+      "dimension": "availability",
+      "statement": "购买前置条件可能不同：HarmonyOS 要求先 queryEnvironmentStatus 判定华为账号服务地且当前仅中国境内可结算；已读 Android（Unity 插件购买流程）与 iOS（StoreKit views 交易监听）文档均未描述类似环境前置检查步骤。",
+      "platforms": [
+        "harmonyos",
+        "android",
+        "ios"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "前提条件：queryEnvironmentStatus 与支持地区限制",
+          "start_line": 5,
+          "end_line": 15,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/store-iap-distribute-query",
+            "platform": "harmonyos",
+            "title": "展示数字商品",
+            "local_path": "docs-raw/research/2026-09-06/74939c5e7d5f45b160fa28392b642416dc1aeec238db044e42449df213948438/df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94/document.md",
+            "sha256": "df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94",
+            "raw_sha256": "a09bb2a8534d5b917283dc3ba58d6574f2abd00bfa7b2a57da74d7659e408965",
+            "raw_path": "docs-raw/research/2026-09-06/74939c5e7d5f45b160fa28392b642416dc1aeec238db044e42449df213948438/df3e409cbc933f079299c91d5e1f543124aa354ebc06a39b817433f13691fb94/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 93,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 93,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 前提条件\n\n当前登录的华为账号所在服务地支持数字商品服务。  \n\n#### 开发步骤\n\n1. 判断当前登录的华为账号所在的服务地是否支持数字商品服务应用内支付。\n\n   在使用应用内支付之前，应用需要向IAP Kit发送[queryEnvironmentStatus](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#iapqueryenvironmentstatus)请求，以此判断用户当前登录的华为账号所在服务地是否在IAP Kit支持结算的国家/地区中。  \n   ![](https://media:201787905882527735)  \n   当前IAP Kit支持结算的国家/地区仅包括中国境内（香港特别行政区、澳门特别行政区、中国台湾除外）。"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Implement Google Play Billing Library features（购买流程无环境前置检查描述）",
+          "start_line": 125,
+          "end_line": 146,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/google/play/billing/unity",
+            "platform": "android",
+            "title": "Use the Google Play Billing Library with Unity",
+            "local_path": "docs-raw/research/2026-09-06/651e5503f8abb7f1f05181e856f657a9a1694ddd5b4d5bb5316cdc7570708e13/6c6a0e7d72402761f69784872c120303d20837011532922028980fa8f208fd07/document.md",
+            "sha256": "6c6a0e7d72402761f69784872c120303d20837011532922028980fa8f208fd07",
+            "raw_sha256": "df9eee81345e2d6952392d5445f745ca27028f2173c3510d3775b6c53fbc911b",
+            "raw_path": "docs-raw/research/2026-09-06/651e5503f8abb7f1f05181e856f657a9a1694ddd5b4d5bb5316cdc7570708e13/6c6a0e7d72402761f69784872c120303d20837011532922028980fa8f208fd07/source.gz",
+            "fetched_at": "2026-09-05T10:42:34.186144+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 305,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": false
+              },
+              {
+                "start_line": 10,
+                "end_line": 18,
+                "truncated": false
+              },
+              {
+                "start_line": 19,
+                "end_line": 30,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Implement Google Play Billing Library features in your game\n\nThe Google Play Billing plugin extends Unity IAP services, so you can use the\nsame Unity APIs to manage common purchasing workflows. Note that there are some\n[minor changes to API behavior](https://developer.android.com/google/play/billing/unity#behavior-changes)\ndue to differences between the Google Play Billing Library and Unity's standard IAP\nimplementation for other app stores. If you're new to the Unity IAP APIs, see\nthe \"Making a Purchase Script\" section in the [Unity IAP\ntutorial](https://learn.unity.com/tutorial/unity-iap#5c7f8528edbc2a002053b46e)\nfor an example of how to implement basic purchasing flows.\n\nThe Google Play Billing Library also includes some features that are unique to the Google\nPlay store. You can access these features through an extended interface. The\nrest of this section describes how to implement these unique Google Play Billing Library\nfeatures in your game.\n\n### Enable deferred purchases\n\nGoogle Play supports deferred purchases—also called [pending\ntrasacations](https://developer.android.com/google/play/billing/billing_library_overview#pending) or pending\npurchases—where users can create a purchase and complete it later using cash in\nstores."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Monitor transactions in your app（交易监听流程无环境前置检查描述）",
+          "start_line": 54,
+          "end_line": 61,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/storekit/getting-started-with-in-app-purchases-using-storekit-views",
+            "platform": "ios",
+            "title": "Getting started with In-App Purchase using StoreKit views",
+            "local_path": "docs-raw/research/2026-09-06/aed42c879f101c6f9cdd11f6cd86aed9c6241b54dbcad61bd9878da548506e5b/93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855/document.md",
+            "sha256": "93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855",
+            "raw_sha256": "9af70946784e0640ff09ea2d29094d4a593e85034057c31873d62177b2eedc81",
+            "raw_path": "docs-raw/research/2026-09-06/aed42c879f101c6f9cdd11f6cd86aed9c6241b54dbcad61bd9878da548506e5b/93b32a8cf125897c422874b0308080cb45b1f0045ad0b0fc4a4651dc969ee855/source.gz",
+            "fetched_at": "2026-09-05T10:26:00.796705+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 222,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 18,
+                "end_line": 32,
+                "truncated": false
+              },
+              {
+                "start_line": 54,
+                "end_line": 113,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "## Monitor transactions in your app\n\nStoreKit provides several asynchronous sequences\nthat provide your app with information and updates.\nFor example, the class below checks\n[`unfinished`](/documentation/StoreKit/Transaction/unfinished) and [`currentEntitlements`](/documentation/StoreKit/Transaction/currentEntitlements) at startup,\nand continues to check [`updates`](/documentation/StoreKit/Transaction/updates) in the background\nwhile the app is running."
+        }
+      ],
+      "open_questions": [
+        "Android Play 结算国家/地区限制与 iOS 商店区域限制未在冻结来源中读到，不能断言无此类限制",
+        "queryEnvironmentStatus 失败后的官方降级建议未读到",
+        "差异仅为所读文档描述层面，未经真机核实"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "Android 核心 Billing Library（Kotlin/Java）商品查询与购买主流程正文未纳入冻结来源，现证据经 Unity 插件与 Play Points 指南路径",
+    "iOS Product.purchase 等购买 API 符号级 availability 与最低 iOS 版本未核对（Apple 目录需逐符号确认 iOS 适用性）",
+    "HarmonyOS 购买主流程（createPurchase/收银台 CashierComponent）正文未读取，仅 API 差异表条目",
+    "三平台订阅升级/降级/价格变更行为仅有 Android 侧（proration mode、改价确认）证据，未做跨平台比较"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "三平台查询/购买主流程文档均有实质缺口（Android 无核心集成正文、iOS 版本未核、HarmonyOS 购买流程未读），且商品类型集合与区域可用性属高风险映射，应优先安排正式研究与真机沙盒验证。"
+  }
+}

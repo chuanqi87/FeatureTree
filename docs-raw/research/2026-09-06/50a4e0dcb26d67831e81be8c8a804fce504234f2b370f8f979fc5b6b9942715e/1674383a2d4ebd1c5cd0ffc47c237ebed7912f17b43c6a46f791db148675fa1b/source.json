@@ -1,0 +1,13 @@
+{
+  "id": "50a4e0dcb26d67831e81be8c8a804fce504234f2b370f8f979fc5b6b9942715e",
+  "url": "https://developer.apple.com/documentation/xcode/sharing-your-teams-signing-certificates",
+  "platform": "ios",
+  "title": "Synchronizing code signing identities with your developer account",
+  "local_path": "docs-raw/research/2026-09-06/50a4e0dcb26d67831e81be8c8a804fce504234f2b370f8f979fc5b6b9942715e/1674383a2d4ebd1c5cd0ffc47c237ebed7912f17b43c6a46f791db148675fa1b/document.md",
+  "sha256": "1674383a2d4ebd1c5cd0ffc47c237ebed7912f17b43c6a46f791db148675fa1b",
+  "raw_sha256": "4f51e165e4f680a7c77f5bf8be9c870c800571f7cb9c871c79be028a18df982e",
+  "raw_path": "docs-raw/research/2026-09-06/50a4e0dcb26d67831e81be8c8a804fce504234f2b370f8f979fc5b6b9942715e/1674383a2d4ebd1c5cd0ffc47c237ebed7912f17b43c6a46f791db148675fa1b/source.gz",
+  "fetched_at": "2026-09-05T11:24:01.289983+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

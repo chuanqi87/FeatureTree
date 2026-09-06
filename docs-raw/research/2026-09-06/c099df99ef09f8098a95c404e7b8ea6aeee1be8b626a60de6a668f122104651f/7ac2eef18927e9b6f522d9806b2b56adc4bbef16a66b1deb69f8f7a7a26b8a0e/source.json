@@ -1,0 +1,13 @@
+{
+  "id": "c099df99ef09f8098a95c404e7b8ea6aeee1be8b626a60de6a668f122104651f",
+  "url": "https://developer.apple.com/documentation/security/security-framework-result-codes",
+  "platform": "ios",
+  "title": "Security Framework Result Codes",
+  "local_path": "docs-raw/research/2026-09-06/c099df99ef09f8098a95c404e7b8ea6aeee1be8b626a60de6a668f122104651f/7ac2eef18927e9b6f522d9806b2b56adc4bbef16a66b1deb69f8f7a7a26b8a0e/document.md",
+  "sha256": "7ac2eef18927e9b6f522d9806b2b56adc4bbef16a66b1deb69f8f7a7a26b8a0e",
+  "raw_sha256": "7acc80cda078e794915e76b0bc89b73d662e476c31622d342b102b7279cebf04",
+  "raw_path": "docs-raw/research/2026-09-06/c099df99ef09f8098a95c404e7b8ea6aeee1be8b626a60de6a668f122104651f/7ac2eef18927e9b6f522d9806b2b56adc4bbef16a66b1deb69f8f7a7a26b8a0e/source.gz",
+  "fetched_at": "2026-09-05T10:25:39.083641+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

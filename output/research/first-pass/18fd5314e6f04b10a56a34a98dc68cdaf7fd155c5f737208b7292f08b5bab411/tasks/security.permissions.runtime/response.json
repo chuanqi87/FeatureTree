@@ -1,0 +1,312 @@
+{
+  "task_id": "393cfd3a3e4e1523b2556286662317dad8c3a3608049cfba50fb6983c91bbd8e",
+  "feature_id": "security.permissions.runtime",
+  "stage": "first_pass",
+  "summary": "三平台均读到运行时向用户请求敏感权限的机制。Android 指南明示 API 23+ 设备上运行时权限须应用自行请求且先在 manifest 声明；iOS 由系统在首次访问受保护资源时弹窗，需 Info.plist 用途字符串，各框架提供 requestAuthorization 类 API；HarmonyOS 经 AtManager.requestPermissionsFromUser(API 9+，Stage 模型)拉起动态授权弹窗，拒绝后不可再弹。Android 实际请求 API 未在冻结来源中，iOS 版本适用性、HarmonyOS API 与发行版映射未核实，全部 low。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "指南明示：运行时/特殊权限在 Android 6.0(API 23)+ 设备须应用自行请求；权限须先以 <uses-permission> 在 manifest 声明，可用 <uses-permission-sdk-23> 限定 API 23+ 设备。PackageManager 参考正文仅含 checkPermission、PERMISSION_GRANTED/DENIED 等查询接口，未见 requestPermissions 方法。",
+      "version_scope": "文档条件：设备 Android 6.0 (API level 23) 或更高；未核实 targetSdk 影响及最新正式版 API Level 对应关系",
+      "conditions": [
+        "设备运行 Android 6.0 (API level 23) 或更高",
+        "权限须先在 manifest 以 <uses-permission> 声明",
+        "适用于运行时(危险)权限与特殊权限；normal/signature 安装时权限自动授予",
+        "请求流程指向 training/permissions/requesting（该正文未包含于冻结来源）"
+      ],
+      "gaps": [
+        "实际请求 API（Activity.requestPermissions/ActivityCompat.requestPermissions 及回调）正文未包含于冻结来源",
+        "绑定注记 PackageManager.requestPermissions 未在该参考正文出现，正文仅 checkPermission 等查询接口",
+        "拒绝后再请求与 rationale 机制未读到",
+        "targetSdk<23 等兼容行为与特殊权限流程未核实"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "Declare app permissions - 权限类型决定请求方式，API 23+ 须自行请求运行时权限",
+          "start_line": 9,
+          "end_line": 21
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Declare permissions by API level - <uses-permission-sdk-23> 限定支持运行时权限的设备",
+          "start_line": 111,
+          "end_line": 117
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Add declaration to app manifest - <uses-permission> 示例",
+          "start_line": 29,
+          "end_line": 43
+        },
+        {
+          "source_id": "android-1",
+          "locator": "PackageManager.checkPermission(String,String) 方法摘要行",
+          "start_line": 318,
+          "end_line": 318
+        },
+        {
+          "source_id": "android-1",
+          "locator": "PERMISSION_DENIED/PERMISSION_GRANTED 常量摘要行",
+          "start_line": 272,
+          "end_line": 273
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "机制与 API 23+ 条件已有文档说明，但授权弹窗展示、拒绝后再请求路径等属系统运行时 UI 行为，确认最新手机正式版实际表现时建议真机验证；本轮为文档初判，未执行实测"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "documented_mechanism",
+      "observation": "系统默认限制受保护资源，首次访问时自动弹系统提示并展示应用提供的用途字符串；缺失时访问失败甚至崩溃并被 App Review 拒绝。各框架提供专用授权 API（如 SFSpeechRecognizer.requestAuthorization），系统记录用户选择后不再弹窗。",
+      "version_scope": "已读 Apple 文章未标注具体 iOS 最低版本；符号级 availability 与最新 iOS 正式版适用性未核对",
+      "conditions": [
+        "Info.plist 须含对应用途字符串，缺失时访问可能失败/崩溃并被 App Review 拒绝",
+        "系统提示在应用首次访问受保护资源时自动触发",
+        "用户可随时在设置中更改授权，访问前应检查授权状态",
+        "部分资源还需另行声明 entitlement（文档提示，未展开）"
+      ],
+      "gaps": [
+        "是否存在统一权限请求入口未核实（本轮仅读到按框架分散的授权 API）",
+        "各受保护资源最低 iOS 版本与符号 availability 未核对",
+        "受保护资源完整清单未读取",
+        "已读文章未逐项区分 iOS 与其他 Apple 平台适用性"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "Provide a purpose string - 首次访问触发系统提示、purpose string 作用",
+          "start_line": 14,
+          "end_line": 22
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Check for authorization - 各框架提供专用授权检查/请求 API",
+          "start_line": 78,
+          "end_line": 82
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Reset authorization access - 系统记住选择不再提示，需重置才会再询问",
+          "start_line": 84,
+          "end_line": 88
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Request Authorization at First Use - requestAuthorization 异步请求并记录结果",
+          "start_line": 26,
+          "end_line": 33
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Add the Privacy Key to Your Info.plist File - 缺 NSSpeechRecognitionUsageDescription 将崩溃",
+          "start_line": 13,
+          "end_line": 24
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "提示触发时机、选择记忆与设置更改后的行为属系统运行时表现，文档已描述但确认最新 iOS 手机版本实际行为建议真机验证；本轮为文档初判，未执行实测"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "@ohos.abilityAccessCtrl 提供 AtManager.requestPermissionsFromUser（API 9+）在运行时拉起动态授权弹窗申请 user_grant 权限并返回 PermissionRequestResult；用户拒绝后无法再次弹窗，可引导设置页或 requestPermissionOnSetting(API 12+)。仅限 Stage 模型，弹窗不可被遮挡。",
+      "version_scope": "模块首批接口 API 8 起；requestPermissionsFromUser API 9+，元服务 API 12+，requestPermissionOnSetting API 12+；API version 与 HarmonyOS 手机发行版映射未核实",
+      "conditions": [
+        "权限须先在配置文件声明且属 user_grant 类",
+        "仅 Stage 模型，需 UIAbility/UIExtensionAbility 的 Context",
+        "onWindowStageCreate 中须待 loadContent/setUIContent 完成后再调用",
+        "每次访问受保护接口前须检查权限并调用 requestPermissionsFromUser，不持久化授权状态",
+        "系统权限弹窗不可被其他组件遮挡"
+      ],
+      "gaps": [
+        "API version 与 HarmonyOS 手机/平板发行版映射未核实，OpenHarmony 与 HarmonyOS 差异未核对",
+        "system_grant/manual_settings 等其余授权类型完整细节未读全",
+        "requestPermissionOnSetting/openPermissionOnSetting 正文仅部分读取",
+        "平板等设备形态条件未读取"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "模块说明 - 权限三类划分与首批接口 API 8 起",
+          "start_line": 1,
+          "end_line": 12
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "AtManager.requestPermissionsFromUser^9+ - 拉起弹窗请求用户授权及拒绝后行为",
+          "start_line": 375,
+          "end_line": 383
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "requestPermissionsFromUser 模型约束 - 元服务 API 12、仅 Stage 模型、SystemCapability",
+          "start_line": 387,
+          "end_line": 391
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "约束与限制 - 拒绝后无法再弹窗、每次先检查、onWindowStageCreate 时序",
+          "start_line": 18,
+          "end_line": 35
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "开发步骤 - 运行时动态申请授权流程",
+          "start_line": 101,
+          "end_line": 109
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "弹窗拉起、拒绝后再请求限制与设置引导属系统运行时行为，文档已描述但确认最新 HarmonyOS 手机版本表现建议真机验证；本轮为文档初判，未执行实测"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "programming_model",
+      "statement": "请求发起模型差异（假设）：iOS 文档描述系统在首次访问受保护资源时自动弹窗、授权 API 按框架分散（如 SFSpeechRecognizer.requestAuthorization）；Android 与 HarmonyOS 文档描述应用主动调用运行时请求接口（Android 指向运行时权限请求流程，HarmonyOS 为 requestPermissionsFromUser 传权限列表）。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "运行时权限须应用自行请求（链接至请求流程文档）",
+          "start_line": 16,
+          "end_line": 21
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "首次访问受保护资源时系统自动提示",
+          "start_line": 14,
+          "end_line": 22
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "SFSpeechRecognizer.requestAuthorization 主动请求授权",
+          "start_line": 26,
+          "end_line": 33
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "requestPermissionsFromUser 拉起弹窗请求用户授权",
+          "start_line": 375,
+          "end_line": 383
+        }
+      ],
+      "open_questions": [
+        "Android 实际请求 API 形态与回调模型未在冻结来源中读到，无法确认接口细节",
+        "iOS 是否存在统一权限请求入口未核实，需逐框架清点"
+      ]
+    },
+    {
+      "dimension": "permissions_privacy",
+      "statement": "拒绝后再请求路径差异（假设，iOS vs HarmonyOS）：HarmonyOS 明示拒绝后 requestPermissionsFromUser 无法再次拉起弹窗，须引导用户去系统设置或 requestPermissionOnSetting(API 12+)；iOS 系统记录选择后不再提示，重新询问需用户在设置更改或重置隐私设置。Android 侧冻结资料未记载该行为，暂不纳入本假设比较。",
+      "platforms": [
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "拒绝后无法通过该接口再次拉起授权弹窗",
+          "start_line": 383,
+          "end_line": 383
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "约束 - 拒绝后无法再次弹窗，引导设置或 requestPermissionOnSetting",
+          "start_line": 20,
+          "end_line": 22
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Reset authorization access - 记住选择不再提示，需重置",
+          "start_line": 84,
+          "end_line": 88
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "系统记录选择，后续请求不再提示",
+          "start_line": 33,
+          "end_line": 33
+        }
+      ],
+      "open_questions": [
+        "Android 拒绝后再请求行为（rationale、设置引导）未在冻结来源核实",
+        "iOS 各框架再次调用请求 API 的实际表现（如定位的再询问选项）未逐框架核实"
+      ]
+    },
+    {
+      "dimension": "api_surface",
+      "statement": "请求前声明面差异（假设）：三平台均要求先静态声明再运行时请求——Android 在 manifest 用 <uses-permission>；HarmonyOS 在配置文件声明并关联目标对象；iOS 在 Info.plist 提供用户可读用途字符串，缺失时访问失败/崩溃且被 App Review 拒绝。已读文档范围内仅 iOS 明示强制用户可见说明文案。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "Add declaration to app manifest - <uses-permission> 声明",
+          "start_line": 29,
+          "end_line": 43
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "user_grant 权限申请步骤 - 先在配置文件声明并关联目标对象",
+          "start_line": 5,
+          "end_line": 11
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "purpose string 要求与 App Review 拒审（ITMS-90683）",
+          "start_line": 47,
+          "end_line": 58
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Info.plist 缺 NSSpeechRecognitionUsageDescription 键将崩溃",
+          "start_line": 23,
+          "end_line": 24
+        }
+      ],
+      "open_questions": [
+        "Android/HarmonyOS 是否有对应用户可见说明义务（商店审核等）未在冻结资料核实",
+        "iOS 用途字符串细则（长度、本地化）对三平台比较的影响未展开"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "Android 实际运行时请求 API（Activity.requestPermissions/ActivityCompat/onRequestPermissionsResult）未包含于冻结来源；绑定注记 PackageManager.requestPermissions 未在该参考正文出现（正文仅 checkPermission 等查询接口）",
+    "Android targetSdk 对运行时权限行为的影响与特殊权限请求流程未读到",
+    "iOS 各受保护资源最低 iOS 版本与符号 availability 未核对，已读文章未标注具体 iOS 版本",
+    "HarmonyOS API version 与手机发行版映射未核实，OpenHarmony 与 HarmonyOS 差异未核对",
+    "特殊权限/仅设置页授权完整清单与平板设备形态条件未读取"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "Android 绑定与正文不一致（PackageManager 无 requestPermissions），实际请求 API 与 targetSdk 条件未核实属高风险映射；iOS 版本适用性与 HarmonyOS API-发行版映射未固定，需优先精研"
+  }
+}

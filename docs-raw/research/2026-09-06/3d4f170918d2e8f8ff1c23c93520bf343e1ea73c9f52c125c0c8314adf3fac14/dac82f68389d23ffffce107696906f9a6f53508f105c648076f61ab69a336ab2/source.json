@@ -1,0 +1,13 @@
+{
+  "id": "3d4f170918d2e8f8ff1c23c93520bf343e1ea73c9f52c125c0c8314adf3fac14",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-sensor",
+  "platform": "harmonyos",
+  "title": "@ohos.sensor (传感器)",
+  "local_path": "docs-raw/research/2026-09-06/3d4f170918d2e8f8ff1c23c93520bf343e1ea73c9f52c125c0c8314adf3fac14/dac82f68389d23ffffce107696906f9a6f53508f105c648076f61ab69a336ab2/document.md",
+  "sha256": "dac82f68389d23ffffce107696906f9a6f53508f105c648076f61ab69a336ab2",
+  "raw_sha256": "c9fa96cd70864e0b6542101a26a049f20217eaf24b4c74c1a6d90a1b4e0c178b",
+  "raw_path": "docs-raw/research/2026-09-06/3d4f170918d2e8f8ff1c23c93520bf343e1ea73c9f52c125c0c8314adf3fac14/dac82f68389d23ffffce107696906f9a6f53508f105c648076f61ab69a336ab2/source.gz",
+  "fetched_at": "2026-09-05T10:27:55.026495+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

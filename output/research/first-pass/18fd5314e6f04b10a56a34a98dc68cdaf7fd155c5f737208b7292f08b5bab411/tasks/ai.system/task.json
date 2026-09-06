@@ -1,0 +1,527 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "ai.system",
+    "level": "L2",
+    "parent": "ai",
+    "name": {
+      "zh": "系统智能",
+      "en": "System Intelligence"
+    },
+    "definition": "系统级建议、摘要与意图（生态/OS 混合）。",
+    "knowledge_role": "rollup",
+    "layer": "mixed",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/ai/system/_rollup.yaml",
+    "comparison_scope": {
+      "includes": [
+        "系统级建议、摘要与意图（生态/OS 混合）。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "d2630573b619b7a9baefde87e7374ba4f92e4bde5ac3d8cceaad5d1fc3b926b0",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "9756d25ab824877f3d290410a5b23cd202241ea0b901dd4c20b339658123f09d",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/ai/intelligence-system",
+      "platform": "android",
+      "title": "Connect your app to the Android intelligence system",
+      "local_path": "docs-raw/research/2026-09-06/40f9eef2d2273a523fa91264d1f0cba00dfd8cf659e7c88582db0061b0b00ce4/1a13cb1888f798bd6f18b6a962996ded1d0acd9eb2a2cf5c6ffaa6f306d32295/document.md",
+      "sha256": "1a13cb1888f798bd6f18b6a962996ded1d0acd9eb2a2cf5c6ffaa6f306d32295",
+      "raw_sha256": "13ab869f424600791f213d6a40c7ee10904ec67abc4f3bc2a33c2440a2cd412f",
+      "raw_path": "docs-raw/research/2026-09-06/40f9eef2d2273a523fa91264d1f0cba00dfd8cf659e7c88582db0061b0b00ce4/1a13cb1888f798bd6f18b6a962996ded1d0acd9eb2a2cf5c6ffaa6f306d32295/source.gz",
+      "fetched_at": "2026-09-05T10:22:21.778370+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 39,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 39,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/ai",
+      "platform": "android",
+      "title": "ai",
+      "local_path": "docs-raw/research/2026-09-06/67bbbd9313fd74e539d02984c707c506af0a11b4a8aeae2bc10d644508385015/552f320c42323a0eee724808c7fcbaadec072bc0eb0c3de19f693d4113642e9b/document.md",
+      "sha256": "552f320c42323a0eee724808c7fcbaadec072bc0eb0c3de19f693d4113642e9b",
+      "raw_sha256": "142e690d62cd5b84a8d9a3f986cb04f30833cc9ddfb9a11c3c21d88b18bb0226",
+      "raw_path": "docs-raw/research/2026-09-06/67bbbd9313fd74e539d02984c707c506af0a11b4a8aeae2bc10d644508385015/552f320c42323a0eee724808c7fcbaadec072bc0eb0c3de19f693d4113642e9b/source.gz",
+      "fetched_at": "2026-09-05T10:22:19.483849+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 200,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 14,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/technologyoverviews/ai-machine-learning",
+      "platform": "ios",
+      "title": "Apple Intelligence and machine learning",
+      "local_path": "docs-raw/research/2026-09-06/1f14d5d2c97a5aac1522cac48ce0e24f508f68474c935c448ee693aeedbc8f8a/791729218e56678465283a4ca267b84becd60ced0f7480625919294358509738/document.md",
+      "sha256": "791729218e56678465283a4ca267b84becd60ced0f7480625919294358509738",
+      "raw_sha256": "3f911143ed9c3ad5dbf989d56f5a2afebe5159dd56b3d1e743cd7c9904766af0",
+      "raw_path": "docs-raw/research/2026-09-06/1f14d5d2c97a5aac1522cac48ce0e24f508f68474c935c448ee693aeedbc8f8a/791729218e56678465283a4ca267b84becd60ced0f7480625919294358509738/source.gz",
+      "fetched_at": "2026-09-05T10:26:33.328263+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 99,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 15,
+          "truncated": false
+        },
+        {
+          "start_line": 16,
+          "end_line": 33,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/appintents/apple-intelligence-and-siri-ai",
+      "platform": "ios",
+      "title": "Apple Intelligence and Siri AI",
+      "local_path": "docs-raw/research/2026-09-06/7f978ee6d150f54bfe72bf570d52a7236a800f8890d776c938f7fbbb7252c691/c04045777146c1b88eb9d67b37cc799501d86066bc426191ead01de13e848629/document.md",
+      "sha256": "c04045777146c1b88eb9d67b37cc799501d86066bc426191ead01de13e848629",
+      "raw_sha256": "4591b33936d283609a68cd4a7eecc3efd1b5518cb16089ce4069f0a49ff543dc",
+      "raw_path": "docs-raw/research/2026-09-06/7f978ee6d150f54bfe72bf570d52a7236a800f8890d776c938f7fbbb7252c691/c04045777146c1b88eb9d67b37cc799501d86066bc426191ead01de13e848629/source.gz",
+      "fetched_at": "2026-09-05T10:17:04.512539+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 94,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 18,
+          "truncated": false
+        },
+        {
+          "start_line": 19,
+          "end_line": 20,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-arkdata-5032",
+      "platform": "harmonyos",
+      "title": "ArkData",
+      "local_path": "docs-raw/research/2026-09-06/e0689ccb8cf5481ee9c4716f004a1e926f2f27f6c6b065ddadcb64b44c7d7eed/ae982ead291dac088fd62c01ed7a196a0245a48e0fba5b483040ea431c430182/document.md",
+      "sha256": "ae982ead291dac088fd62c01ed7a196a0245a48e0fba5b483040ea431c430182",
+      "raw_sha256": "f37ea4dc037588c70cfa5a77bb59cfb89d57ee990ce1bbd085345d9ba2800ed3",
+      "raw_path": "docs-raw/research/2026-09-06/e0689ccb8cf5481ee9c4716f004a1e926f2f27f6c6b065ddadcb64b44c7d7eed/ae982ead291dac088fd62c01ed7a196a0245a48e0fba5b483040ea431c430182/source.gz",
+      "fetched_at": "2026-09-05T11:00:50.929333+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 52,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 52,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkaf-overview",
+      "platform": "harmonyos",
+      "title": "方舟智能开发框架概述",
+      "local_path": "docs-raw/research/2026-09-06/f26d2738c2bc29290a560cf992db50ef5b81c33fdfcb920e4ddee58a29d5ebde/eba8764af2ac8a1689d09e7f44840f0fa7f38bf67b839401cf4116282851bee1/document.md",
+      "sha256": "eba8764af2ac8a1689d09e7f44840f0fa7f38bf67b839401cf4116282851bee1",
+      "raw_sha256": "5a4602d1774e694dbf88a852eeab8d553ff3b7e59e5d84b0df78abcb28832902",
+      "raw_path": "docs-raw/research/2026-09-06/f26d2738c2bc29290a560cf992db50ef5b81c33fdfcb920e4ddee58a29d5ebde/eba8764af2ac8a1689d09e7f44840f0fa7f38bf67b839401cf4116282851bee1/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 61,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 16,
+          "truncated": false
+        },
+        {
+          "start_line": 17,
+          "end_line": 34,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:05.623263+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "8f6e43034d5a8a53c693febda27822abff61776d47636d068f276270e55485a7"
+}

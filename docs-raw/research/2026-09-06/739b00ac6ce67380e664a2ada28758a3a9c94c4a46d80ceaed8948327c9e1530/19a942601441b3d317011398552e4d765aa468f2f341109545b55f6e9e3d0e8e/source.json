@@ -1,0 +1,13 @@
+{
+  "id": "739b00ac6ce67380e664a2ada28758a3a9c94c4a46d80ceaed8948327c9e1530",
+  "url": "https://developer.apple.com/documentation/authenticationservices/platform-single-sign-on-sso",
+  "platform": "ios",
+  "title": "Platform Single Sign-on (SSO)",
+  "local_path": "docs-raw/research/2026-09-06/739b00ac6ce67380e664a2ada28758a3a9c94c4a46d80ceaed8948327c9e1530/19a942601441b3d317011398552e4d765aa468f2f341109545b55f6e9e3d0e8e/document.md",
+  "sha256": "19a942601441b3d317011398552e4d765aa468f2f341109545b55f6e9e3d0e8e",
+  "raw_sha256": "b493d30bd76eb25ed611ec5f2e53644b17145567ce97f131f3d5c622be170367",
+  "raw_path": "docs-raw/research/2026-09-06/739b00ac6ce67380e664a2ada28758a3a9c94c4a46d80ceaed8948327c9e1530/19a942601441b3d317011398552e4d765aa468f2f341109545b55f6e9e3d0e8e/source.gz",
+  "fetched_at": "2026-09-05T10:18:20.165010+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

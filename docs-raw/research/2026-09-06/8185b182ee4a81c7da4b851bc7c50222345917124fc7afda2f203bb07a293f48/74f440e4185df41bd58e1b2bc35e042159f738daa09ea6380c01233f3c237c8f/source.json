@@ -1,0 +1,13 @@
+{
+  "id": "8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability",
+  "platform": "harmonyos",
+  "title": "@ohos.app.ability.UIAbility (带界面的应用组件)",
+  "local_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/document.md",
+  "sha256": "74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f",
+  "raw_sha256": "a60f1b7bade8dc78760344c80bcfd7f8f52851c18a5b6da936beca0c11b82a0f",
+  "raw_path": "docs-raw/research/2026-09-06/8185b182ee4a81c7da4b851bc7c50222345917124fc7afda2f203bb07a293f48/74f440e4185df41bd58e1b2bc35e042159f738daa09ea6380c01233f3c237c8f/source.gz",
+  "fetched_at": "2026-09-05T10:26:49.555101+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

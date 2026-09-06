@@ -1,0 +1,9 @@
+{
+  "task_id": "25c8411edd3ca69b2bb43665a9bc0f44055a82796783d634180b7514047f7f92",
+  "feature_id": "app.install.package_update",
+  "response_sha256": "b93da30557e66a9bc413eff768c854122da1f498eac1680ce4552afc694596e5",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

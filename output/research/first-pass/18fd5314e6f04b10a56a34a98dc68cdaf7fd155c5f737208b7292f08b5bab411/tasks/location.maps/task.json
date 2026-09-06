@@ -1,0 +1,508 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "location.maps",
+    "level": "L2",
+    "parent": "location",
+    "name": {
+      "zh": "地图展示",
+      "en": "Maps Display"
+    },
+    "definition": "地图 SDK 展示与标注（生态层）。",
+    "knowledge_role": "rollup",
+    "layer": "ecosystem",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/location/maps/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "地图 SDK 展示与标注（生态层）。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "50458b9cbacc0e3cf3fd7e592bf1934e931dc629321cb23eb7c811212a26b737",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "edc3f7147fdaebb6edc26b722113bfd3265c37b80661cd5025fd0cad2a84c436",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developers.google.com/maps/documentation/maps-static/cloud-customization/viz",
+      "platform": "android",
+      "title": "Filter which map features to display",
+      "local_path": "docs-raw/research/2026-09-06/72f6815ed9f0474d4f7c81dc860138c30c1d1afe184553699c5d9751251342f4/32c84a143e3e4928f119c47af936191084f1d335826473855dc7f2e5cbb4f025/document.md",
+      "sha256": "32c84a143e3e4928f119c47af936191084f1d335826473855dc7f2e5cbb4f025",
+      "raw_sha256": "ba369ff45a927bd28afed4f9a9185ba8d91158dd879b9e5bdfed08660f6433b6",
+      "raw_path": "docs-raw/research/2026-09-06/72f6815ed9f0474d4f7c81dc860138c30c1d1afe184553699c5d9751251342f4/32c84a143e3e4928f119c47af936191084f1d335826473855dc7f2e5cbb4f025/source.gz",
+      "fetched_at": "2026-09-05T10:58:51.211954+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 39,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 39,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developers.google.com/maps/documentation/android-sdk/cloud-customization/viz",
+      "platform": "android",
+      "title": "Filter which map features to display",
+      "local_path": "docs-raw/research/2026-09-06/60dd2dd6f4ee98c8c477a86430a22d5a437721ab6a2427b198dea93ca0a34d73/da15ed370625c8c951e920407e0c805ef874e927b5d7092a21a139cf5a214bf0/document.md",
+      "sha256": "da15ed370625c8c951e920407e0c805ef874e927b5d7092a21a139cf5a214bf0",
+      "raw_sha256": "4c15c0851f1412a918df783cdddfc03340fb2b251db764aa3b9a06bf909226a0",
+      "raw_path": "docs-raw/research/2026-09-06/60dd2dd6f4ee98c8c477a86430a22d5a437721ab6a2427b198dea93ca0a34d73/da15ed370625c8c951e920407e0c805ef874e927b5d7092a21a139cf5a214bf0/source.gz",
+      "fetched_at": "2026-09-05T10:55:27.159925+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 43,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 43,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developers.google.com/maps/documentation/maps-3d/ios-sdk/cloud-customization/viz",
+      "platform": "ios",
+      "title": "Filter which map features to display",
+      "local_path": "docs-raw/research/2026-09-06/8a8447a9eb16cc7e6a6650ac839c9a4826905c8158f4a87101b88724691da657/2bd129dbe4520628fa5bc6487cce01e582c0dbb335421f785b91ab6abeb77e06/document.md",
+      "sha256": "2bd129dbe4520628fa5bc6487cce01e582c0dbb335421f785b91ab6abeb77e06",
+      "raw_sha256": "2b16ee2e72b0d2dc1bbccb2cc6a154c3006fa6c8903dab9c0ff3033154faec94",
+      "raw_path": "docs-raw/research/2026-09-06/8a8447a9eb16cc7e6a6650ac839c9a4826905c8158f4a87101b88724691da657/2bd129dbe4520628fa5bc6487cce01e582c0dbb335421f785b91ab6abeb77e06/source.gz",
+      "fetched_at": "2026-09-05T10:58:45.867961+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 39,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 39,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developers.google.com/maps/documentation/ios-sdk/cloud-customization/viz",
+      "platform": "ios",
+      "title": "Filter which map features to display",
+      "local_path": "docs-raw/research/2026-09-06/b2f1e25dbb26ba977880363788f811f162310ede20f26fcfeedacd470d483e20/49cfac05bc060f68c6e24445a768de1b23fc841dab4df7b5bef6368b9db5e5d3/document.md",
+      "sha256": "49cfac05bc060f68c6e24445a768de1b23fc841dab4df7b5bef6368b9db5e5d3",
+      "raw_sha256": "5bbd4d47bcbf55f51107514443dc32d9e548b5dfa08711e7caa3a51212a1e7de",
+      "raw_path": "docs-raw/research/2026-09-06/b2f1e25dbb26ba977880363788f811f162310ede20f26fcfeedacd470d483e20/49cfac05bc060f68c6e24445a768de1b23fc841dab4df7b5bef6368b9db5e5d3/source.gz",
+      "fetched_at": "2026-09-05T10:58:16.924717+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 39,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 39,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-petalmaps",
+      "platform": "harmonyos",
+      "title": "通过地图应用实现导航等能力",
+      "local_path": "docs-raw/research/2026-09-06/076f596f2c59a7c40a6f94ae3e3558b96bc82d7b04e62e2f25a7abd045492da2/c9cc06f15c337073bb4727950908cc7a7762fecd35d5854ba66354af68fa1655/document.md",
+      "sha256": "c9cc06f15c337073bb4727950908cc7a7762fecd35d5854ba66354af68fa1655",
+      "raw_sha256": "23c6f6ee08ad4475ebbdff18bc8ad909750f375bfa1267009a0a959014638875",
+      "raw_path": "docs-raw/research/2026-09-06/076f596f2c59a7c40a6f94ae3e3558b96bc82d7b04e62e2f25a7abd045492da2/c9cc06f15c337073bb4727950908cc7a7762fecd35d5854ba66354af68fa1655/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 235,
+      "suggested_sections": [
+        {
+          "start_line": 23,
+          "end_line": 42,
+          "truncated": false
+        },
+        {
+          "start_line": 74,
+          "end_line": 92,
+          "truncated": false
+        },
+        {
+          "start_line": 93,
+          "end_line": 96,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-map-signal-line",
+      "platform": "harmonyos",
+      "title": "信号路线",
+      "local_path": "docs-raw/research/2026-09-06/1d2e6106703e4e20ffb447d21052ae2bca17bd4351e2f9cd847f0805ad0fd0d1/793b63283f26c34e07d2cb0c4ceeb3a7304f3e7a731b36db1828f6aa948a487e/document.md",
+      "sha256": "793b63283f26c34e07d2cb0c4ceeb3a7304f3e7a731b36db1828f6aa948a487e",
+      "raw_sha256": "df0fab8a89c153c43e4c56b2d2df5aad30f3564b2ab85167dc70b087617bfc1b",
+      "raw_path": "docs-raw/research/2026-09-06/1d2e6106703e4e20ffb447d21052ae2bca17bd4351e2f9cd847f0805ad0fd0d1/793b63283f26c34e07d2cb0c4ceeb3a7304f3e7a731b36db1828f6aa948a487e/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 194,
+      "suggested_sections": [
+        {
+          "start_line": 11,
+          "end_line": 14,
+          "truncated": true
+        },
+        {
+          "start_line": 32,
+          "end_line": 41,
+          "truncated": false
+        },
+        {
+          "start_line": 77,
+          "end_line": 168,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:38.497470+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "61f11d2b9d9e3f93d3bbfea333c43fdad955844d65f95ee7e1c4f82ef7b9e9ed"
+}

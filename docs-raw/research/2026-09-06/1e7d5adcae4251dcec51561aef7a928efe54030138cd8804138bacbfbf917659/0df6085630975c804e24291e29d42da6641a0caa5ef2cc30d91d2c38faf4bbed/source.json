@@ -1,0 +1,13 @@
+{
+  "id": "1e7d5adcae4251dcec51561aef7a928efe54030138cd8804138bacbfbf917659",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-graphics-profiler",
+  "platform": "harmonyos",
+  "title": "GPU帧捕获工具：Graphics Profiler抓帧入口",
+  "local_path": "docs-raw/research/2026-09-06/1e7d5adcae4251dcec51561aef7a928efe54030138cd8804138bacbfbf917659/0df6085630975c804e24291e29d42da6641a0caa5ef2cc30d91d2c38faf4bbed/document.md",
+  "sha256": "0df6085630975c804e24291e29d42da6641a0caa5ef2cc30d91d2c38faf4bbed",
+  "raw_sha256": "2f3f90995cb48a656b5791baeeae0aac6e41ef784ff3bfa5dc91bc17108d93e9",
+  "raw_path": "docs-raw/research/2026-09-06/1e7d5adcae4251dcec51561aef7a928efe54030138cd8804138bacbfbf917659/0df6085630975c804e24291e29d42da6641a0caa5ef2cc30d91d2c38faf4bbed/source.gz",
+  "fetched_at": "2026-09-05T10:22:40.344153+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

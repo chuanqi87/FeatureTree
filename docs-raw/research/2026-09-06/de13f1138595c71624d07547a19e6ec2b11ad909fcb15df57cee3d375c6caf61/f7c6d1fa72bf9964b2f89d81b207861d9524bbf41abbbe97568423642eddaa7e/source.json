@@ -1,0 +1,13 @@
+{
+  "id": "de13f1138595c71624d07547a19e6ec2b11ad909fcb15df57cee3d375c6caf61",
+  "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-application-cold-start-optimization",
+  "platform": "harmonyos",
+  "title": "应用冷启动时延优化",
+  "local_path": "docs-raw/research/2026-09-06/de13f1138595c71624d07547a19e6ec2b11ad909fcb15df57cee3d375c6caf61/f7c6d1fa72bf9964b2f89d81b207861d9524bbf41abbbe97568423642eddaa7e/document.md",
+  "sha256": "f7c6d1fa72bf9964b2f89d81b207861d9524bbf41abbbe97568423642eddaa7e",
+  "raw_sha256": "cfa301d6861396ebab53d923d71261b1f4121ff4617f09a548fef6c301d0b04a",
+  "raw_path": "docs-raw/research/2026-09-06/de13f1138595c71624d07547a19e6ec2b11ad909fcb15df57cee3d375c6caf61/f7c6d1fa72bf9964b2f89d81b207861d9524bbf41abbbe97568423642eddaa7e/source.gz",
+  "fetched_at": "2026-09-05T10:40:24.428430+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

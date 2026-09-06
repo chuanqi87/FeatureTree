@@ -1,0 +1,13 @@
+{
+  "id": "ce5742762dbf48020926481d41c91e65e380013c1759f68ab06855efb4c4cd59",
+  "url": "https://developer.apple.com/documentation/xcode/measuring-your-app-s-power-use-with-power-profiler",
+  "platform": "ios",
+  "title": "Measuring your app’s power use with Power Profiler",
+  "local_path": "docs-raw/research/2026-09-06/ce5742762dbf48020926481d41c91e65e380013c1759f68ab06855efb4c4cd59/fdb07016188c753539f044d0bcd80f02645e92fb040addbe80f09db2b6d3d15c/document.md",
+  "sha256": "fdb07016188c753539f044d0bcd80f02645e92fb040addbe80f09db2b6d3d15c",
+  "raw_sha256": "39e1be0faf18690bc6fde070061bdaccae3902eb97d9a64b1b0cb2c5eb476c3a",
+  "raw_path": "docs-raw/research/2026-09-06/ce5742762dbf48020926481d41c91e65e380013c1759f68ab06855efb4c4cd59/fdb07016188c753539f044d0bcd80f02645e92fb040addbe80f09db2b6d3d15c/source.gz",
+  "fetched_at": "2026-09-05T11:23:52.098053+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

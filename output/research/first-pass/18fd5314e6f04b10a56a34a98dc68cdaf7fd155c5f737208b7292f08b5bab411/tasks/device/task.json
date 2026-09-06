@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "device",
+    "level": "L1",
+    "parent": null,
+    "name": {
+      "zh": "设备与系统资源",
+      "en": "Device and System Resources"
+    },
+    "definition": "电量、热、显示与音频路由。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/device/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "电量、热、显示与音频路由。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "9a6b4332d2e98a386d63a1894ac8d574d6888a59ca9253e1dc4b6485c4a00769",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "548b8d8ea5edf5fd956c05c650fa954468ace80a94323baac5ac3d839108e937",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/guide/topics/resources/providing-resources",
+      "platform": "android",
+      "title": "App resources overview",
+      "local_path": "docs-raw/research/2026-09-06/c263dddada5e80c99ae902327113061db3e179fd1e6d0f8324f8722c71939954/cad76a36f262052cd762e226ffd7b9c69ff1c5296b88554ad531cda7f11cbbd8/document.md",
+      "sha256": "cad76a36f262052cd762e226ffd7b9c69ff1c5296b88554ad531cda7f11cbbd8",
+      "raw_sha256": "020e2a244b88bda564d1b47e145500f6b069211065fabfd3192ed129bbed2c3c",
+      "raw_path": "docs-raw/research/2026-09-06/c263dddada5e80c99ae902327113061db3e179fd1e6d0f8324f8722c71939954/cad76a36f262052cd762e226ffd7b9c69ff1c5296b88554ad531cda7f11cbbd8/source.gz",
+      "fetched_at": "2026-09-05T10:31:57.244709+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 500,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 73,
+          "end_line": 139,
+          "truncated": true
+        },
+        {
+          "start_line": 300,
+          "end_line": 301,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/guide/topics/resources/available-resources",
+      "platform": "android",
+      "title": "App resources overview",
+      "local_path": "docs-raw/research/2026-09-06/a83b9b2c98da0f39633cf40cf039bf2d35e6c9c34192c79611c42bc39f9362d1/c4979b018da1f9b3202245d21bb0b02c52183348463f401bd7a02185176b4af4/document.md",
+      "sha256": "c4979b018da1f9b3202245d21bb0b02c52183348463f401bd7a02185176b4af4",
+      "raw_sha256": "fcd86eb33363a877f8dba68aeddb39e23ff6012a41a101dea3ca4012910295ce",
+      "raw_path": "docs-raw/research/2026-09-06/a83b9b2c98da0f39633cf40cf039bf2d35e6c9c34192c79611c42bc39f9362d1/c4979b018da1f9b3202245d21bb0b02c52183348463f401bd7a02185176b4af4/source.gz",
+      "fetched_at": "2026-09-05T10:44:38.691631+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 500,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 73,
+          "end_line": 139,
+          "truncated": true
+        },
+        {
+          "start_line": 300,
+          "end_line": 301,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/updates/bundleresources",
+      "platform": "ios",
+      "title": "Bundle Resources updates",
+      "local_path": "docs-raw/research/2026-09-06/02a66d66e43a9838cee8c3d7abf45a7fc60f65611bf10f5fe28d27067ef3b0c4/dbcf70042b6b804bdbeb1e7f7a8c8ceebe5e1d9c7b1c20c721def33807c59d98/document.md",
+      "sha256": "dbcf70042b6b804bdbeb1e7f7a8c8ceebe5e1d9c7b1c20c721def33807c59d98",
+      "raw_sha256": "aabd12495daaf5cecf3b8fbc2ab24cc54aaf9d110d00a61128f555bbfbc03dd7",
+      "raw_path": "docs-raw/research/2026-09-06/02a66d66e43a9838cee8c3d7abf45a7fc60f65611bf10f5fe28d27067ef3b0c4/dbcf70042b6b804bdbeb1e7f7a8c8ceebe5e1d9c7b1c20c721def33807c59d98/source.gz",
+      "fetched_at": "2026-09-05T10:27:50.071660+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 103,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 5,
+          "end_line": 6,
+          "truncated": true
+        },
+        {
+          "start_line": 11,
+          "end_line": 20,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/metal/selecting-device-objects-for-graphics-rendering",
+      "platform": "ios",
+      "title": "Selecting device objects for graphics rendering",
+      "local_path": "docs-raw/research/2026-09-06/9149b0230e1514ee218efb2a9f1167fda8027955743abe6cc3c28e2e38a7fbaa/7a1ecabdbc0ff59a8efefd9ff76509774a07e86430212070ce9405678be63093/document.md",
+      "sha256": "7a1ecabdbc0ff59a8efefd9ff76509774a07e86430212070ce9405678be63093",
+      "raw_sha256": "320c379498d9d01e38114e6aef12935fbf0a088c49dd9f5fe9997ce48598da4a",
+      "raw_path": "docs-raw/research/2026-09-06/9149b0230e1514ee218efb2a9f1167fda8027955743abe6cc3c28e2e38a7fbaa/7a1ecabdbc0ff59a8efefd9ff76509774a07e86430212070ce9405678be63093/source.gz",
+      "fetched_at": "2026-09-05T10:24:05.390002+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 218,
+      "suggested_sections": [
+        {
+          "start_line": 9,
+          "end_line": 21,
+          "truncated": false
+        },
+        {
+          "start_line": 36,
+          "end_line": 41,
+          "truncated": false
+        },
+        {
+          "start_line": 42,
+          "end_line": 57,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/multi-picture-app",
+      "platform": "harmonyos",
+      "title": "多设备图片美化界面",
+      "local_path": "docs-raw/research/2026-09-06/db35734bac01a456f0af60777c34143bb0d3dda47aadd043b37c013a3d11320e/04da22975af7f03f3ef96e0e5c88a61cccaf24f41c21dc026685e81920685550/document.md",
+      "sha256": "04da22975af7f03f3ef96e0e5c88a61cccaf24f41c21dc026685e81920685550",
+      "raw_sha256": "57bcbf8fa2922e56132e0a68d1bec6a3923feb4ac1b08c8bdc5f5ab988de5b29",
+      "raw_path": "docs-raw/research/2026-09-06/db35734bac01a456f0af60777c34143bb0d3dda47aadd043b37c013a3d11320e/04da22975af7f03f3ef96e0e5c88a61cccaf24f41c21dc026685e81920685550/source.gz",
+      "fetched_at": "2026-09-05T10:45:58.234476+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 203,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 18,
+          "truncated": false
+        },
+        {
+          "start_line": 19,
+          "end_line": 20,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-backgroundtaskskit-5031",
+      "platform": "harmonyos",
+      "title": "Background Tasks Kit",
+      "local_path": "docs-raw/research/2026-09-06/d7d18bb9085074b742e9ab00399a024ae1b243697149e885390c8af8a9c196bb/b8f54ad8c35d7750760b3c3fc9d326660947683661b30ae9bc4e2ee1308662e5/document.md",
+      "sha256": "b8f54ad8c35d7750760b3c3fc9d326660947683661b30ae9bc4e2ee1308662e5",
+      "raw_sha256": "ec51a8507f8f632f677332770515d002b1dd47e8c298ea3af1f06dcff0c34136",
+      "raw_path": "docs-raw/research/2026-09-06/d7d18bb9085074b742e9ab00399a024ae1b243697149e885390c8af8a9c196bb/b8f54ad8c35d7750760b3c3fc9d326660947683661b30ae9bc4e2ee1308662e5/source.gz",
+      "fetched_at": "2026-09-05T11:01:15.220602+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 22,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 22,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:22.015214+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "bfc5c457a607b60a4235dc2e1cfa145fcc7b8814a20b37c67296350f243e83f1"
+}

@@ -1,0 +1,809 @@
+{
+  "task_id": "4aff00723973862a1bdf430712972021f1f609e7d35d538dde2c112d52b734ef",
+  "feature_id": "a11y.service.extension",
+  "stage": "first_pass",
+  "summary": "三平台文档初判：Android（Android 11 行为变更）证实应用可实现无障碍服务并以 AccessibilityServiceInfo flags 与服务元数据文件声明，但观察/操作界面能力正文未读到；HarmonyOS 明示 AccessibilityExtensionAbility 允许三方应用实现、支持访问与操作前台界面，并给出 capabilities 与 Action 能力模型；iOS 冻结资料（BrowserEngineKit、Safari 16 说明）未涉及该机制，保持 unknown。全部 low 置信，基线未固定。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "行为变更文档证实应用侧无障碍服务机制：应用可实现 accessibility service，经 AccessibilityServiceInfo 与服务元数据文件声明能力；Android 11 起不能运行时声明与系统无障碍按钮的关联，须在元数据文件配置 flagRequestAccessibilityButton。观察/操作界面能力正文未读到。",
+      "version_scope": "所读为 Android 11（API 30）行为变更文档，适用 targetSdkVersion 30+；服务机制本体的 API Level 范围冻结资料未覆盖，启动日最新正式版未核实。",
+      "conditions": [
+        "行为变更仅适用 targetSdkVersion 30+（Android 11）的应用",
+        "无障碍按钮关联须在服务元数据文件（如 res/raw/accessibilityservice.xml）的 accessibilityFlags 中声明 flagRequestAccessibilityButton",
+        "运行时向 AccessibilityServiceInfo.flags 追加 FLAG_REQUEST_ACCESSIBILITY_BUTTON 不再获得按钮回调事件"
+      ],
+      "gaps": [
+        "缺少 AccessibilityService API 参考与无障碍服务开发指南正文：节点树观察、动作执行、手势注入等观察/操作能力未读到",
+        "未核实启动日最新 Android 正式版对无障碍服务的限制变化（基线未固定）",
+        "android-2（develop/ui）为导航页，仅含'支持无障碍'链接，无本节点正文证据"
+      ],
+      "confidence": "low",
+      "evidence_strength": "indirect",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Behavior changes: Apps targeting Android 11 > 引言（targetSdkVersion 30 适用范围）",
+          "start_line": 3,
+          "end_line": 7,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/about/versions/11/behavior-changes-11",
+            "platform": "android",
+            "title": "Behavior changes: Apps targeting Android 11",
+            "local_path": "docs-raw/research/2026-09-06/9f9a2603f30e38a93a2e57ae11cf3af7de97aeca86b0226dc3d9a44d4a5c07be/a501b44fc076374d699dca76ade48a53387ff3556b8a4153518ee0bebbfaa61e/document.md",
+            "sha256": "a501b44fc076374d699dca76ade48a53387ff3556b8a4153518ee0bebbfaa61e",
+            "raw_sha256": "7dca0669b498178e71e93361ac40796b9a3ff55749e688ba8ffee85a1f5a1c2f",
+            "raw_path": "docs-raw/research/2026-09-06/9f9a2603f30e38a93a2e57ae11cf3af7de97aeca86b0226dc3d9a44d4a5c07be/a501b44fc076374d699dca76ade48a53387ff3556b8a4153518ee0bebbfaa61e/source.gz",
+            "fetched_at": "2026-09-05T10:21:36.232005+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 351,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 31,
+                "truncated": false
+              },
+              {
+                "start_line": 32,
+                "end_line": 33,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Like earlier releases, Android 11 includes behavior changes that may\naffect your app. The following behavior changes apply exclusively to apps\nthat are targeting Android 11 or higher. If your app sets\n`targetSdkVersion` to `30`, you should modify your app to\nsupport these behaviors properly, where applicable."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Behavior changes: Apps targeting Android 11 > Accessibility > Declare accessibility button usage in metadata file",
+          "start_line": 184,
+          "end_line": 197,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/about/versions/11/behavior-changes-11",
+            "platform": "android",
+            "title": "Behavior changes: Apps targeting Android 11",
+            "local_path": "docs-raw/research/2026-09-06/9f9a2603f30e38a93a2e57ae11cf3af7de97aeca86b0226dc3d9a44d4a5c07be/a501b44fc076374d699dca76ade48a53387ff3556b8a4153518ee0bebbfaa61e/document.md",
+            "sha256": "a501b44fc076374d699dca76ade48a53387ff3556b8a4153518ee0bebbfaa61e",
+            "raw_sha256": "7dca0669b498178e71e93361ac40796b9a3ff55749e688ba8ffee85a1f5a1c2f",
+            "raw_path": "docs-raw/research/2026-09-06/9f9a2603f30e38a93a2e57ae11cf3af7de97aeca86b0226dc3d9a44d4a5c07be/a501b44fc076374d699dca76ade48a53387ff3556b8a4153518ee0bebbfaa61e/source.gz",
+            "fetched_at": "2026-09-05T10:21:36.232005+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 351,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 31,
+                "truncated": false
+              },
+              {
+                "start_line": 32,
+                "end_line": 33,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Starting in Android 11, your accessibility service cannot make\na runtime declaration that it has an [association with the system's\naccessibility button](https://developer.android.com/guide/topics/ui/accessibility/service#button). If you\nappend `AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON` to the\n`flags` property of an `AccessibilityServiceInfo` object, the framework doesn't\npass accessibility button callback events to your service.\n\nTo receive accessibility callback events in your accessibility service, use your\naccessibility service metadata file to declare your service's association with\nthe accessibility button. Include the `flagRequestAccessibilityButton` value in\nyour definition of the\n[`accessibilityFlags`](https://developer.android.com/reference/kotlin/android/accessibilityservice/AccessibilityServiceInfo#android:accessibilityflags)\nattribute. A common location for the accessibility service metadata file is\n`res/raw/accessibilityservice.xml`."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "ui 页 > Support accessibility 导航链接（仅导航，无服务机制正文）",
+          "start_line": 68,
+          "end_line": 72,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/develop/ui",
+            "platform": "android",
+            "title": "ui",
+            "local_path": "docs-raw/research/2026-09-06/1ff3f7e3d7a7565156985c632d2be674decfd31b090f89fe6bc5b59dd0c95499/73e39935372a754100e6ae7cf3c003644b739b71f5b54c41d78f384dec907417/document.md",
+            "sha256": "73e39935372a754100e6ae7cf3c003644b739b71f5b54c41d78f384dec907417",
+            "raw_sha256": "950ad91d294ccef2380cac8abe3797342ca5c74d6dbc65a9826922d2fc18bc41",
+            "raw_path": "docs-raw/research/2026-09-06/1ff3f7e3d7a7565156985c632d2be674decfd31b090f89fe6bc5b59dd0c95499/73e39935372a754100e6ae7cf3c003644b739b71f5b54c41d78f384dec907417/source.gz",
+            "fetched_at": "2026-09-05T10:15:52.494948+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 115,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 15,
+                "truncated": false
+              },
+              {
+                "start_line": 16,
+                "end_line": 19,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### [Support accessibility](https://developer.android.com/develop/ui/compose/accessibility)\n\nDesign for everyone. Integrate accessibility features and services into your app to improve usability for all users.\n\n[Develop for accessibility](https://developer.android.com/develop/ui/compose/accessibility)"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "应用作为无障碍服务跨应用观察/操作界面属高风险能力，冻结资料未覆盖实际观察与操作行为；正式结论需真机验证服务启用流程与操作效果。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "unknown",
+      "observation": "两篇冻结资料均不涉及本节点：BrowserEngineKit 的 Accessibility 主题仅是浏览器引擎扩展进程的无障碍符号（BEAccessibility 系列，区域受限 entitlement 场景）；Safari 16 说明仅提及 VoiceOver Isolated Tree Mode。未读到 iOS 应用作为无障碍服务观察操作界面的机制。",
+      "version_scope": "Safari 16 发行说明标注 2022-09-12 发布（随 iOS 16 提供）；BrowserEngineKit 快照未含符号级 availability 核对；两篇均与本节点无直接版本关系。",
+      "conditions": [
+        "未读到本节点相关机制的适用条件；冻结资料中 BrowserEngineKit 能力面向替代浏览器引擎场景，且按区域（欧盟/日本）需申请 entitlement"
+      ],
+      "gaps": [
+        "冻结资料无 iOS 应用作为无障碍服务观察/操作其他应用界面的机制文档，不能判断支持与否",
+        "未检索 Apple 辅助技术相关框架文档（如 UIAccessibility 及辅助应用类主题）是否提供或明确禁止该能力",
+        "两篇资料分别面向浏览器引擎扩展与 WebKit 发行说明，与节点定义无直接关联"
+      ],
+      "confidence": "low",
+      "evidence_strength": "missing",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "BrowserEngineKit > Develop by region（替代浏览器引擎按区域申请 entitlement）",
+          "start_line": 43,
+          "end_line": 46,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/browserenginekit",
+            "platform": "ios",
+            "title": "BrowserEngineKit",
+            "local_path": "docs-raw/research/2026-09-06/06e11ffed78962a4577ecb6fde8926890aa01b5cf4dccbeebfdf2ac24363d88f/5e6d43754a4f8f42649df6fe93d52a97e3dffdf062ab270b5bf3a26f3334507c/document.md",
+            "sha256": "5e6d43754a4f8f42649df6fe93d52a97e3dffdf062ab270b5bf3a26f3334507c",
+            "raw_sha256": "4ef9c97b20e35020ca6d865abbc8f79e339309498ad6f39a39fff40734be7b79",
+            "raw_path": "docs-raw/research/2026-09-06/06e11ffed78962a4577ecb6fde8926890aa01b5cf4dccbeebfdf2ac24363d88f/5e6d43754a4f8f42649df6fe93d52a97e3dffdf062ab270b5bf3a26f3334507c/source.gz",
+            "fetched_at": "2026-09-05T10:30:01.358391+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 208,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 17,
+                "truncated": false
+              },
+              {
+                "start_line": 18,
+                "end_line": 26,
+                "truncated": false
+              },
+              {
+                "start_line": 27,
+                "end_line": 38,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Support for alternative browser engines varies by geographic region:\n\n- European Union: To request the entitlements in the EU for an iOS or iPadOS app, see [Using alternative browser engines in the European Union](https://developer.apple.com/support/alternative-browser-engines).\n- Japan: To request the entitlements in Japan for an iOS app, see [Using alternative browser engines in Japan](https://developer.apple.com/support/alternative-browser-engines-jp). Also, your app needs to adopt the <doc://com.apple.documentation/documentation/BundleResources/Entitlements/com.apple.security.hardened-process.checked-allocations> entitlement. In apps that aren’t browsers, you can embed only an alternative browser engine of which you have ownership; for more information, see <doc://com.apple.documentation/documentation/BundleResources/Entitlements/com.apple.developer.embedded-web-browser-engine.engine-association>."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "BrowserEngineKit > Topics > Accessibility（BEAccessibility 系列符号，面向浏览器引擎扩展）",
+          "start_line": 120,
+          "end_line": 128,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/browserenginekit",
+            "platform": "ios",
+            "title": "BrowserEngineKit",
+            "local_path": "docs-raw/research/2026-09-06/06e11ffed78962a4577ecb6fde8926890aa01b5cf4dccbeebfdf2ac24363d88f/5e6d43754a4f8f42649df6fe93d52a97e3dffdf062ab270b5bf3a26f3334507c/document.md",
+            "sha256": "5e6d43754a4f8f42649df6fe93d52a97e3dffdf062ab270b5bf3a26f3334507c",
+            "raw_sha256": "4ef9c97b20e35020ca6d865abbc8f79e339309498ad6f39a39fff40734be7b79",
+            "raw_path": "docs-raw/research/2026-09-06/06e11ffed78962a4577ecb6fde8926890aa01b5cf4dccbeebfdf2ac24363d88f/5e6d43754a4f8f42649df6fe93d52a97e3dffdf062ab270b5bf3a26f3334507c/source.gz",
+            "fetched_at": "2026-09-05T10:30:01.358391+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 208,
+            "suggested_sections": [
+              {
+                "start_line": 5,
+                "end_line": 17,
+                "truncated": false
+              },
+              {
+                "start_line": 18,
+                "end_line": 26,
+                "truncated": false
+              },
+              {
+                "start_line": 27,
+                "end_line": 38,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Accessibility\n\n[`BEAccessibilityTextMarkerSupport`](/documentation/BrowserEngineKit/BEAccessibilityTextMarkerSupport)\n\nA set of methods that provide information about text offsets to support assistive features.\n\n[`BEAccessibilityValueChangedNotification`](/documentation/BrowserEngineKit/BEAccessibility/valueChangedNotification)\n\nA notification you post when the value of an element changes."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Safari 16 Release Notes > Accessibility > New Features（VoiceOver Isolated Tree Mode）",
+          "start_line": 56,
+          "end_line": 61,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/safari-release-notes/safari-16-release-notes",
+            "platform": "ios",
+            "title": "Safari 16 Release Notes",
+            "local_path": "docs-raw/research/2026-09-06/8d94f285de5a98d03b2bf30bfd2f7331ae4c2659f9df7956e5b1ed1d75a2a7c2/e7fd915e97522fadf1eeacfbcb727faaab5eef9cae8f8bae7211ca3533eca88f/document.md",
+            "sha256": "e7fd915e97522fadf1eeacfbcb727faaab5eef9cae8f8bae7211ca3533eca88f",
+            "raw_sha256": "dafe61b6c1f3079cc28fd9eef0322029c8473f59bb6c3ba72546df2dc6d94f13",
+            "raw_path": "docs-raw/research/2026-09-06/8d94f285de5a98d03b2bf30bfd2f7331ae4c2659f9df7956e5b1ed1d75a2a7c2/e7fd915e97522fadf1eeacfbcb727faaab5eef9cae8f8bae7211ca3533eca88f/source.gz",
+            "fetched_at": "2026-09-05T10:25:20.847973+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 161,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 8,
+                "truncated": false
+              },
+              {
+                "start_line": 9,
+                "end_line": 10,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Accessibility\n\n#### New Features\n\n- Added accessibility support for `display:contents`.\n- Added Isolated Tree Mode to reduce VoiceOver hangs in WebKit by offloading accessibility work to a secondary thread."
+        }
+      ],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "冻结资料未提供任何机制文档，无法定义待验证行为；需先补充 Apple 官方资料调查后再评估真机需求。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "ExtensionAbility 总览明示 AccessibilityExtensionAbility 为无障碍服务扩展能力，支持访问与操作前台界面，允许三方应用实现；@ohos.accessibility 提供辅助应用信息（capabilities 含 retrieve/gesture）、目标动作（click/setText/home 等）、事件类型与扩展列表查询。",
+      "version_scope": "华为 harmonyos-references/guides 在线文档快照：@ohos.accessibility 首批接口 API 7 起，多数条目 9+/12+，injectAction/executeCustomAction 标注起始版本 26.0.0；ExtensionAbility 总览未标注该类型起始 API 版本，HarmonyOS 发行版基线未固定。",
+      "conditions": [
+        "ExtensionAbility 类型由系统定义并由相应系统服务统一管理，开发者不能直接继承 ExtensionAbility 基类，只能实现已定义类型",
+        "ExtensionAbility 组件不能被应用直接启动，由相应系统管理服务拉起并管理生命周期",
+        "能力通过 capabilities 声明：retrieve/touchGuide/keyEventObserver/zoom/gesture，其中 zoom 标注当前版本暂不支持",
+        "辅助应用状态分 enable/disable/install；动作与接口分版本标注（9+/12+/26.0.0），需按版本核对可用性"
+      ],
+      "gaps": [
+        "AccessibilityExtensionAbility 专属 API 参考正文（生命周期回调、事件接收、具体操作接口）未在冻结资料中",
+        "辅助应用的启用流程与用户同意/权限机制在已读段落未覆盖",
+        "总览表未标注该类型起始 API 版本；与 HarmonyOS 商业发行版的对应关系未核实",
+        "所读为华为官方文档，OpenHarmony 发行版差异未单独核对"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-2",
+          "locator": "ExtensionAbility组件 > 引言（类型由系统定义、系统服务统一管理、不能直接继承）",
+          "start_line": 3,
+          "end_line": 5,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/extensionability-overview",
+            "platform": "harmonyos",
+            "title": "ExtensionAbility组件",
+            "local_path": "docs-raw/research/2026-09-06/da2f23b0fbaf81462d0cc4cc35de4c89d2cad1d207390aba367372d06024ccbd/d8486a77883f70af10fde21445db5421ce7959ddbe2b5d1988c01f1b1b2176d0/document.md",
+            "sha256": "d8486a77883f70af10fde21445db5421ce7959ddbe2b5d1988c01f1b1b2176d0",
+            "raw_sha256": "068139521d70d881c58bc8228d1dcfa37a29abc48bfe8de0dc60c96ca2928f3d",
+            "raw_path": "docs-raw/research/2026-09-06/da2f23b0fbaf81462d0cc4cc35de4c89d2cad1d207390aba367372d06024ccbd/d8486a77883f70af10fde21445db5421ce7959ddbe2b5d1988c01f1b1b2176d0/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 78,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 7,
+                "end_line": 48,
+                "truncated": true
+              },
+              {
+                "start_line": 60,
+                "end_line": 61,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "[ExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-extensionability)组件是一种面向特定场景的应用组件。每一个具体场景对应一个不同类型的ExtensionAbility，例如用于卡片场景的[FormExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-form-formextensionability)，用于输入法场景的[InputMethodExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inputmethod-extension-ability)，用于延时任务场景的[WorkSchedulerExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-workschedulerextensionability)等。开发者通过使用不同类型的ExtensionAbility组件，可以扩展和丰富应用功能，更好地与其他应用或系统开展交互。\n\n不同类型ExtensionAbility组件均由系统定义，且通常由相应的系统服务统一管理（例如[InputMethodExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inputmethod-extension-ability)组件由输入法管理服务统一管理）。开发者不能直接继承ExtensionAbility组件，只能使用（包括实现或访问）已定义的[ExtensionAbilityType](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bundlemanager#extensionabilitytype)。  "
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "ExtensionAbility类型说明表 > AccessibilityExtensionAbility 行（无障碍服务扩展能力，支持访问与操作前台界面，允许三方应用实现）",
+          "start_line": 14,
+          "end_line": 20,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/extensionability-overview",
+            "platform": "harmonyos",
+            "title": "ExtensionAbility组件",
+            "local_path": "docs-raw/research/2026-09-06/da2f23b0fbaf81462d0cc4cc35de4c89d2cad1d207390aba367372d06024ccbd/d8486a77883f70af10fde21445db5421ce7959ddbe2b5d1988c01f1b1b2176d0/document.md",
+            "sha256": "d8486a77883f70af10fde21445db5421ce7959ddbe2b5d1988c01f1b1b2176d0",
+            "raw_sha256": "068139521d70d881c58bc8228d1dcfa37a29abc48bfe8de0dc60c96ca2928f3d",
+            "raw_path": "docs-raw/research/2026-09-06/da2f23b0fbaf81462d0cc4cc35de4c89d2cad1d207390aba367372d06024ccbd/d8486a77883f70af10fde21445db5421ce7959ddbe2b5d1988c01f1b1b2176d0/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 78,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 7,
+                "end_line": 48,
+                "truncated": true
+              },
+              {
+                "start_line": 60,
+                "end_line": 61,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "|ExtensionAbility类型|功能描述|是否允许三方应用实现|是否有独立Extension沙箱|\n|:---------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|:---------|:---------------|\n|[FormExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-form-formextensionability)|卡片扩展能力，用于提供[服务卡片](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/formkit-overview)的相关能力。|是|否|\n|[WorkSchedulerExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-workschedulerextensionability)|延时任务扩展能力，用于提供[延迟任务](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/work-scheduler)的相关能力。|是|否|\n|[InputMethodExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inputmethod-extension-ability)|输入法扩展能力，用于实现[输入法应用](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ime-kit-intro)的开发。|是|是|\n|ServiceExtensionAbility|后台服务扩展能力，提供后台运行并对外提供相应能力。 三方应用可以连接该ExtensionAbility，并进行通信。|否|否|\n|[AccessibilityExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-application-accessibilityextensionability)|无障碍服务扩展能力，支持访问与操作前台界面。|是|否|"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "访问指定类型的ExtensionAbility组件（不能被应用直接启动，由系统管理服务拉起）",
+          "start_line": 60,
+          "end_line": 64,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/extensionability-overview",
+            "platform": "harmonyos",
+            "title": "ExtensionAbility组件",
+            "local_path": "docs-raw/research/2026-09-06/da2f23b0fbaf81462d0cc4cc35de4c89d2cad1d207390aba367372d06024ccbd/d8486a77883f70af10fde21445db5421ce7959ddbe2b5d1988c01f1b1b2176d0/document.md",
+            "sha256": "d8486a77883f70af10fde21445db5421ce7959ddbe2b5d1988c01f1b1b2176d0",
+            "raw_sha256": "068139521d70d881c58bc8228d1dcfa37a29abc48bfe8de0dc60c96ca2928f3d",
+            "raw_path": "docs-raw/research/2026-09-06/da2f23b0fbaf81462d0cc4cc35de4c89d2cad1d207390aba367372d06024ccbd/d8486a77883f70af10fde21445db5421ce7959ddbe2b5d1988c01f1b1b2176d0/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 78,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 7,
+                "end_line": 48,
+                "truncated": true
+              },
+              {
+                "start_line": 60,
+                "end_line": 61,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### 访问指定类型的ExtensionAbility组件\n\n所有类型的[ExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-extensionability)组件均不能被应用直接启动，而是由相应的系统管理服务拉起，以确保其生命周期受系统管控，使用时拉起，使用完销毁。ExtensionAbility组件的调用方无需关心目标ExtensionAbility组件的生命周期。\n\n以[InputMethodExtensionAbility](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inputmethod-extension-ability)组件为例进行说明，如下图所示，调用方应用发起对InputMethodExtensionAbility组件的调用，此时将先调用输入法管理服务，由输入法管理服务拉起InputMethodExtensionAbility组件，返回给调用方，同时开始管理其生命周期。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "@ohos.accessibility > 模块说明（首批接口从 API version 7 开始支持）",
+          "start_line": 5,
+          "end_line": 5,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-accessibility",
+            "platform": "harmonyos",
+            "title": "@ohos.accessibility (辅助功能)",
+            "local_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/document.md",
+            "sha256": "4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38",
+            "raw_sha256": "f6a556b489ff29db345ebee98da1bfd2e771621a6bc652068a4da2004fd6e5c8",
+            "raw_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/source.gz",
+            "fetched_at": "2026-09-05T10:26:36.716236+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 2838,
+            "suggested_sections": [
+              {
+                "start_line": 530,
+                "end_line": 531,
+                "truncated": true
+              },
+              {
+                "start_line": 687,
+                "end_line": 749,
+                "truncated": true
+              },
+              {
+                "start_line": 862,
+                "end_line": 984,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "* 本模块首批接口从API version 7开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "@ohos.accessibility > AccessibilityAbilityInfo（capabilities/eventTypes/targetBundleNames 等属性）",
+          "start_line": 52,
+          "end_line": 75,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-accessibility",
+            "platform": "harmonyos",
+            "title": "@ohos.accessibility (辅助功能)",
+            "local_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/document.md",
+            "sha256": "4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38",
+            "raw_sha256": "f6a556b489ff29db345ebee98da1bfd2e771621a6bc652068a4da2004fd6e5c8",
+            "raw_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/source.gz",
+            "fetched_at": "2026-09-05T10:26:36.716236+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 2838,
+            "suggested_sections": [
+              {
+                "start_line": 530,
+                "end_line": 531,
+                "truncated": true
+              },
+              {
+                "start_line": 687,
+                "end_line": 749,
+                "truncated": true
+              },
+              {
+                "start_line": 862,
+                "end_line": 984,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### AccessibilityAbilityInfo\n\n辅助应用信息。\n\n卡片能力： 从API version 23开始，该接口支持在ArkTS卡片中使用。\n\n元服务API： 从API version 23开始，该接口支持在元服务中使用。\n\n系统能力： SystemCapability.BarrierFree.Accessibility.Core  \n\n#### 属性\n\n|名称|类型|只读|可选|说明|\n|:--------------------|:-----------------------------------|:-|:-|:--------------------------------------------|\n|id|string|是|否|ability id。|\n|name|string|是|否|ability名。|\n|bundleName|string|是|否|Bundle名称。|\n|targetBundleNames^9+^|Array\\<string\\>|是|否|关注的目标Bundle名称。|\n|abilityTypes|Array\\<[AbilityType](#abilitytype)\\>|是|否|辅助应用类型。|\n|capabilities|Array\\<[Capability](#capability)\\>|是|否|辅助应用能力列表。|\n|description|string|是|否|辅助应用描述。|\n|eventTypes|Array\\<[EventType](#eventtype)\\>|是|否|辅助应用关注的无障碍事件列表。|\n|needHide^12+^|boolean|是|否|辅助应用是否在已安装的扩展服务列表中被隐藏，true表示隐藏服务，false表示显示服务。|\n|label^12+^|string|是|否|辅助应用在扩展服务列表中的名称。|"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "@ohos.accessibility > Action 值表（common/home/back 等 12+，injectAction/executeCustomAction 起始版本 26.0.0）与 Capability（retrieve/gesture 等）",
+          "start_line": 113,
+          "end_line": 141,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-accessibility",
+            "platform": "harmonyos",
+            "title": "@ohos.accessibility (辅助功能)",
+            "local_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/document.md",
+            "sha256": "4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38",
+            "raw_sha256": "f6a556b489ff29db345ebee98da1bfd2e771621a6bc652068a4da2004fd6e5c8",
+            "raw_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/source.gz",
+            "fetched_at": "2026-09-05T10:26:36.716236+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 2838,
+            "suggested_sections": [
+              {
+                "start_line": 530,
+                "end_line": 531,
+                "truncated": true
+              },
+              {
+                "start_line": 687,
+                "end_line": 749,
+                "truncated": true
+              },
+              {
+                "start_line": 862,
+                "end_line": 984,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "|'common'^12+^|表示没有特定操作，用于主动聚焦、主动播报等场景。|\n|'home'^12+^|表示返回桌面操作。|\n|'back'^12+^|表示返回上一级操作。|\n|'recentTask'^12+^|表示打开最近任务操作。|\n|'notificationCenter'^12+^|表示打开通知栏操作。|\n|'controlCenter'^12+^|表示打开控制中心操作。|\n|'setCursorPosition'^12+^|表示设置光标位置操作，需配置参数offset，参数值为光标的字符偏移量。|\n|'injectAction'|表示注入动作，需配置参数injectActionType，参数值为注入动作类型。 起始版本： 26.0.0 模型约束： 此接口仅可在Stage模型下使用。|\n|'executeCustomAction'|表示执行自定义操作，需配置参数customAction，参数值为自定义操作的名称。 起始版本： 26.0.0|\n\n#### Capability\n\ntype Capability = 'retrieve' \\| 'touchGuide' \\| 'keyEventObserver' \\| 'zoom' \\| 'gesture'\n\n辅助应用能力类型。\n\n卡片能力： 从API version 23开始，该接口支持在ArkTS卡片中使用。\n\n元服务API： 从API version 23开始，该接口支持在元服务中使用。\n\n系统能力： SystemCapability.BarrierFree.Accessibility.Core  \n\n|类型|说明|\n|:-----------------|:--------------------|\n|'retrieve'|具有检索窗口内容的能力。|\n|'touchGuide'|具有触摸浏览模式的能力。|\n|'keyEventObserver'|具有过滤按键事件的能力。|\n|'zoom'|具有控制显示放大的能力，当前版本暂不支持。|\n|'gesture'|具有执行手势动作的能力。|"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "官方明示三方应用可实现并访问/操作前台界面，实际跨应用行为、启用流程与运行限制需真机确认后方可形成正式结论。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "programming_model",
+      "statement": "应用侧无障碍服务的能力声明载体可能不同：Android 以 AccessibilityServiceInfo flags 加服务元数据文件声明（Android 11 起按钮关联仅元数据声明有效）；HarmonyOS 以辅助应用信息中的 capabilities/abilityTypes/eventTypes 列表声明。",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Accessibility > Declare accessibility button usage in metadata file",
+          "start_line": 184,
+          "end_line": 197,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/about/versions/11/behavior-changes-11",
+            "platform": "android",
+            "title": "Behavior changes: Apps targeting Android 11",
+            "local_path": "docs-raw/research/2026-09-06/9f9a2603f30e38a93a2e57ae11cf3af7de97aeca86b0226dc3d9a44d4a5c07be/a501b44fc076374d699dca76ade48a53387ff3556b8a4153518ee0bebbfaa61e/document.md",
+            "sha256": "a501b44fc076374d699dca76ade48a53387ff3556b8a4153518ee0bebbfaa61e",
+            "raw_sha256": "7dca0669b498178e71e93361ac40796b9a3ff55749e688ba8ffee85a1f5a1c2f",
+            "raw_path": "docs-raw/research/2026-09-06/9f9a2603f30e38a93a2e57ae11cf3af7de97aeca86b0226dc3d9a44d4a5c07be/a501b44fc076374d699dca76ade48a53387ff3556b8a4153518ee0bebbfaa61e/source.gz",
+            "fetched_at": "2026-09-05T10:21:36.232005+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 351,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 31,
+                "truncated": false
+              },
+              {
+                "start_line": 32,
+                "end_line": 33,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Starting in Android 11, your accessibility service cannot make\na runtime declaration that it has an [association with the system's\naccessibility button](https://developer.android.com/guide/topics/ui/accessibility/service#button). If you\nappend `AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON` to the\n`flags` property of an `AccessibilityServiceInfo` object, the framework doesn't\npass accessibility button callback events to your service.\n\nTo receive accessibility callback events in your accessibility service, use your\naccessibility service metadata file to declare your service's association with\nthe accessibility button. Include the `flagRequestAccessibilityButton` value in\nyour definition of the\n[`accessibilityFlags`](https://developer.android.com/reference/kotlin/android/accessibilityservice/AccessibilityServiceInfo#android:accessibilityflags)\nattribute. A common location for the accessibility service metadata file is\n`res/raw/accessibilityservice.xml`."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "AccessibilityAbilityInfo 属性表（capabilities/eventTypes）",
+          "start_line": 52,
+          "end_line": 75,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-accessibility",
+            "platform": "harmonyos",
+            "title": "@ohos.accessibility (辅助功能)",
+            "local_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/document.md",
+            "sha256": "4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38",
+            "raw_sha256": "f6a556b489ff29db345ebee98da1bfd2e771621a6bc652068a4da2004fd6e5c8",
+            "raw_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/source.gz",
+            "fetched_at": "2026-09-05T10:26:36.716236+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 2838,
+            "suggested_sections": [
+              {
+                "start_line": 530,
+                "end_line": 531,
+                "truncated": true
+              },
+              {
+                "start_line": 687,
+                "end_line": 749,
+                "truncated": true
+              },
+              {
+                "start_line": 862,
+                "end_line": 984,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### AccessibilityAbilityInfo\n\n辅助应用信息。\n\n卡片能力： 从API version 23开始，该接口支持在ArkTS卡片中使用。\n\n元服务API： 从API version 23开始，该接口支持在元服务中使用。\n\n系统能力： SystemCapability.BarrierFree.Accessibility.Core  \n\n#### 属性\n\n|名称|类型|只读|可选|说明|\n|:--------------------|:-----------------------------------|:-|:-|:--------------------------------------------|\n|id|string|是|否|ability id。|\n|name|string|是|否|ability名。|\n|bundleName|string|是|否|Bundle名称。|\n|targetBundleNames^9+^|Array\\<string\\>|是|否|关注的目标Bundle名称。|\n|abilityTypes|Array\\<[AbilityType](#abilitytype)\\>|是|否|辅助应用类型。|\n|capabilities|Array\\<[Capability](#capability)\\>|是|否|辅助应用能力列表。|\n|description|string|是|否|辅助应用描述。|\n|eventTypes|Array\\<[EventType](#eventtype)\\>|是|否|辅助应用关注的无障碍事件列表。|\n|needHide^12+^|boolean|是|否|辅助应用是否在已安装的扩展服务列表中被隐藏，true表示隐藏服务，false表示显示服务。|\n|label^12+^|string|是|否|辅助应用在扩展服务列表中的名称。|"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Capability 类型（retrieve/touchGuide/keyEventObserver/zoom/gesture）",
+          "start_line": 123,
+          "end_line": 141,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-accessibility",
+            "platform": "harmonyos",
+            "title": "@ohos.accessibility (辅助功能)",
+            "local_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/document.md",
+            "sha256": "4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38",
+            "raw_sha256": "f6a556b489ff29db345ebee98da1bfd2e771621a6bc652068a4da2004fd6e5c8",
+            "raw_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/source.gz",
+            "fetched_at": "2026-09-05T10:26:36.716236+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 2838,
+            "suggested_sections": [
+              {
+                "start_line": 530,
+                "end_line": 531,
+                "truncated": true
+              },
+              {
+                "start_line": 687,
+                "end_line": 749,
+                "truncated": true
+              },
+              {
+                "start_line": 862,
+                "end_line": 984,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### Capability\n\ntype Capability = 'retrieve' \\| 'touchGuide' \\| 'keyEventObserver' \\| 'zoom' \\| 'gesture'\n\n辅助应用能力类型。\n\n卡片能力： 从API version 23开始，该接口支持在ArkTS卡片中使用。\n\n元服务API： 从API version 23开始，该接口支持在元服务中使用。\n\n系统能力： SystemCapability.BarrierFree.Accessibility.Core  \n\n|类型|说明|\n|:-----------------|:--------------------|\n|'retrieve'|具有检索窗口内容的能力。|\n|'touchGuide'|具有触摸浏览模式的能力。|\n|'keyEventObserver'|具有过滤按键事件的能力。|\n|'zoom'|具有控制显示放大的能力，当前版本暂不支持。|\n|'gesture'|具有执行手势动作的能力。|"
+        }
+      ],
+      "open_questions": [
+        "Android AccessibilityServiceInfo flags 全集与 HarmonyOS capabilities 的语义对应关系未读",
+        "双方声明载体的具体结构（res/raw XML 与应用配置文件）差异需读双方指南确认",
+        "运行时能否变更能力声明双方均未确认"
+      ]
+    },
+    {
+      "dimension": "api_surface",
+      "statement": "HarmonyOS 文档枚举了辅助应用可执行的目标动作集合（click/longClick/setText/setCursorPosition/home/back 等，部分 12+，injectAction/executeCustomAction 标注 26.0.0 起）；Android 冻结资料仅覆盖无障碍按钮回调，未覆盖服务可执行动作集合，双方操作能力范围与版本起点差异待查。",
+      "platforms": [
+        "android",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Action 类型定义（目标动作联合类型）",
+          "start_line": 77,
+          "end_line": 87,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-accessibility",
+            "platform": "harmonyos",
+            "title": "@ohos.accessibility (辅助功能)",
+            "local_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/document.md",
+            "sha256": "4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38",
+            "raw_sha256": "f6a556b489ff29db345ebee98da1bfd2e771621a6bc652068a4da2004fd6e5c8",
+            "raw_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/source.gz",
+            "fetched_at": "2026-09-05T10:26:36.716236+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 2838,
+            "suggested_sections": [
+              {
+                "start_line": 530,
+                "end_line": 531,
+                "truncated": true
+              },
+              {
+                "start_line": 687,
+                "end_line": 749,
+                "truncated": true
+              },
+              {
+                "start_line": 862,
+                "end_line": 984,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### Action\n\ntype Action = 'accessibilityFocus' \\| 'clearAccessibilityFocus' \\| 'focus' \\| 'clearFocus' \\| 'clearSelection' \\|\n\n'click' \\| 'longClick' \\| 'cut' \\| 'copy' \\| 'paste' \\| 'select' \\| 'setText' \\| 'delete' \\|\n\n'scrollForward' \\| 'scrollBackward' \\| 'setSelection' \\| 'setCursorPosition' \\| 'home' \\|\n\n'back' \\| 'recentTask' \\| 'notificationCenter' \\| 'controlCenter' \\| 'common' \\| 'injectAction' \\| 'executeCustomAction'\n\n应用所支持的目标动作，需要配置参数的目标动作已在下表各动作的说明列中标明。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "Action 值表（12+ 动作与 26.0.0 起始动作）",
+          "start_line": 113,
+          "end_line": 121,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-accessibility",
+            "platform": "harmonyos",
+            "title": "@ohos.accessibility (辅助功能)",
+            "local_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/document.md",
+            "sha256": "4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38",
+            "raw_sha256": "f6a556b489ff29db345ebee98da1bfd2e771621a6bc652068a4da2004fd6e5c8",
+            "raw_path": "docs-raw/research/2026-09-06/412603ef8e37e0b7a61f02911e8a83cde8625502e4a26ccb8fb7edfc49b7692e/4ec6b7954f14905638c64308e8d4fc3425c97797380dc4bfd6ffa91d27c0ec38/source.gz",
+            "fetched_at": "2026-09-05T10:26:36.716236+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 2838,
+            "suggested_sections": [
+              {
+                "start_line": 530,
+                "end_line": 531,
+                "truncated": true
+              },
+              {
+                "start_line": 687,
+                "end_line": 749,
+                "truncated": true
+              },
+              {
+                "start_line": 862,
+                "end_line": 984,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "|'common'^12+^|表示没有特定操作，用于主动聚焦、主动播报等场景。|\n|'home'^12+^|表示返回桌面操作。|\n|'back'^12+^|表示返回上一级操作。|\n|'recentTask'^12+^|表示打开最近任务操作。|\n|'notificationCenter'^12+^|表示打开通知栏操作。|\n|'controlCenter'^12+^|表示打开控制中心操作。|\n|'setCursorPosition'^12+^|表示设置光标位置操作，需配置参数offset，参数值为光标的字符偏移量。|\n|'injectAction'|表示注入动作，需配置参数injectActionType，参数值为注入动作类型。 起始版本： 26.0.0 模型约束： 此接口仅可在Stage模型下使用。|\n|'executeCustomAction'|表示执行自定义操作，需配置参数customAction，参数值为自定义操作的名称。 起始版本： 26.0.0|"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Accessibility > Declare accessibility button usage in metadata file（仅按钮回调，未涉动作集合）",
+          "start_line": 184,
+          "end_line": 197,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/about/versions/11/behavior-changes-11",
+            "platform": "android",
+            "title": "Behavior changes: Apps targeting Android 11",
+            "local_path": "docs-raw/research/2026-09-06/9f9a2603f30e38a93a2e57ae11cf3af7de97aeca86b0226dc3d9a44d4a5c07be/a501b44fc076374d699dca76ade48a53387ff3556b8a4153518ee0bebbfaa61e/document.md",
+            "sha256": "a501b44fc076374d699dca76ade48a53387ff3556b8a4153518ee0bebbfaa61e",
+            "raw_sha256": "7dca0669b498178e71e93361ac40796b9a3ff55749e688ba8ffee85a1f5a1c2f",
+            "raw_path": "docs-raw/research/2026-09-06/9f9a2603f30e38a93a2e57ae11cf3af7de97aeca86b0226dc3d9a44d4a5c07be/a501b44fc076374d699dca76ade48a53387ff3556b8a4153518ee0bebbfaa61e/source.gz",
+            "fetched_at": "2026-09-05T10:21:36.232005+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 351,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 11,
+                "truncated": false
+              },
+              {
+                "start_line": 12,
+                "end_line": 31,
+                "truncated": false
+              },
+              {
+                "start_line": 32,
+                "end_line": 33,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Starting in Android 11, your accessibility service cannot make\na runtime declaration that it has an [association with the system's\naccessibility button](https://developer.android.com/guide/topics/ui/accessibility/service#button). If you\nappend `AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON` to the\n`flags` property of an `AccessibilityServiceInfo` object, the framework doesn't\npass accessibility button callback events to your service.\n\nTo receive accessibility callback events in your accessibility service, use your\naccessibility service metadata file to declare your service's association with\nthe accessibility button. Include the `flagRequestAccessibilityButton` value in\nyour definition of the\n[`accessibilityFlags`](https://developer.android.com/reference/kotlin/android/accessibilityservice/AccessibilityServiceInfo#android:accessibilityflags)\nattribute. A common location for the accessibility service metadata file is\n`res/raw/accessibilityservice.xml`."
+        }
+      ],
+      "open_questions": [
+        "Android 服务端动作/手势 API（如 performAction、手势注入）正文未读到，无法对齐枚举比较",
+        "HarmonyOS 各动作实际生效条件与 targetBundleNames 过滤行为未验证"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "iOS 平台本节点机制在冻结资料中完全缺失，为关键缺口，无法初判支持与否",
+    "Android 观察与操作界面的能力正文（AccessibilityService API 参考/服务指南）未读到",
+    "HarmonyOS AccessibilityExtensionAbility 专属参考文档与启用/权限流程未读",
+    "三平台启动日最新正式版与手机基线未固定（version_baseline unresolved），所有结论仅基于冻结快照"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "iOS 无任何本节点证据、Android 核心观察/操作能力正文缺失，且节点涉及跨应用观察/操作界面的高风险映射；需优先补源并精研。"
+  }
+}

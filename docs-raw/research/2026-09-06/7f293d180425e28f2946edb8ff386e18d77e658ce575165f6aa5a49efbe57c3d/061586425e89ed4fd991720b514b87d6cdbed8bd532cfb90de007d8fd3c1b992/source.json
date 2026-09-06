@@ -1,0 +1,13 @@
+{
+  "id": "7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d",
+  "url": "https://developer.apple.com/documentation/coreml",
+  "platform": "ios",
+  "title": "Core ML",
+  "local_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/document.md",
+  "sha256": "061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992",
+  "raw_sha256": "57f6a98f5ea52d5298a3a4739917ba120385b679dd718fce10bece7d803f64fb",
+  "raw_path": "docs-raw/research/2026-09-06/7f293d180425e28f2946edb8ff386e18d77e658ce575165f6aa5a49efbe57c3d/061586425e89ed4fd991720b514b87d6cdbed8bd532cfb90de007d8fd3c1b992/source.gz",
+  "fetched_at": "2026-09-05T10:30:09.483693+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

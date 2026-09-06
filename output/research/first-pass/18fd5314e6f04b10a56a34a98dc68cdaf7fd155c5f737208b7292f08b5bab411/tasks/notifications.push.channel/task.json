@@ -1,0 +1,576 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "notifications.push.channel",
+    "level": "L3",
+    "parent": "notifications.push",
+    "name": {
+      "zh": "推送通道",
+      "en": "Push Delivery Channel"
+    },
+    "definition": "FCM / APNs / Push Kit 远程消息通道。",
+    "knowledge_role": "leaf",
+    "layer": "ecosystem",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "split_justification": "task",
+    "aliases": [
+      "FCM",
+      "APNs",
+      "Push Kit"
+    ],
+    "bindings": {
+      "android": [
+        {
+          "kind": "other",
+          "id": "com.google.firebase.messaging",
+          "url": "https://firebase.google.com/docs/cloud-messaging/android/client",
+          "role": "primary",
+          "note": "ecosystem: FCM"
+        }
+      ],
+      "ios": [
+        {
+          "kind": "framework",
+          "id": "UserNotifications + APNs",
+          "url": "https://developer.apple.com/documentation/usernotifications/registering-your-app-with-apns",
+          "role": "primary"
+        }
+      ],
+      "harmonyos": [
+        {
+          "kind": "kit",
+          "id": "PushKit",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/push-kit-introduction",
+          "role": "primary"
+        }
+      ]
+    },
+    "knowledge_path": "knowledge/notifications/push/channel.yaml",
+    "comparison_scope": {
+      "includes": [
+        "FCM / APNs / Push Kit 远程消息通道。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "df45b092b5256748f335ee52ae54aa87a739ac8dd43a10ff33b2f9f5a4961570",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "7d1e8705f145b0a1513f5164b26265c90677772f1dabc0aca743058994c95455",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://firebase.google.com/docs/cloud-messaging/android/client",
+      "platform": "android",
+      "title": "Get started with Firebase Cloud Messaging in Android apps",
+      "local_path": "docs-raw/research/2026-09-06/6d41c41c1d59e6141f4b06329b59c7b6f215b286bc5b9c5536a0f8a54cce7fbf/08e372a5685ae73a75d12013e629c7b09c8f580d8f8d494f96532ab2dba91e46/document.md",
+      "sha256": "08e372a5685ae73a75d12013e629c7b09c8f580d8f8d494f96532ab2dba91e46",
+      "raw_sha256": "66498d6eb6a842f751bd78578226cec9da72c496a03b8a23d4531227b2937756",
+      "raw_path": "docs-raw/research/2026-09-06/6d41c41c1d59e6141f4b06329b59c7b6f215b286bc5b9c5536a0f8a54cce7fbf/08e372a5685ae73a75d12013e629c7b09c8f580d8f8d494f96532ab2dba91e46/source.gz",
+      "fetched_at": "2026-09-05T10:51:13.759252+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 598,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 14,
+          "truncated": false
+        },
+        {
+          "start_line": 15,
+          "end_line": 16,
+          "truncated": true
+        },
+        {
+          "start_line": 25,
+          "end_line": 83,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://firebase.google.com/docs/cloud-messaging/fcm-architecture",
+      "platform": "android",
+      "title": "FCM Architectural Overview",
+      "local_path": "docs-raw/research/2026-09-06/7c48b091adfffd9da9a2cf9b990d7c20267a2a378bbe009a51b94c425d87e9de/7798dca5bead51542da5cfbae9e05b38c36d9e2e302125830f51c14f58f8de29/document.md",
+      "sha256": "7798dca5bead51542da5cfbae9e05b38c36d9e2e302125830f51c14f58f8de29",
+      "raw_sha256": "71b129d6ac7a559d2083a13a6d70278e56a78ae2a4f3b82a8b39bcafc61d8ac7",
+      "raw_path": "docs-raw/research/2026-09-06/7c48b091adfffd9da9a2cf9b990d7c20267a2a378bbe009a51b94c425d87e9de/7798dca5bead51542da5cfbae9e05b38c36d9e2e302125830f51c14f58f8de29/source.gz",
+      "fetched_at": "2026-09-05T11:03:54.122695+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 45,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 36,
+          "truncated": false
+        },
+        {
+          "start_line": 37,
+          "end_line": 45,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/usernotifications/registering-your-app-with-apns",
+      "platform": "ios",
+      "title": "Registering your app with APNs",
+      "local_path": "docs-raw/research/2026-09-06/818086e3a395106ba5e63c35ba166037ea8a644610f04a8c1dde48e5150b9614/fb9efbaea901bc3384a6bc60a7fbd04228f63a4a26f254b6b988ac0e58d68a35/document.md",
+      "sha256": "fb9efbaea901bc3384a6bc60a7fbd04228f63a4a26f254b6b988ac0e58d68a35",
+      "raw_sha256": "5b431ac7969956a428542201e707afa3f5e19f96f97daeefcd13bb09bf888a1d",
+      "raw_path": "docs-raw/research/2026-09-06/818086e3a395106ba5e63c35ba166037ea8a644610f04a8c1dde48e5150b9614/fb9efbaea901bc3384a6bc60a7fbd04228f63a4a26f254b6b988ac0e58d68a35/source.gz",
+      "fetched_at": "2026-09-05T11:22:33.221162+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 66,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 11,
+          "truncated": false
+        },
+        {
+          "start_line": 12,
+          "end_line": 20,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/usernotifications/testing-notifications-using-the-push-notification-console",
+      "platform": "ios",
+      "title": "Testing notifications using the Push Notification Console",
+      "local_path": "docs-raw/research/2026-09-06/44cc5064bfe8cae57c64a1c80238316b10b06413394644f7cfe87585c53d937a/8b5d30fea454580bde38103b68b904ff1731fb7f865004035949cb046234961d/document.md",
+      "sha256": "8b5d30fea454580bde38103b68b904ff1731fb7f865004035949cb046234961d",
+      "raw_sha256": "cf9559f6b60c13a1d0e8767637378d263b4e066a0d595f2e96cc9839e05c596a",
+      "raw_path": "docs-raw/research/2026-09-06/44cc5064bfe8cae57c64a1c80238316b10b06413394644f7cfe87585c53d937a/8b5d30fea454580bde38103b68b904ff1731fb7f865004035949cb046234961d/source.gz",
+      "fetched_at": "2026-09-05T10:28:09.385770+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 85,
+      "suggested_sections": [
+        {
+          "start_line": 5,
+          "end_line": 21,
+          "truncated": false
+        },
+        {
+          "start_line": 22,
+          "end_line": 39,
+          "truncated": false
+        },
+        {
+          "start_line": 40,
+          "end_line": 45,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/push-kit-introduction",
+      "platform": "harmonyos",
+      "title": "Push Kit简介",
+      "local_path": "docs-raw/research/2026-09-06/7eed65ebe17a982151b06228d6baa9ca1aca5e8c32b0dd8d747f706c88ec1172/099faa25331d8f16fda58157531ab8423e15263f8014eb124180fb236925b8ee/document.md",
+      "sha256": "099faa25331d8f16fda58157531ab8423e15263f8014eb124180fb236925b8ee",
+      "raw_sha256": "4a3dee5f15c5ceff1cf4094f27ef1be9eb9bf43ae2bfbd9f0f394d8f945e3069",
+      "raw_path": "docs-raw/research/2026-09-06/7eed65ebe17a982151b06228d6baa9ca1aca5e8c32b0dd8d747f706c88ec1172/099faa25331d8f16fda58157531ab8423e15263f8014eb124180fb236925b8ee/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 131,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 20,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/push-get-token",
+      "platform": "harmonyos",
+      "title": "获取Push Token",
+      "local_path": "docs-raw/research/2026-09-06/59300a00a3430b4641f00b9ae184c9d2f876e570aeaa911c2b03974064b085e8/716e87661b135afbef78eb802fe7eef53e2be9467bbe919c9724ee6a4e3cba97/document.md",
+      "sha256": "716e87661b135afbef78eb802fe7eef53e2be9467bbe919c9724ee6a4e3cba97",
+      "raw_sha256": "dd28bce1d4d2aeb3bda2afd2dd67b6e61f2b2627aa10204c653fedd3eed6de38",
+      "raw_path": "docs-raw/research/2026-09-06/59300a00a3430b4641f00b9ae184c9d2f876e570aeaa911c2b03974064b085e8/716e87661b135afbef78eb802fe7eef53e2be9467bbe919c9724ee6a4e3cba97/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 204,
+      "suggested_sections": [
+        {
+          "start_line": 3,
+          "end_line": 23,
+          "truncated": false
+        },
+        {
+          "start_line": 28,
+          "end_line": 31,
+          "truncated": true
+        },
+        {
+          "start_line": 38,
+          "end_line": 39,
+          "truncated": true
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:51.955606+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "7f17ed244973a21f443f3b316510b1c4c73847c5881650773ac857a31c4e7b0e"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "ed5a4ff5df60dc629e70c5dd6c7e5d8823b287fdf4310a8e9e594280af0e5662",
+  "url": "https://developer.apple.com/documentation/xcode/responding-to-power-notifications",
+  "platform": "ios",
+  "title": "Responding to power notifications",
+  "local_path": "docs-raw/research/2026-09-06/ed5a4ff5df60dc629e70c5dd6c7e5d8823b287fdf4310a8e9e594280af0e5662/06cfd8130250f43c3232ab6dade286f3af86a7cfaee18d7d2d4f7a6aefe5dce0/document.md",
+  "sha256": "06cfd8130250f43c3232ab6dade286f3af86a7cfaee18d7d2d4f7a6aefe5dce0",
+  "raw_sha256": "882637878f1829795d58de2671cc02aadecd651376abb43c24e396818c9d1976",
+  "raw_path": "docs-raw/research/2026-09-06/ed5a4ff5df60dc629e70c5dd6c7e5d8823b287fdf4310a8e9e594280af0e5662/06cfd8130250f43c3232ab6dade286f3af86a7cfaee18d7d2d4f7a6aefe5dce0/source.gz",
+  "fetched_at": "2026-09-05T11:24:34.053798+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

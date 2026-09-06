@@ -1,0 +1,13 @@
+{
+  "id": "55cd433b94b36c91ac146a4c65f78028234c55f1f8f06eddd3d0fc3afb599d36",
+  "url": "https://developer.android.com/topic/performance/vitals/bg-wifi",
+  "platform": "android",
+  "title": "Excessive Wi-Fi Scanning in the Background",
+  "local_path": "docs-raw/research/2026-09-06/55cd433b94b36c91ac146a4c65f78028234c55f1f8f06eddd3d0fc3afb599d36/d55d74a56e792ebc28e672c443d1755ff18ec1cbe1748b51b2daa9c20bbf824a/document.md",
+  "sha256": "d55d74a56e792ebc28e672c443d1755ff18ec1cbe1748b51b2daa9c20bbf824a",
+  "raw_sha256": "57c8320fd23db5761524a1d683e1188c9b9d7b6dac22afd3042bed5a501b1378",
+  "raw_path": "docs-raw/research/2026-09-06/55cd433b94b36c91ac146a4c65f78028234c55f1f8f06eddd3d0fc3afb599d36/d55d74a56e792ebc28e672c443d1755ff18ec1cbe1748b51b2daa9c20bbf824a/source.gz",
+  "fetched_at": "2026-09-05T10:37:53.060695+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

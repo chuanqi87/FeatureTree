@@ -1,0 +1,13 @@
+{
+  "id": "b5fbc30000a01c3328793cf6be88c1a646f9e7ca963d2fbdac27b35f10fa4f78",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributed-account",
+  "platform": "harmonyos",
+  "title": "@ohos.account.distributedAccount (分布式账号管理)",
+  "local_path": "docs-raw/research/2026-09-06/b5fbc30000a01c3328793cf6be88c1a646f9e7ca963d2fbdac27b35f10fa4f78/35149cabd1281ee5e8b4cdaa205689fcb58c4b1fc46887fee2fb2f75b3e16a4c/document.md",
+  "sha256": "35149cabd1281ee5e8b4cdaa205689fcb58c4b1fc46887fee2fb2f75b3e16a4c",
+  "raw_sha256": "b7b091c5a23bebea03279964cabba9eb8873f6713c43e2cf34fed7b6bcb6c59e",
+  "raw_path": "docs-raw/research/2026-09-06/b5fbc30000a01c3328793cf6be88c1a646f9e7ca963d2fbdac27b35f10fa4f78/35149cabd1281ee5e8b4cdaa205689fcb58c4b1fc46887fee2fb2f75b3e16a4c/source.gz",
+  "fetched_at": "2026-09-05T10:27:16.752360+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "27f3edec21da7c3c4b82f136964e98cf852632f1e57c9cfe74e2b8faccc497b6",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-jwt-description",
+  "platform": "harmonyos",
+  "title": "生成服务端请求的token",
+  "local_path": "docs-raw/research/2026-09-06/27f3edec21da7c3c4b82f136964e98cf852632f1e57c9cfe74e2b8faccc497b6/542ee0caadaad12ec1c966b86dbbeb85f27555cdced928127b1538d9e71919b7/document.md",
+  "sha256": "542ee0caadaad12ec1c966b86dbbeb85f27555cdced928127b1538d9e71919b7",
+  "raw_sha256": "23d2d9129594bb3c80cd67daaf30e08f416ba8dac39d47d0c2e2e1bcb1e29cac",
+  "raw_path": "docs-raw/research/2026-09-06/27f3edec21da7c3c4b82f136964e98cf852632f1e57c9cfe74e2b8faccc497b6/542ee0caadaad12ec1c966b86dbbeb85f27555cdced928127b1538d9e71919b7/source.gz",
+  "fetched_at": "2026-09-05T10:37:48.949282+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "e250050bcb4af6337b82216ec3cc3eeaf2e65e114592b64794507687a341a974",
+  "url": "https://developer.apple.com/documentation/security/using-the-keychain-to-manage-user-secrets",
+  "platform": "ios",
+  "title": "Using the keychain to manage user secrets",
+  "local_path": "docs-raw/research/2026-09-06/e250050bcb4af6337b82216ec3cc3eeaf2e65e114592b64794507687a341a974/1a3971730437c77d10ffb730f1b251328c36b757f72ecdb38e599f778ce969d7/document.md",
+  "sha256": "1a3971730437c77d10ffb730f1b251328c36b757f72ecdb38e599f778ce969d7",
+  "raw_sha256": "adf95c31b543f21432579c569574d5c9d83acaa055010d5848cb3711ea0d0d52",
+  "raw_path": "docs-raw/research/2026-09-06/e250050bcb4af6337b82216ec3cc3eeaf2e65e114592b64794507687a341a974/1a3971730437c77d10ffb730f1b251328c36b757f72ecdb38e599f778ce969d7/source.gz",
+  "fetched_at": "2026-09-05T11:20:16.489611+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

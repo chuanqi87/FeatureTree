@@ -1,0 +1,13 @@
+{
+  "id": "2c7fbf16e2a766d63be9890c54abc8444500f829444f8d579fd12a2de54b2c3e",
+  "url": "https://developer.apple.com/documentation/networkextension/vpn-on-demand-rules",
+  "platform": "ios",
+  "title": "VPN On Demand Rules",
+  "local_path": "docs-raw/research/2026-09-06/2c7fbf16e2a766d63be9890c54abc8444500f829444f8d579fd12a2de54b2c3e/67803926339a0a4a1ce529047c0eeb222e8f6d1be8af92941bc9ab93189b1488/document.md",
+  "sha256": "67803926339a0a4a1ce529047c0eeb222e8f6d1be8af92941bc9ab93189b1488",
+  "raw_sha256": "6851c797c0c80980a821dcca90363e9a3cca5e01bb329aef549eeaad8b95827a",
+  "raw_path": "docs-raw/research/2026-09-06/2c7fbf16e2a766d63be9890c54abc8444500f829444f8d579fd12a2de54b2c3e/67803926339a0a4a1ce529047c0eeb222e8f6d1be8af92941bc9ab93189b1488/source.gz",
+  "fetched_at": "2026-09-05T11:16:42.981529+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

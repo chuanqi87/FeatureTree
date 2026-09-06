@@ -1,0 +1,13 @@
+{
+  "id": "a3bfe52563fd50fc102ffebf12fccd992019b6c8c103b813918784ab19601533",
+  "url": "https://firebase.google.com/docs/firestore/pipelines/stages/transformation/unnest",
+  "platform": "android",
+  "title": "Unnest",
+  "local_path": "docs-raw/research/2026-09-06/a3bfe52563fd50fc102ffebf12fccd992019b6c8c103b813918784ab19601533/b25950eef14ae7900ba0a2f7cc09f43b9c574964b223a15de5565f1160239576/document.md",
+  "sha256": "b25950eef14ae7900ba0a2f7cc09f43b9c574964b223a15de5565f1160239576",
+  "raw_sha256": "56288125e5ff648e431adb1ed4061c0432de22a3a913ff14c9b37160c0697b16",
+  "raw_path": "docs-raw/research/2026-09-06/a3bfe52563fd50fc102ffebf12fccd992019b6c8c103b813918784ab19601533/b25950eef14ae7900ba0a2f7cc09f43b9c574964b223a15de5565f1160239576/source.gz",
+  "fetched_at": "2026-09-05T11:17:04.500812+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

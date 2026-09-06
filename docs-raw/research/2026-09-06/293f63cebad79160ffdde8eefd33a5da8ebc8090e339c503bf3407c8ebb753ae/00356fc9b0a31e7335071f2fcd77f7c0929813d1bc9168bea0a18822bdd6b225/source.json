@@ -1,0 +1,13 @@
+{
+  "id": "293f63cebad79160ffdde8eefd33a5da8ebc8090e339c503bf3407c8ebb753ae",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-faqs/faqs-ndk-26",
+  "platform": "harmonyos",
+  "title": "如何在C++调用从ArkTS传递过来的function",
+  "local_path": "docs-raw/research/2026-09-06/293f63cebad79160ffdde8eefd33a5da8ebc8090e339c503bf3407c8ebb753ae/00356fc9b0a31e7335071f2fcd77f7c0929813d1bc9168bea0a18822bdd6b225/document.md",
+  "sha256": "00356fc9b0a31e7335071f2fcd77f7c0929813d1bc9168bea0a18822bdd6b225",
+  "raw_sha256": "a52acbb3e23a67f46473b25d3444dd65f4f510da2d7ffdf18b561cafd7784e51",
+  "raw_path": "docs-raw/research/2026-09-06/293f63cebad79160ffdde8eefd33a5da8ebc8090e339c503bf3407c8ebb753ae/00356fc9b0a31e7335071f2fcd77f7c0929813d1bc9168bea0a18822bdd6b225/source.gz",
+  "fetched_at": "2026-09-05T10:40:46.362562+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

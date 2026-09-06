@@ -1,0 +1,13 @@
+{
+  "id": "fe745b1cb62d46125cb13be552a38d01f7d42675b3770d8aeb51499f862fe793",
+  "url": "https://developer.apple.com/documentation/corebluetooth/cbcentralmanager",
+  "platform": "ios",
+  "title": "CBCentralManager",
+  "local_path": "docs-raw/research/2026-09-06/fe745b1cb62d46125cb13be552a38d01f7d42675b3770d8aeb51499f862fe793/bd120cd884675f212e867a2abedf93e30cc55883cfe5b8ce325d112749b30e7a/document.md",
+  "sha256": "bd120cd884675f212e867a2abedf93e30cc55883cfe5b8ce325d112749b30e7a",
+  "raw_sha256": "6e82cd25647458c5f7ff38d46de1684e6b7e3a6174706357186c35bcf68c0f80",
+  "raw_path": "docs-raw/research/2026-09-06/fe745b1cb62d46125cb13be552a38d01f7d42675b3770d8aeb51499f862fe793/bd120cd884675f212e867a2abedf93e30cc55883cfe5b8ce325d112749b30e7a/source.gz",
+  "fetched_at": "2026-09-05T09:37:28.075444+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

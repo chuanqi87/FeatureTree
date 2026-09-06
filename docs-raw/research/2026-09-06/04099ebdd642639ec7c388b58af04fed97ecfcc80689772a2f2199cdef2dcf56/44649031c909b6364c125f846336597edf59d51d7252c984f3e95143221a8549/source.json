@@ -1,0 +1,13 @@
+{
+  "id": "04099ebdd642639ec7c388b58af04fed97ecfcc80689772a2f2199cdef2dcf56",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-battery-info",
+  "platform": "harmonyos",
+  "title": "@ohos.batteryInfo (电量信息)",
+  "local_path": "docs-raw/research/2026-09-06/04099ebdd642639ec7c388b58af04fed97ecfcc80689772a2f2199cdef2dcf56/44649031c909b6364c125f846336597edf59d51d7252c984f3e95143221a8549/document.md",
+  "sha256": "44649031c909b6364c125f846336597edf59d51d7252c984f3e95143221a8549",
+  "raw_sha256": "bac6c9db082923a28bc4416193db99e3a60396334c73f9070652a55d77d5418e",
+  "raw_path": "docs-raw/research/2026-09-06/04099ebdd642639ec7c388b58af04fed97ecfcc80689772a2f2199cdef2dcf56/44649031c909b6364c125f846336597edf59d51d7252c984f3e95143221a8549/source.gz",
+  "fetched_at": "2026-09-05T10:27:02.324405+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

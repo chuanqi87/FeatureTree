@@ -1,0 +1,13 @@
+{
+  "id": "97d9661823c710dde92b649f408569ff539456a524959995c51ea87a01f34a4c",
+  "url": "https://developer.android.com/topic/performance/tracing/on-device",
+  "platform": "android",
+  "title": "Capture a system trace on a device",
+  "local_path": "docs-raw/research/2026-09-06/97d9661823c710dde92b649f408569ff539456a524959995c51ea87a01f34a4c/839d1199062cdaf2f8ce13a15795e9803b70e7cc31ce6a1e8e4ed81e30fe2502/document.md",
+  "sha256": "839d1199062cdaf2f8ce13a15795e9803b70e7cc31ce6a1e8e4ed81e30fe2502",
+  "raw_sha256": "1bbe2bf498cad1186b0e7fdb2aef08aef778df0089ed7afeff87bd5a83e1a933",
+  "raw_path": "docs-raw/research/2026-09-06/97d9661823c710dde92b649f408569ff539456a524959995c51ea87a01f34a4c/839d1199062cdaf2f8ce13a15795e9803b70e7cc31ce6a1e8e4ed81e30fe2502/source.gz",
+  "fetched_at": "2026-09-05T10:37:48.820157+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

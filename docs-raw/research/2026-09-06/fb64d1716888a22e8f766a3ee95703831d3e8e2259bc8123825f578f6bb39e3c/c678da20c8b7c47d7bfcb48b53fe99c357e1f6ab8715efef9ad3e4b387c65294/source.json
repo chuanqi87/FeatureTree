@@ -1,0 +1,13 @@
+{
+  "id": "fb64d1716888a22e8f766a3ee95703831d3e8e2259bc8123825f578f6bb39e3c",
+  "url": "https://developer.apple.com/documentation/scsiperipheralsdriverkit",
+  "platform": "ios",
+  "title": "SCSIPeripheralsDriverKit",
+  "local_path": "docs-raw/research/2026-09-06/fb64d1716888a22e8f766a3ee95703831d3e8e2259bc8123825f578f6bb39e3c/c678da20c8b7c47d7bfcb48b53fe99c357e1f6ab8715efef9ad3e4b387c65294/document.md",
+  "sha256": "c678da20c8b7c47d7bfcb48b53fe99c357e1f6ab8715efef9ad3e4b387c65294",
+  "raw_sha256": "1956bfc2e8f981e97bc56a8892042df3948314020b918002facedc04a205344c",
+  "raw_path": "docs-raw/research/2026-09-06/fb64d1716888a22e8f766a3ee95703831d3e8e2259bc8123825f578f6bb39e3c/c678da20c8b7c47d7bfcb48b53fe99c357e1f6ab8715efef9ad3e4b387c65294/source.gz",
+  "fetched_at": "2026-09-05T10:32:49.567749+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

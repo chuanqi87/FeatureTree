@@ -1,0 +1,13 @@
+{
+  "id": "b6ec55c73fd65d13858e2f013215735e3c5d7c33a3481c37a9131a3a416b772e",
+  "url": "https://developer.apple.com/documentation/metal",
+  "platform": "ios",
+  "title": "Metal",
+  "local_path": "docs-raw/research/2026-09-06/b6ec55c73fd65d13858e2f013215735e3c5d7c33a3481c37a9131a3a416b772e/a0701b6dc942248e78fcde352a058f63d7a5cb2186cea4aa4db6dbb0edd0ab55/document.md",
+  "sha256": "a0701b6dc942248e78fcde352a058f63d7a5cb2186cea4aa4db6dbb0edd0ab55",
+  "raw_sha256": "a282e425bb4e205927bdc0a59e590fecc97d9914fc679f1cbe123c62c878d408",
+  "raw_path": "docs-raw/research/2026-09-06/b6ec55c73fd65d13858e2f013215735e3c5d7c33a3481c37a9131a3a416b772e/a0701b6dc942248e78fcde352a058f63d7a5cb2186cea4aa4db6dbb0edd0ab55/source.gz",
+  "fetched_at": "2026-09-05T10:32:36.295146+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

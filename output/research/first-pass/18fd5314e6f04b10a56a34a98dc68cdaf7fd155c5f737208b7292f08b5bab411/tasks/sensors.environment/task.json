@@ -1,0 +1,522 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "sensors.environment",
+    "level": "L2",
+    "parent": "sensors",
+    "name": {
+      "zh": "环境传感器",
+      "en": "Environment Sensors"
+    },
+    "definition": "光感、气压、温度等。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/sensors/environment/_rollup.yaml",
+    "comparison_scope": {
+      "includes": [
+        "光感、气压、温度等。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "7d67711e29de4f1672570dfefcd1fad70480366c70b9889d095a049fb08983c6",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "9e05db2a92f04dd49740304076e4c30eb7a2a012aaa9e4b53768a96052b6862f",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/develop/sensors-and-location/sensors/sensors_environment",
+      "platform": "android",
+      "title": "Environment sensors",
+      "local_path": "docs-raw/research/2026-09-06/59925345c7f527afdf96e0ab844e1ee4110da8810c78d5b32ba9fd93eeafe546/1c48f6d951a6a8793388b320aa5a23f8b5ef0c84894b635d2273e6ff221b5522/document.md",
+      "sha256": "1c48f6d951a6a8793388b320aa5a23f8b5ef0c84894b635d2273e6ff221b5522",
+      "raw_sha256": "4410e4318480d78882b6eed38138a20fe8304c1239387bee69a2f2eb2d395238",
+      "raw_path": "docs-raw/research/2026-09-06/59925345c7f527afdf96e0ab844e1ee4110da8810c78d5b32ba9fd93eeafe546/1c48f6d951a6a8793388b320aa5a23f8b5ef0c84894b635d2273e6ff221b5522/source.gz",
+      "fetched_at": "2026-09-05T10:24:39.538514+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 177,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 31,
+          "truncated": false
+        },
+        {
+          "start_line": 32,
+          "end_line": 39,
+          "truncated": false
+        },
+        {
+          "start_line": 40,
+          "end_line": 80,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/develop/sensors-and-location",
+      "platform": "android",
+      "title": "About sensors and location",
+      "local_path": "docs-raw/research/2026-09-06/02f87d10039ae1bcb4b52d5cd2d955fe2f7c61d3fdba528ae2634b4574d85d35/cd9b1ccf6e918105ac08c46d2360e5046d9876becc6e07caf39afd0ca52b6eee/document.md",
+      "sha256": "cd9b1ccf6e918105ac08c46d2360e5046d9876becc6e07caf39afd0ca52b6eee",
+      "raw_sha256": "0129b19c4d1458f5084dad21474553c8f1a5932f212a8e2cab610ac9f81ff749",
+      "raw_path": "docs-raw/research/2026-09-06/02f87d10039ae1bcb4b52d5cd2d955fe2f7c61d3fdba528ae2634b4574d85d35/cd9b1ccf6e918105ac08c46d2360e5046d9876becc6e07caf39afd0ca52b6eee/source.gz",
+      "fetched_at": "2026-09-05T10:24:34.739476+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 22,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 21,
+          "truncated": false
+        },
+        {
+          "start_line": 22,
+          "end_line": 22,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/technologyoverviews/hardware-networking-sensors",
+      "platform": "ios",
+      "title": "Hardware, networking, and sensors",
+      "local_path": "docs-raw/research/2026-09-06/a448aae8ac5226a5e665e9823eb9833288e09368be6acdc339d02b201c7396e8/e2fa93ca88f281eba6be2193a16960e455e05d820eb386398fabd64ece01b501/document.md",
+      "sha256": "e2fa93ca88f281eba6be2193a16960e455e05d820eb386398fabd64ece01b501",
+      "raw_sha256": "3dfdaf0cba922bb85ef6e2c5decedbcbe1fd027583468e22bbfa91585016cd42",
+      "raw_path": "docs-raw/research/2026-09-06/a448aae8ac5226a5e665e9823eb9833288e09368be6acdc339d02b201c7396e8/e2fa93ca88f281eba6be2193a16960e455e05d820eb386398fabd64ece01b501/source.gz",
+      "fetched_at": "2026-09-05T10:26:38.154988+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 100,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 5,
+          "truncated": false
+        },
+        {
+          "start_line": 6,
+          "end_line": 19,
+          "truncated": false
+        },
+        {
+          "start_line": 20,
+          "end_line": 39,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/technologyoverviews/device-sensors",
+      "platform": "ios",
+      "title": "Device sensors",
+      "local_path": "docs-raw/research/2026-09-06/ae5874c48d5486d7b6f2bec51b9230be61f3e2a06d286e353c59add2448db076/86b4e62bcf6306518f2ac004de750f6cdf337e47bc25098f7397166d44b52b87/document.md",
+      "sha256": "86b4e62bcf6306518f2ac004de750f6cdf337e47bc25098f7397166d44b52b87",
+      "raw_sha256": "91585b15901666f159b3b2255f95f4f3566e2e6f2aeb074ab1294933e7533421",
+      "raw_path": "docs-raw/research/2026-09-06/ae5874c48d5486d7b6f2bec51b9230be61f3e2a06d286e353c59add2448db076/86b4e62bcf6306518f2ac004de750f6cdf337e47bc25098f7397166d44b52b87/source.gz",
+      "fetched_at": "2026-09-05T10:26:36.148719+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 187,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 17,
+          "truncated": false
+        },
+        {
+          "start_line": 18,
+          "end_line": 32,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-sensorservicekit-hdc",
+      "platform": "harmonyos",
+      "title": "Sensor Service Kit",
+      "local_path": "docs-raw/research/2026-09-06/c7567ada745b719d82c934cef4d419050db4ec303f139c4432a9a846e497b25b/bfa7f8cafb50ee22741b3e6db9ac539fddc111e6d053e2bf877897c1da36cee3/document.md",
+      "sha256": "bfa7f8cafb50ee22741b3e6db9ac539fddc111e6d053e2bf877897c1da36cee3",
+      "raw_sha256": "0b6e61fc18ae17b879e16bff38ff8201f0ca78ab958542dc780bf69b7ff0c0f4",
+      "raw_path": "docs-raw/research/2026-09-06/c7567ada745b719d82c934cef4d419050db4ec303f139c4432a9a846e497b25b/bfa7f8cafb50ee22741b3e6db9ac539fddc111e6d053e2bf877897c1da36cee3/source.gz",
+      "fetched_at": "2026-09-05T11:02:40.903224+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 194,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 30,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-system-sensor",
+      "platform": "harmonyos",
+      "title": "@system.sensor (传感器)",
+      "local_path": "docs-raw/research/2026-09-06/4baca4555098953c8b5218111b78cde082ee718df44a60460e61030a6de6bdbe/5810c465e77508cc7ee2421c1c3597a03d25e6ddbf634fc8d992a6192ed4abea/document.md",
+      "sha256": "5810c465e77508cc7ee2421c1c3597a03d25e6ddbf634fc8d992a6192ed4abea",
+      "raw_sha256": "7c43110c56f02f53878b3146b6b88111de3fcef90a554f9e3770cb7a57692843",
+      "raw_path": "docs-raw/research/2026-09-06/4baca4555098953c8b5218111b78cde082ee718df44a60460e61030a6de6bdbe/5810c465e77508cc7ee2421c1c3597a03d25e6ddbf634fc8d992a6192ed4abea/source.gz",
+      "fetched_at": "2026-09-05T10:28:01.192981+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 1461,
+      "suggested_sections": [
+        {
+          "start_line": 28,
+          "end_line": 261,
+          "truncated": true
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:43:00.524537+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "c325dc4f25d83f4aa98d2110cdf7643ed2e18ea6ec908b12ed46b607a96fdba4"
+}

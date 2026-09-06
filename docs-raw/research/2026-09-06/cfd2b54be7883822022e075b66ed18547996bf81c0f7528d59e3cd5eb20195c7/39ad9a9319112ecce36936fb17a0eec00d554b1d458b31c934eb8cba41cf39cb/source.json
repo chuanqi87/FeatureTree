@@ -1,0 +1,13 @@
+{
+  "id": "cfd2b54be7883822022e075b66ed18547996bf81c0f7528d59e3cd5eb20195c7",
+  "url": "https://developer.apple.com/documentation/xcode/replaying-a-gpu-trace-file",
+  "platform": "ios",
+  "title": "Replaying a GPU trace file",
+  "local_path": "docs-raw/research/2026-09-06/cfd2b54be7883822022e075b66ed18547996bf81c0f7528d59e3cd5eb20195c7/39ad9a9319112ecce36936fb17a0eec00d554b1d458b31c934eb8cba41cf39cb/document.md",
+  "sha256": "39ad9a9319112ecce36936fb17a0eec00d554b1d458b31c934eb8cba41cf39cb",
+  "raw_sha256": "a53f1817f034dd0eaf078cd3165575bfe0dce13be70449c8696e0a83dac1bd7e",
+  "raw_path": "docs-raw/research/2026-09-06/cfd2b54be7883822022e075b66ed18547996bf81c0f7528d59e3cd5eb20195c7/39ad9a9319112ecce36936fb17a0eec00d554b1d458b31c934eb8cba41cf39cb/source.gz",
+  "fetched_at": "2026-09-05T11:23:58.381820+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

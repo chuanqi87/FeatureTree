@@ -1,0 +1,13 @@
+{
+  "id": "3cf095ebcc7f70eca3e6bd773d68d0e8d3fbd2a6780e36cf61a4d42afb1067b3",
+  "url": "https://developer.apple.com/documentation/metal/resource-synchronization",
+  "platform": "ios",
+  "title": "Resource synchronization",
+  "local_path": "docs-raw/research/2026-09-06/3cf095ebcc7f70eca3e6bd773d68d0e8d3fbd2a6780e36cf61a4d42afb1067b3/3706c00068d5f4e7be4fa3fb1694187798cac17aa37524e407d9a9ebbbea149e/document.md",
+  "sha256": "3706c00068d5f4e7be4fa3fb1694187798cac17aa37524e407d9a9ebbbea149e",
+  "raw_sha256": "0ec00d9ddca7d1d4501af47e51a46aeb2aa14f51eba65a1adf143a0b87fc1c8a",
+  "raw_path": "docs-raw/research/2026-09-06/3cf095ebcc7f70eca3e6bd773d68d0e8d3fbd2a6780e36cf61a4d42afb1067b3/3706c00068d5f4e7be4fa3fb1694187798cac17aa37524e407d9a9ebbbea149e/source.gz",
+  "fetched_at": "2026-09-05T10:24:04.885024+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "fb899837a15fdf710535ef4919fab765f77c310a457bb23e975243e8f7f46e3a",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-universalkeystorekit-b035",
+  "platform": "harmonyos",
+  "title": "Universal Keystore Kit",
+  "local_path": "docs-raw/research/2026-09-06/fb899837a15fdf710535ef4919fab765f77c310a457bb23e975243e8f7f46e3a/26feafc17d5e97fa2d1839dbfaf1d75e48270c77a4c33770ba8330f7b0e50b06/document.md",
+  "sha256": "26feafc17d5e97fa2d1839dbfaf1d75e48270c77a4c33770ba8330f7b0e50b06",
+  "raw_sha256": "2b93a6b51932e2a131c6b9a666991f8b1a01e8924aaa52a851d8763a4c999ef3",
+  "raw_path": "docs-raw/research/2026-09-06/fb899837a15fdf710535ef4919fab765f77c310a457bb23e975243e8f7f46e3a/26feafc17d5e97fa2d1839dbfaf1d75e48270c77a4c33770ba8330f7b0e50b06/source.gz",
+  "fetched_at": "2026-09-05T11:03:14.369625+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

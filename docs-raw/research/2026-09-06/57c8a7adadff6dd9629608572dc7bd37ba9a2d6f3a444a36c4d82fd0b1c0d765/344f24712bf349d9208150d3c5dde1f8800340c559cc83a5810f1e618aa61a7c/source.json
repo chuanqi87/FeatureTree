@@ -1,0 +1,13 @@
+{
+  "id": "57c8a7adadff6dd9629608572dc7bd37ba9a2d6f3a444a36c4d82fd0b1c0d765",
+  "url": "https://developer.android.com/reference/android/content/pm/PackageManager",
+  "platform": "android",
+  "title": "PackageManager",
+  "local_path": "docs-raw/research/2026-09-06/57c8a7adadff6dd9629608572dc7bd37ba9a2d6f3a444a36c4d82fd0b1c0d765/344f24712bf349d9208150d3c5dde1f8800340c559cc83a5810f1e618aa61a7c/document.md",
+  "sha256": "344f24712bf349d9208150d3c5dde1f8800340c559cc83a5810f1e618aa61a7c",
+  "raw_sha256": "0714a33bcd982703d85b1ec0d3fbbcf98edf55356e46e72c8af8af8c8c478c3a",
+  "raw_path": "docs-raw/research/2026-09-06/57c8a7adadff6dd9629608572dc7bd37ba9a2d6f3a444a36c4d82fd0b1c0d765/344f24712bf349d9208150d3c5dde1f8800340c559cc83a5810f1e618aa61a7c/source.gz",
+  "fetched_at": "2026-09-05T14:47:50.985988+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

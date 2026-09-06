@@ -1,0 +1,13 @@
+{
+  "id": "cdc622e28b158d9c399a9d4176b08f0453064329591410eda06b16ad2f5e43a4",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/errorcode-bluetoothmanager",
+  "platform": "harmonyos",
+  "title": "蓝牙服务子系统错误码",
+  "local_path": "docs-raw/research/2026-09-06/cdc622e28b158d9c399a9d4176b08f0453064329591410eda06b16ad2f5e43a4/4042af7df2166c5fd6290d590a46c431c0462efbadfb5107b098efcad1ba98d6/document.md",
+  "sha256": "4042af7df2166c5fd6290d590a46c431c0462efbadfb5107b098efcad1ba98d6",
+  "raw_sha256": "667b26da23db53cf3b628789ff82ce730350a70ea56c4ed88fff12eb3b053bec",
+  "raw_path": "docs-raw/research/2026-09-06/cdc622e28b158d9c399a9d4176b08f0453064329591410eda06b16ad2f5e43a4/4042af7df2166c5fd6290d590a46c431c0462efbadfb5107b098efcad1ba98d6/source.gz",
+  "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "b4fdb3e6c59005a839a905be996f83d0670b8c635cb7ca73e0c584af263d84ae",
+  "url": "https://developer.apple.com/documentation/xcode/configuring-healthkit-access",
+  "platform": "ios",
+  "title": "Configuring HealthKit access",
+  "local_path": "docs-raw/research/2026-09-06/b4fdb3e6c59005a839a905be996f83d0670b8c635cb7ca73e0c584af263d84ae/fc9fcc5ca32f955ec9f16d83eb11da6a0ed77a7c7b72bdb3646dae9cf814a6d0/document.md",
+  "sha256": "fc9fcc5ca32f955ec9f16d83eb11da6a0ed77a7c7b72bdb3646dae9cf814a6d0",
+  "raw_sha256": "26f3824e3eef464b3786aa9c6c202b2bb1074929fd0c1108cfcde13e7c6aecfb",
+  "raw_path": "docs-raw/research/2026-09-06/b4fdb3e6c59005a839a905be996f83d0670b8c635cb7ca73e0c584af263d84ae/fc9fcc5ca32f955ec9f16d83eb11da6a0ed77a7c7b72bdb3646dae9cf814a6d0/source.gz",
+  "fetched_at": "2026-09-05T11:23:06.322659+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

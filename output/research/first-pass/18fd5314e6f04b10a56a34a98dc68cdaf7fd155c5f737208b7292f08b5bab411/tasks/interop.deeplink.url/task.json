@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "interop.deeplink.url",
+    "level": "L3",
+    "parent": "interop.deeplink",
+    "name": {
+      "zh": "URL深度链接",
+      "en": "URL Deep Link"
+    },
+    "definition": "自定义 scheme 或 https App Links / Universal Links。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "knowledge_path": "knowledge/interop/deeplink/url.yaml",
+    "comparison_scope": {
+      "includes": [
+        "自定义 scheme 或 https App Links / Universal Links。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "6b91dafef97fbbef1603d1f1615ed2ddd767f5160a731b98c84c617482ec2813",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "113ca607d5890a8a5008ba61efa511fccbb36960a0f07841c7dfa369d56153ab",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/guide/navigation/navigation-3/recipes/deeplinks-uriarguments",
+      "platform": "android",
+      "title": "Deep Link URI Arguments Recipe",
+      "local_path": "docs-raw/research/2026-09-06/f71b206d9aee6b3a310ead5befd0b7dceda957237938cdc9c98542dbff672e6a/0b61b438174fa0d8e75b7cc89b92bc315492c8e69d8f5e2c2d648bf5f17f8042/document.md",
+      "sha256": "0b61b438174fa0d8e75b7cc89b92bc315492c8e69d8f5e2c2d648bf5f17f8042",
+      "raw_sha256": "e45002cb0862662d11ea00a47571948174364eda650ec0e97c5aeef98c0c1c91",
+      "raw_path": "docs-raw/research/2026-09-06/f71b206d9aee6b3a310ead5befd0b7dceda957237938cdc9c98542dbff672e6a/0b61b438174fa0d8e75b7cc89b92bc315492c8e69d8f5e2c2d648bf5f17f8042/source.gz",
+      "fetched_at": "2026-09-05T10:29:37.617065+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 403,
+      "suggested_sections": [
+        {
+          "start_line": 14,
+          "end_line": 15,
+          "truncated": true
+        },
+        {
+          "start_line": 31,
+          "end_line": 209,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/training/app-links/instant-app-links",
+      "platform": "android",
+      "title": "Create App Links for Instant Apps",
+      "local_path": "docs-raw/research/2026-09-06/d156d79c8517c4419810343cd4ade871c78acd354672b133167c5feb34b54fda/8d19ed7ff609257de2d95ca19c3dc5b1fcd9b046a482f4c6a889f124bdb1570e/document.md",
+      "sha256": "8d19ed7ff609257de2d95ca19c3dc5b1fcd9b046a482f4c6a889f124bdb1570e",
+      "raw_sha256": "43841ac78e562d44efe8b5e7fe64928a5bc2ae255f06d268b08c5f0d9876dc24",
+      "raw_path": "docs-raw/research/2026-09-06/d156d79c8517c4419810343cd4ade871c78acd354672b133167c5feb34b54fda/8d19ed7ff609257de2d95ca19c3dc5b1fcd9b046a482f4c6a889f124bdb1570e/source.gz",
+      "fetched_at": "2026-09-05T10:37:58.200631+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 93,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 13,
+          "truncated": false
+        },
+        {
+          "start_line": 14,
+          "end_line": 43,
+          "truncated": false
+        },
+        {
+          "start_line": 44,
+          "end_line": 74,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/advancedcommerceapi/setupmanagesubscriptions",
+      "platform": "ios",
+      "title": "Setting up a link to manage subscriptions",
+      "local_path": "docs-raw/research/2026-09-06/1188c1f6dc8baef3969f17f2bd43365901b4cb91e298a1bc3e10f4fb8e05dc38/e8aaf57432eb393e3576ffa50a1fbc38ba5aafddc55ac26b88bf4421bc682159/document.md",
+      "sha256": "e8aaf57432eb393e3576ffa50a1fbc38ba5aafddc55ac26b88bf4421bc682159",
+      "raw_sha256": "1cac704ee7850e3154e4f32396dc7ace9a2c82d5c121a09357036608249090a3",
+      "raw_path": "docs-raw/research/2026-09-06/1188c1f6dc8baef3969f17f2bd43365901b4cb91e298a1bc3e10f4fb8e05dc38/e8aaf57432eb393e3576ffa50a1fbc38ba5aafddc55ac26b88bf4421bc682159/source.gz",
+      "fetched_at": "2026-09-05T10:16:30.072847+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 23,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 23,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://firebase.google.com/docs/auth/ios/passing-state-in-email-actions",
+      "platform": "ios",
+      "title": "Passing State in Email Actions",
+      "local_path": "docs-raw/research/2026-09-06/5ed40e44e2fa8a35d79072836055156d7a7975417758355bb88c6fab6171d917/6261142110ba73e559e241a6895253f7bbc731214744dd5dd819487939e81b7d/document.md",
+      "sha256": "6261142110ba73e559e241a6895253f7bbc731214744dd5dd819487939e81b7d",
+      "raw_sha256": "3fa20bad538a69d9a61f5d20dd2bf9fbeeeefc62714eba0eb013b1f127cf8a81",
+      "raw_path": "docs-raw/research/2026-09-06/5ed40e44e2fa8a35d79072836055156d7a7975417758355bb88c6fab6171d917/6261142110ba73e559e241a6895253f7bbc731214744dd5dd819487939e81b7d/source.gz",
+      "fetched_at": "2026-09-05T11:06:31.980619+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 198,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 3,
+          "truncated": true
+        },
+        {
+          "start_line": 37,
+          "end_line": 51,
+          "truncated": false
+        },
+        {
+          "start_line": 52,
+          "end_line": 62,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/navigating-between-web-and-apps",
+      "platform": "harmonyos",
+      "title": "Web和应用的跳转与拉起",
+      "local_path": "docs-raw/research/2026-09-06/51df458b8a077e794bbe47cc84a98a56132b7884886f66f235c4ee7e2eefa6af/c826c960859ddf664ffdcc739db0f545db6f76bff75876cdeda77c4b885c4e0b/document.md",
+      "sha256": "c826c960859ddf664ffdcc739db0f545db6f76bff75876cdeda77c4b885c4e0b",
+      "raw_sha256": "2137b53d48fb2757e8c4a886ed1fbf41d6c4d844450ac37153c1fbf9ec35a7f7",
+      "raw_path": "docs-raw/research/2026-09-06/51df458b8a077e794bbe47cc84a98a56132b7884886f66f235c4ee7e2eefa6af/c826c960859ddf664ffdcc739db0f545db6f76bff75876cdeda77c4b885c4e0b/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 308,
+      "suggested_sections": [
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": true
+        },
+        {
+          "start_line": 42,
+          "end_line": 74,
+          "truncated": false
+        },
+        {
+          "start_line": 75,
+          "end_line": 201,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/applinking-cross-platform",
+      "platform": "harmonyos",
+      "title": "通过聚合链接按指定方式跳转至应用",
+      "local_path": "docs-raw/research/2026-09-06/03bce9b614134a84d52b8bacd5e3c213792c9d100bab0cffe81668471ffc1307/b277397363af57cd98e5eccef445a0147c863992768ca41d815f2adde2ade91f/document.md",
+      "sha256": "b277397363af57cd98e5eccef445a0147c863992768ca41d815f2adde2ade91f",
+      "raw_sha256": "db3310fb64fd98a35c0ce41afa76a0d993953d6e70ef9c2e90fb9fd0e0e15b6e",
+      "raw_path": "docs-raw/research/2026-09-06/03bce9b614134a84d52b8bacd5e3c213792c9d100bab0cffe81668471ffc1307/b277397363af57cd98e5eccef445a0147c863992768ca41d815f2adde2ade91f/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 358,
+      "suggested_sections": [
+        {
+          "start_line": 60,
+          "end_line": 143,
+          "truncated": false
+        },
+        {
+          "start_line": 172,
+          "end_line": 183,
+          "truncated": true
+        },
+        {
+          "start_line": 244,
+          "end_line": 278,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:37.375931+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "fc81e3f0fa8192748d799ca220607125c60d7bd9f182c5ee9206d947605f1f48"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "7e3d0eef4138938a2ecf12bebb165f79569e1497c0ef0d059f7d25987e5ea5fe",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-enterprise-accountmanager",
+  "platform": "harmonyos",
+  "title": "@ohos.enterprise.accountManager（账号管理）",
+  "local_path": "docs-raw/research/2026-09-06/7e3d0eef4138938a2ecf12bebb165f79569e1497c0ef0d059f7d25987e5ea5fe/a12817f937c9d6cf4aa7021d868668319fec1f39cb069fac6beecdeb690a00b0/document.md",
+  "sha256": "a12817f937c9d6cf4aa7021d868668319fec1f39cb069fac6beecdeb690a00b0",
+  "raw_sha256": "60464e0cc2487e8bfa8654cbee32d4b051b2a25cc0abecfe8392d1c12d879ad5",
+  "raw_path": "docs-raw/research/2026-09-06/7e3d0eef4138938a2ecf12bebb165f79569e1497c0ef0d059f7d25987e5ea5fe/a12817f937c9d6cf4aa7021d868668319fec1f39cb069fac6beecdeb690a00b0/source.gz",
+  "fetched_at": "2026-09-05T10:27:18.953076+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

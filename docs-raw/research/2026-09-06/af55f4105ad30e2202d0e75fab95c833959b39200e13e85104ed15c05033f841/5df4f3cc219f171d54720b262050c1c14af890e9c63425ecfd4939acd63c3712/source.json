@@ -1,0 +1,13 @@
+{
+  "id": "af55f4105ad30e2202d0e75fab95c833959b39200e13e85104ed15c05033f841",
+  "url": "https://developer.android.com/social-and-messaging/guides/communication/receiving-messages",
+  "platform": "android",
+  "title": "Receive messages reliably",
+  "local_path": "docs-raw/research/2026-09-06/af55f4105ad30e2202d0e75fab95c833959b39200e13e85104ed15c05033f841/5df4f3cc219f171d54720b262050c1c14af890e9c63425ecfd4939acd63c3712/document.md",
+  "sha256": "5df4f3cc219f171d54720b262050c1c14af890e9c63425ecfd4939acd63c3712",
+  "raw_sha256": "ecea11ebe7e1775ac0b31b0879ed24113c240ed38ea9863039bb8b3291ce08ed",
+  "raw_path": "docs-raw/research/2026-09-06/af55f4105ad30e2202d0e75fab95c833959b39200e13e85104ed15c05033f841/5df4f3cc219f171d54720b262050c1c14af890e9c63425ecfd4939acd63c3712/source.gz",
+  "fetched_at": "2026-09-05T10:34:39.934463+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

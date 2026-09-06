@@ -1,0 +1,553 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "distributed.continuity.handoff",
+    "level": "L3",
+    "parent": "distributed.continuity",
+    "name": {
+      "zh": "跨设备接续",
+      "en": "Cross-Device Handoff"
+    },
+    "definition": "在另一台已登录设备上继续活动。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "split_justification": "analog",
+    "aliases": [
+      "Handoff",
+      "App Continuity"
+    ],
+    "knowledge_path": "knowledge/distributed/continuity/handoff.yaml",
+    "comparison_scope": {
+      "includes": [
+        "在另一台已登录设备上继续活动。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "af60132e56e5e2557b87a90c0c41e96491b122a68ac9e4671a09a6de0c569bed",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "db2e97234a5cc637280d807f5f49e94cebcec3b3cc59eaf8e77c867a127443ab",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/develop/better-together/continue-on",
+      "platform": "android",
+      "title": "About the Continue On feature",
+      "local_path": "docs-raw/research/2026-09-06/998d81d75199499e39a29b79fb96c733bb4ad8a10039659e4feb64e8d99bb8ca/2dc61ffaa94fc7df6a830c099dfe7b1a170bcb220c7fad3b8236b323406d016e/document.md",
+      "sha256": "2dc61ffaa94fc7df6a830c099dfe7b1a170bcb220c7fad3b8236b323406d016e",
+      "raw_sha256": "24088384b186e36bd6b80c0cc9b081fbb5140378ceee995f7f2a161aa7be9b9f",
+      "raw_path": "docs-raw/research/2026-09-06/998d81d75199499e39a29b79fb96c733bb4ad8a10039659e4feb64e8d99bb8ca/2dc61ffaa94fc7df6a830c099dfe7b1a170bcb220c7fad3b8236b323406d016e/source.gz",
+      "fetched_at": "2026-09-05T10:24:12.342665+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 111,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 24,
+          "truncated": false
+        },
+        {
+          "start_line": 25,
+          "end_line": 41,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/develop/better-together/continue-on/enable-support",
+      "platform": "android",
+      "title": "Enable and customize cross-device handoff",
+      "local_path": "docs-raw/research/2026-09-06/1411d97e770065a05d92c724164baeaf13b882446706b8db0b2ef1de533255b4/c91affbea7db4c554d2c17be28eb6cc1d5faadeeb988b6877114c78f5fe61a28/document.md",
+      "sha256": "c91affbea7db4c554d2c17be28eb6cc1d5faadeeb988b6877114c78f5fe61a28",
+      "raw_sha256": "bf009402f9adef7a33fd8c17b1f4c9a2605b71461fd7bf8f2ea698e17b22043a",
+      "raw_path": "docs-raw/research/2026-09-06/1411d97e770065a05d92c724164baeaf13b882446706b8db0b2ef1de533255b4/c91affbea7db4c554d2c17be28eb6cc1d5faadeeb988b6877114c78f5fe61a28/source.gz",
+      "fetched_at": "2026-09-05T10:24:12.707591+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 206,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 49,
+          "truncated": false
+        },
+        {
+          "start_line": 50,
+          "end_line": 61,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/foundation/continuing-user-activities-with-handoff",
+      "platform": "ios",
+      "title": "Continuing User Activities with Handoff",
+      "local_path": "docs-raw/research/2026-09-06/14c483a22a31900da48e7e4fc0478e438d27aefcc39db093742d3c9f39c7dc5e/9f54bf0f64bc4d4b3d6b6c601fe7fa12cb55826703f00d76631fca5b84a5da86/document.md",
+      "sha256": "9f54bf0f64bc4d4b3d6b6c601fe7fa12cb55826703f00d76631fca5b84a5da86",
+      "raw_sha256": "a115af24f147b7a89e4bef0ca791f6a54d23aa7e554f292854816a397fe8a190",
+      "raw_path": "docs-raw/research/2026-09-06/14c483a22a31900da48e7e4fc0478e438d27aefcc39db093742d3c9f39c7dc5e/9f54bf0f64bc4d4b3d6b6c601fe7fa12cb55826703f00d76631fca5b84a5da86/source.gz",
+      "fetched_at": "2026-09-05T10:22:07.235635+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 157,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 6,
+          "truncated": true
+        },
+        {
+          "start_line": 13,
+          "end_line": 35,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/foundation/implementing-handoff-in-your-app",
+      "platform": "ios",
+      "title": "Implementing Handoff in Your App",
+      "local_path": "docs-raw/research/2026-09-06/d6ad65ec19b9b48280df9f51994fe0357dc0cd350209944c8c2b0f09de25c807/efeb9218de70098821a5fe35e1ddb30fe9dc9b22668fd1dab075109fbc6d63f5/document.md",
+      "sha256": "efeb9218de70098821a5fe35e1ddb30fe9dc9b22668fd1dab075109fbc6d63f5",
+      "raw_sha256": "1bb47649370c1653ebd0fd768050bab3eba0ceac56d9046c3a7461412e5b0bb9",
+      "raw_path": "docs-raw/research/2026-09-06/d6ad65ec19b9b48280df9f51994fe0357dc0cd350209944c8c2b0f09de25c807/efeb9218de70098821a5fe35e1ddb30fe9dc9b22668fd1dab075109fbc6d63f5/source.gz",
+      "fetched_at": "2026-09-05T10:51:36.686348+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 118,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 19,
+          "truncated": false
+        },
+        {
+          "start_line": 20,
+          "end_line": 38,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide_sidebar-navigation",
+      "platform": "harmonyos",
+      "title": "@cross-device-app-dev/sidebar-navigation",
+      "local_path": "docs-raw/research/2026-09-06/ed8e5cbb6756a2489af17dd3adefacd2606d78fd7bc6866e70aa0fa220f85144/65f6a9f24ecbd181da30bdb3d7803a8df938ecad144d40fdfd266333397aee10/document.md",
+      "sha256": "65f6a9f24ecbd181da30bdb3d7803a8df938ecad144d40fdfd266333397aee10",
+      "raw_sha256": "f1b53b70cc1f439e454e9b9db28b5f9aafbf4e79d08e2a0be9635e623733a39b",
+      "raw_path": "docs-raw/research/2026-09-06/ed8e5cbb6756a2489af17dd3adefacd2606d78fd7bc6866e70aa0fa220f85144/65f6a9f24ecbd181da30bdb3d7803a8df938ecad144d40fdfd266333397aee10/source.gz",
+      "fetched_at": "2026-09-05T10:24:22.487695+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 63,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 15,
+          "truncated": false
+        },
+        {
+          "start_line": 16,
+          "end_line": 19,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-continue-data",
+      "platform": "harmonyos",
+      "title": "应用接续数据迁移",
+      "local_path": "docs-raw/research/2026-09-06/4dbcc4083edff372c97a898fa9b99dbd4a1b2e6f42801a255ddc11266033efd9/00ed0ce810251e567f823b833b37973f1cc88c2e1975464d0eadb98b0135883b/document.md",
+      "sha256": "00ed0ce810251e567f823b833b37973f1cc88c2e1975464d0eadb98b0135883b",
+      "raw_sha256": "d2d700a1f380a8996536a0892b46bdd69edbb61f78a91768983c223bccf08077",
+      "raw_path": "docs-raw/research/2026-09-06/4dbcc4083edff372c97a898fa9b99dbd4a1b2e6f42801a255ddc11266033efd9/00ed0ce810251e567f823b833b37973f1cc88c2e1975464d0eadb98b0135883b/source.gz",
+      "fetched_at": "2026-09-05T10:43:40.565761+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 373,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": true
+        },
+        {
+          "start_line": 12,
+          "end_line": 13,
+          "truncated": true
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:24.047104+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "cc6e9ddca11a06b46af1963acd3fb0a857f401a2065b02f4187c4059963f6a87"
+}

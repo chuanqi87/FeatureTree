@@ -1,0 +1,13 @@
+{
+  "id": "6840b8ddcb082bcdd87692b6c13df54986c5e4f71121ce9c34c267d45399dca8",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkweb-ndk-jsbridge",
+  "platform": "harmonyos",
+  "title": "应用侧与前端页面的相互调用(C/C++)",
+  "local_path": "docs-raw/research/2026-09-06/6840b8ddcb082bcdd87692b6c13df54986c5e4f71121ce9c34c267d45399dca8/a9b0dd68c2be4c2ae195b140e18489042d8ab9891bab890235d770c84111d671/document.md",
+  "sha256": "a9b0dd68c2be4c2ae195b140e18489042d8ab9891bab890235d770c84111d671",
+  "raw_sha256": "63be383003cdb8eeeae27e5ab74a5544838c3ba0379dffcb514e608e65f1d2a7",
+  "raw_path": "docs-raw/research/2026-09-06/6840b8ddcb082bcdd87692b6c13df54986c5e4f71121ce9c34c267d45399dca8/a9b0dd68c2be4c2ae195b140e18489042d8ab9891bab890235d770c84111d671/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

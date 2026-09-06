@@ -1,0 +1,543 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "input.ime.framework",
+    "level": "L3",
+    "parent": "input.ime",
+    "name": {
+      "zh": "输入法框架",
+      "en": "IME Framework"
+    },
+    "definition": "应用与系统输入法交互及自定义 IME。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "knowledge_path": "knowledge/input/ime/framework.yaml",
+    "comparison_scope": {
+      "includes": [
+        "应用与系统输入法交互及自定义 IME。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "5bacbf8a727dd7284a4976af9077564a8f4b3400a2eb51b392c3ce87f7b15c34",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "d549a5b426986ac58da5d336e5ed024483be5458bded4f328e23b9bf756dd240",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/training/wearables/user-input/wear-ime",
+      "platform": "android",
+      "title": "Create input method editors on Wear",
+      "local_path": "docs-raw/research/2026-09-06/49d2c48aff1395726bf1c485e044ddb3842594cabaa7662639ed8afa78addfbb/8e3544b0af33d6240c045f8658780dd26069cd3ebdd2d9ae81c304b1bb1b2deb/document.md",
+      "sha256": "8e3544b0af33d6240c045f8658780dd26069cd3ebdd2d9ae81c304b1bb1b2deb",
+      "raw_sha256": "8f0db3a70b5fadaa21b2cfa35e843c419acc3a8fce2fefb4906149bdf096dd75",
+      "raw_path": "docs-raw/research/2026-09-06/49d2c48aff1395726bf1c485e044ddb3842594cabaa7662639ed8afa78addfbb/8e3544b0af33d6240c045f8658780dd26069cd3ebdd2d9ae81c304b1bb1b2deb/source.gz",
+      "fetched_at": "2026-09-05T10:39:07.725200+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 102,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 27,
+          "truncated": false
+        },
+        {
+          "start_line": 28,
+          "end_line": 32,
+          "truncated": false
+        },
+        {
+          "start_line": 33,
+          "end_line": 38,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://firebase.google.com/docs/app-hosting/frameworks-tooling",
+      "platform": "android",
+      "title": "Frameworks and tooling for App Hosting",
+      "local_path": "docs-raw/research/2026-09-06/e337a6c81d5d6ee22ab55e71b45a0c81b25fe714e844669a2ad7a543acc18645/51ffa291f02d558ba7acbd87c38e358d776035f6779794279ab4402ed692bcd7/document.md",
+      "sha256": "51ffa291f02d558ba7acbd87c38e358d776035f6779794279ab4402ed692bcd7",
+      "raw_sha256": "c91deb955481ad64dfad307349c9cf756b661d6539478158f384cdc79d48c3f6",
+      "raw_path": "docs-raw/research/2026-09-06/e337a6c81d5d6ee22ab55e71b45a0c81b25fe714e844669a2ad7a543acc18645/51ffa291f02d558ba7acbd87c38e358d776035f6779794279ab4402ed692bcd7/source.gz",
+      "fetched_at": "2026-09-05T11:03:31.269770+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 244,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 7,
+          "truncated": false
+        },
+        {
+          "start_line": 8,
+          "end_line": 15,
+          "truncated": false
+        },
+        {
+          "start_line": 16,
+          "end_line": 42,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/screentimeapidocumentation",
+      "platform": "ios",
+      "title": "Screen Time Technology Frameworks",
+      "local_path": "docs-raw/research/2026-09-06/31d611f6e8ec4a5be53e8c9195ec9de1efad812597368ffc87d4cd11c82333fb/126aef40a5ed68eecb50501a9938ba1e3c62c773aecb778d3e033a3ec0b61b16/document.md",
+      "sha256": "126aef40a5ed68eecb50501a9938ba1e3c62c773aecb778d3e033a3ec0b61b16",
+      "raw_sha256": "4d24703c1327bce7f0b93ff4e17af9634bf804d10034042c59b8c7509f090dad",
+      "raw_path": "docs-raw/research/2026-09-06/31d611f6e8ec4a5be53e8c9195ec9de1efad812597368ffc87d4cd11c82333fb/126aef40a5ed68eecb50501a9938ba1e3c62c773aecb778d3e033a3ec0b61b16/source.gz",
+      "fetched_at": "2026-09-05T11:17:36.472493+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 49,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 20,
+          "truncated": false
+        },
+        {
+          "start_line": 21,
+          "end_line": 22,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/webkit/macos-webdriver-commands-for-safari-11-1-and-earlier",
+      "platform": "ios",
+      "title": "macOS WebDriver Commands for Safari 11.1 and earlier",
+      "local_path": "docs-raw/research/2026-09-06/066113e2342d71e9e42d8c0e2934f0de941de79172b33af1e34ad1683ea28de7/de87539c471aa2d2abf5f1e2fb08f12ba3056f956e9cb6eba2e3ca47e9dadf0e/document.md",
+      "sha256": "de87539c471aa2d2abf5f1e2fb08f12ba3056f956e9cb6eba2e3ca47e9dadf0e",
+      "raw_sha256": "6415e0823ba91c6e8431df1606eaa68de862634cdbe5b985ccc2c083cb6627a0",
+      "raw_path": "docs-raw/research/2026-09-06/066113e2342d71e9e42d8c0e2934f0de941de79172b33af1e34ad1683ea28de7/de87539c471aa2d2abf5f1e2fb08f12ba3056f956e9cb6eba2e3ca47e9dadf0e/source.gz",
+      "fetched_at": "2026-09-05T10:29:06.751639+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 104,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 28,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inputmethod",
+      "platform": "harmonyos",
+      "title": "@ohos.inputMethod (输入法框架)",
+      "local_path": "docs-raw/research/2026-09-06/4c1099c39a18b9482eeb088f64771ffd5dd6114d81cb06e290993c28e39c0656/fb28c4d7d7e221f30778473f5097f4789b8ec8a825c1ca0e68e866d6122f688c/document.md",
+      "sha256": "fb28c4d7d7e221f30778473f5097f4789b8ec8a825c1ca0e68e866d6122f688c",
+      "raw_sha256": "0bbb1052252f44bc7723b03a4f138a09373c1108c538f9e3c9b0f1970ea969f4",
+      "raw_path": "docs-raw/research/2026-09-06/4c1099c39a18b9482eeb088f64771ffd5dd6114d81cb06e290993c28e39c0656/fb28c4d7d7e221f30778473f5097f4789b8ec8a825c1ca0e68e866d6122f688c/source.gz",
+      "fetched_at": "2026-09-05T10:27:35.056254+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 4212,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 100,
+          "truncated": false
+        },
+        {
+          "start_line": 101,
+          "end_line": 102,
+          "truncated": true
+        },
+        {
+          "start_line": 275,
+          "end_line": 276,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-inputmethod-types-capi-h",
+      "platform": "harmonyos",
+      "title": "inputmethod_types_capi.h",
+      "local_path": "docs-raw/research/2026-09-06/140d9a3f86880e6efdf8dd718ee81271012aac4cc778c6659fbfb96b51453417/387d44591575519698c02c4c2dd559f4aa4f229dda242855f48cb86ad753a561/document.md",
+      "sha256": "387d44591575519698c02c4c2dd559f4aa4f229dda242855f48cb86ad753a561",
+      "raw_sha256": "3cafd4cd9efa7cf7d24cbc92ef86e085192fe30576372d8f638b3efe1f75de7a",
+      "raw_path": "docs-raw/research/2026-09-06/140d9a3f86880e6efdf8dd718ee81271012aac4cc778c6659fbfb96b51453417/387d44591575519698c02c4c2dd559f4aa4f229dda242855f48cb86ad753a561/source.gz",
+      "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 257,
+      "suggested_sections": [
+        {
+          "start_line": 19,
+          "end_line": 20,
+          "truncated": true
+        },
+        {
+          "start_line": 58,
+          "end_line": 87,
+          "truncated": false
+        },
+        {
+          "start_line": 139,
+          "end_line": 161,
+          "truncated": true
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:33.816664+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "b2d7830df21fa98ef660673bc3ffa9bf3525b9e9dfd19f489b6af75beb249da7"
+}

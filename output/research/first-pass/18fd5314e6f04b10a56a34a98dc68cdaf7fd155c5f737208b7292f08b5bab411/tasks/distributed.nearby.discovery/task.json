@@ -1,0 +1,543 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "distributed.nearby.discovery",
+    "level": "L3",
+    "parent": "distributed.nearby",
+    "name": {
+      "zh": "附近发现",
+      "en": "Nearby Discovery"
+    },
+    "definition": "发现附近对等设备。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "aliases": [
+      "Nearby",
+      "MultipeerConnectivity",
+      "近场通信分布式"
+    ],
+    "knowledge_path": "knowledge/distributed/nearby/discovery.yaml",
+    "comparison_scope": {
+      "includes": [
+        "发现附近对等设备。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "11e9ab28860e713c9f97469df73bd9c3cc5e1cad67753d4701e3e389c177b51e",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "68e8d258531526ba3329d07dcddc3431c9b2eeb897b2008aa971cd5c101b395e",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/games/services/unity/v2/api/interface/google-play-games/basic-api/nearby/i-discovery-listener",
+      "platform": "android",
+      "title": "GooglePlayGames. BasicApi. Nearby. IDiscoveryListener",
+      "local_path": "docs-raw/research/2026-09-06/eedf6232e11cafcacf0c2afadeb0ad4f36005cb19c6318cf5544490493934218/577b69fdafd44c6aa00857800cd495bd3b71719a45817b6c1f78a9dd3d726220/document.md",
+      "sha256": "577b69fdafd44c6aa00857800cd495bd3b71719a45817b6c1f78a9dd3d726220",
+      "raw_sha256": "45c221517e49401d23290d34c7d35bfa82dbc8a05f89c4edb68c9e9a50ff1c80",
+      "raw_path": "docs-raw/research/2026-09-06/eedf6232e11cafcacf0c2afadeb0ad4f36005cb19c6318cf5544490493934218/577b69fdafd44c6aa00857800cd495bd3b71719a45817b6c1f78a9dd3d726220/source.gz",
+      "fetched_at": "2026-09-05T10:28:40.060284+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 38,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 13,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/games/services/unity/v2/api/interface/google-play-games/basic-api/nearby/i-nearby-connection-client",
+      "platform": "android",
+      "title": "GooglePlayGames. BasicApi. Nearby. INearbyConnectionClient",
+      "local_path": "docs-raw/research/2026-09-06/5f823495cb019a0a6092571e898ac0397b95d156cce3aeb4197459b634d11ec2/d13962152e5e78116e001b6b4dfed69854e52dce66c0ca7e7158c41454e38141/document.md",
+      "sha256": "d13962152e5e78116e001b6b4dfed69854e52dce66c0ca7e7158c41454e38141",
+      "raw_sha256": "78c2841d21bf1ad2880610011c0c89fc4f42ba39c10ec987c36823423584fa8d",
+      "raw_path": "docs-raw/research/2026-09-06/5f823495cb019a0a6092571e898ac0397b95d156cce3aeb4197459b634d11ec2/d13962152e5e78116e001b6b4dfed69854e52dce66c0ca7e7158c41454e38141/source.gz",
+      "fetched_at": "2026-09-05T10:28:40.449649+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 209,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 8,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/multipeerconnectivity",
+      "platform": "ios",
+      "title": "Multipeer Connectivity",
+      "local_path": "docs-raw/research/2026-09-06/3cca8d82e3be227b834072c1f4cef403def78997e1221f11ae7d65f7b650d084/3236a57afeaf5fb6bdc38bbb4645d5ba7ccb8056d21a8c0c6c46898d09fd4c8b/document.md",
+      "sha256": "3236a57afeaf5fb6bdc38bbb4645d5ba7ccb8056d21a8c0c6c46898d09fd4c8b",
+      "raw_sha256": "2738538f52c1abb5477f1d1b1e56310bfea941969b10a58876e8c9448d9e9523",
+      "raw_path": "docs-raw/research/2026-09-06/3cca8d82e3be227b834072c1f4cef403def78997e1221f11ae7d65f7b650d084/3236a57afeaf5fb6bdc38bbb4645d5ba7ccb8056d21a8c0c6c46898d09fd4c8b/source.gz",
+      "fetched_at": "2026-09-05T10:32:37.678465+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 103,
+      "suggested_sections": [
+        {
+          "start_line": 12,
+          "end_line": 22,
+          "truncated": false
+        },
+        {
+          "start_line": 23,
+          "end_line": 38,
+          "truncated": false
+        },
+        {
+          "start_line": 41,
+          "end_line": 66,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/discovering-peers-with-multipeer-connectivity",
+      "platform": "ios",
+      "title": "Discovering peers with Multipeer Connectivity",
+      "local_path": "docs-raw/research/2026-09-06/03a355c50231416c49e9a69747bbdef3623e1b8c9199ef7a5db11956cd31d566/79605ce59c53d11985aad9a78ec0c7592dfe574f07722c86183cdcf972604ff4/document.md",
+      "sha256": "79605ce59c53d11985aad9a78ec0c7592dfe574f07722c86183cdcf972604ff4",
+      "raw_sha256": "6c51ef70e11acbfbe6946866e9cd34fd8b2278377c1c3068d58188092eab5d16",
+      "raw_path": "docs-raw/research/2026-09-06/03a355c50231416c49e9a69747bbdef3623e1b8c9199ef7a5db11956cd31d566/79605ce59c53d11985aad9a78ec0c7592dfe574f07722c86183cdcf972604ff4/source.gz",
+      "fetched_at": "2026-09-05T10:24:17.195529+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 50,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 24,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/gameservice-nearbytransfer",
+      "platform": "harmonyos",
+      "title": "gameNearbyTransfer（游戏近场快传）",
+      "local_path": "docs-raw/research/2026-09-06/70ae5c803fcdddcf4a97921ddf9f13c46ed7084c7bbdf3ec1608efbfb06b8be5/a6325275cd35a3bf39df662b405deb82e40a0eb98f25527c883181e1bb3a74b3/document.md",
+      "sha256": "a6325275cd35a3bf39df662b405deb82e40a0eb98f25527c883181e1bb3a74b3",
+      "raw_sha256": "3e8061e171928625c6aeece7fc248e76460556d2ce52988c0004c4f6c4017220",
+      "raw_path": "docs-raw/research/2026-09-06/70ae5c803fcdddcf4a97921ddf9f13c46ed7084c7bbdf3ec1608efbfb06b8be5/a6325275cd35a3bf39df662b405deb82e40a0eb98f25527c883181e1bb3a74b3/source.gz",
+      "fetched_at": "2026-09-05T10:26:20.323512+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 1563,
+      "suggested_sections": [
+        {
+          "start_line": 82,
+          "end_line": 83,
+          "truncated": true
+        },
+        {
+          "start_line": 455,
+          "end_line": 506,
+          "truncated": false
+        },
+        {
+          "start_line": 507,
+          "end_line": 558,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-gameservicekit-6101",
+      "platform": "harmonyos",
+      "title": "Game Service Kit",
+      "local_path": "docs-raw/research/2026-09-06/4551630be1f8aa0c8f93c3311e9bebe1874b14bef200417f2c369401f7f11e76/4d06411b94b71a54531c0c4ef2037dbe7973646f0f718fd8ea63ce9bba23bd87/document.md",
+      "sha256": "4d06411b94b71a54531c0c4ef2037dbe7973646f0f718fd8ea63ce9bba23bd87",
+      "raw_sha256": "a133e2257638da2bc652d0bde376042dee370a236cddeebe69e2c2e6ea2bb333",
+      "raw_path": "docs-raw/research/2026-09-06/4551630be1f8aa0c8f93c3311e9bebe1874b14bef200417f2c369401f7f11e76/4d06411b94b71a54531c0c4ef2037dbe7973646f0f718fd8ea63ce9bba23bd87/source.gz",
+      "fetched_at": "2026-09-05T10:56:01.334815+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 43,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 25,
+          "truncated": true
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:24.584613+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "cc27046b0d72f67aee83c705a1cd47a684c1006b9c9736984a15d8eacaf0401c"
+}

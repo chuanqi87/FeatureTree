@@ -1,0 +1,13 @@
+{
+  "id": "e6cc3f7fe05421fd30d240002e8ed299a4b50b4c9be89bbc4eb8fd20d07118d3",
+  "url": "https://developer.apple.com/documentation/security/enabling-password-autofill-on-an-html-input-element",
+  "platform": "ios",
+  "title": "Enabling Password AutoFill on an HTML input element",
+  "local_path": "docs-raw/research/2026-09-06/e6cc3f7fe05421fd30d240002e8ed299a4b50b4c9be89bbc4eb8fd20d07118d3/89487902447d5acf140517573ef6949cc4a887bcc98d62b86d0892925c3d0e0d/document.md",
+  "sha256": "89487902447d5acf140517573ef6949cc4a887bcc98d62b86d0892925c3d0e0d",
+  "raw_sha256": "88868563823bdf7c389c46189f7c9a36ed266c87a2004bc34fa4ec6c515e9482",
+  "raw_path": "docs-raw/research/2026-09-06/e6cc3f7fe05421fd30d240002e8ed299a4b50b4c9be89bbc4eb8fd20d07118d3/89487902447d5acf140517573ef6949cc4a887bcc98d62b86d0892925c3d0e0d/source.gz",
+  "fetched_at": "2026-09-05T11:18:32.259100+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

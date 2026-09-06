@@ -1,0 +1,13 @@
+{
+  "id": "de3d6849738b42c2c93f26b446515f6a2bbff7c78f4f8678b3b6b2b2ea2a7b35",
+  "url": "https://developer.apple.com/documentation/mapkit/displaying-overlays-on-a-map",
+  "platform": "ios",
+  "title": "Displaying overlays on a map",
+  "local_path": "docs-raw/research/2026-09-06/de3d6849738b42c2c93f26b446515f6a2bbff7c78f4f8678b3b6b2b2ea2a7b35/748a233beb78d5acfe45bb40b6fe2733e33f55b00e033c155c8f22501d008ad8/document.md",
+  "sha256": "748a233beb78d5acfe45bb40b6fe2733e33f55b00e033c155c8f22501d008ad8",
+  "raw_sha256": "647d179d5aa8ea95c82b89f92f11d3cdc515d229f8ee28dbd54757fb70b70981",
+  "raw_path": "docs-raw/research/2026-09-06/de3d6849738b42c2c93f26b446515f6a2bbff7c78f4f8678b3b6b2b2ea2a7b35/748a233beb78d5acfe45bb40b6fe2733e33f55b00e033c155c8f22501d008ad8/source.gz",
+  "fetched_at": "2026-09-05T10:23:35.979408+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

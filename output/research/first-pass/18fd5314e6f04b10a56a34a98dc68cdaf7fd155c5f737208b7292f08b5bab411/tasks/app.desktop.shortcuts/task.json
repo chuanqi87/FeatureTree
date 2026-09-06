@@ -1,0 +1,549 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "app.desktop.shortcuts",
+    "level": "L3",
+    "parent": "app.desktop",
+    "name": {
+      "zh": "桌面快捷方式",
+      "en": "Launcher Shortcuts"
+    },
+    "definition": "长按图标或系统菜单中的深链快捷入口。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "split_justification": "task",
+    "knowledge_path": "knowledge/app/desktop/shortcuts.yaml",
+    "comparison_scope": {
+      "includes": [
+        "长按图标或系统菜单中的深链快捷入口。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "dbdacba1d11da1ab22f96b7a89ee4a48c1957fe72e80ac0678d4a8396dbae5cc",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "f0ae3aec23dfa3a838bc7aab844effd97f3c305fc546dc2f16e4f4d7f98623cb",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/develop/ui/compose/system/shortcuts",
+      "platform": "android",
+      "title": "App shortcuts overview",
+      "local_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/document.md",
+      "sha256": "7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6",
+      "raw_sha256": "1d691513441af9b757e8941a701b84b948b2e442faa2bb6a5756598b9bd93719",
+      "raw_path": "docs-raw/research/2026-09-06/a74403b4ca966cb83f31ec67dd96bdcf02b8d1c53efbd3a26f4e5dbfa66f42ff/7cc91ed559d09c75d0a4271fd164c2ceaeedcffdc6c3917bfb489373a6a95be6/source.gz",
+      "fetched_at": "2026-09-05T10:25:34.793195+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 83,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 9,
+          "truncated": false
+        },
+        {
+          "start_line": 10,
+          "end_line": 46,
+          "truncated": false
+        },
+        {
+          "start_line": 47,
+          "end_line": 52,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/guide/topics/ui/shortcuts/creating-shortcuts",
+      "platform": "android",
+      "title": "Create shortcuts",
+      "local_path": "docs-raw/research/2026-09-06/31756d9966b13718103407861e0d539910a6c89ac852a9e607b0f5a97b5cee80/13666428f990fa67c0de01cd6470ddb1d01328936e81c48f8c4ea1678ee076b3/document.md",
+      "sha256": "13666428f990fa67c0de01cd6470ddb1d01328936e81c48f8c4ea1678ee076b3",
+      "raw_sha256": "18e7574be69c2c54b72db75cfa544d12655fee8901d22ad537ca90ae2e3a39d1",
+      "raw_path": "docs-raw/research/2026-09-06/31756d9966b13718103407861e0d539910a6c89ac852a9e607b0f5a97b5cee80/13666428f990fa67c0de01cd6470ddb1d01328936e81c48f8c4ea1678ee076b3/source.gz",
+      "fetched_at": "2026-09-05T10:45:05.453630+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 397,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 37,
+          "end_line": 77,
+          "truncated": true
+        },
+        {
+          "start_line": 189,
+          "end_line": 190,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/appintents/app-shortcuts",
+      "platform": "ios",
+      "title": "App Shortcuts",
+      "local_path": "docs-raw/research/2026-09-06/fb1af83d3f9dab3837d68eeecf91bc9c9c5974f5e14cc78ad838cfa8c69331e8/9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94/document.md",
+      "sha256": "9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94",
+      "raw_sha256": "021007f8b432a7cc4d37b169b80b6ce629f10f20626c15db4cdaebc02c12eacc",
+      "raw_path": "docs-raw/research/2026-09-06/fb1af83d3f9dab3837d68eeecf91bc9c9c5974f5e14cc78ad838cfa8c69331e8/9375f5abe168d01e9dca5ece666adfa323210d7e9d54141d3b2a597b37adff94/source.gz",
+      "fetched_at": "2026-09-05T10:17:04.504685+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 142,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 34,
+          "truncated": false
+        },
+        {
+          "start_line": 35,
+          "end_line": 36,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/sirikit/adding-shortcuts-for-wind-down",
+      "platform": "ios",
+      "title": "Adding Shortcuts for Wind Down",
+      "local_path": "docs-raw/research/2026-09-06/708ca06e1eb4a58f2affd398844d733b78ec5ebbe58b3774a0aa4f2c2813769c/998d215b4b78a180de73dc4263343e63aff1533a0d0206674986066a9bab8af7/document.md",
+      "sha256": "998d215b4b78a180de73dc4263343e63aff1533a0d0206674986066a9bab8af7",
+      "raw_sha256": "15b45e3e51c90db6cf17a2f4f341b9a88d9dc3c3bcb091a53503161c3ee95ac6",
+      "raw_path": "docs-raw/research/2026-09-06/708ca06e1eb4a58f2affd398844d733b78ec5ebbe58b3774a0aa4f2c2813769c/998d215b4b78a180de73dc4263343e63aff1533a0d0206674986066a9bab8af7/source.gz",
+      "fetched_at": "2026-09-05T10:25:47.519549+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 17,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 17,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-desktop-shortcuts",
+      "platform": "harmonyos",
+      "title": "桌面快捷方式",
+      "local_path": "docs-raw/research/2026-09-06/c7b273716710ad2d22bafc0bda579a8294e26dcade0ce6749295565f7a396ee3/49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f/document.md",
+      "sha256": "49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f",
+      "raw_sha256": "1e4482da329bdf77740c9368e7f29362b7e6988f5e34966324571836955747e6",
+      "raw_path": "docs-raw/research/2026-09-06/c7b273716710ad2d22bafc0bda579a8294e26dcade0ce6749295565f7a396ee3/49ed223a7ecee52779779c80650ab5e90104e6b7ba63c04d41c2d02ae694504f/source.gz",
+      "fetched_at": "2026-09-05T10:40:26.358004+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 170,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 19,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/typical-scenario-configuration",
+      "platform": "harmonyos",
+      "title": "创建应用静态快捷方式",
+      "local_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/document.md",
+      "sha256": "c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0",
+      "raw_sha256": "5a5418243b5cef629f1943eaca357cba5db96fd229cd408d4ed15409925b579d",
+      "raw_path": "docs-raw/research/2026-09-06/1b807e4d4b68a507473da9822bf402a6fb2f678cb1efa8b15bd8ba19aea0aee9/c67d9d99a929883d502a6b87389b5583b01bd75030d36dd93b0844ee6132eab0/source.gz",
+      "fetched_at": "2026-09-05T10:24:47.845301+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 102,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 99,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:08.095027+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "abf3691a24cf202e091c5cf4ca15876966dceae118ae07899ebf47d961be8304"
+}

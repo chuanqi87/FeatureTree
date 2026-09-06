@@ -1,0 +1,543 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "commerce.analytics.events",
+    "level": "L3",
+    "parent": "commerce.analytics",
+    "name": {
+      "zh": "分析事件",
+      "en": "Analytics Events"
+    },
+    "definition": "自定义事件采集与上传。",
+    "knowledge_role": "leaf",
+    "layer": "ecosystem",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "knowledge_path": "knowledge/commerce/analytics/events.yaml",
+    "comparison_scope": {
+      "includes": [
+        "自定义事件采集与上传。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "2f4f9582e2e3e13f3cdec81d42544d0bfff2307ef3b472f46a212be91abbfb9d",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "edb0c5f19e97cf462585a3f5b1bf55de629469d494d5ad50de0b695c7fde3075",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://firebase.google.com/docs/analytics/cpp/events",
+      "platform": "android",
+      "title": "Log events",
+      "local_path": "docs-raw/research/2026-09-06/50ee4a642316142dbe93ac05abeb9b4f193e92e134abf8127927b0efb7e574c8/fb79e18c48912a80a62861bf4e201ac2d5e89a924b468b60d06f9f46d2a9b6b9/document.md",
+      "sha256": "fb79e18c48912a80a62861bf4e201ac2d5e89a924b468b60d06f9f46d2a9b6b9",
+      "raw_sha256": "85d350414d53ab7ed083446f3e86379272979468446d359bcebc98376d416969",
+      "raw_path": "docs-raw/research/2026-09-06/50ee4a642316142dbe93ac05abeb9b4f193e92e134abf8127927b0efb7e574c8/fb79e18c48912a80a62861bf4e201ac2d5e89a924b468b60d06f9f46d2a9b6b9/source.gz",
+      "fetched_at": "2026-09-05T10:55:01.337510+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 233,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 17,
+          "truncated": false
+        },
+        {
+          "start_line": 24,
+          "end_line": 157,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://firebase.google.com/docs/analytics/android/events",
+      "platform": "android",
+      "title": "Log events",
+      "local_path": "docs-raw/research/2026-09-06/e4523f82b82ab06f209475e018ba3119330551e801584d11fa43c30131b3dd1a/cac19cabfd81a4adb7e08bd633d76dacfa9dc8319a51a0a4ac05c50b5f879ba4/document.md",
+      "sha256": "cac19cabfd81a4adb7e08bd633d76dacfa9dc8319a51a0a4ac05c50b5f879ba4",
+      "raw_sha256": "6bdf32174663a4d55088d57600f1fcc41e66b65b067fdcc50bfb31c113ad4bac",
+      "raw_path": "docs-raw/research/2026-09-06/e4523f82b82ab06f209475e018ba3119330551e801584d11fa43c30131b3dd1a/cac19cabfd81a4adb7e08bd633d76dacfa9dc8319a51a0a4ac05c50b5f879ba4/source.gz",
+      "fetched_at": "2026-09-05T10:51:08.931872+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 201,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 17,
+          "truncated": false
+        },
+        {
+          "start_line": 18,
+          "end_line": 21,
+          "truncated": true
+        },
+        {
+          "start_line": 24,
+          "end_line": 55,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://firebase.google.com/docs/analytics/ios/events",
+      "platform": "ios",
+      "title": "Log events",
+      "local_path": "docs-raw/research/2026-09-06/02c3a138ff78db9f738eeca8a55ec816c908f8d282741eb4c879074b76f932c4/e89ba858cef49c7c9d6c1c36e5e9718101625681457cfa7b822fb842b5b54f66/document.md",
+      "sha256": "e89ba858cef49c7c9d6c1c36e5e9718101625681457cfa7b822fb842b5b54f66",
+      "raw_sha256": "04c3cbaaaeb73e292f859e6987d36f6b5068d32de837d74b102230bf666f81d0",
+      "raw_path": "docs-raw/research/2026-09-06/02c3a138ff78db9f738eeca8a55ec816c908f8d282741eb4c879074b76f932c4/e89ba858cef49c7c9d6c1c36e5e9718101625681457cfa7b822fb842b5b54f66/source.gz",
+      "fetched_at": "2026-09-05T10:55:02.857162+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 191,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 18,
+          "truncated": false
+        },
+        {
+          "start_line": 19,
+          "end_line": 27,
+          "truncated": false
+        },
+        {
+          "start_line": 28,
+          "end_line": 51,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://firebase.google.com/docs/analytics/ios/get-started",
+      "platform": "ios",
+      "title": "Get started with Google Analytics for iOS+",
+      "local_path": "docs-raw/research/2026-09-06/cd586f8c0594ffac3bc01a8b408cde932f71dd1d060ad5dc832b26704812a112/1e2774feafd3e5ae38a997cd7a2313cd61eb94ca329469221188d7589bd15a58/document.md",
+      "sha256": "1e2774feafd3e5ae38a997cd7a2313cd61eb94ca329469221188d7589bd15a58",
+      "raw_sha256": "c41cde05aaaa2d92b5e9846f337ddce23b7daa0eb83bc362ec70d25773bc3705",
+      "raw_path": "docs-raw/research/2026-09-06/cd586f8c0594ffac3bc01a8b408cde932f71dd1d060ad5dc832b26704812a112/1e2774feafd3e5ae38a997cd7a2313cd61eb94ca329469221188d7589bd15a58/source.gz",
+      "fetched_at": "2026-09-05T10:55:03.226281+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 232,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 22,
+          "truncated": false
+        },
+        {
+          "start_line": 23,
+          "end_line": 31,
+          "truncated": true
+        },
+        {
+          "start_line": 42,
+          "end_line": 163,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-hiviewdfx-hiappevent",
+      "platform": "harmonyos",
+      "title": "@ohos.hiviewdfx.hiAppEvent (应用事件打点)",
+      "local_path": "docs-raw/research/2026-09-06/b40f0ab183fc35b3344acb40cece67653a8d3daa1d38bd4e1eacbaafc27a3d2d/f04306f8ff0ad3a317fceb69ce80505bd9cfa1b33e3f882ca34237968c76a493/document.md",
+      "sha256": "f04306f8ff0ad3a317fceb69ce80505bd9cfa1b33e3f882ca34237968c76a493",
+      "raw_sha256": "d4ad56b255db3be524ac2714905531dbe270d24cc4c325ec4aa8def63f02c166",
+      "raw_path": "docs-raw/research/2026-09-06/b40f0ab183fc35b3344acb40cece67653a8d3daa1d38bd4e1eacbaafc27a3d2d/f04306f8ff0ad3a317fceb69ce80505bd9cfa1b33e3f882ca34237968c76a493/source.gz",
+      "fetched_at": "2026-09-05T10:27:30.964615+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 1320,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": true
+        },
+        {
+          "start_line": 11,
+          "end_line": 12,
+          "truncated": true
+        },
+        {
+          "start_line": 205,
+          "end_line": 261,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-interaction-capability-overview",
+      "platform": "harmonyos",
+      "title": "交互响应概述",
+      "local_path": "docs-raw/research/2026-09-06/b5cdf4c0d906e03372060bf2b098c1f33e7a562b9dced7861b912b9570aeda28/f3978e0dda52aa57832723b174625ce2c8a1112c8409013b381b5887168b25aa/document.md",
+      "sha256": "f3978e0dda52aa57832723b174625ce2c8a1112c8409013b381b5887168b25aa",
+      "raw_sha256": "f630c5ee815138770f88161fd97d44d6a8009eefd97e0f4534a52bebb47e973b",
+      "raw_path": "docs-raw/research/2026-09-06/b5cdf4c0d906e03372060bf2b098c1f33e7a562b9dced7861b912b9570aeda28/f3978e0dda52aa57832723b174625ce2c8a1112c8409013b381b5887168b25aa/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 47,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 16,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:14.828026+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "55098c90397fa86518288e62087d65e7acaced008697b835c292c54440e5ef51"
+}

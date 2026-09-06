@@ -1,0 +1,9 @@
+{
+  "task_id": "a9da79b8413fb3e547a5f694e5a9d52cbde71c29654d38c1f2295bb9174455ac",
+  "feature_id": "ai.system.suggestions",
+  "response_sha256": "b43cde7fe6bd3aad879a864245c7a5c5d0c83faa3ea9f167d03eb8a9db1830f3",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

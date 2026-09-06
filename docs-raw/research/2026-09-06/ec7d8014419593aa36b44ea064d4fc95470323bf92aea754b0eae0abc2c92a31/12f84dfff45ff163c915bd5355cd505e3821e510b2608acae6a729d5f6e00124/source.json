@@ -1,0 +1,13 @@
+{
+  "id": "ec7d8014419593aa36b44ea064d4fc95470323bf92aea754b0eae0abc2c92a31",
+  "url": "https://developer.apple.com/documentation/metal/selecting-device-objects-for-compute-processing",
+  "platform": "ios",
+  "title": "Selecting device objects for compute processing",
+  "local_path": "docs-raw/research/2026-09-06/ec7d8014419593aa36b44ea064d4fc95470323bf92aea754b0eae0abc2c92a31/12f84dfff45ff163c915bd5355cd505e3821e510b2608acae6a729d5f6e00124/document.md",
+  "sha256": "12f84dfff45ff163c915bd5355cd505e3821e510b2608acae6a729d5f6e00124",
+  "raw_sha256": "f1b91878e24b026e35943350c3fb5c1915936b507a2712f7b0e4f7dc3a92a7d2",
+  "raw_path": "docs-raw/research/2026-09-06/ec7d8014419593aa36b44ea064d4fc95470323bf92aea754b0eae0abc2c92a31/12f84dfff45ff163c915bd5355cd505e3821e510b2608acae6a729d5f6e00124/source.gz",
+  "fetched_at": "2026-09-05T10:24:05.384510+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

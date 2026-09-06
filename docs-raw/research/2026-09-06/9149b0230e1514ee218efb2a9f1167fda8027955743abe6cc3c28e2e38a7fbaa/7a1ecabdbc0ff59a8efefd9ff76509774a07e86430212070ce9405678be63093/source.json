@@ -1,0 +1,13 @@
+{
+  "id": "9149b0230e1514ee218efb2a9f1167fda8027955743abe6cc3c28e2e38a7fbaa",
+  "url": "https://developer.apple.com/documentation/metal/selecting-device-objects-for-graphics-rendering",
+  "platform": "ios",
+  "title": "Selecting device objects for graphics rendering",
+  "local_path": "docs-raw/research/2026-09-06/9149b0230e1514ee218efb2a9f1167fda8027955743abe6cc3c28e2e38a7fbaa/7a1ecabdbc0ff59a8efefd9ff76509774a07e86430212070ce9405678be63093/document.md",
+  "sha256": "7a1ecabdbc0ff59a8efefd9ff76509774a07e86430212070ce9405678be63093",
+  "raw_sha256": "320c379498d9d01e38114e6aef12935fbf0a088c49dd9f5fe9997ce48598da4a",
+  "raw_path": "docs-raw/research/2026-09-06/9149b0230e1514ee218efb2a9f1167fda8027955743abe6cc3c28e2e38a7fbaa/7a1ecabdbc0ff59a8efefd9ff76509774a07e86430212070ce9405678be63093/source.gz",
+  "fetched_at": "2026-09-05T10:24:05.390002+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "fc415b0fef9165f01f86aa5c457745a07fabca4fe4ac345f28806594bf682cbd",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ffrt-concurrency-paradigm",
+  "platform": "harmonyos",
+  "title": "Function Flow Runtime并发范式",
+  "local_path": "docs-raw/research/2026-09-06/fc415b0fef9165f01f86aa5c457745a07fabca4fe4ac345f28806594bf682cbd/183cdeb03fa823cc483687cee0a25a54ad974328ea7af1f04bbf2286e7560be5/document.md",
+  "sha256": "183cdeb03fa823cc483687cee0a25a54ad974328ea7af1f04bbf2286e7560be5",
+  "raw_sha256": "a6f6750fc6e731a62619bfc50d0195343e1fe315752970fb03f6daf19792e97b",
+  "raw_path": "docs-raw/research/2026-09-06/fc415b0fef9165f01f86aa5c457745a07fabca4fe4ac345f28806594bf682cbd/183cdeb03fa823cc483687cee0a25a54ad974328ea7af1f04bbf2286e7560be5/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

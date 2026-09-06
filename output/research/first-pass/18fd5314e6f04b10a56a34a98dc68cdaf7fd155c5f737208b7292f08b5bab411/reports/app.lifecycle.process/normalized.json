@@ -1,0 +1,1245 @@
+{
+  "task_id": "0ead325b49cc3f6f688cdd0738defcce3b6e11030c731722511b4c8675571b73",
+  "feature_id": "app.lifecycle.process",
+  "stage": "first_pass",
+  "summary": "三平台均读到因内存查杀应用进程的机制正文：Android LMK 按进程重要性终止后台进程，Android 17 起 cgroup v2 Memory Limiter 按前后台动态限额并可静默查杀，可用 ApplicationExitInfo 查询被杀原因；iOS 内存压力下经低内存通知后 jetsam 终止应用（per-process-limit/vm-pageshortage 等 reason）；HarmonyOS 6.1.0 起资源泄漏管控与内核查杀（如 RSS 超整机内存 1/3 且低内存，不区分前后台）。被杀后恢复策略三平台包内均无来源，进程优先级细节均不足；基线未固定，全部 low。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "读到机制：低内存时系统按用户可感知重要性将进程分层，优先终止后台进程（LMK）；Android 17 起 Memory Limiter 用 cgroup v2 按前后台状态动态限额，超 memory.high 且耗尽 swap 可被静默查杀并经 ApplicationExitInfo 记录。仅机制文档，未核实最新版与真机。",
+      "version_scope": "正文自述 Memory Limiter 自 Android 17（API 37）起、退出原因记录始于 Android 17/26Q4；Bitmap 像素数据入 native 堆自 Android 8.0（API 26）；快照获取于 2026-09-05，未对照启动日最新正式版基线。",
+      "conditions": [
+        "查杀与限额行为发生在整机内存压力或单应用超限场景，依赖设备内存状态",
+        "Memory Limiter 限额按生命周期状态动态分配：可见（前台）更宽，非可见（后台/服务）更紧",
+        "Perceptible Service（前台服务、expedited job 等）按非前台限额对待",
+        "来源为游戏优化指南（Play Console Vitals 语境），一般应用适用性未单独核实"
+      ],
+      "gaps": [
+        "被杀后的恢复策略（状态保存与恢复）两篇来源均无正文",
+        "LMK/进程优先级完整层级仅有概述引用，Processes and threads overview 未入包",
+        "Android 17 Memory Limiter 具体限额数值未载明，需读 AOSP Memory Limiter 指南与最新版说明核实",
+        "ApplicationExitInfo 的 API 级要求正文未载明，待核"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "The importance of memory optimization > Cold start prevention（LMK 优先终止后台游戏进程）",
+          "start_line": 14,
+          "end_line": 25,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/games/optimize/memory-overview",
+            "platform": "android",
+            "title": "About memory management",
+            "local_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/document.md",
+            "sha256": "8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab",
+            "raw_sha256": "fb356c05994377b631caae4b85ab7f13d46aad80310a7a735024723ae4ce3810",
+            "raw_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/source.gz",
+            "fetched_at": "2026-09-05T10:27:42.661143+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 198,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 3,
+                "truncated": true
+              },
+              {
+                "start_line": 9,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 49,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "* **Cold start prevention (user experience and retention)**: When a player\n  temporarily switches away from your game (for example, to answer a\n  notification or check a message), the operating system places the game\n  process into the background. If the game's background memory footprint is\n  too high, the system's Low Memory Killer (LMK) prioritizes terminating the\n  game process to reclaim RAM for foreground tasks. The next time the user\n  resumes, instead of a seamless and instantaneous warm resume, the game must\n  undergo a long cold start—completely reloading heavy graphics assets, audio,\n  and game engine binaries from storage. Keeping your background memory usage\n  low prevents these silent background terminations, preserving user state and\n  ensuring players can resume their session immediately. For more details on\n  system LMK behavior, see the [Android Vitals - Low memory killers](https://developer.android.com/games/optimize/vitals/lmk) guide."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Core Android memory concepts > Processes and threads overview（按可见性与重要性分层决定先终止谁）",
+          "start_line": 67,
+          "end_line": 70,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/games/optimize/memory-overview",
+            "platform": "android",
+            "title": "About memory management",
+            "local_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/document.md",
+            "sha256": "8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab",
+            "raw_sha256": "fb356c05994377b631caae4b85ab7f13d46aad80310a7a735024723ae4ce3810",
+            "raw_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/source.gz",
+            "fetched_at": "2026-09-05T10:27:42.661143+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 198,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 3,
+                "truncated": true
+              },
+              {
+                "start_line": 9,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 49,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "* **Processes and threads overview**: The system categorizes processes into a\n  hierarchy based on their current user-perceived visibility and importance,\n  determining which processes are kept alive and which are terminated first\n  during low-memory conditions."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Memory constraints > Memory Limiter in Android 17 and higher（cgroup v2、按生命周期动态限额、memory.high/memory.swap.max、静默查杀与 ApplicationExitInfo 记录）",
+          "start_line": 91,
+          "end_line": 117,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/games/optimize/memory-overview",
+            "platform": "android",
+            "title": "About memory management",
+            "local_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/document.md",
+            "sha256": "8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab",
+            "raw_sha256": "fb356c05994377b631caae4b85ab7f13d46aad80310a7a735024723ae4ce3810",
+            "raw_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/source.gz",
+            "fetched_at": "2026-09-05T10:27:42.661143+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 198,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 3,
+                "truncated": true
+              },
+              {
+                "start_line": 9,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 49,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Memory Limiter in Android 17 and higher\n\nAndroid 17 (API level 37) and higher manage strict, per-app memory limits using\nLinux cgroup v2 to prevent individual apps from causing system-wide\ninstability. For more details on the technical implementation, see the\n[AOSP Memory Limiter Guide](https://source.android.com/docs/core/perf/memory-limiter) and [Prioritizing Memory Efficiency: Essential\nSteps for Android 17 Blog](https://android-developers.googleblog.com/2026/06/prioritizing-memory-efficiency-steps-for-android-17.html).\n\n* **Mechanism**: The Memory Limiter monitors all application processes and\n  dynamically assigns limits based on the process's lifecycle state:\n  + **Visible processes (foreground)**: App processes currently displaying a\n    UI are expected to run a larger resource working set, and are afforded a\n    more generous limit.\n  + **Non-visible processes (background or services)**: App processes doing\n    active work without showing a UI are constrained to a tighter, more\n    restrictive budget.\n* **Kernel attributes**: The service relies on two main attributes:\n  + **`memory.high`**: A soft limit. When exceeded, the kernel throttles the\n    process and attempts to aggressively reclaim memory. This reclamation\n    can cause the game to experience performance degradation.\n  + **`memory.swap.max`**: Manages a hard cap on the swap or zRAM space the\n    process can use.\n* **Termination behavior**: If a process continues to allocate anonymous\n  memory past `memory.high` and exhausts its swap capacity, allocations fail,\n  and the OS silently kills the process. This termination is logged using\n  [`ApplicationExitInfo`](https://developer.android.com/reference/android/app/ApplicationExitInfo) under the [Memory Limiter](https://source.android.com/docs/core/perf/memory-limiter) exit reason\n  (available starting in Android 17, 26Q4)."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "New memory limits in Play Console Vitals > User-perceived services（Perceptible Service 按非前台限额）",
+          "start_line": 132,
+          "end_line": 148,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/games/optimize/memory-overview",
+            "platform": "android",
+            "title": "About memory management",
+            "local_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/document.md",
+            "sha256": "8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab",
+            "raw_sha256": "fb356c05994377b631caae4b85ab7f13d46aad80310a7a735024723ae4ce3810",
+            "raw_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/source.gz",
+            "fetched_at": "2026-09-05T10:27:42.661143+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 198,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 3,
+                "truncated": true
+              },
+              {
+                "start_line": 9,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 49,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "##### User-perceived services\n\nPerceptible Services are critical background processes that the Android system\nconsiders noticeable to the user. This state encompasses all processes running:\n\n* Foreground services (FGS)\n* Expedited jobs\n* User-initiated data transfer jobs\n* System-bound services or services bound by other applications\n\nBecause Perceptible Services are designed for critical, long-running tasks in\nthe background, they are highly susceptible to cumulative lifecycle leaks.\nAndroid platform memory limits treat this state as not Foreground, meaning if\nyour game is backgrounded but continues running a Perceptible Service, it's\nsubjected to the tighter background or service memory limits shown in the Play\nHelp Center page. Games must aggressively trim unnecessary assets when moving\nfrom the foreground to a background Perceptible Service state."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Monitoring historical OOMs (ApplicationExitInfo)（REASON_LOW_MEMORY 表示被 LMK 杀）",
+          "start_line": 467,
+          "end_line": 482,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/topic/performance/memory/guide/java-memory",
+            "platform": "android",
+            "title": "Analyzing Java memory",
+            "local_path": "docs-raw/research/2026-09-06/984bb73ca980c10dc9eab312dccafdc470c618848dc328231fa2d0c685565480/bc88dc55ca85e392d87f985cfb861bf62fc04446ae00757ae187e3502cad7fb9/document.md",
+            "sha256": "bc88dc55ca85e392d87f985cfb861bf62fc04446ae00757ae187e3502cad7fb9",
+            "raw_sha256": "aad06df1918466b15edbf44dd5638621a93780a925714b071f0f0dc2f0b91ec8",
+            "raw_path": "docs-raw/research/2026-09-06/984bb73ca980c10dc9eab312dccafdc470c618848dc328231fa2d0c685565480/bc88dc55ca85e392d87f985cfb861bf62fc04446ae00757ae187e3502cad7fb9/source.gz",
+            "fetched_at": "2026-09-05T10:37:40.628002+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 501,
+            "suggested_sections": [
+              {
+                "start_line": 134,
+                "end_line": 148,
+                "truncated": true
+              },
+              {
+                "start_line": 178,
+                "end_line": 179,
+                "truncated": true
+              },
+              {
+                "start_line": 217,
+                "end_line": 251,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Monitoring historical OOMs (ApplicationExitInfo)\n\nCatching an LMK as it happens is great for active debugging, but for field\ntelemetry, you can use the `ApplicationExitInfo` API. This allows your app to\ndiscover why it was terminated in a previous session.\n\n```\nActivityManager am = getSystemService(ActivityManager.class);\nList<ApplicationExitInfo> exitReasons = am.getHistoricalProcessExitReasons(null, 0, 1);\nif (!exitReasons.isEmpty()) {\n    ApplicationExitInfo info = exitReasons.get(0);\n    if (info.getReason() == ApplicationExitInfo.REASON_LOW_MEMORY) {\n        // App was killed by the system Low Memory Killer\n    }\n}\n```"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "实际查杀时机与限额数值依赖具体设备内存与整机状态，文档未给全量数值，后续精研需真机验证；本轮仅文档初判，未执行实测。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "documented_mechanism",
+      "observation": "读到机制：iOS 等系统在内存压力下先发低内存通知，应用释放不足即终止应用回收内存（jetsam 事件）；报告含 per-process-limit（所有应用有常驻内存限额，扩展更低）、vm-pageshortage（为前台释放后台进程内存）等 reason 及 frontmost/suspended 状态。优先级算法与恢复策略未读到。",
+      "version_scope": "正文声明适用 iOS/iPadOS/tvOS/visionOS/watchOS，未标明具体 iOS 版本；示例数据为 iPhone OS 13.1.2 设备报告；未核对当前最新 iOS 正式版基线。",
+      "conditions": [
+        "查杀在整机内存压力且各应用释放内存仍不足时触发，先经低内存通知",
+        "per-process-limit 为系统对所有应用施加的常驻内存限额，app extension 限额显著低于前台应用",
+        "vm-pageshortage 时为当前前台应用释放后台进程内存，后台应用可能被终止",
+        "vnode-limit/fc-thrashing 等非内存直接因素也可导致后台应用被终止"
+      ],
+      "gaps": [
+        "jetsam 进程优先级/选择算法（优先级带、coalition 语义）包内文档未展开",
+        "被杀后的状态恢复（state restoration）无来源",
+        "ios-1 Kernel Functions 仅为内核扩展符号索引，无应用层进程回收正文；mach_vm 延迟回收符号被上下文标记为明确非 iOS",
+        "未固定 iOS 版本基线，文档无版本声明"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "ios-2",
+          "locator": "Overview（内存压力、低内存通知、jetsam 终止应用回收内存）",
+          "start_line": 7,
+          "end_line": 15,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/xcode/identifying-high-memory-use-with-jetsam-event-reports",
+            "platform": "ios",
+            "title": "Identifying high-memory use with jetsam event reports",
+            "local_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/document.md",
+            "sha256": "97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267",
+            "raw_sha256": "83af39afd9537d1490ad0b108c5bc906db2445f42f48dfe7cfbc26485c4c3ea6",
+            "raw_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/source.gz",
+            "fetched_at": "2026-09-05T11:23:48.794135+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 163,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 5,
+                "end_line": 6,
+                "truncated": true
+              },
+              {
+                "start_line": 24,
+                "end_line": 57,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "iOS, iPadOS, tvOS, visionOS, and watchOS have a virtual memory system that relies on all apps\nreleasing memory when the operating system encounters *memory pressure*, where available\nmemory is low and the system can’t meet the demands of all running apps. Under memory\npressure, apps free memory after receiving a low-memory notification. If all running\napps release enough total memory to alleviate memory pressure, your app will continue\nto run. But, if memory pressure continues because apps haven’t relinquished enough\nmemory, the system frees memory by terminating applications to reclaim their memory.\nThis is a *jetsam event*, and the system creates a jetsam event report with information\nabout why it chose to jettison an app."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Identify the jetsam reason（per-process-limit/vm-pageshortage/vnode-limit/highwater/fc-thrashing/jettisoned）",
+          "start_line": 90,
+          "end_line": 115,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/xcode/identifying-high-memory-use-with-jetsam-event-reports",
+            "platform": "ios",
+            "title": "Identifying high-memory use with jetsam event reports",
+            "local_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/document.md",
+            "sha256": "97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267",
+            "raw_sha256": "83af39afd9537d1490ad0b108c5bc906db2445f42f48dfe7cfbc26485c4c3ea6",
+            "raw_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/source.gz",
+            "fetched_at": "2026-09-05T11:23:48.794135+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 163,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 5,
+                "end_line": 6,
+                "truncated": true
+              },
+              {
+                "start_line": 24,
+                "end_line": 57,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "If the jettisoned process is your app, the value of the `reason` key explains the\nconditions that led to the jetsam event:\n\n- `per-process-limit`: The process crossed the resident memory limit imposed by the\n  system on all apps. Crossing this limit makes the process eligible for termination.\n  If the process is an app extension from your app, note that extensions have a much\n  lower per-process memory limit than foreground apps. Carefully consider your needs\n  before using technologies with a high-baseline memory cost, such as <doc://com.apple.documentation/documentation/SpriteKit>\n  or a <doc://com.apple.documentation/documentation/MapKit/MKMapView>, in an extension\n  point. Alternate solutions may be more appropriate. For example, an image created\n  by <doc://com.apple.documentation/documentation/MapKit/MKMapSnapshotter> has lower\n  memory use than a <doc://com.apple.documentation/documentation/MapKit/MKMapView>,\n  and is a better choice for many extension-point scenarios.\n- `vm-pageshortage`: The system experienced memory pressure and needed to free background\n  process memory for the current foreground app.\n- `vnode-limit`: Too many files were open across the system. The kernel has a finite\n  number of *vnodes*, a memory structure backing open files, and these were almost\n  exhausted. To avoid terminating the frontmost app when vnodes are nearly exhausted,\n  the system may terminate your app in the background to free vnodes, even if your\n  app isn’t the source of excess vnode use.\n- `highwater`: A system daemon exceeded its highest-expected memory footprint.\n- `fc-thrashing`: A process thrashed the system file cache. This occurs when non-sequential\n  parts of memory-mapped files are read and written too frequently. To avoid terminating\n  the frontmost app, the system may terminate your app in the background to free space\n  in the file cache, even if your app isn’t thrashing the file cache.\n- `jettisoned`: The system jettisoned the process for some other reason."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "processes array 附加字段（states 含 frontmost/suspended、coalition）",
+          "start_line": 123,
+          "end_line": 136,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/xcode/identifying-high-memory-use-with-jetsam-event-reports",
+            "platform": "ios",
+            "title": "Identifying high-memory use with jetsam event reports",
+            "local_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/document.md",
+            "sha256": "97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267",
+            "raw_sha256": "83af39afd9537d1490ad0b108c5bc906db2445f42f48dfe7cfbc26485c4c3ea6",
+            "raw_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/source.gz",
+            "fetched_at": "2026-09-05T11:23:48.794135+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 163,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 5,
+                "end_line": 6,
+                "truncated": true
+              },
+              {
+                "start_line": 24,
+                "end_line": 57,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Each item in the `processes` array also has the following keys, which provide additional\ninformation for diagnosing the issue.\n\n- `uuid`: The build UUID of the binary. This helps you identify the version of your\n  app by comparing this value to the available dSYM files for builds distributed to\n  customers. To learn more about the build UUID, see [Building your app to include debugging information](/documentation/Xcode/building-your-app-to-include-debugging-information).\n- `states`: Describes the app’s current memory use state, such as using memory as\n  the `frontmost` app, or `suspended` and not actively using memory.\n- `lifetimeMax`: The highest number of memory pages allocated during the lifetime\n  of the process.\n- `coalition`: If your app’s process is part of a coalition that involves other system\n  processes doing work on behalf of your app, use this information to identify related\n  processes and their memory use, as your app can influence the memory use of other\n  coalition processes."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Make changes to your app's memory use（响应系统低内存告警）",
+          "start_line": 147,
+          "end_line": 150,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/xcode/identifying-high-memory-use-with-jetsam-event-reports",
+            "platform": "ios",
+            "title": "Identifying high-memory use with jetsam event reports",
+            "local_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/document.md",
+            "sha256": "97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267",
+            "raw_sha256": "83af39afd9537d1490ad0b108c5bc906db2445f42f48dfe7cfbc26485c4c3ea6",
+            "raw_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/source.gz",
+            "fetched_at": "2026-09-05T11:23:48.794135+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 163,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 5,
+                "end_line": 6,
+                "truncated": true
+              },
+              {
+                "start_line": 24,
+                "end_line": 57,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "In addition to lowering your app’s memory use, ensure you are receiving the low-memory\nwarnings sent by the system and acting on these warnings to cooperate with the needs\nof the operating system and lower your appʼs memory use—see [Responding to low-memory warnings](/documentation/Xcode/responding-to-low-memory-warnings)\nfor the specific ways the system notifies your app."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Kernel Functions 标题与 Functions 符号索引（无应用层进程查杀/恢复正文）",
+          "start_line": 1,
+          "end_line": 5,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/kernel/kernel_functions",
+            "platform": "ios",
+            "title": "Kernel Functions",
+            "local_path": "docs-raw/research/2026-09-06/af7f0d291bbe1d70aabb80a2099f3ff2202a9c446ace8e6947fba1d24f5ebb0b/ac6c3fedfdc0263e4c83d1fba8e1a1a4284e154757c698130495c1260b5f0499/document.md",
+            "sha256": "ac6c3fedfdc0263e4c83d1fba8e1a1a4284e154757c698130495c1260b5f0499",
+            "raw_sha256": "b3cff76f3068b9337db813e6f219e769e7bb27a7b6de759cbeeb3d9cbf4e3a63",
+            "raw_path": "docs-raw/research/2026-09-06/af7f0d291bbe1d70aabb80a2099f3ff2202a9c446ace8e6947fba1d24f5ebb0b/ac6c3fedfdc0263e4c83d1fba8e1a1a4284e154757c698130495c1260b5f0499/source.gz",
+            "fetched_at": "2026-09-05T10:32:06.296496+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 847,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 91,
+                "truncated": true
+              },
+              {
+                "start_line": 842,
+                "end_line": 843,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "# Kernel Functions\n\n\n\n## Functions"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "jetsam 实际触发与报告需真机低内存环境观察，模拟器与本包文档均不能确认当前 iOS 正式版行为；本轮仅文档初判，未执行实测。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "读到机制：系统周期采样检测句柄/线程/内存泄漏（阈值如 fd 5000、线程 700、JS 堆 85% 或 OOM、native 峰值超基线 2 倍），判定泄漏后主动终止应用；HarmonyOS 6.1.0 起整机低内存时内核管控查杀超阈值应用（如 RSS 超整机内存 1/3），且不区分前后台，killReason 如 RssThresholdKiller。进程优先级与恢复策略未读到。",
+      "version_scope": "正文自述内核管控自 HarmonyOS 6.1.0 起；来源为华为 harmonyos-guides 指南，未区分 OpenHarmony 发行版；未对照启动日最新正式版基线。",
+      "conditions": [
+        "泄漏判定基于周期采样阈值：fd 超 5000、线程超 700、JS 堆使用率超 85% 或触发 OOM、native 动态峰值超基线 2 倍（200s 基准）",
+        "RSS/GPU/ASHMEM/DMA 内核管控要求超过整机运行内存 1/3 且整机处于低内存状态",
+        "内核管控不区分前后台，可能出现问题应用前台闪退",
+        "hidebug.setAppResourceLimit 自定义基线建议仅开发阶段使用"
+      ],
+      "gaps": [
+        "进程优先级与低内存下查杀顺序（LMK 等价机制）无来源",
+        "被杀后恢复策略无来源；appFreezeWarning 文档仅覆盖冻屏观测而非查杀/恢复",
+        "除 RSS 1/3 外各内核管控具体阈值未载明；HarmonyOS 与 OpenHarmony 发行版适用范围未核实",
+        "6.1.0 为正文自述起点，未核对最新正式版说明与手机基线"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "实现原理 > 资源泄漏检测机制表（fd/线程/JS/native 各类阈值与判定）",
+          "start_line": 13,
+          "end_line": 21,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/resource-leak-guidelines",
+            "platform": "harmonyos",
+            "title": "Resource Leak（资源泄漏）检测",
+            "local_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/document.md",
+            "sha256": "7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e",
+            "raw_sha256": "e8b647f58b184d03002bec9c002f4cd9c438e89be3bd76012324b1d20e61d551",
+            "raw_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1089,
+            "suggested_sections": [
+              {
+                "start_line": 51,
+                "end_line": 69,
+                "truncated": true
+              },
+              {
+                "start_line": 137,
+                "end_line": 140,
+                "truncated": true
+              },
+              {
+                "start_line": 871,
+                "end_line": 956,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "资源泄漏具体检测方式如下：  \n\n|泄漏类型|检测机制|\n|:----------------------------------------------------------|:-------------------------------------------------------|\n|句柄泄漏（FD_LEAK）|每隔60s遍历一次进程，获取进程fd句柄总数，超过阈值（5000个） 时抓取详细句柄信息，同步上报泄漏。|\n|线程泄漏（THREAD_LEAK）|每隔60s遍历一次进程，获取进程的总线程数，超过阈值（700个） 时抓取详细线程名信息，同步上报泄漏。|\n|内存泄漏（MEMORY_LEAK） - JS泄漏（JS_LEAK）|虚拟机内部进行插桩，当堆内存的使用率超过85%或者触发OOM时会抓取heapdump，同步上报该故障。|\n|内存泄漏（MEMORY_LEAK） - native内存泄漏（PSS_MEMORY）|以应用进程平均动态峰值内存作为基线，以200s作为基准，当动态内存峰值超过基线值2倍时，判定泄漏，同时触发管控。|\n|内存泄漏（MEMORY_LEAK） - ASHMEM/DMA（ION）/GPU等内存泄漏（KERNEL_MEMORY）|基于ASHMEM/DMA(ION)/GPU的基线值，超过基线值时会判定泄漏，同步抓取维测信息。|"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "实现原理 > 注释4 管控定义 与 资源泄漏内核管控方式（主动终止泄漏应用；6.1.0 起内核管控、不区分前后台）",
+          "start_line": 33,
+          "end_line": 43,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/resource-leak-guidelines",
+            "platform": "harmonyos",
+            "title": "Resource Leak（资源泄漏）检测",
+            "local_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/document.md",
+            "sha256": "7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e",
+            "raw_sha256": "e8b647f58b184d03002bec9c002f4cd9c438e89be3bd76012324b1d20e61d551",
+            "raw_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1089,
+            "suggested_sections": [
+              {
+                "start_line": 51,
+                "end_line": 69,
+                "truncated": true
+              },
+              {
+                "start_line": 137,
+                "end_line": 140,
+                "truncated": true
+              },
+              {
+                "start_line": 871,
+                "end_line": 956,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "4. 管控是指当系统判定应用发生泄漏后，主动终止泄漏应用的行为。\n\n5. 在资源泄漏资料中，DMA（ION）、dmaheap、dmabuf 可理解为同一种内存类型，不作强区分。\n\n资源泄漏内核管控方式如下：\n\n从HarmonyOS 6.1.0开始，应用资源申请过快或前台泄漏导致整机资源不足，比如单应用快速申请（RSS、DMA（ION）、GPU内存）超过阈值，导致整机出现低内存，系统会对应用进行管控，同步提供部分基础的RESOURCE_OVERLIMIT维测信息。  \n![](https://media:201787906152002440)  \n1. 当前支持内核管控的资源类型有：DMA（ION）、GPU、RSS、ASHMEM、THREAD。\n\n2. 内核管控不区分前后台，可能会出现问题应用的前台闪退问题。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "内核管控日志规格（killTime/killReason/RssThresholdKiller）",
+          "start_line": 957,
+          "end_line": 979,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/resource-leak-guidelines",
+            "platform": "harmonyos",
+            "title": "Resource Leak（资源泄漏）检测",
+            "local_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/document.md",
+            "sha256": "7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e",
+            "raw_sha256": "e8b647f58b184d03002bec9c002f4cd9c438e89be3bd76012324b1d20e61d551",
+            "raw_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1089,
+            "suggested_sections": [
+              {
+                "start_line": 51,
+                "end_line": 69,
+                "truncated": true
+              },
+              {
+                "start_line": 137,
+                "end_line": 140,
+                "truncated": true
+              },
+              {
+                "start_line": 871,
+                "end_line": 956,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### 内核管控日志规格\n\n触发内核管控时，系统资源供给已不足以支撑抓取开销较大的维测，因此只能提供基础维测信息支撑初步定界定位。\n\n内核管控日志通用内容如下：  \n\n|字段|说明|\n|:----------|:-----------------|\n|pidNumber|泄漏应用pid。|\n|processName|泄漏应用进程名。|\n|killTime|应用被查杀时间。|\n|RssMemory|泄漏应用RSS内存占用，单位：KB。|\n|killReason|应用被查杀原因。|\n\n```\nGenerated by HiviewDFX @HarmonyOS\nLOGGER_MEMCHECK_GERNAL_INFO\n pidNumber: 2017\n processName: process1\n killTime: 20260512090030\n killReason: RssThresholdKiller\n RssMemory: 8350500\n```"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "RSS 内核管控 > 概述（RSS 超整机运行内存 1/3 且整机低内存触发）",
+          "start_line": 984,
+          "end_line": 988,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/resource-leak-guidelines",
+            "platform": "harmonyos",
+            "title": "Resource Leak（资源泄漏）检测",
+            "local_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/document.md",
+            "sha256": "7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e",
+            "raw_sha256": "e8b647f58b184d03002bec9c002f4cd9c438e89be3bd76012324b1d20e61d551",
+            "raw_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1089,
+            "suggested_sections": [
+              {
+                "start_line": 51,
+                "end_line": 69,
+                "truncated": true
+              },
+              {
+                "start_line": 137,
+                "end_line": 140,
+                "truncated": true
+              },
+              {
+                "start_line": 871,
+                "end_line": 956,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### RSS内核管控\n\n概述：应用RSS内存泄漏超过整机运行内存的1/3，且整机处于低内存状态时，触发RSS内核管控。\n\n日志文件：memleak-kernel-\\[module\\]-0-\\[timestamp\\].txt（方式一）或 RESOURCE_OVERLIMIT_\\[TIMESTAMP\\]_\\[PID\\].log（方式三）。"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "验证观察者是否订阅到应用冻屏告警事件（APPFREEZE_WARNING 携带 rss/sys_avail_mem 等内存快照与 process_life_time，属冻屏观测）",
+          "start_line": 287,
+          "end_line": 306,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hiappevent-watcher-appfreezewarning-events-ndk",
+            "platform": "harmonyos",
+            "title": "订阅应用冻屏告警事件（C/C++）",
+            "local_path": "docs-raw/research/2026-09-06/015236f122cbc9f3958e7c91ced9f5b2f6d2f239bea5853b1bcd1b3115fbe30d/0c0bade6d9572476ea6919875fbd6de6e459c44a521da1dd463c1a31d9c8ee56/document.md",
+            "sha256": "0c0bade6d9572476ea6919875fbd6de6e459c44a521da1dd463c1a31d9c8ee56",
+            "raw_sha256": "18152411d76296045e5f5bdf135bb165c987899304eb7f77af03db1acddd01ec",
+            "raw_path": "docs-raw/research/2026-09-06/015236f122cbc9f3958e7c91ced9f5b2f6d2f239bea5853b1bcd1b3115fbe30d/0c0bade6d9572476ea6919875fbd6de6e459c44a521da1dd463c1a31d9c8ee56/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 330,
+            "suggested_sections": [
+              {
+                "start_line": 16,
+                "end_line": 157,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "```\nHiAppEvent eventInfo.domain=OS\nHiAppEvent eventInfo.name=APPFREEZE_WARNING\nHiAppEvent eventInfo.eventType=1\nHiAppEvent eventInfo.params.time=1776946769389\nHiAppEvent eventInfo.params.foreground=1\nHiAppEvent eventInfo.params.app_running_unique_id=382145346984526931478\nHiAppEvent eventInfo.params.bundle_version=1.0.0\nHiAppEvent eventInfo.params.bundle_version_code=1000000\nHiAppEvent eventInfo.params.bundle_name=com.example.myapplication\nHiAppEvent eventInfo.params.process_name=com.example.myapplication\nHiAppEvent eventInfo.params.pid=1587\nHiAppEvent eventInfo.params.uid=20010043\nHiAppEvent eventInfo.params.exception={\"\"message\":\"App main thread is not response!Main handler dump start time: 2026-04-23 20:19:28.903\",\"name\":\"THREAD_BLOCK_3S\"}\nHiAppEvent eventInfo.params.hilog.size=6\nHiAppEvent eventInfo.params.event_handler.size=16\nHiAppEvent eventInfo.params.peer_binder.size=0\nHiAppEvent eventInfo.params.threads.size=28\nHiAppEvent eventInfo.params.memory={\"rss\":161080,\"sys_avail_mem\":1361464,\"sys_free_mem\":796232,\"sys_total_mem\":1992340,\"vm_heap_total_size\":\"9961472\",\"vm_heap_used_size\":\"7596424\",\"vss\":56960692}\nHiAppEvent eventInfo.params.process_life_time=18"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "内核管控触发条件（整机低内存、前后台不区分）与实际查杀行为需真机验证，文档为指南描述，无实测；本轮仅文档初判。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "limits_precision",
+      "statement": "触发与限额机制疑似不同：Android 17+ 以 cgroup v2 按进程生命周期状态动态限额（memory.high 软限、memory.swap.max 硬限）并由 LMK 按重要性终止后台进程；iOS 以系统对全部应用的 per-process 常驻内存限额与内存压力触发 jetsam；HarmonyOS 内核管控按资源泄漏阈值（如 RSS 超整机内存 1/3 且低内存）查杀且明示不区分前后台。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "Memory Limiter in Android 17 and higher（cgroup v2 动态限额与终止行为）",
+          "start_line": 91,
+          "end_line": 117,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/games/optimize/memory-overview",
+            "platform": "android",
+            "title": "About memory management",
+            "local_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/document.md",
+            "sha256": "8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab",
+            "raw_sha256": "fb356c05994377b631caae4b85ab7f13d46aad80310a7a735024723ae4ce3810",
+            "raw_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/source.gz",
+            "fetched_at": "2026-09-05T10:27:42.661143+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 198,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 3,
+                "truncated": true
+              },
+              {
+                "start_line": 9,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 49,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Memory Limiter in Android 17 and higher\n\nAndroid 17 (API level 37) and higher manage strict, per-app memory limits using\nLinux cgroup v2 to prevent individual apps from causing system-wide\ninstability. For more details on the technical implementation, see the\n[AOSP Memory Limiter Guide](https://source.android.com/docs/core/perf/memory-limiter) and [Prioritizing Memory Efficiency: Essential\nSteps for Android 17 Blog](https://android-developers.googleblog.com/2026/06/prioritizing-memory-efficiency-steps-for-android-17.html).\n\n* **Mechanism**: The Memory Limiter monitors all application processes and\n  dynamically assigns limits based on the process's lifecycle state:\n  + **Visible processes (foreground)**: App processes currently displaying a\n    UI are expected to run a larger resource working set, and are afforded a\n    more generous limit.\n  + **Non-visible processes (background or services)**: App processes doing\n    active work without showing a UI are constrained to a tighter, more\n    restrictive budget.\n* **Kernel attributes**: The service relies on two main attributes:\n  + **`memory.high`**: A soft limit. When exceeded, the kernel throttles the\n    process and attempts to aggressively reclaim memory. This reclamation\n    can cause the game to experience performance degradation.\n  + **`memory.swap.max`**: Manages a hard cap on the swap or zRAM space the\n    process can use.\n* **Termination behavior**: If a process continues to allocate anonymous\n  memory past `memory.high` and exhausts its swap capacity, allocations fail,\n  and the OS silently kills the process. This termination is logged using\n  [`ApplicationExitInfo`](https://developer.android.com/reference/android/app/ApplicationExitInfo) under the [Memory Limiter](https://source.android.com/docs/core/perf/memory-limiter) exit reason\n  (available starting in Android 17, 26Q4)."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Cold start prevention（LMK 优先终止后台进程）",
+          "start_line": 14,
+          "end_line": 25,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/games/optimize/memory-overview",
+            "platform": "android",
+            "title": "About memory management",
+            "local_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/document.md",
+            "sha256": "8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab",
+            "raw_sha256": "fb356c05994377b631caae4b85ab7f13d46aad80310a7a735024723ae4ce3810",
+            "raw_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/source.gz",
+            "fetched_at": "2026-09-05T10:27:42.661143+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 198,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 3,
+                "truncated": true
+              },
+              {
+                "start_line": 9,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 49,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "* **Cold start prevention (user experience and retention)**: When a player\n  temporarily switches away from your game (for example, to answer a\n  notification or check a message), the operating system places the game\n  process into the background. If the game's background memory footprint is\n  too high, the system's Low Memory Killer (LMK) prioritizes terminating the\n  game process to reclaim RAM for foreground tasks. The next time the user\n  resumes, instead of a seamless and instantaneous warm resume, the game must\n  undergo a long cold start—completely reloading heavy graphics assets, audio,\n  and game engine binaries from storage. Keeping your background memory usage\n  low prevents these silent background terminations, preserving user state and\n  ensuring players can resume their session immediately. For more details on\n  system LMK behavior, see the [Android Vitals - Low memory killers](https://developer.android.com/games/optimize/vitals/lmk) guide."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Identify the jetsam reason（per-process-limit、vm-pageshortage）",
+          "start_line": 90,
+          "end_line": 115,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/xcode/identifying-high-memory-use-with-jetsam-event-reports",
+            "platform": "ios",
+            "title": "Identifying high-memory use with jetsam event reports",
+            "local_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/document.md",
+            "sha256": "97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267",
+            "raw_sha256": "83af39afd9537d1490ad0b108c5bc906db2445f42f48dfe7cfbc26485c4c3ea6",
+            "raw_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/source.gz",
+            "fetched_at": "2026-09-05T11:23:48.794135+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 163,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 5,
+                "end_line": 6,
+                "truncated": true
+              },
+              {
+                "start_line": 24,
+                "end_line": 57,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "If the jettisoned process is your app, the value of the `reason` key explains the\nconditions that led to the jetsam event:\n\n- `per-process-limit`: The process crossed the resident memory limit imposed by the\n  system on all apps. Crossing this limit makes the process eligible for termination.\n  If the process is an app extension from your app, note that extensions have a much\n  lower per-process memory limit than foreground apps. Carefully consider your needs\n  before using technologies with a high-baseline memory cost, such as <doc://com.apple.documentation/documentation/SpriteKit>\n  or a <doc://com.apple.documentation/documentation/MapKit/MKMapView>, in an extension\n  point. Alternate solutions may be more appropriate. For example, an image created\n  by <doc://com.apple.documentation/documentation/MapKit/MKMapSnapshotter> has lower\n  memory use than a <doc://com.apple.documentation/documentation/MapKit/MKMapView>,\n  and is a better choice for many extension-point scenarios.\n- `vm-pageshortage`: The system experienced memory pressure and needed to free background\n  process memory for the current foreground app.\n- `vnode-limit`: Too many files were open across the system. The kernel has a finite\n  number of *vnodes*, a memory structure backing open files, and these were almost\n  exhausted. To avoid terminating the frontmost app when vnodes are nearly exhausted,\n  the system may terminate your app in the background to free vnodes, even if your\n  app isn’t the source of excess vnode use.\n- `highwater`: A system daemon exceeded its highest-expected memory footprint.\n- `fc-thrashing`: A process thrashed the system file cache. This occurs when non-sequential\n  parts of memory-mapped files are read and written too frequently. To avoid terminating\n  the frontmost app, the system may terminate your app in the background to free space\n  in the file cache, even if your app isn’t thrashing the file cache.\n- `jettisoned`: The system jettisoned the process for some other reason."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "资源泄漏内核管控方式（主动终止、不区分前后台）",
+          "start_line": 33,
+          "end_line": 43,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/resource-leak-guidelines",
+            "platform": "harmonyos",
+            "title": "Resource Leak（资源泄漏）检测",
+            "local_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/document.md",
+            "sha256": "7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e",
+            "raw_sha256": "e8b647f58b184d03002bec9c002f4cd9c438e89be3bd76012324b1d20e61d551",
+            "raw_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1089,
+            "suggested_sections": [
+              {
+                "start_line": 51,
+                "end_line": 69,
+                "truncated": true
+              },
+              {
+                "start_line": 137,
+                "end_line": 140,
+                "truncated": true
+              },
+              {
+                "start_line": 871,
+                "end_line": 956,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "4. 管控是指当系统判定应用发生泄漏后，主动终止泄漏应用的行为。\n\n5. 在资源泄漏资料中，DMA（ION）、dmaheap、dmabuf 可理解为同一种内存类型，不作强区分。\n\n资源泄漏内核管控方式如下：\n\n从HarmonyOS 6.1.0开始，应用资源申请过快或前台泄漏导致整机资源不足，比如单应用快速申请（RSS、DMA（ION）、GPU内存）超过阈值，导致整机出现低内存，系统会对应用进行管控，同步提供部分基础的RESOURCE_OVERLIMIT维测信息。  \n![](https://media:201787906152002440)  \n1. 当前支持内核管控的资源类型有：DMA（ION）、GPU、RSS、ASHMEM、THREAD。\n\n2. 内核管控不区分前后台，可能会出现问题应用的前台闪退问题。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "RSS 内核管控 概述（超整机内存 1/3 且低内存触发）",
+          "start_line": 984,
+          "end_line": 988,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/resource-leak-guidelines",
+            "platform": "harmonyos",
+            "title": "Resource Leak（资源泄漏）检测",
+            "local_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/document.md",
+            "sha256": "7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e",
+            "raw_sha256": "e8b647f58b184d03002bec9c002f4cd9c438e89be3bd76012324b1d20e61d551",
+            "raw_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1089,
+            "suggested_sections": [
+              {
+                "start_line": 51,
+                "end_line": 69,
+                "truncated": true
+              },
+              {
+                "start_line": 137,
+                "end_line": 140,
+                "truncated": true
+              },
+              {
+                "start_line": 871,
+                "end_line": 956,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "#### RSS内核管控\n\n概述：应用RSS内存泄漏超过整机运行内存的1/3，且整机处于低内存状态时，触发RSS内核管控。\n\n日志文件：memleak-kernel-\\[module\\]-0-\\[timestamp\\].txt（方式一）或 RESOURCE_OVERLIMIT_\\[TIMESTAMP\\]_\\[PID\\].log（方式三）。"
+        }
+      ],
+      "open_questions": [
+        "各平台限额/阈值如何随设备 RAM 缩放，Android Memory Limiter 与 LMK 的衔接关系",
+        "iOS jetsam 的优先级带与选择算法未读到，无法比较优先级粒度",
+        "HarmonyOS 除 RSS/GPU/ASHMEM/DMA/thread 外是否另有按进程优先级的低内存查杀路径"
+      ]
+    },
+    {
+      "dimension": "api_surface",
+      "statement": "被杀归因的获取面疑似不同：Android 提供 ApplicationExitInfo 应用内 API 查询上次被杀原因（REASON_LOW_MEMORY、Memory Limiter 退出原因）；iOS 包内仅见设备侧 jetsam 事件报告（JSON，含 reason/states/coalition）供事后分析，未见应用内查询 API；HarmonyOS 经 HiAppEvent 订阅资源泄漏/RESOURCE_OVERLIMIT 事件及 killTime/killReason 日志。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Monitoring historical OOMs (ApplicationExitInfo)",
+          "start_line": 467,
+          "end_line": 482,
+          "source": {
+            "id": "android-1",
+            "url": "https://developer.android.com/topic/performance/memory/guide/java-memory",
+            "platform": "android",
+            "title": "Analyzing Java memory",
+            "local_path": "docs-raw/research/2026-09-06/984bb73ca980c10dc9eab312dccafdc470c618848dc328231fa2d0c685565480/bc88dc55ca85e392d87f985cfb861bf62fc04446ae00757ae187e3502cad7fb9/document.md",
+            "sha256": "bc88dc55ca85e392d87f985cfb861bf62fc04446ae00757ae187e3502cad7fb9",
+            "raw_sha256": "aad06df1918466b15edbf44dd5638621a93780a925714b071f0f0dc2f0b91ec8",
+            "raw_path": "docs-raw/research/2026-09-06/984bb73ca980c10dc9eab312dccafdc470c618848dc328231fa2d0c685565480/bc88dc55ca85e392d87f985cfb861bf62fc04446ae00757ae187e3502cad7fb9/source.gz",
+            "fetched_at": "2026-09-05T10:37:40.628002+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 501,
+            "suggested_sections": [
+              {
+                "start_line": 134,
+                "end_line": 148,
+                "truncated": true
+              },
+              {
+                "start_line": 178,
+                "end_line": 179,
+                "truncated": true
+              },
+              {
+                "start_line": 217,
+                "end_line": 251,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Monitoring historical OOMs (ApplicationExitInfo)\n\nCatching an LMK as it happens is great for active debugging, but for field\ntelemetry, you can use the `ApplicationExitInfo` API. This allows your app to\ndiscover why it was terminated in a previous session.\n\n```\nActivityManager am = getSystemService(ActivityManager.class);\nList<ApplicationExitInfo> exitReasons = am.getHistoricalProcessExitReasons(null, 0, 1);\nif (!exitReasons.isEmpty()) {\n    ApplicationExitInfo info = exitReasons.get(0);\n    if (info.getReason() == ApplicationExitInfo.REASON_LOW_MEMORY) {\n        // App was killed by the system Low Memory Killer\n    }\n}\n```"
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Termination behavior（Memory Limiter 退出原因经 ApplicationExitInfo 记录）",
+          "start_line": 113,
+          "end_line": 117,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/games/optimize/memory-overview",
+            "platform": "android",
+            "title": "About memory management",
+            "local_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/document.md",
+            "sha256": "8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab",
+            "raw_sha256": "fb356c05994377b631caae4b85ab7f13d46aad80310a7a735024723ae4ce3810",
+            "raw_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/source.gz",
+            "fetched_at": "2026-09-05T10:27:42.661143+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 198,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 3,
+                "truncated": true
+              },
+              {
+                "start_line": 9,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 49,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "* **Termination behavior**: If a process continues to allocate anonymous\n  memory past `memory.high` and exhausts its swap capacity, allocations fail,\n  and the OS silently kills the process. This termination is logged using\n  [`ApplicationExitInfo`](https://developer.android.com/reference/android/app/ApplicationExitInfo) under the [Memory Limiter](https://source.android.com/docs/core/perf/memory-limiter) exit reason\n  (available starting in Android 17, 26Q4)."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Overview（jetsam 报告区别于崩溃报告，JSON 含全系统内存使用）",
+          "start_line": 17,
+          "end_line": 22,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/xcode/identifying-high-memory-use-with-jetsam-event-reports",
+            "platform": "ios",
+            "title": "Identifying high-memory use with jetsam event reports",
+            "local_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/document.md",
+            "sha256": "97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267",
+            "raw_sha256": "83af39afd9537d1490ad0b108c5bc906db2445f42f48dfe7cfbc26485c4c3ea6",
+            "raw_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/source.gz",
+            "fetched_at": "2026-09-05T11:23:48.794135+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 163,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 5,
+                "end_line": 6,
+                "truncated": true
+              },
+              {
+                "start_line": 24,
+                "end_line": 57,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Jetsam event reports differ from crash reports because they contain the overall memory\nuse of all apps and system processes on a device, they’re in JSON format, and they\ndon’t contain the backtraces of any threads in your app. If the system jettisons\nyour app due to memory pressure while the app is visible, it will look like your\napp crashed. Use jetsam event reports to identify your app’s role in jetsam events,\neven if your app didn’t get jettisoned."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "日志获取 > 方式三 HiAppEvent 订阅（RESOURCE_OVERLIMIT 日志）",
+          "start_line": 77,
+          "end_line": 79,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/resource-leak-guidelines",
+            "platform": "harmonyos",
+            "title": "Resource Leak（资源泄漏）检测",
+            "local_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/document.md",
+            "sha256": "7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e",
+            "raw_sha256": "e8b647f58b184d03002bec9c002f4cd9c438e89be3bd76012324b1d20e61d551",
+            "raw_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1089,
+            "suggested_sections": [
+              {
+                "start_line": 51,
+                "end_line": 69,
+                "truncated": true
+              },
+              {
+                "start_line": 137,
+                "end_line": 140,
+                "truncated": true
+              },
+              {
+                "start_line": 871,
+                "end_line": 956,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "* 方式三：通过HiAppEvent接口订阅。\n\nHiAppEvent对外提供故障订阅接口，可以订阅各类故障打点，详见[HiAppEvent介绍](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hiappevent-intro)，其中资源泄漏的订阅方式详见[资源泄漏事件介绍](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hiappevent-watcher-resourceleak-events)。资源泄漏故障日志存于/data/storage/el2/log/resourcelimit/路径，日志名统一为RESOURCE_OVERLIMIT_\\[TIMESTAMP\\]_\\[PID\\].log，可根据日志内容区分文件类型。  "
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "内核管控日志通用内容（killTime/killReason 字段）",
+          "start_line": 961,
+          "end_line": 978,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/resource-leak-guidelines",
+            "platform": "harmonyos",
+            "title": "Resource Leak（资源泄漏）检测",
+            "local_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/document.md",
+            "sha256": "7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e",
+            "raw_sha256": "e8b647f58b184d03002bec9c002f4cd9c438e89be3bd76012324b1d20e61d551",
+            "raw_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1089,
+            "suggested_sections": [
+              {
+                "start_line": 51,
+                "end_line": 69,
+                "truncated": true
+              },
+              {
+                "start_line": 137,
+                "end_line": 140,
+                "truncated": true
+              },
+              {
+                "start_line": 871,
+                "end_line": 956,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "内核管控日志通用内容如下：  \n\n|字段|说明|\n|:----------|:-----------------|\n|pidNumber|泄漏应用pid。|\n|processName|泄漏应用进程名。|\n|killTime|应用被查杀时间。|\n|RssMemory|泄漏应用RSS内存占用，单位：KB。|\n|killReason|应用被查杀原因。|\n\n```\nGenerated by HiviewDFX @HarmonyOS\nLOGGER_MEMCHECK_GERNAL_INFO\n pidNumber: 2017\n processName: process1\n killTime: 20260512090030\n killReason: RssThresholdKiller\n RssMemory: 8350500"
+        }
+      ],
+      "open_questions": [
+        "iOS 是否存在应用内获取自身 jetsam 历史的 API（本包未见正文，不能断定没有）",
+        "HarmonyOS RESOURCE_OVERLIMIT 事件字段完整性与订阅前提条件",
+        "Android Memory Limiter 退出原因在 ApplicationExitInfo 中的具体字段与 API 级要求"
+      ]
+    },
+    {
+      "dimension": "lifecycle_background",
+      "statement": "前后台状态在查杀决策中的角色疑似不同：Android 限额显式区分可见/非可见进程且 Perceptible Service 按后台限额对待；iOS vm-pageshortage 明示为当前前台应用释放后台进程内存；HarmonyOS 内核管控明示不区分前后台、可查杀前台问题应用。",
+      "platforms": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "Memory Limiter 机制（可见进程限额宽、非可见更紧）",
+          "start_line": 99,
+          "end_line": 106,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/games/optimize/memory-overview",
+            "platform": "android",
+            "title": "About memory management",
+            "local_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/document.md",
+            "sha256": "8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab",
+            "raw_sha256": "fb356c05994377b631caae4b85ab7f13d46aad80310a7a735024723ae4ce3810",
+            "raw_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/source.gz",
+            "fetched_at": "2026-09-05T10:27:42.661143+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 198,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 3,
+                "truncated": true
+              },
+              {
+                "start_line": 9,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 49,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "* **Mechanism**: The Memory Limiter monitors all application processes and\n  dynamically assigns limits based on the process's lifecycle state:\n  + **Visible processes (foreground)**: App processes currently displaying a\n    UI are expected to run a larger resource working set, and are afforded a\n    more generous limit.\n  + **Non-visible processes (background or services)**: App processes doing\n    active work without showing a UI are constrained to a tighter, more\n    restrictive budget."
+        },
+        {
+          "source_id": "android-2",
+          "locator": "User-perceived services（Perceptible Service 按非前台限额）",
+          "start_line": 144,
+          "end_line": 148,
+          "source": {
+            "id": "android-2",
+            "url": "https://developer.android.com/games/optimize/memory-overview",
+            "platform": "android",
+            "title": "About memory management",
+            "local_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/document.md",
+            "sha256": "8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab",
+            "raw_sha256": "fb356c05994377b631caae4b85ab7f13d46aad80310a7a735024723ae4ce3810",
+            "raw_path": "docs-raw/research/2026-09-06/b1e56b4ba18693ce076b2af3f169162c1bbf5b5748e79f0d81bc658e6fab8d97/8ccd1d7c67777e308b863edc528cee2e0b6b860905c2f89f58e4c2d78fcbb3ab/source.gz",
+            "fetched_at": "2026-09-05T10:27:42.661143+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 198,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 3,
+                "truncated": true
+              },
+              {
+                "start_line": 9,
+                "end_line": 42,
+                "truncated": false
+              },
+              {
+                "start_line": 49,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "Android platform memory limits treat this state as not Foreground, meaning if\nyour game is backgrounded but continues running a Perceptible Service, it's\nsubjected to the tighter background or service memory limits shown in the Play\nHelp Center page. Games must aggressively trim unnecessary assets when moving\nfrom the foreground to a background Perceptible Service state."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "vm-pageshortage（为当前前台应用释放后台进程内存）",
+          "start_line": 103,
+          "end_line": 104,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/xcode/identifying-high-memory-use-with-jetsam-event-reports",
+            "platform": "ios",
+            "title": "Identifying high-memory use with jetsam event reports",
+            "local_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/document.md",
+            "sha256": "97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267",
+            "raw_sha256": "83af39afd9537d1490ad0b108c5bc906db2445f42f48dfe7cfbc26485c4c3ea6",
+            "raw_path": "docs-raw/research/2026-09-06/b73c59dd213e19f4eccb41ee8eba9bd0689254d5cb55ecff7a7442f29b5754cd/97f6012b242190cf23724b246fc1b80fd111ee77d4048f2b0fbe3683767a3267/source.gz",
+            "fetched_at": "2026-09-05T11:23:48.794135+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 163,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": true
+              },
+              {
+                "start_line": 5,
+                "end_line": 6,
+                "truncated": true
+              },
+              {
+                "start_line": 24,
+                "end_line": 57,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "- `vm-pageshortage`: The system experienced memory pressure and needed to free background\n  process memory for the current foreground app."
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "内核管控不区分前后台，可能出现前台闪退",
+          "start_line": 41,
+          "end_line": 43,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/resource-leak-guidelines",
+            "platform": "harmonyos",
+            "title": "Resource Leak（资源泄漏）检测",
+            "local_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/document.md",
+            "sha256": "7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e",
+            "raw_sha256": "e8b647f58b184d03002bec9c002f4cd9c438e89be3bd76012324b1d20e61d551",
+            "raw_path": "docs-raw/research/2026-09-06/88bf1005c6c3c683ff6b82b14e51f56a4b201caf0ff777f9141cf90c89641d53/7d0e18b606ed3e7f90709922606c28239b777db63b3fc9638d656999eea4e97e/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 1089,
+            "suggested_sections": [
+              {
+                "start_line": 51,
+                "end_line": 69,
+                "truncated": true
+              },
+              {
+                "start_line": 137,
+                "end_line": 140,
+                "truncated": true
+              },
+              {
+                "start_line": 871,
+                "end_line": 956,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "1. 当前支持内核管控的资源类型有：DMA（ION）、GPU、RSS、ASHMEM、THREAD。\n\n2. 内核管控不区分前后台，可能会出现问题应用的前台闪退问题。"
+        }
+      ],
+      "open_questions": [
+        "Android LMK 完整优先级阶梯（前后台之外的服务/缓存层级）未入包",
+        "iOS suspended 进程是否总是先于 frontmost 被查杀，states 与优先级的关系",
+        "HarmonyOS 6.1.0 之前版本及非内核管控路径是否区分前后台"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "节点定义含恢复策略，但三平台包内来源均无被杀后状态保存/恢复正文，该子范围整体 unknown",
+    "进程优先级完整模型（Android 进程层级正文、iOS jetsam 优先级、HarmonyOS 进程优先级）未入包，本轮仅读到机制概述",
+    "版本基线未固定：Android 17/26Q4、iOS 无版本声明、HarmonyOS 6.1.0 均为正文自述，未对照启动日最新正式版说明",
+    "Android 来源为游戏/Play Vitals 语境，一般应用的限额与查杀行为未单独核实",
+    "iOS Kernel Functions 来源为内核扩展符号索引，对 iOS 应用层进程回收不适用，需替换为 app 层文档"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "恢复策略全平台无来源属关键缺口，且三平台查杀机制映射高风险（限额机制、前后台语义、归因 API 均有待核差异假设），需优先精研。"
+  }
+}

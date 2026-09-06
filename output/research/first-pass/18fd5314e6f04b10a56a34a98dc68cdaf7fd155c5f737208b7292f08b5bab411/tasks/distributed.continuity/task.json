@@ -1,0 +1,542 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "distributed.continuity",
+    "level": "L2",
+    "parent": "distributed",
+    "name": {
+      "zh": "任务接续",
+      "en": "Task Continuity"
+    },
+    "definition": "跨设备接续同一用户任务。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/distributed/continuity/_rollup.yaml",
+    "comparison_scope": {
+      "includes": [
+        "跨设备接续同一用户任务。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "8411bba9c97e44ea736c3b9af605c798d5cb08e4a8e54544ed0e118e7acdd5be",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "f3906d10662143d975ee80f7ed5896420fb258880acd143066ba3af640c6b512",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/docs/quality-guidelines/archive/adaptive/id-map-ls-adaptive",
+      "platform": "android",
+      "title": "ID map",
+      "local_path": "docs-raw/research/2026-09-06/2b12f05bc60b02833b1db167904d68f73dd2cb87605a82b420a2e68ca94e9615/edef4a48ff5830358aa069191eafad58ef85dd3a4af8a3a87c3263301746c1c7/document.md",
+      "sha256": "edef4a48ff5830358aa069191eafad58ef85dd3a4af8a3a87c3263301746c1c7",
+      "raw_sha256": "e233286b1f837f99a1b8e4199a0f81eebbd8d250c12ff953a7ecf54e040085a6",
+      "raw_path": "docs-raw/research/2026-09-06/2b12f05bc60b02833b1db167904d68f73dd2cb87605a82b420a2e68ca94e9615/edef4a48ff5830358aa069191eafad58ef85dd3a4af8a3a87c3263301746c1c7/source.gz",
+      "fetched_at": "2026-09-05T10:27:17.745937+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 155,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": true
+        },
+        {
+          "start_line": 9,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 17,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/design/ui/cars/guides/app-types/resume-navigation",
+      "platform": "android",
+      "title": "Resume navigation after a stop",
+      "local_path": "docs-raw/research/2026-09-06/f92b3e99c6ce51bcc3662cef867b789555a7e00f3835ee7f74722b5ef5945b5a/fe6c81f4e314eacfa22b2a090eefdb3fc316a36c4e0992b9debf6ab17b9816c0/document.md",
+      "sha256": "fe6c81f4e314eacfa22b2a090eefdb3fc316a36c4e0992b9debf6ab17b9816c0",
+      "raw_sha256": "2f21509db73390381a29683dd302b0068f974643eae51814aa6d82be25566227",
+      "raw_path": "docs-raw/research/2026-09-06/f92b3e99c6ce51bcc3662cef867b789555a7e00f3835ee7f74722b5ef5945b5a/fe6c81f4e314eacfa22b2a090eefdb3fc316a36c4e0992b9debf6ab17b9816c0/source.gz",
+      "fetched_at": "2026-09-05T10:22:54.486491+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 14,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 14,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/swiftui/system-events",
+      "platform": "ios",
+      "title": "System events",
+      "local_path": "docs-raw/research/2026-09-06/381d85e3009820567b0da2cca1800d9154a41fa005f2463b3f370b9fbc3dba62/6c92c630bb0181169ca12455f32704e5ddf3c5137f168e6336bed89ade118894/document.md",
+      "sha256": "6c92c630bb0181169ca12455f32704e5ddf3c5137f168e6336bed89ade118894",
+      "raw_sha256": "f818d917a348e54cf753885e80e13378df9be2df955940662ba5e2cba2bba651",
+      "raw_path": "docs-raw/research/2026-09-06/381d85e3009820567b0da2cca1800d9154a41fa005f2463b3f370b9fbc3dba62/6c92c630bb0181169ca12455f32704e5ddf3c5137f168e6336bed89ade118894/source.gz",
+      "fetched_at": "2026-09-05T10:26:25.115566+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 120,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 15,
+          "truncated": false
+        },
+        {
+          "start_line": 16,
+          "end_line": 17,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/avkit/supporting-continuity-camera-in-your-tvos-app",
+      "platform": "ios",
+      "title": "Supporting Continuity Camera in your tvOS app",
+      "local_path": "docs-raw/research/2026-09-06/5802e2861ce63a74648f663da4dee7dd3e18cdfba4293bc06ae521c7c5f07257/ec8505a3620ba95ad4cd98ef5f348f63e567346c7a80dc2580197547ede09a1c/document.md",
+      "sha256": "ec8505a3620ba95ad4cd98ef5f348f63e567346c7a80dc2580197547ede09a1c",
+      "raw_sha256": "e23498ef743a797f7f54555e139314a6a3c271c8c5f7c5c644cd42a2d9d3e8bf",
+      "raw_path": "docs-raw/research/2026-09-06/5802e2861ce63a74648f663da4dee7dd3e18cdfba4293bc06ae521c7c5f07257/ec8505a3620ba95ad4cd98ef5f348f63e567346c7a80dc2580197547ede09a1c/source.gz",
+      "fetched_at": "2026-09-05T10:18:38.601464+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 284,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 5,
+          "truncated": false
+        },
+        {
+          "start_line": 6,
+          "end_line": 21,
+          "truncated": false
+        },
+        {
+          "start_line": 22,
+          "end_line": 41,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/errorcode-vision",
+      "platform": "harmonyos",
+      "title": "ArkTS API错误码",
+      "local_path": "docs-raw/research/2026-09-06/8c2c7574933289473befa3514bb3342ce2802e17e6d3f8f7640465aa456950f1/3faa82975c833437cfae1c89b99cd208e26740e876f8092610ee8e483e486ec5/document.md",
+      "sha256": "3faa82975c833437cfae1c89b99cd208e26740e876f8092610ee8e483e486ec5",
+      "raw_sha256": "0d26fd9a404e7930a45b061751d44e998efbf048cdc9f51d20157b96e1790428",
+      "raw_path": "docs-raw/research/2026-09-06/8c2c7574933289473befa3514bb3342ce2802e17e6d3f8f7640465aa456950f1/3faa82975c833437cfae1c89b99cd208e26740e876f8092610ee8e483e486ec5/source.gz",
+      "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 140,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 5,
+          "truncated": false
+        },
+        {
+          "start_line": 6,
+          "end_line": 23,
+          "truncated": false
+        },
+        {
+          "start_line": 24,
+          "end_line": 41,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-continue-data",
+      "platform": "harmonyos",
+      "title": "应用接续数据迁移",
+      "local_path": "docs-raw/research/2026-09-06/4dbcc4083edff372c97a898fa9b99dbd4a1b2e6f42801a255ddc11266033efd9/00ed0ce810251e567f823b833b37973f1cc88c2e1975464d0eadb98b0135883b/document.md",
+      "sha256": "00ed0ce810251e567f823b833b37973f1cc88c2e1975464d0eadb98b0135883b",
+      "raw_sha256": "d2d700a1f380a8996536a0892b46bdd69edbb61f78a91768983c223bccf08077",
+      "raw_path": "docs-raw/research/2026-09-06/4dbcc4083edff372c97a898fa9b99dbd4a1b2e6f42801a255ddc11266033efd9/00ed0ce810251e567f823b833b37973f1cc88c2e1975464d0eadb98b0135883b/source.gz",
+      "fetched_at": "2026-09-05T10:43:40.565761+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 373,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 24,
+          "end_line": 80,
+          "truncated": false
+        },
+        {
+          "start_line": 83,
+          "end_line": 194,
+          "truncated": true
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:23.846174+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "ad006be2dc4b5b54c479d4308a8d61bdc9dc4c8778ecf68f400eef4b594546d7"
+}

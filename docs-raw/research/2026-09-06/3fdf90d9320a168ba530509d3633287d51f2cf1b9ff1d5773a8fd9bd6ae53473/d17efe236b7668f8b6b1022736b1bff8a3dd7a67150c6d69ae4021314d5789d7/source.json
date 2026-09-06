@@ -1,0 +1,13 @@
+{
+  "id": "3fdf90d9320a168ba530509d3633287d51f2cf1b9ff1d5773a8fd9bd6ae53473",
+  "url": "https://developer.apple.com/documentation/usernotifications/setting-up-broadcast-push-notifications",
+  "platform": "ios",
+  "title": "Setting up broadcast push notifications",
+  "local_path": "docs-raw/research/2026-09-06/3fdf90d9320a168ba530509d3633287d51f2cf1b9ff1d5773a8fd9bd6ae53473/d17efe236b7668f8b6b1022736b1bff8a3dd7a67150c6d69ae4021314d5789d7/document.md",
+  "sha256": "d17efe236b7668f8b6b1022736b1bff8a3dd7a67150c6d69ae4021314d5789d7",
+  "raw_sha256": "0a31731b297275d0d2451a6816efa0c6723bd3a55fe4b45d859ade69c6f3d38a",
+  "raw_path": "docs-raw/research/2026-09-06/3fdf90d9320a168ba530509d3633287d51f2cf1b9ff1d5773a8fd9bd6ae53473/d17efe236b7668f8b6b1022736b1bff8a3dd7a67150c6d69ae4021314d5789d7/source.gz",
+  "fetched_at": "2026-09-05T11:22:33.931201+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

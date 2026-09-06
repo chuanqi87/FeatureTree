@@ -1,0 +1,13 @@
+{
+  "id": "9706e222c21123a6e9bd961686c717895f72aa7ebd7bbb4d5af915719757deea",
+  "url": "https://developer.android.com/reference/android/bluetooth/le/ScanFilter",
+  "platform": "android",
+  "title": "ScanFilter",
+  "local_path": "docs-raw/research/2026-09-06/9706e222c21123a6e9bd961686c717895f72aa7ebd7bbb4d5af915719757deea/f708ed450c66bbc3093a6f6dffdfe3117ea2ce352deea39caa16100d8b7695b8/document.md",
+  "sha256": "f708ed450c66bbc3093a6f6dffdfe3117ea2ce352deea39caa16100d8b7695b8",
+  "raw_sha256": "3203c344b87eb7f94fbb45efdce723068886e9f92eac8ba3b78372d3c1382637",
+  "raw_path": "docs-raw/research/2026-09-06/9706e222c21123a6e9bd961686c717895f72aa7ebd7bbb4d5af915719757deea/f708ed450c66bbc3093a6f6dffdfe3117ea2ce352deea39caa16100d8b7695b8/source.gz",
+  "fetched_at": "2026-09-05T10:15:50.957098+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

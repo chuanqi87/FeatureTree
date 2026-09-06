@@ -1,0 +1,13 @@
+{
+  "id": "3575c07a27f05754785abae0bb174ac55a3847ad8b0b9752ce2a0dc9986f4f9c",
+  "url": "https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient",
+  "platform": "android",
+  "title": "FusedLocationProviderClient",
+  "local_path": "docs-raw/research/2026-09-06/3575c07a27f05754785abae0bb174ac55a3847ad8b0b9752ce2a0dc9986f4f9c/edd24a30383032089923f0fde6073615a945e30a0d3f1de007fdc983a143d2e5/document.md",
+  "sha256": "edd24a30383032089923f0fde6073615a945e30a0d3f1de007fdc983a143d2e5",
+  "raw_sha256": "0cb77b409cecc55ee8ca761536beeb310c654b093e263d0985464794efd18187",
+  "raw_path": "docs-raw/research/2026-09-06/3575c07a27f05754785abae0bb174ac55a3847ad8b0b9752ce2a0dc9986f4f9c/edd24a30383032089923f0fde6073615a945e30a0d3f1de007fdc983a143d2e5/source.gz",
+  "fetched_at": "2026-09-05T14:47:49.504623+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

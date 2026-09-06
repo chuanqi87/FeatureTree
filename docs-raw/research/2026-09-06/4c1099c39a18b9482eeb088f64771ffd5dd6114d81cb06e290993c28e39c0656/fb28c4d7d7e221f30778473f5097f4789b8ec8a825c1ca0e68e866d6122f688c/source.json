@@ -1,0 +1,13 @@
+{
+  "id": "4c1099c39a18b9482eeb088f64771ffd5dd6114d81cb06e290993c28e39c0656",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inputmethod",
+  "platform": "harmonyos",
+  "title": "@ohos.inputMethod (输入法框架)",
+  "local_path": "docs-raw/research/2026-09-06/4c1099c39a18b9482eeb088f64771ffd5dd6114d81cb06e290993c28e39c0656/fb28c4d7d7e221f30778473f5097f4789b8ec8a825c1ca0e68e866d6122f688c/document.md",
+  "sha256": "fb28c4d7d7e221f30778473f5097f4789b8ec8a825c1ca0e68e866d6122f688c",
+  "raw_sha256": "0bbb1052252f44bc7723b03a4f138a09373c1108c538f9e3c9b0f1970ea969f4",
+  "raw_path": "docs-raw/research/2026-09-06/4c1099c39a18b9482eeb088f64771ffd5dd6114d81cb06e290993c28e39c0656/fb28c4d7d7e221f30778473f5097f4789b8ec8a825c1ca0e68e866d6122f688c/source.gz",
+  "fetched_at": "2026-09-05T10:27:35.056254+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

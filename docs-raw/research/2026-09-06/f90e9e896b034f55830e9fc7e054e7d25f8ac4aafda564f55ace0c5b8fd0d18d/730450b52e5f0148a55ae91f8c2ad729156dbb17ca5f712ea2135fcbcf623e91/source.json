@@ -1,0 +1,13 @@
+{
+  "id": "f90e9e896b034f55830e9fc7e054e7d25f8ac4aafda564f55ace0c5b8fd0d18d",
+  "url": "https://developer.apple.com/documentation/appstoreconnectapi/get-v1-appscreenshotsets-_id_-relationships-appscreenshots",
+  "platform": "ios",
+  "title": "Get all app screenshot ids for an app screenshot set",
+  "local_path": "docs-raw/research/2026-09-06/f90e9e896b034f55830e9fc7e054e7d25f8ac4aafda564f55ace0c5b8fd0d18d/730450b52e5f0148a55ae91f8c2ad729156dbb17ca5f712ea2135fcbcf623e91/document.md",
+  "sha256": "730450b52e5f0148a55ae91f8c2ad729156dbb17ca5f712ea2135fcbcf623e91",
+  "raw_sha256": "402c8eda86f698580abf1b370d632d1babdf64cbc1ada80331d7b468a1e93559",
+  "raw_path": "docs-raw/research/2026-09-06/f90e9e896b034f55830e9fc7e054e7d25f8ac4aafda564f55ace0c5b8fd0d18d/730450b52e5f0148a55ae91f8c2ad729156dbb17ca5f712ea2135fcbcf623e91/source.gz",
+  "fetched_at": "2026-09-05T10:39:21.043239+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

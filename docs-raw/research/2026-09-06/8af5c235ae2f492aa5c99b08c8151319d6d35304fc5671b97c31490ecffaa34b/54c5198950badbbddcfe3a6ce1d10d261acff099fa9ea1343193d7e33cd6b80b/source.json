@@ -1,0 +1,13 @@
+{
+  "id": "8af5c235ae2f492aa5c99b08c8151319d6d35304fc5671b97c31490ecffaa34b",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/data-sync-with-cloud",
+  "platform": "harmonyos",
+  "title": "端云数据同步云侧环境部署指导",
+  "local_path": "docs-raw/research/2026-09-06/8af5c235ae2f492aa5c99b08c8151319d6d35304fc5671b97c31490ecffaa34b/54c5198950badbbddcfe3a6ce1d10d261acff099fa9ea1343193d7e33cd6b80b/document.md",
+  "sha256": "54c5198950badbbddcfe3a6ce1d10d261acff099fa9ea1343193d7e33cd6b80b",
+  "raw_sha256": "9523be4483e8dbdae2c9bba142ea737312dad706174cac46b08dac8d747a69d4",
+  "raw_path": "docs-raw/research/2026-09-06/8af5c235ae2f492aa5c99b08c8151319d6d35304fc5671b97c31490ecffaa34b/54c5198950badbbddcfe3a6ce1d10d261acff099fa9ea1343193d7e33cd6b80b/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

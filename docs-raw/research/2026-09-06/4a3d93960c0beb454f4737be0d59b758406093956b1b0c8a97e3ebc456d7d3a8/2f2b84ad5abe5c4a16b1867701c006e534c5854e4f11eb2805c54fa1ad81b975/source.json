@@ -1,0 +1,13 @@
+{
+  "id": "4a3d93960c0beb454f4737be0d59b758406093956b1b0c8a97e3ebc456d7d3a8",
+  "url": "https://developer.android.com/guide/components/activities/activity-lifecycle",
+  "platform": "android",
+  "title": "The activity lifecycle",
+  "local_path": "docs-raw/research/2026-09-06/4a3d93960c0beb454f4737be0d59b758406093956b1b0c8a97e3ebc456d7d3a8/2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975/document.md",
+  "sha256": "2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975",
+  "raw_sha256": "ea82596263145e26b1b3eb8638a03bdc4784f9339a87584a9aa5ee6c25f31a44",
+  "raw_path": "docs-raw/research/2026-09-06/4a3d93960c0beb454f4737be0d59b758406093956b1b0c8a97e3ebc456d7d3a8/2f2b84ad5abe5c4a16b1867701c006e534c5854e4f11eb2805c54fa1ad81b975/source.gz",
+  "fetched_at": "2026-09-05T10:29:21.696442+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

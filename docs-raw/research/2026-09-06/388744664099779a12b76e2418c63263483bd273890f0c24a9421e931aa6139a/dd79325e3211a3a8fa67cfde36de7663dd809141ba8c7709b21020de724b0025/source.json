@@ -1,0 +1,13 @@
+{
+  "id": "388744664099779a12b76e2418c63263483bd273890f0c24a9421e931aa6139a",
+  "url": "https://developer.apple.com/documentation/avfaudio/routing-audio-to-specific-devices-in-multidevice-sessions",
+  "platform": "ios",
+  "title": "Routing audio to specific devices in multidevice sessions",
+  "local_path": "docs-raw/research/2026-09-06/388744664099779a12b76e2418c63263483bd273890f0c24a9421e931aa6139a/dd79325e3211a3a8fa67cfde36de7663dd809141ba8c7709b21020de724b0025/document.md",
+  "sha256": "dd79325e3211a3a8fa67cfde36de7663dd809141ba8c7709b21020de724b0025",
+  "raw_sha256": "c10c6fc356be5bbd18cf51ca350d9415a1c044a0311979df5af407ffadc13c0a",
+  "raw_path": "docs-raw/research/2026-09-06/388744664099779a12b76e2418c63263483bd273890f0c24a9421e931aa6139a/dd79325e3211a3a8fa67cfde36de7663dd809141ba8c7709b21020de724b0025/source.gz",
+  "fetched_at": "2026-09-05T10:18:24.270770+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

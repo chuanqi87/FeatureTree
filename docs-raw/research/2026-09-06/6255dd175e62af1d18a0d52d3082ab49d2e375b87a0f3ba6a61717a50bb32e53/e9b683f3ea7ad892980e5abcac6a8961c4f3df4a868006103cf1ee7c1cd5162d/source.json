@@ -1,0 +1,13 @@
+{
+  "id": "6255dd175e62af1d18a0d52d3082ab49d2e375b87a0f3ba6a61717a50bb32e53",
+  "url": "https://developer.apple.com/documentation/avkit/adopting-picture-in-picture-in-a-custom-player",
+  "platform": "ios",
+  "title": "Adopting Picture in Picture in a Custom Player",
+  "local_path": "docs-raw/research/2026-09-06/6255dd175e62af1d18a0d52d3082ab49d2e375b87a0f3ba6a61717a50bb32e53/e9b683f3ea7ad892980e5abcac6a8961c4f3df4a868006103cf1ee7c1cd5162d/document.md",
+  "sha256": "e9b683f3ea7ad892980e5abcac6a8961c4f3df4a868006103cf1ee7c1cd5162d",
+  "raw_sha256": "663f53947ba3665cb143548b1b1b176afc774b46de041e5092b69ed300e2c640",
+  "raw_path": "docs-raw/research/2026-09-06/6255dd175e62af1d18a0d52d3082ab49d2e375b87a0f3ba6a61717a50bb32e53/e9b683f3ea7ad892980e5abcac6a8961c4f3df4a868006103cf1ee7c1cd5162d/source.gz",
+  "fetched_at": "2026-09-05T10:18:35.481460+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

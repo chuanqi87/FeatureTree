@@ -1,0 +1,13 @@
+{
+  "id": "6ab8a8231a5480c13fd1ecdadee94a979d0de4a237b161360306a4f38b816629",
+  "url": "https://developer.apple.com/documentation/networkextension/personal-vpn",
+  "platform": "ios",
+  "title": "Personal VPN",
+  "local_path": "docs-raw/research/2026-09-06/6ab8a8231a5480c13fd1ecdadee94a979d0de4a237b161360306a4f38b816629/c94b1f03341025fae764c19f1f29f0945137e164e01e765de7e3dc8482d7de30/document.md",
+  "sha256": "c94b1f03341025fae764c19f1f29f0945137e164e01e765de7e3dc8482d7de30",
+  "raw_sha256": "a017f9146d8bb60a9a4008c9ad0cf383c221c745eefd3aef1c7a063fcb835ea4",
+  "raw_path": "docs-raw/research/2026-09-06/6ab8a8231a5480c13fd1ecdadee94a979d0de4a237b161360306a4f38b816629/c94b1f03341025fae764c19f1f29f0945137e164e01e765de7e3dc8482d7de30/source.gz",
+  "fetched_at": "2026-09-05T10:24:23.978499+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

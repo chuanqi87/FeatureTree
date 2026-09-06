@@ -1,0 +1,13 @@
+{
+  "id": "2b9897fd403e5847f5cc31d0986651ad00d23d1614abbafcf54f0140246c2d46",
+  "url": "https://developer.android.com/reference/android/app/NotificationManager",
+  "platform": "android",
+  "title": "NotificationManager",
+  "local_path": "docs-raw/research/2026-09-06/2b9897fd403e5847f5cc31d0986651ad00d23d1614abbafcf54f0140246c2d46/e85cabeaba32ac36285e2f9ba12437124b90c691973ab11ac20beb0976b3eebe/document.md",
+  "sha256": "e85cabeaba32ac36285e2f9ba12437124b90c691973ab11ac20beb0976b3eebe",
+  "raw_sha256": "9b69b483d017e073988167bf47fd5c30cd817cca3c546ad28b1674dcffed9f4e",
+  "raw_path": "docs-raw/research/2026-09-06/2b9897fd403e5847f5cc31d0986651ad00d23d1614abbafcf54f0140246c2d46/e85cabeaba32ac36285e2f9ba12437124b90c691973ab11ac20beb0976b3eebe/source.gz",
+  "fetched_at": "2026-09-05T14:47:49.625188+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

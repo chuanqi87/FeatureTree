@@ -1,0 +1,13 @@
+{
+  "id": "92ec53f15fcf6c5f4820df716ef49a57d28dcd6b3ac600d25bc5730ef332a977",
+  "url": "https://developer.apple.com/documentation/healthkit/accessing-data-from-a-smart-health-card",
+  "platform": "ios",
+  "title": "Accessing Data from a SMART Health Card",
+  "local_path": "docs-raw/research/2026-09-06/92ec53f15fcf6c5f4820df716ef49a57d28dcd6b3ac600d25bc5730ef332a977/efbf72e0b8e2dcccb63fc16be5683c0c61aef5824215e25491e607615037aa1d/document.md",
+  "sha256": "efbf72e0b8e2dcccb63fc16be5683c0c61aef5824215e25491e607615037aa1d",
+  "raw_sha256": "ebff0921b4aa1e2a669a26c94271dbe9314ae509b7eaf2af818cfb86398fa39c",
+  "raw_path": "docs-raw/research/2026-09-06/92ec53f15fcf6c5f4820df716ef49a57d28dcd6b3ac600d25bc5730ef332a977/efbf72e0b8e2dcccb63fc16be5683c0c61aef5824215e25491e607615037aa1d/source.gz",
+  "fetched_at": "2026-09-05T10:22:32.952375+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

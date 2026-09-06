@@ -1,0 +1,9 @@
+{
+  "task_id": "edd40cc384a36cc2ba6c021cd1cc0f0073cc283d8a554cc3f05737edff5e1c39",
+  "feature_id": "connectivity.bluetooth.le.scan.batch",
+  "response_sha256": "ddab44e34316fc8cb39208bd395ff762c0489d4654447adbdf4c0c59a9e1bb7c",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

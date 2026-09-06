@@ -1,0 +1,13 @@
+{
+  "id": "f06e287264522aaa6d15d753b6447886950a3e556dcd8cdf3696539d6b17ee4e",
+  "url": "https://developer.apple.com/documentation/coreml/downloading-and-compiling-a-model-on-the-user-s-device",
+  "platform": "ios",
+  "title": "Downloading and Compiling a Model on the User’s Device",
+  "local_path": "docs-raw/research/2026-09-06/f06e287264522aaa6d15d753b6447886950a3e556dcd8cdf3696539d6b17ee4e/462ff0b3b179022648d8bd340a034e94197f3eb463dc7cc9ee5cd292c1f38c25/document.md",
+  "sha256": "462ff0b3b179022648d8bd340a034e94197f3eb463dc7cc9ee5cd292c1f38c25",
+  "raw_sha256": "a560155b94a33f1d0310e09aceb3a8909e06d5a58eeb4bf028221233a2ebc8a2",
+  "raw_path": "docs-raw/research/2026-09-06/f06e287264522aaa6d15d753b6447886950a3e556dcd8cdf3696539d6b17ee4e/462ff0b3b179022648d8bd340a034e94197f3eb463dc7cc9ee5cd292c1f38c25/source.gz",
+  "fetched_at": "2026-09-05T10:19:33.756275+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

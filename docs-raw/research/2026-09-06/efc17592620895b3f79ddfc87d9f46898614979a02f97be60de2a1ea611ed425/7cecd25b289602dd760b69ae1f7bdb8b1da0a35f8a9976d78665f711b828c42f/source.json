@@ -1,0 +1,13 @@
+{
+  "id": "efc17592620895b3f79ddfc87d9f46898614979a02f97be60de2a1ea611ed425",
+  "url": "https://developer.apple.com/documentation/http-live-streaming",
+  "platform": "ios",
+  "title": "HTTP Live Streaming",
+  "local_path": "docs-raw/research/2026-09-06/efc17592620895b3f79ddfc87d9f46898614979a02f97be60de2a1ea611ed425/7cecd25b289602dd760b69ae1f7bdb8b1da0a35f8a9976d78665f711b828c42f/document.md",
+  "sha256": "7cecd25b289602dd760b69ae1f7bdb8b1da0a35f8a9976d78665f711b828c42f",
+  "raw_sha256": "dfe66b043a5422bd558b4ded4ccaef7ebd87445c89c66e1d1e30009f23c7c74a",
+  "raw_path": "docs-raw/research/2026-09-06/efc17592620895b3f79ddfc87d9f46898614979a02f97be60de2a1ea611ed425/7cecd25b289602dd760b69ae1f7bdb8b1da0a35f8a9976d78665f711b828c42f/source.gz",
+  "fetched_at": "2026-09-05T10:32:24.935514+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

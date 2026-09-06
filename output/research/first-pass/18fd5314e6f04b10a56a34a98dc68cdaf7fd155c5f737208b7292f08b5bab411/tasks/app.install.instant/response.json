@@ -1,0 +1,309 @@
+{
+  "task_id": "d91320d11d6d6d8685e28a5c18a438c5f49b3662f1779edc8ecb804b3b634f36",
+  "feature_id": "app.install.instant",
+  "stage": "first_pass",
+  "summary": "三平台均读到官方轻量即用机制正文：Android 为 Google Play Instant（instant-enabled App Bundle，合计≤15MB、Android 8.0+、受限沙箱），且官方两处明示自 2025-12 起停发并终止所有 Instant API；iOS 为 App Clips（随父应用构建、invocation 入口、不驻留主屏）；HarmonyOS 为元服务（免安装、可独立上架、仅元服务API集，需 HarmonyOS NEXT DP1/API 11+）。三平台初判均 low，启动日基线未固定；主要缺口为 Android 终止后残余状态与 iOS/HarmonyOS 数值级限制。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "documented_mechanism",
+      "observation": "Google Play Instant 以 instant-enabled App Bundle 提供免完整安装体验：运行于受限 SELinux 沙箱（有限权限子集、禁后台服务与后台通知），生产轨道合计下载≤15MB，需 Android 8.0+。官方两处明示自 2025-12 起不能再经 Google Play 发布，所有 Google Play services Instant API 停止工作。",
+      "version_scope": "快照 2026-09-05（version_verified=false）；属 Google Play/GMS 生态服务而非 AOSP 系统 SDK；官方声明 2025-12 起 Instant Apps 停发、Instant API 失效；机制描述基于 Android 8.0 (API 26)+ 条件",
+      "conditions": [
+        "以 instant-enabled App Bundle 形式随同一包名的可安装应用发布，即时体验版本号须低于可安装版本",
+        "运行于特殊 SELinux 沙箱：仅允许有限权限子集（INTERNET、CAMERA、ACCESS_FINE_LOCATION 等），不能用后台服务、不能后台发通知",
+        "所有 instant 模块代码与资源合计下载体积生产轨道≤15MB",
+        "仅 Android 8.0 (API level 26) 及以上设备可体验即时应用",
+        "发布与分发依赖 Google Play / Play Console（GMS 生态服务）"
+      ],
+      "gaps": [
+        "快照 version_verified=false；2025-12 终止后的残余状态（已缓存体验、非 Google Play 渠道、厂商机制）无文档，需真机或后续精研核实",
+        "Instant Apps 属 Google Play 生态服务；AOSP 系统 SDK 或其他 Android 应用市场是否存在等价轻量安装形态未调查",
+        "tablet 形态的即时体验条件未在所读文档单独说明",
+        "权限清单中 INSTANT_APP_FOREGROUND_SERVICE 等仅标注 Android 8.0+，更低版本与具体 API Level 适配细节未读"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "InstantApps 类弃用声明：Starting December 2025, Instant Apps cannot be published through Google Play, and all Google Play services Instant APIs will no longer work",
+          "start_line": 7,
+          "end_line": 11
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Warning: Google Play Instant will no longer be available；Users will no longer be served Instant Apps by Play using any mechanism",
+          "start_line": 3,
+          "end_line": 7
+        },
+        {
+          "source_id": "android-2",
+          "locator": "required execution conditions：SELinux sandbox 与受限交互",
+          "start_line": 49,
+          "end_line": 52
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Supported permissions and operations：instant-enabled app bundles 仅可用列表内权限",
+          "start_line": 56,
+          "end_line": 71
+        },
+        {
+          "source_id": "android-2",
+          "locator": "combined download size of the code and resources within all instant-enabled modules must be at most 15 MB",
+          "start_line": 220,
+          "end_line": 222
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Instant experiences are available only on devices running Android 8.0 (API level 26) or higher",
+          "start_line": 370,
+          "end_line": 371
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "终止事实已由官方文档明示，初判不需真机；但 2025-12 之后设备与 Play 的实际残余状态（如已缓存体验是否仍可运行）文档未覆盖，正式确认时建议真机抽检。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "documented_mechanism",
+      "observation": "App Clips 是 Apple 官方轻量形态：无需安装完整 App 即可即用部分功能，符合一组约束可更大体积提供 demo 版；不驻留主屏幕，系统在一段时间不活跃后自动移除；经 invocation URL、App Clip Code（NFC/扫码）、网站 Smart App Banner 等入口启动，App Store Connect 中以关联注册父应用的 AppClip 资源管理。",
+      "version_scope": "Apple 官方文档快照 2026-09-05（version_verified=false）；所读正文未标注 App Clips 最低 iOS 版本，仅出现 iOS 16.3（网站关联适用设备上下文）；当前最新 iOS 正式版基线未固定",
+      "conditions": [
+        "App Clip 随宿主完整 App 的 Xcode 工程构建（新增 App Clip target 并共享代码），在 App Store Connect 配置 App Clip 体验",
+        "通过 invocation URL / App Clip 体验被发现和启动，支持 App Clip Code（NFC 集成或扫码）、网站 Smart App Banner 与 Messages 入口",
+        "符合一组约束的 App Clip 可使用更大体积提供 demo 版本，用完引导安装完整 App",
+        "不出现在主屏幕，用户不像管理完整 App 那样管理，系统在一段不活跃期后移除",
+        "可经 CloudKit、Sign in with Apple、共享容器等向完整 App 传递数据"
+      ],
+      "gaps": [
+        "App Clips 体积上限数值与最低 iOS 版本未在所读冻结正文出现（仅 iOS 16.3 一处上下文）",
+        "通知时长限制（短/长时段）具体规则未读正文",
+        "tablet（iPad）适用性未逐符号核对 Apple 目录 availability",
+        "当前最新 iOS 正式版基线未固定，无法确认现行版本状态"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "An App Clip is a lightweight version of your app... instantly available – ... without the need to install the full app",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "App Clips that conform to a set of constraints can be larger in size... demo version of your app",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "App Clips don't appear on the Home screen... the system removes an App Clip from a device after a period of inactivity",
+          "start_line": 15,
+          "end_line": 15
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "创建流程：add an App Clip target、Create App Clip experiences in App Store Connect、create App Clip Codes",
+          "start_line": 29,
+          "end_line": 35
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Associating your App Clip with your website... devices running iOS 16.3 or earlier",
+          "start_line": 75,
+          "end_line": 75
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "AppClip object: A lightweight version of an app that users can launch instantly without installation, associated with a registered parent app",
+          "start_line": 35,
+          "end_line": 35
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "机制与入口为文档明示，初判不需真机；invocation 入口（NFC/扫码/横幅）与体积约束的实际运行行为需真机核实，留待精研。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "documented_mechanism",
+      "observation": "元服务是 HarmonyOS 免安装的轻量应用形态：秒开直达、即用即走，可独立上架、分发、运行并独立实现业务闭环；对比传统应用包大小有限制、自动更新、跟随华为账号，且只能使用元服务API集；自 HarmonyOS NEXT Developer Preview1（API 11）起仅支持 Stage 模型与 ArkTS，要求系统 NEXT DP1 及以上，支持 1+8+N 设备。",
+      "version_scope": "华为官方文档快照 2026-09-05（version_verified=false）；声明自 HarmonyOS NEXT Developer Preview1（对应 API 11）起的元服务开发与运行规则；当前 HarmonyOS 最新正式版基线未固定；未核对 OpenHarmony 发行版",
+      "conditions": [
+        "基于 HarmonyOS SDK 且只能使用元服务API集，仅支持 Stage 模型与 ArkTS 接口",
+        "仅可运行在系统软件版本为 HarmonyOS NEXT Developer Preview1 及以上的设备",
+        "可独立上架、分发、运行，独立实现业务闭环",
+        "包大小有限制（具体数值未在所读文档给出）、自动更新、跟随华为账号",
+        "开发需在 AGC 创建元服务、用 DevEco Studio 创建工程，真机调试需对 HAP 签名"
+      ],
+      "gaps": [
+        "元服务包大小具体上限数值与上架审核要求未在所读文档给出",
+        "HarmonyOS 当前最新正式版（如 5.x/6.x）下元服务状态未核实，启动日基线未固定",
+        "OpenHarmony 发行版是否具备对应免安装形态未核对（本包仅华为 HarmonyOS 文档）",
+        "tablet 属 1+8+N 表述范围但未逐设备形态核对适用性"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "从HarmonyOS NEXT Developer Preview1（对应API 11）版本开始：元服务只能用元服务API集、仅支持Stage模型与ArkTS，运行需系统 NEXT DP1 及以上",
+          "start_line": 4,
+          "end_line": 7
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "HarmonyOS 除传统需要安装的应用外，还支持更加方便快捷的免安装的应用，即元服务",
+          "start_line": 9,
+          "end_line": 9
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "元服务是HarmonyOS提供的一种轻量应用程序形态...可独立上架、分发、运行",
+          "start_line": 11,
+          "end_line": 13
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "基于HarmonyOS SDK开发，支持运行在1+8+N设备上",
+          "start_line": 15,
+          "end_line": 15
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "表1 元服务与传统应用对比：免安装、包大小有限制、即用即走、自动更新、跟随华为账号、只能使用元服务API集",
+          "start_line": 21,
+          "end_line": 25
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "元服务开发准备：AGC 创建元服务、DevEco Studio 创建工程、真机调试需对 HAP 签名",
+          "start_line": 9,
+          "end_line": 23
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "免安装、秒开为运行态行为且文档已明示；正式确认元服务在真机上的免安装运行、留存与 1+8+N 设备覆盖需设备验证，留待精研。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "availability",
+      "statement": "可用性走向差异（can 层面）：Android 的 Google Play Instant 被官方宣布自 2025-12 起不能再经 Google Play 发布且所有 Google Play services Instant API 停止工作，而 iOS App Clips 与 HarmonyOS 元服务在各自官方文档中仍作为现行机制描述。",
+      "platforms": ["android", "ios", "harmonyos"],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Starting December 2025, Instant Apps cannot be published through Google Play, and all Google Play services Instant APIs will no longer work",
+          "start_line": 7,
+          "end_line": 11
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "An App Clip is a lightweight version of your app... instantly available without the need to install the full app",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "HarmonyOS 支持免安装的应用，即元服务；轻量应用程序形态",
+          "start_line": 9,
+          "end_line": 13
+        }
+      ],
+      "open_questions": [
+        "iOS App Clips 与 HarmonyOS 元服务在 2026 当前最新正式版中的实际状态需以发行说明核实",
+        "Android 终止后官方是否提供替代轻量机制（文档建议改用 deeplink 引导完整应用）未在机制层核实"
+      ]
+    },
+    {
+      "dimension": "programming_model",
+      "statement": "与完整应用的宿主关系差异：iOS App Clips 须随宿主完整 App 工程（App Clip target）构建并与注册父应用关联；HarmonyOS 元服务可独立上架、分发、运行；Android 即时体验须作为同包名 App Bundle 的一部分且版本号低于可安装版本。",
+      "platforms": ["ios", "android", "harmonyos"],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "add an App Clip target and share code between your App Clip and full app",
+          "start_line": 31,
+          "end_line": 31
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "AppClip: ...associated with a registered parent app",
+          "start_line": 35,
+          "end_line": 35
+        },
+        {
+          "source_id": "android-2",
+          "locator": "version code of your app's instant experience needs to be less than the version code of the installable app；同包名上传同一应用",
+          "start_line": 134,
+          "end_line": 163
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "元服务可独立上架、分发、运行，独立实现业务闭环",
+          "start_line": 13,
+          "end_line": 13
+        }
+      ],
+      "open_questions": [
+        "HarmonyOS 元服务“一体两面，嵌入运行”特征是否也允许依附宿主应用的形态未读正文",
+        "iOS 是否存在脱离父应用单独分发 App Clip 的途径未见文档"
+      ]
+    },
+    {
+      "dimension": "lifecycle_background",
+      "statement": "留存与更新机制差异：iOS 系统在一段不活跃期后自动移除 App Clip 且不驻留主屏幕；Android 即时体验缓存在设备内存不足或重启后被清除、需重新下载；HarmonyOS 元服务自动更新并跟随华为账号。",
+      "platforms": ["ios", "android", "harmonyos"],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "the system removes an App Clip from a device after a period of inactivity",
+          "start_line": 15,
+          "end_line": 15
+        },
+        {
+          "source_id": "android-2",
+          "locator": "instant experience cache 被垃圾回收（内存不足）或设备重启后清除，需重新下载",
+          "start_line": 246,
+          "end_line": 255
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "表1：元服务包大小有限制、自动更新、跟随华为账号",
+          "start_line": 21,
+          "end_line": 25
+        }
+      ],
+      "open_questions": [
+        "各平台具体保留时长与清退阈值数值未读",
+        "HarmonyOS 元服务本地留存与清理策略未在所读文档说明"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "iOS App Clips 体积上限数值、最低系统版本与通知时长限制未在冻结来源正文中读取",
+    "HarmonyOS 元服务包大小上限具体数值与上架审核要求未读取",
+    "Android Instant Apps 终止（2025-12）后的残余状态与非 Google Play 渠道未调查",
+    "OpenHarmony 发行版的对应能力未核对；Apple 目录 iOS 逐符号适用性核对未完成",
+    "启动日三平台最新正式版与手机基线未固定，本轮结论仅基于 2026-09-05 快照"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "Android 官方明示 Google Play Instant 自 2025-12 终止，直接改变该节点 Android 侧可用性结论，属高风险映射；且 iOS/HarmonyOS 的数值级限制（体积上限、最低版本）缺失，需优先精研核实。"
+  }
+}

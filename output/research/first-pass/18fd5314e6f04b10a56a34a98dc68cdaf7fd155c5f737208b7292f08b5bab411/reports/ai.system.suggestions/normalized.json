@@ -1,0 +1,1089 @@
+{
+  "task_id": "a9da79b8413fb3e547a5f694e5a9d52cbde71c29654d38c1f2295bb9174455ac",
+  "feature_id": "ai.system.suggestions",
+  "stage": "first_pass",
+  "summary": "Android 冻结来源仅 ML Kit Smart Reply（Google 生态库，英语会话、最多3条回复、API 23+），映射到系统级节点待确认；iOS 读到 Apple Intelligence Smart Reply（UIKit 会话上下文）与 Journaling Suggestions（entitlement+系统通知）两个系统机制，但文档未标注 iOS 版本；HarmonyOS 两篇来源（车机导航流转、性能测试）与本节点无关，unknown。差异假设：调用模型、生成限制、分发条件。全部 low。",
+  "platforms": [
+    {
+      "platform": "android",
+      "signal": "possible_mapping",
+      "observation": "ML Kit Smart Reply 文档化上下文回复建议机制：应用传入按时间排序的会话历史，端侧模型在识别为英语且无敏感话题时最多生成 3 条回复建议；bundled 静态链接或 unbundled 经 Google Play services 下载（beta）。属 Google 生态库而非系统服务，映射至本系统级节点待确认。",
+      "version_scope": "ML Kit 指南快照（2026-09-05 抓取）：要求 minSdkVersion 23+；示例库版本 bundled com.google.mlkit:smart-reply 17.0.4、unbundled play-services-mlkit-smart-reply 16.0.0-beta1；未绑定启动日最新 Android 正式版基线（version_verified=false）。",
+      "conditions": [
+        "应用内集成 ML Kit 库：bundled 模型静态链接（约 +5.7MB）或 unbundled 经 Google Play services 动态下载（约 +200KB，beta，首次使用前需下载完成）",
+        "要求 Android API level 23 及以上",
+        "仅英语会话生成建议；模型基于最近最多 10 条消息，检测敏感话题或置信不足时可能无结果",
+        "最多返回 3 条建议；被建议回复的最后一条消息应来自对方用户"
+      ],
+      "gaps": [
+        "ML Kit 属 Google 生态服务（Play services/bundled），非 AOSP 系统 SDK；本节点 layer=os，生态库映射到系统级节点需确认",
+        "冻结来源未覆盖 Android 系统级建议机制（如系统通知智能回复、App Prediction/App Actions/动态快捷方式推荐）",
+        "未核实启动日最新 ML Kit / Play services 版本与最新 Android 正式版手机基线",
+        "仅覆盖文本回复建议，快捷操作（quick actions）维度无证据"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Overview — pass log of recent messages; English & non-sensitive topic -> up to three replies",
+          "start_line": 5,
+          "end_line": 8,
+          "source": {
+            "id": "android-1",
+            "url": "https://developers.google.com/ml-kit/language/smart-reply/android",
+            "platform": "android",
+            "title": "Generate smart replies with ML Kit on Android",
+            "local_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/document.md",
+            "sha256": "0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b",
+            "raw_sha256": "d2a85c758beb9105abc229aa6c122f456e1923649745e972fd6015095d158fbf",
+            "raw_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/source.gz",
+            "fetched_at": "2026-09-05T10:51:03.207349+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 214,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": true
+              },
+              {
+                "start_line": 29,
+                "end_line": 30,
+                "truncated": true
+              },
+              {
+                "start_line": 34,
+                "end_line": 214,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "To generate smart replies, you pass ML Kit a log of recent messages in a\nconversation. If ML Kit determines the conversation is in English, and that\nthe conversation doesn't have potentially sensitive subject matter, ML Kit\ngenerates up to three replies, which you can suggest to your user."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Bundled vs unbundled library comparison table; unbundled version offered in beta",
+          "start_line": 16,
+          "end_line": 25,
+          "source": {
+            "id": "android-1",
+            "url": "https://developers.google.com/ml-kit/language/smart-reply/android",
+            "platform": "android",
+            "title": "Generate smart replies with ML Kit on Android",
+            "local_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/document.md",
+            "sha256": "0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b",
+            "raw_sha256": "d2a85c758beb9105abc229aa6c122f456e1923649745e972fd6015095d158fbf",
+            "raw_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/source.gz",
+            "fetched_at": "2026-09-05T10:51:03.207349+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 214,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": true
+              },
+              {
+                "start_line": 29,
+                "end_line": 30,
+                "truncated": true
+              },
+              {
+                "start_line": 34,
+                "end_line": 214,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "|  | Bundled | Unbundled |\n| --- | --- | --- |\n| **Library name** | `com.google.mlkit:smart-reply` | `com.google.android.gms:play-services-mlkit-smart-reply` |\n| **Implementation** | Model is statically linked to your app at build time. | Model is dynamically downloaded via Google Play Services. |\n| **App size impact** | About 5.7 MB size increase. | About 200 KB size increase. |\n| **Initialization time** | Model is available immediately. | Might have to wait for model to download before first use. |\n\n**Note:** The unbundled version of Smart Reply is currently offered in beta, which\nmeans it might be changed in backward-incompatible ways and is not subject to\nany SLA or deprecation policy."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Before you begin — API requires Android API level 23 or above",
+          "start_line": 36,
+          "end_line": 37,
+          "source": {
+            "id": "android-1",
+            "url": "https://developers.google.com/ml-kit/language/smart-reply/android",
+            "platform": "android",
+            "title": "Generate smart replies with ML Kit on Android",
+            "local_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/document.md",
+            "sha256": "0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b",
+            "raw_sha256": "d2a85c758beb9105abc229aa6c122f456e1923649745e972fd6015095d158fbf",
+            "raw_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/source.gz",
+            "fetched_at": "2026-09-05T10:51:03.207349+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 214,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": true
+              },
+              {
+                "start_line": 29,
+                "end_line": 30,
+                "truncated": true
+              },
+              {
+                "start_line": 34,
+                "end_line": 214,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "This API requires Android API level 23 or above. Make sure that your app's build\nfile uses a `minSdkVersion` value of 23 or higher."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Get message replies — SmartReplyGenerator.suggestReplies(conversation)",
+          "start_line": 141,
+          "end_line": 150,
+          "source": {
+            "id": "android-1",
+            "url": "https://developers.google.com/ml-kit/language/smart-reply/android",
+            "platform": "android",
+            "title": "Generate smart replies with ML Kit on Android",
+            "local_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/document.md",
+            "sha256": "0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b",
+            "raw_sha256": "d2a85c758beb9105abc229aa6c122f456e1923649745e972fd6015095d158fbf",
+            "raw_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/source.gz",
+            "fetched_at": "2026-09-05T10:51:03.207349+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 214,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": true
+              },
+              {
+                "start_line": 29,
+                "end_line": 30,
+                "truncated": true
+              },
+              {
+                "start_line": 34,
+                "end_line": 214,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "   ## 2. Get message replies\n\n   To generate smart replies to a message, get an instance of `SmartReplyGenerator`\n   and pass the conversation history to its `suggestReplies()` method:\n\n   ### Kotlin\n\n   ```\n   val smartReplyGenerator = SmartReply.getClient()\n   smartReply.suggestReplies(conversation)"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "SmartReplySuggestionResult contains up to three suggested replies to present to your user",
+          "start_line": 192,
+          "end_line": 194,
+          "source": {
+            "id": "android-1",
+            "url": "https://developers.google.com/ml-kit/language/smart-reply/android",
+            "platform": "android",
+            "title": "Generate smart replies with ML Kit on Android",
+            "local_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/document.md",
+            "sha256": "0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b",
+            "raw_sha256": "d2a85c758beb9105abc229aa6c122f456e1923649745e972fd6015095d158fbf",
+            "raw_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/source.gz",
+            "fetched_at": "2026-09-05T10:51:03.207349+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 214,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": true
+              },
+              {
+                "start_line": 29,
+                "end_line": 30,
+                "truncated": true
+              },
+              {
+                "start_line": 34,
+                "end_line": 214,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "   If the operation succeeds, a `SmartReplySuggestionResult` object is passed to\n   the success handler. This object contains a list of up to three suggested replies,\n   which you can present to your user:"
+        },
+        {
+          "source_id": "android-2",
+          "locator": "Limitations & How the model works — English only, sensitive topics suppressed, up to 10 recent messages, up to three replies",
+          "start_line": 21,
+          "end_line": 39,
+          "source": {
+            "id": "android-2",
+            "url": "https://developers.google.com/ml-kit/language/smart-reply",
+            "platform": "android",
+            "title": "Smart reply",
+            "local_path": "docs-raw/research/2026-09-06/d21f14ab4b6045e944a317445d770807eb404b7a79554691b45492370a3584f8/646d4eddf4b7b200f1775b6bfb489d843d866fbe9fc69aa21c0e0a829b1b5155/document.md",
+            "sha256": "646d4eddf4b7b200f1775b6bfb489d843d866fbe9fc69aa21c0e0a829b1b5155",
+            "raw_sha256": "9c2d2b3488136f0881f1a7d0549f2a8a59b74dcdd10faaad8f24ed81808c87dc",
+            "raw_path": "docs-raw/research/2026-09-06/d21f14ab4b6045e944a317445d770807eb404b7a79554691b45492370a3584f8/646d4eddf4b7b200f1775b6bfb489d843d866fbe9fc69aa21c0e0a829b1b5155/source.gz",
+            "fetched_at": "2026-09-05T10:54:35.391097+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 62,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 12,
+                "truncated": false
+              },
+              {
+                "start_line": 13,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 21,
+                "end_line": 27,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Limitations\n\n* Smart reply is intended for casual conversations in consumer apps. Reply\n  suggestions might not be appropriate for other contexts or audiences.\n* Currently, only English is supported. The model automatically identifies the\n  language being used and only provides suggestions when it's English.\n\n## How the model works\n\n* The model uses up to 10 of the most recent messages from a conversation\n  history to generate reply suggestions.\n* It detects the language of the conversation and only attempts to provide\n  responses when the language is determined to be English.\n* The model compares the messages against a list of sensitive topics and\n  won’t provide suggestions when it detects a sensitive topic.\n* If the language is determined to be English and no sensitive topics are\n  detected, the model provides up to three suggested responses. The number of\n  responses depends on how many meet a sufficient level of confidence based on\n  the input to the model."
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "建议内容由端侧模型运行时决定（语言识别、敏感话题过滤、置信度、数量上限），静态文档无法验证实际输出；后续精研需真机会话验证，本轮仅分类不设计用例。"
+      }
+    },
+    {
+      "platform": "ios",
+      "signal": "documented_mechanism",
+      "observation": "读到两个系统机制：Smart Reply 由系统 Apple Intelligence 生成，应用将 UIMessageConversationContext/UIMailConversationContext 绑定到输入框并在收发消息时更新，系统在特定情形自动给出建议，长文本需应用自行用模型展开；Journaling Suggestions 经系统周期通知推荐日记时刻，需 entitlement 与 URL 格式配置。",
+      "version_scope": "两篇 Apple 文档（2026-09-05 抓取）均未标注最低 iOS 版本、Apple Intelligence 机型条件或 iPad 适用性；符号级 availability 需另行核对，未固定启动日基线。",
+      "conditions": [
+        "Smart Reply：应用构造并维护会话上下文（线程ID、参与者、条目）绑定到输入框 conversationContext；键盘会话初始化使用一次，焦点变化后需重设并通知 inputDelegate",
+        "系统仅在特定情形生成：输入框为空、最后一条来自对方、近期纯文本消息；邮件：本人为直接收件人、未回复过、发件人与收件人地址不同",
+        "Journaling Suggestions：需 com.apple.developer.journal.allow entitlement、JSNotificationURLFormat 通用链接，且用户在设置中开启通知",
+        "长文本邮件建议需应用自持模型基于 UISmartReplySuggestion 展开"
+      ],
+      "gaps": [
+        "文档未标注 iOS 最低版本与 Apple Intelligence 机型要求，无法判断手机/平板（phone/tablet）覆盖",
+        "Smart Reply 是否需要额外能力开关/entitlement 未在文中说明",
+        "Journaling Suggestions 与 Smart Reply 符号级 availability（DocC 元数据）未核对",
+        "App Intents 等其他系统快捷建议方向不在冻结来源内"
+      ],
+      "confidence": "low",
+      "evidence_strength": "direct",
+      "citations": [
+        {
+          "source_id": "ios-1",
+          "locator": "Discussion — Messages and Mail use Apple Intelligence for Smart Reply; adoption steps",
+          "start_line": 5,
+          "end_line": 13,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/adopting-smart-reply-in-your-messaging-or-email-app",
+            "platform": "ios",
+            "title": "Adopting Smart Reply in your messaging or email app",
+            "local_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/document.md",
+            "sha256": "07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e",
+            "raw_sha256": "95900d20daf2a7ccb4efd327687ccaee4afafee940330427e98a54c99ff75e7e",
+            "raw_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/source.gz",
+            "fetched_at": "2026-09-05T11:19:47.440203+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 137,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 13,
+                "truncated": false
+              },
+              {
+                "start_line": 14,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Discussion\n\nMessages and Mail use Apple Intelligence to provide the Smart Reply feature, which generates suggestions that are contextually relevant for a thread when you draft a message or email. To add this feature to your messaging or email app, follow these steps:\n\n- Create a *conversation context* object with your app’s data from a thread.\n- Attach the conversation context to your text view or text field when you prepare your user interface.\n- Implement delegate methods to keep the conversation context up-to-date when you send or receive messages.\n- For an email or other long-form type of messaging, use the selected input suggestion to generate a long-form response and place it in the entry field.\n"
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Create a conversation context — UIMessageConversationContext / UIMailConversationContext",
+          "start_line": 14,
+          "end_line": 26,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/adopting-smart-reply-in-your-messaging-or-email-app",
+            "platform": "ios",
+            "title": "Adopting Smart Reply in your messaging or email app",
+            "local_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/document.md",
+            "sha256": "07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e",
+            "raw_sha256": "95900d20daf2a7ccb4efd327687ccaee4afafee940330427e98a54c99ff75e7e",
+            "raw_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/source.gz",
+            "fetched_at": "2026-09-05T11:19:47.440203+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 137,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 13,
+                "truncated": false
+              },
+              {
+                "start_line": 14,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Create a conversation context\n\nTo give Apple Intelligence the context it needs for Smart Reply generation, create a conversation context object with information about your messaging conversation. This object includes information about participants in the conversation and text entries from the conversation.\n\nWhen you prepare your user interface to send and receive messages with one or more participants, create a conversation context that reflects the type of messaging thread in your app: use [`UIMessageConversationContext`](/documentation/UIKit/UIMessageConversationContext) for messaging, and [`UIMailConversationContext`](/documentation/UIKit/UIMailConversationContext) for email.\n\nConfigure the conversation context with these details:\n\n- A unique identifier for the thread\n- A dictionary of unique identifiers and names of the participants in the thread\n- A set of identifiers for the current person using your app to send and receive messages\n- A set of identifiers for the other people in the conversation\n- An array of conversation entries for the type of thread, either [`UIMessageConversationContext.MessageEntry`](/documentation/UIKit/UIMessageConversationContext/MessageEntry) or [`UIMailConversationContext.MailEntry`](/documentation/UIKit/UIMailConversationContext/MailEntry)"
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Attach conversation context to text view or field; keyboard uses it once per session",
+          "start_line": 72,
+          "end_line": 80,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/adopting-smart-reply-in-your-messaging-or-email-app",
+            "platform": "ios",
+            "title": "Adopting Smart Reply in your messaging or email app",
+            "local_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/document.md",
+            "sha256": "07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e",
+            "raw_sha256": "95900d20daf2a7ccb4efd327687ccaee4afafee940330427e98a54c99ff75e7e",
+            "raw_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/source.gz",
+            "fetched_at": "2026-09-05T11:19:47.440203+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 137,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 13,
+                "truncated": false
+              },
+              {
+                "start_line": 14,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Attach the conversation context to a text view or text field\n\nWhen you create an entry field, such as a text view or text field, which you use to get input from the person using your app, assign the conversation context you created to the object’s [`conversationContext`](/documentation/UIKit/UITextInputTraits/conversationContext) property before the keyboard appears:\n\n```objc\n[self.entryField setConversationContext:context];\n```\n\nThe keyboard uses this context once per session for initialization. Use the steps in the next section to handle changes to the conversation during the keyboard session."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Understand when the system generates Smart Reply suggestions (messaging & mail circumstances)",
+          "start_line": 118,
+          "end_line": 133,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/adopting-smart-reply-in-your-messaging-or-email-app",
+            "platform": "ios",
+            "title": "Adopting Smart Reply in your messaging or email app",
+            "local_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/document.md",
+            "sha256": "07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e",
+            "raw_sha256": "95900d20daf2a7ccb4efd327687ccaee4afafee940330427e98a54c99ff75e7e",
+            "raw_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/source.gz",
+            "fetched_at": "2026-09-05T11:19:47.440203+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 137,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 13,
+                "truncated": false
+              },
+              {
+                "start_line": 14,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Understand when the system generates Smart Reply suggestions\n\nThe system only generates Smart Reply suggestions in specific circumstances, and might not generate suggestions in all cases.\n\nCircumstances when a messaging conversation can generate suggestions include:\n\n- The input field is empty.\n- The last message in the conversation is from the recipient, not the person sending messages.\n- The preceding messages in the conversation are text (not images or emojis).\n- The preceding messages are recent.\n\nCircumstances when a mail conversation can generate suggestions include:\n\n- The person is the direct recipient of the email, and is not in the CC or BCC list.\n- The person has not already replied to the email.\n- The sender and recipient of the email have different email addresses."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Overview — system periodic notifications launch the selected journal app with suggestion details",
+          "start_line": 5,
+          "end_line": 9,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/journalingsuggestions/receiving-journaling-suggestions-from-system-notifications",
+            "platform": "ios",
+            "title": "Receiving journaling suggestions system notifications",
+            "local_path": "docs-raw/research/2026-09-06/fbddb4936d429ebb6b27dc526361d05ccb92124006ab23de107608b8279cc8c6/85cf5388ed9e8eb6d2d5c2e52df3f257abb4fabd43aaf7cf73fc61e90b810f60/document.md",
+            "sha256": "85cf5388ed9e8eb6d2d5c2e52df3f257abb4fabd43aaf7cf73fc61e90b810f60",
+            "raw_sha256": "d2a0a097055941a39542a81eefbecf55236b5951b615ce4032ffe83d94e5d79b",
+            "raw_path": "docs-raw/research/2026-09-06/fbddb4936d429ebb6b27dc526361d05ccb92124006ab23de107608b8279cc8c6/85cf5388ed9e8eb6d2d5c2e52df3f257abb4fabd43aaf7cf73fc61e90b810f60/source.gz",
+            "fetched_at": "2026-09-05T10:23:14.006470+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 161,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 22,
+                "truncated": false
+              },
+              {
+                "start_line": 65,
+                "end_line": 89,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "## Overview\n\nWhen the Journaling Suggestions and notifications settings are on, the system reminds people to journal and reflect on recent moments through periodic notifications. When someone taps a notification, the system launches the journal app indicated in the Open Notifications With setting.\n\nThe person chooses the specific app the system launches using the Settings > Notifications > Journaling Suggestions > Customize Notifications > Open Notifications With setting when multiple journal apps exist on the device that support Journaling Suggestions notifications."
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Entitlement com.apple.developer.journal.allow note; JSNotificationURLFormat universal link requirement",
+          "start_line": 21,
+          "end_line": 25,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/journalingsuggestions/receiving-journaling-suggestions-from-system-notifications",
+            "platform": "ios",
+            "title": "Receiving journaling suggestions system notifications",
+            "local_path": "docs-raw/research/2026-09-06/fbddb4936d429ebb6b27dc526361d05ccb92124006ab23de107608b8279cc8c6/85cf5388ed9e8eb6d2d5c2e52df3f257abb4fabd43aaf7cf73fc61e90b810f60/document.md",
+            "sha256": "85cf5388ed9e8eb6d2d5c2e52df3f257abb4fabd43aaf7cf73fc61e90b810f60",
+            "raw_sha256": "d2a0a097055941a39542a81eefbecf55236b5951b615ce4032ffe83d94e5d79b",
+            "raw_path": "docs-raw/research/2026-09-06/fbddb4936d429ebb6b27dc526361d05ccb92124006ab23de107608b8279cc8c6/85cf5388ed9e8eb6d2d5c2e52df3f257abb4fabd43aaf7cf73fc61e90b810f60/source.gz",
+            "fetched_at": "2026-09-05T10:23:14.006470+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 161,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 22,
+                "truncated": false
+              },
+              {
+                "start_line": 65,
+                "end_line": 89,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "> Note: To display the Journaling Suggestions picker, the system requires your app to have the <doc://com.apple.documentation/documentation/BundleResources/Entitlements/com.apple.developer.journal.allow> entitlement. Add it to your app’s target by enabling the Journaling Suggestions capability in Xcode. For more information, see <doc://com.apple.documentation/documentation/Xcode/adding-capabilities-to-your-app>.\n\n## Add the notification URL target property\n\nWhen you add the <doc://com.apple.documentation/documentation/BundleResources/Information-Property-List/JSNotificationURLFormat> target property to your app, the system adds your app as an available option in the Open Notifications With setting. The value you choose needs to be a *universal link*, which also defines how the system provides notification information to your app. The format of the link is a base URL for your app, followed by the parameter string: `{journaling-suggestion-id}`, which represents the unique journaling suggestion. For example:"
+        }
+      ],
+      "device_review": {
+        "requirement": "recommended",
+        "reason": "Smart Reply 触发情形与键盘会话行为、Journaling Suggestions 的系统通知和设置开关均属系统运行时行为，静态文档不足以验证；后续精研需真机，本轮仅分类。"
+      }
+    },
+    {
+      "platform": "harmonyos",
+      "signal": "unknown",
+      "observation": "两篇冻结来源分别为车机导航流转（CarKit：碰一碰/上车/车内导航流转、smartMobilityEvent 监听）与 DevEco Testing 性能测试（智能遍历算法、性能指标检测），均不涉及系统级上下文建议或快捷操作，未建立任何机制判断。",
+      "version_scope": "不适用：冻结来源与节点无关，未读到任何可核对的 HarmonyOS 系统/SDK 版本条件。",
+      "conditions": [
+        "无可报告条件：冻结来源未包含与系统智能建议相关的机制或适用条件"
+      ],
+      "gaps": [
+        "冻结两篇来源（车机导航流转、性能测试）与本节点无关，未建立机制判断",
+        "未检索小艺建议/Intents Kit/情景感知等 HarmonyOS 官方系统建议文档（本轮不联网补查）",
+        "HarmonyOS 与 OpenHarmony 发行版差异未涉及；手机/平板设备条件未读取"
+      ],
+      "confidence": "low",
+      "evidence_strength": "missing",
+      "citations": [
+        {
+          "source_id": "harmonyos-1",
+          "locator": "场景介绍 — 碰一碰/上车/车内导航流转场景（车机流转主题，非智能建议）",
+          "start_line": 1,
+          "end_line": 13,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/car-navi-hop",
+            "platform": "harmonyos",
+            "title": "导航流转至车机",
+            "local_path": "docs-raw/research/2026-09-06/fb13376ac65e090cdca9181593eb38a54a5212458e85a640d75a8ce0aed7b295/7b9c7dfe7a0ad1426f2a18551154f3f2359fd302f7a98f6a9620ed4b0d41cd3c/document.md",
+            "sha256": "7b9c7dfe7a0ad1426f2a18551154f3f2359fd302f7a98f6a9620ed4b0d41cd3c",
+            "raw_sha256": "ca8459f2a54c76771da7535162ef5838a67cd411d1961c7d56ca83aac29a1967",
+            "raw_path": "docs-raw/research/2026-09-06/fb13376ac65e090cdca9181593eb38a54a5212458e85a640d75a8ce0aed7b295/7b9c7dfe7a0ad1426f2a18551154f3f2359fd302f7a98f6a9620ed4b0d41cd3c/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 246,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 4,
+                "truncated": true
+              },
+              {
+                "start_line": 17,
+                "end_line": 23,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "# 导航流转至车机\n\n#### 场景介绍\n\n导航流转至车机包含如下几个常见使用场景：\n\n* 碰一碰导航流转：用户在手机地图的指定页面中（地图选点页面、规划路线页面、驾车导航页面），与车机中控屏指定区域碰一碰后，将手机上的导航数据流转至车机。\n\n  ![](https://media:201787906131776147)\n* 上车导航自动流转：用户使用手机地图应用发起驾车导航后上车，手机上的导航数据会自动流转至车机。\n\n  ![](https://media:201787906131829148)\n* 车内导航自动流转：用户在车内，使用手机地图应用发起驾车导航，手机上的导航数据会自动流转至车机。"
+        },
+        {
+          "source_id": "harmonyos-1",
+          "locator": "接口说明 — registerSystemNavigationListener、smartMobilityEvent 等 CarKit 接口",
+          "start_line": 17,
+          "end_line": 27,
+          "source": {
+            "id": "harmonyos-1",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/car-navi-hop",
+            "platform": "harmonyos",
+            "title": "导航流转至车机",
+            "local_path": "docs-raw/research/2026-09-06/fb13376ac65e090cdca9181593eb38a54a5212458e85a640d75a8ce0aed7b295/7b9c7dfe7a0ad1426f2a18551154f3f2359fd302f7a98f6a9620ed4b0d41cd3c/document.md",
+            "sha256": "7b9c7dfe7a0ad1426f2a18551154f3f2359fd302f7a98f6a9620ed4b0d41cd3c",
+            "raw_sha256": "ca8459f2a54c76771da7535162ef5838a67cd411d1961c7d56ca83aac29a1967",
+            "raw_path": "docs-raw/research/2026-09-06/fb13376ac65e090cdca9181593eb38a54a5212458e85a640d75a8ce0aed7b295/7b9c7dfe7a0ad1426f2a18551154f3f2359fd302f7a98f6a9620ed4b0d41cd3c/source.gz",
+            "fetched_at": "2026-09-04T09:35:09+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 246,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 2,
+                "truncated": false
+              },
+              {
+                "start_line": 3,
+                "end_line": 4,
+                "truncated": true
+              },
+              {
+                "start_line": 17,
+                "end_line": 23,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "#### 接口说明\n\n导航流转至车机使用接口如下：  \n\n|接口名|描述|\n|:---------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|\n|[registerSystemNavigationListener](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/car-navigationinfomgr#registersystemnavigationlistener)|注册监听系统导航信息和指令。|\n|[on('smartMobilityEvent')](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/car-smartmobilitycommon#onsmartmobilityevent)|注册智慧出行业务的事件监听。|\n|[updateNavigationStatus](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/car-navigationinfomgr#updatenavigationstatus)|设置导航状态，包含地图状态、导航类型、导航目的地、导航途经点、路线和主题等。|\n|[unregisterSystemNavigationListener](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/car-navigationinfomgr#unregistersystemnavigationlistener)|取消注册监听系统导航信息和指令。|\n|[off('smartMobilityEvent')](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/car-smartmobilitycommon#offsmartmobilityevent)|取消注册智慧出行业务的事件监听。|"
+        },
+        {
+          "source_id": "harmonyos-2",
+          "locator": "性能基础质量测试 — 智能遍历算法与性能指标检测（与本节点无关）",
+          "start_line": 1,
+          "end_line": 7,
+          "source": {
+            "id": "harmonyos-2",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/performance-testing",
+            "platform": "harmonyos",
+            "title": "性能测试",
+            "local_path": "docs-raw/research/2026-09-06/fe46dcf1a13b16a74ecc30390128c59786ad03632101237e462470209c260730/b55f509323467a527b1f89aeb45701c50aa7ffd69176251ebb24d863431ef8bf/document.md",
+            "sha256": "b55f509323467a527b1f89aeb45701c50aa7ffd69176251ebb24d863431ef8bf",
+            "raw_sha256": "9aa1d3bb94108a38c1000d8769dab57d809f7196cb35d512956f7106dd57271e",
+            "raw_path": "docs-raw/research/2026-09-06/fe46dcf1a13b16a74ecc30390128c59786ad03632101237e462470209c260730/b55f509323467a527b1f89aeb45701c50aa7ffd69176251ebb24d863431ef8bf/source.gz",
+            "fetched_at": "2026-09-05T10:24:36.266176+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 529,
+            "suggested_sections": [
+              {
+                "start_line": 3,
+                "end_line": 239,
+                "truncated": false
+              },
+              {
+                "start_line": 240,
+                "end_line": 335,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "# 性能测试\n\n#### 性能基础质量测试\n\n性能基础质量测试：基于应用性能测试标准，提供了一套包含智能遍历算法和性能指标分析的解决方案，用于评估应用性能。该测试服务通过模拟用户操作行为，对应用进行长时间、高频次的页面遍历，实时采集性能数据，并生成全面、专业的测试报告。\n\n应用的设计、开发及测试过程中推荐参考[应用性能体验建议](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/performance-experience-suggestions)。"
+        }
+      ],
+      "device_review": {
+        "requirement": "unassessed",
+        "reason": "未读到任何相关机制文档，缺少评估基础；待定位 HarmonyOS 官方对应功能后再评估真机需求。"
+      }
+    }
+  ],
+  "difference_hypotheses": [
+    {
+      "dimension": "programming_model",
+      "statement": "Android 由应用显式调用 SmartReplyGenerator.suggestReplies(会话历史) 取回建议数组并自行展示；iOS Smart Reply 由系统 Apple Intelligence 生成——应用把会话上下文绑定到输入框，系统在特定情形自动产生建议（长文本经 insertInputSuggestion 委托回调应用）。",
+      "platforms": [
+        "android",
+        "ios"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Get message replies — suggestReplies(conversation) API",
+          "start_line": 141,
+          "end_line": 150,
+          "source": {
+            "id": "android-1",
+            "url": "https://developers.google.com/ml-kit/language/smart-reply/android",
+            "platform": "android",
+            "title": "Generate smart replies with ML Kit on Android",
+            "local_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/document.md",
+            "sha256": "0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b",
+            "raw_sha256": "d2a85c758beb9105abc229aa6c122f456e1923649745e972fd6015095d158fbf",
+            "raw_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/source.gz",
+            "fetched_at": "2026-09-05T10:51:03.207349+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 214,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": true
+              },
+              {
+                "start_line": 29,
+                "end_line": 30,
+                "truncated": true
+              },
+              {
+                "start_line": 34,
+                "end_line": 214,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "   ## 2. Get message replies\n\n   To generate smart replies to a message, get an instance of `SmartReplyGenerator`\n   and pass the conversation history to its `suggestReplies()` method:\n\n   ### Kotlin\n\n   ```\n   val smartReplyGenerator = SmartReply.getClient()\n   smartReply.suggestReplies(conversation)"
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Result contains up to three suggested replies to present to your user",
+          "start_line": 192,
+          "end_line": 194,
+          "source": {
+            "id": "android-1",
+            "url": "https://developers.google.com/ml-kit/language/smart-reply/android",
+            "platform": "android",
+            "title": "Generate smart replies with ML Kit on Android",
+            "local_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/document.md",
+            "sha256": "0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b",
+            "raw_sha256": "d2a85c758beb9105abc229aa6c122f456e1923649745e972fd6015095d158fbf",
+            "raw_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/source.gz",
+            "fetched_at": "2026-09-05T10:51:03.207349+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 214,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": true
+              },
+              {
+                "start_line": 29,
+                "end_line": 30,
+                "truncated": true
+              },
+              {
+                "start_line": 34,
+                "end_line": 214,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "   If the operation succeeds, a `SmartReplySuggestionResult` object is passed to\n   the success handler. This object contains a list of up to three suggested replies,\n   which you can present to your user:"
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Discussion — Apple Intelligence generates Smart Reply suggestions",
+          "start_line": 5,
+          "end_line": 13,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/adopting-smart-reply-in-your-messaging-or-email-app",
+            "platform": "ios",
+            "title": "Adopting Smart Reply in your messaging or email app",
+            "local_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/document.md",
+            "sha256": "07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e",
+            "raw_sha256": "95900d20daf2a7ccb4efd327687ccaee4afafee940330427e98a54c99ff75e7e",
+            "raw_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/source.gz",
+            "fetched_at": "2026-09-05T11:19:47.440203+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 137,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 13,
+                "truncated": false
+              },
+              {
+                "start_line": 14,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Discussion\n\nMessages and Mail use Apple Intelligence to provide the Smart Reply feature, which generates suggestions that are contextually relevant for a thread when you draft a message or email. To add this feature to your messaging or email app, follow these steps:\n\n- Create a *conversation context* object with your app’s data from a thread.\n- Attach the conversation context to your text view or text field when you prepare your user interface.\n- Implement delegate methods to keep the conversation context up-to-date when you send or receive messages.\n- For an email or other long-form type of messaging, use the selected input suggestion to generate a long-form response and place it in the entry field.\n"
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Attach conversation context; keyboard uses context per session",
+          "start_line": 72,
+          "end_line": 80,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/adopting-smart-reply-in-your-messaging-or-email-app",
+            "platform": "ios",
+            "title": "Adopting Smart Reply in your messaging or email app",
+            "local_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/document.md",
+            "sha256": "07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e",
+            "raw_sha256": "95900d20daf2a7ccb4efd327687ccaee4afafee940330427e98a54c99ff75e7e",
+            "raw_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/source.gz",
+            "fetched_at": "2026-09-05T11:19:47.440203+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 137,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 13,
+                "truncated": false
+              },
+              {
+                "start_line": 14,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Attach the conversation context to a text view or text field\n\nWhen you create an entry field, such as a text view or text field, which you use to get input from the person using your app, assign the conversation context you created to the object’s [`conversationContext`](/documentation/UIKit/UITextInputTraits/conversationContext) property before the keyboard appears:\n\n```objc\n[self.entryField setConversationContext:context];\n```\n\nThe keyboard uses this context once per session for initialization. Use the steps in the next section to handle changes to the conversation during the keyboard session."
+        }
+      ],
+      "open_questions": [
+        "iOS 建议的实际呈现通道（键盘候选/输入建议列表）未在冻结文档完整说明，需读 UITextInputTraits.conversationContext 等符号页",
+        "Android 系统侧是否另有自动注入建议的机制（如通知智能回复）不在冻结来源内",
+        "HarmonyOS 机制未知，暂无法三方比较"
+      ]
+    },
+    {
+      "dimension": "limits_precision",
+      "statement": "Android 文档给出硬性限制：仅英语、敏感话题不出建议、最多 3 条、基于最近最多 10 条消息；iOS 文档仅列触发情形（空输入框、最后一条来自对方、近期纯文本；邮件另有收件人条件），未标注语言限制或数量上限——两平台约束类型不同。",
+      "platforms": [
+        "android",
+        "ios"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-2",
+          "locator": "Limitations & How the model works — English only, sensitive topics, up to 10 messages, up to three replies",
+          "start_line": 21,
+          "end_line": 39,
+          "source": {
+            "id": "android-2",
+            "url": "https://developers.google.com/ml-kit/language/smart-reply",
+            "platform": "android",
+            "title": "Smart reply",
+            "local_path": "docs-raw/research/2026-09-06/d21f14ab4b6045e944a317445d770807eb404b7a79554691b45492370a3584f8/646d4eddf4b7b200f1775b6bfb489d843d866fbe9fc69aa21c0e0a829b1b5155/document.md",
+            "sha256": "646d4eddf4b7b200f1775b6bfb489d843d866fbe9fc69aa21c0e0a829b1b5155",
+            "raw_sha256": "9c2d2b3488136f0881f1a7d0549f2a8a59b74dcdd10faaad8f24ed81808c87dc",
+            "raw_path": "docs-raw/research/2026-09-06/d21f14ab4b6045e944a317445d770807eb404b7a79554691b45492370a3584f8/646d4eddf4b7b200f1775b6bfb489d843d866fbe9fc69aa21c0e0a829b1b5155/source.gz",
+            "fetched_at": "2026-09-05T10:54:35.391097+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 62,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 12,
+                "truncated": false
+              },
+              {
+                "start_line": 13,
+                "end_line": 20,
+                "truncated": false
+              },
+              {
+                "start_line": 21,
+                "end_line": 27,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Limitations\n\n* Smart reply is intended for casual conversations in consumer apps. Reply\n  suggestions might not be appropriate for other contexts or audiences.\n* Currently, only English is supported. The model automatically identifies the\n  language being used and only provides suggestions when it's English.\n\n## How the model works\n\n* The model uses up to 10 of the most recent messages from a conversation\n  history to generate reply suggestions.\n* It detects the language of the conversation and only attempts to provide\n  responses when the language is determined to be English.\n* The model compares the messages against a list of sensitive topics and\n  won’t provide suggestions when it detects a sensitive topic.\n* If the language is determined to be English and no sensitive topics are\n  detected, the model provides up to three suggested responses. The number of\n  responses depends on how many meet a sufficient level of confidence based on\n  the input to the model."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Understand when the system generates Smart Reply suggestions",
+          "start_line": 118,
+          "end_line": 133,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/adopting-smart-reply-in-your-messaging-or-email-app",
+            "platform": "ios",
+            "title": "Adopting Smart Reply in your messaging or email app",
+            "local_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/document.md",
+            "sha256": "07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e",
+            "raw_sha256": "95900d20daf2a7ccb4efd327687ccaee4afafee940330427e98a54c99ff75e7e",
+            "raw_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/source.gz",
+            "fetched_at": "2026-09-05T11:19:47.440203+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 137,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 13,
+                "truncated": false
+              },
+              {
+                "start_line": 14,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "### Understand when the system generates Smart Reply suggestions\n\nThe system only generates Smart Reply suggestions in specific circumstances, and might not generate suggestions in all cases.\n\nCircumstances when a messaging conversation can generate suggestions include:\n\n- The input field is empty.\n- The last message in the conversation is from the recipient, not the person sending messages.\n- The preceding messages in the conversation are text (not images or emojis).\n- The preceding messages are recent.\n\nCircumstances when a mail conversation can generate suggestions include:\n\n- The person is the direct recipient of the email, and is not in the CC or BCC list.\n- The person has not already replied to the email.\n- The sender and recipient of the email have different email addresses."
+        }
+      ],
+      "open_questions": [
+        "iOS Smart Reply 是否有语言限制与建议数上限，需符号页或其他官方文档核对",
+        "Apple Intelligence 可用性对 iOS 触发情形的实际影响未在冻结文档说明"
+      ]
+    },
+    {
+      "dimension": "availability",
+      "statement": "部署条件不同：Android 依赖 ML Kit 库分发（bundled +5.7MB 或 unbundled 经 Google Play services 动态下载、beta、API 23+）；iOS 为系统集成机制，Journaling Suggestions 需专用 entitlement，Smart Reply 依赖 Apple Intelligence 但文档未列机型/系统门槛。",
+      "platforms": [
+        "android",
+        "ios"
+      ],
+      "kind": "hypothesis",
+      "confidence": "low",
+      "citations": [
+        {
+          "source_id": "android-1",
+          "locator": "Bundled vs unbundled library table; unbundled in beta",
+          "start_line": 16,
+          "end_line": 25,
+          "source": {
+            "id": "android-1",
+            "url": "https://developers.google.com/ml-kit/language/smart-reply/android",
+            "platform": "android",
+            "title": "Generate smart replies with ML Kit on Android",
+            "local_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/document.md",
+            "sha256": "0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b",
+            "raw_sha256": "d2a85c758beb9105abc229aa6c122f456e1923649745e972fd6015095d158fbf",
+            "raw_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/source.gz",
+            "fetched_at": "2026-09-05T10:51:03.207349+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 214,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": true
+              },
+              {
+                "start_line": 29,
+                "end_line": 30,
+                "truncated": true
+              },
+              {
+                "start_line": 34,
+                "end_line": 214,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "|  | Bundled | Unbundled |\n| --- | --- | --- |\n| **Library name** | `com.google.mlkit:smart-reply` | `com.google.android.gms:play-services-mlkit-smart-reply` |\n| **Implementation** | Model is statically linked to your app at build time. | Model is dynamically downloaded via Google Play Services. |\n| **App size impact** | About 5.7 MB size increase. | About 200 KB size increase. |\n| **Initialization time** | Model is available immediately. | Might have to wait for model to download before first use. |\n\n**Note:** The unbundled version of Smart Reply is currently offered in beta, which\nmeans it might be changed in backward-incompatible ways and is not subject to\nany SLA or deprecation policy."
+        },
+        {
+          "source_id": "android-1",
+          "locator": "Requires Android API level 23 or above",
+          "start_line": 36,
+          "end_line": 37,
+          "source": {
+            "id": "android-1",
+            "url": "https://developers.google.com/ml-kit/language/smart-reply/android",
+            "platform": "android",
+            "title": "Generate smart replies with ML Kit on Android",
+            "local_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/document.md",
+            "sha256": "0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b",
+            "raw_sha256": "d2a85c758beb9105abc229aa6c122f456e1923649745e972fd6015095d158fbf",
+            "raw_path": "docs-raw/research/2026-09-06/f91c3ae41030047cee79860bc2a7c235d107e572aa1579c1d4c9c5cf7858a5f4/0ed9df2fc4224b9f27c64e1580b2751c3af7380c5205683c0c42f12f7effb21b/source.gz",
+            "fetched_at": "2026-09-05T10:51:03.207349+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 214,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 9,
+                "truncated": true
+              },
+              {
+                "start_line": 29,
+                "end_line": 30,
+                "truncated": true
+              },
+              {
+                "start_line": 34,
+                "end_line": 214,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "This API requires Android API level 23 or above. Make sure that your app's build\nfile uses a `minSdkVersion` value of 23 or higher."
+        },
+        {
+          "source_id": "ios-1",
+          "locator": "Apple Intelligence Smart Reply overview",
+          "start_line": 5,
+          "end_line": 13,
+          "source": {
+            "id": "ios-1",
+            "url": "https://developer.apple.com/documentation/uikit/adopting-smart-reply-in-your-messaging-or-email-app",
+            "platform": "ios",
+            "title": "Adopting Smart Reply in your messaging or email app",
+            "local_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/document.md",
+            "sha256": "07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e",
+            "raw_sha256": "95900d20daf2a7ccb4efd327687ccaee4afafee940330427e98a54c99ff75e7e",
+            "raw_path": "docs-raw/research/2026-09-06/22d1f4c029bf5c7c1c2a5b565645be4b152a8f9bff793a062acad9b1b2c13f8c/07ace0f60be34551c89a43c751628e492f5c6a518b763f2222f79f7c0d3e563e/source.gz",
+            "fetched_at": "2026-09-05T11:19:47.440203+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 137,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 13,
+                "truncated": false
+              },
+              {
+                "start_line": 14,
+                "end_line": 71,
+                "truncated": false
+              }
+            ]
+          },
+          "excerpt": "## Discussion\n\nMessages and Mail use Apple Intelligence to provide the Smart Reply feature, which generates suggestions that are contextually relevant for a thread when you draft a message or email. To add this feature to your messaging or email app, follow these steps:\n\n- Create a *conversation context* object with your app’s data from a thread.\n- Attach the conversation context to your text view or text field when you prepare your user interface.\n- Implement delegate methods to keep the conversation context up-to-date when you send or receive messages.\n- For an email or other long-form type of messaging, use the selected input suggestion to generate a long-form response and place it in the entry field.\n"
+        },
+        {
+          "source_id": "ios-2",
+          "locator": "Entitlement note & JSNotificationURLFormat",
+          "start_line": 21,
+          "end_line": 25,
+          "source": {
+            "id": "ios-2",
+            "url": "https://developer.apple.com/documentation/journalingsuggestions/receiving-journaling-suggestions-from-system-notifications",
+            "platform": "ios",
+            "title": "Receiving journaling suggestions system notifications",
+            "local_path": "docs-raw/research/2026-09-06/fbddb4936d429ebb6b27dc526361d05ccb92124006ab23de107608b8279cc8c6/85cf5388ed9e8eb6d2d5c2e52df3f257abb4fabd43aaf7cf73fc61e90b810f60/document.md",
+            "sha256": "85cf5388ed9e8eb6d2d5c2e52df3f257abb4fabd43aaf7cf73fc61e90b810f60",
+            "raw_sha256": "d2a0a097055941a39542a81eefbecf55236b5951b615ce4032ffe83d94e5d79b",
+            "raw_path": "docs-raw/research/2026-09-06/fbddb4936d429ebb6b27dc526361d05ccb92124006ab23de107608b8279cc8c6/85cf5388ed9e8eb6d2d5c2e52df3f257abb4fabd43aaf7cf73fc61e90b810f60/source.gz",
+            "fetched_at": "2026-09-05T10:23:14.006470+00:00",
+            "version_verified": false,
+            "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+            "total_lines": 161,
+            "suggested_sections": [
+              {
+                "start_line": 1,
+                "end_line": 4,
+                "truncated": false
+              },
+              {
+                "start_line": 5,
+                "end_line": 22,
+                "truncated": false
+              },
+              {
+                "start_line": 65,
+                "end_line": 89,
+                "truncated": true
+              }
+            ]
+          },
+          "excerpt": "> Note: To display the Journaling Suggestions picker, the system requires your app to have the <doc://com.apple.documentation/documentation/BundleResources/Entitlements/com.apple.developer.journal.allow> entitlement. Add it to your app’s target by enabling the Journaling Suggestions capability in Xcode. For more information, see <doc://com.apple.documentation/documentation/Xcode/adding-capabilities-to-your-app>.\n\n## Add the notification URL target property\n\nWhen you add the <doc://com.apple.documentation/documentation/BundleResources/Information-Property-List/JSNotificationURLFormat> target property to your app, the system adds your app as an available option in the Open Notifications With setting. The value you choose needs to be a *universal link*, which also defines how the system provides notification information to your app. The format of the link is a base URL for your app, followed by the parameter string: `{journaling-suggestion-id}`, which represents the unique journaling suggestion. For example:"
+        }
+      ],
+      "open_questions": [
+        "iOS Apple Intelligence 机型/最低系统门槛需版本资料核对",
+        "无 Google Play services 设备上 unbundled ML Kit 可用性未验证",
+        "HarmonyOS 侧无来源，无法比较"
+      ]
+    }
+  ],
+  "scope_gaps": [
+    "HarmonyOS 平台无相关冻结来源，本轮只能 unknown；需专项检索小艺建议、Intents Kit、智能提醒等官方文档",
+    "Android 证据为 Google 生态 ML Kit 库；OS 层（AOSP/系统服务）建议机制无文档，layer=os 映射待确认",
+    "iOS 版本适用性（Apple Intelligence 最低系统/机型、Journaling Suggestions 最低版本、iPad 支持）未在冻结文档标注",
+    "快捷操作（quick actions）方向三平台证据均不足；本轮仅覆盖文本回复建议与日记建议"
+  ],
+  "followup_priority": {
+    "level": "P1",
+    "reason": "HarmonyOS 完全无相关来源（关键缺口），且 Android 存在生态库映射到系统级节点的高风险映射，iOS 版本条件缺失；需优先精研以建立三方可比基础。"
+  }
+}

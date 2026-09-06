@@ -1,0 +1,13 @@
+{
+  "id": "987a41416b4ac2a0eedc2f25657e93b1746c425bc480829caa3d1b0ccccab4c2",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/preferences-guidelines",
+  "platform": "harmonyos",
+  "title": "通过用户首选项实现数据持久化 (C/C++)",
+  "local_path": "docs-raw/research/2026-09-06/987a41416b4ac2a0eedc2f25657e93b1746c425bc480829caa3d1b0ccccab4c2/a506417e0faf0de09e6b96d688268ffc0faceb9cccf99bd091fa8c335c15a37d/document.md",
+  "sha256": "a506417e0faf0de09e6b96d688268ffc0faceb9cccf99bd091fa8c335c15a37d",
+  "raw_sha256": "f67e49bf9c1a905f6aafd76f8166b1d6a7b4788b1e6816dd76264c791cc03310",
+  "raw_path": "docs-raw/research/2026-09-06/987a41416b4ac2a0eedc2f25657e93b1746c425bc480829caa3d1b0ccccab4c2/a506417e0faf0de09e6b96d688268ffc0faceb9cccf99bd091fa8c335c15a37d/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

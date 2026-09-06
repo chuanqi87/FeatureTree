@@ -1,0 +1,547 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "enterprise.work_profile",
+    "level": "L2",
+    "parent": "enterprise",
+    "name": {
+      "zh": "工作资料",
+      "en": "Work Profile"
+    },
+    "definition": "个人/工作数据隔离配置。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/enterprise/work_profile/_rollup.yaml",
+    "comparison_scope": {
+      "includes": [
+        "个人/工作数据隔离配置。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "edd1512ec18c8a184f70d240e3e955eff74bef9eca50867e1a5c78aa4bd4f11f",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "ce291d17f60dcd281cc1bf239348275459f7ab3d164a6ec22878d680b8574670",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developers.google.com/android/management/work-profile-detection",
+      "platform": "android",
+      "title": "Work profile detection",
+      "local_path": "docs-raw/research/2026-09-06/582ed9b114f4ba67f891065dc7f91375968aa2d5e70505735af4b141e40c4800/4cbc86b29b84164eb262457d3aa8022c6471f166392d3b3f07d516d0e1d245a7/document.md",
+      "sha256": "4cbc86b29b84164eb262457d3aa8022c6471f166392d3b3f07d516d0e1d245a7",
+      "raw_sha256": "f077ac3951223762f2d786124567b546a1091707a76c6b566721fe09bfd7aac1",
+      "raw_path": "docs-raw/research/2026-09-06/582ed9b114f4ba67f891065dc7f91375968aa2d5e70505735af4b141e40c4800/4cbc86b29b84164eb262457d3aa8022c6471f166392d3b3f07d516d0e1d245a7/source.gz",
+      "fetched_at": "2026-09-05T10:53:06.299866+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 95,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 5,
+          "truncated": false
+        },
+        {
+          "start_line": 6,
+          "end_line": 10,
+          "truncated": false
+        },
+        {
+          "start_line": 11,
+          "end_line": 20,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developers.google.com/android/management/policies/work-profile",
+      "platform": "android",
+      "title": "Example policies: Work profile devices",
+      "local_path": "docs-raw/research/2026-09-06/44c423e2cb4c75889c9e8f13e44f184ddac6ef43fb08778f8d67e891af95dbc5/195818085446fa0ef223c5ed55d0411b6a3fb43707b410448275ceaa5cd4ee92/document.md",
+      "sha256": "195818085446fa0ef223c5ed55d0411b6a3fb43707b410448275ceaa5cd4ee92",
+      "raw_sha256": "72f6b5514839f145dc7d4c7b6cd9c6fab01ca4c8c9b215288a507aabab54d7f6",
+      "raw_path": "docs-raw/research/2026-09-06/44c423e2cb4c75889c9e8f13e44f184ddac6ef43fb08778f8d67e891af95dbc5/195818085446fa0ef223c5ed55d0411b6a3fb43707b410448275ceaa5cd4ee92/source.gz",
+      "fetched_at": "2026-09-05T10:53:04.061350+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 112,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 35,
+          "truncated": false
+        },
+        {
+          "start_line": 36,
+          "end_line": 43,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/colorsync",
+      "platform": "ios",
+      "title": "ColorSync",
+      "local_path": "docs-raw/research/2026-09-06/5dc3d750ea2afefaac5ac32b4ab0142bfb95136da4866a0fa508b1c423e48a35/b20bb24fb5d5efde908e3e6f531d22749920a4dcf8357cd4d944af02e2f30f63/document.md",
+      "sha256": "b20bb24fb5d5efde908e3e6f531d22749920a4dcf8357cd4d944af02e2f30f63",
+      "raw_sha256": "e3fbb630299125e7a0c2101fbab7f1d2e22527bf6914e7eb090cabc9a5622289",
+      "raw_path": "docs-raw/research/2026-09-06/5dc3d750ea2afefaac5ac32b4ab0142bfb95136da4866a0fa508b1c423e48a35/b20bb24fb5d5efde908e3e6f531d22749920a4dcf8357cd4d944af02e2f30f63/source.gz",
+      "fetched_at": "2026-09-05T10:30:04.535506+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 65,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 22,
+          "truncated": false
+        },
+        {
+          "start_line": 23,
+          "end_line": 24,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/storekit/testing-ad-attributions-with-a-downloaded-profile",
+      "platform": "ios",
+      "title": "Testing ad attributions with a downloaded profile",
+      "local_path": "docs-raw/research/2026-09-06/700f1c5cca0ce7f95f1e9525386dd5d128759b0f1eda52541c3f367ffc80a622/aaa9f229dee40f176aecbbc9f1ea7165ba5c448043f2b1fcffc6651abe059ff1/document.md",
+      "sha256": "aaa9f229dee40f176aecbbc9f1ea7165ba5c448043f2b1fcffc6651abe059ff1",
+      "raw_sha256": "13d0d5a443b9f39095a033c3701729af4784162ae5815a911238561863c44ef8",
+      "raw_path": "docs-raw/research/2026-09-06/700f1c5cca0ce7f95f1e9525386dd5d128759b0f1eda52541c3f367ffc80a622/aaa9f229dee40f176aecbbc9f1ea7165ba5c448043f2b1fcffc6651abe059ff1/source.gz",
+      "fetched_at": "2026-09-05T11:20:23.689861+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 37,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 17,
+          "truncated": false
+        },
+        {
+          "start_line": 18,
+          "end_line": 21,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-constant",
+      "platform": "harmonyos",
+      "title": "@ohos.bluetooth.constant (蓝牙constant模块)",
+      "local_path": "docs-raw/research/2026-09-06/8df3ba6b401ad1cf812cd38a629f2b2c8e55a41df5a11e6ce90beb244e513386/b6119c61e669736f3c1863efb5d1da533924e80c8950a8119756434b81b2e22c/document.md",
+      "sha256": "b6119c61e669736f3c1863efb5d1da533924e80c8950a8119756434b81b2e22c",
+      "raw_sha256": "7fed7743a3bfebbc79c501913eb8d5ebe1bb438443187fd28690c872e0723058",
+      "raw_path": "docs-raw/research/2026-09-06/8df3ba6b401ad1cf812cd38a629f2b2c8e55a41df5a11e6ce90beb244e513386/b6119c61e669736f3c1863efb5d1da533924e80c8950a8119756434b81b2e22c/source.gz",
+      "fetched_at": "2026-09-05T10:27:03.750965+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 173,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 3,
+          "truncated": true
+        },
+        {
+          "start_line": 7,
+          "end_line": 8,
+          "truncated": true
+        },
+        {
+          "start_line": 13,
+          "end_line": 25,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/native-camera-shooting",
+      "platform": "harmonyos",
+      "title": "拍照(C/C++)",
+      "local_path": "docs-raw/research/2026-09-06/e10991ecebdffe9d1eee7b36449b98273b416d5d1b83fb3cb5c5bd88e6b1b83b/519703d8063d1cf6deba2a7bed82b4432556921478ae8b63f94d29fb1b7bd7c3/document.md",
+      "sha256": "519703d8063d1cf6deba2a7bed82b4432556921478ae8b63f94d29fb1b7bd7c3",
+      "raw_sha256": "58128ca7ee773c6beea9d9fd75855c9c0bd560afe24caf9ba54a342c4735ad7b",
+      "raw_path": "docs-raw/research/2026-09-06/e10991ecebdffe9d1eee7b36449b98273b416d5d1b83fb3cb5c5bd88e6b1b83b/519703d8063d1cf6deba2a7bed82b4432556921478ae8b63f94d29fb1b7bd7c3/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 691,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": true
+        },
+        {
+          "start_line": 12,
+          "end_line": 219,
+          "truncated": true
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:26.373622+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "1ec11624200f9359545077ae4961a84e660e8a5e21e479df37fde587276ac1f5"
+}

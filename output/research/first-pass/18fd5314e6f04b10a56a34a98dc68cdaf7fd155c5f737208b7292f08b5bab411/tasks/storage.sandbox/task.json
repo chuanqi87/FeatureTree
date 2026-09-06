@@ -1,0 +1,542 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "storage.sandbox",
+    "level": "L2",
+    "parent": "storage",
+    "name": {
+      "zh": "应用沙箱文件",
+      "en": "App Sandbox Files"
+    },
+    "definition": "仅本应用可访问的私有文件空间。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/storage/sandbox/_rollup.yaml",
+    "comparison_scope": {
+      "includes": [
+        "仅本应用可访问的私有文件空间。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "74a2e769b5d3e850a27379dce342a465b9177a93ebb0fd8bdafc7706c4a5eb44",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "f8ce89118ea7078873209573567d879c94f6033e579c86b89544d63ae6cb5451",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/studio/gemini/permissions",
+      "platform": "android",
+      "title": "Manage agent permissions",
+      "local_path": "docs-raw/research/2026-09-06/a4ebf38105db88c6f6b8655ab1503b9df300a6761e58899acbe03de7fb1e80af/967cdded74806c136814d2b594f758a6fe418a5f756c08cee8f009abc3ad0472/document.md",
+      "sha256": "967cdded74806c136814d2b594f758a6fe418a5f756c08cee8f009abc3ad0472",
+      "raw_sha256": "1f212d25dda74666d316c56c3b6e1331ceb064d2abf5470f3455059f0b55f40d",
+      "raw_path": "docs-raw/research/2026-09-06/a4ebf38105db88c6f6b8655ab1503b9df300a6761e58899acbe03de7fb1e80af/967cdded74806c136814d2b594f758a6fe418a5f756c08cee8f009abc3ad0472/source.gz",
+      "fetched_at": "2026-09-05T10:34:52.011911+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 54,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 43,
+          "truncated": false
+        },
+        {
+          "start_line": 44,
+          "end_line": 54,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/privacy-and-security/risks/file-providers",
+      "platform": "android",
+      "title": "Improperly Exposed Directories to FileProvider",
+      "local_path": "docs-raw/research/2026-09-06/7dd1d2ddbbf0b2240f16ba87f630e101be578be82d47faedf72e63bdd7af795e/2a0d13933f8208500ca016d7470274334a3f6fd4a621597812da912380015594/document.md",
+      "sha256": "2a0d13933f8208500ca016d7470274334a3f6fd4a621597812da912380015594",
+      "raw_sha256": "550e6380eccaea8cff6451a7f89833808c5487dd029a0d88c57afd02f2ad8fe9",
+      "raw_path": "docs-raw/research/2026-09-06/7dd1d2ddbbf0b2240f16ba87f630e101be578be82d47faedf72e63bdd7af795e/2a0d13933f8208500ca016d7470274334a3f6fd4a621597812da912380015594/source.gz",
+      "fetched_at": "2026-09-05T10:34:25.722774+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 51,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 12,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/security/app-sandbox",
+      "platform": "ios",
+      "title": "App Sandbox",
+      "local_path": "docs-raw/research/2026-09-06/9e326ab271fb7a5d0945c6aa3081e2cb040130c8bb8f4a7adccfb121474cf2b2/1c37d5ca12ea40962047efdba17274e1c5ae5150ce4aeae75d087ea316f506ea/document.md",
+      "sha256": "1c37d5ca12ea40962047efdba17274e1c5ae5150ce4aeae75d087ea316f506ea",
+      "raw_sha256": "0b92f1e46c4b801c4067a081805d1a6b6ab2a4f636dbfaffc3710a4cddb7c614",
+      "raw_path": "docs-raw/research/2026-09-06/9e326ab271fb7a5d0945c6aa3081e2cb040130c8bb8f4a7adccfb121474cf2b2/1c37d5ca12ea40962047efdba17274e1c5ae5150ce4aeae75d087ea316f506ea/source.gz",
+      "fetched_at": "2026-09-05T10:25:34.058347+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 92,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 11,
+          "truncated": false
+        },
+        {
+          "start_line": 12,
+          "end_line": 13,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/security/protecting-user-data-with-app-sandbox",
+      "platform": "ios",
+      "title": "Protecting user data with App Sandbox",
+      "local_path": "docs-raw/research/2026-09-06/6223460bdf313645c50e44f5ffe2efa69a0d1f580135972ca186a308108492d7/902a06a9ca9717f28ea511d2f812339110b36f750978978c81e30af4bc712804/document.md",
+      "sha256": "902a06a9ca9717f28ea511d2f812339110b36f750978978c81e30af4bc712804",
+      "raw_sha256": "8049ddbeac893e81186da86ba4474f39a77cc8fb86e7cdd7064b36e47926f0fc",
+      "raw_path": "docs-raw/research/2026-09-06/6223460bdf313645c50e44f5ffe2efa69a0d1f580135972ca186a308108492d7/902a06a9ca9717f28ea511d2f812339110b36f750978978c81e30af4bc712804/source.gz",
+      "fetched_at": "2026-09-05T11:18:35.076345+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 67,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 13,
+          "truncated": false
+        },
+        {
+          "start_line": 14,
+          "end_line": 27,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/storage-usage-file-lifecycle",
+      "platform": "harmonyos",
+      "title": "存储空间使用与文件生命周期管理",
+      "local_path": "docs-raw/research/2026-09-06/9d5729fd7854a5e39415e528af107d095e9c90c379c6cf65cb94649d2d4b8e7b/e89984df5557597e4db3e57ca9bc91243c777245397b79204837cc368607c26c/document.md",
+      "sha256": "e89984df5557597e4db3e57ca9bc91243c777245397b79204837cc368607c26c",
+      "raw_sha256": "4dcf94b043a438d62dcf3e5222e2bee9432b214b0c0020acd1eaa9072f09ef54",
+      "raw_path": "docs-raw/research/2026-09-06/9d5729fd7854a5e39415e528af107d095e9c90c379c6cf65cb94649d2d4b8e7b/e89984df5557597e4db3e57ca9bc91243c777245397b79204837cc368607c26c/source.gz",
+      "fetched_at": "2026-09-05T10:24:45.244757+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 267,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 12,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/file-native-side",
+      "platform": "harmonyos",
+      "title": "Native侧实现文件访问",
+      "local_path": "docs-raw/research/2026-09-06/5b28738b57aa0943737ff307fb86ddf27674c7381da70d163c1fe9ac9252bf11/b9aa33f5d57af560e4bc904fc3bba090bcc31cf38dc0d3bd5339df345d802148/document.md",
+      "sha256": "b9aa33f5d57af560e4bc904fc3bba090bcc31cf38dc0d3bd5339df345d802148",
+      "raw_sha256": "689d4e67a4f57cdebb9a872a916ef6670313bae51e02da9ea162d0b2dc1d7b23",
+      "raw_path": "docs-raw/research/2026-09-06/5b28738b57aa0943737ff307fb86ddf27674c7381da70d163c1fe9ac9252bf11/b9aa33f5d57af560e4bc904fc3bba090bcc31cf38dc0d3bd5339df345d802148/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 482,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 2,
+          "truncated": false
+        },
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": true
+        },
+        {
+          "start_line": 12,
+          "end_line": 18,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:43:02.920111+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "2c192029db918d7232659c173172d0aea68cd794b72e8bf7746bed9775a19601"
+}

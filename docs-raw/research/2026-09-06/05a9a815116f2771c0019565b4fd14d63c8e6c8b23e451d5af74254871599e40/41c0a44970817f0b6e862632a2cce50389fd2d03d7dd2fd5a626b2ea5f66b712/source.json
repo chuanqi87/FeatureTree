@@ -1,0 +1,13 @@
+{
+  "id": "05a9a815116f2771c0019565b4fd14d63c8e6c8b23e451d5af74254871599e40",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-lowpower-audio-sink-h",
+  "platform": "harmonyos",
+  "title": "lowpower_audio_sink.h",
+  "local_path": "docs-raw/research/2026-09-06/05a9a815116f2771c0019565b4fd14d63c8e6c8b23e451d5af74254871599e40/41c0a44970817f0b6e862632a2cce50389fd2d03d7dd2fd5a626b2ea5f66b712/document.md",
+  "sha256": "41c0a44970817f0b6e862632a2cce50389fd2d03d7dd2fd5a626b2ea5f66b712",
+  "raw_sha256": "2eed2f381daa36b769a9970df3a16390a302e0de3938f4bac9fb4c5651065ada",
+  "raw_path": "docs-raw/research/2026-09-06/05a9a815116f2771c0019565b4fd14d63c8e6c8b23e451d5af74254871599e40/41c0a44970817f0b6e862632a2cce50389fd2d03d7dd2fd5a626b2ea5f66b712/source.gz",
+  "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

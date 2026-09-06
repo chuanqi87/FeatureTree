@@ -1,0 +1,13 @@
+{
+  "id": "fb0aecb485fd9d75b88cba7fbaf585e9181bf24fc98ace8e97790634d17ab617",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-native-audio-device-base-h",
+  "platform": "harmonyos",
+  "title": "native_audio_device_base.h",
+  "local_path": "docs-raw/research/2026-09-06/fb0aecb485fd9d75b88cba7fbaf585e9181bf24fc98ace8e97790634d17ab617/5baf38f7b424326ae40f5330c04c75ecf15d081e71345ede066ea2a25ded47c8/document.md",
+  "sha256": "5baf38f7b424326ae40f5330c04c75ecf15d081e71345ede066ea2a25ded47c8",
+  "raw_sha256": "0feafedde984563e8bf47939441b0cb7cf5c61026467abd0609a5f5c815f1460",
+  "raw_path": "docs-raw/research/2026-09-06/fb0aecb485fd9d75b88cba7fbaf585e9181bf24fc98ace8e97790634d17ab617/5baf38f7b424326ae40f5330c04c75ecf15d081e71345ede066ea2a25ded47c8/source.gz",
+  "fetched_at": "2026-09-04T04:07:05.243692+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

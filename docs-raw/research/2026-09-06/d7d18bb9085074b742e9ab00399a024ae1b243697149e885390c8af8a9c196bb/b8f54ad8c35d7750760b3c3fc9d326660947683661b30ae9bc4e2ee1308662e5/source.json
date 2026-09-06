@@ -1,0 +1,13 @@
+{
+  "id": "d7d18bb9085074b742e9ab00399a024ae1b243697149e885390c8af8a9c196bb",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/js-apidiff-backgroundtaskskit-5031",
+  "platform": "harmonyos",
+  "title": "Background Tasks Kit",
+  "local_path": "docs-raw/research/2026-09-06/d7d18bb9085074b742e9ab00399a024ae1b243697149e885390c8af8a9c196bb/b8f54ad8c35d7750760b3c3fc9d326660947683661b30ae9bc4e2ee1308662e5/document.md",
+  "sha256": "b8f54ad8c35d7750760b3c3fc9d326660947683661b30ae9bc4e2ee1308662e5",
+  "raw_sha256": "ec51a8507f8f632f677332770515d002b1dd47e8c298ea3af1f06dcff0c34136",
+  "raw_path": "docs-raw/research/2026-09-06/d7d18bb9085074b742e9ab00399a024ae1b243697149e885390c8af8a9c196bb/b8f54ad8c35d7750760b3c3fc9d326660947683661b30ae9bc4e2ee1308662e5/source.gz",
+  "fetched_at": "2026-09-05T11:01:15.220602+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

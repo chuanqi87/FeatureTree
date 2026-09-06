@@ -1,0 +1,13 @@
+{
+  "id": "6cade61ff7e1ef74283ebd30e5b11e8f24c5b576de2206768912d24cdb4db7c8",
+  "url": "https://developer.apple.com/documentation/avfaudio/capturing-stereo-audio-from-built-in-microphones",
+  "platform": "ios",
+  "title": "Capturing stereo audio from built-In microphones",
+  "local_path": "docs-raw/research/2026-09-06/6cade61ff7e1ef74283ebd30e5b11e8f24c5b576de2206768912d24cdb4db7c8/5eb3fd2d289a93ad7e944e0cea23ddee12703d7b6c9e8485231f22e19b4d2ef7/document.md",
+  "sha256": "5eb3fd2d289a93ad7e944e0cea23ddee12703d7b6c9e8485231f22e19b4d2ef7",
+  "raw_sha256": "832473ce9123de4fd3dc1be6ca479d83e877c43b0381c451e320f275347d96ee",
+  "raw_path": "docs-raw/research/2026-09-06/6cade61ff7e1ef74283ebd30e5b11e8f24c5b576de2206768912d24cdb4db7c8/5eb3fd2d289a93ad7e944e0cea23ddee12703d7b6c9e8485231f22e19b4d2ef7/source.gz",
+  "fetched_at": "2026-09-05T10:18:22.703971+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

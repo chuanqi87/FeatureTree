@@ -1,0 +1,13 @@
+{
+  "id": "c327dfa2a8a063d97b31bc0cfbc171bbe0f5ad9927b9f2e66b13a4b20f93f348",
+  "url": "https://developer.android.com/training/monitoring-device-state/battery-monitoring",
+  "platform": "android",
+  "title": "Monitor the Battery Level and Charging State",
+  "local_path": "docs-raw/research/2026-09-06/c327dfa2a8a063d97b31bc0cfbc171bbe0f5ad9927b9f2e66b13a4b20f93f348/4bfe5a6748112e208e87f4fec16aa464c428d07e45cb83f6cd1b986bcba3fe51/document.md",
+  "sha256": "4bfe5a6748112e208e87f4fec16aa464c428d07e45cb83f6cd1b986bcba3fe51",
+  "raw_sha256": "6da3e1f903b2624c2306229002f4b4670d02df1fbdd87920c19f443a7ee46f25",
+  "raw_path": "docs-raw/research/2026-09-06/c327dfa2a8a063d97b31bc0cfbc171bbe0f5ad9927b9f2e66b13a4b20f93f348/4bfe5a6748112e208e87f4fec16aa464c428d07e45cb83f6cd1b986bcba3fe51/source.gz",
+  "fetched_at": "2026-09-05T10:38:26.943637+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

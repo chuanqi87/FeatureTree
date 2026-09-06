@@ -1,0 +1,13 @@
+{
+  "id": "4d56d492110057167211e898f5e46beba534ae06b0009d58d3cd23b2b273454a",
+  "url": "https://developer.android.com/guide/topics/providers/document-provider",
+  "platform": "android",
+  "title": "Open files using the Storage Access Framework",
+  "local_path": "docs-raw/research/2026-09-06/4d56d492110057167211e898f5e46beba534ae06b0009d58d3cd23b2b273454a/a8f33f11d26cb15a6089a16931ebcdd958bb96f189d76e1e94bcf1032a68fab2/document.md",
+  "sha256": "a8f33f11d26cb15a6089a16931ebcdd958bb96f189d76e1e94bcf1032a68fab2",
+  "raw_sha256": "e4a6a806a17cc5e1a0d9e789f6632f8267042bcb13cc9abf5fea42cce330ea53",
+  "raw_path": "docs-raw/research/2026-09-06/4d56d492110057167211e898f5e46beba534ae06b0009d58d3cd23b2b273454a/a8f33f11d26cb15a6089a16931ebcdd958bb96f189d76e1e94bcf1032a68fab2/source.gz",
+  "fetched_at": "2026-09-05T10:31:50.779201+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

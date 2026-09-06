@@ -1,0 +1,13 @@
+{
+  "id": "9d9de1a3274e5448d3acd7f43d2773065f230161d5fec00b55e6511015247eb3",
+  "url": "https://developer.android.com/develop/connectivity/telecom/voip-app/api-updates",
+  "platform": "android",
+  "title": "Audio routing API updates in Android 14 for VoIP apps",
+  "local_path": "docs-raw/research/2026-09-06/9d9de1a3274e5448d3acd7f43d2773065f230161d5fec00b55e6511015247eb3/6cfc845f2e0439f263c430c4e4be2f02984d9392feeb872b4d618e36c59784d9/document.md",
+  "sha256": "6cfc845f2e0439f263c430c4e4be2f02984d9392feeb872b4d618e36c59784d9",
+  "raw_sha256": "745a3f577bceea665181cd7d121c3e1d472e95a2f5e70216ddc026a4cc7487a1",
+  "raw_path": "docs-raw/research/2026-09-06/9d9de1a3274e5448d3acd7f43d2773065f230161d5fec00b55e6511015247eb3/6cfc845f2e0439f263c430c4e4be2f02984d9392feeb872b4d618e36c59784d9/source.gz",
+  "fetched_at": "2026-09-05T10:24:22.782275+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

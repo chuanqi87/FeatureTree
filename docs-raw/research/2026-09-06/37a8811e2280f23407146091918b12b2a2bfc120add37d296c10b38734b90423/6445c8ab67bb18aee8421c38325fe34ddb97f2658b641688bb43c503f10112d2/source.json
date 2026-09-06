@@ -1,0 +1,13 @@
+{
+  "id": "37a8811e2280f23407146091918b12b2a2bfc120add37d296c10b38734b90423",
+  "url": "https://developers.google.com/android/management/device-trust-signals",
+  "platform": "android",
+  "title": "Device Trust from Android Enterprise - Available signals",
+  "local_path": "docs-raw/research/2026-09-06/37a8811e2280f23407146091918b12b2a2bfc120add37d296c10b38734b90423/6445c8ab67bb18aee8421c38325fe34ddb97f2658b641688bb43c503f10112d2/document.md",
+  "sha256": "6445c8ab67bb18aee8421c38325fe34ddb97f2658b641688bb43c503f10112d2",
+  "raw_sha256": "1d7727504fc9cc066b85032518674d3616f16399a4194c0e13a41951e8ddeec7",
+  "raw_path": "docs-raw/research/2026-09-06/37a8811e2280f23407146091918b12b2a2bfc120add37d296c10b38734b90423/6445c8ab67bb18aee8421c38325fe34ddb97f2658b641688bb43c503f10112d2/source.gz",
+  "fetched_at": "2026-09-05T10:55:13.049138+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

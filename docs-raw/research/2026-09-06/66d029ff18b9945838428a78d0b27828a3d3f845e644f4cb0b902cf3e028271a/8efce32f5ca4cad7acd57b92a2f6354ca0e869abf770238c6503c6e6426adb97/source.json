@@ -1,0 +1,13 @@
+{
+  "id": "66d029ff18b9945838428a78d0b27828a3d3f845e644f4cb0b902cf3e028271a",
+  "url": "https://developer.apple.com/documentation/devicemanagement/enrolling-with-platform-single-sign-on",
+  "platform": "ios",
+  "title": "Enrollment with Platform Single Sign-on",
+  "local_path": "docs-raw/research/2026-09-06/66d029ff18b9945838428a78d0b27828a3d3f845e644f4cb0b902cf3e028271a/8efce32f5ca4cad7acd57b92a2f6354ca0e869abf770238c6503c6e6426adb97/document.md",
+  "sha256": "8efce32f5ca4cad7acd57b92a2f6354ca0e869abf770238c6503c6e6426adb97",
+  "raw_sha256": "48b8d70927ab24cde4d0563c4d4a1f00e738eaa0dd5a1d432126cc545ec10e53",
+  "raw_path": "docs-raw/research/2026-09-06/66d029ff18b9945838428a78d0b27828a3d3f845e644f4cb0b902cf3e028271a/8efce32f5ca4cad7acd57b92a2f6354ca0e869abf770238c6503c6e6426adb97/source.gz",
+  "fetched_at": "2026-09-05T10:50:12.863860+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

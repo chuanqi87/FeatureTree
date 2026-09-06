@@ -1,0 +1,13 @@
+{
+  "id": "d8b0eb7dec343654b46b3f4d3b0f10e20d21578e84ff015acc9e6832bf3ba639",
+  "url": "https://developer.android.com/identity/sign-in/biometric-auth",
+  "platform": "android",
+  "title": "Show a biometric authentication dialog",
+  "local_path": "docs-raw/research/2026-09-06/d8b0eb7dec343654b46b3f4d3b0f10e20d21578e84ff015acc9e6832bf3ba639/eb36660b2dc2261ee8da61505327eb5af610ad28558d38fdbb278b64863bc550/document.md",
+  "sha256": "eb36660b2dc2261ee8da61505327eb5af610ad28558d38fdbb278b64863bc550",
+  "raw_sha256": "9b3fa7ce56c3a0aa7ebdd78b751a03f949e292f10fad682c73f327758348e5a2",
+  "raw_path": "docs-raw/research/2026-09-06/d8b0eb7dec343654b46b3f4d3b0f10e20d21578e84ff015acc9e6832bf3ba639/eb36660b2dc2261ee8da61505327eb5af610ad28558d38fdbb278b64863bc550/source.gz",
+  "fetched_at": "2026-09-05T10:32:35.947081+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

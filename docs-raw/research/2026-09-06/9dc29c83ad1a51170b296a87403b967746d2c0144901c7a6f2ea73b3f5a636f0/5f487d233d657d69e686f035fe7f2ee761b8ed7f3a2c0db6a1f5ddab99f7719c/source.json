@@ -1,0 +1,13 @@
+{
+  "id": "9dc29c83ad1a51170b296a87403b967746d2c0144901c7a6f2ea73b3f5a636f0",
+  "url": "https://developer.apple.com/documentation/corebluetooth/measuring-distance-between-devices-using-channel-sounding",
+  "platform": "ios",
+  "title": "Measuring distance between devices using Channel Sounding",
+  "local_path": "docs-raw/research/2026-09-06/9dc29c83ad1a51170b296a87403b967746d2c0144901c7a6f2ea73b3f5a636f0/5f487d233d657d69e686f035fe7f2ee761b8ed7f3a2c0db6a1f5ddab99f7719c/document.md",
+  "sha256": "5f487d233d657d69e686f035fe7f2ee761b8ed7f3a2c0db6a1f5ddab99f7719c",
+  "raw_sha256": "e6241396d5a1900a9a5453de6aafe0d7bc28f55fe33127014dcc09386fadac6d",
+  "raw_path": "docs-raw/research/2026-09-06/9dc29c83ad1a51170b296a87403b967746d2c0144901c7a6f2ea73b3f5a636f0/5f487d233d657d69e686f035fe7f2ee761b8ed7f3a2c0db6a1f5ddab99f7719c/source.gz",
+  "fetched_at": "2026-09-05T10:19:05.331144+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "79d4101386be15ba204a7c73c7ca3791bd8640bae2e9767775d4778b13e878dc",
+  "url": "https://developer.android.com/distribute/aep/aep-req-phishing-resistant-auth",
+  "platform": "android",
+  "title": "AEP guideline: Phishing Resistant Authentication",
+  "local_path": "docs-raw/research/2026-09-06/79d4101386be15ba204a7c73c7ca3791bd8640bae2e9767775d4778b13e878dc/31502764b1eb934b13754d4483ed0a633ead9e7533161da692771f14a1b90bea/document.md",
+  "sha256": "31502764b1eb934b13754d4483ed0a633ead9e7533161da692771f14a1b90bea",
+  "raw_sha256": "044e98f84050b9885182cbd211cb745c331498ff8f7ecccb3d20489b66194f96",
+  "raw_path": "docs-raw/research/2026-09-06/79d4101386be15ba204a7c73c7ca3791bd8640bae2e9767775d4778b13e878dc/31502764b1eb934b13754d4483ed0a633ead9e7533161da692771f14a1b90bea/source.gz",
+  "fetched_at": "2026-09-05T10:27:08.401912+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

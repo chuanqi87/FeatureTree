@@ -1,0 +1,13 @@
+{
+  "id": "3eab307ad716aa20768340b6589db0b1ae613aec2372db47279c7e997b509939",
+  "url": "https://developer.android.com/about/versions/17/features/contact-picker",
+  "platform": "android",
+  "title": "Contact picker",
+  "local_path": "docs-raw/research/2026-09-06/3eab307ad716aa20768340b6589db0b1ae613aec2372db47279c7e997b509939/d6be28fd418d130001f75fd6b16162d1f1f7238e4ccfa41fa5504d4c367118a5/document.md",
+  "sha256": "d6be28fd418d130001f75fd6b16162d1f1f7238e4ccfa41fa5504d4c367118a5",
+  "raw_sha256": "4dcf32c5ddf82b83968264eba9325152d00b4a6ee3ad8d0784c016a00463aa33",
+  "raw_path": "docs-raw/research/2026-09-06/3eab307ad716aa20768340b6589db0b1ae613aec2372db47279c7e997b509939/d6be28fd418d130001f75fd6b16162d1f1f7238e4ccfa41fa5504d4c367118a5/source.gz",
+  "fetched_at": "2026-09-05T10:22:01.777332+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

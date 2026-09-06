@@ -1,0 +1,13 @@
+{
+  "id": "9af40266c2b945548909783adf5adf4c06b64ba8ae7c333b323192694285ea09",
+  "url": "https://developer.android.com/kotlin/coroutines",
+  "platform": "android",
+  "title": "Kotlin coroutines on Android",
+  "local_path": "docs-raw/research/2026-09-06/9af40266c2b945548909783adf5adf4c06b64ba8ae7c333b323192694285ea09/bf68d595cf35cb204fedf7cee1c6e8be23a470231f8c400729d550896193c7a0/document.md",
+  "sha256": "bf68d595cf35cb204fedf7cee1c6e8be23a470231f8c400729d550896193c7a0",
+  "raw_sha256": "6ac1009f4b976e2a1689d3139698f5c6b7221b7b7e9c04dae1c752d041d9ead7",
+  "raw_path": "docs-raw/research/2026-09-06/9af40266c2b945548909783adf5adf4c06b64ba8ae7c333b323192694285ea09/bf68d595cf35cb204fedf7cee1c6e8be23a470231f8c400729d550896193c7a0/source.gz",
+  "fetched_at": "2026-09-05T10:33:19.954539+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

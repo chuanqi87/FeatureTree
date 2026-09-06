@@ -1,0 +1,13 @@
+{
+  "id": "b26eb0e63f1a128d0cad4f26e1bfc505dc18b76ff9d2dcbbb55d6e71c5bb1328",
+  "url": "https://developer.apple.com/documentation/homekit",
+  "platform": "ios",
+  "title": "HomeKit",
+  "local_path": "docs-raw/research/2026-09-06/b26eb0e63f1a128d0cad4f26e1bfc505dc18b76ff9d2dcbbb55d6e71c5bb1328/fd6574fc5cdec9365f9ce22cac5afda954fab09d1fe6b41c891262895f8c62e0/document.md",
+  "sha256": "fd6574fc5cdec9365f9ce22cac5afda954fab09d1fe6b41c891262895f8c62e0",
+  "raw_sha256": "6ce23cba51a44bca908550b7215a3a56a082a5f66e4b8925ece97d4124b5c701",
+  "raw_path": "docs-raw/research/2026-09-06/b26eb0e63f1a128d0cad4f26e1bfc505dc18b76ff9d2dcbbb55d6e71c5bb1328/fd6574fc5cdec9365f9ce22cac5afda954fab09d1fe6b41c891262895f8c62e0/source.gz",
+  "fetched_at": "2026-09-05T10:32:24.869000+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

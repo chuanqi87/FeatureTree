@@ -1,0 +1,13 @@
+{
+  "id": "b2e37c4079e14dad381dfe6c4ca2666f103dda87c1b231e8203f37bee347a628",
+  "url": "https://developer.apple.com/documentation/testing/confirmation(_:expectedcount:isolation:sourcelocation:_:)-5mqz2",
+  "platform": "ios",
+  "title": "confirmation(_:expectedCount:isolation:sourceLocation:_:)",
+  "local_path": "docs-raw/research/2026-09-06/b2e37c4079e14dad381dfe6c4ca2666f103dda87c1b231e8203f37bee347a628/044565e5685d918819337fc44d4a32f134698654e6957e71f661e57ad70be16d/document.md",
+  "sha256": "044565e5685d918819337fc44d4a32f134698654e6957e71f661e57ad70be16d",
+  "raw_sha256": "5d939cea7345607a340a9c75847aa4127202beb7b4736373d13631f3a057fcc5",
+  "raw_path": "docs-raw/research/2026-09-06/b2e37c4079e14dad381dfe6c4ca2666f103dda87c1b231e8203f37bee347a628/044565e5685d918819337fc44d4a32f134698654e6957e71f661e57ad70be16d/source.gz",
+  "fetched_at": "2026-09-05T11:19:31.699091+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

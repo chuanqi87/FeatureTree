@@ -1,0 +1,13 @@
+{
+  "id": "b313e932ceb2364a01c029dab229b0e1c03e535aa5f583cc0c497c96f22a9e19",
+  "url": "https://developer.android.com/develop/connectivity/nfc",
+  "platform": "android",
+  "title": "Near field communication (NFC) overview",
+  "local_path": "docs-raw/research/2026-09-06/b313e932ceb2364a01c029dab229b0e1c03e535aa5f583cc0c497c96f22a9e19/f7538bc876e9d656e04244f0728c4c2612c60f9f402a3310c20d4f6db61e1f82/document.md",
+  "sha256": "f7538bc876e9d656e04244f0728c4c2612c60f9f402a3310c20d4f6db61e1f82",
+  "raw_sha256": "4bc49287394b3758def4c5e7e0e6342829fcba6691494900b5dd30ae7ba24cb3",
+  "raw_path": "docs-raw/research/2026-09-06/b313e932ceb2364a01c029dab229b0e1c03e535aa5f583cc0c497c96f22a9e19/f7538bc876e9d656e04244f0728c4c2612c60f9f402a3310c20d4f6db61e1f82/source.gz",
+  "fetched_at": "2026-09-05T10:24:19.626460+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

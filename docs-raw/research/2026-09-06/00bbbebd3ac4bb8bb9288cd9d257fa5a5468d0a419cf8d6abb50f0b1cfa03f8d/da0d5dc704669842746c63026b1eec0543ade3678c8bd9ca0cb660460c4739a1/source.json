@@ -1,0 +1,13 @@
+{
+  "id": "00bbbebd3ac4bb8bb9288cd9d257fa5a5468d0a419cf8d6abb50f0b1cfa03f8d",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-hotspot-accelerate",
+  "platform": "harmonyos",
+  "title": "hotspot-accelerate（热点加速）",
+  "local_path": "docs-raw/research/2026-09-06/00bbbebd3ac4bb8bb9288cd9d257fa5a5468d0a419cf8d6abb50f0b1cfa03f8d/da0d5dc704669842746c63026b1eec0543ade3678c8bd9ca0cb660460c4739a1/document.md",
+  "sha256": "da0d5dc704669842746c63026b1eec0543ade3678c8bd9ca0cb660460c4739a1",
+  "raw_sha256": "da748c8ad832216c19e4bb0dc92a637e9c4ea00b0dead3d9108db73039aec31b",
+  "raw_path": "docs-raw/research/2026-09-06/00bbbebd3ac4bb8bb9288cd9d257fa5a5468d0a419cf8d6abb50f0b1cfa03f8d/da0d5dc704669842746c63026b1eec0543ade3678c8bd9ca0cb660460c4739a1/source.gz",
+  "fetched_at": "2026-09-05T10:25:43.038690+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

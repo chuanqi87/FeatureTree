@@ -1,0 +1,13 @@
+{
+  "id": "e67db4602954b284f46af7209ce16df83a48a4eaa0fd00b2bf723334b2a49f44",
+  "url": "https://developer.apple.com/documentation/accelerate/reducing-spectral-leakage-with-windowing",
+  "platform": "ios",
+  "title": "Reducing spectral leakage with windowing",
+  "local_path": "docs-raw/research/2026-09-06/e67db4602954b284f46af7209ce16df83a48a4eaa0fd00b2bf723334b2a49f44/3c29551228432de230a39614ef7bb9222680980ea9e0314c285f9da4207cefd6/document.md",
+  "sha256": "3c29551228432de230a39614ef7bb9222680980ea9e0314c285f9da4207cefd6",
+  "raw_sha256": "747752e0067669bf637663ed601ed5508b46629242531dc695a258c5cb406ef4",
+  "raw_path": "docs-raw/research/2026-09-06/e67db4602954b284f46af7209ce16df83a48a4eaa0fd00b2bf723334b2a49f44/3c29551228432de230a39614ef7bb9222680980ea9e0314c285f9da4207cefd6/source.gz",
+  "fetched_at": "2026-09-05T10:16:11.767529+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "93d5bd54afd12b26bf2b7a27fc2c222c24581e07e72c364231f6cd164e1c53bd",
+  "url": "https://developer.apple.com/documentation/avfoundation/audio-playback-recording-and-processing",
+  "platform": "ios",
+  "title": "Audio playback, recording, and processing",
+  "local_path": "docs-raw/research/2026-09-06/93d5bd54afd12b26bf2b7a27fc2c222c24581e07e72c364231f6cd164e1c53bd/ab6fe7a7cb5dc1c1751307fd5f0e064939874d0503048b9706fb15ee1e3fdb81/document.md",
+  "sha256": "ab6fe7a7cb5dc1c1751307fd5f0e064939874d0503048b9706fb15ee1e3fdb81",
+  "raw_sha256": "42a998fe7930b5961c3d4c2bdff4daf3f8923d204f75ba5eb833bfeb8d1ac260",
+  "raw_path": "docs-raw/research/2026-09-06/93d5bd54afd12b26bf2b7a27fc2c222c24581e07e72c364231f6cd164e1c53bd/ab6fe7a7cb5dc1c1751307fd5f0e064939874d0503048b9706fb15ee1e3fdb81/source.gz",
+  "fetched_at": "2026-09-05T10:18:25.718592+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

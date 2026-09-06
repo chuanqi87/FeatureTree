@@ -1,0 +1,13 @@
+{
+  "id": "89b4c6953ac5f8f0eb6a46a5b49b131be1b5cf5061d0c9719f3259b0d48fcedb",
+  "url": "https://developer.android.com/media/camera/camerax/architecture",
+  "platform": "android",
+  "title": "CameraX architecture",
+  "local_path": "docs-raw/research/2026-09-06/89b4c6953ac5f8f0eb6a46a5b49b131be1b5cf5061d0c9719f3259b0d48fcedb/8f107784a44e99a3bdc2d7ea4daf1e1877a015044331f1a90ccb73ff883d248a/document.md",
+  "sha256": "8f107784a44e99a3bdc2d7ea4daf1e1877a015044331f1a90ccb73ff883d248a",
+  "raw_sha256": "69bb78e16730da27f5ead28ef68a0d48f8d52aa0bd782bca54226423329637e6",
+  "raw_path": "docs-raw/research/2026-09-06/89b4c6953ac5f8f0eb6a46a5b49b131be1b5cf5061d0c9719f3259b0d48fcedb/8f107784a44e99a3bdc2d7ea4daf1e1877a015044331f1a90ccb73ff883d248a/source.gz",
+  "fetched_at": "2026-09-05T10:33:33.175468+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

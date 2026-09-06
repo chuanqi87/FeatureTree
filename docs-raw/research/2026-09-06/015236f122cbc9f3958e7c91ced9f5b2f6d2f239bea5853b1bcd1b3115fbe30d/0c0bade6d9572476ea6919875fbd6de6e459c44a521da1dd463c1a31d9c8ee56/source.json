@@ -1,0 +1,13 @@
+{
+  "id": "015236f122cbc9f3958e7c91ced9f5b2f6d2f239bea5853b1bcd1b3115fbe30d",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hiappevent-watcher-appfreezewarning-events-ndk",
+  "platform": "harmonyos",
+  "title": "订阅应用冻屏告警事件（C/C++）",
+  "local_path": "docs-raw/research/2026-09-06/015236f122cbc9f3958e7c91ced9f5b2f6d2f239bea5853b1bcd1b3115fbe30d/0c0bade6d9572476ea6919875fbd6de6e459c44a521da1dd463c1a31d9c8ee56/document.md",
+  "sha256": "0c0bade6d9572476ea6919875fbd6de6e459c44a521da1dd463c1a31d9c8ee56",
+  "raw_sha256": "18152411d76296045e5f5bdf135bb165c987899304eb7f77af03db1acddd01ec",
+  "raw_path": "docs-raw/research/2026-09-06/015236f122cbc9f3958e7c91ced9f5b2f6d2f239bea5853b1bcd1b3115fbe30d/0c0bade6d9572476ea6919875fbd6de6e459c44a521da1dd463c1a31d9c8ee56/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

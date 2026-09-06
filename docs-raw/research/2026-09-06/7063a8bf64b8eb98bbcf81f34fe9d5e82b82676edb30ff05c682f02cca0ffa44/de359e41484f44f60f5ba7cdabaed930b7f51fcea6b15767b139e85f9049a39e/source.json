@@ -1,0 +1,13 @@
+{
+  "id": "7063a8bf64b8eb98bbcf81f34fe9d5e82b82676edb30ff05c682f02cca0ffa44",
+  "url": "https://firebase.google.com/docs/firestore/transaction-data-contention",
+  "platform": "android",
+  "title": "Transaction serializability and isolation",
+  "local_path": "docs-raw/research/2026-09-06/7063a8bf64b8eb98bbcf81f34fe9d5e82b82676edb30ff05c682f02cca0ffa44/de359e41484f44f60f5ba7cdabaed930b7f51fcea6b15767b139e85f9049a39e/document.md",
+  "sha256": "de359e41484f44f60f5ba7cdabaed930b7f51fcea6b15767b139e85f9049a39e",
+  "raw_sha256": "819506648723302a1349ced545ff63f1913f0072d04dceb9519bcb4ac79eb3e0",
+  "raw_path": "docs-raw/research/2026-09-06/7063a8bf64b8eb98bbcf81f34fe9d5e82b82676edb30ff05c682f02cca0ffa44/de359e41484f44f60f5ba7cdabaed930b7f51fcea6b15767b139e85f9049a39e/source.gz",
+  "fetched_at": "2026-09-05T11:17:05.434742+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "2658f4554954633f7a04c1db8b99cf4c1bb3121637119932acc9281d185e5d0e",
+  "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/socket-connection",
+  "platform": "harmonyos",
+  "title": "使用Socket访问网络",
+  "local_path": "docs-raw/research/2026-09-06/2658f4554954633f7a04c1db8b99cf4c1bb3121637119932acc9281d185e5d0e/696c1017fbee4697d032ce7875054de81a9b0bf8c2196f4b92ae1c5cbc5d5e3f/document.md",
+  "sha256": "696c1017fbee4697d032ce7875054de81a9b0bf8c2196f4b92ae1c5cbc5d5e3f",
+  "raw_sha256": "af5411edb73741d0242313f110405a53f5715bebd11e32930efa1f37d8125d56",
+  "raw_path": "docs-raw/research/2026-09-06/2658f4554954633f7a04c1db8b99cf4c1bb3121637119932acc9281d185e5d0e/696c1017fbee4697d032ce7875054de81a9b0bf8c2196f4b92ae1c5cbc5d5e3f/source.gz",
+  "fetched_at": "2026-09-04T09:35:09+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

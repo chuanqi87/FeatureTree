@@ -1,0 +1,553 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "app.background.deferred_work",
+    "level": "L3",
+    "parent": "app.background",
+    "name": {
+      "zh": "延迟与条件任务",
+      "en": "Deferred Conditional Work"
+    },
+    "definition": "在网络/充电等约束下由系统调度的延迟任务。",
+    "knowledge_role": "leaf",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "leaf_at_this_level": true,
+    "split_justification": "task",
+    "aliases": [
+      "WorkManager",
+      "BGAppRefresh"
+    ],
+    "knowledge_path": "knowledge/app/background/deferred_work.yaml",
+    "comparison_scope": {
+      "includes": [
+        "在网络/充电等约束下由系统调度的延迟任务。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "47d9973a76bab7a3a40c46ffb7d39853db4f38e0b43e90b8be02e39170690f17",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "8e226362c61aafa2d1ab7b153f7df0f53c9eab5932d2cdd3356fbb9f9352c0fd",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/topic/performance/power/power-details",
+      "platform": "android",
+      "title": "Power management resource limits",
+      "local_path": "docs-raw/research/2026-09-06/7c832ef72a0e3c27434b433d2fc21a752b2a6da66eac29a0d8ee2353dca3885d/326edbf570f7a90b7f7eab31a5f69d71df5b804d86fca4a71a24dd1acdaf11fc/document.md",
+      "sha256": "326edbf570f7a90b7f7eab31a5f69d71df5b804d86fca4a71a24dd1acdaf11fc",
+      "raw_sha256": "f8cb4fb1475e263a8b8a0fe7e7693fc120dd5f4f3c5dff6bbb1a0902db2e5208",
+      "raw_path": "docs-raw/research/2026-09-06/7c832ef72a0e3c27434b433d2fc21a752b2a6da66eac29a0d8ee2353dca3885d/326edbf570f7a90b7f7eab31a5f69d71df5b804d86fca4a71a24dd1acdaf11fc/source.gz",
+      "fetched_at": "2026-09-05T10:37:44.214495+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 153,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 37,
+          "truncated": false
+        },
+        {
+          "start_line": 38,
+          "end_line": 50,
+          "truncated": false
+        },
+        {
+          "start_line": 51,
+          "end_line": 61,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/topic/libraries/architecture/workmanager/how-to/define-work",
+      "platform": "android",
+      "title": "Define work requests",
+      "local_path": "docs-raw/research/2026-09-06/a95204d0faa4bfe275e6d9e60e89f20af4146c421c3b59ea8c5d15f8d569b26d/3f34ec45b5840a790e1f9892c320b51fb00a2ffe822e51884899a02ad7bd3a86/document.md",
+      "sha256": "3f34ec45b5840a790e1f9892c320b51fb00a2ffe822e51884899a02ad7bd3a86",
+      "raw_sha256": "d2536b594b5e17547c1a723c577ab5479ca611a85b88ed18bb0ac9e48353daae",
+      "raw_path": "docs-raw/research/2026-09-06/a95204d0faa4bfe275e6d9e60e89f20af4146c421c3b59ea8c5d15f8d569b26d/3f34ec45b5840a790e1f9892c320b51fb00a2ffe822e51884899a02ad7bd3a86/source.gz",
+      "fetched_at": "2026-09-05T10:48:10.456751+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 618,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 15,
+          "truncated": false
+        },
+        {
+          "start_line": 16,
+          "end_line": 17,
+          "truncated": true
+        },
+        {
+          "start_line": 29,
+          "end_line": 31,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/metal/metal-sample-code-library",
+      "platform": "ios",
+      "title": "Metal sample code library",
+      "local_path": "docs-raw/research/2026-09-06/c64bd59c47201f2bfb1a461a95da98a13250ca2c07ffdb54acebf4c39d476145/783d7c6308832038a1069972ee55cdd983bb9d9ed53a503d1b0c596c592bcd22/document.md",
+      "sha256": "783d7c6308832038a1069972ee55cdd983bb9d9ed53a503d1b0c596c592bcd22",
+      "raw_sha256": "93d13f091db8bea9e2c40b6e690878babb7b9d76141540e15c9dea5a8a5c9f46",
+      "raw_path": "docs-raw/research/2026-09-06/c64bd59c47201f2bfb1a461a95da98a13250ca2c07ffdb54acebf4c39d476145/783d7c6308832038a1069972ee55cdd983bb9d9ed53a503d1b0c596c592bcd22/source.gz",
+      "fetched_at": "2026-09-05T10:23:59.986065+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 236,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 8,
+          "truncated": false
+        },
+        {
+          "start_line": 9,
+          "end_line": 10,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/backgroundtasks",
+      "platform": "ios",
+      "title": "Background Tasks",
+      "local_path": "docs-raw/research/2026-09-06/e707b9e21193d5a79807989a6de50f1c6a6b3178f6e8afb7944d6ce83e307040/c18ed3d47729cc341f5f62231efa84d6a5fcfd5fc00005febf9a78e1c9b245cc/document.md",
+      "sha256": "c18ed3d47729cc341f5f62231efa84d6a5fcfd5fc00005febf9a78e1c9b245cc",
+      "raw_sha256": "77c8aaabf6f97a09a6da5ad4be7f9c5a3081a50b5924bcb4a41ddebb7b65431b",
+      "raw_path": "docs-raw/research/2026-09-06/e707b9e21193d5a79807989a6de50f1c6a6b3178f6e8afb7944d6ce83e307040/c18ed3d47729cc341f5f62231efa84d6a5fcfd5fc00005febf9a78e1c9b245cc/source.gz",
+      "fetched_at": "2026-09-05T10:30:00.542329+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 95,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 12,
+          "truncated": false
+        },
+        {
+          "start_line": 13,
+          "end_line": 14,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/use-napi-asynchronous-task",
+      "platform": "harmonyos",
+      "title": "使用Node-API接口进行异步任务开发",
+      "local_path": "docs-raw/research/2026-09-06/2afa788de9486b2310f65ffc9cd7901aaf329da5894c11ce55c26331d2c07fac/9bc8a004033d864ef3f51f08724a929c15e469efcae6b3a0d7cf83c05d2f0612/document.md",
+      "sha256": "9bc8a004033d864ef3f51f08724a929c15e469efcae6b3a0d7cf83c05d2f0612",
+      "raw_sha256": "18d32bb0f55b038c001c86e85dd8ad60083e083544a0c66172e29ed95cc2911f",
+      "raw_path": "docs-raw/research/2026-09-06/2afa788de9486b2310f65ffc9cd7901aaf329da5894c11ce55c26331d2c07fac/9bc8a004033d864ef3f51f08724a929c15e469efcae6b3a0d7cf83c05d2f0612/source.gz",
+      "fetched_at": "2026-09-05T10:25:03.303253+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 379,
+      "suggested_sections": [
+        {
+          "start_line": 3,
+          "end_line": 4,
+          "truncated": true
+        },
+        {
+          "start_line": 21,
+          "end_line": 155,
+          "truncated": false
+        },
+        {
+          "start_line": 156,
+          "end_line": 216,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-enterprise-networkmanager",
+      "platform": "harmonyos",
+      "title": "@ohos.enterprise.networkManager（网络管理）",
+      "local_path": "docs-raw/research/2026-09-06/f9d1df104ace51791e2995d2aa4bbcf3faaddfc7ca1f7feca1588e3fff6bb9eb/f10aaadb323f9a24662ec3f66ec3c8e5e65b91e76aa37b982f105d5532514e85/document.md",
+      "sha256": "f10aaadb323f9a24662ec3f66ec3c8e5e65b91e76aa37b982f105d5532514e85",
+      "raw_sha256": "7e6510ea8f97fb0b7baee22216d58037beae4a1082f32e9207fb7520a3e575a6",
+      "raw_path": "docs-raw/research/2026-09-06/f9d1df104ace51791e2995d2aa4bbcf3faaddfc7ca1f7feca1588e3fff6bb9eb/f10aaadb323f9a24662ec3f66ec3c8e5e65b91e76aa37b982f105d5532514e85/source.gz",
+      "fetched_at": "2026-09-05T10:27:21.176843+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 1641,
+      "suggested_sections": [
+        {
+          "start_line": 186,
+          "end_line": 187,
+          "truncated": true
+        },
+        {
+          "start_line": 597,
+          "end_line": 671,
+          "truncated": false
+        },
+        {
+          "start_line": 672,
+          "end_line": 752,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:42:06.650663+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "b8e5605e052ab92d76f1119c60350c71a276e84e7b1b0d8f7e7cc80254783635"
+}

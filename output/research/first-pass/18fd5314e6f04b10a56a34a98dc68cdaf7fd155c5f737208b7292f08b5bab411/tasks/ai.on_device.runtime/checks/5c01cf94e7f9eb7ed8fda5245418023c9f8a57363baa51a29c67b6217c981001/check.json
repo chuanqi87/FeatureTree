@@ -1,0 +1,9 @@
+{
+  "task_id": "67fa393b736fe965ac16c476cd2fe7d9a9679f86a188bcde08b2b7fccc346b4d",
+  "feature_id": "ai.on_device.runtime",
+  "response_sha256": "d6cf98dd73c066599cf324f1db64ca46f03a0ac81b39bc82e8ff572964a194f9",
+  "delivery_valid": true,
+  "semantic_review_passed": false,
+  "production_accepted": false,
+  "errors": []
+}

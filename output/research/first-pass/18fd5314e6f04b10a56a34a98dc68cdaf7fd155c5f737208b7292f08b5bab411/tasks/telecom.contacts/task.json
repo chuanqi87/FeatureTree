@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "stage": "first_pass",
+  "model": "volcengine/glm-5.3",
+  "feature": {
+    "id": "telecom.contacts",
+    "level": "L2",
+    "parent": "telecom",
+    "name": {
+      "zh": "联系人",
+      "en": "Contacts"
+    },
+    "definition": "系统通讯录访问。",
+    "knowledge_role": "rollup",
+    "layer": "os",
+    "device_forms": [
+      "phone",
+      "tablet"
+    ],
+    "privacy_class": "none",
+    "knowledge_path": "knowledge/telecom/contacts/_rollup.yaml",
+    "bindings": {},
+    "comparison_scope": {
+      "includes": [
+        "系统通讯录访问。"
+      ],
+      "excludes": []
+    },
+    "schema_version": 2,
+    "comparison_dimensions": [
+      "availability",
+      "programming_model",
+      "lifecycle_background",
+      "permissions_privacy",
+      "limits_precision",
+      "device_forms",
+      "api_surface"
+    ]
+  },
+  "platforms": [
+    "android",
+    "ios",
+    "harmonyos"
+  ],
+  "inputs": {
+    "feature": "95b295c1245684089ddfa7b7cd970efc6a543a4a371019e1733c39ee6a86d0f2",
+    "config": "2eb41cd9b198759231b9cef263c86e957404145f8d9c2ec449a9152288d892b7",
+    "policy": "b7f06bf299635f6d51a42b544ae24864640edc2651bbdc2400140ca7a8082ea7",
+    "methodology": "7c4ab7168027079d2b2017b5beddadf6d6fbb68f1ce72a5de1cf44b5d8941adb",
+    "knowledge": "fe0b5bc6bd75ffcfedd2a6075d42ee518d2da2a69c72053f2539ad18305c8ad5",
+    "baseline": null
+  },
+  "sources": [
+    {
+      "id": "android-1",
+      "url": "https://developer.android.com/work/contacts",
+      "platform": "android",
+      "title": "Work profile contacts",
+      "local_path": "docs-raw/research/2026-09-06/5940bab2a1e8f381571e6ca9925c2c763e4090e71879fa445583954b8b1d353b/9c1906d0a28efff14f3c420aa67dd4dfb27d82167ae091b071c78a6c52757ba8/document.md",
+      "sha256": "9c1906d0a28efff14f3c420aa67dd4dfb27d82167ae091b071c78a6c52757ba8",
+      "raw_sha256": "25182b30f2a7ad5ac041ed7ca36c6900fd76e35489a2c1aca4eb7b5c7f3445ab",
+      "raw_path": "docs-raw/research/2026-09-06/5940bab2a1e8f381571e6ca9925c2c763e4090e71879fa445583954b8b1d353b/9c1906d0a28efff14f3c420aa67dd4dfb27d82167ae091b071c78a6c52757ba8/source.gz",
+      "fetched_at": "2026-09-05T10:39:23.239028+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 620,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 7,
+          "truncated": false
+        },
+        {
+          "start_line": 25,
+          "end_line": 60,
+          "truncated": false
+        },
+        {
+          "start_line": 61,
+          "end_line": 79,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "android-2",
+      "url": "https://developer.android.com/identity/providers/contacts-provider/contacts-storage-locations",
+      "platform": "android",
+      "title": "Manage contact storage locations",
+      "local_path": "docs-raw/research/2026-09-06/0b445058cbae4772005ac621d32f62e9c0aa2409f1aaedc6e021cda6c8bc46ff/f7f84e8ec70c1694d6f74ec679688392a69b4944f2523d5cd4a7b209e315aa9c/document.md",
+      "sha256": "f7f84e8ec70c1694d6f74ec679688392a69b4944f2523d5cd4a7b209e315aa9c",
+      "raw_sha256": "86e01b02adc8fad47e0c3ca186584ed00400ec87a21a318a1a81b000c17de58a",
+      "raw_path": "docs-raw/research/2026-09-06/0b445058cbae4772005ac621d32f62e9c0aa2409f1aaedc6e021cda6c8bc46ff/f7f84e8ec70c1694d6f74ec679688392a69b4944f2523d5cd4a7b209e315aa9c/source.gz",
+      "fetched_at": "2026-09-05T10:32:34.804837+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 324,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 18,
+          "truncated": false
+        },
+        {
+          "start_line": 19,
+          "end_line": 27,
+          "truncated": false
+        },
+        {
+          "start_line": 28,
+          "end_line": 40,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "ios-1",
+      "url": "https://developer.apple.com/documentation/contacts",
+      "platform": "ios",
+      "title": "Contacts",
+      "local_path": "docs-raw/research/2026-09-06/9bcc53ad7b63d798bbac71d97af9f25e1cdce64774c6572f4ee677548c82aa3c/eec682eb615660f9dff25930ac23ea770427c497a1e54b2403757b06186fff9a/document.md",
+      "sha256": "eec682eb615660f9dff25930ac23ea770427c497a1e54b2403757b06186fff9a",
+      "raw_sha256": "d4be09edbf2b8f6e43898330f1b8c3e7fe2a1a541576ec0d95fa8023680f0433",
+      "raw_path": "docs-raw/research/2026-09-06/9bcc53ad7b63d798bbac71d97af9f25e1cdce64774c6572f4ee677548c82aa3c/eec682eb615660f9dff25930ac23ea770427c497a1e54b2403757b06186fff9a/source.gz",
+      "fetched_at": "2026-09-05T10:30:05.962547+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 377,
+      "suggested_sections": [
+        {
+          "start_line": 69,
+          "end_line": 87,
+          "truncated": true
+        },
+        {
+          "start_line": 101,
+          "end_line": 140,
+          "truncated": false
+        },
+        {
+          "start_line": 141,
+          "end_line": 142,
+          "truncated": true
+        }
+      ]
+    },
+    {
+      "id": "ios-2",
+      "url": "https://developer.apple.com/documentation/contacts/contact-keys",
+      "platform": "ios",
+      "title": "Contact Keys",
+      "local_path": "docs-raw/research/2026-09-06/cf06a6f692152ad9bc3f08ab9385a033f4c1ec717e8efdc5b8194bcf6aebf90c/236b59ad9920ee5e393e616ebde6fe5f920239510f5328dd7872612089aecd66/document.md",
+      "sha256": "236b59ad9920ee5e393e616ebde6fe5f920239510f5328dd7872612089aecd66",
+      "raw_sha256": "c0a19bdbece9e0fac3e62cc296604603823f1ba90242fa6369e8600ec901d8bd",
+      "raw_path": "docs-raw/research/2026-09-06/cf06a6f692152ad9bc3f08ab9385a033f4c1ec717e8efdc5b8194bcf6aebf90c/236b59ad9920ee5e393e616ebde6fe5f920239510f5328dd7872612089aecd66/source.gz",
+      "fetched_at": "2026-09-05T10:19:01.698358+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 209,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "truncated": false
+        },
+        {
+          "start_line": 5,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 20,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-1",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/contacts-intro",
+      "platform": "harmonyos",
+      "title": "Contacts Kit简介",
+      "local_path": "docs-raw/research/2026-09-06/9dceea9a031aa541ce3b718bc5147996c487e71f85747320ad9a1bc49d8a3d73/cf187d6380bd0d7e0ab2b4ef0da54d257e3ad38a3243e25ca66c9f8e3c9f2363/document.md",
+      "sha256": "cf187d6380bd0d7e0ab2b4ef0da54d257e3ad38a3243e25ca66c9f8e3c9f2363",
+      "raw_sha256": "3b0931c98af84a1330612eb6205fce219de16d963bdbf5f89256235cf75ae219",
+      "raw_path": "docs-raw/research/2026-09-06/9dceea9a031aa541ce3b718bc5147996c487e71f85747320ad9a1bc49d8a3d73/cf187d6380bd0d7e0ab2b4ef0da54d257e3ad38a3243e25ca66c9f8e3c9f2363/source.gz",
+      "fetched_at": "2026-09-04T09:35:09+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 113,
+      "suggested_sections": [
+        {
+          "start_line": 1,
+          "end_line": 6,
+          "truncated": false
+        },
+        {
+          "start_line": 7,
+          "end_line": 22,
+          "truncated": false
+        },
+        {
+          "start_line": 23,
+          "end_line": 49,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "id": "harmonyos-2",
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-contact",
+      "platform": "harmonyos",
+      "title": "@ohos.contact (联系人)",
+      "local_path": "docs-raw/research/2026-09-06/f57b64dd180b8d0ffdb42af3e11e2094ed6ecb2c830b32a322f3c8d087467722/152b6c1416c43391da579632a121ac367b123a79e15e0f05b69cf7bff0d549ee/document.md",
+      "sha256": "152b6c1416c43391da579632a121ac367b123a79e15e0f05b69cf7bff0d549ee",
+      "raw_sha256": "e670053e842016fbb70ab95efd4cfa8e334b5ae214a93871a6fb9e53beb320d4",
+      "raw_path": "docs-raw/research/2026-09-06/f57b64dd180b8d0ffdb42af3e11e2094ed6ecb2c830b32a322f3c8d087467722/152b6c1416c43391da579632a121ac367b123a79e15e0f05b69cf7bff0d549ee/source.gz",
+      "fetched_at": "2026-09-05T10:27:09.028782+00:00",
+      "version_verified": false,
+      "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability.",
+      "total_lines": 5380,
+      "suggested_sections": [
+        {
+          "start_line": 1431,
+          "end_line": 1473,
+          "truncated": false
+        },
+        {
+          "start_line": 2286,
+          "end_line": 2327,
+          "truncated": false
+        },
+        {
+          "start_line": 2473,
+          "end_line": 2507,
+          "truncated": false
+        }
+      ]
+    }
+  ],
+  "binding_source_gaps": {
+    "android": [],
+    "ios": [],
+    "harmonyos": []
+  },
+  "context_generated_at": "2026-09-06T03:43:04.810400+00:00",
+  "deadline": "2026-09-07T11:26:00+08:00",
+  "version_baseline": "unresolved: do not assert launch-day latest support",
+  "production_accepted": false,
+  "semantic_review_passed": false,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "feature_id": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "stage": {
+        "const": "first_pass"
+      },
+      "summary": {
+        "type": "string",
+        "pattern": "\\S",
+        "maxLength": 1600
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platform": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "signal": {
+              "enum": [
+                "documented_mechanism",
+                "possible_mapping",
+                "unknown"
+              ]
+            },
+            "observation": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "version_scope": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "evidence_strength": {
+              "enum": [
+                "direct",
+                "indirect",
+                "missing"
+              ]
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "device_review": {
+              "type": "object",
+              "properties": {
+                "requirement": {
+                  "enum": [
+                    "required",
+                    "recommended",
+                    "not_required",
+                    "unassessed"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "pattern": "\\S",
+                  "maxLength": 1600
+                }
+              },
+              "required": [
+                "requirement",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "platform",
+            "signal",
+            "observation",
+            "version_scope",
+            "conditions",
+            "gaps",
+            "confidence",
+            "evidence_strength",
+            "citations",
+            "device_review"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 1,
+        "maxItems": 3
+      },
+      "difference_hypotheses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "statement": {
+              "type": "string",
+              "pattern": "\\S",
+              "maxLength": 1600
+            },
+            "platforms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 2,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "kind": {
+              "const": "hypothesis"
+            },
+            "confidence": {
+              "const": "low"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source_id": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "locator": {
+                    "type": "string",
+                    "pattern": "\\S",
+                    "maxLength": 1600
+                  },
+                  "start_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "end_line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "locator",
+                  "start_line",
+                  "end_line"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 6
+            },
+            "open_questions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "\\S",
+                "maxLength": 1600
+              },
+              "minItems": 1,
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "dimension",
+            "statement",
+            "platforms",
+            "kind",
+            "confidence",
+            "citations",
+            "open_questions"
+          ],
+          "additionalProperties": false
+        },
+        "maxItems": 3
+      },
+      "scope_gaps": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "\\S",
+          "maxLength": 1600
+        },
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "followup_priority": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "pattern": "\\S",
+            "maxLength": 1600
+          }
+        },
+        "required": [
+          "level",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "task_id",
+      "feature_id",
+      "stage",
+      "summary",
+      "platforms",
+      "difference_hypotheses",
+      "scope_gaps",
+      "followup_priority"
+    ],
+    "additionalProperties": false
+  },
+  "budget": {
+    "soft_minutes": 6,
+    "hard_seconds": 900,
+    "max_attempts": 1,
+    "max_response_bytes": 24000,
+    "max_bodies": 6,
+    "max_fetches": 0
+  },
+  "task_id": "fe9180cf469896a23d6d2b128464db072e8f8e073f56c3849722c4188aca191e"
+}

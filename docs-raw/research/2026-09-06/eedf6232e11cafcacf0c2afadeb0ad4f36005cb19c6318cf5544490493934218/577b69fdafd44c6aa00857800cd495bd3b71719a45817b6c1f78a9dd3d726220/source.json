@@ -1,0 +1,13 @@
+{
+  "id": "eedf6232e11cafcacf0c2afadeb0ad4f36005cb19c6318cf5544490493934218",
+  "url": "https://developer.android.com/games/services/unity/v2/api/interface/google-play-games/basic-api/nearby/i-discovery-listener",
+  "platform": "android",
+  "title": "GooglePlayGames. BasicApi. Nearby. IDiscoveryListener",
+  "local_path": "docs-raw/research/2026-09-06/eedf6232e11cafcacf0c2afadeb0ad4f36005cb19c6318cf5544490493934218/577b69fdafd44c6aa00857800cd495bd3b71719a45817b6c1f78a9dd3d726220/document.md",
+  "sha256": "577b69fdafd44c6aa00857800cd495bd3b71719a45817b6c1f78a9dd3d726220",
+  "raw_sha256": "45c221517e49401d23290d34c7d35bfa82dbc8a05f89c4edb68c9e9a50ff1c80",
+  "raw_path": "docs-raw/research/2026-09-06/eedf6232e11cafcacf0c2afadeb0ad4f36005cb19c6318cf5544490493934218/577b69fdafd44c6aa00857800cd495bd3b71719a45817b6c1f78a9dd3d726220/source.gz",
+  "fetched_at": "2026-09-05T10:28:40.060284+00:00",
+  "version_verified": false,
+  "notice": "Snapshot integrity only; read body and independently verify locator, excerpt and applicability."
+}

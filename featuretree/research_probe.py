@@ -10,6 +10,7 @@ import json
 from .corpus.store import Corpus
 from .context_checks import context_errors
 from .research_contract import file_hash
+from .research_handoff import handoff_contract, render_handoff
 from .research_probe_validation import RESPONSE_SCHEMA, response_errors
 from .research_profile import fingerprint, research_policy
 from .research_sources import export_source
@@ -60,7 +61,10 @@ def prepare_probe(repo, corpus, spec, model, run_date):
         for sid in question["source_ids"]:
             if sid not in source_map or source_map[sid]["source"]["platform"] != question["platform"]:
                 raise ValueError("Question/source platform mismatch")
-    packet = {"schema_version": 1, "feature_id": fid, "feature": feature,
+    budget = {"soft_minutes": 5, "max_attempts": 1, "max_response_bytes": 18000,
+              "hard_provider_cost_cap": False}
+    handoff = handoff_contract("probe", feature, model, [q["id"] for q in questions], budget)
+    packet = {"schema_version": 2, "feature_id": fid, "feature": feature,
               "model": model, "run_date": run_date, "inputs": task_inputs(repo, fid),
               "mode": "diagnostic_only", "production_write_authorized": False,
               "baseline_errors": baseline_errors(repo, repo.config(), research_policy(repo), run_date),
@@ -68,16 +72,17 @@ def prepare_probe(repo, corpus, spec, model, run_date):
                                       for p, value in context["platforms"].items()},
               "questions": questions, "sources": sources,
               "response_schema": RESPONSE_SCHEMA,
-              "budget": {"soft_minutes": 5, "max_attempts": 1, "max_response_bytes": 18000,
-                         "hard_provider_cost_cap": False}}
+              "handoff": handoff, "budget": budget}
     if len(json.dumps(sources, ensure_ascii=False)) > 30000:
         raise ValueError("Source packet exceeds 30000 characters; narrow questions without hiding relevant context")
     packet["probe_id"] = fingerprint(packet)
     directory = repo.root / PROBES_DIR / packet["probe_id"]
     write_json(directory / "probe.json", packet)
+    write_text(directory / "handoff.md", render_handoff(handoff))
     prompt = (
         "执行一次限定范围的官方文档诊断研究。先完整阅读 AGENTS.md、docs/official-documentation-entrypoints.md、"
-        "docs/sources.md、docs/official-corpus.md、docs/knowledge-confidence.md；不需要阅读校验实现代码。\n"
+        "docs/sources.md、docs/official-corpus.md、docs/knowledge-confidence.md、docs/research-acceptance.md；"
+        f"阅读 {directory.relative_to(repo.root)}/handoff.md 并逐条自查；不需要阅读校验实现代码。\n"
         f"运行 .venv/bin/python scripts/official_docs.py context {fid} --limit 3，然后完整阅读 "
         f"{directory.relative_to(repo.root)}/probe.json 中的节点、问题和带行号的官方正文。\n"
         "这些原文来自所列官方入口的实际缓存，不是搜索片段；只回答本包的具体问题，不做整节点支持确认。"
@@ -94,7 +99,8 @@ def prepare_probe(repo, corpus, spec, model, run_date):
         "不得写任何测试结果或已完成实测；型号/构建未知可在计划中明确待选。\n"
         f"唯一手工输出文件：{directory.relative_to(repo.root)}/response.json。先完成这份文件，再运行 "
         f".venv/bin/python scripts/research_probe.py check {directory.relative_to(repo.root)}/probe.json。"
-        "若结构错误只修本文件一次，不改校验器。约五分钟、仅一次调用；完成即停止，最终只报告路径、检查结果和缺口。\n"
+        "若结构错误只修本文件一次，不改校验器，不填写独立验收记录。约五分钟、仅一次调用；"
+        "完成即停止，最终只报告路径、检查结果和缺口。自查通过不代表内容验收通过。\n"
     )
     write_text(directory / "prompt.md", prompt)
     return directory / "probe.json", packet

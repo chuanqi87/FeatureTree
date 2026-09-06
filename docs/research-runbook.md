@@ -65,6 +65,8 @@
 
 执行契约见 `docs/opencode-worker-contract.md`。任务包命令只准备或检查文件，不启动模型、不直接修改正式知识：
 
+所有新任务附带标准 `handoff.md`，明确范围、输入、输出、预算及七项验收标准；统一收回流程见 [标准派发与独立验收](research-acceptance.md)。机器通过后使用 `research_acceptance.py init/check` 记录独立复核，每个所选项逐条核对；问题清零才接受该次交付。内容验收与正式采纳、试点启动门槛保持分离。
+
 ```bash
 .venv/bin/python scripts/research_tasks.py prepare --feature connectivity.bluetooth.le.scan.filter --model volcengine/glm-5.3
 .venv/bin/python scripts/research_tasks.py prepare --feature connectivity.bluetooth.le.scan.filter --model volcengine/glm-5.3 --stage candidate --claim support:android

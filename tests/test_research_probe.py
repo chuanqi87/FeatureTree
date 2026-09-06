@@ -7,9 +7,10 @@ import unittest
 from featuretree.corpus.context import build_contexts
 from featuretree.corpus.extract import Content
 from featuretree.corpus.store import Corpus
+from featuretree.research_acceptance import initialize_review, inspect_submission
 from featuretree.research_probe import check_probe, prepare_probe
 from featuretree.research_probe_validation import response_errors
-from featuretree.storage import write_json, write_text
+from featuretree.storage import read_yaml, write_json, write_text
 from tests import test_readiness
 
 
@@ -37,6 +38,16 @@ class ResearchProbeTests(unittest.TestCase):
 
     def save_answer(self):
         write_json(self.path.parent / "response.json", self.answer)
+
+    def test_probe_uses_same_handoff_and_independent_review_contract(self):
+        self.save_answer()
+        binding, contract = inspect_submission(self.repo, self.path)
+        self.assertEqual(contract["scope"]["target_ids"], ["q1"])
+        self.assertEqual(list(binding["artifact_sha256"]), ["response.json"])
+        self.assertTrue((self.path.parent / "handoff.md").is_file())
+        path = initialize_review(self.repo, self.path, "fixture-author", "fixture-reviewer")
+        self.assertEqual(len(read_yaml(path)["checks"]), 7)
+        self.assertEqual(read_yaml(path)["decision"], "pending")
 
     def test_metadata_and_excerpt_are_machine_assembled_not_confirmed(self):
         original = (self.root / "knowledge/sample.yaml").read_bytes()

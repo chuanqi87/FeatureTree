@@ -28,6 +28,19 @@ class ResearchTaskTests(unittest.TestCase):
         self.assertFalse(task["production_write_authorized"])
         self.assertEqual(task["mode"], "diagnostic_pilot")
 
+    def test_handoff_is_generated_for_each_stage_and_cannot_be_weakened(self):
+        for stage in ("evidence", "candidate"):
+            path, task = prepare_task(self.repo, "sample", "p/m", "2026-09-06", stage=stage,
+                                      claim_ids=["support:android"])
+            self.assertEqual(task["handoff"]["scope"]["target_ids"], ["support:android"])
+            self.assertEqual(len(task["handoff"]["criteria"]), 7)
+            self.assertTrue((path.parent / "handoff.md").is_file())
+            self.assertEqual(load_task(self.repo, path), task)
+            task["handoff"]["criteria"] = []
+            write_json(path, task)
+            with self.assertRaisesRegex(ValueError, "identity"):
+                load_task(self.repo, path)
+
     def test_other_feature_and_cross_task_path_cannot_be_submitted(self):
         changed = deepcopy(self.doc)
         changed["feature_id"] = "another"
@@ -70,7 +83,7 @@ class ResearchTaskTests(unittest.TestCase):
 
     def test_missing_report_is_rejected(self):
         write_yaml(self.root / self.task["candidate_path"], self.doc)
-        self.assertIn("Worker report missing", check_task(self.repo, self.path)["errors"])
+        self.assertIn("Worker report missing", " ".join(check_task(self.repo, self.path)["errors"]))
 
     def test_task_outside_staging_is_rejected(self):
         with self.assertRaises(ValueError):

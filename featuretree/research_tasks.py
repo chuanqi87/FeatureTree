@@ -8,9 +8,10 @@ import json
 from .confidence import assessment_input_hash, claim_slots
 from .knowledge_validation import knowledge_errors
 from .research_contract import file_hash, methodology_hash
+from .research_handoff import handoff_contract, render_handoff
 from .research_profile import fingerprint, research_policy
 from .run_baseline import baseline_errors
-from .storage import Repository, contained_path, read_yaml, write_json
+from .storage import Repository, contained_path, read_yaml, write_json, write_text
 
 TASKS_DIR = "output/research/tasks"
 
@@ -44,27 +45,31 @@ def prepare_task(repo, feature_id, model, run_date, *, stage="candidate", claim_
     if not context.exists():
         raise ValueError(f"Missing context: run official_docs.py context {feature_id}")
     inputs = task_inputs(repo, feature_id)
+    budget = {"max_bodies": 6 if stage == "evidence" else 15,
+              "max_fetches": 3 if stage == "evidence" else 6,
+              "soft_minutes": 5 if stage == "evidence" else 10, "max_attempts": 1,
+              "hard_provider_cost_cap": False}
+    handoff = handoff_contract(stage, features[feature_id], model, selected, budget)
     identity = {"feature_id": feature_id, "model": model, "run_date": run_date, "inputs": inputs,
-                "stage": stage, "selection": "node" if claim_ids is None else "claims", "claim_ids": selected}
+                "stage": stage, "selection": "node" if claim_ids is None else "claims", "claim_ids": selected,
+                "handoff": handoff}
     task_id = fingerprint(identity)
     directory = f"{TASKS_DIR}/{task_id}"
     errors = baseline_errors(repo, repo.config(), research_policy(repo), run_date)
-    package = {"schema_version": 2, "task_id": task_id, **identity,
+    package = {"schema_version": 3, "task_id": task_id, **identity,
                "mode": "diagnostic_pilot" if errors else "research_candidate",
                "baseline_errors": errors, "knowledge_path": paths[feature_id],
                "context_path": context.relative_to(repo.root).as_posix(),
                "candidate_path": directory + "/candidate.yaml",
                "report_path": directory + "/worker-report.md",
                "contract": "docs/opencode-worker-contract.md",
-               "budget": {"max_bodies": 6 if stage == "evidence" else 15,
-                          "max_fetches": 3 if stage == "evidence" else 6,
-                          "soft_minutes": 5 if stage == "evidence" else 10, "max_attempts": 1,
-                          "hard_provider_cost_cap": False},
+               "budget": budget,
                "production_write_authorized": False}
     path = repo.root / directory / "task.json"
     if path.exists() and json.loads(path.read_text()) != package:
         raise ValueError("Immutable task collision; do not overwrite")
     write_json(path, package)
+    write_text(path.parent / "handoff.md", render_handoff(handoff))
     return path, package
 
 
@@ -72,10 +77,12 @@ def load_task(repo, path):
     path = contained_path(repo.root, str(path), TASKS_DIR)
     task = json.loads(path.read_text(encoding="utf-8"))
     identity_keys = ("feature_id", "model", "run_date", "inputs")
-    if task.get("schema_version") == 2:
+    if task.get("schema_version") in (2, 3):
         identity_keys += ("stage", "selection", "claim_ids")
     elif task.get("schema_version") != 1:
         raise ValueError("Unsupported task schema version")
+    if task["schema_version"] == 3:
+        identity_keys += ("handoff",)
     expected = fingerprint({key: task[key] for key in identity_keys})
     if task["task_id"] != expected or path.parent.name != expected or path.name != "task.json":
         raise ValueError("Task identity does not match its contents/path")
@@ -155,8 +162,9 @@ def check_task(repo, path):
     candidate_path = repo.root / task["candidate_path"]
     candidate = read_yaml(candidate_path)
     errors = candidate_errors(repo, task, candidate)
-    if not (repo.root / task["report_path"]).is_file():
-        errors.append("Worker report missing")
+    report = repo.root / task["report_path"]
+    if not report.is_file() or not report.read_text(encoding="utf-8").strip():
+        errors.append("Worker report missing or empty")
     result = {"task_id": task["task_id"], "candidate_sha256": file_hash(candidate_path),
               "structurally_valid": not errors, "semantic_review_passed": False,
               "production_accepted": False, "errors": errors}

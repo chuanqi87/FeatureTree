@@ -2,6 +2,8 @@
 
 执行器使用任务包中明确指定的 provider/model；本轮试点为 `volcengine/glm-5.3`，不得静默换模型。任务包只分配一个节点，一个节点同一时间只允许一个作者。任务包不是已确认知识，也不是扩大范围的授权。
 
+所有新任务同时生成标准 `handoff.md`，验收项固定在任务包中。派发和收回均遵循 [标准派发与独立验收](research-acceptance.md)：作者逐条自查，协调者独立逐项复核，问题明确到位置、改法和通过所需证据；不能用平均分抵消错误。工作者不得填写独立验收记录。
+
 ## 定向原文回归（probe）
 
 `scripts/research_probe.py prepare <spec.yaml> --model <provider/model>` 可准备最多三个明确问题的诊断包。协调者先执行 context、选择相关原文完整段落，程序核验候选有效性并固定来源、行号、问题、模型和输入指纹；不会提供上轮答案。题目不覆盖整节点，不能计作全节点研究完成。
@@ -12,7 +14,7 @@
 
 ## 输入与写入边界
 
-先看任务阶段：命令行默认 `stage: evidence`，先提交不超过 1200 中文字的 worker-report.md：每平台一条带 URL、正文章节、路径、SHA、获取时间的文档观察；两个具体差异候选或反例；缺口与真机计划。最多 6 篇正文、3 次按需抓取、约 5 分钟。此阶段不写 candidate.yaml、不填 24 个槽位、不研究校验实现代码。报告落盘通过仅表示交付存在，仍需证据与语义复核。
+先看任务阶段：命令行默认 `stage: evidence`，先提交不超过 1200 中文字的 worker-report.md：按本次所选知识项逐项记录带 URL、正文章节、路径、SHA、获取时间的文档观察；范围内的具体差异候选或反例；缺口与真机计划。仅选单平台时不要求扩写跨平台差异。最多 6 篇正文、3 次按需抓取、约 5 分钟。此阶段不写 candidate.yaml、不填 24 个槽位、不研究校验实现代码。报告落盘通过仅表示交付存在，仍需证据与语义复核。
 
 证据报告复核后才以 `--stage candidate` 准备结构化候选。允许 `--claim` 指定单节点内的精确知识项，未选中的陈述、上下文和引用不得受改动影响；需要调整共享上下文时先明确依赖范围。未指定知识项为全节点选择，可新增关键 facts。一次结构化任务优先限制为 3–5 个已研究项，复杂结论单独做。下面的完整 YAML 要求仅适用于 candidate 阶段。
 
@@ -22,7 +24,7 @@
 
 特别核对 can/must、编译 SDK/target SDK/系统版本、单接口/整个模块的区别。报告不得把预览 SDK 放入正式版主比较或主测试计划，不得从语言框架的传输抽象推断系统缺少其他框架。手机之外的用例单独列附录；模拟器结果不能计入人工真机完成。
 
-先完整阅读 AGENTS.md、docs/official-documentation-entrypoints.md、docs/sources.md、docs/official-corpus.md、docs/knowledge-confidence.md、docs/comparison-model.md。再阅读任务包、目标 taxonomy 节点和原 knowledge。
+先完整阅读 AGENTS.md、docs/official-documentation-entrypoints.md、docs/sources.md、docs/official-corpus.md、docs/knowledge-confidence.md、docs/comparison-model.md、docs/research-acceptance.md。再阅读任务包及同目录 handoff.md、目标 taxonomy 节点和原 knowledge。
 
 必须执行 `.venv/bin/python scripts/official_docs.py context <feature_id>`，检查 binding_source_gaps，并读取相关官方正文。检索片段、目录、历史文章均不能替代证据。可以使用 official_docs.py 的 search / locate / fetch / read 按需补查；不启动整库 crawl。新增正文由资料库保存原始响应与哈希。
 

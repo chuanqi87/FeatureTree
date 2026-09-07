@@ -1,0 +1,513 @@
+{
+  "domain": "enterprise",
+  "authored_count": 5,
+  "draft_clue_count": 32,
+  "authored": [
+    {
+      "id": "enterprise",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "企业与管理",
+        "en": "Enterprise and Management"
+      },
+      "definition": "MDM 与工作资料。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "enterprise.mdm",
+      "parent": "enterprise",
+      "level": "L2",
+      "name": {
+        "zh": "设备管理",
+        "en": "Device Management"
+      },
+      "definition": "企业设备策略。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "enterprise.mdm.policy",
+      "parent": "enterprise.mdm",
+      "level": "L3",
+      "name": {
+        "zh": "管理策略",
+        "en": "Management Policy"
+      },
+      "definition": "远程配置设备/应用策略。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "enterprise.work_profile",
+      "parent": "enterprise",
+      "level": "L2",
+      "name": {
+        "zh": "工作资料",
+        "en": "Work Profile"
+      },
+      "definition": "个人/工作数据隔离配置。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "enterprise.work_profile.isolation",
+      "parent": "enterprise.work_profile",
+      "level": "L3",
+      "name": {
+        "zh": "工作数据隔离",
+        "en": "Work Data Isolation"
+      },
+      "definition": "工作应用与数据容器隔离。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "enterprise.app_control",
+      "parent": "enterprise",
+      "name": "企业应用管控",
+      "what": "企业场景下应用安装、配置与限制。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "enterprise.app_control.distribution",
+      "parent": "enterprise.app_control",
+      "name": "企业应用分发",
+      "what": "在企业内分发/安装受管应用。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "ManagedAppDistribution framework",
+          "url": "https://developer.apple.com/documentation/managedappdistribution",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.app_control.install_control",
+      "parent": "enterprise.app_control",
+      "name": "安装与卸载管控",
+      "what": "控制应用安装、卸载与可见性。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "DevicePolicyManager install/blacklist policies",
+          "url": "https://developer.android.com/reference/android/app/admin/DevicePolicyManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.app_control.managed_config",
+      "parent": "enterprise.app_control",
+      "name": "应用托管配置",
+      "what": "向受管应用下发企业配置。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Managed App Configuration",
+          "url": "https://developer.apple.com/documentation/managedapp",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Application restrictions (setApplicationRestrictions)",
+          "url": "https://developer.apple.com/documentation/managedapp",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.device_policy",
+      "parent": "enterprise",
+      "name": "设备策略管理",
+      "what": "对整机或资料下发管理与安全策略。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "enterprise.device_policy.app_restrict_api",
+      "parent": "enterprise.device_policy",
+      "name": "应用限制下发",
+      "what": "向应用下发受管限制键值。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "setApplicationRestrictions",
+          "url": "https://developers.google.com/android/management",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.device_policy.apple_mdm",
+      "parent": "enterprise.device_policy",
+      "name": "Apple设备管理API",
+      "what": "通过MDM协议/Apple Business API管理组织设备。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Apple Business API",
+          "url": "https://developer.apple.com/documentation/applebusinessapi",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.device_policy.certificates",
+      "parent": "enterprise.device_policy",
+      "name": "证书管理",
+      "what": "安装/查询企业CA与应用证书。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "DevicePolicyManager.installCaCert",
+          "url": "https://developer.android.com/reference/android/app/admin/DevicePolicyManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Keychain证书 / 配置描述文件",
+          "url": "https://developer.apple.com/documentation/security/keychain-services",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.device_policy.device_admin",
+      "parent": "enterprise.device_policy",
+      "name": "设备管理员",
+      "what": "传统DeviceAdminReceiver管理组件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "DeviceAdminReceiver",
+          "url": "https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.device_policy.harmonyos_mdm",
+      "parent": "enterprise.device_policy",
+      "name": "HarmonyOS MDM",
+      "what": "鸿蒙企业设备管理（admin应用策略）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "MDM Kit (@ohos.mdm)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/mdm-arkts",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.device_policy.location_policy",
+      "parent": "enterprise.device_policy",
+      "name": "网络与定位管控",
+      "what": "企业网络/VPN与定位策略（候选）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "DevicePolicyManager (VPN/always-on)",
+          "url": "https://developers.google.com/android/management",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.device_policy.password",
+      "parent": "enterprise.device_policy",
+      "name": "密码与锁屏策略",
+      "what": "强制密码质量、锁屏与重置密码。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "DevicePolicyManager.setPasswordQuality / resetPassword",
+          "url": "https://developer.android.com/reference/android/app/admin/DevicePolicyManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.device_policy.restrictions",
+      "parent": "enterprise.device_policy",
+      "name": "功能限制策略",
+      "what": "限制相机、截屏、安装等设备功能。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "DevicePolicyManager.setUserRestriction",
+          "url": "https://developer.android.com/reference/android/app/admin/DevicePolicyManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.device_policy.wipe",
+      "parent": "enterprise.device_policy",
+      "name": "远程锁定与擦除",
+      "what": "远程锁定设备或擦除数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "DevicePolicyManager.lockNow / wipeData",
+          "url": "https://developer.android.com/reference/android/app/admin/DevicePolicyManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.education",
+      "parent": "enterprise",
+      "name": "教育与课堂",
+      "what": "课堂作业与学生进度上报。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "enterprise.education.classkit",
+      "parent": "enterprise.education",
+      "name": "ClassKit作业进度",
+      "what": "向教师上报学生作业与进度。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "ClassKit CLSContext",
+          "url": "https://developer.apple.com/documentation/classkit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.education.classkit_ui",
+      "parent": "enterprise.education",
+      "name": "ClassKit教师UI",
+      "what": "教师端选择上下文的系统UI。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "CLSContextProvider UI",
+          "url": "https://developer.apple.com/documentation/classkitui",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.file_guard",
+      "parent": "enterprise",
+      "name": "企业文件防护",
+      "what": "企业级文件安全管控策略。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "FileGuard",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/fileguard-set-hdc-authentication-key",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.financed_device",
+      "parent": "enterprise",
+      "name": "融资设备管控",
+      "what": "分期/融资设备的锁定管理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.devicelock DeviceLockManager",
+          "url": "https://developer.android.com/reference/android/devicelock/DeviceLockManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.identity",
+      "parent": "enterprise",
+      "name": "企业身份与单点登录",
+      "what": "企业目录、Kerberos与SSO接入。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "enterprise.identity.gss",
+      "parent": "enterprise.identity",
+      "name": "GSS/Kerberos认证",
+      "what": "接入企业Kerberos域认证。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "GSS framework",
+          "url": "https://developer.apple.com/documentation/gss",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.identity.school_manager",
+      "parent": "enterprise.identity",
+      "name": "学校/企业管理器API",
+      "what": "Apple School/Business Manager组织管理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Apple School and Business Manager API",
+          "url": "https://developer.apple.com/documentation/appleschoolandbusinessmanagerapi",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.permissions",
+      "parent": "enterprise",
+      "name": "企业权限模型",
+      "what": "企业专属权限与ACL申请。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "enterprise.permissions.acl",
+      "parent": "enterprise.permissions",
+      "name": "受限权限ACL开放",
+      "what": "通过ACL方式申请企业受限权限。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "permissions-for enterprises (ACL)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/permissions-for-all",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.threat_protection",
+      "parent": "enterprise",
+      "name": "威胁防护",
+      "what": "企业侧检测并处置安全威胁。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "enterprise.threat_protection.virus_remediation",
+      "parent": "enterprise.threat_protection",
+      "name": "病毒查杀治理",
+      "what": "企业威胁防护的病毒检测与处置。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "enterpriseThreatProtection (virusRemediation)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/enterprisethreatprotection-virusremediation-isolate",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.work_profile",
+      "parent": "enterprise",
+      "name": "工作资料",
+      "what": "在企业容器内隔离工作应用与数据。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "enterprise.work_profile.compliance",
+      "parent": "enterprise.work_profile",
+      "name": "合规检查上报",
+      "what": "设备合规状态检查与上报。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.enterprise compliance",
+          "url": "https://developer.android.com/reference/androidx/enterprise/feedback",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.work_profile.cope",
+      "parent": "enterprise.work_profile",
+      "name": "公司自有设备工作资料",
+      "what": "COPE场景在公司设备上开通工作资料。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidForWork COPE",
+          "url": "https://developers.google.com/android/work/requirements/work-profile-corporate",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.work_profile.cross_profile",
+      "parent": "enterprise.work_profile",
+      "name": "跨资料交互",
+      "what": "个人/工作资料间的应用切换与数据可见性。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.enterprise: CrossProfileApps",
+          "url": "https://developer.android.com/reference/androidx/crossprofile/CrossProfileApps",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.work_profile.policy",
+      "parent": "enterprise.work_profile",
+      "name": "资料内策略管理",
+      "what": "在受管资料内下发安全与功能策略。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "DevicePolicyManager (Profile Owner APIs)",
+          "url": "https://developer.android.com/work/managed-profiles",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "enterprise.work_profile.provisioning",
+      "parent": "enterprise.work_profile",
+      "name": "工作资料开通",
+      "what": "以Device Owner/Profile Owner方式开通受管资料。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "DevicePolicyManager.ACTION_PROVISION_MANAGED_PROFILE",
+          "url": "https://developer.android.com/reference/android/app/admin/DevicePolicyManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

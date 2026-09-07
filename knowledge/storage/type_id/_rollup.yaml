@@ -1,0 +1,25 @@
+schema_version: 2
+feature_id: storage.type_id
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 统一类型标识与 MIME/扩展名识别。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- storage.type_id.declare
+- storage.type_id.mime
+- storage.type_id.uniform_type

@@ -1,0 +1,21 @@
+schema_version: 2
+feature_id: digital_wellbeing.app_limits.shield
+role: leaf
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 在超限时展示阻断护盾界面。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []

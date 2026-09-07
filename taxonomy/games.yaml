@@ -1,0 +1,1997 @@
+domain: games
+features:
+- id: games
+  level: L1
+  parent: null
+  name:
+    zh: 游戏服务
+    en: Game Services
+  definition: 玩家账号、成就排行、多人会话与游戏引擎系统服务；不含完整游戏引擎编辑器。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 玩家、成就、多人、引擎系统服务
+    excludes:
+    - 完整 Unity/Unreal 引擎本体
+    - 通用推送见 notifications
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+- id: games.achievements
+  level: L2
+  parent: games
+  name:
+    zh: 成就与排行
+    en: Achievements and Leaderboards
+  definition: 成就、排行榜与事件。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/achievements/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 成就、排行榜、事件
+    excludes:
+    - 多人见 multiplayer
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: games_capability_family
+- id: games.engine_services
+  level: L2
+  parent: games
+  name:
+    zh: 引擎系统服务
+    en: Engine System Services
+  definition: 游戏模式、帧速率、性能提示等系统服务。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/engine_services/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - Game Mode、性能提示
+    excludes:
+    - 完整引擎编辑器排除
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: games_capability_family
+- id: games.multiplayer
+  level: L2
+  parent: games
+  name:
+    zh: 多人会话
+    en: Multiplayer Sessions
+  definition: 实时/回合多人与房间匹配。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/multiplayer/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 实时、回合、匹配
+    excludes:
+    - 近场快传见 distributed.nearby
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: games_capability_family
+- id: games.player
+  level: L2
+  parent: games
+  name:
+    zh: 玩家与登录
+    en: Player and Sign-In
+  definition: 玩家身份、登录与游戏存档。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/player/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 登录、玩家资料、存档
+    excludes:
+    - 成就见 achievements
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: games_capability_family
+- id: games.achievements.challenges
+  level: L3
+  parent: games.achievements
+  name:
+    zh: 挑战
+    en: Challenges
+  definition: 向好友发起分数或成就挑战。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/achievements/challenges.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: GKChallenge
+      url: https://developer.apple.com/documentation/gamekit/gkchallenge
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - GKChallenge
+    excludes:
+    - 好友见 player.friends
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: achievements_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.achievements.events
+  level: L3
+  parent: games.achievements
+  name:
+    zh: 游戏事件
+    en: Game Events
+  definition: 记录可触发成就的游戏事件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/achievements/events.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: EventsClient
+      url: https://developer.android.com/games/pgs/android/events
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - EventsClient
+    excludes:
+    - 成就见 unlock
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: achievements_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.achievements.hidden
+  level: L3
+  parent: games.achievements
+  name:
+    zh: 隐藏成就揭示
+    en: Reveal Hidden Achievements
+  definition: 揭示隐藏成就。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/achievements/hidden.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: AchievementsClient reveal
+      url: https://developer.android.com/games/pgs/android/achievements
+      role: primary
+    ios:
+    - kind: class
+      id: GKAchievement
+      url: https://developer.apple.com/documentation/gamekit/gkachievement
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - reveal achievement
+    excludes:
+    - 解锁见 unlock
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: achievements_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.achievements.incremental
+  level: L3
+  parent: games.achievements
+  name:
+    zh: 增量成就
+    en: Incremental Achievements
+  definition: 更新需要多步完成的增量成就。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/achievements/incremental.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: AchievementsClient increment
+      url: https://developer.android.com/games/pgs/android/achievements
+      role: primary
+    ios:
+    - kind: class
+      id: GKAchievement percentComplete
+      url: https://developer.apple.com/documentation/gamekit/gkachievement
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - incremental achievements
+    excludes:
+    - 解锁见 unlock
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: achievements_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.achievements.leaderboard_span
+  level: L3
+  parent: games.achievements
+  name:
+    zh: 排行榜时间跨度
+    en: Leaderboard Time Span
+  definition: 按日/周/全时查询排行榜。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/achievements/leaderboard_span.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: LeaderboardsClient
+      url: https://developer.android.com/games/pgs/android/leaderboards
+      role: primary
+    ios:
+    - kind: class
+      id: GKLeaderboard.TimeScope
+      url: https://developer.apple.com/documentation/gamekit/gkleaderboard/timescope
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - time span
+    excludes:
+    - 分数见 leaderboards
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: achievements_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.achievements.leaderboards
+  level: L3
+  parent: games.achievements
+  name:
+    zh: 排行榜分数
+    en: Leaderboard Scores
+  definition: 提交与查询排行榜分数。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/achievements/leaderboards.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: LeaderboardsClient
+      url: https://developer.android.com/games/pgs/android/leaderboards
+      role: primary
+    ios:
+    - kind: class
+      id: GKLeaderboard
+      url: https://developer.apple.com/documentation/gamekit/gkleaderboard
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Game Service
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/gameservice-kit-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - LeaderboardsClient / GKLeaderboard
+    excludes:
+    - 成就见 unlock
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: achievements_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.achievements.ui
+  level: L3
+  parent: games.achievements
+  name:
+    zh: 成就排行榜界面
+    en: Achievements Leaderboards UI
+  definition: 展示系统成就/排行榜界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/achievements/ui.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: AchievementsClient.getAchievementsIntent
+      url: https://developer.android.com/games/pgs/android/achievements
+      role: primary
+    ios:
+    - kind: class
+      id: GKGameCenterViewController
+      url: https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontroller
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - UI intents
+    excludes:
+    - 提交见 unlock/leaderboards
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: achievements_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.achievements.unlock
+  level: L3
+  parent: games.achievements
+  name:
+    zh: 成就解锁进度
+    en: Achievement Unlock Progress
+  definition: 解锁成就或更新成就进度。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/achievements/unlock.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: AchievementsClient
+      url: https://developer.android.com/games/pgs/android/achievements
+      role: primary
+    ios:
+    - kind: class
+      id: GKAchievement
+      url: https://developer.apple.com/documentation/gamekit/gkachievement
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Game Service
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/gameservice-kit-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - AchievementsClient / GKAchievement
+    excludes:
+    - 排行榜见 leaderboards
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: achievements_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.engine_services.frame_pacing
+  level: L3
+  parent: games.engine_services
+  name:
+    zh: 帧节奏控制
+    en: Frame Pacing
+  definition: 控制游戏帧节奏与垂直同步策略。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/engine_services/frame_pacing.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Android Frame Pacing
+      url: https://developer.android.com/games/sdk/frame-pacing
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Android Frame Pacing
+    excludes:
+    - 性能提示见 performance_hint
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: engine_services_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.engine_services.game_activity
+  level: L3
+  parent: games.engine_services
+  name:
+    zh: 游戏活动宿主
+    en: Game Activity Host
+  definition: 使用游戏专用 Activity/宿主集成原生引擎。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/engine_services/game_activity.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: GameActivity
+      url: https://developer.android.com/games/agdk/game-activity
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - GameActivity
+    excludes:
+    - 完整引擎排除
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: engine_services_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.engine_services.game_mode
+  level: L3
+  parent: games.engine_services
+  name:
+    zh: 游戏模式
+    en: Game Mode
+  definition: 声明并查询系统游戏模式。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/engine_services/game_mode.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Game Mode
+      url: https://developer.android.com/games/gamemode/gamemode-api
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: Game quality
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/game-quality
+      role: primary
+  comparison_scope:
+    includes:
+    - GameModeManager
+    excludes:
+    - 性能提示见 performance_hint
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: engine_services_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.engine_services.input_sdk
+  level: L3
+  parent: games.engine_services
+  name:
+    zh: 游戏输入服务
+    en: Game Input Services
+  definition: 游戏手柄与触控手势游戏输入服务。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/engine_services/input_sdk.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Game Controller
+      url: https://developer.android.com/games/sdk/game-controller
+      role: primary
+    ios:
+    - kind: framework
+      id: GCController
+      url: https://developer.apple.com/documentation/gamecontroller
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - GameController / AGDK input
+    excludes:
+    - 通用输入见 input
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: engine_services_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.engine_services.loading_overlay
+  level: L3
+  parent: games.engine_services
+  name:
+    zh: 游戏加载提示
+    en: Game Loading Hint
+  definition: 向系统声明游戏加载阶段以优化调度。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/engine_services/loading_overlay.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Game Mode
+      url: https://developer.android.com/games/gamemode/gamemode-api
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - loading hints
+    excludes:
+    - 游戏模式见 game_mode
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: engine_services_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.engine_services.orientation_lock
+  level: L3
+  parent: games.engine_services
+  name:
+    zh: 游戏方向锁定提示
+    en: Game Orientation Lock Hint
+  definition: 向系统提示游戏方向锁定偏好。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/engine_services/orientation_lock.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Game Mode
+      url: https://developer.android.com/games/gamemode/gamemode-api
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - orientation hint
+    excludes:
+    - 游戏模式见 game_mode
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: engine_services_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.engine_services.performance_hint
+  level: L3
+  parent: games.engine_services
+  name:
+    zh: 性能提示会话
+    en: Performance Hint Session
+  definition: 向系统提供帧速率等性能提示。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/engine_services/performance_hint.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Performance Hint API
+      url: https://developer.android.com/games/optimize/performance-hint
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: GPM
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/game-quality
+      role: primary
+  comparison_scope:
+    includes:
+    - PerformanceHintManager / AGDK
+    excludes:
+    - 游戏模式见 game_mode
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: engine_services_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.engine_services.quality_telemetry
+  level: L3
+  parent: games.engine_services
+  name:
+    zh: 游戏质量遥测
+    en: Game Quality Telemetry
+  definition: 采集游戏卡顿/温度等质量遥测。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/engine_services/quality_telemetry.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Android GPU Inspector hooks
+      url: https://developer.android.com/agp
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: GPM
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/game-quality
+      role: primary
+  comparison_scope:
+    includes:
+    - GPM / AGDK telemetry
+    excludes:
+    - 通用指标见 observability.metrics
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: engine_services_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.engine_services.thermal
+  level: L3
+  parent: games.engine_services
+  name:
+    zh: 游戏热状态
+    en: Game Thermal State
+  definition: 监听热状态以调节游戏负载。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/engine_services/thermal.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PowerManager thermal
+      url: https://developer.android.com/reference/android/os/PowerManager
+      role: primary
+    ios:
+    - kind: class
+      id: ProcessInfo.ThermalState
+      url: https://developer.apple.com/documentation/foundation/processinfo/thermalstate
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - thermal state
+    excludes:
+    - 性能提示见 performance_hint
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: engine_services_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.engine_services.vulkan_loader
+  level: L3
+  parent: games.engine_services
+  name:
+    zh: 游戏图形加载器服务
+    en: Game Graphics Loader Service
+  definition: 游戏侧图形 API 加载器系统服务入口（非完整引擎）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/engine_services/vulkan_loader.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: AGDK
+      url: https://developer.android.com/games/agdk
+      role: primary
+    ios:
+    - kind: framework
+      id: Metal
+      url: https://developer.apple.com/documentation/metal
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - graphics loader hooks
+    excludes:
+    - 帧节奏见 frame_pacing
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: engine_services_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.multiplayer.automatch
+  level: L3
+  parent: games.multiplayer
+  name:
+    zh: 自动补位匹配
+    en: Automatch Fill-In
+  definition: 用自动匹配填满房间空位。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/multiplayer/automatch.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Real-time automatch
+      url: https://developer.android.com/games/pgs/android/realtime-multiplayer
+      role: primary
+    ios:
+    - kind: class
+      id: GKMatchRequest
+      url: https://developer.apple.com/documentation/gamekit/gkmatchrequest
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - automatch
+    excludes:
+    - 匹配见 matchmaking
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: multiplayer_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.multiplayer.invites
+  level: L3
+  parent: games.multiplayer
+  name:
+    zh: 对局邀请
+    en: Match Invites
+  definition: 发送与接收对局邀请。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/multiplayer/invites.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Invitations
+      url: https://developer.android.com/games/pgs/android/realtime-multiplayer
+      role: primary
+    ios:
+    - kind: class
+      id: GKInvite
+      url: https://developer.apple.com/documentation/gamekit/gkinvite
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - invitations
+    excludes:
+    - 好友见 player.friends
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: multiplayer_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.multiplayer.matchmaking
+  level: L3
+  parent: games.multiplayer
+  name:
+    zh: 匹配排队
+    en: Matchmaking
+  definition: 按规则匹配玩家进入对局。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/multiplayer/matchmaking.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Real-time matchmaking
+      url: https://developer.android.com/games/pgs/android/realtime-multiplayer
+      role: primary
+    ios:
+    - kind: class
+      id: GKMatchmaker
+      url: https://developer.apple.com/documentation/gamekit/gkmatchmaker
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - matchmaking
+    excludes:
+    - 房间见 realtime
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: multiplayer_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.multiplayer.nearby_transfer
+  level: L3
+  parent: games.multiplayer
+  name:
+    zh: 近场游戏快传
+    en: Nearby Game Transfer
+  definition: 近场传递游戏内容或对局。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/multiplayer/nearby_transfer.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Nearby Connections
+      url: https://developers.google.com/nearby/connections/overview
+      role: primary
+    ios:
+    - kind: framework
+      id: Multipeer Connectivity
+      url: https://developer.apple.com/documentation/multipeerconnectivity
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Share Kit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/share-kit-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - nearby game transfer
+    excludes:
+    - 通用近场见 distributed.nearby
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: multiplayer_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.multiplayer.participant_status
+  level: L3
+  parent: games.multiplayer
+  name:
+    zh: 参与者状态
+    en: Participant Status
+  definition: 查询对局参与者连接与回合状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/multiplayer/participant_status.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Real-time multiplayer
+      url: https://developer.android.com/games/pgs/android/realtime-multiplayer
+      role: primary
+    ios:
+    - kind: class
+      id: GKPlayer
+      url: https://developer.apple.com/documentation/gamekit/gkplayer
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - participant status
+    excludes:
+    - 实时见 realtime
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: multiplayer_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.multiplayer.realtime
+  level: L3
+  parent: games.multiplayer
+  name:
+    zh: 实时多人
+    en: Realtime Multiplayer
+  definition: 建立实时多人房间并收发消息。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/multiplayer/realtime.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Real-time multiplayer
+      url: https://developer.android.com/games/pgs/android/realtime-multiplayer
+      role: primary
+    ios:
+    - kind: class
+      id: GKMatch
+      url: https://developer.apple.com/documentation/gamekit/gkmatch
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Real-time multiplayer / GKMatch
+    excludes:
+    - 回合制见 turn_based
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: multiplayer_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.multiplayer.reliable_msg
+  level: L3
+  parent: games.multiplayer
+  name:
+    zh: 可靠消息通道
+    en: Reliable Message Channel
+  definition: 在实时对局中发送可靠消息。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/multiplayer/reliable_msg.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Real-time messages
+      url: https://developer.android.com/games/pgs/android/realtime-multiplayer
+      role: primary
+    ios:
+    - kind: class
+      id: GKMatch sendData
+      url: https://developer.apple.com/documentation/gamekit/gkmatch
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - reliable messages
+    excludes:
+    - 实时见 realtime
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: multiplayer_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.multiplayer.turn_based
+  level: L3
+  parent: games.multiplayer
+  name:
+    zh: 回合制多人
+    en: Turn-Based Multiplayer
+  definition: 回合制对局托管与回合提交。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/multiplayer/turn_based.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Turn-based multiplayer
+      url: https://developer.android.com/games/pgs/android/turnbased-multiplayer
+      role: primary
+    ios:
+    - kind: class
+      id: GKTurnBasedMatch
+      url: https://developer.apple.com/documentation/gamekit/gkturnbasedmatch
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - TurnBasedMultiplayer / GKTurnBasedMatch
+    excludes:
+    - 实时见 realtime
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: multiplayer_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.multiplayer.unreliable_msg
+  level: L3
+  parent: games.multiplayer
+  name:
+    zh: 不可靠消息通道
+    en: Unreliable Message Channel
+  definition: 在实时对局中发送低延迟不可靠消息。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/multiplayer/unreliable_msg.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Real-time messages
+      url: https://developer.android.com/games/pgs/android/realtime-multiplayer
+      role: primary
+    ios:
+    - kind: class
+      id: GKMatch sendData
+      url: https://developer.apple.com/documentation/gamekit/gkmatch
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - unreliable messages
+    excludes:
+    - 可靠见 reliable_msg
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: multiplayer_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.player.friends
+  level: L3
+  parent: games.player
+  name:
+    zh: 玩家好友列表
+    en: Player Friends
+  definition: 读取游戏好友与授权。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/games/player/friends.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: PlayersClient.loadFriends
+      url: https://developer.android.com/games/pgs/android/android-start
+      role: primary
+    ios:
+    - kind: class
+      id: GKLocalPlayer.loadFriends
+      url: https://developer.apple.com/documentation/gamekit/gklocalplayer
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - friends
+    excludes:
+    - 多人邀请见 multiplayer
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: player_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.player.identity_verify
+  level: L3
+  parent: games.player
+  name:
+    zh: 玩家身份校验
+    en: Player Identity Verify
+  definition: 服务端校验玩家身份令牌。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/player/identity_verify.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Games auth code
+      url: https://developer.android.com/games/pgs/android/android-start
+      role: primary
+    ios:
+    - kind: class
+      id: fetchItems forIdentityVerificationSignature
+      url: https://developer.apple.com/documentation/gamekit/gklocalplayer
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - server auth code / identityVerification
+    excludes:
+    - 登录见 sign_in
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: player_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.player.player_stats
+  level: L3
+  parent: games.player
+  name:
+    zh: 玩家统计
+    en: Player Stats
+  definition: 读取玩家游戏统计数据。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/player/player_stats.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: PlayerStatsClient
+      url: https://developer.android.com/games/pgs/android/stats
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - PlayerStats
+    excludes:
+    - 资料见 profile
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: player_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.player.plus_profile
+  level: L3
+  parent: games.player
+  name:
+    zh: 玩家主页界面
+    en: Player Profile UI
+  definition: 展示系统玩家主页/比较界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/player/plus_profile.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: PlayersClient.getCompareProfileIntent
+      url: https://developer.android.com/games/pgs/android/android-start
+      role: primary
+    ios:
+    - kind: class
+      id: GKGameCenterViewController
+      url: https://developer.apple.com/documentation/gamekit/gkgamecenterviewcontroller
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - compare profile UI
+    excludes:
+    - 资料见 profile
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: player_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.player.profile
+  level: L3
+  parent: games.player
+  name:
+    zh: 玩家资料
+    en: Player Profile
+  definition: 读取玩家昵称、头像等资料。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/player/profile.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: PlayersClient
+      url: https://developer.android.com/games/pgs/android/android-start
+      role: primary
+    ios:
+    - kind: class
+      id: GKLocalPlayer
+      url: https://developer.apple.com/documentation/gamekit/gklocalplayer
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Game Service
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/gameservice-kit-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - player profile
+    excludes:
+    - 登录见 sign_in
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: player_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.player.recall_token
+  level: L3
+  parent: games.player
+  name:
+    zh: 玩家召回令牌
+    en: Player Recall Token
+  definition: 获取用于召回安装的玩家令牌。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/player/recall_token.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: RecallClient
+      url: https://developer.android.com/games/pgs/android/android-start
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - recall tokens
+    excludes:
+    - 登录见 sign_in
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: player_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.player.saved_games
+  level: L3
+  parent: games.player
+  name:
+    zh: 游戏云存档
+    en: Cloud Saved Games
+  definition: 保存与加载云端游戏进度。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/games/player/saved_games.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Saved Games
+      url: https://developer.android.com/games/pgs/android/saved-games
+      role: primary
+    ios:
+    - kind: class
+      id: GKSavedGame
+      url: https://developer.apple.com/documentation/gamekit/gksavedgame
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Saved Games / GKSavedGame
+    excludes:
+    - 登录见 sign_in
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: player_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: games.player.sign_in
+  level: L3
+  parent: games.player
+  name:
+    zh: 游戏玩家登录
+    en: Game Player Sign-In
+  definition: 登录游戏中心/游戏服务玩家账号。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/games/player/sign_in.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Play Games Services Sign-in
+      url: https://developer.android.com/games/pgs/android/android-start
+      role: primary
+    ios:
+    - kind: framework
+      id: GameKit
+      url: https://developer.apple.com/documentation/gamekit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Game Service
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/gameservice-kit-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - GamesSignIn / GKLocalPlayer
+    excludes:
+    - 资料见 profile
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: player_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability

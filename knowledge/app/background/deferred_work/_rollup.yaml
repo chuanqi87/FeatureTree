@@ -1,0 +1,24 @@
+schema_version: 2
+feature_id: app.background.deferred_work
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 按网络/充电等约束调度的延迟或周期性后台工作。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- app.background.deferred_work.constraints
+- app.background.deferred_work.periodic

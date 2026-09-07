@@ -1,9 +1,0 @@
-{
-  "task_id": "c09dfb77f3520b3126f3449f72b0b6c076185529b214351023b6ed0df41d9f7c",
-  "feature_id": "connectivity.wifi.scan",
-  "response_sha256": "fb6686b0c706fd99a8aceb7ba004f3f4c61e60f315c578e7b7dcaa6012cc1128",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

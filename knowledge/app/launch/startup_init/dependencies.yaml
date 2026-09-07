@@ -1,0 +1,21 @@
+schema_version: 2
+feature_id: app.launch.startup_init.dependencies
+role: leaf
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 声明启动初始化器之间的依赖顺序。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []

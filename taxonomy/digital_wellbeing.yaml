@@ -1,0 +1,1997 @@
+domain: digital_wellbeing
+features:
+- id: digital_wellbeing
+  level: L1
+  parent: null
+  name:
+    zh: 数字健康与家庭守护
+    en: Digital Wellbeing
+  definition: 屏幕使用时间、应用限额、家长控制与专注模式等数字健康能力。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 屏幕时间、应用限额、家长控制、专注
+    excludes:
+    - 健康体征数据见 health_home
+    - 通知打扰见 notifications
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+- id: digital_wellbeing.app_limits
+  level: L2
+  parent: digital_wellbeing
+  name:
+    zh: 应用限额
+    en: App Limits
+  definition: 为应用或类别设置使用限额与阻断。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/app_limits/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 限额、阻断、选择器
+    excludes:
+    - 家长策略见 parental
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wellbeing_capability_family
+- id: digital_wellbeing.focus
+  level: L2
+  parent: digital_wellbeing
+  name:
+    zh: 专注模式
+    en: Focus Modes
+  definition: 专注/勿扰相关的系统模式与应用适配。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/focus/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 专注状态、过滤
+    excludes:
+    - 通知渠道见 notifications
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wellbeing_capability_family
+- id: digital_wellbeing.parental
+  level: L2
+  parent: digital_wellbeing
+  name:
+    zh: 家长控制
+    en: Parental Controls
+  definition: 家庭账号下的监护、审批与内容限制。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/parental/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 监护、审批、限制
+    excludes:
+    - 个人专注见 focus
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wellbeing_capability_family
+- id: digital_wellbeing.screen_time
+  level: L2
+  parent: digital_wellbeing
+  name:
+    zh: 屏幕使用时间
+    en: Screen Time
+  definition: 查询与汇报应用/设备使用时长。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/screen_time/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 使用时长、使用报告
+    excludes:
+    - 限额策略见 app_limits
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wellbeing_capability_family
+- id: digital_wellbeing.app_limits.always_allowed
+  level: L3
+  parent: digital_wellbeing.app_limits
+  name:
+    zh: 始终允许应用
+    en: Always Allowed Apps
+  definition: 配置不受限额约束的始终允许应用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/app_limits/always_allowed.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: ManagedSettingsStore
+      url: https://developer.apple.com/documentation/managedsettings
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - always allowed
+    excludes:
+    - 限额见 set_limit
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: app_limits_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.app_limits.android_policy
+  level: L3
+  parent: digital_wellbeing.app_limits
+  name:
+    zh: 使用访问策略
+    en: Usage Access Policy
+  definition: 基于使用情况访问权限实施限制策略入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/digital_wellbeing/app_limits/android_policy.yaml
+  bindings:
+    android:
+    - kind: class
+      id: UsageStatsManager
+      url: https://developer.android.com/reference/android/app/usage/UsageStatsManager
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - PACKAGE_USAGE_STATS policies
+    excludes:
+    - 查询见 screen_time
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: app_limits_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.app_limits.downtime
+  level: L3
+  parent: digital_wellbeing.app_limits
+  name:
+    zh: 停用时间段
+    en: Downtime Schedule
+  definition: 设置设备停用时间段限制应用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/app_limits/downtime.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: ManagedSettings
+      url: https://developer.apple.com/documentation/managedsettings
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - downtime
+    excludes:
+    - 时间表见 schedule
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: app_limits_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.app_limits.monitor
+  level: L3
+  parent: digital_wellbeing.app_limits
+  name:
+    zh: 限额监测扩展
+    en: Limit Monitor Extension
+  definition: 在后台监测使用并触发限额事件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/app_limits/monitor.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: DeviceActivityMonitor
+      url: https://developer.apple.com/documentation/deviceactivity/deviceactivitymonitor
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - DeviceActivityMonitor
+    excludes:
+    - 事件流见 screen_time.events
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: app_limits_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.app_limits.picker
+  level: L3
+  parent: digital_wellbeing.app_limits
+  name:
+    zh: 应用类别选择器
+    en: App Category Picker
+  definition: 选择受限额约束的应用或类别。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/app_limits/picker.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: FamilyActivityPicker
+      url: https://developer.apple.com/documentation/familycontrols
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - FamilyActivityPicker
+    excludes:
+    - 限额见 set_limit
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: app_limits_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.app_limits.schedule
+  level: L3
+  parent: digital_wellbeing.app_limits
+  name:
+    zh: 限额时间表
+    en: Limit Schedule
+  definition: 按时间表启用或停用限额。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/app_limits/schedule.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: DeviceActivitySchedule
+      url: https://developer.apple.com/documentation/deviceactivity
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - schedule
+    excludes:
+    - 设置限额见 set_limit
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: app_limits_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.app_limits.set_limit
+  level: L3
+  parent: digital_wellbeing.app_limits
+  name:
+    zh: 设置应用限额
+    en: Set App Limit
+  definition: 为应用或类别设置每日使用限额。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/app_limits/set_limit.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: ManagedSettings
+      url: https://developer.apple.com/documentation/managedsettings
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - ManagedSettings / AppTimer
+    excludes:
+    - 阻断见 shield
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: app_limits_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.app_limits.shield
+  level: L3
+  parent: digital_wellbeing.app_limits
+  name:
+    zh: 超限阻断护盾
+    en: Limit Shield
+  definition: 在超限时展示阻断护盾界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/app_limits/shield.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: ManagedSettingsStore
+      url: https://developer.apple.com/documentation/managedsettings
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - shield
+    excludes:
+    - 设置限额见 set_limit
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: app_limits_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.app_limits.website_limit
+  level: L3
+  parent: digital_wellbeing.app_limits
+  name:
+    zh: 网站限额
+    en: Website Limits
+  definition: 对网站或域名设置使用限额。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/app_limits/website_limit.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: ManagedSettingsStore
+      url: https://developer.apple.com/documentation/managedsettings
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - website limits
+    excludes:
+    - 应用限额见 set_limit
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: app_limits_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.focus.activity_share
+  level: L3
+  parent: digital_wellbeing.focus
+  name:
+    zh: 专注状态共享
+    en: Focus Status Sharing
+  definition: 向联系人或系统共享当前专注状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/focus/activity_share.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: FocusStatusCenter
+      url: https://developer.apple.com/documentation/intents/focusstatuscenter
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - share focus status
+    excludes:
+    - 状态见 status
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: focus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.focus.allowed_people
+  level: L3
+  parent: digital_wellbeing.focus
+  name:
+    zh: 允许打断联系人
+    en: Allowed Interrupt People
+  definition: 配置专注模式下允许打断的联系人。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/focus/allowed_people.yaml
+  bindings:
+    android:
+    - kind: class
+      id: NotificationManager.Policy
+      url: https://developer.android.com/reference/android/app/NotificationManager.Policy
+      role: primary
+    ios:
+    - kind: guide
+      id: Focus allowed people
+      url: https://developer.apple.com/focus/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - allowed people
+    excludes:
+    - 配置档见 profile_config
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: focus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.focus.app_exceptions
+  level: L3
+  parent: digital_wellbeing.focus
+  name:
+    zh: 专注应用例外
+    en: Focus App Exceptions
+  definition: 配置专注模式下仍允许通知的应用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/focus/app_exceptions.yaml
+  bindings:
+    android:
+    - kind: class
+      id: NotificationManager.Policy
+      url: https://developer.android.com/reference/android/app/NotificationManager.Policy
+      role: primary
+    ios:
+    - kind: guide
+      id: Focus allowed apps
+      url: https://developer.apple.com/focus/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - app exceptions
+    excludes:
+    - 意图过滤见 intent_filter
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: focus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.focus.drive_mode
+  level: L3
+  parent: digital_wellbeing.focus
+  name:
+    zh: 驾驶专注
+    en: Driving Focus
+  definition: 驾驶场景专注模式适配。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/focus/drive_mode.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AutomaticZenRule
+      url: https://developer.android.com/reference/android/app/AutomaticZenRule
+      role: primary
+    ios:
+    - kind: guide
+      id: Focus Driving
+      url: https://developer.apple.com/focus/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - driving focus
+    excludes:
+    - 状态见 status
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: focus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.focus.intent_filter
+  level: L3
+  parent: digital_wellbeing.focus
+  name:
+    zh: 专注意图过滤
+    en: Focus Intent Filtering
+  definition: 在专注模式下过滤可打断的意图或通知。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/focus/intent_filter.yaml
+  bindings:
+    android:
+    - kind: class
+      id: InterruptionFilter
+      url: https://developer.android.com/reference/android/app/NotificationManager
+      role: primary
+    ios:
+    - kind: framework
+      id: FocusFilterIntent
+      url: https://developer.apple.com/documentation/appintents
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - focus filter
+    excludes:
+    - 状态见 status
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: focus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.focus.profile_config
+  level: L3
+  parent: digital_wellbeing.focus
+  name:
+    zh: 专注配置档
+    en: Focus Profile Config
+  definition: 配置专注模式允许的应用与联系人。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/focus/profile_config.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: Focus
+      url: https://support.apple.com/guide/iphone/focus-ipha0fc1b5d2/ios
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - focus config
+    excludes:
+    - 状态见 status
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: focus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.focus.schedule
+  level: L3
+  parent: digital_wellbeing.focus
+  name:
+    zh: 专注时间表
+    en: Focus Schedule
+  definition: 按时间或位置自动启用专注模式。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/focus/schedule.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AutomaticZenRule
+      url: https://developer.android.com/reference/android/app/AutomaticZenRule
+      role: primary
+    ios:
+    - kind: guide
+      id: Focus
+      url: https://developer.apple.com/focus/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - focus schedule
+    excludes:
+    - 配置档见 profile_config
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: focus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.focus.sleep_mode
+  level: L3
+  parent: digital_wellbeing.focus
+  name:
+    zh: 睡眠专注
+    en: Sleep Focus
+  definition: 睡眠场景专注模式适配。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/focus/sleep_mode.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AutomaticZenRule
+      url: https://developer.android.com/reference/android/app/AutomaticZenRule
+      role: primary
+    ios:
+    - kind: guide
+      id: Sleep Focus
+      url: https://developer.apple.com/focus/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - sleep focus
+    excludes:
+    - 状态见 status
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: focus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.focus.status
+  level: L3
+  parent: digital_wellbeing.focus
+  name:
+    zh: 专注模式状态
+    en: Focus Mode Status
+  definition: 读取当前专注/勿扰状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/focus/status.yaml
+  bindings:
+    android:
+    - kind: class
+      id: NotificationManager
+      url: https://developer.android.com/reference/android/app/NotificationManager
+      role: primary
+    ios:
+    - kind: class
+      id: FocusStatusCenter
+      url: https://developer.apple.com/documentation/intents/focusstatuscenter
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - FocusStatusCenter / ZenMode
+    excludes:
+    - 意图过滤见 intent_filter
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: focus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.parental.account_link
+  level: L3
+  parent: digital_wellbeing.parental
+  name:
+    zh: 亲子账号关联
+    en: Parent-Child Account Link
+  definition: 关联亲子账号以启用监护能力。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/parental/account_link.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: FamilySharing
+      url: https://developer.apple.com/family-sharing/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - family account link
+    excludes:
+    - 授权见 family_auth
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: parental_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.parental.ask_to_buy
+  level: L3
+  parent: digital_wellbeing.parental
+  name:
+    zh: 购买与下载审批
+    en: Ask to Buy Approval
+  definition: 儿童购买或下载需监护人审批。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/parental/ask_to_buy.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: FamilySharing
+      url: https://developer.apple.com/documentation/storekit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Ask to Buy / parental approval
+    excludes:
+    - 内容过滤见 content_restrict
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: parental_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.parental.communication_limit
+  level: L3
+  parent: digital_wellbeing.parental
+  name:
+    zh: 通信限制
+    en: Communication Limits
+  definition: 限制可通话/消息的联系人范围。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/parental/communication_limit.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: CommunicationLimits
+      url: https://developer.apple.com/documentation/managedsettings
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - communication limits
+    excludes:
+    - 内容限制见 content_restrict
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: parental_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.parental.content_restrict
+  level: L3
+  parent: digital_wellbeing.parental
+  name:
+    zh: 内容分级限制
+    en: Content Rating Restrictions
+  definition: 按分级限制应用、媒体或网页内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/parental/content_restrict.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Restrictions
+      url: https://developer.android.com/work/dpc/build-dpc
+      role: primary
+    ios:
+    - kind: framework
+      id: Screen Time restrictions
+      url: https://developer.apple.com/documentation/screentime
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - content restrictions
+    excludes:
+    - 应用限额见 app_limits
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: parental_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.parental.device_supervise
+  level: L3
+  parent: digital_wellbeing.parental
+  name:
+    zh: 设备监督配置
+    en: Supervised Device Config
+  definition: 对受监护设备下发基础监督配置。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/parental/device_supervise.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: Supervised devices
+      url: https://developer.apple.com/documentation/devicedevice
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - supervised device
+    excludes:
+    - 企业 MDM 见 enterprise
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: parental_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.parental.family_auth
+  level: L3
+  parent: digital_wellbeing.parental
+  name:
+    zh: 家庭监护授权
+    en: Family Guardianship Auth
+  definition: 请求家庭控件/监护授权。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/digital_wellbeing/parental/family_auth.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: FamilyControls
+      url: https://developer.apple.com/documentation/familycontrols
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - FamilyControls auth
+    excludes:
+    - 审批见 ask_to_buy
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: parental_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.parental.location_share
+  level: L3
+  parent: digital_wellbeing.parental
+  name:
+    zh: 家庭位置共享
+    en: Family Location Share
+  definition: 家庭成员间位置共享入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/digital_wellbeing/parental/location_share.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: Find My / Family
+      url: https://developer.apple.com/documentation/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - family location
+    excludes:
+    - 远程管理见 remote_manage
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: parental_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.parental.remote_manage
+  level: L3
+  parent: digital_wellbeing.parental
+  name:
+    zh: 远程家长管理
+    en: Remote Parental Manage
+  definition: 监护人远程查看或调整孩子设备限制。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/parental/remote_manage.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: FamilyControls
+      url: https://developer.apple.com/documentation/familycontrols
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - remote parental
+    excludes:
+    - 本机限额见 app_limits
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: parental_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.parental.screen_distance
+  level: L3
+  parent: digital_wellbeing.parental
+  name:
+    zh: 屏幕距离提醒
+    en: Screen Distance Alert
+  definition: 屏幕距离过近提醒能力入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/parental/screen_distance.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: Screen Distance
+      url: https://developer.apple.com/documentation/screentime
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - screen distance
+    excludes:
+    - 使用报告见 screen_time
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: parental_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.screen_time.category_stats
+  level: L3
+  parent: digital_wellbeing.screen_time
+  name:
+    zh: 类别使用统计
+    en: Category Usage Stats
+  definition: 按应用类别聚合使用时长。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/screen_time/category_stats.yaml
+  bindings:
+    android:
+    - kind: class
+      id: UsageStats
+      url: https://developer.android.com/reference/android/app/usage/UsageStats
+      role: primary
+    ios:
+    - kind: framework
+      id: DeviceActivityFilter
+      url: https://developer.apple.com/documentation/deviceactivity
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - category stats
+    excludes:
+    - 应用级见 usage_query
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: screen_time_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.screen_time.events
+  level: L3
+  parent: digital_wellbeing.screen_time
+  name:
+    zh: 使用事件流
+    en: Usage Event Stream
+  definition: 读取应用前台/通知等使用事件流。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/digital_wellbeing/screen_time/events.yaml
+  bindings:
+    android:
+    - kind: class
+      id: UsageEvents
+      url: https://developer.android.com/reference/android/app/usage/UsageEvents
+      role: primary
+    ios:
+    - kind: framework
+      id: DeviceActivityData
+      url: https://developer.apple.com/documentation/deviceactivity
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - UsageEvents
+    excludes:
+    - 聚合查询见 usage_query
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: screen_time_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.screen_time.notification_stats
+  level: L3
+  parent: digital_wellbeing.screen_time
+  name:
+    zh: 通知使用统计
+    en: Notification Usage Stats
+  definition: 统计通知到达与互动相关使用数据。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/digital_wellbeing/screen_time/notification_stats.yaml
+  bindings:
+    android:
+    - kind: class
+      id: UsageEvents
+      url: https://developer.android.com/reference/android/app/usage/UsageEvents
+      role: primary
+    ios:
+    - kind: framework
+      id: DeviceActivity
+      url: https://developer.apple.com/documentation/deviceactivity
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - notification stats
+    excludes:
+    - 使用时长见 usage_query
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: screen_time_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.screen_time.pickup_stats
+  level: L3
+  parent: digital_wellbeing.screen_time
+  name:
+    zh: 拿起次数统计
+    en: Pickup Count Stats
+  definition: 统计设备拿起/唤醒相关次数。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/digital_wellbeing/screen_time/pickup_stats.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: DeviceActivity
+      url: https://developer.apple.com/documentation/deviceactivity
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - pickups
+    excludes:
+    - 解锁见 unlock_count
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: screen_time_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.screen_time.report_ui
+  level: L3
+  parent: digital_wellbeing.screen_time
+  name:
+    zh: 使用报告界面
+    en: Usage Report UI
+  definition: 展示或跳转系统使用报告界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/digital_wellbeing/screen_time/report_ui.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Digital Wellbeing
+      url: https://developer.android.com/guide/topics/usage
+      role: primary
+    ios:
+    - kind: framework
+      id: Screen Time API
+      url: https://developer.apple.com/documentation/screentime
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - screen time report
+    excludes:
+    - 查询 API 见 usage_query
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: screen_time_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.screen_time.token_auth
+  level: L3
+  parent: digital_wellbeing.screen_time
+  name:
+    zh: 屏幕时间授权令牌
+    en: Screen Time Auth Token
+  definition: 获取家庭/屏幕时间能力授权令牌。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/digital_wellbeing/screen_time/token_auth.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: AuthorizationCenter
+      url: https://developer.apple.com/documentation/familycontrols/authorizationcenter
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - AuthorizationCenter
+    excludes:
+    - 查询见 usage_query
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: screen_time_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.screen_time.unlock_count
+  level: L3
+  parent: digital_wellbeing.screen_time
+  name:
+    zh: 解锁次数统计
+    en: Unlock Count Stats
+  definition: 统计设备解锁次数。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/digital_wellbeing/screen_time/unlock_count.yaml
+  bindings:
+    android:
+    - kind: class
+      id: UsageStatsManager
+      url: https://developer.android.com/reference/android/app/usage/UsageStatsManager
+      role: primary
+    ios:
+    - kind: framework
+      id: DeviceActivity
+      url: https://developer.apple.com/documentation/deviceactivity
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - unlock count
+    excludes:
+    - 使用时长见 usage_query
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: screen_time_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: digital_wellbeing.screen_time.usage_query
+  level: L3
+  parent: digital_wellbeing.screen_time
+  name:
+    zh: 使用时长查询
+    en: Usage Duration Query
+  definition: 查询应用或设备屏幕使用时长统计。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/digital_wellbeing/screen_time/usage_query.yaml
+  bindings:
+    android:
+    - kind: class
+      id: UsageStatsManager
+      url: https://developer.android.com/reference/android/app/usage/UsageStatsManager
+      role: primary
+    ios:
+    - kind: framework
+      id: DeviceActivity
+      url: https://developer.apple.com/documentation/deviceactivity
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - UsageStatsManager / DeviceActivity
+    excludes:
+    - 限额见 app_limits
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: screen_time_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability

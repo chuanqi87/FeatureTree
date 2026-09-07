@@ -1,0 +1,32 @@
+schema_version: 2
+feature_id: sensors.fusion
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 活动识别、静止、握持与设备姿态融合状态。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- sensors.fusion.activity
+- sensors.fusion.device_posture
+- sensors.fusion.flip
+- sensors.fusion.grip
+- sensors.fusion.headline
+- sensors.fusion.motion_detect
+- sensors.fusion.restricted_research
+- sensors.fusion.rotation_matrix
+- sensors.fusion.stationary
+- sensors.fusion.tilt_detect

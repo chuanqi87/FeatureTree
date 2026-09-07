@@ -1,0 +1,711 @@
+{
+  "domain": "sensors",
+  "authored_count": 5,
+  "draft_clue_count": 36,
+  "authored": [
+    {
+      "id": "sensors",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "传感器与运动",
+        "en": "Sensors and Motion"
+      },
+      "definition": "加速度、陀螺仪、环境传感器等。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "sensors.environment",
+      "parent": "sensors",
+      "level": "L2",
+      "name": {
+        "zh": "环境传感器",
+        "en": "Environment Sensors"
+      },
+      "definition": "光感、气压、温度等。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "sensors.environment.ambient",
+      "parent": "sensors.environment",
+      "level": "L3",
+      "name": {
+        "zh": "环境读数",
+        "en": "Ambient Readings"
+      },
+      "definition": "环境光、气压等传感器。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "sensors.motion",
+      "parent": "sensors",
+      "level": "L2",
+      "name": {
+        "zh": "运动传感器",
+        "en": "Motion Sensors"
+      },
+      "definition": "加速度计、陀螺仪、姿态。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "sensors.motion.accel_gyro",
+      "parent": "sensors.motion",
+      "level": "L3",
+      "name": {
+        "zh": "加速度与陀螺仪",
+        "en": "Accelerometer and Gyroscope"
+      },
+      "definition": "原始运动传感器读数。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "sensors.access",
+      "parent": "sensors",
+      "name": "数据访问与订阅",
+      "what": "传感器数据的订阅、查询与配置模型",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "sensors.access.c-api",
+      "parent": "sensors.access",
+      "name": "传感器C接口",
+      "what": "C/C++侧传感器信息获取与订阅（起始版本11）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_Sensor_Subscribe（Sensor C API）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor-guidelines-capi",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.access.device-list",
+      "parent": "sensors.access",
+      "name": "传感器列表查询",
+      "what": "查询设备支持的传感器类型与属性",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "sensor.getSensorListSync/getSingleSensor",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-sensor",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "SensorManager.getSensorList(Sensor.TYPE_ALL)",
+          "url": "https://developer.android.com/reference/android/hardware/SensorManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.access.dynamic",
+      "parent": "sensors.access",
+      "name": "动态传感器管理",
+      "what": "动态接入传感器（外接设备）上下线监听",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "动态传感器（Sensor Service Kit）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "SensorManager.registerDynamicSensorCallback",
+          "url": "https://developer.android.com/reference/android/hardware/SensorManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.access.permission",
+      "parent": "sensors.access",
+      "name": "权限与使用限制",
+      "what": "传感器相关权限与高采样率限制（按需注册、及时释放）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "HIGH_SAMPLING_RATE_SENSORS权限 / body sensors权限",
+          "url": "https://developer.android.com/develop/sensors-and-location/sensors/gnss",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "NSMotionUsageDescription",
+          "url": "https://developer.apple.com/documentation/coremotion",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.access.sampling",
+      "parent": "sensors.access",
+      "name": "采样率与精度配置",
+      "what": "指定数据上报频率与精度模式",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "SensorManager.registerListener(samplingPeriodUs)",
+          "url": "https://developer.android.com/reference/android/hardware/SensorManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "sensor.on(type, interval)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.access.subscribe",
+      "parent": "sensors.access",
+      "name": "订阅与单次查询",
+      "what": "按类型订阅传感器数据流或单次获取",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "sensor.on/once/off（@ohos.sensor，订阅-单次-取消）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-sensor",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "SensorManager.registerListener",
+          "url": "https://developer.android.com/reference/android/hardware/SensorManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CMMotionManager.startAccelerometerUpdates",
+          "url": "https://developer.apple.com/documentation/coremotion",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.body",
+      "parent": "sensors",
+      "name": "生物传感数据",
+      "what": "人体生理相关传感器（多为穿戴形态/受限）",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "sensors.body.ecg-ppg",
+      "parent": "sensors.body",
+      "name": "ECG/PPG心电脉搏",
+      "what": "心电与光电容积脉搏波数据（HarmonyOS标注受限发布，仅限专业研究机构）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "穿戴ECG/PPG（传感器受限发布）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.body.heart-rate",
+      "parent": "sensors.body",
+      "name": "心率传感器",
+      "what": "心率数据获取（穿戴设备）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "sensor.SensorId.HEART_RATE（穿戴）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Sensor.TYPE_HEART_RATE（BODY_SENSORS权限）",
+          "url": "https://developer.android.com/develop/sensors-and-location/sensors/gnss",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.body.wrist",
+      "parent": "sensors.body",
+      "name": "腕部佩戴状态",
+      "what": "手腕佩戴姿态与配置信息（SensorKit受限）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "SensorKit SRSensorReader（wrist config，需entitlement）",
+          "url": "https://developer.apple.com/documentation/sensorkit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.environment",
+      "parent": "sensors",
+      "name": "环境传感器",
+      "what": "测量周围环境的传感器",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "sensors.environment.light",
+      "parent": "sensors.environment",
+      "name": "环境光传感器",
+      "what": "环境光照强度（自动亮度等）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "sensor.SensorId.AMBIENT_LIGHT",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Sensor.TYPE_LIGHT",
+          "url": "https://developer.android.com/develop/sensors-and-location/sensors/gnss",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.environment.pressure",
+      "parent": "sensors.environment",
+      "name": "气压计",
+      "what": "大气压力（相对海拔）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Sensor.TYPE_PRESSURE",
+          "url": "https://developer.android.com/develop/sensors-and-location/sensors/gnss",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CMAltimeter(CMAltitudeData)",
+          "url": "https://developer.apple.com/documentation/coremotion/cmabsolutealtitudedata",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "sensor.SensorId.BAROMETER",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.environment.temp-humidity",
+      "parent": "sensors.environment",
+      "name": "温湿度传感器",
+      "what": "环境温度与相对湿度",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "sensor.SensorId.AMBIENT_TEMPERATURE / HUMIDITY",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Sensor.TYPE_AMBIENT_TEMPERATURE / TYPE_RELATIVE_HUMIDITY",
+          "url": "https://developer.android.com/develop/sensors-and-location/sensors/gnss",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.fusion",
+      "parent": "sensors",
+      "name": "融合感知",
+      "what": "多传感器融合的设备与用户状态感知",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "sensors.fusion.activity",
+      "parent": "sensors.fusion",
+      "name": "身体活动识别",
+      "what": "识别步行/跑步/骑车等活动状态转换（主归属location域）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ActivityRecognitionClient / ActivityRecognitionResult",
+          "url": "https://developer.android.com/develop/sensors-and-location/location/give-users-context",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.fusion.device-status",
+      "parent": "sensors.fusion",
+      "name": "设备形态状态感知",
+      "what": "支架态等设备使用形态感知",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Multimodal Awareness Kit deviceStatus（支架态）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/multimodalawareness-kit-intro",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.fusion.grip",
+      "parent": "sensors.fusion",
+      "name": "握持手/操作手感知",
+      "what": "识别握持手与交互手供应用动态调整UI布局",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Multimodal Awareness Kit motion（操作手/握持手，智感握姿）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/multimodalawareness-motion-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.fusion.sensorkit-restricted",
+      "parent": "sensors.fusion",
+      "name": "iOS SensorKit受限读取",
+      "what": "经entitlement读取原始与派生传感指标（步数/旋转/环境光/通勤等，iPhone与配对手表）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "SRSensorReader/SRFetchRequest（SensorKit）",
+          "url": "https://developer.apple.com/documentation/sensorkit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.fusion.stationary",
+      "parent": "sensors.fusion",
+      "name": "设备静止状态感知",
+      "what": "订阅设备绝对/相对静止状态进入与退出",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.stationary on/once（静止/相对静止）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/stationary-glossary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.haptics",
+      "parent": "sensors",
+      "name": "振动与触感",
+      "what": "振动马达控制与触觉反馈",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "sensors.haptics.basic",
+      "parent": "sensors.haptics",
+      "name": "基础振动控制",
+      "what": "触发/停止振动（需权限）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.vibrator startVibration（@kit.SensorServiceKit）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-vibrator",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "sensors.haptics.core-haptics",
+      "parent": "sensors.haptics",
+      "name": "触觉引擎",
+      "what": "自定义触感模式与实时触感控制",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "CHHapticEngine（Core Haptics）",
+          "url": "https://developer.apple.com/documentation/corehaptics",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.haptics.effects",
+      "parent": "sensors.haptics",
+      "name": "预设与组合振动效果",
+      "what": "系统预设效果或按时序组合的振动波形（含动态马达）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "VibrationEffect.createPredefined/createWaveform",
+          "url": "https://developer.android.com/reference/android/os/Vibrator",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Vibrator效果查询与动态马达（Sensor Service Kit）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/vibrator",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.haptics.uikit-feedback",
+      "parent": "sensors.haptics",
+      "name": "UIKit触感反馈",
+      "what": "系统预置的界面触感反馈生成器",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIImpactFeedbackGenerator/UINotificationFeedbackGenerator",
+          "url": "https://developer.apple.com/documentation/uikit/uifeedbackgenerator",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.motion",
+      "parent": "sensors",
+      "name": "运动传感器",
+      "what": "测量设备运动与姿态的传感器",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "sensors.motion.accelerometer",
+      "parent": "sensors.motion",
+      "name": "加速度计",
+      "what": "测量三轴加速度（含重力）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "sensor.SensorId.ACCELEROMETER",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Sensor.TYPE_ACCELEROMETER",
+          "url": "https://developer.android.com/develop/sensors-and-location/sensors/gnss",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CMAccelerometerData",
+          "url": "https://developer.apple.com/documentation/coremotion",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.motion.attitude",
+      "parent": "sensors.motion",
+      "name": "设备姿态与旋转矢量",
+      "what": "设备朝向/旋转姿态（含游戏旋转矢量）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Sensor.TYPE_ROTATION_VECTOR",
+          "url": "https://developer.android.com/develop/sensors-and-location/sensors/gnss",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CMAttitude",
+          "url": "https://developer.apple.com/documentation/coremotion",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "sensor.SensorId.ROTATION_VECTOR",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.motion.gyroscope",
+      "parent": "sensors.motion",
+      "name": "陀螺仪",
+      "what": "测量三轴旋转角速度",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "sensor.SensorId.GYROSCOPE",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Sensor.TYPE_GYROSCOPE",
+          "url": "https://developer.android.com/develop/sensors-and-location/sensors/gnss",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CMGyroData",
+          "url": "https://developer.apple.com/documentation/coremotion",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.motion.linear-gravity",
+      "parent": "sensors.motion",
+      "name": "线性加速度与重力",
+      "what": "分离重力分量的线性加速度数据",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Sensor.TYPE_LINEAR_ACCELERATION / TYPE_GRAVITY",
+          "url": "https://developer.android.com/develop/sensors-and-location/sensors/gnss",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CMMotionManager deviceMotion(userAcceleration/gravity)",
+          "url": "https://developer.apple.com/documentation/coremotion",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.motion.orientation",
+      "parent": "sensors.motion",
+      "name": "设备方向",
+      "what": "设备屏幕方向与地磁方位角",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Sensor.TYPE_ORIENTATION（地磁+加速度融合）",
+          "url": "https://developer.android.com/develop/sensors-and-location/sensors/gnss",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "sensor.SensorId.ORIENTATION",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.position",
+      "parent": "sensors",
+      "name": "位置与近接类传感器",
+      "what": "磁场、距离与计步等位姿相关传感",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "sensors.position.magnetic",
+      "parent": "sensors.position",
+      "name": "磁力计",
+      "what": "三轴地磁强度（指南针）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "sensor.SensorId.MAGNETIC_FIELD",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Sensor.TYPE_MAGNETIC_FIELD",
+          "url": "https://developer.android.com/develop/sensors-and-location/sensors/gnss",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CMMagnetometer",
+          "url": "https://developer.apple.com/documentation/coremotion",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.position.pedometer",
+      "parent": "sensors.position",
+      "name": "计步器",
+      "what": "步数统计与步进检测",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "CMPedometer.queryPedometerData",
+          "url": "https://developer.apple.com/documentation/coremotion/cmpedometer",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Sensor.TYPE_STEP_COUNTER / TYPE_STEP_DETECTOR",
+          "url": "https://developer.android.com/develop/sensors-and-location/sensors/gnss",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "sensor.SensorId.PEDOMETER / PEDOMETER_DETECTION",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/sensor",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "sensors.position.proximity",
+      "parent": "sensors.position",
+      "name": "距离传感器",
+      "what": "物体与屏幕距离（通话熄屏等）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Sensor.TYPE_PROXIMITY",
+          "url": "https://developer.android.com/develop/sensors-and-location/sensors/gnss",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIDevice proximityState",
+          "url": "https://developer.apple.com/documentation/uikit/uidevice",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

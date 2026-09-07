@@ -206,6 +206,59 @@
         "minLength": 1
       },
       "uniqueItems": true
+    },
+    "sibling_axis": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Shared split axis among siblings under the same parent."
+    },
+    "granularity": {
+      "type": "string",
+      "enum": [
+        "atomic",
+        "branch"
+      ],
+      "description": "atomic = independently comparable leaf capability; branch = still subdivided."
+    },
+    "anchor_status": {
+      "type": "string",
+      "enum": [
+        "unverified",
+        "url_ok",
+        "body_ok",
+        "symbol_ok",
+        "failed"
+      ],
+      "default": "unverified",
+      "description": "API binding verification state; design phase starts as unverified."
+    },
+    "legacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "disposition"
+      ],
+      "properties": {
+        "disposition": {
+          "type": "string",
+          "enum": [
+            "kept",
+            "renamed_from",
+            "merged_from",
+            "split_from",
+            "new"
+          ]
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "description": "Related historical feature ids from the prior 212-node tree."
+        }
+      }
     }
   },
   "$defs": {

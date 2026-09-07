@@ -1,0 +1,21 @@
+schema_version: 2
+feature_id: graphics.gpu.compute.kernel_lib
+role: leaf
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 预置图像/矩阵等 GPU 内核库。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []

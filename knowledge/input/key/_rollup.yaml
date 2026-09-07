@@ -1,0 +1,29 @@
+schema_version: 2
+feature_id: input.key
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 物理/外接键盘按键事件与导航键。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- input.key.dpad
+- input.key.events
+- input.key.keyboard_nav
+- input.key.modifier_state
+- input.key.repeat
+- input.key.shortcuts
+- input.key.system_keys

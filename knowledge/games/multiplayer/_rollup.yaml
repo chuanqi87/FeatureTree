@@ -1,0 +1,31 @@
+schema_version: 2
+feature_id: games.multiplayer
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 实时/回合多人与房间匹配。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- games.multiplayer.automatch
+- games.multiplayer.invites
+- games.multiplayer.matchmaking
+- games.multiplayer.nearby_transfer
+- games.multiplayer.participant_status
+- games.multiplayer.realtime
+- games.multiplayer.reliable_msg
+- games.multiplayer.turn_based
+- games.multiplayer.unreliable_msg

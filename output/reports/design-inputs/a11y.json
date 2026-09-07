@@ -1,0 +1,838 @@
+{
+  "domain": "a11y",
+  "authored_count": 5,
+  "draft_clue_count": 48,
+  "authored": [
+    {
+      "id": "a11y",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "无障碍",
+        "en": "Accessibility"
+      },
+      "definition": "无障碍服务与辅助技术；控件叶子引用本域，不复述框架。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "a11y.framework",
+      "parent": "a11y",
+      "level": "L2",
+      "name": {
+        "zh": "无障碍框架",
+        "en": "Accessibility Framework"
+      },
+      "definition": "无障碍树、焦点与服务。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "a11y.framework.tree",
+      "parent": "a11y.framework",
+      "level": "L3",
+      "name": {
+        "zh": "无障碍树与语义",
+        "en": "Accessibility Tree and Semantics"
+      },
+      "definition": "向辅助技术暴露语义属性。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "a11y.service",
+      "parent": "a11y",
+      "level": "L2",
+      "name": {
+        "zh": "无障碍服务",
+        "en": "Accessibility Service"
+      },
+      "definition": "第三方无障碍服务扩展。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "a11y.service.extension",
+      "parent": "a11y.service",
+      "level": "L3",
+      "name": {
+        "zh": "无障碍服务扩展",
+        "en": "Accessibility Service Extension"
+      },
+      "definition": "应用作为无障碍服务观察并操作界面。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "a11y.announce",
+      "parent": "a11y",
+      "name": "动态播报与状态告知",
+      "what": "界面内容变化时主动向辅助用户实时播报",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "a11y.announce.event",
+      "parent": "a11y.announce",
+      "name": "内容变化主动播报",
+      "what": "界面重要内容变化后经接口实时告知",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "accessibility.EventInfo 主动播报",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-accessibility",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.announce.live-region",
+      "parent": "a11y.announce",
+      "name": "动态区域播报",
+      "what": "标注区域内容变化时自动朗读",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "View.accessibilityLiveRegion",
+          "url": "https://developer.android.com/reference/android/view/View",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIAccessibility.post(notification: .announcement)",
+          "url": "https://developer.apple.com/documentation/accessibility/accessibility-api",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.announce.page",
+      "parent": "a11y.announce",
+      "name": "页面切换通知",
+      "what": "自定义页面堆栈切换后通知屏幕朗读重新聚焦",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "EventInfo(type=pageActive, customId)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-accessibility",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.announce.state",
+      "parent": "a11y.announce",
+      "name": "控件状态与位置变化播报",
+      "what": "播放/暂停等状态切换与控件移动位置的同步播报",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "状态/位置播报实践（指南）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-support-accessibility-friendliness",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.custom-render",
+      "parent": "a11y",
+      "name": "自绘内容无障碍接入",
+      "what": "自绘引擎/三方框架渲染内容接入系统无障碍",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "a11y.custom-render.provider",
+      "parent": "a11y.custom-render",
+      "name": "无障碍提供方接口",
+      "what": "三方框架通过Provider使自绘组件支持焦点等无障碍功能",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ArkUI_AccessibilityProvider（API 13起）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-support-accessibility-friendliness",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.custom-render.render-node",
+      "parent": "a11y.custom-render",
+      "name": "渲染节点树接入",
+      "what": "基于XComponent/CustomNode渲染节点树接入无障碍（API 23起）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "XComponent/CustomNode 无障碍接入",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-support-accessibility-friendliness",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.elder",
+      "parent": "a11y",
+      "name": "适老化与关怀模式",
+      "what": "接入系统长辈关怀/适老化模式",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "a11y.elder.senior-mode",
+      "parent": "a11y.elder",
+      "name": "关怀模式声明接入",
+      "what": "module.json5声明senior_mode元数据接入系统关怀模式",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "senior_mode metadata + isSeniorModeEnabled（API 26.0.0起）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-elder-care",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.elder.state-sync",
+      "parent": "a11y.elder",
+      "name": "应用内关怀模式状态同步",
+      "what": "查询/设置/监听设置中本应用关怀模式开关",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "getSeniorModeStateForSelf/setSeniorModeStateForSelf/onSeniorModeStateChangeForSelf",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-elder-care",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.focus",
+      "parent": "a11y",
+      "name": "焦点与走焦管理",
+      "what": "控制屏幕朗读/键盘焦点的移动顺序、纳入与恢复",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "a11y.focus.dialog",
+      "parent": "a11y.focus",
+      "name": "弹窗走焦策略",
+      "what": "模态弹窗强制聚焦、非模态弹窗允许外部聚焦的走焦行为控制",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "弹窗类控件走焦（模态/非模态/子窗）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-support-accessibility-friendliness",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIAccessibilityFocus 手势导航与模态适配",
+          "url": "https://developer.apple.com/documentation/accessibility/accessibility-api",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.focus.exclude",
+      "parent": "a11y.focus",
+      "name": "装饰性内容焦点排除",
+      "what": "将纯装饰控件排除出可聚焦树避免无效走焦",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "accessibilityLevel(\"no\"/\"no-hide-descendants\")",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-universal-attributes-accessibility",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "View.importantForAccessibility",
+          "url": "https://developer.android.com/reference/android/view/View",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.focus.order",
+      "parent": "a11y.focus",
+      "name": "自定义走焦顺序",
+      "what": "指定焦点在控件间的切换先后顺序",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "accessibilityNextFocusId（API 18起）/ nextFocusParams",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-universal-attributes-accessibility",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "AccessibilityNodeInfo.setTraversalBefore/After",
+          "url": "https://developer.android.com/reference/android/view/accessibility/AccessibilityNodeInfo",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.focus.scroll",
+      "parent": "a11y.focus",
+      "name": "焦点可视性保证",
+      "what": "滚动容器中聚焦项自动滚动至可视/居中位置",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "屏幕朗读聚焦卡片自动居中实践",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-support-accessibility-friendliness",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "AccessibilityNodeInfo.performAction(ACTION_SCROLL_TO_POSITION)",
+          "url": "https://developer.android.com/reference/android/view/accessibility/AccessibilityNodeInfo",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.focus.set",
+      "parent": "a11y.focus",
+      "name": "主动聚焦与焦点恢复",
+      "what": "焦点所在控件消失后主动设置新焦点避免跳变",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "js-apis-accessibility 焦点设置接口",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-accessibility",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "AccessibilityNodeInfo.performAction(ACTION_FOCUS)",
+          "url": "https://developer.android.com/reference/android/view/accessibility/AccessibilityNodeInfo",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.grouping",
+      "parent": "a11y",
+      "name": "分组朗读",
+      "what": "将多个控件组合为单一语义单元整体播报，减少冗余走焦",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "a11y.grouping.group",
+      "parent": "a11y.grouping",
+      "name": "组合控件整体播报",
+      "what": "功能完整的组合控件聚合为语义组整体朗读、子项不可聚焦",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "accessibilityGroup",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-universal-attributes-accessibility",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Compose semantics mergeDescendants",
+          "url": "https://developer.android.com/develop/ui/compose/accessibility",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIAccessibilityElement(isAccessibilityElement: false) 容器语义",
+          "url": "https://developer.apple.com/documentation/accessibility/accessibility-api",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.grouping.nested",
+      "parent": "a11y.grouping",
+      "name": "嵌套组去重朗读",
+      "what": "嵌套分组避免同一信息重复朗读，统一标注在父控件",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "嵌套组多维信息整体朗读实践",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-support-accessibility-friendliness",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.grouping.options",
+      "parent": "a11y.grouping",
+      "name": "播报与操作控制细化",
+      "what": "细化分组内播报偏好与状态/动作控制",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "accessibilityOptions（accessibilityPreferred/stateController*/actionController*）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-universal-attributes-accessibility",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.labeling",
+      "parent": "a11y",
+      "name": "控件语义标注",
+      "what": "为控件提供朗读语义，使屏幕朗读等价传达界面信息",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "a11y.labeling.hint",
+      "parent": "a11y.labeling",
+      "name": "提示与用途描述",
+      "what": "补充说明控件用途与操作结果的辅助描述文本",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "accessibilityHint",
+          "url": "https://developer.apple.com/documentation/accessibility/accessibility-api",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "accessibilityDescription",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-universal-attributes-accessibility",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.labeling.i18n",
+      "parent": "a11y.labeling",
+      "name": "朗读内容国际化",
+      "what": "标注字符串的多语言翻译与RTL语言播报拼接顺序处理",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "无障碍标注多语言实践（指南）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-support-accessibility-friendliness",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.labeling.non-text",
+      "parent": "a11y.labeling",
+      "name": "非文本可交互控件标注",
+      "what": "图标、虚拟按钮等无可读文本控件必须提供的替代语义",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "accessibilityText（自定义虚拟按钮场景）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-support-accessibility-friendliness",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android:contentDescription（ImageButton等）",
+          "url": "https://developer.android.com/develop/ui/compose/accessibility",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.labeling.text",
+      "parent": "a11y.labeling",
+      "name": "无障碍文本标注",
+      "what": "为文本/非文本控件提供优先于显示文本的朗读内容",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "accessibilityText()",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-universal-attributes-accessibility",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "accessibilityLabel",
+          "url": "https://developer.apple.com/documentation/accessibility/accessibility-api",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "View.contentDescription",
+          "url": "https://developer.android.com/reference/android/view/View",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.media",
+      "parent": "a11y",
+      "name": "媒体无障碍",
+      "what": "媒体播放相关的无障碍偏好与能力",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "a11y.media.caption",
+      "parent": "a11y.media",
+      "name": "字幕外观与偏好",
+      "what": "读取系统字幕样式偏好并适配字幕展示",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "CaptioningManager",
+          "url": "https://developer.android.com/reference/android/view/accessibility/CaptioningManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MediaAccessibility 字幕外观偏好",
+          "url": "https://developer.apple.com/documentation/avfoundation/mediaaccessibility",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.media.flashing",
+      "parent": "a11y.media",
+      "name": "闪烁灯光检测与缓解",
+      "what": "检测媒体闪光内容并触发系统缓解",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MediaAccessibility 闪烁检测（flashing lights）",
+          "url": "https://developer.apple.com/documentation/avfoundation/mediaaccessibility",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.media.music-haptics",
+      "parent": "a11y.media",
+      "name": "音乐触感",
+      "what": "为音频内容提供与音乐同步的触感体验",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Music Haptics（Core Haptics）",
+          "url": "https://developer.apple.com/documentation/corehaptics/adding-haptics-to-music-playback",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.motor",
+      "parent": "a11y",
+      "name": "交互替代与运动辅助",
+      "what": "为运动障碍用户提供更易触达的交互目标",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "a11y.motor.touch-target",
+      "parent": "a11y.motor",
+      "name": "最小触控目标尺寸",
+      "what": "交互热区满足最小尺寸要求（HarmonyOS推荐48vp、下限40vp）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "responseRegion 热区与最小尺寸lint规则",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-support-accessibility-friendliness",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "48dp 最小触控目标（指南）",
+          "url": "https://developer.android.com/develop/ui/compose/accessibility",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.service",
+      "parent": "a11y",
+      "name": "无障碍服务开发",
+      "what": "以辅助应用/服务形式监听无障碍事件、查询屏幕内容并代用户执行操作的能力",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "a11y.service.a11y-button",
+      "parent": "a11y.service",
+      "name": "无障碍快捷按钮交互",
+      "what": "响应系统无障碍功能快捷按钮的手势与可用性变化",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AccessibilityButtonController",
+          "url": "https://developer.android.com/reference/android/accessibilityservice/AccessibilityButtonController",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.service.event",
+      "parent": "a11y.service",
+      "name": "无障碍事件监听",
+      "what": "后台接收界面变化产生的无障碍事件流",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AccessibilityService.onAccessibilityEvent(AccessibilityEvent)",
+          "url": "https://developer.android.com/reference/android/accessibilityservice/AccessibilityService",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.accessibility AccessibilityEvent",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-accessibility",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.service.gesture",
+      "parent": "a11y.service",
+      "name": "无障碍手势合成与代执行",
+      "what": "服务侧合成触控手势代替用户在屏幕上执行操作",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "GestureDescription.dispatchGesture",
+          "url": "https://developer.android.com/reference/android/accessibilityservice/GestureDescription",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.service.magnification",
+      "parent": "a11y.service",
+      "name": "屏幕放大控制",
+      "what": "控制与监听系统屏幕放大状态",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MagnificationConfig",
+          "url": "https://developer.android.com/reference/android/accessibilityservice/MagnificationConfig",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.service.node-query",
+      "parent": "a11y.service",
+      "name": "屏幕内容节点查询",
+      "what": "查询活动窗口控件树获取文本、状态与位置信息",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AccessibilityNodeInfo (findAccessibilityNodeInfosByText)",
+          "url": "https://developer.android.com/reference/android/view/accessibility/AccessibilityNodeInfo",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIAccessibilityElement / UIAccessibility』协议体系",
+          "url": "https://developer.apple.com/documentation/accessibility/accessibility-api",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "ArkUI_Accessibility 节点查询",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-accessibility",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.testing",
+      "parent": "a11y",
+      "name": "无障碍测试与检查",
+      "what": "自动检查与人工验证无障碍实现",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "a11y.testing.scanner",
+      "parent": "a11y.testing",
+      "name": "无障碍自动检查工具",
+      "what": "扫描界面并报告无障碍问题",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Compose 语义检查/Accessibility Scanner",
+          "url": "https://developer.android.com/develop/ui/compose/accessibility/inspect-debug",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Accessibility Inspector",
+          "url": "https://developer.apple.com/documentation/accessibility/accessibility-inspector",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.testing.screen-reader-test",
+      "parent": "a11y.testing",
+      "name": "屏幕朗读人工验证",
+      "what": "启用屏幕朗读进行功能验证的流程",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "屏幕朗读功能验证指导",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/test-screen-reader",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.tts",
+      "parent": "a11y",
+      "name": "屏幕朗读与语音输出",
+      "what": "屏幕朗读器适配与语音输出（TTS本体在ai域）",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "a11y.tts.screen-reader",
+      "parent": "a11y.tts",
+      "name": "屏幕朗读器适配",
+      "what": "适配TalkBack/VoiceOver/屏幕朗读的语义要求",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "TalkBack 适配（指南）",
+          "url": "https://developer.android.com/develop/ui/compose/accessibility",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "VoiceOver 适配",
+          "url": "https://developer.apple.com/documentation/accessibility/accessibility-api",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "屏幕朗读功能验证",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/test-screen-reader",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.vision-visual",
+      "parent": "a11y",
+      "name": "视觉辅助适配",
+      "what": "跟随系统视觉类无障碍设置调整应用表现",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "a11y.vision-visual.bold",
+      "parent": "a11y.vision-visual",
+      "name": "粗体文本适配",
+      "what": "检测并跟随系统粗体文本开关",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIAccessibility.isBoldTextEnabled",
+          "url": "https://developer.apple.com/documentation/accessibility/accessibility-api",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.vision-visual.contrast",
+      "parent": "a11y.vision-visual",
+      "name": "高对比与颜色反转适配",
+      "what": "跟随系统提高对比度/颜色反转设置并提供高对比资源",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIAccessibility.isDarkerSystemColorsEnabled",
+          "url": "https://developer.apple.com/documentation/accessibility/accessibility-api",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.vision-visual.font-scale",
+      "parent": "a11y.vision-visual",
+      "name": "字体缩放适配",
+      "what": "跟随系统字号缩放调整文本布局",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Configuration.fontScale",
+          "url": "https://developer.android.com/reference/android/content/res/Configuration",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIFontMetrics 动态字体（Dynamic Type）",
+          "url": "https://developer.apple.com/documentation/accessibility/accessibility-api",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "a11y.vision-visual.reduce-motion",
+      "parent": "a11y.vision-visual",
+      "name": "减弱动态效果适配",
+      "what": "检测系统减弱动画设置并降级动效",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIAccessibility.isReduceMotionEnabled",
+          "url": "https://developer.apple.com/documentation/accessibility/accessibility-api",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Settings.Global.ANIMATOR_DURATION_SCALE",
+          "url": "https://developer.android.com/reference/android/provider/Settings.Global",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

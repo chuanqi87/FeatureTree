@@ -1,9 +1,0 @@
-{
-  "task_id": "3bbec302b907f5cd885af68e49d6d5d583689bd95d55860a5af3e86fad72b7a4",
-  "feature_id": "commerce.ads.sdk",
-  "response_sha256": "05e57b23d52c7955592223a7b66a76e270765b85dad369f04be9d92ff81dfba2",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

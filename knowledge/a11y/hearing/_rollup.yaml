@@ -1,0 +1,27 @@
+schema_version: 2
+feature_id: a11y.hearing
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 字幕、闪光提示与音乐触感等。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- a11y.hearing.audio_description
+- a11y.hearing.caption
+- a11y.hearing.flashing
+- a11y.hearing.mono_audio
+- a11y.hearing.music_haptics

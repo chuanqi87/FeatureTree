@@ -1,0 +1,929 @@
+{
+  "domain": "observability",
+  "authored_count": 7,
+  "draft_clue_count": 53,
+  "authored": [
+    {
+      "id": "observability",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "可观测与质量",
+        "en": "Observability and Quality"
+      },
+      "definition": "日志、崩溃、性能与测试钩子。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "observability.crash",
+      "parent": "observability",
+      "level": "L2",
+      "name": {
+        "zh": "崩溃与ANR",
+        "en": "Crash and ANR"
+      },
+      "definition": "崩溃采集与无响应检测。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "observability.crash.report",
+      "parent": "observability.crash",
+      "level": "L3",
+      "name": {
+        "zh": "崩溃报告",
+        "en": "Crash Reporting"
+      },
+      "definition": "捕获并上报崩溃堆栈。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "observability.logging",
+      "parent": "observability",
+      "level": "L2",
+      "name": {
+        "zh": "日志",
+        "en": "Logging"
+      },
+      "definition": "系统/应用日志接口。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "observability.logging.app",
+      "parent": "observability.logging",
+      "level": "L3",
+      "name": {
+        "zh": "应用日志",
+        "en": "App Logging"
+      },
+      "definition": "应用输出诊断日志。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "observability.perf",
+      "parent": "observability",
+      "level": "L2",
+      "name": {
+        "zh": "性能追踪",
+        "en": "Performance Tracing"
+      },
+      "definition": "帧率、启动与自定义 trace。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "observability.perf.trace",
+      "parent": "observability.perf",
+      "level": "L3",
+      "name": {
+        "zh": "性能Trace",
+        "en": "Performance Trace"
+      },
+      "definition": "记录性能时间线。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "observability.benchmark",
+      "parent": "observability",
+      "name": "基准测试",
+      "what": "自动化性能基准测量。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "observability.benchmark.baseline_profiles",
+      "parent": "observability.benchmark",
+      "name": "基线配置文件",
+      "what": "生成/安装基线profile加速启动。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.profileinstaller",
+          "url": "https://developer.android.com/reference/androidx/profileinstaller",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.benchmark.macro",
+      "parent": "observability.benchmark",
+      "name": "宏观基准测试",
+      "what": "整应用启动/滚动等宏观测量。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MacrobenchmarkRule",
+          "url": "https://developer.android.com/reference/androidx/benchmark/macrobenchmark/package-summary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.benchmark.micro",
+      "parent": "observability.benchmark",
+      "name": "微观基准测试",
+      "what": "CPU/内存微基准测量。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.benchmark BenchmarkRule",
+          "url": "https://developer.android.com/reference/androidx/benchmark/junit4/package-summary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.crash",
+      "parent": "observability",
+      "name": "崩溃与卡死捕获",
+      "what": "应用崩溃、冻结等异常的捕获与上报。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "observability.crash.app_freeze",
+      "parent": "observability.crash",
+      "name": "应用冻结检测",
+      "what": "主线程卡死导致的冻结检测。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AppFreeze",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/appfreeze-guidelines",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.crash.error_manager",
+      "parent": "observability.crash",
+      "name": "错误管理器",
+      "what": "应用内错误对象与异常处理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.app.ability.errorManager",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/errormanager-guidelines",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.crash.event_subscription",
+      "parent": "observability.crash",
+      "name": "崩溃事件订阅",
+      "what": "订阅系统抛出的崩溃/卡死事件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "hiAppEvent watcher (crash events)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/appfreezewarning-events",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.crash.fault_rules",
+      "parent": "observability.crash",
+      "name": "故障检测规则",
+      "what": "系统故障检测框架与规则处理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "fault detection",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/fault-detection-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.crash.js_crash",
+      "parent": "observability.crash",
+      "name": "JS/ArkTS崩溃分析",
+      "what": "ArkTS异常崩溃日志的定位。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "jscrash日志分析",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/jscrash-guidelines",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.crash.native_crash",
+      "parent": "observability.crash",
+      "name": "Native崩溃分析",
+      "what": "C++栈崩溃日志定位。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "cppcrash日志分析",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cppcrash-guidelines",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.crash.third_party",
+      "parent": "observability.crash",
+      "name": "第三方崩溃上报",
+      "what": "Firebase Crashlytics等崩溃聚合。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "FirebaseCrashlytics",
+          "url": "https://firebase.google.com/docs/crashlytics/get-started",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.diagnostics",
+      "parent": "observability",
+      "name": "诊断与调试",
+      "what": "运行时诊断信息采集与问题定位。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "observability.diagnostics.arkts_inspector",
+      "parent": "observability.diagnostics",
+      "name": "ArkTS状态检查",
+      "what": "ArkTS状态渲染与性能检查。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ArkTS Inspector",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-inspector-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.diagnostics.asan",
+      "parent": "observability.diagnostics",
+      "name": "内存错误检测ASan",
+      "what": "AddressSanitizer检测内存错误。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ASan (address-sanitizer)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/address-sanitizer-guidelines",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.diagnostics.deep_recording",
+      "parent": "observability.diagnostics",
+      "name": "深度录制",
+      "what": "系统问题复现深度录制（日志聚合）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "deep recording",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/deep-recording",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.diagnostics.hichecker",
+      "parent": "observability.diagnostics",
+      "name": "系统检查器",
+      "what": "检测系统服务/IPC异常状态。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "hichecker",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hichecker-guidelines-arkts",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.diagnostics.hicollie",
+      "parent": "observability.diagnostics",
+      "name": "卡死检测器",
+      "what": "hicollie处理器卡死看门狗检测。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "hicollie",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hicollie-guidelines-ndk",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.diagnostics.hidebug",
+      "parent": "observability.diagnostics",
+      "name": "应用调试信息",
+      "what": "获取应用内存/CPU等调试信息。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "hidebug (@ohos.hidebug)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hidebug-guidelines",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.diagnostics.hidumper",
+      "parent": "observability.diagnostics",
+      "name": "系统信息转储",
+      "what": "dump系统/服务状态信息。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "hidumper",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hidumper",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.diagnostics.hiretrieval",
+      "parent": "observability.diagnostics",
+      "name": "故障日志检索",
+      "what": "检索设备故障日志。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "hiretrieval",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hiretrieval-intro",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.diagnostics.hitrace",
+      "parent": "observability.diagnostics",
+      "name": "调用链跟踪",
+      "what": "hiTraceChain/hitrace分布式调用链追踪。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "hiTraceChain (@ohos.hiTraceChain)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hitracechain",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.os.Trace",
+          "url": "https://developer.android.com/reference/android/os/Trace",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "os_signpost",
+          "url": "https://developer.apple.com/documentation/os/os_signpost",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.diagnostics.jsvm_debug",
+      "parent": "observability.diagnostics",
+      "name": "JSVM调试",
+      "what": "ArkTS虚拟机内存/线程调试。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "jsvm-debugger",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/jsvm-debugger-cpuprofiler-heapsnapshot",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.diagnostics.lldb",
+      "parent": "observability.diagnostics",
+      "name": "Native调试",
+      "what": "LLDB调试Native代码。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "lldb调试",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/debug-lldb",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Android Studio LLDB debugger",
+          "url": "https://developer.android.com/studio/debug",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.game_quality",
+      "parent": "observability",
+      "name": "游戏质量观测",
+      "what": "游戏专项性能与稳定性监控。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "observability.game_quality.agdk",
+      "parent": "observability.game_quality",
+      "name": "AGDK性能工具",
+      "what": "Android游戏性能调优工具链。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AGDK tuning libraries",
+          "url": "https://developer.android.com/games/agdk",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.game_quality.gpm",
+      "parent": "observability.game_quality",
+      "name": "游戏性能监控",
+      "what": "华为GPM游戏性能监控服务。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Game Performance Monitoring",
+          "url": "https://developer.huawei.com/consumer/cn/doc/games-guides/games-gpm-advantage-0000002298947500",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.logging",
+      "parent": "observability",
+      "name": "应用日志",
+      "what": "结构化/系统日志的记录与捞取。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "observability.logging.log_viewer",
+      "parent": "observability.logging",
+      "name": "开发者日志工具",
+      "what": "命令行/工具捞取与过滤日志。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "hilog工具",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hilog-tool",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "logcat",
+          "url": "https://developer.android.com/tools/logcat",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.logging.native_log",
+      "parent": "observability.logging",
+      "name": "Native日志",
+      "what": "C侧输出日志接口。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "capi-log",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-log-h",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.logging.structured_events",
+      "parent": "observability.logging",
+      "name": "结构化事件日志",
+      "what": "以事件形式记录业务与系统行为。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "hiAppEvent (@ohos.hiviewdfx.hiAppEvent)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hiappevent-watcher-address-sanitizer-events",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.logging.system_log",
+      "parent": "observability.logging",
+      "name": "系统日志API",
+      "what": "输出分级日志到系统日志缓冲。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.util.Log",
+          "url": "https://developer.android.com/reference/android/util/Log",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "os.Logger",
+          "url": "https://developer.apple.com/documentation/os/logger",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "hilog (@ohos.hilog)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hilog",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.logging.watcher",
+      "parent": "observability.logging",
+      "name": "应用事件观察器",
+      "what": "watcher机制订阅本应用事件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "hiAppEvent watcher",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hiappevent-watcher-address-sanitizer-events",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.metrics",
+      "parent": "observability",
+      "name": "质量指标采集",
+      "what": "应用运行指标与诊断数据收集。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "observability.metrics.firebase_perf",
+      "parent": "observability.metrics",
+      "name": "Firebase Performance",
+      "what": "网络/trace性能监控。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "FirebasePerformance FIRTrace",
+          "url": "https://firebase.google.com/docs/perf-mon",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.metrics.jetpack_metrics",
+      "parent": "observability.metrics",
+      "name": "Jetpack指标库",
+      "what": "进程内CPU/内存/绘制状态指标。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.metrics (AppStateMonitor)",
+          "url": "https://developer.android.com/reference/androidx/metrics/library-summary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.metrics.metrickit",
+      "parent": "observability.metrics",
+      "name": "MetricKit指标",
+      "what": "组织级性能/能耗/诊断指标派发。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MXMetricManager",
+          "url": "https://developer.apple.com/documentation/metrickit/mxmetricmanager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.metrics.state_reporting",
+      "parent": "observability.metrics",
+      "name": "状态上报",
+      "what": "设备/应用状态报告（XR等形态候选）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "State Reporting",
+          "url": "https://developer.apple.com/documentation/statereporting",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.performance",
+      "parent": "observability",
+      "name": "性能分析",
+      "what": "CPU、内存、帧率等性能采集分析。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "observability.performance.app_launch",
+      "parent": "observability.performance",
+      "name": "启动性能",
+      "what": "冷/热启动耗时分析优化。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "启动时长分析",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/startup-duration-events",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Baseline Profiles / startup",
+          "url": "https://developer.android.com/topic/performance/baselineprofiles",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.performance.cpu_memory",
+      "parent": "observability.performance",
+      "name": "CPU与内存分析",
+      "what": "进程CPU占用与内存分析。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "CPU/内存分析",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/performance-cpu-usage",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Instruments Time Profiler",
+          "url": "https://developer.apple.com/documentation/xcode/instruments",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.performance.detection",
+      "parent": "observability.performance",
+      "name": "性能体验检测",
+      "what": "系统级性能问题检测框架。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "性能检测框架 (@ohos.hichecker类)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/perf-detection",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.performance.experience",
+      "parent": "observability.performance",
+      "name": "体验性能度量",
+      "what": "页面切换/滑动等体验维度度量。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "体验度量",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/experience-suggestions-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.performance.frame",
+      "parent": "observability.performance",
+      "name": "帧率与渲染性能",
+      "what": "丢帧/Jank等渲染性能度量。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "JankStats (androidx.metrics)",
+          "url": "https://developer.android.com/topic/performance/jank-stats",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "帧率分析",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/performance-frame-rate",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.performance.hiperf",
+      "parent": "observability.performance",
+      "name": "性能采样分析",
+      "what": "hiperf/Perfetto采样分析热点。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "hiperf",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hiperf",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Perfetto / systrace",
+          "url": "https://developer.android.com/topic/performance/tracing",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.performance.mem_leak",
+      "parent": "observability.performance",
+      "name": "内存泄漏与堆分析",
+      "what": "堆快照与泄漏定位。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "内存泄漏分析",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/bpta-malloc",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "JS RawHeap分析",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/js-rawheap-translator",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.performance.smartperf",
+      "parent": "observability.performance",
+      "name": "Smart Perf工具",
+      "what": "性能功耗专项分析工具。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Smart Perf",
+          "url": "https://developer.huawei.com/consumer/cn/doc/AppGallery-connect-Guides/smartperf-tool-0000001873208929",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.testing",
+      "parent": "observability",
+      "name": "应用测试",
+      "what": "单元/UI/系统级测试框架与云测。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "observability.testing.arkts_test",
+      "parent": "observability.testing",
+      "name": "ArkTS测试",
+      "what": "鸿蒙ArkTS应用测试框架。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "test-arkts",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/test-arkts",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.testing.device_lab",
+      "parent": "observability.testing",
+      "name": "云端设备测试",
+      "what": "Firebase Test Lab真机云测。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Firebase Test Lab (iOS)",
+          "url": "https://firebase.google.com/docs/test-lab",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Firebase Test Lab",
+          "url": "https://firebase.google.com/docs/test-lab",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.testing.hypium_perf",
+      "parent": "observability.testing",
+      "name": "性能测试",
+      "what": "Hypium性能/稳定性测试。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "hypium perf",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hypium-perf-python-guidelines",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.testing.ui_automation",
+      "parent": "observability.testing",
+      "name": "UI自动化测试",
+      "what": "跨应用UI自动化。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "XCUITest",
+          "url": "https://developer.apple.com/documentation/xcuiautomation",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Espresso",
+          "url": "https://developer.android.com/training/testing/espresso",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "UiTest (@test.unittest)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/errorcode-uitest",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "observability.testing.unit",
+      "parent": "observability.testing",
+      "name": "单元测试",
+      "what": "JUnit/Hypium/XCTest单元测试。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "XCTest",
+          "url": "https://developer.apple.com/documentation/xctest",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "JUnit on Android",
+          "url": "https://developer.android.com/training/testing/local-tests",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Hypium单元测试",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ut",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

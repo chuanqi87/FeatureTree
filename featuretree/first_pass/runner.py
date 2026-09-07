@@ -137,7 +137,7 @@ def run_batch(repo, manifest_path, bridge, poll_seconds=20):
         if any(row["status"] == "launching" for row in state["nodes"].values()):
             state.update(status="launch_uncertain", attention="Interrupted while launching; reconcile missing job receipt before any new dispatch")
             write_json(state_path, state)
-        if state["status"] in {"completed", "deadline_reached", "stopped_smoke_failure", "launch_uncertain", "stopped_input_change", "stopped_backend_failures"}:
+        if state["status"] in {"completed", "deadline_reached", "stopped_smoke_failure", "launch_uncertain", "stopped_input_change", "stopped_backend_failures", "stopped_by_user"}:
             return write_report(repo, path, manifest, state)
         state.update(status="running", started_at=state["started_at"] or utcnow())
         deadline = datetime.fromisoformat(manifest["deadline"].replace("Z", "+00:00")).timestamp()

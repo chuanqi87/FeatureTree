@@ -1,0 +1,34 @@
+schema_version: 2
+feature_id: print_scan.print
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 打印任务、打印机发现与页面渲染到打印管线。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- print_scan.print.adapter
+- print_scan.print.attributes
+- print_scan.print.cancel
+- print_scan.print.color_duplex
+- print_scan.print.discovery
+- print_scan.print.job
+- print_scan.print.job_state
+- print_scan.print.media_size
+- print_scan.print.pdf_output
+- print_scan.print.preview
+- print_scan.print.range
+- print_scan.print.service_ext

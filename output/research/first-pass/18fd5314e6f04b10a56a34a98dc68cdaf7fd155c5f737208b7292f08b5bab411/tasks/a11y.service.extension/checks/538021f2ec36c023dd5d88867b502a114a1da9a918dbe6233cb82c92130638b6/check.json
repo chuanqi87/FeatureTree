@@ -1,9 +1,0 @@
-{
-  "task_id": "4aff00723973862a1bdf430712972021f1f609e7d35d538dde2c112d52b734ef",
-  "feature_id": "a11y.service.extension",
-  "response_sha256": "03ff61e7c93eb05e15c7f5455b7b41da0db2e1eb1df164ca7e3856af05c7dd55",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

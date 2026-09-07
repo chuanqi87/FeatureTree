@@ -1,9 +1,0 @@
-{
-  "task_id": "d91320d11d6d6d8685e28a5c18a438c5f49b3662f1779edc8ecb804b3b634f36",
-  "feature_id": "app.install.instant",
-  "response_sha256": "7bf7e03b66b10376fadc6fad4a0e449068a52ddd26272d7bc57093ed93d90c83",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

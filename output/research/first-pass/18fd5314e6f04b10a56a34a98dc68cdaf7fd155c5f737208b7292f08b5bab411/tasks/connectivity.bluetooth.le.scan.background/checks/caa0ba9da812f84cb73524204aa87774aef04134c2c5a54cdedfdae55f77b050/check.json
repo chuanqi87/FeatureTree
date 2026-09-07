@@ -1,9 +1,0 @@
-{
-  "task_id": "aed0ca5ef137f27d1a8899fd80fc931f9e52242ef41ea997572d338c88ef72dc",
-  "feature_id": "connectivity.bluetooth.le.scan.background",
-  "response_sha256": "661a970f7884273a7016569eda801b05614dffc0317abd1496854428b4c845c4",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

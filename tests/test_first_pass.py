@@ -153,6 +153,15 @@ class FirstPassTests(unittest.TestCase):
         state["nodes"]["leaf"]["status"] = "failed"
         self.assertEqual(queued_nodes(manifest, state), [manifest["tasks"][0]])
 
+    def test_explicit_user_stop_is_terminal_even_when_pending_work_remains(self):
+        _, manifest = load_manifest(self.repo, self.manifest_path)
+        state = initial_state(manifest)
+        state["status"] = "stopped_by_user"
+        write_json(self.directory / "state.json", state)
+        result = run_batch(self.repo, self.manifest_path, object(), poll_seconds=0)
+        self.assertEqual(result["state"], "stopped_by_user")
+        self.assertEqual(result["counts"], {"pending": 1})
+
     def test_timeout_cancels_only_owned_job_and_keeps_partial_delivery(self):
         self.save()
 

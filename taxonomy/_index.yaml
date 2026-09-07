@@ -77,3 +77,15 @@ domains:
   - id: a11y
     file: a11y.yaml
     name: { zh: 无障碍, en: Accessibility }
+  - id: documents
+    file: documents.yaml
+    name: { zh: 文档与阅读, en: Documents and Reading }
+  - id: digital_wellbeing
+    file: digital_wellbeing.yaml
+    name: { zh: 数字健康与家庭守护, en: Digital Wellbeing }
+  - id: print_scan
+    file: print_scan.yaml
+    name: { zh: 打印与外部扫描, en: Print and Scan }
+  - id: games
+    file: games.yaml
+    name: { zh: 游戏服务, en: Game Services }

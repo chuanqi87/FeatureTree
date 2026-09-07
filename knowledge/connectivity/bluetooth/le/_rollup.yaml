@@ -1,13 +1,12 @@
+schema_version: 2
 feature_id: connectivity.bluetooth.le
 role: rollup
 status: stub
 baseline:
-  android: API 35
-  ios: iOS 18
-  harmonyos: API 12+
-  gms: Play services BOM 24.x
-  hms: HMS / NEXT Kits
-definition: BLE 广播、扫描、连接与 GATT。
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: BLE 广播、扫描、GATT 与信道探测等低功耗能力簇。
 presence:
   android:
     status: unknown
@@ -18,22 +17,12 @@ presence:
   harmonyos:
     status: unknown
     verification: unreviewed
+comparisons: []
+evidence: []
 child_index:
 - connectivity.bluetooth.le.advertise
+- connectivity.bluetooth.le.channel_sounding
+- connectivity.bluetooth.le.filter
+- connectivity.bluetooth.le.gatt_client
+- connectivity.bluetooth.le.gatt_server
 - connectivity.bluetooth.le.scan
-- connectivity.bluetooth.le.connect
-- connectivity.bluetooth.le.gatt
-architecture_diff: 分支综述：仅描述本域范围与跨子节点架构差异，禁止展开子叶子细节。
-legacy_presence:
-  android:
-    status: full
-  ios:
-    status: full
-  harmonyos:
-    status: full
-schema_version: 2
-comparisons: []
-migration_notes:
-- v1 有无与 analog/unique 断言保存在 legacy_presence，不作为已确认结论。
-- 原正文、编辑状态及 baseline 保留；需按当前比较范围与固定版本逐项复核。
-evidence: []

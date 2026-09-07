@@ -1,13 +1,12 @@
+schema_version: 2
 feature_id: a11y
 role: rollup
 status: stub
 baseline:
-  android: API 35
-  ios: iOS 18
-  harmonyos: API 12+
-  gms: Play services BOM 24.x
-  hms: HMS / NEXT Kits
-definition: 无障碍服务与辅助技术；控件叶子引用本域，不复述框架。
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 无障碍树与语义、辅助服务、视觉/运动/听觉适配及无障碍测试。
 presence:
   android:
     status: unknown
@@ -18,20 +17,12 @@ presence:
   harmonyos:
     status: unknown
     verification: unreviewed
+comparisons: []
+evidence: []
 child_index:
 - a11y.framework
+- a11y.hearing
+- a11y.motor
 - a11y.service
-architecture_diff: 分支综述：仅描述本域范围与跨子节点架构差异，禁止展开子叶子细节。
-legacy_presence:
-  android:
-    status: full
-  ios:
-    status: full
-  harmonyos:
-    status: full
-schema_version: 2
-comparisons: []
-migration_notes:
-- v1 有无与 analog/unique 断言保存在 legacy_presence，不作为已确认结论。
-- 原正文、编辑状态及 baseline 保留；需按当前比较范围与固定版本逐项复核。
-evidence: []
+- a11y.testing
+- a11y.vision

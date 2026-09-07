@@ -8,7 +8,7 @@ from urllib.parse import unquote, urlsplit
 
 import yaml
 
-from .viewer import build_snapshot, json_default
+from .viewer import build_draft_snapshot, build_snapshot, json_default
 
 
 def make_handler(repo, web_root):
@@ -23,9 +23,9 @@ def make_handler(repo, web_root):
 
         def respond(self, include_body):
             route = unquote(urlsplit(self.path).path)
-            if route == "/api/tree":
+            if route in {"/api/tree", "/api/draft-tree"}:
                 try:
-                    payload = build_snapshot(repo)
+                    payload = build_draft_snapshot(repo) if route == "/api/draft-tree" else build_snapshot(repo)
                     status = HTTPStatus.OK
                 except (ValueError, KeyError, OSError, TypeError, yaml.YAMLError) as error:
                     payload = {"error": str(error)}

@@ -1,0 +1,30 @@
+schema_version: 2
+feature_id: games.achievements
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 成就、排行榜与事件。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- games.achievements.challenges
+- games.achievements.events
+- games.achievements.hidden
+- games.achievements.incremental
+- games.achievements.leaderboard_span
+- games.achievements.leaderboards
+- games.achievements.ui
+- games.achievements.unlock

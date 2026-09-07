@@ -1,0 +1,1336 @@
+{
+  "historical_count": 212,
+  "mapped_count": 212,
+  "missing_count": 0,
+  "missing": [],
+  "mapped": {
+    "a11y": [
+      {
+        "current_id": "a11y",
+        "disposition": "kept"
+      }
+    ],
+    "a11y.framework": [
+      {
+        "current_id": "a11y.framework",
+        "disposition": "kept"
+      }
+    ],
+    "a11y.framework.tree": [
+      {
+        "current_id": "a11y.framework.tree",
+        "disposition": "kept"
+      }
+    ],
+    "a11y.service": [
+      {
+        "current_id": "a11y.service",
+        "disposition": "kept"
+      }
+    ],
+    "a11y.service.extension": [
+      {
+        "current_id": "a11y.service.extension",
+        "disposition": "kept"
+      }
+    ],
+    "ai": [
+      {
+        "current_id": "ai",
+        "disposition": "kept"
+      }
+    ],
+    "ai.on_device": [
+      {
+        "current_id": "ai.on_device",
+        "disposition": "kept"
+      }
+    ],
+    "ai.on_device.runtime": [
+      {
+        "current_id": "ai.on_device.runtime",
+        "disposition": "kept"
+      }
+    ],
+    "ai.system": [
+      {
+        "current_id": "ai.intents.system_suggestions",
+        "disposition": "renamed_from"
+      }
+    ],
+    "ai.system.suggestions": [
+      {
+        "current_id": "ai.intents.app_intents",
+        "disposition": "merged_from"
+      }
+    ],
+    "app": [
+      {
+        "current_id": "app",
+        "disposition": "kept"
+      }
+    ],
+    "app.background": [
+      {
+        "current_id": "app.background",
+        "disposition": "kept"
+      }
+    ],
+    "app.background.deferred_work": [
+      {
+        "current_id": "app.background.deferred_work",
+        "disposition": "kept"
+      }
+    ],
+    "app.background.foreground_task": [
+      {
+        "current_id": "app.background.foreground_task",
+        "disposition": "kept"
+      }
+    ],
+    "app.desktop": [
+      {
+        "current_id": "app.desktop",
+        "disposition": "kept"
+      }
+    ],
+    "app.desktop.shortcuts": [
+      {
+        "current_id": "app.desktop.shortcuts",
+        "disposition": "kept"
+      }
+    ],
+    "app.desktop.widget": [
+      {
+        "current_id": "app.desktop.widget",
+        "disposition": "kept"
+      }
+    ],
+    "app.extensions": [
+      {
+        "current_id": "app.extensions",
+        "disposition": "kept"
+      }
+    ],
+    "app.extensions.share": [
+      {
+        "current_id": "app.extensions.share",
+        "disposition": "kept"
+      }
+    ],
+    "app.install": [
+      {
+        "current_id": "app.install",
+        "disposition": "kept"
+      }
+    ],
+    "app.install.instant": [
+      {
+        "current_id": "app.install.instant",
+        "disposition": "kept"
+      }
+    ],
+    "app.install.package_update": [
+      {
+        "current_id": "app.install.package_update",
+        "disposition": "kept"
+      }
+    ],
+    "app.lifecycle": [
+      {
+        "current_id": "app.lifecycle",
+        "disposition": "kept"
+      }
+    ],
+    "app.lifecycle.activity_ability": [
+      {
+        "current_id": "app.lifecycle.activity_ability",
+        "disposition": "kept"
+      }
+    ],
+    "app.lifecycle.process": [
+      {
+        "current_id": "app.process",
+        "disposition": "renamed_from"
+      },
+      {
+        "current_id": "app.process.model",
+        "disposition": "merged_from"
+      }
+    ],
+    "commerce": [
+      {
+        "current_id": "commerce",
+        "disposition": "kept"
+      }
+    ],
+    "commerce.ads": [
+      {
+        "current_id": "commerce.ads",
+        "disposition": "kept"
+      }
+    ],
+    "commerce.ads.sdk": [
+      {
+        "current_id": "commerce.ads.display",
+        "disposition": "renamed_from"
+      }
+    ],
+    "commerce.analytics": [
+      {
+        "current_id": "commerce.analytics",
+        "disposition": "kept"
+      }
+    ],
+    "commerce.analytics.events": [
+      {
+        "current_id": "commerce.analytics.events",
+        "disposition": "kept"
+      }
+    ],
+    "commerce.iap": [
+      {
+        "current_id": "commerce.iap",
+        "disposition": "kept"
+      }
+    ],
+    "commerce.iap.products": [
+      {
+        "current_id": "commerce.iap.products",
+        "disposition": "kept"
+      }
+    ],
+    "connectivity": [
+      {
+        "current_id": "connectivity",
+        "disposition": "kept"
+      }
+    ],
+    "connectivity.bluetooth": [
+      {
+        "current_id": "connectivity.bluetooth",
+        "disposition": "kept"
+      }
+    ],
+    "connectivity.bluetooth.classic": [
+      {
+        "current_id": "connectivity.bluetooth.classic",
+        "disposition": "kept"
+      }
+    ],
+    "connectivity.bluetooth.le": [
+      {
+        "current_id": "connectivity.bluetooth.le",
+        "disposition": "kept"
+      }
+    ],
+    "connectivity.bluetooth.le.advertise": [
+      {
+        "current_id": "connectivity.bluetooth.le.advertise",
+        "disposition": "kept"
+      }
+    ],
+    "connectivity.bluetooth.le.connect": [
+      {
+        "current_id": "connectivity.bluetooth.le.gatt_client",
+        "disposition": "merged_from"
+      }
+    ],
+    "connectivity.bluetooth.le.gatt": [
+      {
+        "current_id": "connectivity.bluetooth.le.gatt_client",
+        "disposition": "merged_from"
+      }
+    ],
+    "connectivity.bluetooth.le.scan": [
+      {
+        "current_id": "connectivity.bluetooth.le.scan",
+        "disposition": "kept"
+      }
+    ],
+    "connectivity.bluetooth.le.scan.background": [
+      {
+        "current_id": "connectivity.bluetooth.le.filter",
+        "disposition": "renamed_from"
+      }
+    ],
+    "connectivity.bluetooth.le.scan.batch": [
+      {
+        "current_id": "connectivity.bluetooth.le.filter",
+        "disposition": "renamed_from"
+      }
+    ],
+    "connectivity.bluetooth.le.scan.filter": [
+      {
+        "current_id": "connectivity.bluetooth.le.filter",
+        "disposition": "renamed_from"
+      }
+    ],
+    "connectivity.nfc": [
+      {
+        "current_id": "connectivity.nfc",
+        "disposition": "kept"
+      }
+    ],
+    "connectivity.nfc.hce": [
+      {
+        "current_id": "connectivity.nfc.hce",
+        "disposition": "kept"
+      }
+    ],
+    "connectivity.nfc.reader": [
+      {
+        "current_id": "connectivity.nfc.tag",
+        "disposition": "merged_from"
+      }
+    ],
+    "connectivity.usb": [
+      {
+        "current_id": "connectivity.usb",
+        "disposition": "kept"
+      }
+    ],
+    "connectivity.usb.host": [
+      {
+        "current_id": "connectivity.usb.host",
+        "disposition": "kept"
+      }
+    ],
+    "connectivity.wifi": [
+      {
+        "current_id": "connectivity.wifi",
+        "disposition": "kept"
+      }
+    ],
+    "connectivity.wifi.connect": [
+      {
+        "current_id": "connectivity.wifi.connect",
+        "disposition": "kept"
+      }
+    ],
+    "connectivity.wifi.scan": [
+      {
+        "current_id": "connectivity.wifi.scan",
+        "disposition": "kept"
+      }
+    ],
+    "device": [
+      {
+        "current_id": "device",
+        "disposition": "kept"
+      }
+    ],
+    "device.audio_route": [
+      {
+        "current_id": "device.audio_route",
+        "disposition": "kept"
+      }
+    ],
+    "device.audio_route.output": [
+      {
+        "current_id": "device.audio_route.output",
+        "disposition": "kept"
+      }
+    ],
+    "device.display": [
+      {
+        "current_id": "device.display",
+        "disposition": "kept"
+      }
+    ],
+    "device.display.brightness": [
+      {
+        "current_id": "device.display.brightness",
+        "disposition": "kept"
+      }
+    ],
+    "device.power": [
+      {
+        "current_id": "device.power",
+        "disposition": "kept"
+      }
+    ],
+    "device.power.battery": [
+      {
+        "current_id": "device.power.battery",
+        "disposition": "kept"
+      }
+    ],
+    "distributed": [
+      {
+        "current_id": "distributed",
+        "disposition": "kept"
+      }
+    ],
+    "distributed.continuity": [
+      {
+        "current_id": "distributed.continuity",
+        "disposition": "kept"
+      }
+    ],
+    "distributed.continuity.handoff": [
+      {
+        "current_id": "distributed.continuity.handoff",
+        "disposition": "kept"
+      }
+    ],
+    "distributed.nearby": [
+      {
+        "current_id": "distributed.nearby",
+        "disposition": "kept"
+      }
+    ],
+    "distributed.nearby.discovery": [
+      {
+        "current_id": "distributed.nearby.discovery",
+        "disposition": "kept"
+      }
+    ],
+    "distributed.softbus": [
+      {
+        "current_id": "distributed.softbus",
+        "disposition": "kept"
+      }
+    ],
+    "distributed.softbus.fabric": [
+      {
+        "current_id": "distributed.softbus.fabric",
+        "disposition": "kept"
+      }
+    ],
+    "enterprise": [
+      {
+        "current_id": "enterprise",
+        "disposition": "kept"
+      }
+    ],
+    "enterprise.mdm": [
+      {
+        "current_id": "enterprise.mdm",
+        "disposition": "kept"
+      }
+    ],
+    "enterprise.mdm.policy": [
+      {
+        "current_id": "enterprise.mdm.policy",
+        "disposition": "kept"
+      }
+    ],
+    "enterprise.work_profile": [
+      {
+        "current_id": "enterprise.work_profile",
+        "disposition": "kept"
+      }
+    ],
+    "enterprise.work_profile.isolation": [
+      {
+        "current_id": "enterprise.work_profile.isolation",
+        "disposition": "kept"
+      }
+    ],
+    "graphics": [
+      {
+        "current_id": "graphics",
+        "disposition": "kept"
+      }
+    ],
+    "graphics.2d": [
+      {
+        "current_id": "graphics.2d",
+        "disposition": "kept"
+      }
+    ],
+    "graphics.2d.canvas": [
+      {
+        "current_id": "graphics.2d.canvas",
+        "disposition": "kept"
+      }
+    ],
+    "graphics.3d": [
+      {
+        "current_id": "graphics.3d",
+        "disposition": "kept"
+      }
+    ],
+    "graphics.3d.gpu_api": [
+      {
+        "current_id": "graphics.gpu.api",
+        "disposition": "renamed_from"
+      }
+    ],
+    "graphics.capture": [
+      {
+        "current_id": "graphics.capture",
+        "disposition": "kept"
+      }
+    ],
+    "graphics.capture.screen_record": [
+      {
+        "current_id": "graphics.capture.screen_record",
+        "disposition": "kept"
+      }
+    ],
+    "graphics.capture.screenshot": [
+      {
+        "current_id": "graphics.capture.screenshot",
+        "disposition": "kept"
+      }
+    ],
+    "health_home": [
+      {
+        "current_id": "health_home",
+        "disposition": "kept"
+      }
+    ],
+    "health_home.auto": [
+      {
+        "current_id": "health_home.auto",
+        "disposition": "kept"
+      }
+    ],
+    "health_home.auto.projection": [
+      {
+        "current_id": "health_home.auto.projection",
+        "disposition": "kept"
+      }
+    ],
+    "health_home.health": [
+      {
+        "current_id": "health_home.health_data",
+        "disposition": "renamed_from"
+      }
+    ],
+    "health_home.health.records": [
+      {
+        "current_id": "health_home.health_data.records",
+        "disposition": "kept"
+      }
+    ],
+    "health_home.home": [
+      {
+        "current_id": "health_home.home",
+        "disposition": "kept"
+      }
+    ],
+    "health_home.home.accessories": [
+      {
+        "current_id": "health_home.home.accessories",
+        "disposition": "kept"
+      }
+    ],
+    "identity": [
+      {
+        "current_id": "identity",
+        "disposition": "kept"
+      }
+    ],
+    "identity.federated": [
+      {
+        "current_id": "identity.federated",
+        "disposition": "kept"
+      }
+    ],
+    "identity.federated.platform_sign_in": [
+      {
+        "current_id": "identity.federated.platform_sign_in",
+        "disposition": "kept"
+      }
+    ],
+    "identity.system_account": [
+      {
+        "current_id": "identity.system_account",
+        "disposition": "kept"
+      }
+    ],
+    "identity.system_account.manager": [
+      {
+        "current_id": "identity.system_account.manager",
+        "disposition": "kept"
+      }
+    ],
+    "input": [
+      {
+        "current_id": "input",
+        "disposition": "kept"
+      }
+    ],
+    "input.clipboard": [
+      {
+        "current_id": "input.clipboard",
+        "disposition": "kept"
+      }
+    ],
+    "input.clipboard.read_write": [
+      {
+        "current_id": "input.clipboard.read_write",
+        "disposition": "kept"
+      }
+    ],
+    "input.dragdrop": [
+      {
+        "current_id": "input.dragdrop",
+        "disposition": "kept"
+      }
+    ],
+    "input.dragdrop.cross_app": [
+      {
+        "current_id": "input.dragdrop.cross_app",
+        "disposition": "kept"
+      }
+    ],
+    "input.ime": [
+      {
+        "current_id": "input.ime",
+        "disposition": "kept"
+      }
+    ],
+    "input.ime.framework": [
+      {
+        "current_id": "input.ime.framework",
+        "disposition": "kept"
+      }
+    ],
+    "input.touch": [
+      {
+        "current_id": "input.touch",
+        "disposition": "kept"
+      }
+    ],
+    "input.touch.gestures": [
+      {
+        "current_id": "input.touch.gestures",
+        "disposition": "kept"
+      }
+    ],
+    "interop": [
+      {
+        "current_id": "interop",
+        "disposition": "kept"
+      }
+    ],
+    "interop.action_dispatch": [
+      {
+        "current_id": "interop.action_dispatch",
+        "disposition": "kept"
+      }
+    ],
+    "interop.action_dispatch.component_intent": [
+      {
+        "current_id": "interop.action_dispatch.component_intent",
+        "disposition": "kept"
+      }
+    ],
+    "interop.action_dispatch.system_intents": [
+      {
+        "current_id": "interop.action_dispatch.system_intents",
+        "disposition": "kept"
+      }
+    ],
+    "interop.action_dispatch.url_launch": [
+      {
+        "current_id": "interop.action_dispatch.url_launch",
+        "disposition": "kept"
+      }
+    ],
+    "interop.deeplink": [
+      {
+        "current_id": "interop.deeplink",
+        "disposition": "kept"
+      }
+    ],
+    "interop.deeplink.url": [
+      {
+        "current_id": "interop.deeplink.custom_scheme",
+        "disposition": "split_from"
+      },
+      {
+        "current_id": "interop.deeplink.verified_links",
+        "disposition": "merged_from"
+      }
+    ],
+    "interop.share": [
+      {
+        "current_id": "interop.share",
+        "disposition": "kept"
+      }
+    ],
+    "interop.share.sheet": [
+      {
+        "current_id": "interop.share.sheet",
+        "disposition": "kept"
+      }
+    ],
+    "location": [
+      {
+        "current_id": "location",
+        "disposition": "kept"
+      }
+    ],
+    "location.geofence": [
+      {
+        "current_id": "location.geofence",
+        "disposition": "kept"
+      }
+    ],
+    "location.geofence.region": [
+      {
+        "current_id": "location.geofence.region",
+        "disposition": "kept"
+      }
+    ],
+    "location.maps": [
+      {
+        "current_id": "location.maps",
+        "disposition": "kept"
+      }
+    ],
+    "location.maps.sdk": [
+      {
+        "current_id": "location.maps.sdk",
+        "disposition": "kept"
+      }
+    ],
+    "location.positioning": [
+      {
+        "current_id": "location.positioning",
+        "disposition": "kept"
+      }
+    ],
+    "location.positioning.background": [
+      {
+        "current_id": "location.positioning.background",
+        "disposition": "kept"
+      }
+    ],
+    "location.positioning.foreground": [
+      {
+        "current_id": "location.positioning.foreground",
+        "disposition": "kept"
+      }
+    ],
+    "media": [
+      {
+        "current_id": "media",
+        "disposition": "kept"
+      }
+    ],
+    "media.capture": [
+      {
+        "current_id": "media.capture",
+        "disposition": "kept"
+      }
+    ],
+    "media.capture.camera": [
+      {
+        "current_id": "media.capture.camera",
+        "disposition": "kept"
+      }
+    ],
+    "media.capture.microphone": [
+      {
+        "current_id": "media.capture.microphone",
+        "disposition": "kept"
+      }
+    ],
+    "media.codec": [
+      {
+        "current_id": "media.codec",
+        "disposition": "kept"
+      }
+    ],
+    "media.codec.hardware": [
+      {
+        "current_id": "media.codec.hardware",
+        "disposition": "kept"
+      }
+    ],
+    "media.library": [
+      {
+        "current_id": "media.library",
+        "disposition": "kept"
+      }
+    ],
+    "media.library.picker": [
+      {
+        "current_id": "media.library.picker",
+        "disposition": "kept"
+      }
+    ],
+    "media.playback": [
+      {
+        "current_id": "media.playback",
+        "disposition": "kept"
+      }
+    ],
+    "media.playback.audio": [
+      {
+        "current_id": "media.playback.audio",
+        "disposition": "kept"
+      }
+    ],
+    "media.playback.video": [
+      {
+        "current_id": "media.playback.video",
+        "disposition": "kept"
+      }
+    ],
+    "network": [
+      {
+        "current_id": "network",
+        "disposition": "kept"
+      }
+    ],
+    "network.hotspot": [
+      {
+        "current_id": "connectivity.wifi.hotspot_local",
+        "disposition": "merged_from"
+      }
+    ],
+    "network.hotspot.local": [
+      {
+        "current_id": "connectivity.wifi.hotspot_local",
+        "disposition": "merged_from"
+      }
+    ],
+    "network.http": [
+      {
+        "current_id": "network.http",
+        "disposition": "kept"
+      }
+    ],
+    "network.http.client": [
+      {
+        "current_id": "network.http.client",
+        "disposition": "kept"
+      }
+    ],
+    "network.socket": [
+      {
+        "current_id": "network.socket",
+        "disposition": "kept"
+      }
+    ],
+    "network.socket.tcp_udp": [
+      {
+        "current_id": "network.socket.tcp",
+        "disposition": "split_from"
+      },
+      {
+        "current_id": "network.socket.udp",
+        "disposition": "split_from"
+      }
+    ],
+    "network.vpn": [
+      {
+        "current_id": "network.vpn",
+        "disposition": "kept"
+      }
+    ],
+    "network.vpn.app_vpn": [
+      {
+        "current_id": "network.vpn.app_vpn",
+        "disposition": "kept"
+      }
+    ],
+    "notifications": [
+      {
+        "current_id": "notifications",
+        "disposition": "kept"
+      }
+    ],
+    "notifications.local": [
+      {
+        "current_id": "notifications.local",
+        "disposition": "kept"
+      }
+    ],
+    "notifications.local.actions": [
+      {
+        "current_id": "notifications.actions",
+        "disposition": "renamed_from"
+      }
+    ],
+    "notifications.local.display": [
+      {
+        "current_id": "notifications.local.display",
+        "disposition": "kept"
+      }
+    ],
+    "notifications.push": [
+      {
+        "current_id": "notifications.push",
+        "disposition": "kept"
+      }
+    ],
+    "notifications.push.channel": [
+      {
+        "current_id": "notifications.channels",
+        "disposition": "renamed_from"
+      }
+    ],
+    "observability": [
+      {
+        "current_id": "observability",
+        "disposition": "kept"
+      }
+    ],
+    "observability.crash": [
+      {
+        "current_id": "observability.crash",
+        "disposition": "kept"
+      }
+    ],
+    "observability.crash.report": [
+      {
+        "current_id": "observability.crash.report",
+        "disposition": "kept"
+      }
+    ],
+    "observability.logging": [
+      {
+        "current_id": "observability.logging",
+        "disposition": "kept"
+      }
+    ],
+    "observability.logging.app": [
+      {
+        "current_id": "observability.logging.app",
+        "disposition": "kept"
+      }
+    ],
+    "observability.perf": [
+      {
+        "current_id": "observability.perf",
+        "disposition": "kept"
+      }
+    ],
+    "observability.perf.trace": [
+      {
+        "current_id": "observability.tracing.sections",
+        "disposition": "renamed_from"
+      }
+    ],
+    "runtime": [
+      {
+        "current_id": "runtime",
+        "disposition": "kept"
+      }
+    ],
+    "runtime.concurrency": [
+      {
+        "current_id": "runtime.concurrency",
+        "disposition": "kept"
+      }
+    ],
+    "runtime.concurrency.overview": [
+      {
+        "current_id": "runtime.concurrency.overview",
+        "disposition": "kept"
+      }
+    ],
+    "runtime.i18n": [
+      {
+        "current_id": "runtime.i18n",
+        "disposition": "kept"
+      }
+    ],
+    "runtime.i18n.locale": [
+      {
+        "current_id": "runtime.i18n.locale",
+        "disposition": "kept"
+      }
+    ],
+    "security": [
+      {
+        "current_id": "security",
+        "disposition": "kept"
+      }
+    ],
+    "security.biometrics": [
+      {
+        "current_id": "security.biometrics",
+        "disposition": "kept"
+      }
+    ],
+    "security.biometrics.local_auth": [
+      {
+        "current_id": "security.biometrics.local_auth",
+        "disposition": "kept"
+      }
+    ],
+    "security.crypto": [
+      {
+        "current_id": "security.crypto",
+        "disposition": "kept"
+      }
+    ],
+    "security.crypto.keystore": [
+      {
+        "current_id": "security.crypto.keystore",
+        "disposition": "kept"
+      }
+    ],
+    "security.permissions": [
+      {
+        "current_id": "security.permissions",
+        "disposition": "kept"
+      }
+    ],
+    "security.permissions.runtime": [
+      {
+        "current_id": "security.permissions.runtime",
+        "disposition": "kept"
+      }
+    ],
+    "security.permissions.special": [
+      {
+        "current_id": "security.permissions.special",
+        "disposition": "kept"
+      }
+    ],
+    "security.secure_storage": [
+      {
+        "current_id": "security.secure_storage",
+        "disposition": "kept"
+      }
+    ],
+    "security.secure_storage.credentials": [
+      {
+        "current_id": "security.secure_storage.credentials",
+        "disposition": "kept"
+      }
+    ],
+    "sensors": [
+      {
+        "current_id": "sensors",
+        "disposition": "kept"
+      }
+    ],
+    "sensors.environment": [
+      {
+        "current_id": "sensors.environment",
+        "disposition": "kept"
+      }
+    ],
+    "sensors.environment.ambient": [
+      {
+        "current_id": "sensors.environment.ambient",
+        "disposition": "kept"
+      }
+    ],
+    "sensors.motion": [
+      {
+        "current_id": "sensors.motion",
+        "disposition": "kept"
+      }
+    ],
+    "sensors.motion.accel_gyro": [
+      {
+        "current_id": "sensors.motion.accel_gyro",
+        "disposition": "kept"
+      }
+    ],
+    "storage": [
+      {
+        "current_id": "storage",
+        "disposition": "kept"
+      }
+    ],
+    "storage.cloud": [
+      {
+        "current_id": "storage.cloud",
+        "disposition": "kept"
+      }
+    ],
+    "storage.cloud.records": [
+      {
+        "current_id": "storage.cloud.sync",
+        "disposition": "merged_from"
+      }
+    ],
+    "storage.db": [
+      {
+        "current_id": "storage.db",
+        "disposition": "kept"
+      }
+    ],
+    "storage.db.relational": [
+      {
+        "current_id": "storage.db.relational",
+        "disposition": "kept"
+      }
+    ],
+    "storage.kv": [
+      {
+        "current_id": "storage.kv",
+        "disposition": "kept"
+      }
+    ],
+    "storage.kv.preferences": [
+      {
+        "current_id": "storage.kv.preferences",
+        "disposition": "kept"
+      }
+    ],
+    "storage.sandbox": [
+      {
+        "current_id": "storage.sandbox",
+        "disposition": "kept"
+      }
+    ],
+    "storage.sandbox.private_files": [
+      {
+        "current_id": "storage.sandbox.private_files",
+        "disposition": "kept"
+      }
+    ],
+    "storage.user_files": [
+      {
+        "current_id": "storage.user_files",
+        "disposition": "kept"
+      }
+    ],
+    "storage.user_files.picker": [
+      {
+        "current_id": "storage.user_files.picker",
+        "disposition": "kept"
+      }
+    ],
+    "telecom": [
+      {
+        "current_id": "telecom",
+        "disposition": "kept"
+      }
+    ],
+    "telecom.calendar": [
+      {
+        "current_id": "telecom.calendar",
+        "disposition": "kept"
+      }
+    ],
+    "telecom.calendar.events": [
+      {
+        "current_id": "telecom.calendar.events",
+        "disposition": "kept"
+      }
+    ],
+    "telecom.contacts": [
+      {
+        "current_id": "telecom.contacts",
+        "disposition": "kept"
+      }
+    ],
+    "telecom.contacts.read": [
+      {
+        "current_id": "telecom.contacts.read",
+        "disposition": "kept"
+      }
+    ],
+    "telecom.phone": [
+      {
+        "current_id": "telecom.phone",
+        "disposition": "kept"
+      }
+    ],
+    "telecom.phone.dial": [
+      {
+        "current_id": "telecom.phone.dial",
+        "disposition": "kept"
+      }
+    ],
+    "telecom.sms": [
+      {
+        "current_id": "telecom.sms",
+        "disposition": "kept"
+      }
+    ],
+    "telecom.sms.send": [
+      {
+        "current_id": "telecom.sms.send",
+        "disposition": "kept"
+      }
+    ],
+    "ui": [
+      {
+        "current_id": "ui",
+        "disposition": "kept"
+      }
+    ],
+    "ui.controls": [
+      {
+        "current_id": "ui.controls",
+        "disposition": "kept"
+      }
+    ],
+    "ui.controls.button": [
+      {
+        "current_id": "ui.controls.button_selection",
+        "disposition": "renamed_from"
+      },
+      {
+        "current_id": "ui.controls.button_selection.action",
+        "disposition": "renamed_from"
+      }
+    ],
+    "ui.controls.dialog": [
+      {
+        "current_id": "ui.controls.dialog",
+        "disposition": "kept"
+      },
+      {
+        "current_id": "ui.controls.dialog.alert",
+        "disposition": "split_from"
+      },
+      {
+        "current_id": "ui.controls.dialog.custom",
+        "disposition": "split_from"
+      },
+      {
+        "current_id": "ui.controls.dialog.sheet",
+        "disposition": "split_from"
+      }
+    ],
+    "ui.controls.image": [
+      {
+        "current_id": "ui.controls.image",
+        "disposition": "kept"
+      },
+      {
+        "current_id": "ui.controls.image.display",
+        "disposition": "renamed_from"
+      }
+    ],
+    "ui.controls.list": [
+      {
+        "current_id": "ui.layout",
+        "disposition": "merged_from"
+      },
+      {
+        "current_id": "ui.layout.scroll",
+        "disposition": "merged_from"
+      },
+      {
+        "current_id": "ui.layout.scroll.recycling",
+        "disposition": "renamed_from"
+      }
+    ],
+    "ui.controls.navigation_bar": [
+      {
+        "current_id": "ui.navigation.app_bar",
+        "disposition": "renamed_from"
+      }
+    ],
+    "ui.controls.text_field": [
+      {
+        "current_id": "ui.controls.text_display",
+        "disposition": "renamed_from"
+      },
+      {
+        "current_id": "ui.controls.text_display.input",
+        "disposition": "renamed_from"
+      }
+    ],
+    "ui.declarative": [
+      {
+        "current_id": "ui.paradigm",
+        "disposition": "merged_from"
+      },
+      {
+        "current_id": "ui.paradigm.declarative",
+        "disposition": "renamed_from"
+      }
+    ],
+    "ui.declarative.vs_imperative": [
+      {
+        "current_id": "ui.paradigm",
+        "disposition": "merged_from"
+      },
+      {
+        "current_id": "ui.paradigm.declarative",
+        "disposition": "renamed_from"
+      }
+    ],
+    "ui.imperative": [
+      {
+        "current_id": "ui.paradigm",
+        "disposition": "merged_from"
+      },
+      {
+        "current_id": "ui.paradigm.imperative",
+        "disposition": "renamed_from"
+      }
+    ],
+    "ui.navigation": [
+      {
+        "current_id": "ui.navigation",
+        "disposition": "kept"
+      }
+    ],
+    "ui.navigation.stack": [
+      {
+        "current_id": "ui.navigation.stack",
+        "disposition": "kept"
+      }
+    ],
+    "ui.theme": [
+      {
+        "current_id": "ui.theme",
+        "disposition": "kept"
+      }
+    ],
+    "ui.theme.dark_mode": [
+      {
+        "current_id": "ui.theme.dark_mode",
+        "disposition": "kept"
+      }
+    ],
+    "ui.window": [
+      {
+        "current_id": "ui.window",
+        "disposition": "kept"
+      }
+    ],
+    "ui.window.multiwindow": [
+      {
+        "current_id": "ui.window.split_free",
+        "disposition": "renamed_from"
+      }
+    ],
+    "ui.window.pip": [
+      {
+        "current_id": "ui.window.pip",
+        "disposition": "kept"
+      }
+    ],
+    "web": [
+      {
+        "current_id": "web",
+        "disposition": "kept"
+      }
+    ],
+    "web.bridge": [
+      {
+        "current_id": "web.bridge",
+        "disposition": "kept"
+      }
+    ],
+    "web.bridge.native_js": [
+      {
+        "current_id": "web.bridge.native_js",
+        "disposition": "kept"
+      }
+    ],
+    "web.webview": [
+      {
+        "current_id": "web.webview",
+        "disposition": "kept"
+      }
+    ],
+    "web.webview.embed": [
+      {
+        "current_id": "web.webview.embed",
+        "disposition": "kept"
+      }
+    ]
+  }
+}

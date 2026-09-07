@@ -1,9 +1,0 @@
-{
-  "task_id": "af29d96e264c052ab334c54e990576ac838721d68e247a4b8c7b1e93e4e463e1",
-  "feature_id": "app.extensions.share",
-  "response_sha256": "e78f61fb49894f6a5b05c80c827671221c6bf185c42593aef75854a0c26ee747",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

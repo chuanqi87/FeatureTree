@@ -1,0 +1,854 @@
+{
+  "domain": "telecom",
+  "authored_count": 9,
+  "draft_clue_count": 41,
+  "authored": [
+    {
+      "id": "telecom",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "通信与内容",
+        "en": "Telecom and Personal Content"
+      },
+      "definition": "电话短信、联系人与日历。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "telecom.calendar",
+      "parent": "telecom",
+      "level": "L2",
+      "name": {
+        "zh": "日历",
+        "en": "Calendar"
+      },
+      "definition": "系统日历事件。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "telecom.calendar.events",
+      "parent": "telecom.calendar",
+      "level": "L3",
+      "name": {
+        "zh": "日历事件",
+        "en": "Calendar Events"
+      },
+      "definition": "读写日历事件。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "telecom.contacts",
+      "parent": "telecom",
+      "level": "L2",
+      "name": {
+        "zh": "联系人",
+        "en": "Contacts"
+      },
+      "definition": "系统通讯录访问。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "telecom.contacts.read",
+      "parent": "telecom.contacts",
+      "level": "L3",
+      "name": {
+        "zh": "读取联系人",
+        "en": "Read Contacts"
+      },
+      "definition": "查询通讯录条目。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "telecom.phone",
+      "parent": "telecom",
+      "level": "L2",
+      "name": {
+        "zh": "电话",
+        "en": "Telephony"
+      },
+      "definition": "拨号与通话状态。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "telecom.phone.dial",
+      "parent": "telecom.phone",
+      "level": "L3",
+      "name": {
+        "zh": "发起通话",
+        "en": "Place Call"
+      },
+      "definition": "发起系统电话呼叫。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "telecom.sms",
+      "parent": "telecom",
+      "level": "L2",
+      "name": {
+        "zh": "短信",
+        "en": "SMS"
+      },
+      "definition": "短信发送与读取。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "telecom.sms.send",
+      "parent": "telecom.sms",
+      "level": "L3",
+      "name": {
+        "zh": "发送短信",
+        "en": "Send SMS"
+      },
+      "definition": "应用发送短信（iOS 通常仅 UI 分享）。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "telecom.calendar",
+      "parent": "telecom",
+      "name": "日历",
+      "what": "日历账户与日程管理及服务联动。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "telecom.calendar.account",
+      "parent": "telecom.calendar",
+      "name": "日历账户管理",
+      "what": "创建/获取/删除应用专属日历账户。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "calendarManager (@kit.CalendarKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-calendarmanager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Calendar Provider (CalendarContract)",
+          "url": "https://developer.android.com/guide/topics/providers/calendar-provider",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "EKEventStore (EventKit)",
+          "url": "https://developer.apple.com/documentation/eventkit/ekeventstore",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.calendar.event",
+      "parent": "telecom.calendar",
+      "name": "日程增删改查",
+      "what": "日程事件的创建、编辑、删除、查询与提醒规则设置。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Calendar.addEvent/Event CRUD (@kit.CalendarKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-calendarmanager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "EKEvent (EventKit)",
+          "url": "https://developer.apple.com/documentation/eventkit/ekevent",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Events table (CalendarContract)",
+          "url": "https://developer.android.com/reference/android/provider/CalendarContract.Events",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.calendar.event_ui",
+      "parent": "telecom.calendar",
+      "name": "跳转日程创建界面",
+      "what": "跳转系统日程创建编辑界面辅助录入。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Calendar跳转日程创建界面",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/calendar-event-edit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.calendar.reminder",
+      "parent": "telecom.calendar",
+      "name": "提醒事项",
+      "what": "访问与管理提醒事项数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "EKReminder (EventKit)",
+          "url": "https://developer.apple.com/documentation/eventkit/ekreminder",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Reminders API (Google Tasks候选)",
+          "url": "https://developer.android.com/reference/android/provider/",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.calendar.service_link",
+      "parent": "telecom.calendar",
+      "name": "日程一键服务",
+      "what": "日程写入附带DeepLink服务按钮实现一键入会/追剧等。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "日程一键服务ServiceType",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/calendar-oneclick-service",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.call",
+      "parent": "telecom",
+      "name": "通话",
+      "what": "拨号、通话状态、VoIP集成与来电管理。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "telecom.call.caller_info",
+      "parent": "telecom.call",
+      "name": "企业来电信息展示",
+      "what": "来去电页面经查询扩展显示企业联系人与业务数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "CallerInfoQueryExtensionAbility.onQueryCallerInfo",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-caller-info-query",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.call.device_switch",
+      "parent": "telecom.call",
+      "name": "通话设备切换",
+      "what": "通话中切换音频输出设备（AVCastPicker）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AVCastPicker (@ohos.multimedia.avCastPicker)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-av-cast-picker",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.call.dial",
+      "parent": "telecom.call",
+      "name": "拉起拨号",
+      "what": "三方应用拉起系统电话应用拨打电话。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "call.makeCall (@ohos.telephony.call)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-call",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Intent.ACTION_DIAL",
+          "url": "https://developer.android.com/reference/android/content/Intent",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "tel: URL scheme",
+          "url": "https://developer.apple.com/documentation/uikit/uiapplication/1623048-openurl",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.call.emergency",
+      "parent": "telecom.call",
+      "name": "紧急号码识别",
+      "what": "查询设备支持的紧急号码。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "TelephonyManager.getEmergencyNumberList",
+          "url": "https://developer.android.com/reference/android/telephony/TelephonyManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "call模块紧急号码",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-call",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.call.incall_ui",
+      "parent": "telecom.call",
+      "name": "通话中界面",
+      "what": "替换/增强系统来电与通话中界面。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "InCallService",
+          "url": "https://developer.android.com/reference/android/telecom/InCallService",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.call.number_identify",
+      "parent": "telecom.call",
+      "name": "号码识别",
+      "what": "查询企业来电与陌生号码识别开关及企业信息。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "numberIdentify (@kit.CallServiceKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-number-identify",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.call.rtt_video",
+      "parent": "telecom.call",
+      "name": "RTT与视频通话",
+      "what": "实时文本与视频通话支持。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Connection.PROPERTY_IS_RTT / video state",
+          "url": "https://developer.android.com/reference/android/telecom/Connection",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.call.screening",
+      "parent": "telecom.call",
+      "name": "来电筛选与重定向",
+      "what": "来电过滤、拒接与重定向控制。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "CallScreeningService / CallRedirectionService",
+          "url": "https://developer.android.com/reference/android/telecom/CallScreeningService",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.call.state",
+      "parent": "telecom.call",
+      "name": "通话状态监听",
+      "what": "监听通话状态、呼叫等待与通话记录类事件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "observer.on('callStateChange') (@ohos.telephony.observer)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-observer",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "TelephonyCallback.CallStateListener",
+          "url": "https://developer.android.com/reference/android/telephony/TelephonyCallback",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CTCallCenter (Core Telephony)",
+          "url": "https://developer.apple.com/documentation/coretelephony/ctcallcenter",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.call.voip_framework",
+      "parent": "telecom.call",
+      "name": "VoIP通话框架接入",
+      "what": "自管通话经系统通话框架与音频焦点协同（self-managed ConnectionService等）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ConnectionService (self-managed)",
+          "url": "https://developer.android.com/reference/android/telecom/ConnectionService",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "LiveCommunicationKit",
+          "url": "https://developer.apple.com/documentation/livecommunicationkit",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "PushKit VoIP (CallKit类推)",
+          "url": "https://developer.android.com/develop/ui/views/notifications/voip-notifications",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.call.voip_report",
+      "parent": "telecom.call",
+      "name": "VoIP来电去电上报",
+      "what": "应用向系统上报VoIP来电/去电/状态并获取用户点击事件，与系统通话UI集成。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "voipCall.on/off (@kit.CallServiceKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-voip-call",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.cellular",
+      "parent": "telecom",
+      "name": "蜂窝网络与SIM",
+      "what": "蜂窝网络状态、SIM/eSIM与蜂窝数据管理。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "telecom.cellular.carrier_config",
+      "parent": "telecom.cellular",
+      "name": "运营商配置",
+      "what": "读取运营商网络配置键值。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "CarrierConfigManager",
+          "url": "https://developer.android.com/reference/android/telephony/CarrierConfigManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.cellular.data",
+      "parent": "telecom.cellular",
+      "name": "蜂窝数据",
+      "what": "蜂窝数据连接状态与默认数据SIM。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "data (@ohos.telephony.data)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-telephony-data",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.cellular.esim",
+      "parent": "telecom.cellular",
+      "name": "eSIM管理",
+      "what": "eSIM配置与订阅管理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "esim (@ohos.telephony.esim)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-esim",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "EuiccManager",
+          "url": "https://developer.android.com/reference/android/telephony/euicc/EuiccManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Core Telephony eSIM (运营商应用)",
+          "url": "https://developer.apple.com/documentation/coretelephony",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.cellular.ims",
+      "parent": "telecom.cellular",
+      "name": "IMS",
+      "what": "IP多媒体子系统状态与能力。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ImsManager",
+          "url": "https://developer.android.com/reference/android/telephony/ims/ImsManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.cellular.network_state",
+      "parent": "telecom.cellular",
+      "name": "蜂窝网络状态查询",
+      "what": "查询运营商名称、PLMN、漫游与注册状态。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "radio.getNetworkState (@ohos.telephony.radio)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-radio",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "TelephonyManager.getNetworkOperator",
+          "url": "https://developer.android.com/reference/android/telephony/TelephonyManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CTTelephonyNetworkInfo.serviceSubscriberCellularProviders",
+          "url": "https://developer.apple.com/documentation/coretelephony/cttelephonynetworkinfo",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.cellular.observer",
+      "parent": "telecom.cellular",
+      "name": "蜂窝状态事件订阅",
+      "what": "订阅网络状态、信号与SIM状态变化事件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "observer (@ohos.telephony.observer)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-observer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.cellular.signal",
+      "parent": "telecom.cellular",
+      "name": "信号与网络制式",
+      "what": "信号强度与网络制式（NR/LTE等）信息。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "radio.getSignalInformation",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-radio",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "SignalStrength / dataNetworkType",
+          "url": "https://developer.android.com/reference/android/telephony/SignalStrength",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.cellular.sim",
+      "parent": "telecom.cellular",
+      "name": "SIM卡管理",
+      "what": "SIM卡状态、联系人存储与卡槽管理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "sim (@ohos.telephony.sim)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-sim",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "TelephonyManager.getSimState",
+          "url": "https://developer.android.com/reference/android/telephony/TelephonyManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.contacts",
+      "parent": "telecom",
+      "name": "联系人",
+      "what": "联系人数据存取、选择器与系统供给。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "telecom.contacts.access_button",
+      "parent": "telecom.contacts",
+      "name": "联系人增量授权按钮",
+      "what": "应用内按钮按需授予部分联系人访问。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "ContactAccessButton (ContactsUI)",
+          "url": "https://developer.apple.com/documentation/contactsui/contactaccessbutton",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.contacts.crud",
+      "parent": "telecom.contacts",
+      "name": "联系人增删改查",
+      "what": "应用读写用户联系人数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.contact",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-contact",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Contacts Provider (RawContacts)",
+          "url": "https://developer.android.com/guide/topics/providers/contacts-provider",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CNContactStore (Contacts)",
+          "url": "https://developer.apple.com/documentation/contacts/cncontactstore",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.contacts.picker",
+      "parent": "telecom.contacts",
+      "name": "联系人选择器",
+      "what": "免权限经系统UI新建/选择/保存联系人。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "addContactViaUI / saveToExistingContactViaUI",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/contact-picker",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CNContactPickerViewController (ContactsUI)",
+          "url": "https://developer.apple.com/documentation/contactsui/cncontactpickerviewcontroller",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "ContactsContract ContactsPicker",
+          "url": "https://developer.android.com/reference/android/provider/ContactsContract",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.contacts.provider_ext",
+      "parent": "telecom.contacts",
+      "name": "应用联系人系统供给",
+      "what": "应用自管理联系人经扩展供给系统通讯录生态。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "ContactProviderExtension (ContactProvider)",
+          "url": "https://developer.apple.com/documentation/contactprovider",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.contacts.vcard",
+      "parent": "telecom.contacts",
+      "name": "vCard导入导出",
+      "what": "vCard格式联系人数据导入导出。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "vcard (@ohos.telephony.vcard)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-vcard",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CNContactVCardSerialization",
+          "url": "https://developer.apple.com/documentation/contacts/cncontactvcardserialization",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.mail_compose",
+      "parent": "telecom",
+      "name": "系统邮件编写",
+      "what": "应用内模态呈现系统邮件编写界面。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MFMailComposeViewController (MessageUI)",
+          "url": "https://developer.apple.com/documentation/messageui/mfmailcomposeviewcontroller",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Intent.ACTION_SENDTO (mailto:)",
+          "url": "https://developer.android.com/reference/android/content/Intent",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.sms",
+      "parent": "telecom",
+      "name": "短信",
+      "what": "短信创建发送、系统编写界面与消息生态扩展。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "telecom.sms.compose_ui",
+      "parent": "telecom.sms",
+      "name": "系统短信编写界面",
+      "what": "应用内模态呈现系统短信编写界面由用户完成发送。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MFMessageComposeViewController (MessageUI)",
+          "url": "https://developer.apple.com/documentation/messageui/mfmessagecomposeviewcontroller",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Intent.ACTION_SENDTO (smsto:)",
+          "url": "https://developer.android.com/reference/android/content/Intent",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.sms.filter",
+      "parent": "telecom.sms",
+      "name": "垃圾短信过滤与举报",
+      "what": "消息过滤与不良通信举报应用扩展。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "IdentityLookup (ILMessageFilterExtension)",
+          "url": "https://developer.apple.com/documentation/identitylookup",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.sms.rcs",
+      "parent": "telecom.sms",
+      "name": "运营商消息RCS",
+      "what": "经运营商消息会话框架收发SMS/MMS/RCS与chatbot。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "TelephonyMessagingSession (iOS 18+, 仅iPhone)",
+          "url": "https://developer.apple.com/documentation/telephony/telephonymessagingsession",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.sms.satellite",
+      "parent": "telecom.sms",
+      "name": "卫星消息",
+      "what": "卫星链路收发消息（设备与运营商条件待核）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Satellite messaging (telephony)",
+          "url": "https://developer.android.com/reference/android/telephony/SatelliteManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.sms.send",
+      "parent": "telecom.sms",
+      "name": "短信创建发送",
+      "what": "创建并发送短信、默认卡槽与短信中心地址管理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "sms.sendMessage (@ohos.telephony.sms)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-sms",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "SmsManager.sendTextMessage",
+          "url": "https://developer.android.com/reference/android/telephony/SmsManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "telecom.sms.voicemail",
+      "parent": "telecom.sms",
+      "name": "语音信箱",
+      "what": "可视化语音信箱集成。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "TelephonyManager visual voicemail",
+          "url": "https://developer.android.com/reference/android/telephony/TelephonyManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

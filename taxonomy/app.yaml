@@ -6,7 +6,7 @@ features:
   name:
     zh: 应用模型
     en: Application Model
-  definition: 应用进程与组件生命周期、后台约束、扩展点、桌面与安装更新。
+  definition: 应用组件模型、生命周期、进程、后台执行、启动、桌面呈现、安装更新与系统扩展点。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -17,8 +17,11 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 应用进程与组件生命周期、后台约束、扩展点、桌面与安装更新。
-    excludes: []
+    - model、lifecycle、process、background、launch、desktop、install、extensions
+    excludes:
+    - ui 窗口与控件
+    - runtime 语言/包管理底层
+    - enterprise 设备策略
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -28,116 +31,19 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: app.lifecycle
-  level: L2
-  parent: app
-  name:
-    zh: 组件生命周期
-    en: Component Lifecycle
-  definition: 应用与界面组件的创建、可见、销毁与状态保存。
-  knowledge_role: rollup
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  knowledge_path: knowledge/app/lifecycle/_rollup.yaml
-  bindings: {}
-  comparison_scope:
-    includes:
-    - 应用与界面组件的创建、可见、销毁与状态保存。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: app.lifecycle.activity_ability
-  level: L3
-  parent: app.lifecycle
-  name:
-    zh: 界面组件生命周期
-    en: UI Component Lifecycle
-  definition: 前台界面入口组件的生命周期回调与状态恢复。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: analog
-  bindings:
-    android:
-    - kind: class
-      id: android.app.Activity
-      role: primary
-      url: https://developer.android.com/reference/android/app/Activity
-    ios:
-    - kind: class
-      id: UIKit.UIViewController
-      role: primary
-      url: https://developer.apple.com/documentation/uikit/uiviewcontroller
-    harmonyos:
-    - kind: module
-      id: '@ohos.app.ability.UIAbility'
-      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability
-      role: primary
-      syscap: SystemCapability.Ability.AbilityRuntime.Core
-  knowledge_path: knowledge/app/lifecycle/activity_ability.yaml
-  comparison_scope:
-    includes:
-    - 前台界面入口组件的生命周期回调与状态恢复。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: app.lifecycle.process
-  level: L3
-  parent: app.lifecycle
-  name:
-    zh: 进程与内存回收
-    en: Process and Memory Reclamation
-  definition: 进程优先级、被杀与恢复策略。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: background
-  knowledge_path: knowledge/app/lifecycle/process.yaml
-  comparison_scope:
-    includes:
-    - 进程优先级、被杀与恢复策略。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - app
 - id: app.background
   level: L2
   parent: app
   name:
     zh: 后台执行
     en: Background Execution
-  definition: 应用不在前台时可持续或受限执行的系统能力。
+  definition: 前台长时任务、延迟条件任务与短暂延缓挂起。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -148,8 +54,10 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 应用不在前台时可持续或受限执行的系统能力。
-    excludes: []
+    - foreground_task、deferred_work、transient
+    excludes:
+    - 播放后台续播见 media.playback
+    - 推送见 notifications
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -159,151 +67,20 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: app.background.foreground_task
-  level: L3
-  parent: app.background
-  name:
-    zh: 前台长时任务
-    en: Foreground Long-Running Task
-  definition: 向用户明示的长时后台工作（如下载、导航）。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: background
-  aliases:
-  - Foreground Service
-  - BGTaskScheduler
-  - Background Task
-  bindings:
-    android:
-    - kind: class
-      id: android.app.Service
-      url: https://developer.android.com/reference/android/app/Service
-      role: primary
-      note: Foreground service + types
-    ios:
-    - kind: framework
-      id: BackgroundTasks
-      url: https://developer.apple.com/documentation/backgroundtasks
-      role: primary
-    harmonyos:
-    - kind: module
-      id: '@ohos.resourceschedule.backgroundTaskManager'
-      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-resourceschedule-backgroundtaskmanager
-      role: primary
-  knowledge_path: knowledge/app/background/foreground_task.yaml
-  comparison_scope:
-    includes:
-    - 向用户明示的长时后台工作（如下载、导航）。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: app.background.deferred_work
-  level: L3
-  parent: app.background
-  name:
-    zh: 延迟与条件任务
-    en: Deferred Conditional Work
-  definition: 在网络/充电等约束下由系统调度的延迟任务。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  aliases:
-  - WorkManager
-  - BGAppRefresh
-  knowledge_path: knowledge/app/background/deferred_work.yaml
-  comparison_scope:
-    includes:
-    - 在网络/充电等约束下由系统调度的延迟任务。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: app.extensions
-  level: L2
-  parent: app
-  name:
-    zh: 扩展点
-    en: App Extensions
-  definition: 主应用之外由系统拉起的扩展进程/能力。
-  knowledge_role: rollup
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  knowledge_path: knowledge/app/extensions/_rollup.yaml
-  comparison_scope:
-    includes:
-    - 主应用之外由系统拉起的扩展进程/能力。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: app.extensions.share
-  level: L3
-  parent: app.extensions
-  name:
-    zh: 分享扩展
-    en: Share Extension
-  definition: 向其他应用提供分享目标或接收分享内容。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: analog
-  knowledge_path: knowledge/app/extensions/share.yaml
-  comparison_scope:
-    includes:
-    - 向其他应用提供分享目标或接收分享内容。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - app.background
+  sibling_axis: app_runtime_concern
 - id: app.desktop
   level: L2
   parent: app
   name:
-    zh: 桌面能力
-    en: Launcher Capabilities
-  definition: 图标、快捷方式、小组件等桌面入口。
+    zh: 桌面呈现
+    en: Desktop Presence
+  definition: 桌面小组件、快捷方式与动态图标。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -311,44 +88,12 @@ features:
   - tablet
   privacy_class: none
   knowledge_path: knowledge/app/desktop/_rollup.yaml
-  comparison_scope:
-    includes:
-    - 图标、快捷方式、小组件等桌面入口。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: app.desktop.widget
-  level: L3
-  parent: app.desktop
-  name:
-    zh: 桌面小组件
-    en: Home Screen Widget
-  definition: 在桌面展示的可刷新应用卡片。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  aliases:
-  - App Widget
-  - WidgetKit
-  - Form
-  knowledge_path: knowledge/app/desktop/widget.yaml
   bindings: {}
   comparison_scope:
     includes:
-    - 在桌面展示的可刷新应用卡片。
-    excludes: []
+    - widget、shortcuts、dynamic_icon
+    excludes:
+    - 壳层状态栏条目见 ui.system_integration
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -358,26 +103,33 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: app.desktop.shortcuts
-  level: L3
-  parent: app.desktop
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - app.desktop
+  sibling_axis: app_runtime_concern
+- id: app.extensions
+  level: L2
+  parent: app
   name:
-    zh: 桌面快捷方式
-    en: Launcher Shortcuts
-  definition: 长按图标或系统菜单中的深链快捷入口。
-  knowledge_role: leaf
+    zh: 系统扩展点
+    en: System Extensions
+  definition: 分享、照片编辑、UI 嵌入、驱动与智能体等扩展能力。
+  knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  knowledge_path: knowledge/app/desktop/shortcuts.yaml
+  knowledge_path: knowledge/app/extensions/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 长按图标或系统菜单中的深链快捷入口。
-    excludes: []
+    - share、photo_editor、ui_embed、driver、agent
+    excludes:
+    - 桌面小组件见 app.desktop.widget
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -387,13 +139,20 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - app.extensions
+  sibling_axis: app_runtime_concern
 - id: app.install
   level: L2
   parent: app
   name:
     zh: 安装与更新
     en: Install and Update
-  definition: 安装包分发、更新与轻量安装形态。
+  definition: 包安装更新、应用内更新、即用安装、按需模块与包查询。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -404,8 +163,9 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 安装包分发、更新与轻量安装形态。
-    excludes: []
+    - package_update、inapp_update、instant、on_demand、query
+    excludes:
+    - 签名安全见 security
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -415,25 +175,346 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: app.install.package_update
-  level: L3
-  parent: app.install
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - app.install
+  sibling_axis: app_runtime_concern
+- id: app.launch
+  level: L2
+  parent: app
   name:
-    zh: 应用安装更新
-    en: App Install Update
-  definition: 完整应用的安装与版本更新。
+    zh: 启动与初始化
+    en: Launch and Startup
+  definition: 启动初始化、启动窗与启动加速。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/launch/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - startup_init、splash、acceleration
+    excludes:
+    - 安装见 app.install
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: app_runtime_concern
+- id: app.lifecycle
+  level: L2
+  parent: app
+  name:
+    zh: 组件生命周期
+    en: Component Lifecycle
+  definition: 界面组件生命周期、进程死亡恢复与退出。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/lifecycle/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - activity_ability、callbacks、process_death、recovery、app_exit
+    excludes:
+    - 进程优先级见 app.process
+    - 后台任务见 app.background
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - app.lifecycle
+  sibling_axis: app_runtime_concern
+- id: app.model
+  level: L2
+  parent: app
+  name:
+    zh: 应用组件模型
+    en: App Component Model
+  definition: 应用入口、上下文、界面组件与后台服务组件模型。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/model/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - app_entry、context、ui_entry、service_component
+    excludes:
+    - 生命周期回调细节见 app.lifecycle
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: app_runtime_concern
+- id: app.process
+  level: L2
+  parent: app
+  name:
+    zh: 进程与隔离
+    en: Process and Isolation
+  definition: 多进程模型、优先级、隔离与 IPC。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/process/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - model、priority、isolation、ipc
+    excludes:
+    - 组件生命周期见 app.lifecycle
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: renamed_from
+    sources:
+    - app.lifecycle.process
+  sibling_axis: app_runtime_concern
+- id: app.background.deferred_work
+  level: L3
+  parent: app.background
+  name:
+    zh: 延迟与条件任务
+    en: Deferred and Conditional Work
+  definition: 按网络/充电等约束调度的延迟或周期性后台工作。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/background/deferred_work/_rollup.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: WorkManager
+      url: https://developer.android.com/develop/background-work/background-tasks/persistent/getting-started
+      role: primary
+    ios:
+    - kind: class
+      id: BGTaskScheduler
+      url: https://developer.apple.com/documentation/backgroundtasks/bgtaskscheduler
+      role: primary
+    harmonyos:
+    - kind: module
+      id: workScheduler
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-workscheduler
+      role: primary
+  comparison_scope:
+    includes:
+    - WorkManager、BGTaskScheduler、workScheduler
+    excludes:
+    - 前台服务见 foreground_task
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - app.background.deferred_work
+  sibling_axis: background_kind
+  split_justification: independent_capability
+- id: app.background.foreground_task
+  level: L3
+  parent: app.background
+  name:
+    zh: 前台长时任务
+    en: Foreground Long-running Task
+  definition: 用户可感知的长时后台执行（前台服务/连续任务）。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/background/foreground_task/_rollup.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Foreground services
+      url: https://developer.android.com/develop/background-work/services/foreground-services
+      role: primary
+    ios:
+    - kind: class
+      id: BGContinuedProcessingTask
+      url: https://developer.apple.com/documentation/backgroundtasks/bgcontinuedprocessingtask
+      role: primary
+    harmonyos:
+    - kind: module
+      id: startContinuousTask
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-resourceschedule-backgroundtaskmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - startForeground、BGContinuedProcessingTask、startContinuousTask
+    excludes:
+    - 延迟任务见 deferred_work
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - app.background.foreground_task
+  sibling_axis: background_kind
+  split_justification: independent_capability
+- id: app.background.transient
+  level: L3
+  parent: app.background
+  name:
+    zh: 短暂延缓挂起
+    en: Transient Suspend Delay
+  definition: 短时间申请延迟进入挂起以完成收尾工作。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/background/transient/_rollup.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 可用 Wakeful 模式有限替代；无同名 API
+    ios:
+    - kind: class
+      id: beginBackgroundTask
+      url: https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtask
+      role: primary
+    harmonyos:
+    - kind: module
+      id: requestSuspendDelay
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-resourceschedule-backgroundtaskmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - requestSuspendDelay、beginBackgroundTask
+    excludes:
+    - 长时任务见 foreground_task
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: background_kind
+  split_justification: independent_capability
+- id: app.desktop.dynamic_icon
+  level: L3
+  parent: app.desktop
+  name:
+    zh: 动态图标
+    en: Dynamic App Icon
+  definition: 运行时切换桌面应用图标/角标相关入口。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  knowledge_path: knowledge/app/install/package_update.yaml
+  knowledge_path: knowledge/app/desktop/dynamic_icon.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: activity-alias icons
+      url: https://developer.android.com/guide/topics/manifest/activity-alias-element
+      role: primary
+    ios:
+    - kind: class
+      id: setAlternateIconName
+      url: https://developer.apple.com/documentation/uikit/uiapplication/2806818-setalternateiconname
+      role: primary
+    harmonyos:
+    - kind: module
+      id: 动态图标
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-icon-management
+      role: primary
   comparison_scope:
     includes:
-    - 完整应用的安装与版本更新。
-    excludes: []
+    - activity-alias icon、alternate icons、动态图标
+    excludes:
+    - 快捷方式见 shortcuts
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -443,49 +524,464 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: desktop_surface
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.desktop.shortcuts
+  level: L3
+  parent: app.desktop
+  name:
+    zh: 桌面快捷方式
+    en: App Shortcuts
+  definition: 静态/动态应用快捷方式发布与更新。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/desktop/shortcuts/_rollup.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ShortcutManager
+      url: https://developer.android.com/reference/android/content/pm/ShortcutManager
+      role: primary
+    ios:
+    - kind: class
+      id: UIApplicationShortcutItem
+      url: https://developer.apple.com/documentation/uikit/uiapplicationshortcutitem
+      role: primary
+    harmonyos:
+    - kind: module
+      id: 桌面快捷方式
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/shortcuts
+      role: primary
+  comparison_scope:
+    includes:
+    - ShortcutManager、UIApplicationShortcutItem、shortcutManager
+    excludes:
+    - 小组件见 widget
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - app.desktop.shortcuts
+  sibling_axis: desktop_surface
+  split_justification: independent_capability
+- id: app.desktop.widget
+  level: L3
+  parent: app.desktop
+  name:
+    zh: 桌面小组件
+    en: Home Screen Widgets
+  definition: 桌面/负一屏小组件的提供与刷新。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/desktop/widget/_rollup.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AppWidgetProvider
+      url: https://developer.android.com/reference/android/appwidget/AppWidgetProvider
+      role: primary
+    ios:
+    - kind: framework
+      id: WidgetKit
+      url: https://developer.apple.com/documentation/widgetkit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: FormExtensionAbility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-form-formextensionability
+      role: primary
+  comparison_scope:
+    includes:
+    - AppWidget、WidgetKit、FormExtensionAbility
+    excludes:
+    - 快捷方式见 shortcuts
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - app.desktop.widget
+  sibling_axis: desktop_surface
+  split_justification: independent_capability
+- id: app.extensions.agent
+  level: L3
+  parent: app.extensions
+  name:
+    zh: 智能体扩展
+    en: Agent Extension
+  definition: 系统智能体/代理宿主扩展入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/extensions/agent.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: App Intents / Siri 另域
+    harmonyos:
+    - kind: module
+      id: AgentExtensionAbility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-agentextensionability
+      role: primary
+  comparison_scope:
+    includes:
+    - AgentExtensionAbility
+    excludes:
+    - 通用 AI 运行时见 ai
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: extension_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.extensions.driver
+  level: L3
+  parent: app.extensions
+  name:
+    zh: 驱动扩展
+    en: Driver Extension
+  definition: 外设/驱动类扩展能力入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/extensions/driver.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: DriverExtensionAbility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-driverextensionability
+      role: primary
+  comparison_scope:
+    includes:
+    - DriverExtensionAbility
+    excludes:
+    - USB 主机见 connectivity.usb
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: extension_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.extensions.photo_editor
+  level: L3
+  parent: app.extensions
+  name:
+    zh: 照片编辑扩展
+    en: Photo Editor Extension
+  definition: 向系统相册提供就地照片编辑扩展。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/extensions/photo_editor.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: Photo Editing Extension
+      url: https://developer.apple.com/documentation/photokit/photo_editing_extension
+      role: primary
+    harmonyos:
+    - kind: module
+      id: PhotoEditorExtensionAbility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-photoeditorextensionability
+      role: primary
+  comparison_scope:
+    includes:
+    - Photo Editing Extension、PhotoEditorExtensionAbility
+    excludes:
+    - 媒体库管理见 media.library.manage
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: extension_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.extensions.share
+  level: L3
+  parent: app.extensions
+  name:
+    zh: 分享扩展
+    en: Share Extension
+  definition: 作为系统分享目标接收并处理外来内容。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/extensions/share/_rollup.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ShareSheet / Intent.ACTION_SEND
+      url: https://developer.android.com/training/sharing/receive
+      role: primary
+    ios:
+    - kind: guide
+      id: Share Extension
+      url: https://developer.apple.com/documentation/foundation/app_extension_support
+      role: primary
+    harmonyos:
+    - kind: module
+      id: ShareExtensionAbility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-shareextensionability
+      role: primary
+  comparison_scope:
+    includes:
+    - ShareCompat / Share Extension / ShareExtensionAbility
+    excludes:
+    - 通用 UI 嵌入见 ui_embed
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - app.extensions.share
+  sibling_axis: extension_kind
+  split_justification: independent_capability
+- id: app.extensions.ui_embed
+  level: L3
+  parent: app.extensions
+  name:
+    zh: 嵌入式UI扩展
+    en: Embedded UI Extension
+  definition: 在宿主中嵌入扩展提供的界面内容。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/extensions/ui_embed/_rollup.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 可用 Activity 嵌入 / SDK 视图
+    ios:
+    - kind: guide
+      id: App Extensions
+      url: https://developer.apple.com/documentation/foundation/app_extension_support
+      role: primary
+    harmonyos:
+    - kind: module
+      id: EmbeddedUIExtensionAbility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-embeddeduiextensionability
+      role: primary
+  comparison_scope:
+    includes:
+    - EmbeddedUIExtensionAbility、App Extensions UI
+    excludes:
+    - 分享扩展见 share
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: extension_kind
+  split_justification: independent_capability
+- id: app.install.inapp_update
+  level: L3
+  parent: app.install
+  name:
+    zh: 应用内更新
+    en: In-app Update
+  definition: 应用内检查并触发更新流程。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/install/inapp_update.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: AppUpdateManager
+      url: https://developer.android.com/guide/playcore/in-app-updates
+      role: primary
+    ios:
+    - kind: class
+      id: AppStore / SKStoreProductViewController
+      url: https://developer.apple.com/documentation/storekit/skstoreproductviewcontroller
+      role: primary
+    harmonyos:
+    - kind: module
+      id: updateManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-updatemanager
+      role: primary
+  comparison_scope:
+    includes:
+    - AppUpdateManager、updateManager
+    excludes:
+    - 商店外安装见 package_update
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: install_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
 - id: app.install.instant
   level: L3
   parent: app.install
   name:
     zh: 轻量即用安装
-    en: Lightweight Instant Experience
-  definition: 无需完整安装即可试用的轻量应用形态。
+    en: Instant / Lightweight Install
+  definition: 免安装或轻量即用的应用分发与拉起。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence
-  aliases:
-  - Instant Apps
-  - App Clips
-  - Atomic Service
-  - 元服务
+  knowledge_path: knowledge/app/install/instant.yaml
   bindings:
     android:
-    - kind: other
-      id: com.google.android.gms.instantapps
-      url: https://developers.google.com/android/reference/com/google/android/gms/instantapps/InstantApps
+    - kind: guide
+      id: Google Play Instant
+      url: https://developer.android.com/topic/google-play-instant
       role: primary
-      note: Google Play Instant
     ios:
     - kind: framework
-      id: App Clips
+      id: App Clip
       url: https://developer.apple.com/documentation/appclip
       role: primary
     harmonyos:
-    - kind: kit
-      id: Atomic Service
-      url: https://developer.huawei.com/consumer/cn/doc/atomic-guides/atomic-service-definition
+    - kind: module
+      id: AtomicService
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/atomic-service-overview
       role: primary
-      note: 元服务
-  knowledge_path: knowledge/app/install/instant.yaml
   comparison_scope:
     includes:
-    - 无需完整安装即可试用的轻量应用形态。
-    excludes: []
+    - App Clip、AtomicService/元服务、Instant（历史）
+    excludes:
+    - 完整包安装见 package_update
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -495,3 +991,2916 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - app.install.instant
+  sibling_axis: install_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.install.on_demand
+  level: L3
+  parent: app.install
+  name:
+    zh: 按需模块交付
+    en: On-demand Module Delivery
+  definition: 按需下载功能模块/资产包。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/install/on_demand/_rollup.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: SplitInstallManager
+      url: https://developer.android.com/guide/playcore/feature-delivery
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: On-Demand Resources
+    harmonyos:
+    - kind: module
+      id: moduleInstallManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-moduleinstallmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - Play Feature Delivery、moduleInstallManager
+    excludes:
+    - 完整更新见 package_update
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: install_aspect
+  split_justification: independent_capability
+- id: app.install.package_update
+  level: L3
+  parent: app.install
+  name:
+    zh: 应用安装更新
+    en: Package Install and Update
+  definition: 应用包安装、更新与包格式分发模型。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/install/package_update/_rollup.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PackageInstaller
+      url: https://developer.android.com/reference/android/content/pm/PackageInstaller
+      role: primary
+    ios:
+    - kind: framework
+      id: NSExtension / App install (系统)
+      url: https://developer.apple.com/documentation/storekit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: bundleManager / HAP
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/application-package-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - PackageInstaller、HAP/AAB 安装更新
+    excludes:
+    - 应用内更新 API 见 inapp_update
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - app.install.package_update
+  sibling_axis: install_aspect
+  split_justification: independent_capability
+- id: app.install.query
+  level: L3
+  parent: app.install
+  name:
+    zh: 已安装包查询
+    en: Installed Package Query
+  definition: 查询本机已安装应用/包信息（受可见性约束）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/install/query.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PackageManager
+      url: https://developer.android.com/reference/android/content/pm/PackageManager
+      role: primary
+    ios:
+    - kind: class
+      id: canOpenURL / LSApplicationQueriesSchemes
+      url: https://developer.apple.com/documentation/uikit/uiapplication/1622952-canopenurl
+      role: primary
+    harmonyos:
+    - kind: module
+      id: bundleManager.getBundleInfo
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bundlemanager
+      role: primary
+  comparison_scope:
+    includes:
+    - PackageManager、bundleManager.getBundleInfo、canOpenURL 限制
+    excludes:
+    - 安装动作见 package_update
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: install_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.install.twin
+  level: L3
+  parent: app.install
+  name:
+    zh: 应用分身
+    en: App Twin / Clone
+  definition: 同一应用多实例/分身安装与管理入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/install/twin.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: OEM 分身能力，非统一公开 API
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: 应用分身
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-clone
+      role: primary
+  comparison_scope:
+    includes:
+    - 应用分身
+    excludes:
+    - 普通安装见 package_update
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: install_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.launch.acceleration
+  level: L3
+  parent: app.launch
+  name:
+    zh: 启动加速
+    en: Launch Acceleration
+  definition: 启动剖析配置与系统预加载加速。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/launch/acceleration/_rollup.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Baseline Profiles
+      url: https://developer.android.com/topic/performance/baselineprofiles/overview
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: 应用预加载
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-preload
+      role: primary
+  comparison_scope:
+    includes:
+    - Baseline Profiles、app preload
+    excludes:
+    - 闪屏见 splash
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: launch_aspect
+  split_justification: independent_capability
+- id: app.launch.splash
+  level: L3
+  parent: app.launch
+  name:
+    zh: 启动窗与闪屏
+    en: Splash / Starting Window
+  definition: 系统启动窗或首屏占位资源配置。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/launch/splash.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SplashScreen
+      url: https://developer.android.com/reference/androidx/core/splashscreen/SplashScreen
+      role: primary
+    ios:
+    - kind: guide
+      id: Launch Screen
+      url: https://developer.apple.com/documentation/uikit/uistoryboard/storyboard_launch_screen
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Starting Window
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/start-window
+      role: primary
+  comparison_scope:
+    includes:
+    - SplashScreen API、Launch Screen、Starting Window
+    excludes:
+    - 初始化器见 startup_init
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: launch_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.launch.startup_init
+  level: L3
+  parent: app.launch
+  name:
+    zh: 启动初始化器
+    en: Startup Initializers
+  definition: 进程启动阶段的组件初始化编排。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/launch/startup_init/_rollup.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: App Startup
+      url: https://developer.android.com/topic/libraries/app-startup
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: startupManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-startupmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - App Startup Initializer、startupManager
+    excludes:
+    - 启动窗见 splash
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: launch_aspect
+  split_justification: independent_capability
+- id: app.lifecycle.activity_ability
+  level: L3
+  parent: app.lifecycle
+  name:
+    zh: 界面组件生命周期
+    en: UI Component Lifecycle
+  definition: 前台界面入口组件的创建、可见、销毁与状态保存回调。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/lifecycle/activity_ability/_rollup.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Activity lifecycle
+      url: https://developer.android.com/guide/components/activities/activity-lifecycle
+      role: primary
+    ios:
+    - kind: class
+      id: UIViewController
+      url: https://developer.apple.com/documentation/uikit/uiviewcontroller
+      role: primary
+    harmonyos:
+    - kind: module
+      id: UIAbility 生命周期
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/uiability-lifecycle
+      role: primary
+  comparison_scope:
+    includes:
+    - Activity/UIAbility/UIViewController 生命周期
+    excludes:
+    - 进程回收见 process / process_death
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: symbol_ok
+  legacy:
+    disposition: kept
+    sources:
+    - app.lifecycle.activity_ability
+  sibling_axis: lifecycle_aspect
+  split_justification: independent_capability
+- id: app.lifecycle.app_exit
+  level: L3
+  parent: app.lifecycle
+  name:
+    zh: 应用退出与自终止
+    en: App Exit and Self Termination
+  definition: 主动终止自身 Ability/任务或重启应用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/lifecycle/app_exit.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Activity.finish
+      url: https://developer.android.com/reference/android/app/Activity#finish()
+      role: primary
+    ios:
+    - kind: class
+      id: exit(0) / UIApplication
+      url: https://developer.apple.com/documentation/uikit/uiapplication
+      role: primary
+    harmonyos:
+    - kind: module
+      id: terminateSelf / restartApp
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inner-application-uiabilitycontext
+      role: primary
+  comparison_scope:
+    includes:
+    - finishAffinity/terminateSelf/exit
+    excludes:
+    - 系统杀进程见 process.priority
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: lifecycle_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.lifecycle.callbacks
+  level: L3
+  parent: app.lifecycle
+  name:
+    zh: 应用级生命周期回调
+    en: App-level Lifecycle Callbacks
+  definition: 进程/应用前后台切换等全局生命周期监听。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/lifecycle/callbacks/_rollup.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ProcessLifecycleOwner
+      url: https://developer.android.com/reference/androidx/lifecycle/ProcessLifecycleOwner
+      role: primary
+    ios:
+    - kind: other
+      id: scenePhase
+      url: https://developer.apple.com/documentation/swiftui/scenephase
+      role: primary
+    harmonyos:
+    - kind: module
+      id: ApplicationStateChangeCallback
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-application
+      role: primary
+  comparison_scope:
+    includes:
+    - ProcessLifecycleOwner、scene phase、ApplicationStateChange
+    excludes:
+    - 单页面组件见 activity_ability
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: lifecycle_aspect
+  split_justification: independent_capability
+- id: app.lifecycle.process_death
+  level: L3
+  parent: app.lifecycle
+  name:
+    zh: 进程死亡状态保存
+    en: Process Death State Saving
+  definition: 在进程可能被杀死前保存可恢复状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/lifecycle/process_death.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: onSaveInstanceState
+      url: https://developer.android.com/guide/components/activities/activity-lifecycle#onSaveInstanceState
+      role: primary
+    ios:
+    - kind: class
+      id: UISceneSession state restoration
+      url: https://developer.apple.com/documentation/uikit/uiscenesession
+      role: primary
+    harmonyos:
+    - kind: module
+      id: UIAbility.onSaveState
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/uiability-persist-data
+      role: primary
+  comparison_scope:
+    includes:
+    - onSaveInstanceState、onSaveState、scene restoration
+    excludes:
+    - 崩溃恢复见 recovery
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: lifecycle_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.lifecycle.recovery
+  level: L3
+  parent: app.lifecycle
+  name:
+    zh: 异常恢复重启
+    en: Abnormal Recovery Restart
+  definition: 应用异常后的状态保存与拉起恢复。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/lifecycle/recovery.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 可用自定义异常处理；无统一 appRecovery API
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: appRecovery
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-apprecovery
+      role: primary
+  comparison_scope:
+    includes:
+    - appRecovery、exception handler restart
+    excludes:
+    - 常规状态保存见 process_death
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: lifecycle_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.model.app_entry
+  level: L3
+  parent: app.model
+  name:
+    zh: 应用进程入口
+    en: Application Process Entry
+  definition: 应用进程级入口与全局创建回调。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/model/app_entry/_rollup.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Application
+      url: https://developer.android.com/reference/android/app/Application
+      role: primary
+    ios:
+    - kind: class
+      id: UIApplicationMain
+      url: https://developer.apple.com/documentation/uikit/uiapplicationmain(_:_:_:_:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: AbilityStage
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-abilitystage
+      role: primary
+  comparison_scope:
+    includes:
+    - Application/AbilityStage、UIApplicationMain
+    excludes:
+    - 界面组件入口见 ui_entry
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: model_role
+  split_justification: independent_capability
+- id: app.model.context
+  level: L3
+  parent: app.model
+  name:
+    zh: 应用与组件上下文
+    en: App and Component Context
+  definition: 获取应用/组件上下文以访问系统服务与资源。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/model/context.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Context
+      url: https://developer.android.com/reference/android/content/Context
+      role: primary
+    ios:
+    - kind: class
+      id: UIApplication
+      url: https://developer.apple.com/documentation/uikit/uiapplication
+      role: primary
+    harmonyos:
+    - kind: module
+      id: ApplicationContext / UIAbilityContext
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inner-application-uiabilitycontext
+      role: primary
+  comparison_scope:
+    includes:
+    - Context/UIAbilityContext、UIApplication
+    excludes:
+    - 入口组件见 ui_entry
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: model_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.model.service_component
+  level: L3
+  parent: app.model
+  name:
+    zh: 服务组件
+    en: Service Component
+  definition: 无界面后台服务组件的声明与启动模型。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/model/service_component/_rollup.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Service
+      url: https://developer.android.com/reference/android/app/Service
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 无对等 Service 组件；用后台任务 API
+    harmonyos:
+    - kind: module
+      id: AppServiceExtensionAbility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-appserviceextensionability
+      role: primary
+  comparison_scope:
+    includes:
+    - Service、AppServiceExtensionAbility
+    excludes:
+    - 前台服务长时任务见 background.foreground_task
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: model_role
+  split_justification: independent_capability
+- id: app.model.ui_entry
+  level: L3
+  parent: app.model
+  name:
+    zh: 界面入口组件
+    en: UI Entry Component
+  definition: 可作为界面入口被启动的 Activity/UIAbility/Scene。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/model/ui_entry/_rollup.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Activity
+      url: https://developer.android.com/reference/android/app/Activity
+      role: primary
+    ios:
+    - kind: class
+      id: UIScene / App lifecycle
+      url: https://developer.apple.com/documentation/uikit/uiscene
+      role: primary
+    harmonyos:
+    - kind: module
+      id: UIAbility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-uiability
+      role: primary
+  comparison_scope:
+    includes:
+    - Activity/UIAbility exported 入口
+    excludes:
+    - 生命周期回调见 lifecycle.activity_ability
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: model_role
+  split_justification: independent_capability
+- id: app.process.ipc
+  level: L3
+  parent: app.process
+  name:
+    zh: 进程间通信
+    en: Inter-process Communication
+  definition: 跨进程调用通道与序列化。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/process/ipc/_rollup.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: AIDL
+      url: https://developer.android.com/guide/components/aidl
+      role: primary
+    ios:
+    - kind: framework
+      id: XPC
+      url: https://developer.apple.com/documentation/xpc
+      role: primary
+    harmonyos:
+    - kind: module
+      id: rpc.IRemoteObject
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-rpc
+      role: primary
+  comparison_scope:
+    includes:
+    - Binder/AIDL、XPC、RPC/MessageSequence
+    excludes:
+    - 组件启动模型见 app.model
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: symbol_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: process_aspect
+  split_justification: independent_capability
+- id: app.process.isolation
+  level: L3
+  parent: app.process
+  name:
+    zh: 进程与子进程隔离
+    en: Process Isolation
+  definition: 子进程/隔离进程创建与安全边界。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/process/isolation.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: android:isolatedProcess
+      url: https://developer.android.com/guide/topics/manifest/service-element#isolated
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: Native child process
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-childprocess
+      role: primary
+  comparison_scope:
+    includes:
+    - isolatedProcess、native child process
+    excludes:
+    - 同应用多进程见 model
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: process_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.process.model
+  level: L3
+  parent: app.process
+  name:
+    zh: 多进程模型
+    en: Multi-process Model
+  definition: 为组件指定独立进程与进程划分模型。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/process/model.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: android:process
+      url: https://developer.android.com/guide/components/processes-and-threads
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: App Extensions 另进程；主应用通常单进程
+    harmonyos:
+    - kind: module
+      id: process 配置
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/process-model
+      role: primary
+  comparison_scope:
+    includes:
+    - android:process、module process 字段
+    excludes:
+    - IPC 通道见 ipc
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: merged_from
+    sources:
+    - app.lifecycle.process
+  sibling_axis: process_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.process.priority
+  level: L3
+  parent: app.process
+  name:
+    zh: 进程优先级
+    en: Process Priority
+  definition: 前后台与服务状态下的进程重要性/优先级。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/process/priority/_rollup.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Processes and application life cycle
+      url: https://developer.android.com/guide/components/activities/process-lifecycle
+      role: primary
+    ios:
+    - kind: guide
+      id: App lifecycle memory
+      url: https://developer.apple.com/documentation/uikit/app_and_environment/managing_your_app_s_life_cycle
+      role: primary
+    harmonyos:
+    - kind: module
+      id: 进程优先级
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/process-model
+      role: primary
+  comparison_scope:
+    includes:
+    - oom_adj / importance levels
+    excludes:
+    - 后台任务配额见 background
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: process_aspect
+  split_justification: independent_capability
+- id: app.background.deferred_work.constraints
+  level: L4
+  parent: app.background.deferred_work
+  name:
+    zh: 延迟任务约束
+    en: Deferred Work Constraints
+  definition: 网络、电量、空闲等执行约束条件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/background/deferred_work/constraints.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Constraints.Builder
+      url: https://developer.android.com/reference/androidx/work/Constraints.Builder
+      role: primary
+    ios:
+    - kind: class
+      id: BGAppRefreshTaskRequest
+      url: https://developer.apple.com/documentation/backgroundtasks/bgapprefreshtaskrequest
+      role: primary
+    harmonyos:
+    - kind: module
+      id: WorkInfo 约束
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-workscheduler
+      role: primary
+  comparison_scope:
+    includes:
+    - Constraints、BGAppRefresh、WorkInfo constraints
+    excludes:
+    - 调度入口见父节点
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: deferred_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.background.deferred_work.periodic
+  level: L4
+  parent: app.background.deferred_work
+  name:
+    zh: 周期性延迟任务
+    en: Periodic Deferred Work
+  definition: 按间隔重复执行的延迟后台任务。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/background/deferred_work/periodic.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PeriodicWorkRequest
+      url: https://developer.android.com/reference/androidx/work/PeriodicWorkRequest
+      role: primary
+    ios:
+    - kind: class
+      id: BGProcessingTaskRequest
+      url: https://developer.apple.com/documentation/backgroundtasks/bgprocessingtaskrequest
+      role: primary
+    harmonyos:
+    - kind: module
+      id: workScheduler 周期任务
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-workscheduler
+      role: primary
+  comparison_scope:
+    includes:
+    - PeriodicWorkRequest、BGProcessingTask periodic
+    excludes:
+    - 约束见 constraints
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: deferred_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.background.foreground_task.notification
+  level: L4
+  parent: app.background.foreground_task
+  name:
+    zh: 前台任务通知
+    en: Foreground Task Notification
+  definition: 长时任务必须展示的用户可感知通知/状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/background/foreground_task/notification.yaml
+  bindings:
+    android:
+    - kind: class
+      id: startForeground
+      url: https://developer.android.com/reference/android/app/Service#startForeground(int,%20android.app.Notification)
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: 连续任务通知
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/continuous-task
+      role: primary
+  comparison_scope:
+    includes:
+    - startForeground notification、continuous task notification
+    excludes:
+    - 类型声明见 types
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: foreground_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.background.foreground_task.types
+  level: L4
+  parent: app.background.foreground_task
+  name:
+    zh: 前台任务类型声明
+    en: Foreground Task Type Declaration
+  definition: 声明长时任务的系统类型与权限约束。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/background/foreground_task/types.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: foregroundServiceType
+      url: https://developer.android.com/develop/background-work/services/foreground-services#types
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: BackgroundMode
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/continuous-task
+      role: primary
+  comparison_scope:
+    includes:
+    - foregroundServiceType、continuous task types
+    excludes:
+    - 启动见父节点
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: foreground_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.background.transient.expire
+  level: L4
+  parent: app.background.transient
+  name:
+    zh: 延缓挂起到期
+    en: Suspend Delay Expiration
+  definition: 短暂延缓挂起到期回调与收尾。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/background/transient/expire.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: UIBackgroundTask expirationHandler
+      url: https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtask
+      role: primary
+    harmonyos:
+    - kind: module
+      id: SuspendDelay 回调
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-resourceschedule-backgroundtaskmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - expiration handler / suspend delay callback
+    excludes:
+    - 申请延缓见 request
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: transient_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.background.transient.request
+  level: L4
+  parent: app.background.transient
+  name:
+    zh: 申请短暂延缓
+    en: Request Transient Delay
+  definition: 申请短时间延迟进入挂起。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/background/transient/request.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: beginBackgroundTask
+      url: https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtask
+      role: primary
+    harmonyos:
+    - kind: module
+      id: requestSuspendDelay
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-resourceschedule-backgroundtaskmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - beginBackgroundTask、requestSuspendDelay
+    excludes:
+    - 到期见 expire
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: transient_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.desktop.shortcuts.dynamic
+  level: L4
+  parent: app.desktop.shortcuts
+  name:
+    zh: 动态快捷方式发布
+    en: Dynamic Shortcut Publishing
+  definition: 运行时发布/更新动态快捷方式集合。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/desktop/shortcuts/dynamic.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ShortcutManager.setDynamicShortcuts
+      url: https://developer.android.com/reference/android/content/pm/ShortcutManager#setDynamicShortcuts(java.util.List%3Candroid.content.pm.ShortcutInfo%3E)
+      role: primary
+    ios:
+    - kind: class
+      id: UIApplication.shortcutItems
+      url: https://developer.apple.com/documentation/uikit/uiapplication/1622937-shortcutitems
+      role: primary
+    harmonyos:
+    - kind: module
+      id: 动态快捷方式
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/shortcuts
+      role: primary
+  comparison_scope:
+    includes:
+    - setDynamicShortcuts、shortcutItems
+    excludes:
+    - 固定快捷方式见 pin
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: shortcut_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.desktop.shortcuts.pin
+  level: L4
+  parent: app.desktop.shortcuts
+  name:
+    zh: 固定快捷方式
+    en: Pinned Shortcuts
+  definition: 请求将快捷方式固定到桌面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/desktop/shortcuts/pin.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ShortcutManager.requestPinShortcut
+      url: https://developer.android.com/reference/android/content/pm/ShortcutManager#requestPinShortcut(android.content.pm.ShortcutInfo,%20android.content.IntentSender)
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: 固定快捷方式
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/shortcuts
+      role: primary
+  comparison_scope:
+    includes:
+    - requestPinShortcut、ShortcutItem
+    excludes:
+    - 动态快捷方式发布见父节点
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: shortcut_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.desktop.widget.configuration
+  level: L4
+  parent: app.desktop.widget
+  name:
+    zh: 小组件配置界面
+    en: Widget Configuration UI
+  definition: 用户添加小组件时的配置 Activity/界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/desktop/widget/configuration.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: AppWidget configuration
+      url: https://developer.android.com/develop/ui/views/appwidgets#setting-up-configuration-activity
+      role: primary
+    ios:
+    - kind: class
+      id: IntentConfiguration
+      url: https://developer.apple.com/documentation/widgetkit/intentconfiguration
+      role: primary
+    harmonyos:
+    - kind: module
+      id: 卡片配置
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/formextensionability
+      role: primary
+  comparison_scope:
+    includes:
+    - AppWidget config activity、IntentConfiguration、form config
+    excludes:
+    - 时间线刷新见 timeline
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: widget_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.desktop.widget.timeline
+  level: L4
+  parent: app.desktop.widget
+  name:
+    zh: 小组件时间线刷新
+    en: Widget Timeline Refresh
+  definition: 按时间线或周期性策略刷新小组件内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/desktop/widget/timeline.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AppWidgetManager.updateAppWidget
+      url: https://developer.android.com/reference/android/appwidget/AppWidgetManager
+      role: primary
+    ios:
+    - kind: class
+      id: TimelineProvider
+      url: https://developer.apple.com/documentation/widgetkit/timelineprovider
+      role: primary
+    harmonyos:
+    - kind: module
+      id: formProvider
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-form-formprovider
+      role: primary
+  comparison_scope:
+    includes:
+    - TimelineProvider、AppWidget update、formProvider update
+    excludes:
+    - 小组件声明见父节点
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: widget_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.extensions.share.receive
+  level: L4
+  parent: app.extensions.share
+  name:
+    zh: 接收分享内容
+    en: Receive Shared Content
+  definition: 解析并接收系统分享传入的文本/文件等内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/extensions/share/receive.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Intent.EXTRA_STREAM
+      url: https://developer.android.com/training/sharing/receive
+      role: primary
+    ios:
+    - kind: class
+      id: NSExtensionContext.inputItems
+      url: https://developer.apple.com/documentation/foundation/nsextensioncontext/1416593-inputitems
+      role: primary
+    harmonyos:
+    - kind: module
+      id: ShareExtensionAbility.onShareSelect
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-shareextensionability
+      role: primary
+  comparison_scope:
+    includes:
+    - Intent extras / extension context input items
+    excludes:
+    - 作为分享目标注册见父节点
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: share_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.extensions.share.send
+  level: L4
+  parent: app.extensions.share
+  name:
+    zh: 发起系统分享
+    en: Send via System Share
+  definition: 将内容交给系统分享面板分发。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/extensions/share/send.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Intent.ACTION_SEND
+      url: https://developer.android.com/training/sharing/send
+      role: primary
+    ios:
+    - kind: class
+      id: UIActivityViewController
+      url: https://developer.apple.com/documentation/uikit/uiactivityviewcontroller
+      role: primary
+    harmonyos:
+    - kind: module
+      id: 系统分享
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/share-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - ACTION_SEND / UIActivityViewController / share sheet
+    excludes:
+    - 接收扩展见 receive
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: share_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.extensions.ui_embed.host
+  level: L4
+  parent: app.extensions.ui_embed
+  name:
+    zh: 嵌入扩展宿主
+    en: Embedded Extension Host
+  definition: 宿主侧加载并展示嵌入式扩展 UI。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/extensions/ui_embed/host.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: NSExtensionHost
+      url: https://developer.apple.com/documentation/foundation/app_extension_support
+      role: primary
+    harmonyos:
+    - kind: module
+      id: EmbeddedComponent
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-embedded-component
+      role: primary
+  comparison_scope:
+    includes:
+    - EmbeddedComponent host / extension host
+    excludes:
+    - 扩展实现见 provider
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: embed_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.extensions.ui_embed.provider
+  level: L4
+  parent: app.extensions.ui_embed
+  name:
+    zh: 嵌入扩展提供方
+    en: Embedded Extension Provider
+  definition: 作为嵌入式 UI 扩展提供可被宿主加载的界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/extensions/ui_embed/provider.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: App Extension principal class
+      url: https://developer.apple.com/documentation/foundation/app_extension_support
+      role: primary
+    harmonyos:
+    - kind: module
+      id: EmbeddedUIExtensionAbility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-embeddeduiextensionability
+      role: primary
+  comparison_scope:
+    includes:
+    - EmbeddedUIExtensionAbility provider
+    excludes:
+    - 宿主加载见 host
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: embed_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.install.on_demand.deferred
+  level: L4
+  parent: app.install.on_demand
+  name:
+    zh: 延后按需安装
+    en: Deferred On-demand Install
+  definition: 在空闲时延后下载按需模块。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/install/on_demand/deferred.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: SplitInstallManager.deferredInstall
+      url: https://developer.android.com/guide/playcore/feature-delivery/on-demand
+      role: primary
+    ios:
+    - kind: class
+      id: NSBundleResourceRequest loadingPriority
+      url: https://developer.apple.com/documentation/foundation/nsbundleresourcerequest
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - deferred install / wifi-only install
+    excludes:
+    - 状态监听见 status
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ondemand_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.install.on_demand.status
+  level: L4
+  parent: app.install.on_demand
+  name:
+    zh: 按需模块状态监听
+    en: On-demand Module Status
+  definition: 监听按需模块下载/安装会话状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/install/on_demand/status.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SplitInstallStateUpdatedListener
+      url: https://developer.android.com/reference/com/google/android/play/core/splitinstall/SplitInstallStateUpdatedListener
+      role: primary
+    ios:
+    - kind: class
+      id: NSBundleResourceRequest
+      url: https://developer.apple.com/documentation/foundation/nsbundleresourcerequest
+      role: primary
+    harmonyos:
+    - kind: module
+      id: moduleInstallManager 会话
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-moduleinstallmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - SplitInstallStateUpdatedListener、module install session
+    excludes:
+    - 发起安装见父节点
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ondemand_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.install.package_update.session
+  level: L4
+  parent: app.install.package_update
+  name:
+    zh: 安装会话
+    en: Install Session
+  definition: 创建包安装/更新会话并提交。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/install/package_update/session.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PackageInstaller.Session
+      url: https://developer.android.com/reference/android/content/pm/PackageInstaller.Session
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 系统安装，无对等第三方会话 API
+    harmonyos:
+    - kind: module
+      id: bundleInstaller
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-installer
+      role: primary
+  comparison_scope:
+    includes:
+    - PackageInstaller.Session、bundle install session
+    excludes:
+    - 包格式见父节点
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: package_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.install.package_update.uninstall
+  level: L4
+  parent: app.install.package_update
+  name:
+    zh: 卸载应用包
+    en: Uninstall Package
+  definition: 请求卸载本应用或其他可见包（受权限约束）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/install/package_update/uninstall.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PackageInstaller.uninstall
+      url: https://developer.android.com/reference/android/content/pm/PackageInstaller#uninstall(java.lang.String,%20android.content.IntentSender)
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: bundleManager.uninstall
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-installer
+      role: primary
+  comparison_scope:
+    includes:
+    - deletePackage / uninstall
+    excludes:
+    - 安装会话见 session
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: package_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.launch.acceleration.aot_profile
+  level: L4
+  parent: app.launch.acceleration
+  name:
+    zh: AOT剖析配置
+    en: AOT Profile Installation
+  definition: 安装/使用基线剖析文件加速启动与运行。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/launch/acceleration/aot_profile.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ProfileInstaller
+      url: https://developer.android.com/reference/androidx/profileinstaller/ProfileInstaller
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - ProfileInstaller / baseline-prof.txt
+    excludes:
+    - 系统预加载见 system_preload
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: acceleration_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.launch.acceleration.system_preload
+  level: L4
+  parent: app.launch.acceleration
+  name:
+    zh: 系统预加载
+    en: System Preload
+  definition: 系统在启动前预创建进程/阶段以加速冷启动。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/launch/acceleration/system_preload.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: appPreloadPhase
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-preload
+      role: primary
+  comparison_scope:
+    includes:
+    - appPreloadPhase / getAppPreloadType
+    excludes:
+    - AOT 剖析见 aot_profile
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: acceleration_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.launch.startup_init.dependencies
+  level: L4
+  parent: app.launch.startup_init
+  name:
+    zh: 初始化依赖图
+    en: Initializer Dependency Graph
+  definition: 声明启动初始化器之间的依赖顺序。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/launch/startup_init/dependencies.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Initializer.dependencies
+      url: https://developer.android.com/topic/libraries/app-startup
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: StartupConfig 依赖
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-startupmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - Initializer dependencies、startup config dependencies
+    excludes:
+    - 运行初始化见父节点
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: startup_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.launch.startup_init.timeout
+  level: L4
+  parent: app.launch.startup_init
+  name:
+    zh: 启动初始化超时
+    en: Startup Initializer Timeout
+  definition: 启动任务超时与失败处理策略。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/launch/startup_init/timeout.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: StartupTask 超时
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-startupmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - startup timeout config
+    excludes:
+    - 依赖图见 dependencies
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: startup_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.lifecycle.activity_ability.multi_instance
+  level: L4
+  parent: app.lifecycle.activity_ability
+  name:
+    zh: 多实例与任务
+    en: Multi-instance and Tasks
+  definition: 同一界面组件多任务/多实例呈现。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/lifecycle/activity_ability/multi_instance.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: documentLaunchMode
+      url: https://developer.android.com/guide/components/activities/multi-window#multi-instance
+      role: primary
+    ios:
+    - kind: class
+      id: UISceneSession
+      url: https://developer.apple.com/documentation/uikit/uiscenesession
+      role: primary
+    harmonyos:
+    - kind: module
+      id: UIAbility 多实例
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/uiability-multi-instance
+      role: primary
+  comparison_scope:
+    includes:
+    - documentLaunchMode、UIScene sessions、UIAbility 多实例
+    excludes:
+    - 状态恢复见 state_restore
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: lifecycle_ui_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.lifecycle.activity_ability.state_restore
+  level: L4
+  parent: app.lifecycle.activity_ability
+  name:
+    zh: 界面状态恢复
+    en: UI State Restoration
+  definition: 界面组件在重建后恢复视图状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/lifecycle/activity_ability/state_restore.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ViewModel SavedState
+      url: https://developer.android.com/topic/libraries/architecture/viewmodel/viewmodel-savedstate
+      role: primary
+    ios:
+    - kind: guide
+      id: Restoring Your App's State
+      url: https://developer.apple.com/documentation/uikit/view_controllers/preserving_your_app_s_ui_across_launches
+      role: primary
+    harmonyos:
+    - kind: module
+      id: setSupportRestore
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/uiability-persist-data
+      role: primary
+  comparison_scope:
+    includes:
+    - restoreState、setSupportRestore
+    excludes:
+    - 进程死亡保存见 process_death
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: lifecycle_ui_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.lifecycle.callbacks.environment
+  level: L4
+  parent: app.lifecycle.callbacks
+  name:
+    zh: 配置环境变更
+    en: Configuration Environment Changes
+  definition: 监听语言、暗色、密度等配置变更。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/lifecycle/callbacks/environment.yaml
+  bindings:
+    android:
+    - kind: class
+      id: onConfigurationChanged
+      url: https://developer.android.com/reference/android/app/Application#onConfigurationChanged(android.content.res.Configuration)
+      role: primary
+    ios:
+    - kind: class
+      id: traitCollectionDidChange
+      url: https://developer.apple.com/documentation/uikit/uitraitenvironment/1623516-traitcollectiondidchange
+      role: primary
+    harmonyos:
+    - kind: module
+      id: EnvironmentCallback
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-environmentcallback
+      role: primary
+  comparison_scope:
+    includes:
+    - onConfigurationChanged、traitCollection
+    excludes:
+    - 前后台见 foreground
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: lifecycle_cb_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.lifecycle.callbacks.foreground
+  level: L4
+  parent: app.lifecycle.callbacks
+  name:
+    zh: 前后台切换监听
+    en: Foreground Background Observation
+  definition: 观察应用进入前台/后台。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/lifecycle/callbacks/foreground.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Lifecycle.Event
+      url: https://developer.android.com/reference/androidx/lifecycle/Lifecycle.Event
+      role: primary
+    ios:
+    - kind: other
+      id: scenePhase
+      url: https://developer.apple.com/documentation/swiftui/scenephase
+      role: primary
+    harmonyos:
+    - kind: module
+      id: onApplicationForeground/Background
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-application
+      role: primary
+  comparison_scope:
+    includes:
+    - ON_START/ON_STOP、scenePhase、onApplicationForeground
+    excludes:
+    - 页面级生命周期见 activity_ability
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: lifecycle_cb_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.model.app_entry.attach_base
+  level: L4
+  parent: app.model.app_entry
+  name:
+    zh: 进程附加与基础上下文
+    en: Attach Base Context
+  definition: 进程创建早期附加基础上下文/资源覆写入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/model/app_entry/attach_base.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Application.attachBaseContext
+      url: https://developer.android.com/reference/android/app/Application#attachBaseContext(android.content.Context)
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: AbilityStage.onCreate
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-abilitystage
+      role: primary
+  comparison_scope:
+    includes:
+    - attachBaseContext
+    excludes:
+    - 多模块见 multi_module
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: app_entry_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.model.app_entry.multi_module
+  level: L4
+  parent: app.model.app_entry
+  name:
+    zh: 多模块应用入口
+    en: Multi-module App Entry
+  definition: 多 module/App Extension 共存时的入口与 AbilityStage 划分。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/model/app_entry/multi_module.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: App modules
+      url: https://developer.android.com/guide/app-bundle
+      role: primary
+    ios:
+    - kind: guide
+      id: App Extensions
+      url: https://developer.apple.com/documentation/foundation/app_extension_support
+      role: primary
+    harmonyos:
+    - kind: module
+      id: AbilityStage 多模块
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/application-structure-stage
+      role: primary
+  comparison_scope:
+    includes:
+    - multiple modules / App Extensions hosts
+    excludes:
+    - 进程入口见父节点
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: app_entry_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.model.service_component.bind
+  level: L4
+  parent: app.model.service_component
+  name:
+    zh: 绑定服务连接
+    en: Bound Service Connection
+  definition: 客户端绑定服务组件并获取通信接口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/model/service_component/bind.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: bindService
+      url: https://developer.android.com/guide/components/bound-services
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: connectServiceExtensionAbility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inner-application-uiabilitycontext
+      role: primary
+  comparison_scope:
+    includes:
+    - bindService、connectServiceExtensionAbility
+    excludes:
+    - 服务声明见父节点
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: service_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.model.service_component.start
+  level: L4
+  parent: app.model.service_component
+  name:
+    zh: 启动服务组件
+    en: Start Service Component
+  definition: 显式启动服务组件（非绑定）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/model/service_component/start.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: startService
+      url: https://developer.android.com/guide/components/services
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: startAbility (service)
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/appserviceextensionability
+      role: primary
+  comparison_scope:
+    includes:
+    - startService / startForegroundService、startAbility service
+    excludes:
+    - 绑定见 bind
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: service_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.model.ui_entry.exported
+  level: L4
+  parent: app.model.ui_entry
+  name:
+    zh: 入口导出与可见性
+    en: Entry Export Visibility
+  definition: 声明界面入口是否可被外部拉起。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/model/ui_entry/exported.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: android:exported
+      url: https://developer.android.com/guide/topics/manifest/activity-element#exported
+      role: primary
+    ios:
+    - kind: guide
+      id: LSApplicationQueriesSchemes / URL types
+      url: https://developer.apple.com/documentation/bundleresources/information-property-list/lsapplicationqueriesschemes
+      role: primary
+    harmonyos:
+    - kind: module
+      id: exported / skills
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/module-configuration-file
+      role: primary
+  comparison_scope:
+    includes:
+    - exported / skills
+    excludes:
+    - 启动模式见 launch_mode
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ui_entry_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.model.ui_entry.launch_mode
+  level: L4
+  parent: app.model.ui_entry
+  name:
+    zh: 界面入口启动模式
+    en: UI Entry Launch Mode
+  definition: 单例/标准等界面入口启动模式与任务亲和。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/model/ui_entry/launch_mode.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: launchMode
+      url: https://developer.android.com/guide/components/activities/tasks-and-back-stack
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: launchType
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/uiability-launch-type
+      role: primary
+  comparison_scope:
+    includes:
+    - launchMode、launchType
+    excludes:
+    - 生命周期回调见 lifecycle.activity_ability
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ui_entry_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.process.ipc.channel
+  level: L4
+  parent: app.process.ipc
+  name:
+    zh: IPC通道
+    en: IPC Channel
+  definition: 建立并维护跨进程通信连接与死亡通知。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/process/ipc/channel.yaml
+  bindings:
+    android:
+    - kind: class
+      id: IBinder
+      url: https://developer.android.com/reference/android/os/IBinder
+      role: primary
+    ios:
+    - kind: class
+      id: xpc_connection_t
+      url: https://developer.apple.com/documentation/xpc/xpc_connection_t
+      role: primary
+    harmonyos:
+    - kind: module
+      id: connectServiceExtensionAbility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inner-application-uiabilitycontext
+      role: primary
+  comparison_scope:
+    includes:
+    - IBinder/Messenger、xpc_connection、connectServiceExtensionAbility
+    excludes:
+    - 序列化见 serialization
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ipc_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.process.ipc.serialization
+  level: L4
+  parent: app.process.ipc
+  name:
+    zh: IPC序列化
+    en: IPC Serialization
+  definition: 跨进程传递的数据打包与反序列化。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/process/ipc/serialization.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Parcel
+      url: https://developer.android.com/reference/android/os/Parcel
+      role: primary
+    ios:
+    - kind: framework
+      id: XPC dictionaries
+      url: https://developer.apple.com/documentation/xpc
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MessageSequence
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-rpc
+      role: primary
+  comparison_scope:
+    includes:
+    - Parcel/Parcelable、XPC dictionary、MessageSequence
+    excludes:
+    - 通道建立见 channel
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ipc_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.process.priority.lmr
+  level: L4
+  parent: app.process.priority
+  name:
+    zh: 后台限制与待机桶
+    en: Background Restrictions and Standby
+  definition: 应用待机桶与后台限制对执行机会的影响查询。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/process/priority/lmr.yaml
+  bindings:
+    android:
+    - kind: class
+      id: UsageStatsManager
+      url: https://developer.android.com/reference/android/app/usage/UsageStatsManager
+      role: primary
+    ios:
+    - kind: framework
+      id: Background App Refresh
+      url: https://developer.apple.com/documentation/backgroundtasks
+      role: primary
+    harmonyos:
+    - kind: module
+      id: 应用休眠/管控
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/background-task-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - AppStandby / UsageStats、Background App Refresh
+    excludes:
+    - 内存裁剪见 memory_trim
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: priority_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: app.process.priority.memory_trim
+  level: L4
+  parent: app.process.priority
+  name:
+    zh: 内存裁剪回调
+    en: Memory Trim Callbacks
+  definition: 在系统内存压力下接收裁剪级别回调。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/app/process/priority/memory_trim.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ComponentCallbacks2.onTrimMemory
+      url: https://developer.android.com/reference/android/content/ComponentCallbacks2#onTrimMemory(int)
+      role: primary
+    ios:
+    - kind: class
+      id: didReceiveMemoryWarning
+      url: https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623063-applicationdidreceivememorywarni
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Application.onMemoryLevel
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-application
+      role: primary
+  comparison_scope:
+    includes:
+    - onTrimMemory、didReceiveMemoryWarning
+    excludes:
+    - 优先级层级见父节点
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: priority_detail
+  leaf_at_this_level: true
+  split_justification: independent_capability

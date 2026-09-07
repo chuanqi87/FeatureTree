@@ -10,3 +10,5 @@ docs-raw/.firecrawl/**/screenshot*.png
 docs-raw/official/
 output/reports/official-documents/documents.jsonl
 output/contexts/
+output/research/
+archive/*/output/

@@ -1,9 +1,0 @@
-{
-  "task_id": "ca18065a9b6eb67f8fcd01f7f2453ef22edfbc771e91bd5c2745b73efe2047c5",
-  "feature_id": "distributed.softbus.fabric",
-  "response_sha256": "87d828cf83f338587aeee86882e85ac5f9a885a99679a188820fe579a9512ff4",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

@@ -1,0 +1,30 @@
+schema_version: 2
+feature_id: games.player
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 玩家身份、登录与游戏存档。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- games.player.friends
+- games.player.identity_verify
+- games.player.player_stats
+- games.player.plus_profile
+- games.player.profile
+- games.player.recall_token
+- games.player.saved_games
+- games.player.sign_in

@@ -6,7 +6,7 @@ features:
   name:
     zh: 跨应用协作
     en: Cross-App Interop
-  definition: Deep Link、分享与系统意图分发。
+  definition: 系统分享、深度链接、跨应用动作分发、数据传递与轻量即时体验入口。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -14,10 +14,13 @@ features:
   - tablet
   privacy_class: none
   knowledge_path: knowledge/interop/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - Deep Link、分享与系统意图分发。
-    excludes: []
+    - share、deeplink、action_dispatch、data_transfer、lightweight_ui
+    excludes:
+    - 分布式跨端 Continuity 见 distributed
+    - 账号联邦登录见 identity
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -27,13 +30,92 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - interop
+- id: interop.action_dispatch
+  level: L2
+  parent: interop
+  name:
+    zh: 跨应用动作分发
+    en: Cross-App Action Dispatch
+  definition: 显式/隐式启动组件、系统意图注册、过滤器解析与助手调用。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/action_dispatch/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - component_intent、system_intents、url_launch、filters、assistant
+    excludes:
+    - 深度链接路由见 deeplink
+    - 分享面板见 share.sheet
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - interop.action_dispatch
+  sibling_axis: interop_channel
+- id: interop.data_transfer
+  level: L2
+  parent: interop
+  name:
+    zh: 跨应用数据传递
+    en: Cross-App Data Transfer
+  definition: 拖放、内容提供者、文件提供者、URI 授权与内容嵌入。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/data_transfer/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - drag_drop、content_provider、file_provider、uri_grant、content_embed
+    excludes:
+    - 系统分享面板见 share
+    - 存储侧共享见 storage.sharing
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: interop_channel
 - id: interop.deeplink
   level: L2
   parent: interop
   name:
     zh: 深度链接
     en: Deep Linking
-  definition: URL 打开应用内页面。
+  definition: 自定义 scheme 与域名验证的 https 应用链接（三端同一能力）。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -41,10 +123,12 @@ features:
   - tablet
   privacy_class: none
   knowledge_path: knowledge/interop/deeplink/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - URL 打开应用内页面。
-    excludes: []
+    - custom_scheme、verified_links
+    excludes:
+    - 通用 URL 启动见 action_dispatch.url_launch
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -54,25 +138,34 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: interop.deeplink.url
-  level: L3
-  parent: interop.deeplink
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - interop.deeplink
+  sibling_axis: interop_channel
+- id: interop.lightweight_ui
+  level: L2
+  parent: interop
   name:
-    zh: URL深度链接
-    en: URL Deep Link
-  definition: 自定义 scheme 或 https App Links / Universal Links。
-  knowledge_role: leaf
+    zh: 轻量即时体验
+    en: Lightweight Instant Experience
+  definition: 免安装/轻量入口体验（App Clip 与原子化服务等归为同一能力）。
+  knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  knowledge_path: knowledge/interop/deeplink/url.yaml
+  knowledge_path: knowledge/interop/lightweight_ui/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 自定义 scheme 或 https App Links / Universal Links。
-    excludes: []
+    - instant_experience、embedded_slice
+    excludes:
+    - 完整应用安装生命周期见 app
+    - 小组件见 app.desktop
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -82,13 +175,19 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: interop_channel
 - id: interop.share
   level: L2
   parent: interop
   name:
     zh: 系统分享
     en: System Share
-  definition: 系统分享面板发送内容。
+  definition: 系统分享面板、接收扩展、近距碰一碰分享与统一数据类型。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -99,8 +198,10 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 系统分享面板发送内容。
-    excludes: []
+    - sheet、receive、nearby、utd、link_preview
+    excludes:
+    - 意图启动见 action_dispatch
+    - 文件 URI 授权见 data_transfer
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -110,102 +211,100 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: interop.share.sheet
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - interop.share
+  sibling_axis: interop_channel
+- id: interop.action_dispatch.assistant
   level: L3
-  parent: interop.share
+  parent: interop.action_dispatch
   name:
-    zh: 分享面板
-    en: Share Sheet
-  definition: 调起系统分享 UI。
+    zh: 助手与语音调用
+    en: Assistant and Voice Invoke
+  definition: 向系统助手/语音暴露可调用动作。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
+  knowledge_path: knowledge/interop/action_dispatch/assistant.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: App Actions
+      url: https://developer.android.com/guide/app-actions/overview
+      role: primary
+    ios:
+    - kind: framework
+      id: App Intents
+      url: https://developer.apple.com/documentation/appintents
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - App Actions、App Intents shortcuts
+    excludes:
+    - 普通系统意图见 system_intents
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: dispatch_role
   leaf_at_this_level: true
-  knowledge_path: knowledge/interop/share/sheet.yaml
-  comparison_scope:
-    includes:
-    - 调起系统分享 UI。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: interop.action_dispatch
-  level: L2
-  parent: interop
-  name:
-    zh: 跨应用动作分发
-    en: Cross-App Action Dispatch
-  definition: 以动作为中心的跨应用调用（易假对齐）。
-  knowledge_role: rollup
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  knowledge_path: knowledge/interop/action_dispatch/_rollup.yaml
-  comparison_scope:
-    includes:
-    - 以动作为中心的跨应用调用（易假对齐）。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  split_justification: independent_capability
 - id: interop.action_dispatch.component_intent
   level: L3
   parent: interop.action_dispatch
   name:
     zh: 目标组件调用
     en: Target Component Invocation
-  definition: 定位并调用应用组件，传递调用参数并处理无法找到目标等结果。
+  definition: 显式启动另一应用/本应用组件并传递参数。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: analog
-  aliases:
-  - Intent
-  - Want
-  - 组件意图跳转
+  knowledge_path: knowledge/interop/action_dispatch/component_intent.yaml
   bindings:
     android:
     - kind: class
-      id: android.content.Intent
-      role: primary
+      id: Intent
       url: https://developer.android.com/reference/android/content/Intent
+      role: primary
+    ios:
+    - kind: class
+      id: UIApplication.open
+      url: https://developer.apple.com/documentation/uikit/uiapplication
+      role: primary
     harmonyos:
     - kind: module
-      id: '@ohos.app.ability.Want'
-      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-want
+      id: startAbility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inner-ability-want
       role: primary
-      note: analog to Intent
-  knowledge_path: knowledge/interop/action_dispatch/component_intent.yaml
   comparison_scope:
     includes:
-    - 显式指定目标组件
-    - 按声明的能力解析目标
-    - 参数传递与调用结果
+    - startActivity、startAbility、openURL to component
     excludes:
-    - 仅通过 URL 打开资源
-    - 智能助理触发的系统能力注册
-  notes: 保留历史 ID 以维持引用；节点名称和比较对象已中立化。
+    - 系统隐式意图注册见 system_intents
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -215,26 +314,50 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: interop.action_dispatch.url_launch
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - interop.action_dispatch.component_intent
+  sibling_axis: dispatch_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: interop.action_dispatch.education
   level: L3
   parent: interop.action_dispatch
   name:
-    zh: URL拉起应用
-    en: URL App Launch
-  definition: 通过 URL 拉起应用或系统处理器。
+    zh: 教育任务分发
+    en: Education Task Dispatch
+  definition: 向教育/课堂系统分发作业与进度类跨应用协作入口。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  knowledge_path: knowledge/interop/action_dispatch/url_launch.yaml
+  knowledge_path: knowledge/interop/action_dispatch/education.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: ClassKit
+      url: https://developer.apple.com/documentation/classkit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
   comparison_scope:
     includes:
-    - 通过 URL 拉起应用或系统处理器。
-    excludes: []
+    - ClassKit
+    excludes:
+    - 通用助手调用见 assistant
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -244,31 +367,155 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: dispatch_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: interop.action_dispatch.filters
+  level: L3
+  parent: interop.action_dispatch
+  name:
+    zh: 意图过滤与解析
+    en: Intent Filter Resolution
+  definition: 查询可处理某意图的应用集合并做可见性约束。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/action_dispatch/filters.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PackageManager.queryIntentActivities
+      url: https://developer.android.com/reference/android/content/pm/PackageManager
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: LSServices 可见性受限，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - queryIntentActivities、<queries>
+    excludes:
+    - 实际启动见 component_intent
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: dispatch_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: interop.action_dispatch.media_intents
+  level: L3
+  parent: interop.action_dispatch
+  name:
+    zh: 媒体域系统意图
+    en: Media Domain System Intents
+  definition: 媒体相关系统意图（播放/搜索等）跨应用分发。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/action_dispatch/media_intents.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: Media STYLE intents 待核
+    ios:
+    - kind: framework
+      id: Media Intents
+      url: https://developer.apple.com/documentation/mediaintents
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Media Intents
+    excludes:
+    - 播控会话见 media.session
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: dispatch_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - media.session
 - id: interop.action_dispatch.system_intents
   level: L3
   parent: interop.action_dispatch
   name:
     zh: 系统意图注册
     en: System Intent Registration
-  definition: 向系统注册可被智能助理/搜索触发的应用能力。
+  definition: 声明可处理的系统动作/类别供其他应用解析调用。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence
-  aliases:
-  - App Intents
-  - Intents Kit
-  - Shortcuts
   knowledge_path: knowledge/interop/action_dispatch/system_intents.yaml
-  bindings: {}
+  bindings:
+    android:
+    - kind: guide
+      id: intent-filter
+      url: https://developer.android.com/guide/components/intents-filters
+      role: primary
+    ios:
+    - kind: framework
+      id: App Intents
+      url: https://developer.apple.com/documentation/appintents
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: skills / want actions
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ability-stage-brief
+      role: primary
   comparison_scope:
     includes:
-    - 向系统注册可被智能助理/搜索触发的应用能力。
-    excludes: []
+    - intent-filter actions、App Intents
+    excludes:
+    - 分享接收见 share.receive
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -278,3 +525,877 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - interop.action_dispatch.system_intents
+  sibling_axis: dispatch_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: interop.action_dispatch.url_launch
+  level: L3
+  parent: interop.action_dispatch
+  name:
+    zh: URL应用启动
+    en: URL App Launch
+  definition: 通过 URL 交由系统解析并启动目标应用（不一定经域名验证）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/action_dispatch/url_launch.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ACTION_VIEW
+      url: https://developer.android.com/guide/components/intents-common
+      role: primary
+    ios:
+    - kind: class
+      id: openURL
+      url: https://developer.apple.com/documentation/uikit/uiapplication/1648685-open
+      role: primary
+    harmonyos:
+    - kind: module
+      id: startAbility by URI
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inner-ability-want
+      role: primary
+  comparison_scope:
+    includes:
+    - openURL、ACTION_VIEW
+    excludes:
+    - 验证域名链接见 deeplink.verified_links
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - interop.action_dispatch.url_launch
+  sibling_axis: dispatch_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - interop.deeplink.verified_links
+  - interop.deeplink.custom_scheme
+- id: interop.data_transfer.content_embed
+  level: L3
+  parent: interop.data_transfer
+  name:
+    zh: 跨应用内容嵌入
+    en: Cross-App Content Embed
+  definition: 将其他应用内容嵌入本应用窗口区域。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/data_transfer/content_embed.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: Activity embedding / SDK 待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: Content Embedding
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-contentembed
+      role: primary
+  comparison_scope:
+    includes:
+    - Content Embedding
+    excludes:
+    - 轻量即时体验见 lightweight_ui
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: transfer_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - interop.lightweight_ui.instant_experience
+- id: interop.data_transfer.content_provider
+  level: L3
+  parent: interop.data_transfer
+  name:
+    zh: 内容提供者
+    en: Content Provider
+  definition: 以 URI 向其他应用暴露结构化数据集。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/data_transfer/content_provider.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ContentProvider
+      url: https://developer.android.com/reference/android/content/ContentProvider
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: DataShare / 类 ContentProvider 待核
+  comparison_scope:
+    includes:
+    - ContentProvider
+    excludes:
+    - 文件专用提供者见 file_provider
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: transfer_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - storage.sharing
+- id: interop.data_transfer.drag_drop
+  level: L3
+  parent: interop.data_transfer
+  name:
+    zh: 拖放
+    en: Drag and Drop
+  definition: 跨视图/跨应用拖放数据载荷。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/data_transfer/drag_drop.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: View.startDragAndDrop
+      url: https://developer.android.com/guide/topics/ui/drag-drop
+      role: primary
+    ios:
+    - kind: class
+      id: UIDragInteraction
+      url: https://developer.apple.com/documentation/uikit/uidraginteraction
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: drag-drop
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-common-components-drag-drop
+      role: primary
+  comparison_scope:
+    includes:
+    - startDragAndDrop、UIDragInteraction
+    excludes:
+    - 分享面板见 share.sheet
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: transfer_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: interop.data_transfer.file_provider
+  level: L3
+  parent: interop.data_transfer
+  name:
+    zh: 安全文件提供者
+    en: Secure File Provider
+  definition: 通过 content URI 安全共享应用私有文件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/data_transfer/file_provider.yaml
+  bindings:
+    android:
+    - kind: class
+      id: FileProvider
+      url: https://developer.android.com/reference/androidx/core/content/FileProvider
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - FileProvider
+    excludes:
+    - URI 临时授权见 uri_grant
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: transfer_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: interop.data_transfer.uri_grant
+  level: L3
+  parent: interop.data_transfer
+  name:
+    zh: URI临时授权
+    en: URI Permission Grant
+  definition: 向目标应用授予 URI 读写临时权限。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/data_transfer/uri_grant.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: FLAG_GRANT_READ_URI_PERMISSION
+      url: https://developer.android.com/training/secure-file-sharing
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - FLAG_GRANT_READ_URI_PERMISSION
+    excludes:
+    - 提供者实现见 content_provider/file_provider
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: transfer_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: interop.deeplink.custom_scheme
+  level: L3
+  parent: interop.deeplink
+  name:
+    zh: 自定义Scheme链接
+    en: Custom Scheme Links
+  definition: 通过自定义 URL scheme 打开应用内页面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/deeplink/custom_scheme.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: intent-filter scheme
+      url: https://developer.android.com/guide/components/intents-filters
+      role: primary
+    ios:
+    - kind: guide
+      id: URL Schemes
+      url: https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: Want URI
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-startup-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - myapp:// paths、intent-filter scheme
+    excludes:
+    - 域名验证 https 链接见 verified_links
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: symbol_ok
+  legacy:
+    disposition: split_from
+    sources:
+    - interop.deeplink.url
+  sibling_axis: deeplink_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: interop.deeplink.verified_links
+  level: L3
+  parent: interop.deeplink
+  name:
+    zh: 验证域名应用链接
+    en: Verified Domain App Links
+  definition: 经域名所有权验证的 https 应用链接（App Links / Universal Links / App Linking 同一能力）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/deeplink/verified_links.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: App Links
+      url: https://developer.android.com/training/app-links
+      role: primary
+    ios:
+    - kind: guide
+      id: Associated Domains
+      url: https://developer.apple.com/documentation/xcode/supporting-associated-domains
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: App Linking
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-linking-startupapp
+      role: primary
+  comparison_scope:
+    includes:
+    - autoVerify App Links、Associated Domains、App Linking
+    excludes:
+    - 自定义 scheme 见 custom_scheme
+    - 未验证 URL 启动见 action_dispatch.url_launch
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: symbol_ok
+  legacy:
+    disposition: merged_from
+    sources:
+    - interop.deeplink.url
+    - interop.deep_linking.app_links
+    - interop.deep_linking.universal_links
+    - interop.deep_linking.app_linking
+  sibling_axis: deeplink_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - interop.action_dispatch.url_launch
+  aliases:
+  - App Links
+  - Universal Links
+  - App Linking
+- id: interop.lightweight_ui.embedded_slice
+  level: L3
+  parent: interop.lightweight_ui
+  name:
+    zh: 嵌入式内容切片
+    en: Embedded Content Slice
+  definition: 向其他应用/系统表面提供可嵌入的轻量 UI 切片。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/lightweight_ui/embedded_slice.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: SliceProvider
+      url: https://developer.android.com/guide/slices
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: Widget/Live Activity 边界见 app.desktop
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - SliceProvider
+    excludes:
+    - 完整即时体验入口见 instant_experience
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: lightweight_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - interop.lightweight_ui.instant_experience
+- id: interop.lightweight_ui.instant_experience
+  level: L3
+  parent: interop.lightweight_ui
+  name:
+    zh: 免安装即时入口
+    en: Install-Free Instant Entry
+  definition: 免完整安装即可触达的轻量应用体验（App Clip、原子化服务等同一能力）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/lightweight_ui/instant_experience.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: Google Play Instant 边界待核
+    ios:
+    - kind: framework
+      id: App Clip
+      url: https://developer.apple.com/documentation/appclip
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: Atomic Service
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/atomic-service-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - App Clip、Atomic Service / instant experience entry
+    excludes:
+    - 嵌入切片卡片见 embedded_slice
+    - 完整应用见 app
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: lightweight_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  aliases:
+  - App Clip
+  - Atomic Service
+- id: interop.share.link_preview
+  level: L3
+  parent: interop.share
+  name:
+    zh: 链接预览元数据
+    en: Link Preview Metadata
+  definition: 为 URL 提供丰富链接预览元数据。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/share/link_preview.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: LPLinkMetadata
+      url: https://developer.apple.com/documentation/linkpresentation
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - LPLinkMetadata
+    excludes:
+    - 深度链接路由见 deeplink
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: share_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: interop.share.nearby
+  level: L3
+  parent: interop.share
+  name:
+    zh: 近距碰触分享
+    en: Nearby Knock Share
+  definition: 设备近距碰一碰触发的内容分享。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/share/nearby.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: Nearby Share 应用侧 API 待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: NameDrop/AirDrop 应用 API 受限，待核
+    harmonyos:
+    - kind: guide
+      id: Knock Share
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/knock-share-between-phones-content
+      role: primary
+  comparison_scope:
+    includes:
+    - knock share
+    excludes:
+    - 通用蓝牙传输见 connectivity
+    - 系统分享面板见 share.sheet
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: share_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: interop.share.receive
+  level: L3
+  parent: interop.share
+  name:
+    zh: 分享接收扩展
+    en: Share Receive Extension
+  definition: 注册为系统分享目标/扩展以接收外来内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/share/receive.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: intent-filter SEND
+      url: https://developer.android.com/training/sharing/receive
+      role: primary
+    ios:
+    - kind: guide
+      id: Share extension
+      url: https://developer.apple.com/documentation/xcode/configuring-a-share-extension
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: Share Kit access
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/share-access-mode
+      role: primary
+  comparison_scope:
+    includes:
+    - share extension、share target、Share Kit 接入方
+    excludes:
+    - 主动拉起分享面板见 share.sheet
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: share_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - interop.action_dispatch.system_intents
+- id: interop.share.shared_with_you
+  level: L3
+  parent: interop.share
+  name:
+    zh: 与你共享汇聚
+    en: Shared With You Aggregation
+  definition: 汇聚消息等渠道分享给当前用户的内容入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/share/shared_with_you.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: SharedWithYou
+      url: https://developer.apple.com/documentation/sharedwithyou
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - SharedWithYou
+    excludes:
+    - 主动分享面板见 share.sheet
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: share_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: interop.share.sheet
+  level: L3
+  parent: interop.share
+  name:
+    zh: 系统分享面板
+    en: System Share Sheet
+  definition: 拉起系统分享面板向外发送文本/文件/多媒体。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/share/sheet.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ACTION_SEND
+      url: https://developer.android.com/training/sharing/send
+      role: primary
+    ios:
+    - kind: class
+      id: UIActivityViewController
+      url: https://developer.apple.com/documentation/uikit/uiactivityviewcontroller
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.share'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-share
+      role: primary
+  comparison_scope:
+    includes:
+    - ACTION_SEND、UIActivityViewController、systemShare
+    excludes:
+    - 作为接收方见 share.receive
+    - 拖放见 data_transfer.drag_drop
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - interop.share.sheet
+  sibling_axis: share_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: interop.share.utd
+  level: L3
+  parent: interop.share
+  name:
+    zh: 统一分享数据类型
+    en: Uniform Share Data Types
+  definition: 分享载荷的统一类型描述（UTD 等）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/interop/share/utd.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: UTType
+      url: https://developer.apple.com/documentation/uniformtypeidentifiers
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: Share UTD
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/share-utd-image
+      role: primary
+  comparison_scope:
+    includes:
+    - UTD image/file types
+    excludes:
+    - MIME/UTI 通用标识见 storage.type_id
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: share_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - storage.type_id

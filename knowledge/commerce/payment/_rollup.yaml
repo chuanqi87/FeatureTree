@@ -1,0 +1,27 @@
+schema_version: 2
+feature_id: commerce.payment
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 系统支付授权、第三方收银台、卡券钱包与订单追踪。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- commerce.payment.order_tracking
+- commerce.payment.quick_access_wallet
+- commerce.payment.request_payment
+- commerce.payment.third_party
+- commerce.payment.wallet

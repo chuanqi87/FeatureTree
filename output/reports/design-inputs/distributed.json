@@ -1,0 +1,934 @@
+{
+  "domain": "distributed",
+  "authored_count": 7,
+  "draft_clue_count": 54,
+  "authored": [
+    {
+      "id": "distributed",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "分布式与多端",
+        "en": "Distributed and Continuity"
+      },
+      "definition": "接续、附近设备与分布式软总线。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "distributed.continuity",
+      "parent": "distributed",
+      "level": "L2",
+      "name": {
+        "zh": "任务接续",
+        "en": "Task Continuity"
+      },
+      "definition": "跨设备接续同一用户任务。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "distributed.continuity.handoff",
+      "parent": "distributed.continuity",
+      "level": "L3",
+      "name": {
+        "zh": "跨设备接续",
+        "en": "Cross-Device Handoff"
+      },
+      "definition": "在另一台已登录设备上继续活动。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "distributed.nearby",
+      "parent": "distributed",
+      "level": "L2",
+      "name": {
+        "zh": "附近设备",
+        "en": "Nearby Devices"
+      },
+      "definition": "发现并连接附近设备。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "distributed.nearby.discovery",
+      "parent": "distributed.nearby",
+      "level": "L3",
+      "name": {
+        "zh": "附近发现",
+        "en": "Nearby Discovery"
+      },
+      "definition": "发现附近对等设备。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "distributed.softbus",
+      "parent": "distributed",
+      "level": "L2",
+      "name": {
+        "zh": "跨设备通信",
+        "en": "Cross-device Communication"
+      },
+      "definition": "建立设备间通信会话，传输数据并调用远端能力。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "distributed.softbus.fabric",
+      "parent": "distributed.softbus",
+      "level": "L3",
+      "name": {
+        "zh": "跨设备调用与数据传输",
+        "en": "Cross-device Calls and Data Transfer"
+      },
+      "definition": "在多个设备之间调用远端能力、传输消息或数据流，并处理连接中断。",
+      "knowledge_role": "leaf",
+      "bindings": {
+        "harmonyos": [
+          {
+            "kind": "syscap",
+            "id": "SystemCapability.DistributedHardware.DistributedHardware",
+            "role": "primary",
+            "note": "示意 SysCap；以官方软总线文档为准"
+          }
+        ]
+      }
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "distributed.collaboration",
+      "parent": "distributed",
+      "name": "跨设备互通调用",
+      "what": "本端应用调用组网内远端设备的能力（相机/扫描/图库）",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "distributed.collaboration.camera-legacy",
+      "parent": "distributed.collaboration",
+      "name": "跨端相机（历史）",
+      "what": "PC/2in1跨端调用手机拍照的旧组件（5.0.0(12)起废弃）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "CollaborationCamera（deprecated，由CollaborationService替代）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/service-collaboration-kit-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.collaboration.capability-call",
+      "parent": "distributed.collaboration",
+      "name": "跨端能力调用",
+      "what": "获取具备能力的设备列表并拉起对端应用、回传素材",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "createCollaborationServiceMenuItems（@kit.ServiceCollaborationKit，5.0.0(12)）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/servicecollaboration-service",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "HMS_ServiceCollaboration_StartCollaboration（C API）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/servicecollaboration-servicendk-description-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.collaboration.richeditor",
+      "parent": "distributed.collaboration",
+      "name": "控件级互通接入",
+      "what": "RichEditor右键菜单直接调用跨端相机/扫描/图库",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "RichEditor跨设备互通集成",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/servicecollaboration-richeditor-title",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.collaboration.state",
+      "parent": "distributed.collaboration",
+      "name": "互通状态与回调",
+      "what": "互通开始/结束、图片视频回传等状态事件通道",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "OnEvent/OnDataCallback（ServiceCollaboration C API）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/servicecollaboration-servicendk-description-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.companion-pairing",
+      "parent": "distributed",
+      "name": "配件关联与信任配对",
+      "what": "应用按过滤条件请求系统完成配件设备关联（连接本体在connectivity域）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "CompanionDeviceManager.associate(AssociationRequest)",
+          "url": "https://developer.android.com/reference/android/companion/CompanionDeviceManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.continuity",
+      "parent": "distributed",
+      "name": "应用接续与跨端迁移",
+      "what": "任务在一台设备开始、在另一台设备继续的接续能力",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "distributed.continuity.migration",
+      "parent": "distributed.continuity",
+      "name": "应用跨端迁移",
+      "what": "UIAbility携状态从A设备迁移到B设备继续任务（自由流转之迁移）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "continueManager + restoreId（迁移标识）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-continuation-continuationManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Continue On（handoff机制，Android 17/API 37）",
+          "url": "https://developer.android.com/develop/better-together/continue-on",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "NSUserActivity（Handoff）",
+          "url": "https://developer.apple.com/documentation/foundation/nsuseractivity",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.continuity.multi-device",
+      "parent": "distributed.continuity",
+      "name": "多端协同",
+      "what": "多设备作为整体协同运行（跨设备UIAbility连接管理）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "abilityConnectionManager（多端协同）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/distributed-service-kit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.continuity.spec",
+      "parent": "distributed.continuity",
+      "name": "接续兼容规格",
+      "what": "接续的功能与数据兼容、位置状态一致的要求（规格文档）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "自由流转规格（接续/协同两类）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hop-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.data-sync",
+      "parent": "distributed",
+      "name": "跨设备数据同步",
+      "what": "应用数据在组网设备间与端云间同步",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "distributed.data-sync.cloud-sync",
+      "parent": "distributed.data-sync",
+      "name": "端云数据同步",
+      "what": "端云协同的数据同步（云侧部署，与storage交叉）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "distributed-data-cloud-sync",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/distributed-data-sync",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.data-sync.data-object",
+      "parent": "distributed.data-sync",
+      "name": "分布式数据对象",
+      "what": "跨设备同步的内存数据对象（当前仅跨端迁移与跨设备Call场景）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.data.distributedDataObject",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/data-sync-of-distributed-data-object",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.data-sync.distributed-db",
+      "parent": "distributed.data-sync",
+      "name": "分布式数据库同步",
+      "what": "键值型/关系型数据库跨设备同步（最终一致性）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Rdb_DistributedConfig（跨设备表配置）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-oh-rdb-err-code-h",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "distributed-data-sync（导航）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/distributed-data-sync",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.data-sync.distributed-file",
+      "parent": "distributed.data-sync",
+      "name": "分布式文件系统",
+      "what": "组网设备间经分布式目录读写与拷贝文件（本地IO属storage域）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "hmdfs + ohos.file.fs（distributedfiles目录）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/distributed-fs",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.data-sync.wear-data-layer",
+      "parent": "distributed.data-sync",
+      "name": "穿戴数据层",
+      "what": "手机-手表经数据层同步DataItem等（payload≤100KB，配对iOS不可用）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "DataClient/PutDataRequest（Wear OS Data Layer）",
+          "url": "https://developer.android.com/training/wearables/data",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.device-picking",
+      "parent": "distributed",
+      "name": "设备选择与流转入口",
+      "what": "系统级设备选择面板与流转入口组件",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "distributed.device-picking.capability-filter",
+      "parent": "distributed.device-picking",
+      "name": "能力过滤设备列表",
+      "what": "按能力类型过滤组网内可用设备",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "GetCollaborationDeviceInfos + CollaborationDeviceInfo（能力类型）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/servicecollaboration-servicendk-description-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.device-picking.picker",
+      "parent": "distributed.device-picking",
+      "name": "设备选择面板",
+      "what": "拉起系统设备选择面板并回调选择/取消/离线事件",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "devicePicker（4.0.0(10)）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/servicecollaborationkit-introduction",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "CollaborationDevicePicker流转控件",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/service-collaboration-kit-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.nearby",
+      "parent": "distributed",
+      "name": "附近设备发现与连接",
+      "what": "近场设备发现、点对点连接、会话与快速交互",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "distributed.nearby.connection",
+      "parent": "distributed.nearby",
+      "name": "点对点连接与数据通道",
+      "what": "设备间建立连接并传输消息/载荷",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "crossdevice.connections",
+          "url": "https://developer.android.com/reference/com/google/ambient/crossdevice/connections",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MCSession send/receive",
+          "url": "https://developer.apple.com/documentation/multipeerconnectivity",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.nearby.discovery",
+      "parent": "distributed.nearby",
+      "name": "跨设备发现",
+      "what": "发现组网/近场内可交互的设备与端点",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "com.google.ambient.crossdevice.discovery",
+          "url": "https://developer.android.com/reference/com/google/ambient/crossdevice",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MCNearbyServiceBrowser/MCAdvertiserAssistant（Multipeer Connectivity）",
+          "url": "https://developer.apple.com/documentation/multipeerconnectivity",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "分布式设备发现（软总线组网）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/distributedservice-kit-intro",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.nearby.game-transfer",
+      "parent": "distributed.nearby",
+      "name": "游戏近场快传",
+      "what": "游戏资源包/安装包在设备间高速传输（游戏作用域）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "gameNearbyTransfer（Game Service Kit）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-gameservice-gameNearbyTransfer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.nearby.gestures-share",
+      "parent": "distributed.nearby",
+      "name": "隔空传送",
+      "what": "一抓一放手势跨端传输内容（与interop分享交叉）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "harmonyShare.on/off(\"gesturesShare\") + SharableTarget.share()",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/share-kit-gestureshare",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.nearby.knock",
+      "parent": "distributed.nearby",
+      "name": "碰一碰",
+      "what": "设备顶端触碰触发连接、传递信息与断开",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "serviceInteraction（API 26.0.0起，受限权限KNOCK_COLLABORATION）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/serviceinteraction-dev-guides",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Share Kit碰一碰分享（knockShare）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/knock-share",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.nearby.session",
+      "parent": "distributed.nearby",
+      "name": "跨设备会话共享",
+      "what": "多设备共享同一活动会话（如同步观看）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "crossdevice.sessions",
+          "url": "https://developer.android.com/reference/com/google/ambient/crossdevice/sessions",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "GroupActivities（SharePlay会话）",
+          "url": "https://developer.apple.com/documentation/groupactivities",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.nearby.uwb",
+      "parent": "distributed.nearby",
+      "name": "UWB近场测距交互",
+      "what": "通过超宽带获得近场设备距离/方向并建立交互（与location交叉）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "NearbyInteraction（NISession，U1/U2芯片）",
+          "url": "https://developer.apple.com/documentation/nearbyinteraction",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.ranging.uwb（RangingManager）",
+          "url": "https://developer.android.com/guide/topics/connectivity/uwb",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.nearby.wakeup",
+      "parent": "distributed.nearby",
+      "name": "跨设备唤醒",
+      "what": "远程唤醒对端设备上的应用实例",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "crossdevice.wakeup",
+          "url": "https://developer.android.com/reference/com/google/ambient/crossdevice/wakeup",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.share-experience",
+      "parent": "distributed",
+      "name": "跨设备共享体验",
+      "what": "多设备共享媒体/操作体验的会话型能力",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "distributed.share-experience.cross-clipboard",
+      "parent": "distributed.share-experience",
+      "name": "跨设备剪贴板",
+      "what": "A设备复制、B设备粘贴的跨设备剪贴板（剪贴板本体在input域）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "分布式剪贴板",
+          "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-distributed-pasteboard-cast",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.share-experience.cross-drag",
+      "parent": "distributed.share-experience",
+      "name": "跨设备拖拽",
+      "what": "键鼠共享下跨设备拖拽文本/图片/视频/PDF（拖放本体在input域）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "跨设备拖拽（组件拖入拖出接入）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-distributed-pasteboard-cast",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.share-experience.group-activity",
+      "parent": "distributed.share-experience",
+      "name": "SharePlay共享活动",
+      "what": "把内容做成多端同步的共享体验（同步观影等，媒体同步与media交叉）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "GroupActivity/GroupSession（GroupActivities）",
+          "url": "https://developer.apple.com/documentation/groupactivities",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.share-experience.tabletop",
+      "parent": "distributed.share-experience",
+      "name": "空间桌面游戏同步",
+      "what": "visionOS空间桌面游戏的多端状态同步（非手机形态）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "TabletopKit（visionOS）",
+          "url": "https://developer.apple.com/documentation/tabletopkit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.softbus",
+      "parent": "distributed",
+      "name": "分布式软总线与设备管理",
+      "what": "软总线组网、可信设备管理与跨设备RPC通道",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "distributed.softbus.device-manager",
+      "parent": "distributed.softbus",
+      "name": "分布式设备管理",
+      "what": "可信设备发现、绑定认证、信息查询与状态监听",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "distributedDeviceManager（@kit.DistributedServiceKit）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/distributed-service-kit",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_DeviceManager（C API）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-oh-device-manager-h",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.softbus.link-enhance",
+      "parent": "distributed.softbus",
+      "name": "增强连接",
+      "what": "基于BLE多通道合并算法提升跨设备连接数量与稳定性",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "linkEnhance（需DISTRIBUTED_DATASYNC权限）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/link-enhance",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.softbus.mechanic",
+      "parent": "distributed.softbus",
+      "name": "机械体设备管理",
+      "what": "机械体设备连接监听与跟踪控制（分布式硬件）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.distributedHardware.mechanicManager（首批API 20）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributedHardware-mechanicManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.softbus.proxy-channel",
+      "parent": "distributed.softbus",
+      "name": "代理通道",
+      "what": "手机与穿戴设备双向代理通道（蓝牙BR链路+后台代理拉起）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "proxyChannelManager（@kit.DistributedServiceKit）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/errorcode-proxychannelmanager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.softbus.rpc",
+      "parent": "distributed.softbus",
+      "name": "跨设备RPC",
+      "what": "基于软总线的跨设备进程调用与死亡通知（设备内IPC属app域）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "RPC registerDeathRecipient/onRemoteDied（IPC Kit跨设备侧）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ipc-rpc-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.virtual-hardware",
+      "parent": "distributed",
+      "name": "分布式硬件与虚拟化",
+      "what": "跨设备硬件共享与虚拟化设备框架",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "distributed.virtual-hardware.companion-virtual",
+      "parent": "distributed.virtual-hardware",
+      "name": "配件虚拟设备框架",
+      "what": "虚拟显示/虚拟输入端点等虚拟设备能力",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "companion.virtual（虚拟设备框架）",
+          "url": "https://developer.android.com/reference/android/companion/virtual/package-summary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.virtual-hardware.keyboard-mouse",
+      "parent": "distributed.virtual-hardware",
+      "name": "键鼠穿越",
+      "what": "平板/2in1间键鼠共享",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "分布式硬件键鼠穿越",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/distributed-service-kit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.virtual-hardware.wear-virtual",
+      "parent": "distributed.virtual-hardware",
+      "name": "穿戴虚拟化",
+      "what": "手机侧应用实时获取穿戴连接/佩戴/电量与传感器数据（部分受限发布）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "穿戴设备虚拟化（ECG/PPG/ACC受限）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/distributedservice-kit-intro",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.wear-link",
+      "parent": "distributed",
+      "name": "手机-穿戴互联",
+      "what": "手机应用与配对穿戴设备的消息、文件、状态与数据交互",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "distributed.wear-link.device-select",
+      "parent": "distributed.wear-link",
+      "name": "穿戴目标设备选择",
+      "what": "按设备类别/能力集从已连接设备中选择通信目标",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "wearEngine DeviceCategory设备筛选",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wearengine_phonedev",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.wear-link.device-status",
+      "parent": "distributed.wear-link",
+      "name": "穿戴设备状态查询订阅",
+      "what": "查询/订阅穿戴设备连接、佩戴、电量等状态",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "wearEngine DeviceClient/状态订阅",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wear-engine-kit-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.wear-link.file-transfer",
+      "parent": "distributed.wear-link",
+      "name": "穿戴文件传输",
+      "what": "手机与穿戴设备间互传文件",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "wearEngine FileClient",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wear-engine-kit-guide",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WCSession.transferFile",
+          "url": "https://developer.apple.com/documentation/watchconnectivity/wcsession",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.wear-link.ios-watch",
+      "parent": "distributed.wear-link",
+      "name": "iOS-配对手表通信",
+      "what": "iOS应用与配对watchOS应用的后台托管数据传输（applicationContext/userInfo）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "WCSession updateApplicationContext/transferUserInfo",
+          "url": "https://developer.apple.com/documentation/watchconnectivity/wcsession",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.wear-link.lite",
+      "parent": "distributed.wear-link",
+      "name": "穿戴侧轻量连接订阅",
+      "what": "穿戴侧应用订阅与手机连接状态（仅FA模型，6.1.1(24)起）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "wearEngineLite onConnectionStateChange",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wearenginelite",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.wear-link.p2p-message",
+      "parent": "distributed.wear-link",
+      "name": "穿戴P2P消息",
+      "what": "手机与穿戴设备应用间双向消息通道",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "wearEngine getP2pClient/sendMessage（两端需同时启动）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wearengine_phonedev",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WCSession.sendMessage",
+          "url": "https://developer.apple.com/documentation/watchconnectivity/wcsession",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.wear-link.remote-app",
+      "parent": "distributed.wear-link",
+      "name": "拉起穿戴应用",
+      "what": "从手机拉起穿戴侧指定应用",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "wearEngine startRemoteApp",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wear-engine-kit-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.wear-link.sensor-data",
+      "parent": "distributed.wear-link",
+      "name": "穿戴传感器数据读取",
+      "what": "读取穿戴侧心率等传感数据（部分数据受限发布）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "wearEngine SensorClient（HR等）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wear-engine-kit-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.wear-link.service-state",
+      "parent": "distributed.wear-link",
+      "name": "穿戴服务连接监测",
+      "what": "监测Wear Engine服务断连等生命周期状态",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "wearEngine.on/off(\"serviceDie\")",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wearengine_service_status",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "distributed.wear-link.template-notification",
+      "parent": "distributed.wear-link",
+      "name": "穿戴模板化通知",
+      "what": "向穿戴设备发送模板化通知（通知本体在notifications域）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "wearEngine NotificationClient",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wear-engine-kit-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

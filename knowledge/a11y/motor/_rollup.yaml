@@ -1,0 +1,27 @@
+schema_version: 2
+feature_id: a11y.motor
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 触控目标、开关控制等运动障碍适配。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- a11y.motor.assistive_touch
+- a11y.motor.sticky_keys
+- a11y.motor.switch_control
+- a11y.motor.timing_controls
+- a11y.motor.touch_target

@@ -1,0 +1,1012 @@
+{
+  "domain": "notifications",
+  "authored_count": 6,
+  "draft_clue_count": 54,
+  "authored": [
+    {
+      "id": "notifications",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "通知与推送",
+        "en": "Notifications and Push"
+      },
+      "definition": "本地通知展示与远程推送通道。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "notifications.local",
+      "parent": "notifications",
+      "level": "L2",
+      "name": {
+        "zh": "本地通知",
+        "en": "Local Notifications"
+      },
+      "definition": "由本机应用创建的通知展示（OS 层）。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "notifications.local.actions",
+      "parent": "notifications.local",
+      "level": "L3",
+      "name": {
+        "zh": "通知操作按钮",
+        "en": "Notification Actions"
+      },
+      "definition": "通知上的可点击操作。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "notifications.local.display",
+      "parent": "notifications.local",
+      "level": "L3",
+      "name": {
+        "zh": "通知展示",
+        "en": "Notification Display"
+      },
+      "definition": "通知栏/横幅/锁屏通知展示与渠道。",
+      "knowledge_role": "leaf",
+      "bindings": {
+        "android": [
+          {
+            "kind": "class",
+            "id": "android.app.NotificationManager",
+            "url": "https://developer.android.com/reference/android/app/NotificationManager",
+            "role": "primary"
+          }
+        ],
+        "ios": [
+          {
+            "kind": "framework",
+            "id": "UserNotifications",
+            "url": "https://developer.apple.com/documentation/usernotifications",
+            "role": "primary"
+          }
+        ],
+        "harmonyos": [
+          {
+            "kind": "module",
+            "id": "@ohos.notificationManager",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-notificationmanager",
+            "role": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "id": "notifications.push",
+      "parent": "notifications",
+      "level": "L2",
+      "name": {
+        "zh": "远程推送通道",
+        "en": "Remote Push Channel"
+      },
+      "definition": "云端到设备的推送投递（生态层）。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "notifications.push.channel",
+      "parent": "notifications.push",
+      "level": "L3",
+      "name": {
+        "zh": "推送通道",
+        "en": "Push Delivery Channel"
+      },
+      "definition": "FCM / APNs / Push Kit 远程消息通道。",
+      "knowledge_role": "leaf",
+      "bindings": {
+        "android": [
+          {
+            "kind": "other",
+            "id": "com.google.firebase.messaging",
+            "url": "https://firebase.google.com/docs/cloud-messaging/android/client",
+            "role": "primary",
+            "note": "ecosystem: FCM"
+          }
+        ],
+        "ios": [
+          {
+            "kind": "framework",
+            "id": "UserNotifications + APNs",
+            "url": "https://developer.apple.com/documentation/usernotifications/registering-your-app-with-apns",
+            "role": "primary"
+          }
+        ],
+        "harmonyos": [
+          {
+            "kind": "kit",
+            "id": "PushKit",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/push-kit-introduction",
+            "role": "primary"
+          }
+        ]
+      }
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "notifications.auxiliary",
+      "parent": "notifications",
+      "name": "辅助提醒形态",
+      "what": "通知之外的提醒与轻提示形态",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "notifications.auxiliary.alarm",
+      "parent": "notifications.auxiliary",
+      "name": "系统闹钟调度",
+      "what": "系统级醒目闹钟与倒计时（授权管理、贪睡、小组件展示）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "AlarmKit（iOS 26+）",
+          "url": "https://developer.apple.com/documentation/alarmkit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.auxiliary.bubbles",
+      "parent": "notifications.auxiliary",
+      "name": "气泡通知",
+      "what": "会话以浮动气泡形式常驻展示",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Bubbles API",
+          "url": "https://developer.android.com/guide/topics/ui/bubbles",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.auxiliary.heads-up",
+      "parent": "notifications.auxiliary",
+      "name": " Heads-up浮动通知",
+      "what": "屏幕顶部横幅式浮现通知",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "heads-up notification（高优先级渠道）",
+          "url": "https://developer.android.com/guide/topics/ui/notifiers/notifications",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.auxiliary.reminder",
+      "parent": "notifications.auxiliary",
+      "name": "代理提醒",
+      "what": "应用退后台/终止后系统代理发布倒计时/日历/闹钟提醒",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "reminderAgentManager（@kit.BackgroundTasksKit，营销场景不支持）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/agent-powered-reminder",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.auxiliary.toast",
+      "parent": "notifications.auxiliary",
+      "name": "Toast轻提示",
+      "what": "屏幕轻量提示消息",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Toast.makeText",
+          "url": "https://developer.android.com/reference/android/widget/Toast",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "promptAction.showToast",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-promptAction",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.badge",
+      "parent": "notifications",
+      "name": "角标",
+      "what": "桌面图标未读数角标",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "notifications.badge.desktop",
+      "parent": "notifications.badge",
+      "name": "桌面角标设置",
+      "what": "设置/累加桌面未读角标（>99显示99+）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "NotificationRequest.badgeNumber / setBadgeNumber",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-notificationmanager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UNUserNotificationCenter badge / UIApplication.applicationIconBadgeNumber",
+          "url": "https://developer.apple.com/documentation/usernotifications",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "BadgeUtils（AndroidX，厂商launcher差异）",
+          "url": "https://developer.android.com/reference/androidx/core/app/NotificationCompat",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.cross-device",
+      "parent": "notifications",
+      "name": "跨设备通知",
+      "what": "通知在多设备间流转、桥接与转发",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "notifications.cross-device.accessory",
+      "parent": "notifications.cross-device",
+      "name": "配件通知转发",
+      "what": "自研配件请求批准并接收/响应iOS系统通知（iOS 26.5+，EU条件）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Accessory Notifications",
+          "url": "https://developer.apple.com/documentation/accessorynotifications",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Accessory Live Activities（实时活动转发）",
+          "url": "https://developer.apple.com/documentation/accessoryliveactivities",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.cross-device.bridge",
+      "parent": "notifications.cross-device",
+      "name": "穿戴通知桥接",
+      "what": "默认桥接手机通知到手表并可程序化控制",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Wear OS通知桥接（setBridgeTag/禁用）",
+          "url": "https://developer.apple.com/documentation/foundation/cfbridgingrelease",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.cross-device.sync",
+      "parent": "notifications.cross-device",
+      "name": "协同通知流转",
+      "what": "以手机为中心与穿戴（API 18+）/平板、PC-2in1（API 20+）协同并去重",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "跨设备协同通知（appMessageId清除跨渠道重复）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-notificationmanager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.extension",
+      "parent": "notifications",
+      "name": "通知扩展处理",
+      "what": "应用扩展在通知展示前后处理内容与界面",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "notifications.extension.content-ext",
+      "parent": "notifications.extension",
+      "name": "通知内容界面扩展",
+      "what": "自定义通知展开后的界面",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UNNotificationContentExtension",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontentextension",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.extension.listener",
+      "parent": "notifications.extension",
+      "name": "通知监听服务",
+      "what": "监听读取系统通知（需用户授权的特殊权限应用）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "NotificationListenerService",
+          "url": "https://developer.android.com/reference/android/service/notification/NotificationListenerService",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.extension.service-ext",
+      "parent": "notifications.extension",
+      "name": "通知服务扩展",
+      "what": "收到远程推送后修改/解密通知内容（限时返回）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UNNotificationServiceExtension",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "RemoteNotificationExtensionAbility（10秒内返回，仅系统应用开放）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.interaction",
+      "parent": "notifications",
+      "name": "通知交互",
+      "what": "通知上的操作与送达分级",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "notifications.interaction.actions",
+      "parent": "notifications.interaction",
+      "name": "可操作通知按钮",
+      "what": "通知上提供操作按钮",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UNNotificationCategory + UNNotificationAction",
+          "url": "https://developer.apple.com/documentation/usernotifications/declaring-your-actionable-notification-types",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "NotificationCompat.Action",
+          "url": "https://developer.android.com/guide/topics/ui/notifiers/notifications",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.interaction.dismiss",
+      "parent": "notifications.interaction",
+      "name": "通知取消与移除",
+      "what": "取消指定/全部通知或移除已送达通知",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "notificationManager.cancel(id)/cancelAll()",
+          "url": "https://developer.apple.com/documentation/alarmkit/alarmmanager/cancel(id:)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UNUserNotificationCenter.removeDeliveredNotifications",
+          "url": "https://developer.apple.com/documentation/usernotifications",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "NotificationManager.cancel",
+          "url": "https://developer.android.com/guide/topics/ui/notifiers/notifications",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.interaction.reply",
+      "parent": "notifications.interaction",
+      "name": "通知直接回复",
+      "what": "在通知上直接回复消息（会话场景）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "RemoteInput（direct reply）",
+          "url": "https://developer.android.com/guide/topics/ui/notifiers/notifications",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.interaction.time-sensitive",
+      "parent": "notifications.interaction",
+      "name": "时效性与打断分级",
+      "what": "标记时效性通知获得更高打断等级",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UNNotificationInterruptionLevel.timeSensitive",
+          "url": "https://developer.apple.com/documentation/usernotifications",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.live",
+      "parent": "notifications",
+      "name": "实时状态通知",
+      "what": "锁屏/状态栏实时更新的进行中任务状态展示",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "notifications.live.activity",
+      "parent": "notifications.live",
+      "name": "Live Activities实时活动",
+      "what": "锁屏/灵动岛/手表Smart Stack展示的实时更新活动（iOS 16.1+）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "ActivityKit Activity<ActivityAttributes>",
+          "url": "https://developer.apple.com/documentation/activitykit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.live.activity-push",
+      "parent": "notifications.live",
+      "name": "Live Activities推送更新",
+      "what": "经APNs推送启动/更新Live Activity",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "ActivityKit push token + APNs更新",
+          "url": "https://developer.apple.com/documentation/activitykit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.live.liveview",
+      "parent": "notifications.live",
+      "name": "实况窗本地构建",
+      "what": "创建/更新/结束实况窗（锁屏/通知中心/状态栏胶囊与卡片态，13类场景）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "liveViewManager startLiveView/updateLiveView/stopLiveView/isLiveViewEnabled",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/liveview-create-locally",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "notifications.live.liveview-geo",
+      "parent": "notifications.live",
+      "name": "地理位置触发实况窗",
+      "what": "基于地理围栏自动创建/结束实况窗（6.1.0(23)起打卡/快递等）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Location-based Live View Alert（地理围栏触发创建/结束实况窗）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/liveview-kit-terminology",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "notifications.live.liveview-push",
+      "parent": "notifications.live",
+      "name": "Push通道更新实况窗",
+      "what": "应用进程不存活时经Push Kit远程更新/结束实况窗（26.0.0起支持网络图片）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Push Kit推送实况窗消息",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/liveview-update-by-push",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.local",
+      "parent": "notifications",
+      "name": "本地通知",
+      "what": "应用在本机构建并发布的通知",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "notifications.local.basic",
+      "parent": "notifications.local",
+      "name": "通知构建与发布",
+      "what": "构建通知对象并发布到系统通知栏",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "NotificationCompat.Builder.notify()",
+          "url": "https://developer.android.com/reference/androidx/core/app/NotificationCompat",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "notificationManager.publish(NotificationRequest)（@kit.NotificationKit）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-notificationmanager",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UNMutableNotificationContent + UNUserNotificationCenter.add()",
+          "url": "https://developer.apple.com/documentation/usernotifications",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.local.channels",
+      "parent": "notifications.local",
+      "name": "通知渠道与分类",
+      "what": "按渠道/类别组织通知的视觉与打扰行为（Android 8.0+渠道；HarmonyOS消息分类）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "NotificationChannel (API 26起必须)",
+          "url": "https://developer.android.com/guide/topics/ui/notifiers/notifications",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "通知消息分类标准（服务与通讯/资讯营销）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.local.click-intent",
+      "parent": "notifications.local",
+      "name": "通知点击行为",
+      "what": "点击通知跳转指定页面或携带数据拉起",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "WantAgent（notification with wantAgent）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/notification-with-wantagent",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "PendingIntent (contentIntent)",
+          "url": "https://developer.android.com/guide/topics/ui/notifiers/notifications",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UNUserNotificationCenterDelegate.didReceive response",
+          "url": "https://developer.apple.com/documentation/usernotifications",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.local.group",
+      "parent": "notifications.local",
+      "name": "通知分组与会话",
+      "what": "同组通知折叠展示与会话式通知",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "NotificationCompat.setGroup / MessagingStyle",
+          "url": "https://developer.android.com/guide/topics/ui/notifiers/notifications",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UNNotificationCategory (threadIdentifier会话分组)",
+          "url": "https://developer.apple.com/documentation/usernotifications/declaring-your-actionable-notification-types",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.local.progress",
+      "parent": "notifications.local",
+      "name": "进度条通知",
+      "what": "系统进度条模板展示下载/处理进度",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "NotificationTemplate + isSupportTemplate()",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/progress-bar-notification",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.local.ringtone",
+      "parent": "notifications.local",
+      "name": "自定义铃声",
+      "what": "通知指定预置或沙箱音频为铃声（API 12起，API 24起支持非预置资源）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "NotificationRequest.sound",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/notification-customized-ringtone",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.local.styles",
+      "parent": "notifications.local",
+      "name": "通知内容样式",
+      "what": "文本/多行/大图标等通知内容模板",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "NOTIFICATION_CONTENT_BASIC_TEXT/MULTILINE",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/text-notification",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "NotificationCompat.BigTextStyle/BigPictureStyle",
+          "url": "https://developer.android.com/guide/topics/ui/notifiers/notifications",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.local.visibility",
+      "parent": "notifications.local",
+      "name": "锁屏可见性",
+      "what": "控制通知在锁屏的展示与敏感内容隐藏",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Notification.visibility",
+          "url": "https://developer.android.com/guide/topics/ui/notifiers/notifications",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.permission",
+      "parent": "notifications",
+      "name": "授权与设置",
+      "what": "通知授权请求、开关查询与系统设置跳转",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "notifications.permission.query",
+      "parent": "notifications.permission",
+      "name": "开关查询与设置跳转",
+      "what": "查询通知开关状态并引导用户去设置开启",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "isNotificationEnabled / openNotificationSettingsWithResult",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-notificationmanager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.permission.request",
+      "parent": "notifications.permission",
+      "name": "授权请求",
+      "what": "请求用户开启通知权限（Android 13起运行时权限）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "POST_NOTIFICATIONS运行时权限",
+          "url": "https://developer.android.com/guide/topics/ui/notifiers/notification-permission",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "requestEnableNotification（首次弹窗）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-notificationmanager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UNUserNotificationCenter.requestAuthorization",
+          "url": "https://developer.apple.com/documentation/usernotifications/asking-permission-to-use-notifications",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.push",
+      "parent": "notifications",
+      "name": "远程推送通道",
+      "what": "云端到设备的消息推送通道与消息类型",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "notifications.push.aaid",
+      "parent": "notifications.push",
+      "name": "应用匿名标识",
+      "what": "36字符应用实例级匿名标识（仅安装期存在，用于申请Push Token）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AAID（@kit.PushKit）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.push.apns",
+      "parent": "notifications.push",
+      "name": "APNs通道接入",
+      "what": "基于证书/令牌的APNs服务器连接与投递",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "APNs（certificate/token based connection）",
+          "url": "https://developer.apple.com/documentation/usernotifications/establishing-a-certificate-based-connection-to-apns",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.push.background-msg",
+      "parent": "notifications.push",
+      "name": "静默后台消息",
+      "what": "不展示通知的后台数据消息（非前台缓存最新1条、最多7天）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "推送后台消息（5.1.0(18)起Wearable、5.1.1(19)起TV）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "FCM data message（静默推送）",
+          "url": "https://firebase.google.com/docs/cloud-messaging/ios/certs",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "content-available后台推送",
+          "url": "https://developer.apple.com/documentation/usernotifications",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.push.card-refresh",
+      "parent": "notifications.push",
+      "name": "卡片刷新消息",
+      "what": "经系统通道向桌面卡片即时推送刷新内容",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "推送卡片刷新消息（push-type=1，Form Kit联动）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.push.content-classification",
+      "parent": "notifications.push",
+      "name": "消息分类与频控",
+      "what": "通知按服务与通讯/资讯营销分类并差异化频控（资讯营销每日每设备2或5条）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "通知消息分类标准与提醒方式（自分类权益）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.push.priority",
+      "parent": "notifications.push",
+      "name": "优先通知",
+      "what": "优先提醒权益（商务/社交通讯类+重要联系人场景）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "priorityNotificationType消息权益",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.push.recall",
+      "parent": "notifications.push",
+      "name": "消息撤回",
+      "what": "按token+notifyId撤回已发送通知/语音播报消息",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "撤回消息REST接口",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.push.receipts",
+      "parent": "notifications.push",
+      "name": "消息回执",
+      "what": "推送送达状态回调开发者服务器",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "消息回执REST（需开通回执权益）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.push.scenario-msg",
+      "parent": "notifications.push",
+      "name": "场景化消息推送",
+      "what": "云侧V3接口按push-type下发通知/卡片刷新/语音播报等场景消息",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Push Kit场景化消息（REST V3）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.push.service-notify",
+      "parent": "notifications.push",
+      "name": "服务通知与订阅消息",
+      "what": "基于账号/Push Token的订阅消息（元服务场景，用户授权弹窗闭环）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "serviceNotification + requestSubscribeNotification（5.0.0(12)起元服务）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.push.token",
+      "parent": "notifications.push",
+      "name": "推送标识获取",
+      "what": "获取设备-应用级推送Token（卸载重装/恢复出厂失效）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "pushService.getToken/deleteToken（SystemCapability.Push.PushService）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "FirebaseMessaging.getToken（FCM）",
+          "url": "https://firebase.google.com/docs/cloud-messaging/ios/certs",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "APNs deviceToken注册",
+          "url": "https://developer.apple.com/documentation/usernotifications/establishing-a-certificate-based-connection-to-apns",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.push.voice-broadcast",
+      "parent": "notifications.push",
+      "name": "语音播报消息",
+      "what": "推送语音播报类消息（后台经扩展处理并返回自定义内容）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "推送语音播报消息（push-type=2）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.push.voip",
+      "parent": "notifications.push",
+      "name": "应用内通话消息",
+      "what": "VoIP来电推送：锁屏接听/拒绝、解锁横幅并拉起通话界面",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Push Kit应用内通话消息（场景权益）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-kit-guide-V5",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "PushKit VoIP push（PKPushRegistry）",
+          "url": "https://developer.apple.com/documentation/pushkit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "notifications.tv-recommend",
+      "parent": "notifications",
+      "name": "TV内容推荐",
+      "what": "向TV主屏推荐应用内容（非手机形态，device_form=tv）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ContentRecommendation/RecommendationExtender（TV推荐channel API 26+）",
+          "url": "https://developer.android.com/reference/androidx/recommendation/app/ContentRecommendation",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

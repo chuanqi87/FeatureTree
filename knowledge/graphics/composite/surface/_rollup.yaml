@@ -1,0 +1,27 @@
+schema_version: 2
+feature_id: graphics.composite.surface
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 原生窗口/表面的缓冲申请、属性、队列与跨进程共享。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- graphics.composite.surface.buffer_image_bridge
+- graphics.composite.surface.buffer_props
+- graphics.composite.surface.buffer_queue
+- graphics.composite.surface.cross_process
+- graphics.composite.surface.window_bind

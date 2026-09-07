@@ -1,0 +1,25 @@
+schema_version: 2
+feature_id: network.rpc
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 面向服务的高性能 RPC 通道（非 REST/HTTP 业务封装）。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- network.rpc.call
+- network.rpc.session
+- network.rpc.stream

@@ -6,7 +6,7 @@ features:
   name:
     zh: 无障碍
     en: Accessibility
-  definition: 无障碍服务与辅助技术；控件叶子引用本域，不复述框架。
+  definition: 无障碍树与语义、辅助服务、视觉/运动/听觉适配及无障碍测试。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -17,8 +17,10 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 无障碍服务与辅助技术；控件叶子引用本域，不复述框架。
-    excludes: []
+    - 框架、服务、视觉、运动、听觉、测试
+    excludes:
+    - TTS 引擎通用合成见 ai.speech.tts
+    - 普通 UI 布局见 ui
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -28,13 +30,19 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - a11y
 - id: a11y.framework
   level: L2
   parent: a11y
   name:
     zh: 无障碍框架
     en: Accessibility Framework
-  definition: 无障碍树、焦点与服务。
+  definition: 无障碍节点树、语义标注与焦点走焦。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -42,10 +50,12 @@ features:
   - tablet
   privacy_class: none
   knowledge_path: knowledge/a11y/framework/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 无障碍树、焦点与服务。
-    excludes: []
+    - 树、标注、焦点、播报
+    excludes:
+    - 辅助服务实现见 service
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -55,29 +65,33 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: a11y.framework.tree
-  level: L3
-  parent: a11y.framework
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - a11y.framework
+  sibling_axis: a11y_capability_family
+- id: a11y.hearing
+  level: L2
+  parent: a11y
   name:
-    zh: 无障碍树与语义
-    en: Accessibility Tree and Semantics
-  definition: 向辅助技术暴露语义属性。
-  knowledge_role: leaf
+    zh: 听觉无障碍
+    en: Hearing Accessibility
+  definition: 字幕、闪光提示与音乐触感等。
+  knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  aliases:
-  - TalkBack
-  - VoiceOver
-  - 无障碍
-  knowledge_path: knowledge/a11y/framework/tree.yaml
+  knowledge_path: knowledge/a11y/hearing/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 向辅助技术暴露语义属性。
-    excludes: []
+    - 字幕、闪光、触感
+    excludes:
+    - 媒体播放见 media
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -87,13 +101,54 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: a11y_capability_family
+- id: a11y.motor
+  level: L2
+  parent: a11y
+  name:
+    zh: 运动无障碍
+    en: Motor Accessibility
+  definition: 触控目标、开关控制等运动障碍适配。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/motor/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 触控目标、开关控制
+    excludes:
+    - 视觉见 vision
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: a11y_capability_family
 - id: a11y.service
   level: L2
   parent: a11y
   name:
-    zh: 无障碍服务
+    zh: 辅助功能服务
     en: Accessibility Service
-  definition: 第三方无障碍服务扩展。
+  definition: 实现系统辅助服务扩展与手势放大。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -101,10 +156,12 @@ features:
   - tablet
   privacy_class: none
   knowledge_path: knowledge/a11y/service/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 第三方无障碍服务扩展。
-    excludes: []
+    - service extension、手势、放大
+    excludes:
+    - 应用侧语义见 framework
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -114,26 +171,118 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: a11y.service.extension
-  level: L3
-  parent: a11y.service
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - a11y.service
+  sibling_axis: a11y_capability_family
+- id: a11y.testing
+  level: L2
+  parent: a11y
   name:
-    zh: 无障碍服务扩展
-    en: Accessibility Service Extension
-  definition: 应用作为无障碍服务观察并操作界面。
+    zh: 无障碍测试
+    en: Accessibility Testing
+  definition: 无障碍扫描与读屏测试工具入口。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/testing/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - scanner、读屏测试
+    excludes:
+    - 框架语义见 framework
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: a11y_capability_family
+- id: a11y.vision
+  level: L2
+  parent: a11y
+  name:
+    zh: 视觉无障碍
+    en: Vision Accessibility
+  definition: 字号、对比度、动效与加粗等视觉适配。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/vision/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 字号、对比、动效
+    excludes:
+    - 读屏服务见 service
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: a11y_capability_family
+- id: a11y.framework.actions
+  level: L3
+  parent: a11y.framework
+  name:
+    zh: 自定义无障碍动作
+    en: Custom Accessibility Actions
+  definition: 向辅助技术暴露自定义动作。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence
-  knowledge_path: knowledge/a11y/service/extension.yaml
+  knowledge_path: knowledge/a11y/framework/actions.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AccessibilityAction
+      url: https://developer.android.com/reference/androidx/core/view/accessibility/AccessibilityNodeInfoCompat.AccessibilityActionCompat
+      role: primary
+    ios:
+    - kind: class
+      id: AccessibilityAction
+      url: https://developer.apple.com/documentation/swiftui/accessibilityactionkind
+      role: primary
+    harmonyos:
+    - kind: module
+      id: accessibilityAction
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-accessibility
+      role: primary
   comparison_scope:
     includes:
-    - 应用作为无障碍服务观察并操作界面。
-    excludes: []
+    - custom actions
+    excludes:
+    - 标注见 labeling
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -143,3 +292,1677 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: framework_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.framework.announce
+  level: L3
+  parent: a11y.framework
+  name:
+    zh: 动态播报
+    en: Live Announcements
+  definition: 主动播报内容或状态变化。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/framework/announce.yaml
+  bindings:
+    android:
+    - kind: class
+      id: announceForAccessibility
+      url: https://developer.android.com/reference/android/view/View
+      role: primary
+    ios:
+    - kind: guide
+      id: UIAccessibility.post
+      url: https://developer.apple.com/documentation/uikit/uiaccessibility
+      role: primary
+    harmonyos:
+    - kind: module
+      id: sendAccessibilityEvent
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-accessibility
+      role: primary
+  comparison_scope:
+    includes:
+    - announceForAccessibility / live region
+    excludes:
+    - 焦点见 focus
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: framework_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.framework.custom_provider
+  level: L3
+  parent: a11y.framework
+  name:
+    zh: 自绘无障碍提供方
+    en: Custom Draw Accessibility Provider
+  definition: 为自绘/自定义渲染内容提供无障碍节点。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/framework/custom_provider.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AccessibilityNodeProvider
+      url: https://developer.android.com/reference/android/view/accessibility/AccessibilityNodeProvider
+      role: primary
+    ios:
+    - kind: class
+      id: UIAccessibilityContainer
+      url: https://developer.apple.com/documentation/uikit/uiaccessibilitycontainer
+      role: primary
+    harmonyos:
+    - kind: module
+      id: accessibility custom
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-accessibility
+      role: primary
+  comparison_scope:
+    includes:
+    - AccessibilityNodeProvider
+    excludes:
+    - 标准控件见 tree
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: framework_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.framework.focus
+  level: L3
+  parent: a11y.framework
+  name:
+    zh: 无障碍焦点
+    en: Accessibility Focus
+  definition: 管理无障碍焦点顺序与主动聚焦。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/framework/focus.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: focusable / nextFocus
+      url: https://developer.android.com/guide/topics/ui/accessibility
+      role: primary
+    ios:
+    - kind: guide
+      id: accessibilityFocus
+      url: https://developer.apple.com/documentation/uikit/uiaccessibility
+      role: primary
+    harmonyos:
+    - kind: module
+      id: accessibilityFocus
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-accessibility
+      role: primary
+  comparison_scope:
+    includes:
+    - focus order / accessibilityFocus
+    excludes:
+    - 播报见 announce
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: framework_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.framework.grouping
+  level: L3
+  parent: a11y.framework
+  name:
+    zh: 分组朗读
+    en: Grouped Reading
+  definition: 将组合控件作为整体朗读。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/framework/grouping.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AccessibilityNodeInfo
+      url: https://developer.android.com/reference/android/view/accessibility/AccessibilityNodeInfo
+      role: primary
+    ios:
+    - kind: class
+      id: accessibilityElement(children:)
+      url: https://developer.apple.com/documentation/swiftui/view/accessibilityelement(children:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: accessibilityGroup
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-accessibility
+      role: primary
+  comparison_scope:
+    includes:
+    - shouldGroupAccessibilityChildren
+    excludes:
+    - 标注见 labeling
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: framework_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.framework.labeling
+  level: L3
+  parent: a11y.framework
+  name:
+    zh: 语义标注
+    en: Semantic Labeling
+  definition: 为控件提供可访问名称、提示与角色。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/framework/labeling.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ViewCompat.setAccessibilityDelegate
+      url: https://developer.android.com/reference/androidx/core/view/ViewCompat
+      role: primary
+    ios:
+    - kind: class
+      id: accessibilityLabel
+      url: https://developer.apple.com/documentation/swiftui/view/accessibilitylabel(_:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: accessibilityText
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-universal-attributes-accessibility
+      role: primary
+  comparison_scope:
+    includes:
+    - contentDescription / accessibilityLabel
+    excludes:
+    - 节点树见 tree
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: framework_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.framework.tree
+  level: L3
+  parent: a11y.framework
+  name:
+    zh: 无障碍节点树
+    en: Accessibility Node Tree
+  definition: 构建与查询无障碍节点树。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/framework/tree.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AccessibilityNodeInfo
+      url: https://developer.android.com/reference/android/view/accessibility/AccessibilityNodeInfo
+      role: primary
+    ios:
+    - kind: guide
+      id: UIAccessibility
+      url: https://developer.apple.com/documentation/uikit/accessibility
+      role: primary
+    harmonyos:
+    - kind: module
+      id: accessibility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-universal-attributes-accessibility
+      role: primary
+  comparison_scope:
+    includes:
+    - AccessibilityNodeInfo / UIAccessibility
+    excludes:
+    - 标注见 labeling
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - a11y.framework.tree
+  sibling_axis: framework_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.hearing.audio_description
+  level: L3
+  parent: a11y.hearing
+  name:
+    zh: 音频描述
+    en: Audio Description
+  definition: 为视频提供音频描述轨道支持。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/hearing/audio_description.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: Media Accessibility
+      url: https://developer.apple.com/documentation/mediaaccessibility
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - audio description
+    excludes:
+    - 字幕见 caption
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: hearing_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.hearing.caption
+  level: L3
+  parent: a11y.hearing
+  name:
+    zh: 字幕与转写
+    en: Captions and Transcription
+  definition: 提供或遵循系统字幕偏好。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/hearing/caption.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CaptioningManager
+      url: https://developer.android.com/reference/android/view/accessibility/CaptioningManager
+      role: primary
+    ios:
+    - kind: framework
+      id: AVTextStyleRule / Media accessibility
+      url: https://developer.apple.com/documentation/avfoundation
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - closed captions
+    excludes:
+    - 媒体播放见 media
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: hearing_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.hearing.flashing
+  level: L3
+  parent: a11y.hearing
+  name:
+    zh: 闪光与视觉告警
+    en: Flash and Visual Alerts
+  definition: 用闪光/视觉方式提示告警。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/hearing/flashing.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: LED Flash for Alerts
+      url: https://developer.apple.com/accessibility/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - LED/flash alerts
+    excludes:
+    - 字幕见 caption
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: hearing_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.hearing.mono_audio
+  level: L3
+  parent: a11y.hearing
+  name:
+    zh: 单声道音频
+    en: Mono Audio
+  definition: 适配单声道音频偏好。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/hearing/mono_audio.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: UIAccessibility.isMonoAudioEnabled
+      url: https://developer.apple.com/documentation/uikit/uiaccessibility
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - mono audio
+    excludes:
+    - 媒体路由见 device
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: hearing_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.hearing.music_haptics
+  level: L3
+  parent: a11y.hearing
+  name:
+    zh: 音乐触感反馈
+    en: Music Haptics
+  definition: 将音乐节奏转为触感反馈。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/hearing/music_haptics.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: Music Haptics
+      url: https://developer.apple.com/accessibility/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - music haptics
+    excludes:
+    - 通用触感见 device
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: hearing_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.motor.assistive_touch
+  level: L3
+  parent: a11y.motor
+  name:
+    zh: 辅助触控
+    en: Assistive Touch
+  definition: 适配辅助触控手势与指针。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/motor/assistive_touch.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: AssistiveTouch
+      url: https://developer.apple.com/accessibility/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - AssistiveTouch
+    excludes:
+    - 触控目标见 touch_target
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: motor_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.motor.sticky_keys
+  level: L3
+  parent: a11y.motor
+  name:
+    zh: 粘滞键与慢速键
+    en: Sticky and Slow Keys
+  definition: 适配键盘粘滞键/慢速键偏好。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/motor/sticky_keys.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: Keyboard accessibility
+      url: https://developer.apple.com/accessibility/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - sticky keys
+    excludes:
+    - 开关控制见 switch_control
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: motor_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.motor.switch_control
+  level: L3
+  parent: a11y.motor
+  name:
+    zh: 开关控制适配
+    en: Switch Control Adaptation
+  definition: 适配开关控制扫描与选择。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/motor/switch_control.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: Switch Control
+      url: https://developer.apple.com/accessibility/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Switch Control
+    excludes:
+    - 触控目标见 touch_target
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: motor_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.motor.timing_controls
+  level: L3
+  parent: a11y.motor
+  name:
+    zh: 时限操作可延长
+    en: Extendable Time Limits
+  definition: 为限时交互提供延长或关闭时限。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/motor/timing_controls.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: Accessibility Timeout
+      url: https://developer.apple.com/design/human-interface-guidelines/accessibility
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - extend time limits
+    excludes:
+    - 触控目标见 touch_target
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: motor_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.motor.touch_target
+  level: L3
+  parent: a11y.motor
+  name:
+    zh: 触控目标尺寸
+    en: Touch Target Size
+  definition: 保证可交互控件满足最小触控目标。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/motor/touch_target.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Material touch target
+      url: https://developer.android.com/guide/topics/ui/accessibility/apps
+      role: primary
+    ios:
+    - kind: guide
+      id: Apple HIG touch target
+      url: https://developer.apple.com/design/human-interface-guidelines/accessibility
+      role: primary
+    harmonyos:
+    - kind: module
+      id: touch target
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-accessibility
+      role: primary
+  comparison_scope:
+    includes:
+    - min touch target
+    excludes:
+    - 开关控制见 switch_control
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: motor_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.service.button
+  level: L3
+  parent: a11y.service
+  name:
+    zh: 辅助功能按钮
+    en: Accessibility Button
+  definition: 响应系统辅助功能按钮回调。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/service/button.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AccessibilityButtonController
+      url: https://developer.android.com/reference/android/accessibilityservice/AccessibilityService.AccessibilityButtonController
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - accessibilityButton
+    excludes:
+    - 服务见 extension
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: service_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.service.event
+  level: L3
+  parent: a11y.service
+  name:
+    zh: 辅助事件监听
+    en: Accessibility Event Listen
+  definition: 接收窗口与内容变化等辅助事件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/service/event.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AccessibilityEvent
+      url: https://developer.android.com/reference/android/view/accessibility/AccessibilityEvent
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: accessibility event
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/accessibilitykit-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - onAccessibilityEvent
+    excludes:
+    - 服务见 extension
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: service_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.service.extension
+  level: L3
+  parent: a11y.service
+  name:
+    zh: 辅助服务扩展
+    en: Accessibility Service Extension
+  definition: 实现系统辅助功能服务。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/service/extension.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AccessibilityService
+      url: https://developer.android.com/reference/android/accessibilityservice/AccessibilityService
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: AccessibilityExtensionAbility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-accessibilityextensionability
+      role: primary
+  comparison_scope:
+    includes:
+    - AccessibilityService
+    excludes:
+    - 节点查询见 node_query
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - a11y.service.extension
+  sibling_axis: service_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.service.gesture
+  level: L3
+  parent: a11y.service
+  name:
+    zh: 辅助手势派发
+    en: Accessibility Gesture Dispatch
+  definition: 由辅助服务派发手势操作。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/service/gesture.yaml
+  bindings:
+    android:
+    - kind: class
+      id: GestureDescription
+      url: https://developer.android.com/reference/android/accessibilityservice/GestureDescription
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - dispatchGesture
+    excludes:
+    - 服务见 extension
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: service_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.service.magnification
+  level: L3
+  parent: a11y.service
+  name:
+    zh: 放大镜控制
+    en: Magnification Control
+  definition: 控制系统放大镜能力。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/service/magnification.yaml
+  bindings:
+    android:
+    - kind: class
+      id: MagnificationController
+      url: https://developer.android.com/reference/android/accessibilityservice/AccessibilityService.MagnificationController
+      role: primary
+    ios:
+    - kind: guide
+      id: Zoom
+      url: https://developer.apple.com/accessibility/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - MagnificationController
+    excludes:
+    - 视觉字号见 vision
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: service_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.service.node_query
+  level: L3
+  parent: a11y.service
+  name:
+    zh: 节点查询遍历
+    en: Node Query Traversal
+  definition: 从辅助服务侧查询与遍历节点。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/service/node_query.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AccessibilityService
+      url: https://developer.android.com/reference/android/accessibilityservice/AccessibilityService
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: accessibility
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/accessibilitykit-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - findAccessibilityNodeInfos
+    excludes:
+    - 应用侧树见 framework.tree
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: service_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.testing.automation
+  level: L3
+  parent: a11y.testing
+  name:
+    zh: 无障碍自动化驱动
+    en: Accessibility Automation Driving
+  definition: 通过无障碍树驱动 UI 自动化。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/testing/automation.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: UiAutomator
+      url: https://developer.android.com/training/testing/other-components/ui-automator
+      role: primary
+    ios:
+    - kind: framework
+      id: XCUITest
+      url: https://developer.apple.com/documentation/xctest
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Hypium
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hypium-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - UIAutomator a11y tree
+    excludes:
+    - 单元断言见 unit_checks
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: testing_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.testing.scanner
+  level: L3
+  parent: a11y.testing
+  name:
+    zh: 无障碍扫描器
+    en: Accessibility Scanner
+  definition: 运行无障碍问题自动扫描。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/testing/scanner.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Accessibility Scanner
+      url: https://support.google.com/accessibility/android/answer/6376570
+      role: primary
+    ios:
+    - kind: guide
+      id: Accessibility Inspector
+      url: https://developer.apple.com/documentation/accessibility/accessibility-inspector
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Accessibility Scanner / Accessibility Inspector
+    excludes:
+    - 读屏测试见 screen_reader_test
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: testing_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.testing.screen_reader_test
+  level: L3
+  parent: a11y.testing
+  name:
+    zh: 读屏测试
+    en: Screen Reader Testing
+  definition: 用读屏进行端到端无障碍测试。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/testing/screen_reader_test.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Espresso a11y checks
+      url: https://developer.android.com/guide/topics/ui/accessibility/testing
+      role: primary
+    ios:
+    - kind: framework
+      id: XCTest accessibility
+      url: https://developer.apple.com/documentation/xctest
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Hypium a11y
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hypium-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - TalkBack / VoiceOver tests
+    excludes:
+    - 扫描器见 scanner
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: testing_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.testing.unit_checks
+  level: L3
+  parent: a11y.testing
+  name:
+    zh: 无障碍单元断言
+    en: Accessibility Unit Assertions
+  definition: 在单元/UI 测试中断言无障碍属性。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/testing/unit_checks.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: AccessibilityChecks
+      url: https://developer.android.com/guide/topics/ui/accessibility/testing
+      role: primary
+    ios:
+    - kind: framework
+      id: XCUIElement accessibility
+      url: https://developer.apple.com/documentation/xctest
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - accessibility assertions
+    excludes:
+    - 扫描器见 scanner
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: testing_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.vision.bold_text
+  level: L3
+  parent: a11y.vision
+  name:
+    zh: 粗体文本
+    en: Bold Text
+  definition: 适配系统粗体文本偏好。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/vision/bold_text.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: boldTextEnabled
+      url: https://developer.apple.com/documentation/uikit/uiaccessibility
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - boldText
+    excludes:
+    - 字号见 font_scale
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_a11y_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.vision.contrast
+  level: L3
+  parent: a11y.vision
+  name:
+    zh: 增强对比度
+    en: Increase Contrast
+  definition: 适配高对比度/区分无障碍色。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/vision/contrast.yaml
+  bindings:
+    android:
+    - kind: class
+      id: highTextContrast
+      url: https://developer.android.com/reference/android/provider/Settings.Secure
+      role: primary
+    ios:
+    - kind: guide
+      id: UIAccessibility.isDarkerSystemColorsEnabled
+      url: https://developer.apple.com/documentation/uikit/uiaccessibility
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - highContrast / Increase Contrast
+    excludes:
+    - 色反转见 invert
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_a11y_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.vision.elder_mode
+  level: L3
+  parent: a11y.vision
+  name:
+    zh: 适老关怀模式
+    en: Elder Care Mode
+  definition: 声明并同步适老化/关怀模式状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/vision/elder_mode.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: elderlyFriendly
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-accessibility
+      role: primary
+  comparison_scope:
+    includes:
+    - senior mode
+    excludes:
+    - 字号见 font_scale
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_a11y_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.vision.font_scale
+  level: L3
+  parent: a11y.vision
+  name:
+    zh: 系统字号缩放
+    en: Font Scale
+  definition: 适配系统字体缩放偏好。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/vision/font_scale.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Configuration.fontScale
+      url: https://developer.android.com/reference/android/content/res/Configuration
+      role: primary
+    ios:
+    - kind: guide
+      id: Dynamic Type
+      url: https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically
+      role: primary
+    harmonyos:
+    - kind: module
+      id: fontSizeScale
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-config
+      role: primary
+  comparison_scope:
+    includes:
+    - fontScale
+    excludes:
+    - 加粗见 bold_text
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_a11y_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.vision.invert
+  level: L3
+  parent: a11y.vision
+  name:
+    zh: 智能反色
+    en: Smart Invert Colors
+  definition: 适配智能反色，避免图片被反转。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/vision/invert.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: accessibilityIgnoresInvertColors
+      url: https://developer.apple.com/documentation/uikit/uiview
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - accessibilityIgnoresInvertColors
+    excludes:
+    - 对比度见 contrast
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_a11y_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: a11y.vision.reduce_motion
+  level: L3
+  parent: a11y.vision
+  name:
+    zh: 减弱动态效果
+    en: Reduce Motion
+  definition: 在减弱动态效果开启时降低动画。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/a11y/vision/reduce_motion.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Animator duration scale
+      url: https://developer.android.com/reference/android/provider/Settings.Global
+      role: primary
+    ios:
+    - kind: guide
+      id: UIAccessibility.isReduceMotionEnabled
+      url: https://developer.apple.com/documentation/uikit/uiaccessibility
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - reduceMotion
+    excludes:
+    - 对比度见 contrast
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_a11y_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability

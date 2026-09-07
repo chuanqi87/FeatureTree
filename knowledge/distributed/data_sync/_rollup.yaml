@@ -1,0 +1,28 @@
+schema_version: 2
+feature_id: distributed.data_sync
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 分布式对象/库/文件及穿戴数据层同步。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- distributed.data_sync.cloud_bridge
+- distributed.data_sync.conflict
+- distributed.data_sync.data_object
+- distributed.data_sync.distributed_db
+- distributed.data_sync.distributed_file
+- distributed.data_sync.wear_data_layer

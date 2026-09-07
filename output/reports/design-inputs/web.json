@@ -1,0 +1,454 @@
+{
+  "domain": "web",
+  "authored_count": 5,
+  "draft_clue_count": 17,
+  "authored": [
+    {
+      "id": "web",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "Web与混合",
+        "en": "Web and Hybrid"
+      },
+      "definition": "嵌入式浏览器与 JS 桥接。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "web.bridge",
+      "parent": "web",
+      "level": "L2",
+      "name": {
+        "zh": "JS桥接",
+        "en": "JS Bridge"
+      },
+      "definition": "原生与网页脚本互调。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "web.bridge.native_js",
+      "parent": "web.bridge",
+      "level": "L3",
+      "name": {
+        "zh": "原生与JS互调",
+        "en": "Native JS Interop"
+      },
+      "definition": "向页面注入接口或接收脚本回调。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "web.webview",
+      "parent": "web",
+      "level": "L2",
+      "name": {
+        "zh": "嵌入式Web视图",
+        "en": "Embedded Web View"
+      },
+      "definition": "应用内渲染网页内容。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "web.webview.embed",
+      "parent": "web.webview",
+      "level": "L3",
+      "name": {
+        "zh": "WebView嵌入",
+        "en": "WebView Embed"
+      },
+      "definition": "嵌入浏览器引擎组件。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "web.browser",
+      "parent": "web",
+      "name": "外部浏览器集成",
+      "what": "复用系统/外部浏览器的受控浏览会话。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "web.browser.auth_session",
+      "parent": "web.browser",
+      "name": "网页认证会话",
+      "what": "通过受限浏览器会话完成OAuth等Web认证回调。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "ASWebAuthenticationSession",
+          "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Custom Tabs + App Links回调 (模式)",
+          "url": "https://developer.android.com/training/app-links",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "web.browser.custom_tabs",
+      "parent": "web.browser",
+      "name": "浏览器标签会话",
+      "what": "以Custom Tabs/SFSafariViewController打开轻量浏览器会话保持登录态。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.browser CustomTabsIntent",
+          "url": "https://developer.android.com/reference/androidx/browser/customtabs/CustomTabsIntent",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "SFSafariViewController",
+          "url": "https://developer.apple.com/documentation/safariservices/sfsafariviewcontroller",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "web.hybrid",
+      "parent": "web",
+      "name": "混合开发支撑",
+      "what": "Web与原生混合的工程化能力。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "web.hybrid.capability_bridge",
+      "parent": "web.hybrid",
+      "name": "Web能力桥接",
+      "what": "为Web页面提供设备/系统能力代理（定位、文件等，需权限）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WebChromeClient onGeolocationPermissionsShowPrompt / onShowFileChooser",
+          "url": "https://developer.android.com/reference/android/webkit/WebChromeClient",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WKUIDelegate / WKGeolocationProvider(私有,候选)",
+          "url": "https://developer.apple.com/documentation/webkit/wkuidelegate",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Web组件 onGeolocationShow / onShowFileSelector (候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkui-ts/ts-basic-components-web",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "web.hybrid.local_content",
+      "parent": "web.hybrid",
+      "name": "本地资源与离线加载",
+      "what": "从应用资源/沙箱加载页面与拦截资源实现离线Web。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WebViewAssetLoader",
+          "url": "https://developer.android.com/reference/androidx/webkit/WebViewAssetLoader",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WKWebView loadFileURL",
+          "url": "https://developer.apple.com/documentation/webkit/wkwebview",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Web组件本地资源加载 ($rawfile,候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkui-ts/ts-basic-components-web",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "web.webview",
+      "parent": "web",
+      "name": "嵌入式浏览器组件",
+      "what": "应用内网页渲染与控制。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "web.webview.basic_auth",
+      "parent": "web.webview",
+      "name": "Web认证质询处理",
+      "what": "处理页面HTTP认证质询与证书错误。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WebViewClient.onReceivedHttpAuthRequest",
+          "url": "https://developer.android.com/reference/android/webkit/WebViewClient",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WKNavigationDelegate didReceiveAuthenticationChallenge",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationdelegate",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Web组件 onHttpAuthRequest / onSslErrorReceive (候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkui-ts/ts-basic-components-web",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "web.webview.cache",
+      "parent": "web.webview",
+      "name": "缓存与站点数据管理",
+      "what": "清理与控制Web缓存、存储等站点数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WebStorage.deleteAllData / WebView.clearCache",
+          "url": "https://developer.android.com/reference/android/webkit/WebStorage",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WKWebsiteDataStore.removeData",
+          "url": "https://developer.apple.com/documentation/webkit/wkwebsitedatastore",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "webview.WebStorage / clearAllCache (候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-webview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "web.webview.component",
+      "parent": "web.webview",
+      "name": "Web组件加载",
+      "what": "在应用内嵌入浏览器组件并加载网页/本地内容。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.webkit.WebView.loadUrl",
+          "url": "https://developer.android.com/reference/android/webkit/WebView",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WKWebView load(_:)",
+          "url": "https://developer.apple.com/documentation/webkit/wkwebview",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Web组件 controller.loadUrl (arkui)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkui-ts/ts-basic-components-web",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "web.webview.cookies",
+      "parent": "web.webview",
+      "name": "Web Cookie管理",
+      "what": "读写Web组件的Cookie存储。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.webkit.CookieManager",
+          "url": "https://developer.android.com/reference/android/webkit/CookieManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WKHTTPCookieStore",
+          "url": "https://developer.apple.com/documentation/webkit/wkhttpcookiestore",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "webview.WebCookieManager",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-webview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "web.webview.eval_js",
+      "parent": "web.webview",
+      "name": "执行JS脚本",
+      "what": "在页面上下文中执行任意JS并取回结果。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WebView.evaluateJavascript",
+          "url": "https://developer.android.com/reference/android/webkit/WebView#evaluateJavascript(java.lang.String,%20android.webkit.ValueCallback)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WKWebView.evaluateJavaScript",
+          "url": "https://developer.apple.com/documentation/webkit/wkwebview/evaluatejavascript(_:_:)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "webview.WebviewController.runJavaScript",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-webview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "web.webview.intercept",
+      "parent": "web.webview",
+      "name": "请求拦截与自定义资源",
+      "what": "拦截网络请求返回自定义内容或注册自定义scheme处理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WebViewClient.shouldInterceptRequest",
+          "url": "https://developer.android.com/reference/android/webkit/WebViewClient#shouldInterceptRequest(android.webkit.WebView,%20android.webkit.WebResourceRequest)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WKURLSchemeHandler / WKContentRuleList",
+          "url": "https://developer.apple.com/documentation/webkit/wkurlschemehandler",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Web组件 onInterceptRequest",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkui-ts/ts-basic-components-web",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "web.webview.js_bridge",
+      "parent": "web.webview",
+      "name": "JS与原生双向通信",
+      "what": "向页面注入原生对象/消息通道实现JS与应用互调。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WebView.addJavascriptInterface / WebMessagePort",
+          "url": "https://developer.android.com/reference/android/webkit/WebView#addJavascriptInterface(java.lang.Object,%20java.lang.String)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WKScriptMessageHandler / WKUserContentController",
+          "url": "https://developer.apple.com/documentation/webkit/wkscriptmessagehandler",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Web组件 registerJavaScriptProxy / postMessage / javaScriptOnDocumentStart (候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkui-ts/ts-basic-components-web",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "web.webview.js_console",
+      "parent": "web.webview",
+      "name": "控制台与错误诊断",
+      "what": "接收页面console输出与JS异常用于调试。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WebChromeClient.onConsoleMessage",
+          "url": "https://developer.android.com/reference/android/webkit/WebChromeClient#onConsoleMessage(android.webkit.ConsoleMessage)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WKScriptMessageHandler console消息注入 (模式)",
+          "url": "https://developer.apple.com/documentation/webkit/wkusercontentcontroller",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Web组件 onConsole (候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkui-ts/ts-basic-components-web",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "web.webview.navigation",
+      "parent": "web.webview",
+      "name": "页面加载与导航控制",
+      "what": "拦截/控制页面导航、前进后退与重载。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WebViewClient.shouldOverrideUrlLoading",
+          "url": "https://developer.android.com/reference/android/webkit/WebViewClient",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WKNavigationDelegate decidePolicyFor",
+          "url": "https://developer.apple.com/documentation/webkit/wknavigationdelegate",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Web组件 onControllerAttached / onBackPress拦截 (候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkui-ts/ts-basic-components-web",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "web.webview.prefetch",
+      "parent": "web.webview",
+      "name": "页面预取与预加载",
+      "what": "提前加载/预取页面资源加速首屏。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "webview.WebviewController.prefetchPage",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-webview",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "WebView预加载 (候选)/Prerendering",
+          "url": "https://developer.android.com/reference/android/webkit/WebView",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

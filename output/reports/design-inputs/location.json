@@ -1,0 +1,1124 @@
+{
+  "domain": "location",
+  "authored_count": 8,
+  "draft_clue_count": 55,
+  "authored": [
+    {
+      "id": "location",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "位置与地理",
+        "en": "Location and Geospatial"
+      },
+      "definition": "定位、地理围栏与地图（含生态地图）。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "location.geofence",
+      "parent": "location",
+      "level": "L2",
+      "name": {
+        "zh": "地理围栏",
+        "en": "Geofencing"
+      },
+      "definition": "进出地理区域时的系统回调。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "location.geofence.region",
+      "parent": "location.geofence",
+      "level": "L3",
+      "name": {
+        "zh": "区域围栏",
+        "en": "Region Geofence"
+      },
+      "definition": "圆形/多边形区域进出事件。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "location.maps",
+      "parent": "location",
+      "level": "L2",
+      "name": {
+        "zh": "地图展示",
+        "en": "Maps Display"
+      },
+      "definition": "地图 SDK 展示与标注（生态层）。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "location.maps.sdk",
+      "parent": "location.maps",
+      "level": "L3",
+      "name": {
+        "zh": "地图SDK",
+        "en": "Maps SDK"
+      },
+      "definition": "嵌入式地图渲染与交互。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "location.positioning",
+      "parent": "location",
+      "level": "L2",
+      "name": {
+        "zh": "定位",
+        "en": "Positioning"
+      },
+      "definition": "获取设备地理位置。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "location.positioning.background",
+      "parent": "location.positioning",
+      "level": "L3",
+      "name": {
+        "zh": "后台定位",
+        "en": "Background Location"
+      },
+      "definition": "应用不可见时持续或间歇获取位置。",
+      "knowledge_role": "leaf",
+      "bindings": {
+        "android": [
+          {
+            "kind": "other",
+            "id": "com.google.android.gms.location",
+            "url": "https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient",
+            "role": "primary",
+            "note": "Fused location / background"
+          }
+        ],
+        "ios": [
+          {
+            "kind": "framework",
+            "id": "CoreLocation",
+            "url": "https://developer.apple.com/documentation/corelocation",
+            "role": "primary"
+          }
+        ],
+        "harmonyos": [
+          {
+            "kind": "module",
+            "id": "@ohos.geoLocationManager",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager",
+            "role": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "id": "location.positioning.foreground",
+      "parent": "location.positioning",
+      "level": "L3",
+      "name": {
+        "zh": "前台定位",
+        "en": "Foreground Location"
+      },
+      "definition": "应用可见时获取位置。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "location.aod_navi",
+      "parent": "location",
+      "name": "熄屏导航",
+      "what": "AOD熄屏界面低功耗实时展示导航与运动信息。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AOD Navigation Kit",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/aod-navigation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.environment",
+      "parent": "location",
+      "name": "环境地理数据",
+      "what": "按位置查询的天气与环境数据生态服务。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "location.environment.weather",
+      "parent": "location.environment",
+      "name": "天气数据获取",
+      "what": "按经纬度获取格点天气/降水/预警/潮汐等。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "weatherService.getWeather (@kit.WeatherServiceKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-weather-service",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "WeatherService (WeatherKit)",
+          "url": "https://developer.apple.com/documentation/weatherkit/weatherservice",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.environment.weather_rest",
+      "parent": "location.environment",
+      "name": "天气REST服务",
+      "what": "JWT认证的天气Web服务可跨平台使用。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "WeatherKit REST API",
+          "url": "https://developer.apple.com/documentation/weatherkit/rest-api",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.geocoding",
+      "parent": "location",
+      "name": "地理编码",
+      "what": "地址与经纬度互转及坐标系处理。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "location.geocoding.coordinate",
+      "parent": "location.geocoding",
+      "name": "坐标系纠偏与距离计算",
+      "what": "GCJ02/WGS84转换纠偏与两点距离计算。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "map.calculateDistance / 坐标纠偏",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-calc-tool",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.geocoding.forward",
+      "parent": "location.geocoding",
+      "name": "正地理编码",
+      "what": "地址文本转经纬度。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "geoLocationManager.getAddressesFromLocationName",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geo-location-manager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Geocoder.getFromLocationName",
+          "url": "https://developer.android.com/reference/android/location/Geocoder",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CLGeocoder.geocodeAddressString",
+          "url": "https://developer.apple.com/documentation/corelocation/clgeocoder",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.geocoding.reverse",
+      "parent": "location.geocoding",
+      "name": "逆地理编码",
+      "what": "经纬度转结构化地址。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "geoLocationManager.getAddressesFromLocation",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geo-location-manager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Geocoder.getFromLocation",
+          "url": "https://developer.android.com/reference/android/location/Geocoder",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CLGeocoder.reverseGeocodeLocation",
+          "url": "https://developer.apple.com/documentation/corelocation/clgeocoder",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.geofencing",
+      "parent": "location",
+      "name": "地理围栏",
+      "what": "进入/离开/驻留区域事件通知。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "location.geofencing.cloud",
+      "parent": "location.geofencing",
+      "name": "云侧围栏",
+      "what": "AGC配置公共围栏经FenceExtensionAbility通知应用。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "FenceExtensionAbility (云侧围栏)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cloud-fence",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.geofencing.gnss",
+      "parent": "location.geofencing",
+      "name": "端侧围栏",
+      "what": "本地创建订阅GNSS地理围栏（当前仅圆形）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "geoLocationManager.addGnssGeofence",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geo-location-manager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.geofencing.region",
+      "parent": "location.geofencing",
+      "name": "区域监控",
+      "what": "系统区域监控围栏事件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "CLMonitor / CLCircularRegion",
+          "url": "https://developer.apple.com/documentation/corelocation/clmonitor",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "GeofencingClient",
+          "url": "https://developer.android.com/reference/com/google/android/gms/location/GeofencingClient",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps",
+      "parent": "location",
+      "name": "地图",
+      "what": "交互式地图显示、绘制、图层与交互。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "location.maps.building3d",
+      "parent": "location.maps",
+      "name": "3D建筑",
+      "what": "绘制3D建筑与楼盘三维模型。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "BuildingOverlayParams",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-3d-building",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.camera",
+      "parent": "location.maps",
+      "name": "相机视点控制",
+      "what": "控制地图中心、缩放级别、旋转与倾角。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "MapComponentController.moveCamera",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-change-position",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MKMapCamera",
+          "url": "https://developer.apple.com/documentation/mapkit/mkmapcamera",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.cluster",
+      "parent": "location.maps",
+      "name": "点聚合",
+      "what": "大量标记按距离聚合自适应显示。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ClusterItem 点聚合",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-cluster",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.display",
+      "parent": "location.maps",
+      "name": "地图显示",
+      "what": "嵌入交互式地图组件显示基础/卫星地图。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "MapComponent (Map Kit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/map-mapcomponent",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "MapView (Maps SDK for Android)",
+          "url": "https://developer.android.com/reference/com/google/android/libraries/maps/MapView",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MKMapView (MapKit)",
+          "url": "https://developer.apple.com/documentation/mapkit/mkmapview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.event",
+      "parent": "location.maps",
+      "name": "地图事件交互",
+      "what": "点击/长按/POI点击等地图事件监听。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "on('poiClick')等事件",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-event-interaction",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.flowfield",
+      "parent": "location.maps",
+      "name": "流场图层",
+      "what": "风场/洋流等动态矢量流动可视化。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "addFlowFieldOverlay",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-flowfield",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.gesture",
+      "parent": "location.maps",
+      "name": "地图手势与控件",
+      "what": "缩放/滚动/旋转/倾斜手势开关与系统控件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "MapComponentController手势接口",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-control-gesture",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.heatmap",
+      "parent": "location.maps",
+      "name": "热力图图层",
+      "what": "按密度颜色区块展示数据分布。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "addHeatmap (HeatmapParams)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-heatmap",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.launch",
+      "parent": "location.maps",
+      "name": "拉起地图应用",
+      "what": "拉起系统/生态地图应用展示位置与路线。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "petalMaps.openMapHomePage",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/map-petalmaps",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.marker",
+      "parent": "location.maps",
+      "name": "标记与点注释",
+      "what": "地图指定位置添加可交互标记与信息窗。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Marker / PointAnnotation",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-add-marker",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Marker (Maps SDK)",
+          "url": "https://developer.android.com/reference/com/google/android/libraries/maps/Marker",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MKAnnotation / MKPointAnnotation",
+          "url": "https://developer.apple.com/documentation/mapkit/mkpointannotation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.my_location",
+      "parent": "location.maps",
+      "name": "我的位置显示",
+      "what": "地图上显示用户当前位置与定位按钮。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "显示我的位置 (Map Kit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-show-location",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.offline",
+      "parent": "location.maps",
+      "name": "离线地图",
+      "what": "离线地图区域查询与下载管理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "offlineMapData (26.0.0+)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/map-offlinemapdata",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.overlay",
+      "parent": "location.maps",
+      "name": "覆盖物绘制",
+      "what": "折线/多边形/圆/弧线/图片图层绘制。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "addPolyline/addPolygon/addCircle/addArc/ImageOverlay",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-add-overlay",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MKPolyline/MKPolygon/MKCircle",
+          "url": "https://developer.apple.com/documentation/mapkit/mkpolygon",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.picker",
+      "parent": "location.maps",
+      "name": "场景化地图选点控件",
+      "what": "无需自建地图页快速集成地点选取/区划选择。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "sceneMap 地点选取chooseLocation",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/map-scenemap",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MKLocalSearch + MKPlaceSelectionViewController候选",
+          "url": "https://developer.apple.com/documentation/mapkit/mklocalsearch",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.screenshot",
+      "parent": "location.maps",
+      "name": "地图截图",
+      "what": "截取当前地图显示内容。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "地图截图 (Map Kit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-screenshot",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.static",
+      "parent": "location.maps",
+      "name": "静态地图图片",
+      "what": "按参数生成地图静态图片。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "staticMap.getMapImage",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/map-staticmap",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MKMapSnapshotter",
+          "url": "https://developer.apple.com/documentation/mapkit/mkmapsnapshotter",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.trace",
+      "parent": "location.maps",
+      "name": "动态轨迹",
+      "what": "实时绘制运动/行驶轨迹并支持回放。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "addTraceOverlay (TraceOverlayParams)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-trace",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.type",
+      "parent": "location.maps",
+      "name": "地图类型切换",
+      "what": "切换基础/卫星/3D地球/室内图等地图形态。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "setMapType / 3D地球(5.0.3+)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-switch-type",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.web",
+      "parent": "location.maps",
+      "name": "Web地图",
+      "what": "网页中嵌入交互式地图。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MapKit JS",
+          "url": "https://developer.apple.com/documentation/mapkitjs",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Maps JavaScript API",
+          "url": "https://developer.android.com/maps/documentation/javascript",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.maps.zorder",
+      "parent": "location.maps",
+      "name": "元素压盖顺序",
+      "what": "设置地图元素显示层级压盖关系。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "地图元素压盖顺序设置",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-z-order",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.positioning",
+      "parent": "location",
+      "name": "定位",
+      "what": "设备位置获取、权限模型与连续定位。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "location.positioning.acquire",
+      "parent": "location.positioning",
+      "name": "位置获取与连续定位",
+      "what": "获取当前/持续位置并监听位置变化。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "geoLocationManager.getCurrentLocation/on('locationChange')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geo-location-manager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "LocationManager.requestLocationUpdates",
+          "url": "https://developer.android.com/reference/android/location/LocationManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CLLocationManager.locationUpdates (CLMonitor)",
+          "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.positioning.activity",
+      "parent": "location.positioning",
+      "name": "活动识别转换",
+      "what": "识别用户活动状态转换（步行/驾车等）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ActivityRecognitionClient",
+          "url": "https://developer.android.com/reference/com/google/android/gms/location/ActivityRecognitionClient",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "活动状态数据（Location Kit）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/activity-transition",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.positioning.background",
+      "parent": "location.positioning",
+      "name": "后台定位",
+      "what": "应用后台期间的持续定位与政策限制。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ohos.permission.LOCATION_IN_BACKGROUND",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/userguide-location-guide",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "ACCESS_BACKGROUND_LOCATION",
+          "url": "https://developer.android.com/develop/background-work/access",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CLBackgroundActivitySession",
+          "url": "https://developer.apple.com/documentation/corelocation/clbackgroundactivitysession",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.positioning.fused",
+      "parent": "location.positioning",
+      "name": "融合定位服务",
+      "what": "经生态服务（GNSS+网络+传感器）获得位置。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "FusedLocationProviderClient",
+          "url": "https://developer.android.com/reference/com/google/android/gms/location/FusedLocationProviderClient",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CLLocationManager (系统融合)",
+          "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.positioning.gnss_raw",
+      "parent": "location.positioning",
+      "name": "GNSS原始测量",
+      "what": "读取GNSS原始测量与导航消息。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "GnssMeasurementsEvent",
+          "url": "https://developer.android.com/reference/android/location/GnssMeasurementsEvent",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "GnssMeasurement（location GNSS原始测量）",
+          "url": "https://developer.android.com/develop/sensors-and-location/location/gnss",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.positioning.heading",
+      "parent": "location.positioning",
+      "name": "指南针航向",
+      "what": "设备朝向与磁力计航向数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "CLLocationManager.headingUpdates",
+          "url": "https://developer.apple.com/documentation/corelocation/cllocationmanager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "SensorManager (TYPE_ORIENTATION/MAGNETIC)",
+          "url": "https://developer.android.com/reference/android/hardware/SensorManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.positioning.indoor",
+      "parent": "location.positioning",
+      "name": "室内高精度定位",
+      "what": "商场/车站等场所的高精度室内定位（受限开放能力）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Location Kit室内高精度定位",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/indoor-location",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.positioning.last_known",
+      "parent": "location.positioning",
+      "name": "最近历史位置",
+      "what": "缓存获取最近一次已知位置。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "geoLocationManager.getLastLocation",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geo-location-manager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "LocationManager.getLastKnownLocation",
+          "url": "https://developer.android.com/reference/android/location/LocationManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.positioning.location_button",
+      "parent": "location.positioning",
+      "name": "一次性定位按钮",
+      "what": "系统定位按钮按需单次授权定位。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "CLLocationButton (CoreLocationUI)",
+          "url": "https://developer.apple.com/documentation/corelocationui/cllocationbutton",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.positioning.permission",
+      "parent": "location.positioning",
+      "name": "定位权限分级",
+      "what": "精确/模糊/后台多级定位权限语义。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "LOCATION / APPROXIMATELY_LOCATION 权限",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/userguide-location-perm",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "ACCESS_FINE/COARSE_LOCATION",
+          "url": "https://developer.android.com/develop/location/permissions",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "whenInUse/always authorization",
+          "url": "https://developer.apple.com/documentation/corelocation/requesting-authorization-to-use-location-services",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.ranging",
+      "parent": "location",
+      "name": "近场测距",
+      "what": "UWB等近场精密测距与方位测量。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "location.ranging.beacon",
+      "parent": "location.ranging",
+      "name": "iBeacon测距",
+      "what": "蓝牙信标区域检测与距离估算。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "CLBeaconRegion (Core Location)",
+          "url": "https://developer.apple.com/documentation/corelocation/clbeaconregion",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Bluetooth LE beacon扫描",
+          "url": "https://developer.android.com/reference/android/bluetooth/BluetoothLeScanner",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.ranging.uwb",
+      "parent": "location.ranging",
+      "name": "UWB精密测距",
+      "what": "本机与远端设备距离/方位角/俯仰角测量。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ranging.RangingManager (API 36+)",
+          "url": "https://developer.android.com/reference/android/ranging/RangingManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "NISession (Nearby Interaction)",
+          "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.search",
+      "parent": "location",
+      "name": "地点搜索与路线",
+      "what": "POI检索、地点详情与路径规划服务。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "location.search.address_validate",
+      "parent": "location.search",
+      "name": "地址校验",
+      "what": "对街道地址做标准化与校验。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Address Validation API",
+          "url": "https://developer.android.com/maps/documentation/address-validation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.search.autocomplete",
+      "parent": "location.search",
+      "name": "地点自动补全与详情",
+      "what": "输入联想补全与地点详情查询。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Places SDK Autocomplete",
+          "url": "https://developer.android.com/places/android-sdk/autocomplete",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MKLocalSearchCompleter",
+          "url": "https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.search.elevation",
+      "parent": "location.search",
+      "name": "海拔与时区道路服务",
+      "what": "海拔查询与地点海拔补充。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Elevation API / location.altitude",
+          "url": "https://developer.android.com/maps/documentation/elevation",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CLLocation.altitude / CLVisit",
+          "url": "https://developer.apple.com/documentation/corelocation/cllocation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.search.geocode_service",
+      "parent": "location.search",
+      "name": "服务端地理Web服务",
+      "what": "地理编码/POI/路线/ETA等服务端地理API。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Apple Maps Server API",
+          "url": "https://developer.apple.com/documentation/documentation/appleserverapi",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Geocoding API (Maps Platform)",
+          "url": "https://developer.android.com/maps/documentation/geocoding",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.search.navigation_launch",
+      "parent": "location.search",
+      "name": "拉起导航",
+      "what": "经系统意图/地图应用发起导航。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "startAbilityByType('navigation')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/navigation-startability",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "google.navigation: intent",
+          "url": "https://developer.android.com/reference/android/content/Intent",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.search.poi",
+      "parent": "location.search",
+      "name": "地点/POI搜索",
+      "what": "关键字检索地点与POI信息。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "site.searchByText (Map Kit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/map-site",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Places SDK (Place Search)",
+          "url": "https://developer.android.com/places/android-sdk/search",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MKLocalSearch",
+          "url": "https://developer.apple.com/documentation/mapkit/mklocalsearch",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "location.search.route",
+      "parent": "location.search",
+      "name": "路径规划",
+      "what": "驾车/步行/骑行路线与批量算路、轨迹绑路。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "navi.getDrivingRoutes (Map Kit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/map-navi",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Directions API",
+          "url": "https://developer.android.com/maps/documentation/directions",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MKDirections",
+          "url": "https://developer.apple.com/documentation/mapkit/mkdirections",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

@@ -1,0 +1,756 @@
+{
+  "domain": "interop",
+  "authored_count": 9,
+  "draft_clue_count": 44,
+  "authored": [
+    {
+      "id": "interop",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "跨应用协作",
+        "en": "Cross-App Interop"
+      },
+      "definition": "Deep Link、分享与系统意图分发。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "interop.action_dispatch",
+      "parent": "interop",
+      "level": "L2",
+      "name": {
+        "zh": "跨应用动作分发",
+        "en": "Cross-App Action Dispatch"
+      },
+      "definition": "以动作为中心的跨应用调用（易假对齐）。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "interop.action_dispatch.component_intent",
+      "parent": "interop.action_dispatch",
+      "level": "L3",
+      "name": {
+        "zh": "目标组件调用",
+        "en": "Target Component Invocation"
+      },
+      "definition": "定位并调用应用组件，传递调用参数并处理无法找到目标等结果。",
+      "knowledge_role": "leaf",
+      "bindings": {
+        "android": [
+          {
+            "kind": "class",
+            "id": "android.content.Intent",
+            "role": "primary",
+            "url": "https://developer.android.com/reference/android/content/Intent"
+          }
+        ],
+        "harmonyos": [
+          {
+            "kind": "module",
+            "id": "@ohos.app.ability.Want",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-want",
+            "role": "primary",
+            "note": "analog to Intent"
+          }
+        ]
+      }
+    },
+    {
+      "id": "interop.action_dispatch.system_intents",
+      "parent": "interop.action_dispatch",
+      "level": "L3",
+      "name": {
+        "zh": "系统意图注册",
+        "en": "System Intent Registration"
+      },
+      "definition": "向系统注册可被智能助理/搜索触发的应用能力。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "interop.action_dispatch.url_launch",
+      "parent": "interop.action_dispatch",
+      "level": "L3",
+      "name": {
+        "zh": "URL拉起应用",
+        "en": "URL App Launch"
+      },
+      "definition": "通过 URL 拉起应用或系统处理器。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "interop.deeplink",
+      "parent": "interop",
+      "level": "L2",
+      "name": {
+        "zh": "深度链接",
+        "en": "Deep Linking"
+      },
+      "definition": "URL 打开应用内页面。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "interop.deeplink.url",
+      "parent": "interop.deeplink",
+      "level": "L3",
+      "name": {
+        "zh": "URL深度链接",
+        "en": "URL Deep Link"
+      },
+      "definition": "自定义 scheme 或 https App Links / Universal Links。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "interop.share",
+      "parent": "interop",
+      "level": "L2",
+      "name": {
+        "zh": "系统分享",
+        "en": "System Share"
+      },
+      "definition": "系统分享面板发送内容。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "interop.share.sheet",
+      "parent": "interop.share",
+      "level": "L3",
+      "name": {
+        "zh": "分享面板",
+        "en": "Share Sheet"
+      },
+      "definition": "调起系统分享 UI。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "interop.content_access",
+      "parent": "interop",
+      "name": "跨应用内容访问",
+      "what": "以URI/Provider等方式跨应用读写内容。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "interop.content_access.content_embed",
+      "parent": "interop.content_access",
+      "name": "跨应用内容嵌入",
+      "what": "将其他应用内容嵌入本应用窗口。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Content Embedding (capi)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-contentembed",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.content_access.file_provider",
+      "parent": "interop.content_access",
+      "name": "FileProvider安全文件共享",
+      "what": "通过content URI安全共享文件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "FileProvider",
+          "url": "https://developer.android.com/reference/androidx/core/content/FileProvider",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.content_access.multimodal",
+      "parent": "interop.content_access",
+      "name": "多模态感知协作",
+      "what": "跨应用多模态感知数据协作（候选）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "multimodal-awareness",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/multimodal-awareness-api",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.content_access.provider",
+      "parent": "interop.content_access",
+      "name": "ContentProvider内容提供",
+      "what": "暴露结构化数据给其他应用。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ContentProvider",
+          "url": "https://developer.android.com/reference/android/content/ContentProvider",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.content_access.uri_grant",
+      "parent": "interop.content_access",
+      "name": "URI临时授权",
+      "what": "对单次跨应用URI读写授权。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "FLAG_GRANT_READ_URI_PERMISSION",
+          "url": "https://developer.android.com/training/secure-file-sharing",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.data_transfer",
+      "parent": "interop",
+      "name": "跨应用数据传递",
+      "what": "剪贴板/拖拽等通用数据交换（与ui/input域有交叉）。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "interop.data_transfer.drag_drop",
+      "parent": "interop.data_transfer",
+      "name": "拖拽数据交换",
+      "what": "应用间/应用内拖拽传递数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIDragInteraction",
+          "url": "https://developer.apple.com/documentation/uikit/uidraginteraction",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "View startDragAndDrop",
+          "url": "https://developer.android.com/reference/android/view/View",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.deep_linking",
+      "parent": "interop",
+      "name": "深度链接",
+      "what": "通过链接直达应用内内容。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "interop.deep_linking.app_linking",
+      "parent": "interop.deep_linking",
+      "name": "HarmonyOS App Linking",
+      "what": "鸿蒙App Linking深度链接服务。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "App Linking Kit",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-linking-startupapp",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.deep_linking.app_links",
+      "parent": "interop.deep_linking",
+      "name": "Android App Links",
+      "what": "经域名验证的HTTP深链。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android:autoVerify intent-filter",
+          "url": "https://developer.android.com/training/app-links",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.deep_linking.custom_scheme",
+      "parent": "interop.deep_linking",
+      "name": "自定义Scheme",
+      "what": "私有URL scheme跳转。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "intent-filter custom scheme",
+          "url": "https://developer.android.com/guide/components/intents-filters",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.deep_linking.universal_links",
+      "parent": "interop.deep_linking",
+      "name": "Universal Links",
+      "what": "iOS经域名验证的通用链接。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Associated domains entitlement",
+          "url": "https://developer.apple.com/documentation/xcode/supporting-associated-domains",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.intent_dispatch",
+      "parent": "interop",
+      "name": "意图跳转与分发",
+      "what": "以显式/隐式意图启动其他应用能力。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "interop.intent_dispatch.assistant_invoke",
+      "parent": "interop.intent_dispatch",
+      "name": "助手语音调用",
+      "what": "通过系统助手以自然语言调用应用功能。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "App Actions (assistant invocation)",
+          "url": "https://developer.android.com/guide/app-actions/action-schema",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.intent_dispatch.filters",
+      "parent": "interop.intent_dispatch",
+      "name": "意图过滤器匹配",
+      "what": "应用声明可响应的隐式意图类别。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "intent-filter",
+          "url": "https://developer.android.com/guide/components/intents-filters",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.intent_dispatch.media_intents",
+      "parent": "interop.intent_dispatch",
+      "name": "媒体意图",
+      "what": "播放/识别等媒体类系统意图。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Media Intents",
+          "url": "https://developer.apple.com/documentation/mediaintents",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.intent_dispatch.share_target",
+      "parent": "interop.intent_dispatch",
+      "name": "分享目标声明",
+      "what": "声明应用为系统分享/拉起目标。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Share Kit share-app",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/share-app-actions",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.intent_dispatch.start",
+      "parent": "interop.intent_dispatch",
+      "name": "显式/隐式意图启动",
+      "what": "通过Intent/Want启动目标应用页面或服务。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "startActivity(Intent)",
+          "url": "https://developer.android.com/reference/android/content/Intent",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.app.ability.wantConstant / startAbility",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-inner-ability-want",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.lightweight_ui",
+      "parent": "interop",
+      "name": "轻量跨应用UI单元",
+      "what": "以小片段形态在其他界面呈现应用能力。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "interop.lightweight_ui.app_clip",
+      "parent": "interop.lightweight_ui",
+      "name": "App Clip",
+      "what": "免安装的轻量应用片段。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "App Clip (NSUserActivity)",
+          "url": "https://developer.apple.com/documentation/appclip",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.lightweight_ui.slices",
+      "parent": "interop.lightweight_ui",
+      "name": "Slices",
+      "what": "在系统界面嵌入应用交互卡片。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.slice SliceProvider",
+          "url": "https://developer.android.com/guide/slices",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.link_preview",
+      "parent": "interop",
+      "name": "链接元数据预览",
+      "what": "获取并展示网页链接的预览信息。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "LPLinkMetadata (LinkPresentation)",
+          "url": "https://developer.apple.com/documentation/linkpresentation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.messaging_integration",
+      "parent": "interop",
+      "name": "消息与社交集成",
+      "what": "与系统消息/社交应用集成。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "interop.messaging_integration.message_ui",
+      "parent": "interop.messaging_integration",
+      "name": "消息与邮件UI",
+      "what": "系统短信/邮件编写UI调用。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MFMessageComposeViewController",
+          "url": "https://developer.apple.com/documentation/messageui",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.messaging_integration.messages_app",
+      "parent": "interop.messaging_integration",
+      "name": "Messages应用集成",
+      "what": "在iMessage中呈现自定义消息/贴纸体验。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Messages framework (MSMessageAppViewController)",
+          "url": "https://developer.apple.com/documentation/messages",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.messaging_integration.social",
+      "parent": "interop.messaging_integration",
+      "name": "社交分享服务",
+      "what": "系统社交服务分享（已废弃候选）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "SLComposeViewController",
+          "url": "https://developer.apple.com/documentation/social",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.package_visibility",
+      "parent": "interop",
+      "name": "包可见性与查询",
+      "what": "查询设备上其他应用的存在与能力。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "interop.package_visibility.queries",
+      "parent": "interop.package_visibility",
+      "name": "包可见性声明",
+      "what": "声明需查询的其他应用包名。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "<queries> element",
+          "url": "https://developer.android.com/training/package-visibility",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.package_visibility.resolve",
+      "parent": "interop.package_visibility",
+      "name": "能力解析查询",
+      "what": "查询可处理指定Intent的应用。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "PackageManager.queryIntentActivities",
+          "url": "https://developer.android.com/reference/android/content/pm/PackageManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.search_index",
+      "parent": "interop",
+      "name": "应用内容搜索索引",
+      "what": "将应用内容编入系统搜索。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "interop.search_index.app_indexing",
+      "parent": "interop.search_index",
+      "name": "App Indexing",
+      "what": "将应用内容编入Google搜索/助手。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "App Indexing",
+          "url": "https://developer.android.com/training/app-indexing",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.search_index.spotlight",
+      "parent": "interop.search_index",
+      "name": "Spotlight索引",
+      "what": "向iOS系统搜索提交可索引条目。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "CSSearchableItem",
+          "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.share",
+      "parent": "interop",
+      "name": "跨应用分享",
+      "what": "向其他应用或设备分享内容。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "interop.share.harmony_share_kit",
+      "parent": "interop.share",
+      "name": "鸿蒙分享面板",
+      "what": "Share Kit系统分享面板与推荐卡片。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Share Kit",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/share-app-actions",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.share.knock",
+      "parent": "interop.share",
+      "name": "碰一碰分享",
+      "what": "设备间碰一碰触发分享/连接。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Knock Share",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/knock-share-between-phones-content",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.share.recommend",
+      "parent": "interop.share",
+      "name": "分享内容推荐",
+      "what": "系统根据场景推荐分享目标与卡片。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "scenario-fusion推荐",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scenario-fusion-api-asyn-system-info",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.share.share_extension",
+      "parent": "interop.share",
+      "name": "分享接收扩展",
+      "what": "作为系统分享目标接收内容。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Share extension",
+          "url": "https://developer.apple.com/documentation/xcode/configuring-a-share-extension",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Share Kit接入方",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/share-access-mode",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.share.system_sheet",
+      "parent": "interop.share",
+      "name": "系统分享面板",
+      "what": "拉起系统分享选择并投递内容。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIActivityViewController",
+          "url": "https://developer.apple.com/documentation/uikit/uiactivityviewcontroller",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "ACTION_SEND",
+          "url": "https://developer.android.com/training/sharing/send",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "systemShare (@ohos.share)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-share",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.share.utd",
+      "parent": "interop.share",
+      "name": "统一数据类型UTD",
+      "what": "以统一类型描述分享/拖拽数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "UTD (uniform data type)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/share-utd-image",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.shared_with_you",
+      "parent": "interop",
+      "name": "共享内容高亮",
+      "what": "呈现系统\"与你共享\"内容关联。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "SharedWithYou framework",
+          "url": "https://developer.apple.com/documentation/sharedwithyou",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.spatial",
+      "parent": "interop",
+      "name": "空间协作组件",
+      "what": "面向空间设备的多用户协作UI（非手机主线）。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "interop.spatial.spatial_preview",
+      "parent": "interop.spatial",
+      "name": "空间预览",
+      "what": "3D内容在他人周边空间的共享预览（vision形态）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "SpatialPreview",
+          "url": "https://developer.apple.com/documentation/spatialpreview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "interop.spatial.tabletop",
+      "parent": "interop.spatial",
+      "name": "TabletopKit桌面协作",
+      "what": "多人共享桌面对象协作（visionOS形态）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "TabletopKit",
+          "url": "https://developer.apple.com/documentation/tabletopkit",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

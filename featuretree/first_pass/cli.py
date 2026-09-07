@@ -20,6 +20,7 @@ def main(argv=None):
     prepare.add_argument("--model", required=True)
     prepare.add_argument("--deadline", required=True)
     prepare.add_argument("--feature", action="append")
+    prepare.add_argument("--existing-nodes-only", action="store_true", help="Explicitly opt into fixed-tree knowledge research on authored taxonomy nodes")
     check = commands.add_parser("check")
     check.add_argument("task")
     run = commands.add_parser("run")
@@ -27,11 +28,17 @@ def main(argv=None):
     run.add_argument("--launcher", required=True)
     run.add_argument("--background", action="store_true")
     run.add_argument("--poll-seconds", type=int, default=20)
+    run.add_argument("--existing-nodes-only", action="store_true")
     for command in ("status", "report"):
         commands.add_parser(command).add_argument("manifest")
     args = parser.parse_args(argv)
     repo = Repository()
     try:
+        if args.command in {"prepare", "run"} and not args.existing_nodes_only:
+            raise ValueError(
+                "Fixed-tree research is not tree building. "
+                "Author taxonomy via docs/tree-design.md; knowledge research requires --existing-nodes-only"
+            )
         if args.command == "prepare":
             path = prepare_batch(repo, args.model, args.deadline, args.feature)
             print(json.dumps({"manifest": str(path), "model_calls": 0}))
@@ -47,7 +54,7 @@ def main(argv=None):
             bridge = AgentBridge(repo, args.launcher)
             if args.background:
                 command = [sys.executable, str(repo.root / "scripts/research_first_pass.py"), "run", str(path),
-                           "--launcher", str(bridge.launcher), "--poll-seconds", str(args.poll_seconds)]
+                           "--launcher", str(bridge.launcher), "--poll-seconds", str(args.poll_seconds), "--existing-nodes-only"]
                 with (path.parent / "runner.log").open("a", encoding="utf-8") as log:
                     process = subprocess.Popen(command, cwd=repo.root, stdin=subprocess.DEVNULL,
                                                stdout=log, stderr=subprocess.STDOUT, start_new_session=True)

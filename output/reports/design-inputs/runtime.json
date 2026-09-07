@@ -1,0 +1,999 @@
+{
+  "domain": "runtime",
+  "authored_count": 5,
+  "draft_clue_count": 62,
+  "authored": [
+    {
+      "id": "runtime",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "运行时与国际化",
+        "en": "Runtime and Internationalization"
+      },
+      "definition": "并发模型作横切；国际化与本地化。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "runtime.concurrency",
+      "parent": "runtime",
+      "level": "L2",
+      "name": {
+        "zh": "并发模型",
+        "en": "Concurrency Model"
+      },
+      "definition": "线程/协程/actor 等并发横切主文，叶子能力只引用。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "runtime.concurrency.overview",
+      "parent": "runtime.concurrency",
+      "level": "L3",
+      "name": {
+        "zh": "异步任务调度与协作",
+        "en": "Asynchronous Task Coordination"
+      },
+      "definition": "创建、调度和协调异步任务，处理取消、结果传递与共享状态。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "runtime.i18n",
+      "parent": "runtime",
+      "level": "L2",
+      "name": {
+        "zh": "国际化",
+        "en": "Internationalization"
+      },
+      "definition": "语言、区域、格式化。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "runtime.i18n.locale",
+      "parent": "runtime.i18n",
+      "level": "L3",
+      "name": {
+        "zh": "语言区域",
+        "en": "Locale"
+      },
+      "definition": "应用语言与区域格式。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "runtime.con.coroutines",
+      "parent": "runtime.concurrency",
+      "name": "协程与响应式流",
+      "what": "协程、Flow响应式异步流与生命周期感知收集。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Kotlin Flow/StateFlow",
+          "url": "https://developer.android.com/kotlin/flow",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.concurrency",
+      "parent": "runtime",
+      "name": "并发模型",
+      "what": "多线程、任务调度与跨线程数据共享（横切能力）。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "runtime.concurrency.asyncrunner",
+      "parent": "runtime.concurrency",
+      "name": "异步队列并发控制",
+      "what": "创建异步队列避免并发资源过载。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "taskpool.createAsyncRunner (API 18+)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-taskpool",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.concurrency.collections",
+      "parent": "runtime.concurrency",
+      "name": "并发共享容器",
+      "what": "多并发实例间引用共享的容器与LRU缓存。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@arkts.collections / SendableLruCache",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-collections",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.concurrency.emitter",
+      "parent": "runtime.concurrency",
+      "name": "线程间事件通信",
+      "what": "进程内跨线程事件订阅/发布/取消。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "emitter (@ohos.events.emitter)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-emitter",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.concurrency.future",
+      "parent": "runtime.concurrency",
+      "name": "异步结果工具",
+      "what": "ListenableFuture/futures等异步结果包装工具。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ListenableFuture",
+          "url": "https://developer.android.com/reference/com/google/common/util/concurrent/ListenableFuture",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.concurrency.gcd",
+      "parent": "runtime.concurrency",
+      "name": "GCD与操作队列",
+      "what": "系统调度队列与操作依赖并发执行。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Dispatch (GCD) / OperationQueue",
+          "url": "https://developer.apple.com/documentation/dispatch",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.concurrency.locks",
+      "parent": "runtime.concurrency",
+      "name": "异步锁与条件等待",
+      "what": "跨线程引用传递下的异步锁与任务时序控制。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ArkTSUtils.locks.AsyncLock / ConditionVariable",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-arkts-utils",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.concurrency.sab",
+      "parent": "runtime.concurrency",
+      "name": "共享内存缓冲",
+      "what": "SharedArrayBuffer跨并发实例共享Native内存。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "SharedArrayBuffer (Atomics)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/interprocess-shared",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.concurrency.sendable",
+      "parent": "runtime.concurrency",
+      "name": "Sendable共享对象",
+      "what": "并发实例间引用传递共享数据（配套冻结/共享模块）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@Sendable装饰器",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-sendable",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.concurrency.taskpool",
+      "parent": "runtime.concurrency",
+      "name": "任务池并发",
+      "what": "系统统一线程管理下执行/取消/优先级调度的池化任务。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "taskpool (@kit.ArkTS)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-taskpool",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.concurrency.worker",
+      "parent": "runtime.concurrency",
+      "name": "常驻Worker线程",
+      "what": "长驻后台线程执行超3分钟任务与主线程通信。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Worker (ThreadWorker)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-worker",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.env",
+      "parent": "runtime",
+      "name": "运行环境服务",
+      "what": "系统时间、环境配置与运行时性能加速服务。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "runtime.env.configuration",
+      "parent": "runtime.env",
+      "name": "应用环境配置",
+      "what": "读取与订阅字体大小/深浅色/语言等配置变化。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "getConfigurationSync (@ohos.app.ability)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-app-ability-configuration",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.env.fast",
+      "parent": "runtime.env",
+      "name": "算法加速服务",
+      "what": "数理预测/DSP变换/排序等性能加速原语。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "FAST Kit (mathPrediction/schedulingOptimization)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-fast",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.env.ffrt",
+      "parent": "runtime.env",
+      "name": "函数流并发运行时",
+      "what": "基于任务依赖与协程的FFRT并发调度框架。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ffrt (loop.h/mutex.h/condition_variable.h)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ffrt",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.env.linx",
+      "parent": "runtime.env",
+      "name": "热点加速",
+      "what": "线程热点函数识别优化的执行加速。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "LinxKit (linx_hotspot.h, 26.0.0+)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/linx",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.env.qos",
+      "parent": "runtime.env",
+      "name": "线程QoS优先级",
+      "what": "按6级调度优先级设置线程QoS。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_QoS_SetThreadQoS / taskpool.Priority",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/qos",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.env.system_datetime",
+      "parent": "runtime.env",
+      "name": "系统时间日期",
+      "what": "系统时间/时区设置与读取。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.systemDateTime",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-system-date-time",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.ffi",
+      "parent": "runtime",
+      "name": "跨语言互操作",
+      "what": "JS/ArkTS与Native C/C++互操作与嵌入JS引擎。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "runtime.ffi.dynamic_import",
+      "parent": "runtime.ffi",
+      "name": "动态import与延迟加载",
+      "what": "按条件延迟加载HSP/HAR/ohpm包与Native库。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "动态import / lazy import (API 12+)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-dynamic-import",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.ffi.jni",
+      "parent": "runtime.ffi",
+      "name": "JNI原生互操作",
+      "what": "Java/Kotlin与C/C++互操作接口。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "JNI (Java Native Interface)",
+          "url": "https://developer.android.com/ndk/guides/concepts",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.ffi.jsc",
+      "parent": "runtime.ffi",
+      "name": "JavaScriptCore",
+      "what": "系统JS引擎C接口运行脚本。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "JavaScriptCore (JSContext)",
+          "url": "https://developer.apple.com/documentation/javascriptcore",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.ffi.jsvm",
+      "parent": "runtime.ffi",
+      "name": "嵌入式JS引擎",
+      "what": "独立标准JS引擎C接口编译执行JS与快照调试。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "JSVM-API (ArkCompiler.JSVM)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/jsvm-introduction",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.ffi.load_native",
+      "parent": "runtime.ffi",
+      "name": "Native模块动态加载",
+      "what": "按需同步加载系统库或应用内.so。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "loadNativeModule (@ohos)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/load-native-module",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.ffi.node_api",
+      "parent": "runtime.ffi",
+      "name": "Node-API互操作",
+      "what": "ArkTS/JS与C/C++互操作标准FFI（线程安全/生命周期/模块注册）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Node-API (napi/native_api.h)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/use-napi-process",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n",
+      "parent": "runtime",
+      "name": "国际化与本地化",
+      "what": "区域文化习惯适配与多语言资源机制。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "runtime.i18n.calendar",
+      "parent": "runtime.i18n",
+      "name": "多历法",
+      "what": "公历/农历/伊斯兰历/希伯来历等历法日期计算。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "i18n.Calendar",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/i18n-calendar",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Calendar",
+          "url": "https://developer.apple.com/documentation/foundation/calendar",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.collator",
+      "parent": "runtime.i18n",
+      "name": "多语言排序",
+      "what": "按本地习惯排序与创建索引。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "i18n.Collator / Intl.Collator",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/i18n-sort",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "ICU4J Collator",
+          "url": "https://developer.android.com/reference/android/icu/text/Collator",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.date_time",
+      "parent": "runtime.i18n",
+      "name": "日期时间格式化",
+      "what": "按区域习惯格式化日期时间/相对时间/时间段。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Intl.DateTimeFormat",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/i18n-datetime",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Date.FormatStyle",
+          "url": "https://developer.apple.com/documentation/foundation/date/formatstyle",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "java.time.format.DateTimeFormatter",
+          "url": "https://developer.android.com/reference/java/time/format/DateTimeFormatter",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.display_names",
+      "parent": "runtime.i18n",
+      "name": "本地化显示名称",
+      "what": "语言/地区/脚本/货币/历法名称本地化显示。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Intl.DisplayNames / System.getDisplayLanguage",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/i18n-display",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.icu",
+      "parent": "runtime.i18n",
+      "name": "ICU国际化库",
+      "what": "ICU4J排序重排码/格式化值/双向文本等地区数据能力。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.icu (lang/text/number)",
+          "url": "https://developer.android.com/reference/android/icu/text/package-summary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.number",
+      "parent": "runtime.i18n",
+      "name": "数字与度量衡格式化",
+      "what": "数字/货币/单位/区间格式化。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Intl.NumberFormat (currency/unit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/i18n-number",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.phone_format",
+      "parent": "runtime.i18n",
+      "name": "电话号码格式化",
+      "what": "按国家地区格式化电话号码。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "i18n.PhoneNumberFormat.format",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/i18n-phone",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.preferred_language",
+      "parent": "runtime.i18n",
+      "name": "应用偏好语言",
+      "what": "设置/读取应用级语言与资源加载一致。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "i18n.System.getAppPreferredLanguage",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-i18n",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.pseudo",
+      "parent": "runtime.i18n",
+      "name": "伪本地化测试",
+      "what": "模拟本地化过程提前发现国际化缺陷。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "pseudo locales",
+          "url": "https://developer.android.com/guide/topics/resources/localization",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.resource",
+      "parent": "runtime.i18n",
+      "name": "资源体系与限定词",
+      "what": "按语言/密度/颜色模式等限定词动态匹配选取资源。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "resourceManager (@ohos.resourceManager)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-resource-manager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Resources/qualifiers",
+          "url": "https://developer.android.com/guide/topics/resources/providing-resources",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.rtl",
+      "parent": "runtime.i18n",
+      "name": "双向文本与RTL",
+      "what": "RTL镜像布局与双向文本处理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "资源direction属性RTL",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/i18n-rtl",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.system_locale",
+      "parent": "runtime.i18n",
+      "name": "系统语言与区域",
+      "what": "读取系统语言列表、系统区域与用户偏好。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "i18n.System.getSystemLanguage/getSystemRegion",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-i18n",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "LocaleList",
+          "url": "https://developer.android.com/reference/android/os/LocaleList",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Locale (Foundation)",
+          "url": "https://developer.apple.com/documentation/foundation/locale",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.timezone",
+      "parent": "runtime.i18n",
+      "name": "时区与夏令时",
+      "what": "时区查询与夏令时跳变计算。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "i18n时区/夏令时 + @ohos.systemDateTime.getTimeZone",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-system-date-time",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "TimeZone",
+          "url": "https://developer.apple.com/documentation/foundation/timezone",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.ui_translation",
+      "parent": "runtime.i18n",
+      "name": "界面内容即时翻译",
+      "what": "端上UI内容翻译能力。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "view.translation (UiTranslationManager)",
+          "url": "https://developer.android.com/reference/android/view/translation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.i18n.unicode",
+      "parent": "runtime.i18n",
+      "name": "Unicode字符处理",
+      "what": "字符类别判断（数字/字母/RTL/表意文字）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "i18n.Unicode.isDigit等",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-i18n",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.langlib",
+      "parent": "runtime",
+      "name": "语言基础库",
+      "what": "文本/二进制/数值/容器等语言级基础数据设施。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "runtime.langlib.buffer",
+      "parent": "runtime.langlib",
+      "name": "二进制Buffer",
+      "what": "内存区域抽象的可读写二进制数据容器。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.buffer / @ohos.fastbuffer",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-buffer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.langlib.containers",
+      "parent": "runtime.langlib",
+      "name": "容器与集合",
+      "what": "语言级集合数据结构（ArrayMap/SparseArray/LruCache等）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.collection / ArrayMap",
+          "url": "https://developer.android.com/reference/androidx/collection/util/package-summary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.langlib.decimal",
+      "parent": "runtime.langlib",
+      "name": "高精度数学",
+      "what": "高精度十进制Decimal数学运算。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.util.Decimal",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-util",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.langlib.json",
+      "parent": "runtime.langlib",
+      "name": "JSON处理",
+      "what": "JSON解析/生成与BigInt/循环引用扩展处理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@arkts.json / util JSON",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-json",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.langlib.serialization",
+      "parent": "runtime.langlib",
+      "name": "跨版本序列化",
+      "what": "进程间数据跨版本兼容序列化机制。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "VersionedParcelable",
+          "url": "https://developer.android.com/reference/androidx/versionedparcelable/package-summary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.langlib.url",
+      "parent": "runtime.langlib",
+      "name": "URL与文本解析",
+      "what": "URL解析与字符串处理基础库。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.url",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-url",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.langlib.xml",
+      "parent": "runtime.langlib",
+      "name": "XML解析",
+      "what": "XML与Convertexml解析处理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.xml",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-xml",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.native",
+      "parent": "runtime",
+      "name": "原生运行时",
+      "what": "NDK C/C++库、内存与异步IO基础设施。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "runtime.native.cpu_features",
+      "parent": "runtime.native",
+      "name": "CPU特性扩展",
+      "what": "使用NEON等CPU硬件扩展（无系统查询接口）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "NEON / getauxval(AT_HWCAP)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cpu-features",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.native.libc",
+      "parent": "runtime.native",
+      "name": "C标准库musl libc",
+      "what": "Native应用开发的C标准库公开API面（POSIX子集）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "musl libc (NDK)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/libc",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.native.libcpp",
+      "parent": "runtime.native",
+      "name": "libc++与链接命名空间",
+      "what": "系统/应用C++库隔离与动态链接namespace管控。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "libc++_shared.so / 动态链接器namespace",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cpp-libraries",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.native.libuv",
+      "parent": "runtime.native",
+      "name": "libuv异步IO",
+      "what": "事件驱动异步IO与事件循环C库。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "libuv (uv.h/libuv.so)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/uv",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.native.longque",
+      "parent": "runtime.native",
+      "name": "实验性Longque JS引擎",
+      "what": "实验性__Longque__对象JS引擎扩展能力。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Longque JS Engine (实验)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/longque-js-api",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.native.memory",
+      "parent": "runtime.native",
+      "name": "Native内存管理",
+      "what": "可丢弃内存创建/读写/重建等进程内存原语。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "purgeable_memory.h (OH_PurgeableMemory)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/purgeable-memory",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.vm",
+      "parent": "runtime",
+      "name": "语言运行时与虚拟机",
+      "what": "应用语言运行时执行、内存管理与模块系统。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "runtime.vm.arkts",
+      "parent": "runtime.vm",
+      "name": "ArkTS运行时",
+      "what": "方舟运行时字节码解释/AOT/JIT执行与GC内存管理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ArkTS运行时 (ArkCompiler)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-runtime",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.vm.art",
+      "parent": "runtime.vm",
+      "name": "ART运行时",
+      "what": "Android应用字节码执行与运行时优化。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ART (dalvik/DEX运行时)",
+          "url": "https://developer.android.com/about/versions/12/features",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.vm.module",
+      "parent": "runtime.vm",
+      "name": "模块与包系统",
+      "what": "HSP/HAR模块加载机制与模块化副作用管理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "HSP/HAR模块 (ArkTS模块化)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/module",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "runtime.vm.multithread_detect",
+      "parent": "runtime.vm",
+      "name": "多线程检测开关",
+      "what": "应用侧开启方舟运行时多线程违规检测（崩溃或仅日志）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "setMultithreadingDetectionEnabled (@ohos.util)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-util",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

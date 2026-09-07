@@ -1,0 +1,30 @@
+schema_version: 2
+feature_id: input.stylus
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 手写笔触点、压感、笔迹与手写转文字。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- input.stylus.buttons
+- input.stylus.color_picker
+- input.stylus.hover
+- input.stylus.ink
+- input.stylus.palm_rejection
+- input.stylus.prediction
+- input.stylus.scribble
+- input.stylus.tilt

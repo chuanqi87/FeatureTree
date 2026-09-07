@@ -1,9 +1,0 @@
-{
-  "task_id": "be36586cfdcd2cca763d5a3d31578c5549cefd31291c22bcaf537fd205bf37ef",
-  "feature_id": "enterprise.work_profile.isolation",
-  "response_sha256": "a45c8b898e4f51ee11a546f234ab99213fe29fd30d15b10d21103eb2349dff21",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

@@ -1,0 +1,30 @@
+schema_version: 2
+feature_id: documents.reading
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 阅读器布局、重排与阅读进度。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- documents.reading.bookmarks
+- documents.reading.progress
+- documents.reading.reflow
+- documents.reading.search
+- documents.reading.selection
+- documents.reading.theme
+- documents.reading.tts_read_aloud
+- documents.reading.two_page

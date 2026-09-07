@@ -1,0 +1,24 @@
+schema_version: 2
+feature_id: app.model.service_component
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 无界面后台服务组件的声明与启动模型。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- app.model.service_component.bind
+- app.model.service_component.start

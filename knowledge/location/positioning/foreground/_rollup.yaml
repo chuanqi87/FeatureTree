@@ -1,0 +1,24 @@
+schema_version: 2
+feature_id: location.positioning.foreground
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 应用可见或前台服务场景下请求/监听位置。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- location.positioning.foreground.once
+- location.positioning.foreground.watch

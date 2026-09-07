@@ -1,0 +1,30 @@
+schema_version: 2
+feature_id: digital_wellbeing.screen_time
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 查询与汇报应用/设备使用时长。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- digital_wellbeing.screen_time.category_stats
+- digital_wellbeing.screen_time.events
+- digital_wellbeing.screen_time.notification_stats
+- digital_wellbeing.screen_time.pickup_stats
+- digital_wellbeing.screen_time.report_ui
+- digital_wellbeing.screen_time.token_auth
+- digital_wellbeing.screen_time.unlock_count
+- digital_wellbeing.screen_time.usage_query

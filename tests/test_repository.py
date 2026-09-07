@@ -106,7 +106,7 @@ class MappingTests(unittest.TestCase):
 
     def test_socket_is_not_http(self):
         row = self.row("@ohos.net.socket")
-        self.assertEqual(propose_mapping(row, self.features, self.rules)[0]["feature_id"], "network.socket.tcp_udp")
+        self.assertEqual(propose_mapping(row, self.features, self.rules)[0]["feature_id"], "network.socket")
 
     def test_unknown_module_stays_unmapped(self):
         self.assertEqual(propose_mapping(self.row("@ohos.unknownCapability"), self.features, self.rules), [])

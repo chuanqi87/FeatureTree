@@ -1,9 +1,0 @@
-{
-  "task_id": "0ead325b49cc3f6f688cdd0738defcce3b6e11030c731722511b4c8675571b73",
-  "feature_id": "app.lifecycle.process",
-  "response_sha256": "83d512bdf7055a59c97eb55fd7b7a4d1b526324d30d0ed9f25b5f36f4d743110",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

@@ -1,9 +1,0 @@
-{
-  "task_id": "abf3691a24cf202e091c5cf4ca15876966dceae118ae07899ebf47d961be8304",
-  "feature_id": "app.desktop.shortcuts",
-  "response_sha256": "0f896c4ebb44347b18b9a391387c9024ad6d9bc2e0e49fac5f06626759dd6d76",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

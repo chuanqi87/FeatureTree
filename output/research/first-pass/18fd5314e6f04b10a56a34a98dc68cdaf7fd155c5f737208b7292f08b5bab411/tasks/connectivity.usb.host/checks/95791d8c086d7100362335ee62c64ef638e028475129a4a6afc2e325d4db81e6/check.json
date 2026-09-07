@@ -1,9 +1,0 @@
-{
-  "task_id": "af6a73518d2bda0f4c6ae2761a0ff2d0dc5e58fb2a62f3c5404f2400f6527937",
-  "feature_id": "connectivity.usb.host",
-  "response_sha256": "f40f9b51fb7ce523c4a67137d13b64422f866d73e046b51f174ed9537bc02995",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

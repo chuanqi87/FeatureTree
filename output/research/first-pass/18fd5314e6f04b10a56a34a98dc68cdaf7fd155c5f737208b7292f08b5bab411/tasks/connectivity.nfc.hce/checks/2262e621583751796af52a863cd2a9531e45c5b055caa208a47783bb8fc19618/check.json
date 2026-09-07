@@ -1,9 +1,0 @@
-{
-  "task_id": "d660df429333c71cf07dda1f3d5cab3223330a87b3955eee0bb130eb73f27207",
-  "feature_id": "connectivity.nfc.hce",
-  "response_sha256": "e90caf6fd6832ef17f995559fe75d18eb541dd333b42a1fe6c6bddd445a3565f",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

@@ -1,0 +1,37 @@
+schema_version: 2
+feature_id: health_home.health_data
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 健康样本读写、授权、统计与临床记录。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- health_home.health_data.auth
+- health_home.health_data.delete
+- health_home.health_data.observer
+- health_home.health_data.realtime
+- health_home.health_data.records
+- health_home.health_data.stats
+- health_home.health_data.store
+- health_home.health_data.types_activity
+- health_home.health_data.types_hearing
+- health_home.health_data.types_lab
+- health_home.health_data.types_nutrition
+- health_home.health_data.types_sleep
+- health_home.health_data.types_vitals
+- health_home.health_data.ui
+- health_home.health_data.wear_access

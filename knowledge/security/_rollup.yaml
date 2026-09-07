@@ -1,13 +1,12 @@
+schema_version: 2
 feature_id: security
 role: rollup
 status: stub
 baseline:
-  android: API 35
-  ios: iOS 18
-  harmonyos: API 12+
-  gms: Play services BOM 24.x
-  hms: HMS / NEXT Kits
-definition: 权限模型、密钥、生物识别、安全存储与数据保护。
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 权限模型、密码学、证书、生物识别、安全存储、证明、设备安全与隐私数据保护。
 presence:
   android:
     status: unknown
@@ -18,22 +17,15 @@ presence:
   harmonyos:
     status: unknown
     verification: unreviewed
-child_index:
-- security.permissions
-- security.crypto
-- security.biometrics
-- security.secure_storage
-architecture_diff: 分支综述：仅描述本域范围与跨子节点架构差异，禁止展开子叶子细节。
-legacy_presence:
-  android:
-    status: full
-  ios:
-    status: full
-  harmonyos:
-    status: full
-schema_version: 2
 comparisons: []
-migration_notes:
-- v1 有无与 analog/unique 断言保存在 legacy_presence，不作为已确认结论。
-- 原正文、编辑状态及 baseline 保留；需按当前比较范围与固定版本逐项复核。
 evidence: []
+child_index:
+- security.attestation
+- security.biometrics
+- security.certificates
+- security.crypto
+- security.data_protection
+- security.device_safety
+- security.permissions
+- security.privacy
+- security.secure_storage

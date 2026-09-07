@@ -1,9 +1,0 @@
-{
-  "task_id": "8b0a1ef46dde7c7c3b60b2fe00abfbfd698084a6e5237363b0f4b35d7cd61388",
-  "feature_id": "connectivity.bluetooth.le.connect",
-  "response_sha256": "40ed8a72fa159dd75eab9d22ab849f539d6e7016adfaee9f4dd97ced59f6d317",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

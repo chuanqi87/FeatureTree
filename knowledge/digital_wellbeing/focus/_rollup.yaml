@@ -1,0 +1,31 @@
+schema_version: 2
+feature_id: digital_wellbeing.focus
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 专注/勿扰相关的系统模式与应用适配。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- digital_wellbeing.focus.activity_share
+- digital_wellbeing.focus.allowed_people
+- digital_wellbeing.focus.app_exceptions
+- digital_wellbeing.focus.drive_mode
+- digital_wellbeing.focus.intent_filter
+- digital_wellbeing.focus.profile_config
+- digital_wellbeing.focus.schedule
+- digital_wellbeing.focus.sleep_mode
+- digital_wellbeing.focus.status

@@ -6,7 +6,7 @@ features:
   name:
     zh: 图形与渲染
     en: Graphics and Rendering
-  definition: 2D/3D 绘制、合成、HDR 与截屏录屏。
+  definition: 二维/三维绘制、合成呈现、色彩与 HDR、GPU 接口、图像特效、PDF 渲染、墨迹与截屏类捕获；不含连续屏幕音视频录制主路径。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -17,8 +17,11 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 2D/3D 绘制、合成、HDR 与截屏录屏。
-    excludes: []
+    - 2d、3d、capture、composite、text、color、gpu、imagefx、pdf、ink
+    excludes:
+    - media.recording.screen 连续录屏
+    - ui 控件树与布局
+    - media.image 编解码容器
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -28,13 +31,19 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - graphics
 - id: graphics.2d
   level: L2
   parent: graphics
   name:
     zh: 二维绘制
     en: 2D Drawing
-  definition: Canvas/矢量/位图二维绘制。
+  definition: 即时模式画布、矢量形状、位图图元、绘制效果与离屏/2D 场景引擎。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -42,10 +51,13 @@ features:
   - tablet
   privacy_class: none
   knowledge_path: knowledge/graphics/2d/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - Canvas/矢量/位图二维绘制。
-    excludes: []
+    - canvas、shape、bitmap、effects、offscreen、engine
+    excludes:
+    - 3D 场景见 graphics.3d
+    - GPU 底层见 graphics.gpu
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -55,41 +67,20 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: graphics.2d.canvas
-  level: L3
-  parent: graphics.2d
-  name:
-    zh: 画布绘制
-    en: Canvas Drawing
-  definition: 即时模式二维画布 API。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  knowledge_path: knowledge/graphics/2d/canvas.yaml
-  comparison_scope:
-    includes:
-    - 即时模式二维画布 API。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - graphics.2d
+  sibling_axis: graphics_pipeline_stage
 - id: graphics.3d
   level: L2
   parent: graphics
   name:
-    zh: 三维与GPU
-    en: 3D and GPU
-  definition: Metal/Vulkan/OpenGL 等 GPU 渲染。
+    zh: 三维场景
+    en: 3D Scene
+  definition: 三维场景图、资源、动画、空间重建与 AR 叠加渲染入口。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -100,8 +91,10 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - Metal/Vulkan/OpenGL 等 GPU 渲染。
-    excludes: []
+    - scene、assets、animation、spatial、ar
+    excludes:
+    - GPU API 见 graphics.gpu
+    - 传感器位姿见 sensors
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -111,44 +104,20 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: graphics.3d.gpu_api
-  level: L3
-  parent: graphics.3d
-  name:
-    zh: 现代GPU图形API
-    en: Modern GPU Graphics API
-  definition: 低开销 GPU 命令提交与着色器管线。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  aliases:
-  - Vulkan
-  - Metal
-  knowledge_path: knowledge/graphics/3d/gpu_api.yaml
-  comparison_scope:
-    includes:
-    - 低开销 GPU 命令提交与着色器管线。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - graphics.3d
+  sibling_axis: graphics_pipeline_stage
 - id: graphics.capture
   level: L2
   parent: graphics
   name:
-    zh: 截屏与录屏
-    en: Screenshot and Screen Record
-  definition: 捕获屏幕图像或视频流。
+    zh: 图形捕获
+    en: Graphics Capture
+  definition: 全屏/组件静帧截取；连续屏幕 AV 录制主能力在 media。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -159,8 +128,9 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 捕获屏幕图像或视频流。
-    excludes: []
+    - screenshot、component
+    excludes:
+    - 连续录屏见 media.recording.screen
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -170,25 +140,332 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: graphics.capture.screenshot
-  level: L3
-  parent: graphics.capture
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - graphics.capture
+  sibling_axis: graphics_pipeline_stage
+- id: graphics.color
+  level: L2
+  parent: graphics
   name:
-    zh: 截屏
-    en: Screenshot
-  definition: 捕获当前显示内容为图像。
+    zh: 色彩与HDR
+    en: Color and HDR
+  definition: 色彩空间管理、HDR 显示与单双层 HDR 转换。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/color/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - mgmt、hdr_display、hdr_convert
+    excludes:
+    - 媒体 HDR 轨见 media
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: graphics_pipeline_stage
+- id: graphics.composite
+  level: L2
+  parent: graphics
+  name:
+    zh: 合成与表面
+    en: Composition and Surfaces
+  definition: 原生窗口/表面缓冲队列、跨进程缓冲、同步栅栏与硬件合成协作。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/composite/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - surface、hwc、fence、custom
+    excludes:
+    - 画布绘制见 graphics.2d.canvas
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: graphics_pipeline_stage
+- id: graphics.gpu
+  level: L2
+  parent: graphics
+  name:
+    zh: GPU接口与加速
+    en: GPU APIs and Acceleration
+  definition: 现代 GPU API、上下文、着色器、计算与帧节奏/超分加速。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/gpu/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - api、context、shader、compute、frame_pacing、upscale
+    excludes:
+    - 2D 画布见 graphics.2d
+    - 3D 场景图见 graphics.3d
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: graphics_pipeline_stage
+- id: graphics.imagefx
+  level: L2
+  parent: graphics
+  name:
+    zh: 图像特效
+    en: Image Effects
+  definition: 静图滤镜链、模糊/调色/风格化与主色提取。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/imagefx/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - filter、color_extract
+    excludes:
+    - 绘制态 Paint 效果见 graphics.2d.effects
+    - 媒体图像编解码见 media.image
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: graphics_pipeline_stage
+- id: graphics.ink
+  level: L2
+  parent: graphics
+  name:
+    zh: 墨迹绘制
+    en: Ink Drawing
+  definition: 低延迟手写墨迹画布与笔画数据模型。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/ink/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - canvas、model
+    excludes:
+    - 触控输入事件见 input
+    - 矢量形状见 graphics.2d.shape
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: graphics_pipeline_stage
+- id: graphics.pdf
+  level: L2
+  parent: graphics
+  name:
+    zh: PDF渲染
+    en: PDF Rendering
+  definition: PDF 页渲染与基础文档图形呈现。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/pdf/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - page_render、document_view
+    excludes:
+    - 通用文档存储见 storage.document
+    - 打印见 print_scan
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: graphics_pipeline_stage
+- id: graphics.text
+  level: L2
+  parent: graphics
+  name:
+    zh: 文本排版绘制
+    en: Text Layout and Drawing
+  definition: 字体、测量、复杂文本整形与画布文本绘制。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/text/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - font、measure、shaping、draw
+    excludes:
+    - UI 文本控件见 ui.controls
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: graphics_pipeline_stage
+- id: graphics.2d.bitmap
+  level: L3
+  parent: graphics.2d
+  name:
+    zh: 位图图元
+    en: Bitmap Primitives
+  definition: 将位图作为绘制图元绘制，并读写/桥接像素缓冲。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/bitmap/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - draw、pixel_rw、type_bridge
+    excludes:
+    - 图像编解码见 media.image
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: 2d_capability
+- id: graphics.2d.canvas
+  level: L3
+  parent: graphics.2d
+  name:
+    zh: 画布绘制
+    en: Canvas Drawing
+  definition: 即时模式二维画布：裁剪、变换、保存/恢复与基础图元绘制。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
-  privacy_class: sensitive
-  leaf_at_this_level: true
-  knowledge_path: knowledge/graphics/capture/screenshot.yaml
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/canvas.yaml
+  bindings:
+    android:
+    - kind: class
+      id: android.graphics.Canvas
+      url: https://developer.android.com/reference/android/graphics/Canvas
+      role: primary
+    ios:
+    - kind: class
+      id: CGContext
+      url: https://developer.apple.com/documentation/coregraphics
+      role: primary
+    harmonyos:
+    - kind: module
+      id: drawing.Canvas
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/graphic-drawing-overview
+      role: primary
   comparison_scope:
     includes:
-    - 捕获当前显示内容为图像。
-    excludes: []
+    - clip、save/restore、draw primitives
+    excludes:
+    - 声明式 Shape 见 2d.shape
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -198,25 +475,541 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - graphics.2d.canvas
+  sibling_axis: 2d_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.2d.effects
+  level: L3
+  parent: graphics.2d
+  name:
+    zh: 二维绘制效果
+    en: 2D Draw Effects
+  definition: 混合、颜色过滤、渐变着色、遮罩与路径效果等画笔级效果。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/effects/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - blend、color_filter、gradient、mask、path、image_filter
+    excludes:
+    - 静图滤镜链见 graphics.imagefx
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: 2d_capability
+- id: graphics.2d.engine
+  level: L3
+  parent: graphics.2d
+  name:
+    zh: 二维场景引擎
+    en: 2D Scene Engine
+  definition: 精灵/节点式二维场景图与动作驱动渲染。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/engine.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 常见于游戏引擎 SDK，待核系统级入口
+    ios:
+    - kind: framework
+      id: SpriteKit
+      url: https://developer.apple.com/documentation/spritekit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - scene graph、sprites、actions
+    excludes:
+    - 3D 场景见 graphics.3d.scene
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: 2d_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.2d.offscreen
+  level: L3
+  parent: graphics.2d
+  name:
+    zh: 离屏绘制
+    en: Offscreen Drawing
+  definition: 离屏画布或图层缓冲上的绘制与回读。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/offscreen.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Canvas.saveLayer
+      url: https://developer.android.com/reference/android/graphics/Canvas
+      role: primary
+    ios:
+    - kind: class
+      id: CGBitmapContext
+      url: https://developer.apple.com/documentation/coregraphics
+      role: primary
+    harmonyos:
+    - kind: module
+      id: OffscreenCanvasRenderingContext2D
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-offscreencanvasrenderingcontext2d
+      role: primary
+  comparison_scope:
+    includes:
+    - saveLayer、OffscreenCanvas
+    excludes:
+    - 表面合成见 graphics.composite
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: 2d_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.2d.shape
+  level: L3
+  parent: graphics.2d
+  name:
+    zh: 矢量形状
+    en: Vector Shapes
+  definition: 矩形/圆/路径等矢量形状声明或路径构建。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/shape.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: VectorDrawable
+      url: https://developer.android.com/guide/topics/graphics/vector-drawable-resources
+      role: primary
+    ios:
+    - kind: class
+      id: UIBezierPath
+      url: https://developer.apple.com/documentation/uikit/uibezierpath
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Shape
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-shape-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - path、rect、circle、vector drawable
+    excludes:
+    - 位图图元见 2d.bitmap
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: 2d_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.3d.animation
+  level: L3
+  parent: graphics.3d
+  name:
+    zh: 三维动画
+    en: 3D Animation
+  definition: 场景内骨骼/关键帧动画播放与回调。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/3d/animation.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: SCNAnimationPlayer
+      url: https://developer.apple.com/documentation/scenekit
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: ArkGraphics3D Animation
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkgraphics3d-animation
+      role: primary
+  comparison_scope:
+    includes:
+    - clip play、callbacks
+    excludes:
+    - 2D 精灵动作见 2d.engine
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: 3d_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.3d.ar
+  level: L3
+  parent: graphics.3d
+  name:
+    zh: 增强现实叠加
+    en: AR Overlay Rendering
+  definition: AR 会话帧与虚拟内容叠加渲染入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/3d/ar.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ARCore
+      url: https://developers.google.com/ar/develop
+      role: primary
+    ios:
+    - kind: framework
+      id: ARKit
+      url: https://developer.apple.com/documentation/arkit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: arEngine
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arengine-api-arengine
+      role: primary
+  comparison_scope:
+    includes:
+    - AR session、AR view
+    excludes:
+    - 纯 3D 离线场景见 3d.scene
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: 3d_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.3d.assets
+  level: L3
+  parent: graphics.3d
+  name:
+    zh: 三维资产加载
+    en: 3D Asset Loading
+  definition: 网格/材质/环境贴图等三维资产加载与工厂创建。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/3d/assets.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: Model I/O
+      url: https://developer.apple.com/documentation/modelio
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Scene.load
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkgraphics3d-scene
+      role: primary
+  comparison_scope:
+    includes:
+    - glTF/USD、mesh、material
+    excludes:
+    - 场景图管理见 3d.scene
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: 3d_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.3d.scene
+  level: L3
+  parent: graphics.3d
+  name:
+    zh: 三维场景图
+    en: 3D Scene Graph
+  definition: 加载/构建三维场景节点、相机与灯光。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/3d/scene.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: Filament/Sceneform 等生态库为主，待核
+    ios:
+    - kind: framework
+      id: SceneKit
+      url: https://developer.apple.com/documentation/scenekit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.graphics.scene'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkgraphics3d-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - Scene、nodes、camera、light
+    excludes:
+    - 资源加载见 3d.assets
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: 3d_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.3d.spatial
+  level: L3
+  parent: graphics.3d
+  name:
+    zh: 空间重建渲染
+    en: Spatial Reconstruction Render
+  definition: 空间重建结果编辑与三维高斯等空间内容渲染。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/3d/spatial.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: RoomPlan/Object Capture 边界待核
+    harmonyos:
+    - kind: guide
+      id: SpatialRecon
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/spatial-recon-introduction
+      role: primary
+  comparison_scope:
+    includes:
+    - spatial recon、spatial render
+    excludes:
+    - AR 会话见 3d.ar
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: 3d_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.capture.component
+  level: L3
+  parent: graphics.capture
+  name:
+    zh: 组件截图
+    en: Component Snapshot
+  definition: 对界面组件树或离屏构建内容生成静帧快照。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/capture/component/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - on_tree、offline、long_scroll、surface_source
+    excludes:
+    - 全屏截图见 capture.screenshot
+    - 连续录屏见 media.recording.screen
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: capture_kind
+  related_features:
+  - media.recording.screen
 - id: graphics.capture.screen_record
   level: L3
   parent: graphics.capture
   name:
-    zh: 屏幕录制
-    en: Screen Recording
-  definition: 持续捕获屏幕为视频。
+    zh: 屏幕录制（见媒体域）
+    en: Screen Record (see Media)
+  definition: 连续屏幕音视频录制交叉引用；原子能力归 media.recording.screen，此处不展开重复叶子。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
-  privacy_class: sensitive
-  leaf_at_this_level: true
+  privacy_class: runtime_permission
   knowledge_path: knowledge/graphics/capture/screen_record.yaml
+  bindings:
+    android:
+    - kind: class
+      id: MediaProjection
+      url: https://developer.android.com/reference/android/media/projection/MediaProjection
+      role: primary
+    ios:
+    - kind: class
+      id: RPScreenRecorder
+      url: https://developer.apple.com/documentation/replaykit/rpscreenrecorder
+      role: primary
+    harmonyos:
+    - kind: module
+      id: AVScreenCapture
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-avscreencapture
+      role: primary
   comparison_scope:
     includes:
-    - 持续捕获屏幕为视频。
-    excludes: []
+    - cross-ref to media.recording.screen
+    excludes:
+    - 静帧截图见 capture.screenshot
+    - 组件截图见 capture.component
+    - 连续录屏原子能力见 media.recording.screen
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -226,3 +1019,2801 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - graphics.capture.screen_record
+  sibling_axis: capture_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - media.recording.screen
+- id: graphics.capture.screenshot
+  level: L3
+  parent: graphics.capture
+  name:
+    zh: 全屏截图
+    en: Screenshot
+  definition: 捕获当前显示内容为静帧图像。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/graphics/capture/screenshot.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PixelCopy
+      url: https://developer.android.com/reference/android/view/PixelCopy
+      role: primary
+    ios:
+    - kind: class
+      id: UIView.drawHierarchy
+      url: https://developer.apple.com/documentation/uikit/uiview
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.screenshot'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/screenshot-and-privacy-mode
+      role: primary
+  comparison_scope:
+    includes:
+    - screenshot API
+    excludes:
+    - 组件截图见 capture.component
+    - 连续录屏见 media.recording.screen
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - graphics.capture.screenshot
+  sibling_axis: capture_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - media.recording.screen
+- id: graphics.color.hdr_convert
+  level: L3
+  parent: graphics.color
+  name:
+    zh: HDR图层转换
+    en: HDR Layer Conversion
+  definition: 单层/双层 HDR 图像合成与分解及元数据写入。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/color/hdr_convert/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - dual_to_single、single_to_dual、metadata
+    excludes:
+    - HDR 显示能力查询见 color.hdr_display
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: color_capability
+- id: graphics.color.hdr_display
+  level: L3
+  parent: graphics.color
+  name:
+    zh: HDR显示能力
+    en: HDR Display Capability
+  definition: 查询/配置显示侧 HDR 能力与 LUT/元数据。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/color/hdr_display.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: DisplayLuts
+      url: https://developer.android.com/media/grow/hdr-lut
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: EDR/HDR 显示 API 待核
+    harmonyos:
+    - kind: module
+      id: '@ohos.graphics.hdrCapability'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkgraphics2d-introduction
+      role: primary
+  comparison_scope:
+    includes:
+    - hdrCapability、DisplayLuts
+    excludes:
+    - 图层转换见 hdr_convert
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: color_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.color.mgmt
+  level: L3
+  parent: graphics.color
+  name:
+    zh: 色彩空间管理
+    en: Color Space Management
+  definition: 创建/查询色彩空间并应用于缓冲或窗口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/color/mgmt.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: android.graphics.ColorSpace
+      url: https://developer.android.com/training/wide-color-gamut
+      role: primary
+    ios:
+    - kind: framework
+      id: ColorSync
+      url: https://developer.apple.com/documentation/colorsync
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.graphics.colorSpaceManager'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-nativecolorspacemanager
+      role: primary
+  comparison_scope:
+    includes:
+    - ColorSpace、CGColorSpace、ColorSync
+    excludes:
+    - HDR 转换见 hdr_convert
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: body_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: color_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.composite.custom
+  level: L3
+  parent: graphics.composite
+  name:
+    zh: 自定义合成层
+    en: Custom Compositor Layer
+  definition: 向系统合成器提供自定义层渲染器。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/composite/custom.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: LayerRenderer
+      url: https://developer.apple.com/documentation/compositorservices/layer-renderer
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - CompositorServices LayerRenderer
+    excludes:
+    - 普通表面见 composite.surface
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: composite_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.composite.fence
+  level: L3
+  parent: graphics.composite
+  name:
+    zh: 同步栅栏
+    en: Native Fence Sync
+  definition: 原生 fence 句柄等待与生命周期管理。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/composite/fence.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: sync_fence / EGL sync 待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: OH_NativeFence
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-nativefence
+      role: primary
+  comparison_scope:
+    includes:
+    - OH_NativeFence、sync fence
+    excludes:
+    - 缓冲提交见 surface.buffer_queue
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: composite_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.composite.hwc
+  level: L3
+  parent: graphics.composite
+  name:
+    zh: 硬件合成协作
+    en: Hardware Composer Collaboration
+  definition: 应用侧与硬件合成器协作的图层策略入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/composite/hwc.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: SurfaceFlinger/HWC 应用侧约束待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: guide
+      id: HWC collaboration
+      url: https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-utilize-hwc-efficiently
+      role: primary
+  comparison_scope:
+    includes:
+    - HWC layer tips
+    excludes:
+    - 表面缓冲见 composite.surface
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: composite_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.composite.surface
+  level: L3
+  parent: graphics.composite
+  name:
+    zh: 表面与缓冲
+    en: Surfaces and Buffers
+  definition: 原生窗口/表面的缓冲申请、属性、队列与跨进程共享。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/composite/surface/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - window_bind、buffer_queue、buffer_props、cross_process、buffer_image_bridge
+    excludes:
+    - HWC 策略见 composite.hwc
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: composite_role
+- id: graphics.gpu.api
+  level: L3
+  parent: graphics.gpu
+  name:
+    zh: 现代GPU图形API
+    en: Modern GPU Graphics API
+  definition: Metal/Vulkan/OpenGL ES 等现代 GPU 绘制 API 入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/gpu/api.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: OpenGL ES
+      url: https://developer.android.com/guide/topics/graphics/opengl
+      role: primary
+    ios:
+    - kind: framework
+      id: Metal
+      url: https://developer.apple.com/documentation/metal
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: OpenGL ES / Vulkan
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/opengles
+      role: primary
+  comparison_scope:
+    includes:
+    - Metal、Vulkan、GLES
+    excludes:
+    - 计算见 gpu.compute
+    - 上下文见 gpu.context
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: symbol_ok
+  legacy:
+    disposition: renamed_from
+    sources:
+    - graphics.3d.gpu_api
+  sibling_axis: gpu_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.gpu.compute
+  level: L3
+  parent: graphics.gpu
+  name:
+    zh: GPU计算
+    en: GPU Compute
+  definition: 计算管线、性能着色器内核库与图执行。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/gpu/compute/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - compute_pipeline、kernel_lib、graph_exec
+    excludes:
+    - 图形渲染 API 见 gpu.api
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: gpu_capability
+- id: graphics.gpu.context
+  level: L3
+  parent: graphics.gpu
+  name:
+    zh: GPU上下文与表面
+    en: GPU Context and Surface
+  definition: 创建 EGL/EAGL 等图形上下文并关联窗口表面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/gpu/context.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: EGL
+      url: https://developer.android.com/ndk/reference/group/egl
+      role: primary
+    ios:
+    - kind: class
+      id: EAGLContext
+      url: https://developer.apple.com/documentation/opengles
+      role: primary
+    harmonyos:
+    - kind: module
+      id: EGL
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/egl
+      role: primary
+  comparison_scope:
+    includes:
+    - EGL、EAGLContext
+    excludes:
+    - 命令编码见 gpu.api
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: gpu_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.gpu.frame_pacing
+  level: L3
+  parent: graphics.gpu
+  name:
+    zh: 帧节奏与刷新率
+    en: Frame Pacing and Refresh Rate
+  definition: VSync/DisplayLink、表面期望帧率与刷新率信息。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/gpu/frame_pacing.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Surface.setFrameRate
+      url: https://developer.android.com/media/optimize/performance/frame-rate
+      role: primary
+    ios:
+    - kind: class
+      id: CADisplayLink
+      url: https://developer.apple.com/documentation/quartzcore/cadisplaylink
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.graphics.displaySync'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/displaysync-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - Choreographer、CADisplayLink、displaySync、setFrameRate
+    excludes:
+    - 超分/插帧见 gpu.upscale
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: gpu_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.gpu.shader
+  level: L3
+  parent: graphics.gpu
+  name:
+    zh: 着色器
+    en: Shaders
+  definition: 运行时/资源着色器编译与向 UI/3D 管线注入。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/gpu/shader/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - runtime_ui、render_effect、engine_3d
+    excludes:
+    - 完整 GPU API 见 gpu.api
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: gpu_capability
+- id: graphics.gpu.upscale
+  level: L3
+  parent: graphics.gpu
+  name:
+    zh: 超分与帧生成
+    en: Upscale and Frame Generation
+  definition: 空间/时间超分与插帧/外推帧生成加速。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/gpu/upscale.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: AGDK/厂商超分待核
+    ios:
+    - kind: framework
+      id: MetalFX
+      url: https://developer.apple.com/documentation/metalfx
+      role: primary
+    harmonyos:
+    - kind: module
+      id: frame_generation
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/frame__generation__base_8h
+      role: primary
+  comparison_scope:
+    includes:
+    - MTLFX、frame generation
+    excludes:
+    - 帧节奏见 frame_pacing
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: gpu_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.imagefx.color_extract
+  level: L3
+  parent: graphics.imagefx
+  name:
+    zh: 主色提取
+    en: Color Extraction
+  definition: 从位图提取调色板/主色。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/imagefx/color_extract.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Palette
+      url: https://developer.android.com/training/material/palette-colors
+      role: primary
+    ios:
+    - kind: class
+      id: CIAreaAverage
+      url: https://developer.apple.com/documentation/coreimage
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Palette
+    excludes:
+    - 滤镜见 imagefx.filter
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: imagefx_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.imagefx.filter
+  level: L3
+  parent: graphics.imagefx
+  name:
+    zh: 图像滤镜
+    en: Image Filters
+  definition: 对静图像素图应用模糊、调色、风格化及滤镜链。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/imagefx/filter/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - blur、color_adjust、stylize、chain
+    excludes:
+    - 绘制态 ImageFilter 见 2d.effects.image_filter
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: imagefx_capability
+  related_features:
+  - graphics.2d.effects.image_filter
+- id: graphics.ink.canvas
+  level: L3
+  parent: graphics.ink
+  name:
+    zh: 墨迹画布
+    en: Ink Canvas
+  definition: 低延迟手写/触控笔墨迹绘制画布。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/ink/canvas.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Stylus / Ink
+      url: https://developer.android.com/develop/ui/views/touch-and-input/stylus-input
+      role: primary
+    ios:
+    - kind: class
+      id: PKCanvasView
+      url: https://developer.apple.com/documentation/pencilkit
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: Pen Kit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/pen-kit-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - PKCanvasView、Pen Kit canvas
+    excludes:
+    - 笔画模型见 ink.model
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ink_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.ink.model
+  level: L3
+  parent: graphics.ink
+  name:
+    zh: 墨迹数据模型
+    en: Ink Stroke Model
+  definition: 笔画路径与墨迹文档数据模型。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/ink/model.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: PKDrawing
+      url: https://developer.apple.com/documentation/pencilkit/pkdrawing
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - PKDrawing、PKStroke
+    excludes:
+    - 画布交互见 ink.canvas
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ink_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.pdf.document_view
+  level: L3
+  parent: graphics.pdf
+  name:
+    zh: PDF文档视图
+    en: PDF Document View
+  definition: 嵌入式 PDF 文档浏览与缩略图视图。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/pdf/document_view.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: PdfViewerFragment
+      url: https://developer.android.com/reference/android/graphics/pdf/package-summary
+      role: primary
+    ios:
+    - kind: class
+      id: PDFView
+      url: https://developer.apple.com/documentation/pdfkit/pdfview
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: PDF Kit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/pdf-kit-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - PDFView、PdfViewerFragment
+    excludes:
+    - 页渲染原语见 page_render
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: pdf_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.pdf.page_render
+  level: L3
+  parent: graphics.pdf
+  name:
+    zh: PDF页渲染
+    en: PDF Page Render
+  definition: 将 PDF 页面渲染为位图或视图内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/pdf/page_render.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PdfRenderer
+      url: https://developer.android.com/reference/android/graphics/pdf/PdfRenderer
+      role: primary
+    ios:
+    - kind: framework
+      id: PDFKit
+      url: https://developer.apple.com/documentation/pdfkit
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: PDF Kit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/pdf-kit-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - PdfRenderer、PDFPage render
+    excludes:
+    - 表单编辑深度见 storage.document
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: pdf_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.text.draw
+  level: L3
+  parent: graphics.text
+  name:
+    zh: 文本绘制
+    en: Text Drawing
+  definition: 将整形后的文本/TextBlob 绘制到画布。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/text/draw.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Canvas.drawText
+      url: https://developer.android.com/reference/android/graphics/Canvas
+      role: primary
+    ios:
+    - kind: class
+      id: CTLineDraw
+      url: https://developer.apple.com/documentation/coretext
+      role: primary
+    harmonyos:
+    - kind: module
+      id: drawing.Canvas.drawTextBlob
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/textblock-drawing-arkts
+      role: primary
+  comparison_scope:
+    includes:
+    - drawText、TextBlob
+    excludes:
+    - UI Text 控件见 ui
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: text_pipeline
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.text.font
+  level: L3
+  parent: graphics.text
+  name:
+    zh: 字体管理
+    en: Font Management
+  definition: 字体集合注册、可下载字体与主题字体。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/text/font.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: FontsContractCompat
+      url: https://developer.android.com/guide/topics/ui/look-and-feel/downloadable-fonts
+      role: primary
+    ios:
+    - kind: class
+      id: CTFont
+      url: https://developer.apple.com/documentation/coretext
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.graphics.text FontCollection'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/theme-font-arkts
+      role: primary
+  comparison_scope:
+    includes:
+    - FontCollection、FontsContract
+    excludes:
+    - 测量见 text.measure
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: symbol_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: text_pipeline
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.text.measure
+  level: L3
+  parent: graphics.text
+  name:
+    zh: 文本测量
+    en: Text Measurement
+  definition: 文本宽度、行高与字形/字符范围测量。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/text/measure.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Paint.measureText
+      url: https://developer.android.com/reference/android/graphics/Paint
+      role: primary
+    ios:
+    - kind: class
+      id: CTLineGetTypographicBounds
+      url: https://developer.apple.com/documentation/coretext
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: text measure
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/text-measure-arkts
+      role: primary
+  comparison_scope:
+    includes:
+    - measureText、Paragraph metrics
+    excludes:
+    - 整形见 text.shaping
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: text_pipeline
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.text.shaping
+  level: L3
+  parent: graphics.text
+  name:
+    zh: 复杂文本整形
+    en: Complex Text Shaping
+  definition: 双向文本、locale 与段落样式整形。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/text/shaping.yaml
+  bindings:
+    android:
+    - kind: package
+      id: android.graphics.text
+      url: https://developer.android.com/reference/android/graphics/text/package-summary
+      role: primary
+    ios:
+    - kind: framework
+      id: Core Text
+      url: https://developer.apple.com/documentation/coretext
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: complex text
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/complex-text-arkts
+      role: primary
+  comparison_scope:
+    includes:
+    - ParagraphStyle、locale
+    excludes:
+    - 绘制见 text.draw
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: symbol_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: text_pipeline
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.2d.bitmap.draw
+  level: L4
+  parent: graphics.2d.bitmap
+  name:
+    zh: 位图图元绘制
+    en: Bitmap Draw
+  definition: 将解码位图按位置/矩形绘制到画布，含采样缩放。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/bitmap/draw.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Canvas.drawBitmap
+      url: https://developer.android.com/reference/android/graphics/Canvas
+      role: primary
+    ios:
+    - kind: class
+      id: CGContext.draw
+      url: https://developer.apple.com/documentation/coregraphics/cgcontext
+      role: primary
+    harmonyos:
+    - kind: module
+      id: drawing.Canvas.drawImage
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/pixelmap-drawing-arkts
+      role: primary
+  comparison_scope:
+    includes:
+    - drawBitmap/drawImage
+    excludes:
+    - 像素读写见 pixel_rw
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: bitmap_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.2d.bitmap.pixel_rw
+  level: L4
+  parent: graphics.2d.bitmap
+  name:
+    zh: 位图像素读写
+    en: Bitmap Pixel I/O
+  definition: 读写位图像素缓冲或从缓冲区构建位图。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/bitmap/pixel_rw.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Bitmap.setPixels
+      url: https://developer.android.com/reference/android/graphics/Bitmap
+      role: primary
+    ios:
+    - kind: class
+      id: CGDataProvider
+      url: https://developer.apple.com/documentation/coregraphics
+      role: primary
+    harmonyos:
+    - kind: module
+      id: PixelMap.writePixelsSync
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/pixelmap-drawing-arkts
+      role: primary
+  comparison_scope:
+    includes:
+    - get/setPixels、buffer copy
+    excludes:
+    - 绘制见 bitmap.draw
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: bitmap_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.2d.bitmap.type_bridge
+  level: L4
+  parent: graphics.2d.bitmap
+  name:
+    zh: 位图类型桥接
+    en: Bitmap Type Bridge
+  definition: 硬件缓冲/纹理与 CPU 位图类型互转。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/bitmap/type_bridge.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Bitmap.wrapHardwareBuffer
+      url: https://developer.android.com/reference/android/graphics/Bitmap
+      role: primary
+    ios:
+    - kind: class
+      id: CIContext.createCGImage
+      url: https://developer.apple.com/documentation/coreimage/cicontext
+      role: primary
+    harmonyos:
+    - kind: module
+      id: OH_Drawing_PixelMapGetFromOhPixelMapNative
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/pixelmap-drawing-arkts
+      role: primary
+  comparison_scope:
+    includes:
+    - HardwareBuffer wrap、CGImage↔texture
+    excludes:
+    - 像素读写见 pixel_rw
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: bitmap_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.2d.effects.blend
+  level: L4
+  parent: graphics.2d.effects
+  name:
+    zh: 混合模式
+    en: Blend Modes
+  definition: 设置画笔/上下文混合模式控制源与目标合成。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/effects/blend.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PorterDuff.Mode
+      url: https://developer.android.com/reference/android/graphics/PorterDuff.Mode
+      role: primary
+    ios:
+    - kind: class
+      id: CGBlendMode
+      url: https://developer.apple.com/documentation/coregraphics/cgblendmode
+      role: primary
+    harmonyos:
+    - kind: module
+      id: drawing.Brush.setBlendMode
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/complex-drawing-effect-arkts
+      role: primary
+  comparison_scope:
+    includes:
+    - PorterDuff/BlendMode
+    excludes:
+    - 颜色矩阵见 color_filter
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: draw_effect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.2d.effects.color_filter
+  level: L4
+  parent: graphics.2d.effects
+  name:
+    zh: 颜色过滤
+    en: Color Filter
+  definition: 矩阵/光照等颜色过滤器作用于绘制内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/effects/color_filter.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ColorMatrixColorFilter
+      url: https://developer.android.com/reference/android/graphics/ColorMatrixColorFilter
+      role: primary
+    ios:
+    - kind: class
+      id: CIColorMatrix
+      url: https://developer.apple.com/documentation/coreimage/cicolormatrix
+      role: primary
+    harmonyos:
+    - kind: module
+      id: drawing.ColorFilter
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/complex-drawing-effect-arkts
+      role: primary
+  comparison_scope:
+    includes:
+    - ColorMatrix、ColorFilter
+    excludes:
+    - 渐变着色见 gradient_shader
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: draw_effect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.2d.effects.gradient_shader
+  level: L4
+  parent: graphics.2d.effects
+  name:
+    zh: 渐变着色器
+    en: Gradient Shader
+  definition: 线性/径向/扫描渐变作为画笔着色器。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/effects/gradient_shader.yaml
+  bindings:
+    android:
+    - kind: class
+      id: LinearGradient
+      url: https://developer.android.com/reference/android/graphics/LinearGradient
+      role: primary
+    ios:
+    - kind: class
+      id: CGGradient
+      url: https://developer.apple.com/documentation/coregraphics/cggradient
+      role: primary
+    harmonyos:
+    - kind: module
+      id: drawing.ShaderEffect
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/complex-drawing-effect-arkts
+      role: primary
+  comparison_scope:
+    includes:
+    - Linear/Radial/SweepGradient
+    excludes:
+    - 图像滤镜见 image_filter
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: draw_effect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.2d.effects.image_filter
+  level: L4
+  parent: graphics.2d.effects
+  name:
+    zh: 绘制图像滤镜
+    en: Draw-time Image Filter
+  definition: 在绘制管线注入模糊等图像滤镜（RenderEffect/ImageFilter）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/effects/image_filter.yaml
+  bindings:
+    android:
+    - kind: class
+      id: RenderEffect
+      url: https://developer.android.com/reference/android/graphics/RenderEffect
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: drawing.ImageFilter
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/complex-drawing-effect-arkts
+      role: primary
+  comparison_scope:
+    includes:
+    - RenderEffect、ImageFilter
+    excludes:
+    - 独立静图滤镜链见 graphics.imagefx
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: draw_effect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - graphics.imagefx.filter
+- id: graphics.2d.effects.mask_filter
+  level: L4
+  parent: graphics.2d.effects
+  name:
+    zh: 遮罩模糊
+    en: Mask Filter
+  definition: 对描边/填充应用模糊遮罩效果。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/effects/mask_filter.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BlurMaskFilter
+      url: https://developer.android.com/reference/android/graphics/BlurMaskFilter
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: drawing.MaskFilter
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/complex-drawing-effect-arkts
+      role: primary
+  comparison_scope:
+    includes:
+    - BlurMaskFilter
+    excludes:
+    - 图像模糊滤镜见 imagefx.filter.blur
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: draw_effect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - graphics.imagefx.filter.blur
+- id: graphics.2d.effects.path_effect
+  level: L4
+  parent: graphics.2d.effects
+  name:
+    zh: 路径效果
+    en: Path Effect
+  definition: 虚线等路径效果作用于描边。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/2d/effects/path_effect.yaml
+  bindings:
+    android:
+    - kind: class
+      id: DashPathEffect
+      url: https://developer.android.com/reference/android/graphics/DashPathEffect
+      role: primary
+    ios:
+    - kind: class
+      id: CGContext.setLineDash
+      url: https://developer.apple.com/documentation/coregraphics/cgcontext
+      role: primary
+    harmonyos:
+    - kind: module
+      id: drawing.PathEffect
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/complex-drawing-effect-arkts
+      role: primary
+  comparison_scope:
+    includes:
+    - DashPathEffect、line dash
+    excludes:
+    - 遮罩见 mask_filter
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: draw_effect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.capture.component.long_scroll
+  level: L4
+  parent: graphics.capture.component
+  name:
+    zh: 长列表拼接截图
+    en: Long Scroll Snapshot
+  definition: 滚动容器分页截取并拼接为长图。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/capture/component/long_scroll.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: guide
+      id: ComponentSnapshot + Scroller
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-uicontext-component-snapshot
+      role: primary
+  comparison_scope:
+    includes:
+    - scroll + stitch
+    excludes:
+    - 单帧组件截图见 on_tree
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: component_snapshot_mode
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.capture.component.offline
+  level: L4
+  parent: graphics.capture.component
+  name:
+    zh: 离屏组件截图
+    en: Offline Component Snapshot
+  definition: 从未挂载构建器/组件内容生成截图。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/capture/component/offline.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: componentSnapshot.createFromBuilder
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-uicontext-component-snapshot
+      role: primary
+  comparison_scope:
+    includes:
+    - createFromBuilder
+    excludes:
+    - 在树截图见 on_tree
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: component_snapshot_mode
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.capture.component.on_tree
+  level: L4
+  parent: graphics.capture.component
+  name:
+    zh: 在树组件截图
+    en: On-Tree Component Snapshot
+  definition: 对已挂载组件按 id 同步/异步生成快照。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/capture/component/on_tree.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PixelCopy.request
+      url: https://developer.android.com/reference/android/view/PixelCopy
+      role: primary
+    ios:
+    - kind: class
+      id: UIView.drawHierarchy
+      url: https://developer.apple.com/documentation/uikit/uiview/drawhierarchy(in:afterscreenupdates:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: ComponentSnapshot.get
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-uicontext-component-snapshot
+      role: primary
+  comparison_scope:
+    includes:
+    - get/getSync、SnapshotOptions
+    excludes:
+    - 离屏构建见 offline
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: component_snapshot_mode
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.capture.component.surface_source
+  level: L4
+  parent: graphics.capture.component
+  name:
+    zh: 表面源截图
+    en: Surface Source Snapshot
+  definition: 从 Video/自绘制表面等源生成像素图。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/capture/component/surface_source.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PixelCopy.request
+      url: https://developer.android.com/reference/android/view/PixelCopy
+      role: primary
+    ios:
+    - kind: class
+      id: MTLTexture
+      url: https://developer.apple.com/documentation/metal/mtltexture
+      role: primary
+    harmonyos:
+    - kind: module
+      id: createPixelMapFromSurface
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-uicontext-component-snapshot
+      role: primary
+  comparison_scope:
+    includes:
+    - PixelCopy Surface、createPixelMapFromSurface
+    excludes:
+    - 窗口全屏见 screenshot
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: component_snapshot_mode
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.color.hdr_convert.dual_to_single
+  level: L4
+  parent: graphics.color.hdr_convert
+  name:
+    zh: 双层合成单层HDR
+    en: Dual-to-Single HDR Compose
+  definition: 将 SDR+增益图合成为单层 HDR。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/color/hdr_convert/dual_to_single.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: OH_ImageProcessing_Compose
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hdr-dual-to-single
+      role: primary
+  comparison_scope:
+    includes:
+    - IMAGE_PROCESSING_TYPE_COMPOSITION
+    excludes:
+    - 分解见 single_to_dual
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: hdr_convert_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.color.hdr_convert.metadata
+  level: L4
+  parent: graphics.color.hdr_convert
+  name:
+    zh: HDR元数据
+    en: HDR Metadata
+  definition: 读写像素图/图像的 HDR 元数据键。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/color/hdr_convert/metadata.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: ImageIO
+      url: https://developer.apple.com/documentation/imageio
+      role: primary
+    harmonyos:
+    - kind: module
+      id: PixelMap.setMetadata
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hdr-dual-to-single
+      role: primary
+  comparison_scope:
+    includes:
+    - HdrMetadataKey、ImageIO HDR props
+    excludes:
+    - 合成算法见 dual_to_single
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: hdr_convert_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.color.hdr_convert.single_to_dual
+  level: L4
+  parent: graphics.color.hdr_convert
+  name:
+    zh: 单层分解双层HDR
+    en: Single-to-Dual HDR Decompose
+  definition: 将单层 HDR 分解为 SDR+增益图。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/color/hdr_convert/single_to_dual.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: OH_ImageProcessing_Decompose
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-imageprocessing
+      role: primary
+  comparison_scope:
+    includes:
+    - IMAGE_PROCESSING_TYPE_DECOMPOSITION
+    excludes:
+    - 合成见 dual_to_single
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: hdr_convert_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.composite.surface.buffer_image_bridge
+  level: L4
+  parent: graphics.composite.surface
+  name:
+    zh: 缓冲图像桥接
+    en: Buffer-Image Bridge
+  definition: 表面/像素缓冲与 GPU 纹理或 ImageReader 消费桥接。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/composite/surface/buffer_image_bridge.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ImageReader
+      url: https://developer.android.com/reference/android/media/ImageReader
+      role: primary
+    ios:
+    - kind: class
+      id: CVMetalTextureCache
+      url: https://developer.apple.com/documentation/corevideo/cvmetaltexturecache
+      role: primary
+    harmonyos:
+    - kind: module
+      id: OH_NativeImage
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/native-window-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - ImageReader、CVMetalTextureCache、NativeImage
+    excludes:
+    - 窗口绑定见 window_bind
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: surface_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.composite.surface.buffer_props
+  level: L4
+  parent: graphics.composite.surface
+  name:
+    zh: 缓冲几何属性
+    en: Buffer Geometry Props
+  definition: 设置缓冲宽高、格式等几何与用途属性。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/composite/surface/buffer_props.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ANativeWindow_setBuffersGeometry
+      url: https://developer.android.com/ndk/reference/group/native-window
+      role: primary
+    ios:
+    - kind: framework
+      id: IOSurface
+      url: https://developer.apple.com/documentation/iosurface
+      role: primary
+    harmonyos:
+    - kind: module
+      id: OH_NativeWindow_NativeWindowHandleOpt
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/native-window-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - setBuffersGeometry、IOSurface properties
+    excludes:
+    - 队列见 buffer_queue
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: surface_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.composite.surface.buffer_queue
+  level: L4
+  parent: graphics.composite.surface
+  name:
+    zh: 缓冲队列
+    en: Buffer Queue
+  definition: 申请/提交/丢弃表面缓冲帧。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/composite/surface/buffer_queue.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ANativeWindow_lock
+      url: https://developer.android.com/ndk/reference/group/native-window
+      role: primary
+    ios:
+    - kind: class
+      id: IOSurfaceLock
+      url: https://developer.apple.com/documentation/iosurface
+      role: primary
+    harmonyos:
+    - kind: module
+      id: OH_NativeWindow_NativeWindowRequestBuffer
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/native-window-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - request/flush buffer、lock/unlock
+    excludes:
+    - 跨进程共享见 cross_process
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: surface_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.composite.surface.cross_process
+  level: L4
+  parent: graphics.composite.surface
+  name:
+    zh: 跨进程缓冲共享
+    en: Cross-Process Buffer Share
+  definition: 跨进程共享硬件缓冲/IOSurface。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/composite/surface/cross_process.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AHardwareBuffer
+      url: https://developer.android.com/reference/android/hardware/HardwareBuffer
+      role: primary
+    ios:
+    - kind: framework
+      id: IOSurface
+      url: https://developer.apple.com/documentation/iosurface
+      role: primary
+    harmonyos:
+    - kind: module
+      id: OH_NativeBuffer
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/native-window-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - AHardwareBuffer、IOSurface、OH_NativeBuffer
+    excludes:
+    - 本进程队列见 buffer_queue
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: surface_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.composite.surface.window_bind
+  level: L4
+  parent: graphics.composite.surface
+  name:
+    zh: 窗口表面绑定
+    en: Window Surface Bind
+  definition: 将自绘制内容绑定到系统表面/图层。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/composite/surface/window_bind.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ANativeWindow_fromSurface
+      url: https://developer.android.com/ndk/reference/group/native-window
+      role: primary
+    ios:
+    - kind: class
+      id: CAMetalLayer
+      url: https://developer.apple.com/documentation/quartzcore/cametallayer
+      role: primary
+    harmonyos:
+    - kind: module
+      id: OH_NativeWindow
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/native-window-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - ANativeWindow_fromSurface、CAMetalLayer、XComponent surface
+    excludes:
+    - 缓冲队列操作见 buffer_queue
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: surface_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.gpu.compute.compute_pipeline
+  level: L4
+  parent: graphics.gpu.compute
+  name:
+    zh: 计算管线
+    en: Compute Pipeline
+  definition: 创建并调度 GPU 计算管线/着色器。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/gpu/compute/compute_pipeline.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Vulkan compute
+      url: https://developer.android.com/ndk/guides/graphics
+      role: primary
+    ios:
+    - kind: class
+      id: MTLComputePipelineState
+      url: https://developer.apple.com/documentation/metal/mtlcomputepipelinestate
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: Vulkan
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/vulkan-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - MTLComputePipeline、Vulkan compute
+    excludes:
+    - 内核库见 kernel_lib
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: compute_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.gpu.compute.graph_exec
+  level: L4
+  parent: graphics.gpu.compute
+  name:
+    zh: 计算图执行
+    en: Compute Graph Execution
+  definition: 构建并执行 GPU 计算图。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/gpu/compute/graph_exec.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: MPSGraph
+      url: https://developer.apple.com/documentation/metalperformanceshaders
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - MPSGraph
+    excludes:
+    - 单内核见 kernel_lib
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: compute_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.gpu.compute.kernel_lib
+  level: L4
+  parent: graphics.gpu.compute
+  name:
+    zh: 性能着色器内核库
+    en: Performance Shader Kernels
+  definition: 预置图像/矩阵等 GPU 内核库。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/gpu/compute/kernel_lib.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: RenderScript 已废弃，替代路径待核
+    ios:
+    - kind: framework
+      id: Metal Performance Shaders
+      url: https://developer.apple.com/documentation/metalperformanceshaders
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Metal Performance Shaders
+    excludes:
+    - 图执行见 graph_exec
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: compute_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.gpu.shader.engine_3d_resource
+  level: L4
+  parent: graphics.gpu.shader
+  name:
+    zh: 三维引擎着色器资源
+    en: 3D Engine Shader Resource
+  definition: 三维引擎自定义着色器资源描述与管线状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/gpu/shader/engine_3d_resource.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: MTLRenderPipelineState
+      url: https://developer.apple.com/documentation/metal/mtlrenderpipelinestate
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: ArkGraphics3D shader resource
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkgraphics3d-shader-resource
+      role: primary
+  comparison_scope:
+    includes:
+    - .shader resource、MSL/SPIR-V
+    excludes:
+    - UI 运行时着色器见 runtime_ui
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: shader_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.gpu.shader.render_effect_inject
+  level: L4
+  parent: graphics.gpu.shader
+  name:
+    zh: 渲染效果着色器注入
+    en: Render Effect Shader Inject
+  definition: 经 RenderEffect/layerEffect 将着色器注入视图层。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/gpu/shader/render_effect_inject.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: RenderEffect.createRuntimeShaderEffect
+      url: https://developer.android.com/develop/ui/views/graphics/agsl/using-agsl
+      role: primary
+    ios:
+    - kind: class
+      id: View.layerEffect
+      url: https://developer.apple.com/documentation/swiftui/view/layereffect(_:maxsampleoffset:isenabled:)
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - createRuntimeShaderEffect、layerEffect
+    excludes:
+    - 纯 RuntimeShader 画布见 runtime_ui
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: shader_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.gpu.shader.runtime_ui
+  level: L4
+  parent: graphics.gpu.shader
+  name:
+    zh: 运行时UI着色器
+    en: Runtime UI Shader
+  definition: 在 UI/画布路径编译并应用运行时着色器。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/gpu/shader/runtime_ui.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: RuntimeShader
+      url: https://developer.android.com/develop/ui/views/graphics/agsl/using-agsl
+      role: primary
+    ios:
+    - kind: class
+      id: Shader
+      url: https://developer.apple.com/documentation/swiftui/shader
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - RuntimeShader、SwiftUI Shader
+    excludes:
+    - RenderEffect 注入见 render_effect_inject
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: shader_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.imagefx.filter.blur
+  level: L4
+  parent: graphics.imagefx.filter
+  name:
+    zh: 模糊滤镜
+    en: Blur Filter
+  definition: 高斯等模糊半径滤镜。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/imagefx/filter/blur.yaml
+  bindings:
+    android:
+    - kind: class
+      id: RenderEffect.createBlurEffect
+      url: https://developer.android.com/reference/android/graphics/RenderEffect
+      role: primary
+    ios:
+    - kind: class
+      id: CIGaussianBlur
+      url: https://developer.apple.com/documentation/coreimage/cigaussianblur
+      role: primary
+    harmonyos:
+    - kind: module
+      id: OH_Filter_Blur
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/effectkit-filter-c
+      role: primary
+  comparison_scope:
+    includes:
+    - gaussian blur
+    excludes:
+    - 调色见 color_adjust
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: filter_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.imagefx.filter.chain
+  level: L4
+  parent: graphics.imagefx.filter
+  name:
+    zh: 滤镜链
+    en: Filter Chain
+  definition: 按序组合多个滤镜并输出结果像素。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/imagefx/filter/chain.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: CIFilter
+      url: https://developer.apple.com/documentation/coreimage/cifilter
+      role: primary
+    harmonyos:
+    - kind: module
+      id: OH_Filter_CreateEffect
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/effectkit-filter-c
+      role: primary
+  comparison_scope:
+    includes:
+    - chainedEffects、OH_Filter pipeline
+    excludes:
+    - 单滤镜见 blur/color_adjust
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: filter_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.imagefx.filter.color_adjust
+  level: L4
+  parent: graphics.imagefx.filter
+  name:
+    zh: 颜色调节滤镜
+    en: Color Adjust Filter
+  definition: 亮度/对比度/曝光等颜色调节。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/imagefx/filter/color_adjust.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: CIColorControls
+      url: https://developer.apple.com/documentation/coreimage/cicolorcontrols
+      role: primary
+    harmonyos:
+    - kind: module
+      id: OH_Filter_Brighten
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/effectkit-filter-c
+      role: primary
+  comparison_scope:
+    includes:
+    - brighten、ColorControls
+    excludes:
+    - 风格化见 stylize
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: filter_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: graphics.imagefx.filter.stylize
+  level: L4
+  parent: graphics.imagefx.filter
+  name:
+    zh: 风格化滤镜
+    en: Stylize Filter
+  definition: 灰度、反色等风格化效果。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/graphics/imagefx/filter/stylize.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: CIColorInvert
+      url: https://developer.apple.com/documentation/coreimage/cicolorinvert
+      role: primary
+    harmonyos:
+    - kind: module
+      id: OH_Filter_GrayScale
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/effectkit-filter-c
+      role: primary
+  comparison_scope:
+    includes:
+    - grayScale、invert、photo effects
+    excludes:
+    - 滤镜链见 chain
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: filter_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability

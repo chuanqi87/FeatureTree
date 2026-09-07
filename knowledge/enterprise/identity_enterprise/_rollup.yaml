@@ -1,0 +1,30 @@
+schema_version: 2
+feature_id: enterprise.identity_enterprise
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 企业单点登录、Kerberos 与学校/企业管理器身份。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- enterprise.identity_enterprise.acl
+- enterprise.identity_enterprise.cert_auth
+- enterprise.identity_enterprise.education_classkit
+- enterprise.identity_enterprise.kerberos
+- enterprise.identity_enterprise.managed_account
+- enterprise.identity_enterprise.school_manager
+- enterprise.identity_enterprise.sso
+- enterprise.identity_enterprise.vpn_per_app

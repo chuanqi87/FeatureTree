@@ -1,0 +1,30 @@
+schema_version: 2
+feature_id: security.privacy
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 跟踪授权、隐私模式与界面防窥等隐私控制。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- security.privacy.anti_peep
+- security.privacy.data_usage_flag
+- security.privacy.local_network
+- security.privacy.pasteboard_protect
+- security.privacy.precise_toggle
+- security.privacy.screenshot_detect
+- security.privacy.super_privacy
+- security.privacy.tracking_consent

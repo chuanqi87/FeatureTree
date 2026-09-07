@@ -6,7 +6,7 @@ features:
   name:
     zh: 连接与外设
     en: Connectivity and Peripherals
-  definition: Wi-Fi、蓝牙、NFC、USB 与配件。
+  definition: 设备侧无线与有线近距连接、配件会话及本地外设总线；不含通用 IP 联网与分布式跨端 Continuity。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -17,8 +17,10 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - Wi-Fi、蓝牙、NFC、USB 与配件。
-    excludes: []
+    - 蓝牙、Wi-Fi 近距、NFC、USB、串口、红外、星闪、配件会话
+    excludes:
+    - network 域 HTTP/Socket/VPN
+    - distributed 域跨端流转
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -28,98 +30,19 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: connectivity.wifi
-  level: L2
-  parent: connectivity
-  name:
-    zh: Wi-Fi
-    en: Wi-Fi
-  definition: Wi-Fi 扫描、连接与感知。
-  knowledge_role: rollup
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  knowledge_path: knowledge/connectivity/wifi/_rollup.yaml
-  comparison_scope:
-    includes:
-    - Wi-Fi 扫描、连接与感知。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: connectivity.wifi.scan
-  level: L3
-  parent: connectivity.wifi
-  name:
-    zh: Wi-Fi扫描
-    en: Wi-Fi Scan
-  definition: 扫描附近 Wi-Fi 网络。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: runtime_permission
-  leaf_at_this_level: true
-  split_justification: privacy
-  knowledge_path: knowledge/connectivity/wifi/scan.yaml
-  comparison_scope:
-    includes:
-    - 扫描附近 Wi-Fi 网络。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: connectivity.wifi.connect
-  level: L3
-  parent: connectivity.wifi
-  name:
-    zh: Wi-Fi连接建议
-    en: Wi-Fi Connection Suggestion
-  definition: 应用建议或协助连接 Wi-Fi。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: analog
-  knowledge_path: knowledge/connectivity/wifi/connect.yaml
-  comparison_scope:
-    includes:
-    - 应用建议或协助连接 Wi-Fi。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - connectivity
 - id: connectivity.bluetooth
   level: L2
   parent: connectivity
   name:
     zh: 蓝牙
     en: Bluetooth
-  definition: 经典蓝牙与低功耗蓝牙能力簇。
+  definition: 经典蓝牙与低功耗蓝牙的发现、配对、连接、配置文件与数据通道。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -130,8 +53,9 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 经典蓝牙与低功耗蓝牙能力簇。
-    excludes: []
+    - BR/EDR、BLE、LE Audio
+    excludes:
+    - 媒体播控见 media.session
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -141,54 +65,33 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: connectivity.bluetooth.classic
-  level: L3
-  parent: connectivity.bluetooth
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - connectivity.bluetooth
+  sibling_axis: radio_or_bus_family
+- id: connectivity.ir
+  level: L2
+  parent: connectivity
   name:
-    zh: 经典蓝牙
-    en: Bluetooth Classic
-  definition: BR/EDR 连接与配置文件。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence
-  knowledge_path: knowledge/connectivity/bluetooth/classic.yaml
-  comparison_scope:
-    includes:
-    - BR/EDR 连接与配置文件。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: connectivity.bluetooth.le
-  level: L3
-  parent: connectivity.bluetooth
-  name:
-    zh: 低功耗蓝牙
-    en: Bluetooth Low Energy
-  definition: BLE 广播、扫描、连接与 GATT。
+    zh: 消费红外
+    en: Consumer IR
+  definition: 本机红外发射与频率能力查询。
   knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  knowledge_path: knowledge/connectivity/bluetooth/le/_rollup.yaml
+  knowledge_path: knowledge/connectivity/ir/_rollup.yaml
   bindings: {}
   comparison_scope:
     includes:
-    - BLE 广播、扫描、连接与 GATT。
-    excludes: []
+    - 红外发射、频率查询
+    excludes:
+    - 遥控业务协议本身
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -198,76 +101,32 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: connectivity.bluetooth.le.advertise
-  level: L4
-  parent: connectivity.bluetooth.le
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: radio_or_bus_family
+- id: connectivity.nearlink
+  level: L2
+  parent: connectivity
   name:
-    zh: BLE广播
-    en: BLE Advertising
-  definition: 作为 Peripheral 广播数据。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  knowledge_path: knowledge/connectivity/bluetooth/le/advertise.yaml
-  comparison_scope:
-    includes:
-    - 作为 Peripheral 广播数据。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: connectivity.bluetooth.le.scan
-  level: L4
-  parent: connectivity.bluetooth.le
-  name:
-    zh: BLE扫描
-    en: BLE Scan
-  definition: 发现附近 BLE 广播设备。
+    zh: 星闪近距连接
+    en: NearLink
+  definition: 星闪设备发现、管理与 SSAP 数据通道。
   knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  split_justification: task
-  bindings:
-    android:
-    - kind: package
-      id: android.bluetooth.le
-      url: https://developer.android.com/reference/android/bluetooth/le/package-summary
-      role: primary
-      since: API 21
-    ios:
-    - kind: framework
-      id: CoreBluetooth
-      url: https://developer.apple.com/documentation/corebluetooth
-      role: primary
-    harmonyos:
-    - kind: module
-      id: '@ohos.bluetooth.ble'
-      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble
-      role: primary
-      syscap: SystemCapability.Communication.Bluetooth.Core
-  knowledge_path: knowledge/connectivity/bluetooth/le/scan/_rollup.yaml
+  knowledge_path: knowledge/connectivity/nearlink/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 发现附近 BLE 广播设备
-    - 开始与停止扫描
-    - 接收扫描结果
+    - 发现、管理、SSAP
     excludes:
-    - 建立连接
-    - 读取 GATT 数据
+    - 通用 BLE 见 connectivity.bluetooth.le
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -277,201 +136,19 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: connectivity.bluetooth.le.scan.filter
-  level: L5
-  parent: connectivity.bluetooth.le.scan
-  name:
-    zh: BLE扫描过滤
-    en: BLE Scan Filter
-  definition: 按指定条件筛选 BLE 扫描结果，并明确过滤的执行位置与结果语义。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence_and_background_model
-  bindings:
-    android:
-    - kind: class
-      id: android.bluetooth.le.ScanFilter
-      role: primary
-      since: API 21
-      url: https://developer.android.com/reference/android/bluetooth/le/ScanFilter
-    ios:
-    - kind: class
-      id: CoreBluetooth.CBCentralManager
-      url: https://developer.apple.com/documentation/corebluetooth/cbcentralmanager
-      role: primary
-      note: 过滤能力弱于 Android，细节见知识
-    harmonyos:
-    - kind: module
-      id: '@ohos.bluetooth.ble'
-      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble
-      role: primary
-      syscap: SystemCapability.Communication.Bluetooth.Core
-  knowledge_path: knowledge/connectivity/bluetooth/le/scan/filter.yaml
-  comparison_scope:
-    includes:
-    - 按条件筛选扫描结果
-    - 过滤条件的组合与执行位置
-    excludes:
-    - 批量结果交付
-    - 后台执行资格
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: connectivity.bluetooth.le.scan.background
-  level: L5
-  parent: connectivity.bluetooth.le.scan
-  name:
-    zh: BLE后台扫描
-    en: BLE Background Scan
-  definition: 应用不在前台时继续或受限的 BLE 扫描。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: background
-  bindings:
-    android:
-    - kind: package
-      id: android.bluetooth.le
-      url: https://developer.android.com/reference/android/bluetooth/le/package-summary
-      role: primary
-      note: 后台扫描受 Doze/配额约束
-    ios:
-    - kind: framework
-      id: CoreBluetooth
-      url: https://developer.apple.com/documentation/corebluetooth
-      role: primary
-      note: 需蓝牙后台模式
-    harmonyos:
-    - kind: module
-      id: '@ohos.bluetooth.ble'
-      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble
-      role: primary
-  knowledge_path: knowledge/connectivity/bluetooth/le/scan/background.yaml
-  comparison_scope:
-    includes:
-    - 非前台状态下发现 BLE 设备
-    - 挂起、唤醒和停止条件
-    excludes:
-    - 后台任务框架全集
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: connectivity.bluetooth.le.scan.batch
-  level: L5
-  parent: connectivity.bluetooth.le.scan
-  name:
-    zh: BLE批量扫描结果
-    en: BLE Batched Scan Results
-  definition: 硬件或系统批量投递扫描结果以节能。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence
-  knowledge_path: knowledge/connectivity/bluetooth/le/scan/batch.yaml
-  comparison_scope:
-    includes:
-    - 将扫描结果聚合后批量交付
-    excludes:
-    - 过滤条件种类
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: connectivity.bluetooth.le.connect
-  level: L4
-  parent: connectivity.bluetooth.le
-  name:
-    zh: BLE连接
-    en: BLE Connection
-  definition: 与外设建立 BLE 连接。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  knowledge_path: knowledge/connectivity/bluetooth/le/connect.yaml
-  comparison_scope:
-    includes:
-    - 与外设建立 BLE 连接。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: connectivity.bluetooth.le.gatt
-  level: L4
-  parent: connectivity.bluetooth.le
-  name:
-    zh: GATT读写通知
-    en: GATT Read Write Notify
-  definition: GATT 特征读写与通知订阅。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  knowledge_path: knowledge/connectivity/bluetooth/le/gatt.yaml
-  comparison_scope:
-    includes:
-    - GATT 特征读写与通知订阅。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: radio_or_bus_family
 - id: connectivity.nfc
   level: L2
   parent: connectivity
   name:
     zh: NFC
     en: NFC
-  definition: 近场通信读写与卡模拟。
+  definition: NFC 标签读写、主机卡模拟与安全单元访问。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -482,8 +159,9 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 近场通信读写与卡模拟。
-    excludes: []
+    - Tag I/O、HCE、SE
+    excludes:
+    - 支付业务编排见 commerce
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -493,57 +171,33 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: connectivity.nfc.reader
-  level: L3
-  parent: connectivity.nfc
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - connectivity.nfc
+  sibling_axis: radio_or_bus_family
+- id: connectivity.peripherals
+  level: L2
+  parent: connectivity
   name:
-    zh: NFC读写
-    en: NFC Reader Writer
-  definition: 读写 NFC 标签。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: runtime_permission
-  leaf_at_this_level: true
-  knowledge_path: knowledge/connectivity/nfc/reader.yaml
-  comparison_scope:
-    includes:
-    - 读写 NFC 标签。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: connectivity.nfc.hce
-  level: L3
-  parent: connectivity.nfc
-  name:
-    zh: 主机卡模拟
-    en: Host Card Emulation
-  definition: 应用模拟智能卡应答读卡器。
-  knowledge_role: leaf
+    zh: 配件与外设生态
+    en: Accessories
+  definition: 系统级配件发现、厂商协议会话、测距与伙伴设备互通。
+  knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence
-  aliases:
-  - HCE
-  - Apple Pay NFC constraints
-  knowledge_path: knowledge/connectivity/nfc/hce.yaml
+  knowledge_path: knowledge/connectivity/peripherals/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 应用模拟智能卡应答读卡器。
-    excludes: []
+    - 配件发现、MFi/EA、UWB、MIDI 设备侧
+    excludes:
+    - MIDI 音频消息见 media.audio.midi
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -553,13 +207,54 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: radio_or_bus_family
+- id: connectivity.serial
+  level: L2
+  parent: connectivity
+  name:
+    zh: 串口与工业外设
+    en: Serial I/O
+  definition: 本机 UART 与 USB 串口数据通道。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/serial/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - UART、USB-serial
+    excludes:
+    - USB 枚举见 connectivity.usb
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: radio_or_bus_family
 - id: connectivity.usb
   level: L2
   parent: connectivity
   name:
     zh: USB
     en: USB
-  definition: USB 主机/配件模式。
+  definition: USB 主机/配件模式、MTP 与用户态驱动开发入口。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -570,8 +265,9 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - USB 主机/配件模式。
-    excludes: []
+    - host、accessory、MTP、DDK
+    excludes:
+    - 串口协议见 connectivity.serial
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -581,26 +277,292 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: connectivity.usb.host
-  level: L3
-  parent: connectivity.usb
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - connectivity.usb
+  sibling_axis: radio_or_bus_family
+- id: connectivity.wifi
+  level: L2
+  parent: connectivity
   name:
-    zh: USB主机模式
-    en: USB Host Mode
-  definition: 设备作为 USB 主机访问配件。
+    zh: Wi-Fi
+    en: Wi-Fi
+  definition: 本地 Wi-Fi 扫描、连接建议、点对点、热点、测距与感知。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/wifi/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 扫描、连接、P2P、Aware、RTT、热点、连接信息
+    excludes:
+    - 蜂窝切换见 network
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - connectivity.wifi
+  sibling_axis: radio_or_bus_family
+- id: connectivity.bluetooth.bond
+  level: L3
+  parent: connectivity.bluetooth
+  name:
+    zh: 发现配对与绑定
+    en: Discovery Pairing and Bonding
+  definition: 设备级发现、可被发现、配对请求与绑定关系管理。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/bluetooth/bond/_rollup.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BluetoothAdapter
+      url: https://developer.android.com/develop/connectivity/bluetooth/find-bluetooth-devices
+      role: primary
+    ios:
+    - kind: class
+      id: CBCentralManager
+      url: https://developer.apple.com/documentation/corebluetooth/cbcentralmanager
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.bluetooth.connection'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-connection
+      role: primary
+  comparison_scope:
+    includes:
+    - discovery、pairing、bonded list
+    excludes:
+    - GATT 连接见 le.gatt_client
+    - Companion 关联见 peripherals.discovery
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: symbol_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: bluetooth_role
+- id: connectivity.bluetooth.classic
+  level: L3
+  parent: connectivity.bluetooth
+  name:
+    zh: 经典蓝牙与配置文件
+    en: Classic Bluetooth Profiles
+  definition: BR/EDR 数据通道与常见配置文件控制面。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/bluetooth/classic/_rollup.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BluetoothSocket
+      url: https://developer.android.com/develop/connectivity/bluetooth/transfer-data
+      role: primary
+    ios:
+    - kind: guide
+      id: Core Bluetooth Classic
+      url: https://developer.apple.com/documentation/corebluetooth/using-core-bluetooth-classic
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.bluetooth.socket'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/spp-development-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - SPP/RFCOMM、A2DP/HFP/HID/PAN
+    excludes:
+    - BLE GATT
+    - LE Audio
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: body_ok
+  legacy:
+    disposition: kept
+    sources:
+    - connectivity.bluetooth.classic
+  sibling_axis: bluetooth_role
+- id: connectivity.bluetooth.le
+  level: L3
+  parent: connectivity.bluetooth
+  name:
+    zh: 低功耗蓝牙
+    en: Bluetooth Low Energy
+  definition: BLE 广播、扫描、GATT 与信道探测等低功耗能力簇。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/bluetooth/le/_rollup.yaml
+  bindings:
+    android:
+    - kind: package
+      id: android.bluetooth.le
+      url: https://developer.android.com/reference/android/bluetooth/le/package-summary
+      role: primary
+    ios:
+    - kind: framework
+      id: CoreBluetooth
+      url: https://developer.apple.com/documentation/corebluetooth
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.bluetooth.ble'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ble-development-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - advertise、scan、GATT、channel sounding
+    excludes:
+    - 经典配置文件
+    - LE Audio 单列
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: body_ok
+  legacy:
+    disposition: kept
+    sources:
+    - connectivity.bluetooth.le
+  sibling_axis: bluetooth_role
+- id: connectivity.bluetooth.le_audio
+  level: L3
+  parent: connectivity.bluetooth
+  name:
+    zh: LE Audio
+    en: LE Audio
+  definition: 基于 BLE 的低功耗音频单播/广播与端点管理。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/bluetooth/le_audio.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BluetoothLeAudio
+      url: https://developer.android.com/develop/connectivity/bluetooth/ble/ble-audio
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: '@ohos.bluetooth.ble'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ble-development-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - unicast、broadcast、通信设备选择
+    excludes:
+    - 经典 A2DP
+    - 播控会话见 media.session
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: bluetooth_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.ir.transmit
+  level: L3
+  parent: connectivity.ir
+  name:
+    zh: 红外发射
+    en: IR Transmit
+  definition: 按指定频率与图案发射消费红外信号。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence
-  knowledge_path: knowledge/connectivity/usb/host.yaml
+  knowledge_path: knowledge/connectivity/ir/transmit.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ConsumerIrManager
+      url: https://developer.android.com/reference/android/hardware/ConsumerIrManager
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: infraredEmitter
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-infraredemitter
+      role: primary
   comparison_scope:
     includes:
-    - 设备作为 USB 主机访问配件。
-    excludes: []
+    - transmitInfrared、频率查询
+    excludes:
+    - 遥控码库业务逻辑
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -610,3 +572,2005 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ir_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.nearlink.discovery
+  level: L3
+  parent: connectivity.nearlink
+  name:
+    zh: 星闪发现与广播
+    en: NearLink Discovery
+  definition: 星闪设备扫描与广播。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/nearlink/discovery.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: nearlink scan
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-nearlink-scan
+      role: primary
+  comparison_scope:
+    includes:
+    - NearLink Discovery
+    excludes:
+    - BLE 见 connectivity.bluetooth.le
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nearlink_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.nearlink.manager
+  level: L3
+  parent: connectivity.nearlink
+  name:
+    zh: 星闪基础管理
+    en: NearLink Manager
+  definition: 星闪适配器开关与基础状态管理。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/nearlink/manager.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: nearlink manager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-nearlink-manager
+      role: primary
+  comparison_scope:
+    includes:
+    - NearLink Manager
+    excludes:
+    - BLE 见 connectivity.bluetooth.le
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nearlink_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.nearlink.ssap
+  level: L3
+  parent: connectivity.nearlink
+  name:
+    zh: 星闪SSAP数据
+    en: NearLink SSAP
+  definition: 星闪 SSAP 连接与数据收发。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/nearlink/ssap.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: nearlink ssap
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-nearlink-ssap
+      role: primary
+  comparison_scope:
+    includes:
+    - NearLink SSAP
+    excludes:
+    - BLE 见 connectivity.bluetooth.le
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nearlink_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.nfc.hce
+  level: L3
+  parent: connectivity.nfc
+  name:
+    zh: 主机卡模拟
+    en: Host Card Emulation
+  definition: 由主机应用模拟智能卡与读卡器交互。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/nfc/hce.yaml
+  bindings:
+    android:
+    - kind: class
+      id: HostApduService
+      url: https://developer.android.com/reference/android/nfc/cardemulation/HostApduService
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: HCE 能力待核
+    harmonyos:
+    - kind: module
+      id: '@ohos.nfc.cardEmulation'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cardEmulation
+      role: primary
+  comparison_scope:
+    includes:
+    - Host Card Emulation
+    excludes:
+    - 支付编排见 commerce
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - connectivity.nfc.hce
+  sibling_axis: nfc_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.nfc.se
+  level: L3
+  parent: connectivity.nfc
+  name:
+    zh: 安全单元访问
+    en: Secure Element Access
+  definition: 访问设备安全单元或 eSE 上的卡应用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/nfc/se.yaml
+  bindings:
+    android:
+    - kind: class
+      id: OffHostApduService
+      url: https://developer.android.com/reference/android/nfc/cardemulation/OffHostApduService
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Secure Element Access
+    excludes:
+    - 支付编排见 commerce
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nfc_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.nfc.tag
+  level: L3
+  parent: connectivity.nfc
+  name:
+    zh: NFC标签读写
+    en: NFC Tag I/O
+  definition: 发现 NFC 标签并读写 NDEF/技术标签数据。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/nfc/tag.yaml
+  bindings:
+    android:
+    - kind: package
+      id: android.nfc
+      url: https://developer.android.com/develop/connectivity/nfc
+      role: primary
+    ios:
+    - kind: framework
+      id: CoreNFC
+      url: https://developer.apple.com/documentation/corenfc
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.nfc.tag'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-nfcTag
+      role: primary
+  comparison_scope:
+    includes:
+    - NFC Tag I/O
+    excludes:
+    - 支付编排见 commerce
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: merged_from
+    sources:
+    - connectivity.nfc.reader
+  sibling_axis: nfc_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.peripherals.accessory_services
+  level: L3
+  parent: connectivity.peripherals
+  name:
+    zh: 配件侧系统服务
+    en: Accessory System Services
+  definition: 配件侧可调用的系统服务能力（通知转发、音频切换等）入口簇。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/peripherals/accessory_services.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: CoreBluetooth / Accessory
+      url: https://developer.apple.com/documentation/corebluetooth
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Accessory System Services
+    excludes:
+    - 通用蓝牙绑定见 connectivity.bluetooth.bond
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: accessory_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.peripherals.discovery
+  level: L3
+  parent: connectivity.peripherals
+  name:
+    zh: 配件发现与关联
+    en: Accessory Discovery
+  definition: 通过系统 Companion/配件框架发现并关联外设。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/peripherals/discovery.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CompanionDeviceManager
+      url: https://developer.android.com/develop/connectivity/bluetooth/companion-device-pairing
+      role: primary
+    ios:
+    - kind: framework
+      id: AccessorySetupKit
+      url: https://developer.apple.com/documentation/accessorysetupkit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Accessory Discovery
+    excludes:
+    - 通用蓝牙绑定见 connectivity.bluetooth.bond
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: accessory_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.peripherals.mfi
+  level: L3
+  parent: connectivity.peripherals
+  name:
+    zh: 厂商配件会话
+    en: Vendor Accessory Session
+  definition: 与已关联配件按厂商协议建立会话并收发数据（含 MFi EASession 等）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/peripherals/mfi.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: EASession
+      url: https://developer.apple.com/documentation/externalaccessory/easession
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Vendor Accessory Session
+    excludes:
+    - 通用蓝牙绑定见 connectivity.bluetooth.bond
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: accessory_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.peripherals.midi
+  level: L3
+  parent: connectivity.peripherals
+  name:
+    zh: MIDI设备连接
+    en: MIDI Device Connectivity
+  definition: MIDI 设备发现与端口连接（设备侧）；消息流见 media。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/peripherals/midi.yaml
+  bindings:
+    android:
+    - kind: class
+      id: MidiManager
+      url: https://developer.android.com/reference/android/media/midi/MidiManager
+      role: primary
+    ios:
+    - kind: framework
+      id: CoreMIDI
+      url: https://developer.apple.com/documentation/coremidi
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.multimedia.midi'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-midi
+      role: primary
+  comparison_scope:
+    includes:
+    - MIDI Device Connectivity
+    excludes:
+    - 通用蓝牙绑定见 connectivity.bluetooth.bond
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: accessory_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.peripherals.partner_interop
+  level: L3
+  parent: connectivity.peripherals
+  name:
+    zh: 伙伴设备互通
+    en: Partner Device Interop
+  definition: 手机与手表/耳机等伙伴设备的厂商互通会话入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/peripherals/partner_interop.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Wearable Data Layer
+      url: https://developer.android.com/training/wearables/data
+      role: primary
+    ios:
+    - kind: framework
+      id: Watch Connectivity
+      url: https://developer.apple.com/documentation/watchconnectivity
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Partner Device Interop
+    excludes:
+    - 通用蓝牙绑定见 connectivity.bluetooth.bond
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: accessory_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.peripherals.uwb
+  level: L3
+  parent: connectivity.peripherals
+  name:
+    zh: UWB测距
+    en: UWB Ranging
+  definition: 超宽带测距与空间感知。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/peripherals/uwb.yaml
+  bindings:
+    android:
+    - kind: class
+      id: RangingManager
+      url: https://developer.android.com/develop/connectivity/ranging
+      role: primary
+    ios:
+    - kind: framework
+      id: Nearby Interaction
+      url: https://developer.apple.com/documentation/nearbyinteraction
+      role: primary
+    harmonyos:
+    - kind: module
+      id: nearbyInteraction
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-nearbyinteraction
+      role: primary
+  comparison_scope:
+    includes:
+    - UWB Ranging
+    excludes:
+    - 通用蓝牙绑定见 connectivity.bluetooth.bond
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: accessory_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.serial.uart
+  level: L3
+  parent: connectivity.serial
+  name:
+    zh: 本机串口管理
+    en: UART Serial
+  definition: 打开本机 UART 串口并收发数据。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/serial/uart.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 通常经 USB-serial/厂商库，待核标准 API
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: '@ohos.uart'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-uart
+      role: primary
+  comparison_scope:
+    includes:
+    - UART Serial
+    excludes:
+    - USB 枚举见 connectivity.usb.host
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: serial_transport
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.serial.usb
+  level: L3
+  parent: connectivity.serial
+  name:
+    zh: USB串口
+    en: USB Serial
+  definition: 经 USB 枚举的串口设备通信。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/serial/usb.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: UsbSerialDriver 生态库，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: '@ohos.usbManager'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-usbManager
+      role: primary
+  comparison_scope:
+    includes:
+    - USB Serial
+    excludes:
+    - USB 枚举见 connectivity.usb.host
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: serial_transport
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.usb.accessory
+  level: L3
+  parent: connectivity.usb
+  name:
+    zh: USB配件模式
+    en: USB Accessory
+  definition: 作为 USB 配件与主机侧应用通信。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/usb/accessory.yaml
+  bindings:
+    android:
+    - kind: class
+      id: UsbAccessory
+      url: https://developer.android.com/guide/topics/connectivity/usb/accessory
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - USB Accessory
+    excludes:
+    - 串口见 connectivity.serial
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: usb_mode
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.usb.ddk
+  level: L3
+  parent: connectivity.usb
+  name:
+    zh: 用户态USB驱动开发
+    en: USB DDK
+  definition: 用户态 USB 驱动开发套件入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/usb/ddk.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: guide
+      id: USB DDK
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/usb-ddk
+      role: primary
+  comparison_scope:
+    includes:
+    - USB DDK
+    excludes:
+    - 串口见 connectivity.serial
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: usb_mode
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.usb.host
+  level: L3
+  parent: connectivity.usb
+  name:
+    zh: USB主机模式
+    en: USB Host
+  definition: 作为 USB 主机枚举并与外设通信。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/usb/host.yaml
+  bindings:
+    android:
+    - kind: class
+      id: UsbManager
+      url: https://developer.android.com/guide/topics/connectivity/usb/host
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: '@ohos.usbManager'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-usbManager
+      role: primary
+  comparison_scope:
+    includes:
+    - USB Host
+    excludes:
+    - 串口见 connectivity.serial
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - connectivity.usb.host
+  sibling_axis: usb_mode
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.usb.mtp
+  level: L3
+  parent: connectivity.usb
+  name:
+    zh: MTP设备访问
+    en: MTP Access
+  definition: 通过 MTP 访问媒体传输协议设备。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/usb/mtp.yaml
+  bindings:
+    android:
+    - kind: package
+      id: android.mtp
+      url: https://developer.android.com/reference/android/mtp/package-summary
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - MTP Access
+    excludes:
+    - 串口见 connectivity.serial
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: usb_mode
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.wifi.aware
+  level: L3
+  parent: connectivity.wifi
+  name:
+    zh: Wi-Fi感知组网
+    en: Wi-Fi Aware
+  definition: 邻区感知网络发布/订阅与数据路径。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/wifi/aware.yaml
+  bindings:
+    android:
+    - kind: class
+      id: WifiAwareManager
+      url: https://developer.android.com/develop/connectivity/wifi/wifi-aware
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Wi-Fi Aware
+    excludes:
+    - 蜂窝网络见 network
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wifi_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.wifi.connect
+  level: L3
+  parent: connectivity.wifi
+  name:
+    zh: Wi-Fi连接与网络建议
+    en: Wi-Fi Connect and Suggestions
+  definition: 请求连接网络或向系统提供网络建议。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/wifi/connect.yaml
+  bindings:
+    android:
+    - kind: class
+      id: WifiNetworkSuggestion
+      url: https://developer.android.com/guide/topics/connectivity/wifi-suggest
+      role: primary
+    ios:
+    - kind: class
+      id: NEHotspotConfigurationManager
+      url: https://developer.apple.com/documentation/networkextension/nehotspotconfigurationmanager
+      role: primary
+    harmonyos:
+    - kind: module
+      id: wifiManager.connectToNetwork
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wifiManager
+      role: primary
+  comparison_scope:
+    includes:
+    - Wi-Fi Connect and Suggestions
+    excludes:
+    - 蜂窝网络见 network
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - connectivity.wifi.connect
+  sibling_axis: wifi_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.wifi.hotspot_local
+  level: L3
+  parent: connectivity.wifi
+  name:
+    zh: 本地热点
+    en: Local Hotspot
+  definition: 开启/配置本机本地 Wi-Fi 热点。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/wifi/hotspot_local.yaml
+  bindings:
+    android:
+    - kind: class
+      id: WifiManager.startLocalOnlyHotspot
+      url: https://developer.android.com/reference/android/net/wifi/WifiManager
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: wifiManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wifiManager
+      role: primary
+  comparison_scope:
+    includes:
+    - Local Hotspot
+    excludes:
+    - 蜂窝网络见 network
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: merged_from
+    sources:
+    - network.hotspot
+    - network.hotspot.local
+  sibling_axis: wifi_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.wifi.p2p
+  level: L3
+  parent: connectivity.wifi
+  name:
+    zh: Wi-Fi点对点
+    en: Wi-Fi P2P
+  definition: Wi-Fi Direct/P2P 设备发现与组网。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/wifi/p2p.yaml
+  bindings:
+    android:
+    - kind: class
+      id: WifiP2pManager
+      url: https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: wifiManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wifiManager
+      role: primary
+  comparison_scope:
+    includes:
+    - Wi-Fi P2P
+    excludes:
+    - 蜂窝网络见 network
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wifi_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.wifi.rtt
+  level: L3
+  parent: connectivity.wifi
+  name:
+    zh: Wi-Fi RTT测距
+    en: Wi-Fi RTT
+  definition: 对支持的接入点或对等方进行 RTT 测距。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/wifi/rtt.yaml
+  bindings:
+    android:
+    - kind: class
+      id: WifiRttManager
+      url: https://developer.android.com/guide/topics/connectivity/wifi-rtt
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Wi-Fi RTT
+    excludes:
+    - 蜂窝网络见 network
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wifi_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.wifi.scan
+  level: L3
+  parent: connectivity.wifi
+  name:
+    zh: Wi-Fi扫描
+    en: Wi-Fi Scan
+  definition: 扫描周边 Wi-Fi 接入点并获取结果。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/wifi/scan.yaml
+  bindings:
+    android:
+    - kind: class
+      id: WifiManager.startScan
+      url: https://developer.android.com/guide/topics/connectivity/wifi-scan
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 应用侧扫描受限，待核
+    harmonyos:
+    - kind: module
+      id: '@ohos.wifiManager'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wifiManager
+      role: primary
+  comparison_scope:
+    includes:
+    - Wi-Fi Scan
+    excludes:
+    - 蜂窝网络见 network
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - connectivity.wifi.scan
+  sibling_axis: wifi_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.wifi.state
+  level: L3
+  parent: connectivity.wifi
+  name:
+    zh: Wi-Fi连接信息
+    en: Wi-Fi Connection Info
+  definition: 查询当前 Wi-Fi 连接状态与链路信息。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/wifi/state.yaml
+  bindings:
+    android:
+    - kind: class
+      id: WifiInfo
+      url: https://developer.android.com/reference/android/net/wifi/WifiInfo
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: getLinkedInfo
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wifiManager
+      role: primary
+  comparison_scope:
+    includes:
+    - Wi-Fi Connection Info
+    excludes:
+    - 蜂窝网络见 network
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wifi_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.bluetooth.bond.discovery
+  level: L4
+  parent: connectivity.bluetooth.bond
+  name:
+    zh: 蓝牙设备发现
+    en: Bluetooth Device Discovery
+  definition: 启动/停止周边蓝牙设备查询并接收发现结果。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/bluetooth/bond/discovery.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BluetoothAdapter.startDiscovery
+      url: https://developer.android.com/develop/connectivity/bluetooth/find-bluetooth-devices
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 经典发现受限；BLE 见 le.scan
+    harmonyos:
+    - kind: module
+      id: startBluetoothDiscovery
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-connection
+      role: primary
+  comparison_scope:
+    includes:
+    - startDiscovery、发现回调
+    excludes:
+    - 配对见 bond.pairing
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: bond_phase
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.bluetooth.bond.pairing
+  level: L4
+  parent: connectivity.bluetooth.bond
+  name:
+    zh: 配对与绑定管理
+    en: Pairing and Bond Management
+  definition: 发起配对、查询已绑定设备并监听绑定状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/bluetooth/bond/pairing.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BluetoothDevice.createBond
+      url: https://developer.android.com/develop/connectivity/bluetooth/find-bluetooth-devices
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: pairDevice
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-connection
+      role: primary
+  comparison_scope:
+    includes:
+    - createBond/pairDevice、bonded list
+    excludes:
+    - 发现见 bond.discovery
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: bond_phase
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.bluetooth.classic.a2dp
+  level: L4
+  parent: connectivity.bluetooth.classic
+  name:
+    zh: A2DP音频配置文件
+    en: A2DP Profile
+  definition: 经典蓝牙高质量音频配置文件控制面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/bluetooth/classic/a2dp.yaml
+  bindings:
+    android:
+    - kind: package
+      id: android.bluetooth
+      url: https://developer.android.com/develop/connectivity/bluetooth
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: '@ohos.bluetooth.a2dp'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/connectivity-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - A2DP Profile
+    excludes:
+    - LE Audio 见 le_audio
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: classic_profile
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.bluetooth.classic.hfp
+  level: L4
+  parent: connectivity.bluetooth.classic
+  name:
+    zh: HFP免提配置文件
+    en: HFP Profile
+  definition: 免提音频网关/耳机配置文件控制面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/bluetooth/classic/hfp.yaml
+  bindings:
+    android:
+    - kind: package
+      id: android.bluetooth
+      url: https://developer.android.com/develop/connectivity/bluetooth
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: '@ohos.bluetooth.hfp'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/connectivity-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - HFP Profile
+    excludes:
+    - LE Audio 见 le_audio
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: classic_profile
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.bluetooth.classic.hid
+  level: L4
+  parent: connectivity.bluetooth.classic
+  name:
+    zh: HID人机接口配置文件
+    en: HID Profile
+  definition: 蓝牙人机接口设备配置文件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/bluetooth/classic/hid.yaml
+  bindings:
+    android:
+    - kind: package
+      id: android.bluetooth
+      url: https://developer.android.com/develop/connectivity/bluetooth
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: '@ohos.bluetooth.hid'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/connectivity-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - HID Profile
+    excludes:
+    - LE Audio 见 le_audio
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: classic_profile
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.bluetooth.classic.pan
+  level: L4
+  parent: connectivity.bluetooth.classic
+  name:
+    zh: PAN个人区域网
+    en: PAN Profile
+  definition: 蓝牙个人区域网配置文件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/bluetooth/classic/pan.yaml
+  bindings:
+    android:
+    - kind: package
+      id: android.bluetooth
+      url: https://developer.android.com/develop/connectivity/bluetooth
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: '@ohos.bluetooth.pan'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/connectivity-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - PAN Profile
+    excludes:
+    - LE Audio 见 le_audio
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: classic_profile
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.bluetooth.classic.spp
+  level: L4
+  parent: connectivity.bluetooth.classic
+  name:
+    zh: SPP串口仿真
+    en: RFCOMM/SPP
+  definition: 通过 RFCOMM/SPP 建立面向字节流的经典蓝牙数据通道。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/connectivity/bluetooth/classic/spp.yaml
+  bindings:
+    android:
+    - kind: package
+      id: android.bluetooth
+      url: https://developer.android.com/develop/connectivity/bluetooth
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: '@ohos.bluetooth.socket'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/connectivity-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - RFCOMM/SPP
+    excludes:
+    - LE Audio 见 le_audio
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: classic_profile
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.bluetooth.le.advertise
+  level: L4
+  parent: connectivity.bluetooth.le
+  name:
+    zh: BLE广播
+    en: BLE Advertising
+  definition: 外设侧广播可发现载荷并管理广播状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/bluetooth/le/advertise.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BluetoothLeAdvertiser
+      url: https://developer.android.com/reference/android/bluetooth/le/BluetoothLeAdvertiser
+      role: primary
+    ios:
+    - kind: class
+      id: CBPeripheralManager
+      url: https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager
+      role: primary
+    harmonyos:
+    - kind: module
+      id: ble.startAdvertising
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ble-development-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - advertising data、start/stop
+    excludes:
+    - 扫描见 le.scan
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - connectivity.bluetooth.le.advertise
+  sibling_axis: ble_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.bluetooth.le.channel_sounding
+  level: L4
+  parent: connectivity.bluetooth.le
+  name:
+    zh: BLE信道探测测距
+    en: BLE Channel Sounding
+  definition: 基于 Channel Sounding 在两台 BLE 设备间测距。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/bluetooth/le/channel_sounding.yaml
+  bindings:
+    android:
+    - kind: class
+      id: RangingManager
+      url: https://developer.android.com/develop/connectivity/ranging
+      role: primary
+    ios:
+    - kind: guide
+      id: Channel Sounding
+      url: https://developer.apple.com/documentation/corebluetooth/measuring-distance-between-devices-using-channel-sounding
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - channel sounding ranging
+    excludes:
+    - UWB 见 peripherals.uwb
+    - Wi-Fi RTT 见 wifi.rtt
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ble_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - connectivity.peripherals.uwb
+  - connectivity.wifi.rtt
+- id: connectivity.bluetooth.le.filter
+  level: L4
+  parent: connectivity.bluetooth.le
+  name:
+    zh: BLE扫描过滤
+    en: BLE Scan Filtering
+  definition: 按服务 UUID、厂商数据等条件过滤扫描结果。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/bluetooth/le/filter.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ScanFilter
+      url: https://developer.android.com/reference/android/bluetooth/le/ScanFilter
+      role: primary
+    ios:
+    - kind: class
+      id: scanForPeripherals(withServices:)
+      url: https://developer.apple.com/documentation/corebluetooth/cbcentralmanager
+      role: primary
+    harmonyos:
+    - kind: module
+      id: ScanFilter
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-bluetooth-ble
+      role: primary
+  comparison_scope:
+    includes:
+    - ScanFilter 字段语义
+    excludes:
+    - 启动扫描见 le.scan
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: symbol_ok
+  legacy:
+    disposition: renamed_from
+    sources:
+    - connectivity.bluetooth.le.scan.filter
+    - connectivity.bluetooth.le.scan.batch
+    - connectivity.bluetooth.le.scan.background
+  sibling_axis: ble_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.bluetooth.le.gatt_client
+  level: L4
+  parent: connectivity.bluetooth.le
+  name:
+    zh: GATT客户端
+    en: GATT Client
+  definition: 作为中心连接外设、发现服务特性并读写/订阅。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/bluetooth/le/gatt_client.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BluetoothGatt
+      url: https://developer.android.com/reference/android/bluetooth/BluetoothGatt
+      role: primary
+    ios:
+    - kind: class
+      id: CBPeripheral
+      url: https://developer.apple.com/documentation/corebluetooth/cbperipheral
+      role: primary
+    harmonyos:
+    - kind: module
+      id: ble.createGattClientDevice
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/gatt-development-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - connect、service discovery、notify
+    excludes:
+    - 服务端见 gatt_server
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: merged_from
+    sources:
+    - connectivity.bluetooth.le.connect
+    - connectivity.bluetooth.le.gatt
+  sibling_axis: ble_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.bluetooth.le.gatt_server
+  level: L4
+  parent: connectivity.bluetooth.le
+  name:
+    zh: GATT服务端
+    en: GATT Server
+  definition: 作为外设注册服务/特性并响应远端读写与通知。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/bluetooth/le/gatt_server.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BluetoothGattServer
+      url: https://developer.android.com/reference/android/bluetooth/BluetoothGattServer
+      role: primary
+    ios:
+    - kind: class
+      id: CBMutableService
+      url: https://developer.apple.com/documentation/corebluetooth/cbmutableservice
+      role: primary
+    harmonyos:
+    - kind: module
+      id: ble.createGattServer
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/gatt-development-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - addService、notify/indicate
+    excludes:
+    - 客户端见 gatt_client
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ble_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: connectivity.bluetooth.le.scan
+  level: L4
+  parent: connectivity.bluetooth.le
+  name:
+    zh: BLE扫描
+    en: BLE Scanning
+  definition: 中心侧扫描周边 BLE 广播并接收结果。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/connectivity/bluetooth/le/scan.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BluetoothLeScanner
+      url: https://developer.android.com/develop/connectivity/bluetooth/ble/find-ble-devices
+      role: primary
+    ios:
+    - kind: class
+      id: CBCentralManager.scanForPeripherals
+      url: https://developer.apple.com/documentation/corebluetooth/cbcentralmanager
+      role: primary
+    harmonyos:
+    - kind: module
+      id: ble.startBLEScan
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ble-development-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - scan settings、callbacks
+    excludes:
+    - 过滤见 le.scan.filter
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: body_ok
+  legacy:
+    disposition: kept
+    sources:
+    - connectivity.bluetooth.le.scan
+  sibling_axis: ble_role
+  leaf_at_this_level: true
+  split_justification: independent_capability

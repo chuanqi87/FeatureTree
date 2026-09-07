@@ -1,0 +1,24 @@
+schema_version: 2
+feature_id: media.drm.license
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 密钥系统发现、许可证请求与离线密钥。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- media.drm.license.key_request
+- media.drm.license.key_status

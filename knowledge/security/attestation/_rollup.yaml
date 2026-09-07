@@ -1,0 +1,27 @@
+schema_version: 2
+feature_id: security.attestation
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 应用/设备/密钥完整性证明与信任令牌。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- security.attestation.app_integrity
+- security.attestation.device_token
+- security.attestation.key_attestation
+- security.attestation.nonce
+- security.attestation.server_verify

@@ -1,9 +1,0 @@
-{
-  "task_id": "ba44675ceb884c4e7495c00cbe9e5d907521f9d18d46cef810edcd69d471f7d2",
-  "feature_id": "app.desktop.widget",
-  "response_sha256": "8f9f0bef875164b23ef3dcd0f05c3d5cd43e24cab9380b89604f8d99a080fdf2",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

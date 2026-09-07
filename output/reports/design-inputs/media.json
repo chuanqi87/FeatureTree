@@ -1,0 +1,4841 @@
+{
+  "domain": "media",
+  "authored_count": 11,
+  "draft_clue_count": 201,
+  "authored": [
+    {
+      "id": "media",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "媒体",
+        "en": "Media"
+      },
+      "definition": "音视频编解码、播放、相机、图库与屏幕共享。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "media.capture",
+      "parent": "media",
+      "level": "L2",
+      "name": {
+        "zh": "媒体采集",
+        "en": "Media Capture"
+      },
+      "definition": "麦克风与相机采集。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "media.capture.camera",
+      "parent": "media.capture",
+      "level": "L3",
+      "name": {
+        "zh": "相机捕获管线",
+        "en": "Camera Capture Pipeline"
+      },
+      "definition": "预览、拍照与录像管线（多世代 API 收在知识演进）。",
+      "knowledge_role": "leaf",
+      "bindings": {
+        "android": [
+          {
+            "kind": "package",
+            "id": "androidx.camera",
+            "url": "https://developer.android.com/jetpack/androidx/releases/camera",
+            "role": "primary",
+            "preferred": true
+          }
+        ],
+        "ios": [
+          {
+            "kind": "framework",
+            "id": "AVFoundation",
+            "url": "https://developer.apple.com/documentation/avfoundation",
+            "role": "primary"
+          }
+        ],
+        "harmonyos": [
+          {
+            "kind": "kit",
+            "id": "CameraKit",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/camera-overview",
+            "role": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "id": "media.capture.microphone",
+      "parent": "media.capture",
+      "level": "L3",
+      "name": {
+        "zh": "麦克风录音",
+        "en": "Microphone Recording"
+      },
+      "definition": "音频输入采集。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "media.codec",
+      "parent": "media",
+      "level": "L2",
+      "name": {
+        "zh": "编解码",
+        "en": "Codecs"
+      },
+      "definition": "音视频编解码器访问。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "media.codec.hardware",
+      "parent": "media.codec",
+      "level": "L3",
+      "name": {
+        "zh": "硬件编解码",
+        "en": "Hardware Codec"
+      },
+      "definition": "硬件加速编解码能力。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "media.library",
+      "parent": "media",
+      "level": "L2",
+      "name": {
+        "zh": "媒体库",
+        "en": "Media Library"
+      },
+      "definition": "系统图库与媒体文件访问。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "media.library.picker",
+      "parent": "media.library",
+      "level": "L3",
+      "name": {
+        "zh": "系统媒体选择器",
+        "en": "System Media Picker"
+      },
+      "definition": "由系统 UI 选择照片/视频，减少广域存储权限。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "media.playback",
+      "parent": "media",
+      "level": "L2",
+      "name": {
+        "zh": "媒体播放",
+        "en": "Media Playback"
+      },
+      "definition": "音视频播放会话与焦点。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "media.playback.audio",
+      "parent": "media.playback",
+      "level": "L3",
+      "name": {
+        "zh": "音频播放",
+        "en": "Audio Playback"
+      },
+      "definition": "本地或流式音频播放。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "media.playback.video",
+      "parent": "media.playback",
+      "level": "L3",
+      "name": {
+        "zh": "视频播放",
+        "en": "Video Playback"
+      },
+      "definition": "视频渲染与控制。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "media.audio",
+      "parent": "media",
+      "name": "音频渲染与处理",
+      "what": "播放器之下的音频层能力：PCM流式渲染、低延迟播放、音效处理、MIDI设备与消息、短音频池、空间音频。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Oboe, AAudio",
+          "url": "https://developer.android.com/games/sdk/oboe/low-latency-audio",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.audio(AudioRenderer)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-audiorenderer-for-playback",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.effects",
+      "parent": "media.audio",
+      "name": "音效处理",
+      "what": "对播放/输出音频施加效果器：均衡器、低音增强、混响、响度、声道虚拟化及音频回声消除/降噪等预处理。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.audiofx.AudioEffect, Equalizer, DynamicsProcessing, AcousticEchoCanceler",
+          "url": "https://developer.android.com/reference/android/media/audiofx/package-summary",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.audio(音效能力)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/public-audio-spatialization-management",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.effects.bass_boost",
+      "parent": "media.audio.effects",
+      "name": "低音增强",
+      "what": "提升播放音频低频段的能量，改善小扬声器/耳机的低音听感。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.audiofx.BassBoost",
+          "url": "https://developer.android.com/reference/android/media/audiofx/package-summary",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.effects.dynamics",
+      "parent": "media.audio.effects",
+      "name": "动态处理与响度增强",
+      "what": "对播放音频做动态范围处理：多段压缩、限幅、EQ级联的动态处理链，以及提升整体响度的响度增强。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.audiofx.DynamicsProcessing / LoudnessEnhancer",
+          "url": "https://developer.android.com/reference/android/media/audiofx/package-summary",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFAudio.AVAudioUnitDynamicsProcessor",
+          "url": "https://developer.apple.com/documentation/avfaudio/avaudiounitdynamicsprocessor",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.effects.equalizer",
+      "parent": "media.audio.effects",
+      "name": "均衡器",
+      "what": "按频段调整播放音频的频率响应，可作用于单个音频会话或全局输出混音。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.audiofx.Equalizer",
+          "url": "https://developer.android.com/reference/android/media/audiofx/package-summary",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFAudio.AVAudioUnitEQ",
+          "url": "https://developer.apple.com/documentation/avfaudio/avaudiouniteq",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.effects.reverb",
+      "parent": "media.audio.effects",
+      "name": "混响效果",
+      "what": "为播放音频添加房间/环境混响，含预设混响与可调参数的环境混响。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.audiofx.PresetReverb / EnvironmentalReverb",
+          "url": "https://developer.android.com/reference/android/media/audiofx/package-summary",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFAudio.AVAudioUnitReverb",
+          "url": "https://developer.apple.com/documentation/avfaudio/avaudiounitreverb",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.effects.visualizer",
+      "parent": "media.audio.effects",
+      "name": "播放音频可视化取数",
+      "what": "周期性获取当前播放音频的波形/FFT数据用于界面可视化，不修改音频输出；需系统授权且受内容保护限制。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.audiofx.Visualizer / Visualizer.OnDataCaptureListener",
+          "url": "https://developer.android.com/reference/android/media/audiofx/package-summary",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFoundation.MTAudioProcessingTap",
+          "url": "https://developer.apple.com/documentation/mediatoolbox/mtaudioprocessingtap",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.effects.voice_preproc",
+      "parent": "media.audio.effects",
+      "name": "语音前处理效果(AEC/NS/AGC)",
+      "what": "对音频流施加回声消除、噪声抑制、自动增益等语音通信前处理效果，提升双向通话/语音交互质量。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.audiofx.AcousticEchoCanceler / NoiseSuppressor / AutomaticGainControl",
+          "url": "https://developer.android.com/reference/android/media/audiofx/package-summary",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFAudio.AVAudioSession voiceProcessing(VoiceProcessingIO)",
+          "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/setmode(_:)/voiceprocessing",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.midi",
+      "parent": "media.audio",
+      "name": "MIDI设备与消息",
+      "what": "MIDI设备发现/连接与MIDI消息收发：热插拔、端口能力、UMP数据、蓝牙MIDI配对。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.midi.MidiManager",
+          "url": "https://developer.android.com/reference/android/media/midi/package-summary",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_MIDI(开始版本24)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ohmidi",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CABTMIDICentralViewController(CoreAudioKit)",
+          "url": "https://developer.apple.com/documentation/coreaudiokit",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CoreMIDI, MIDI Bluetooth支持",
+          "url": "https://developer.apple.com/documentation/coremidi/midi-bluetooth",
+          "status": "reviewed_source"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.media.midi.MidiManager.getDevices/openDevice, MidiDevice.openInputPort/openOutputPort; NDK AMidi",
+          "url": "https://developer.android.com/reference/android/media/midi/MidiManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CoreMIDI(MIDIEntity/MIDIEndpoint端口收发)",
+          "url": "https://developer.apple.com/documentation/coremidi",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.midi.bt_pairing",
+      "parent": "media.audio.midi",
+      "name": "蓝牙MIDI配对与外设管理",
+      "what": "发现并配对附近蓝牙(BLE) MIDI外设；iOS另支持将本机广告为蓝牙MIDI外设供他机连接。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "CoreAudioKit.CABTMIDICentralViewController / CABTLEMIDIWindowController / CABTMIDILocalPeripheralViewController",
+          "url": "https://developer.apple.com/documentation/coreaudiokit",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.media.midi.MidiManager(蓝牙MIDI设备出现在设备列表)",
+          "url": "https://developer.android.com/reference/android/media/midi/package-summary",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MIDIBluetoothDriverActivateAllConnections() / MIDIBluetoothDriverDisconnect(_:)",
+          "url": "https://developer.apple.com/documentation/coremidi/midi-bluetooth",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.media.midi.BluetoothMidiDevice",
+          "url": "https://developer.android.com/reference/android/media/midi/BluetoothMidiDevice",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.midi.connection",
+      "parent": "media.audio.midi",
+      "name": "MIDI设备连接与端口管理",
+      "what": "打开/关闭MIDI设备与端口：USB设备同步打开、BLE设备异步打开；端口以设备视角命名(向合成器发音符开其输入口)，每端口16通道，含端口数量与类型查询。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MidiManager.openDevice/MidiDevice.openInputPort/openOutputPort(端口模型与方向语义见包概述)",
+          "url": "https://developer.android.com/reference/android/media/midi/package-summary",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_MIDIClient_OpenDevice(USB同步)/OH_MIDIClient_OpenBLEDevice(BLE异步)/CloseDevice + OH_MIDIDevice_OpenInputPort/OpenOutputPort/CloseInputPort/CloseOutputPort/GetPortCount/GetPortInfos",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ohmidi",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CoreMIDI端点连接(MIDIPortConnectSource等)",
+          "url": "https://developer.apple.com/documentation/coremidi",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.midi.discovery",
+      "parent": "media.audio.midi",
+      "name": "MIDI设备枚举与热插拔",
+      "what": "枚举当前可用MIDI设备(名称/厂商/端口能力)并订阅插拔通知；HarmonyOS需蓝牙权限才能枚举BLE MIDI设备，并提供系统能力检查。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.midi.MidiManager.getDevices/registerDeviceCallback(onDeviceAdded/onDeviceRemoved)/MidiDeviceInfo.getProperties",
+          "url": "https://developer.android.com/reference/android/media/midi/package-summary",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_MIDIClient_GetDeviceCount/GetDeviceInfos + OH_MIDICallback_OnDeviceChange + canIUse(SystemCapability.Multimedia.Audio.MIDI)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ohmidi",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CoreMIDI设备/端点枚举(MIDIGetNumberOfDevices等)",
+          "url": "https://developer.apple.com/documentation/coremidi",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.midi.messaging",
+      "parent": "media.audio.midi",
+      "name": "MIDI消息收发",
+      "what": "标准MIDI事件协议消息收发：1-3字节短消息高效传输、任意长度SysEx、时间戳避免抖动、接收回调；覆盖USB/BLE/虚拟传输。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.midi消息传输(短消息/SysEx/时间戳,见包概述能力列表)",
+          "url": "https://developer.android.com/reference/android/media/midi/package-summary",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_MIDIDevice_Send/OH_MIDIDevice_SendSysEx/OH_MIDIDevice_OnReceived",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ohmidi",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CoreMIDI消息收发(MIDIReceived/发送API)",
+          "url": "https://developer.apple.com/documentation/coremidi",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.midi.virtual_device",
+      "parent": "media.audio.midi",
+      "name": "虚拟MIDI设备与应用间路由",
+      "what": "创建可被其他应用连接的虚拟MIDI设备(如合成器应用被作曲应用驱动)、应用间MIDI消息互发、设备间直接patching降低延迟、外设模式把本机作为多点触控控制器连接PC。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.midi虚拟MIDI设备创建/设备patching/peripheral mode(包概述确认能力，方法级符号待核)",
+          "url": "https://developer.android.com/reference/android/media/midi/package-summary",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.render",
+      "parent": "media.audio",
+      "name": "低延迟音频渲染",
+      "what": "将PCM流直接写入音频输出设备的底层渲染：流创建、buffer管理、低延迟/低功耗模式、状态回调。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Oboe::AudioStream, AAudioStream",
+          "url": "https://developer.android.com/games/sdk/oboe/low-latency-audio",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_AudioRenderer(OHAudio)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ohaudio-for-playback",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.render.buffer_tuning",
+      "parent": "media.audio.render",
+      "name": "缓冲区调优与欠载监测",
+      "what": "运行时优化延迟稳定性：按framesPerBurst将缓冲设为双倍burst(双缓冲)、以XRun欠载计数驱动缓冲增大；Oboe自动设双burst而AAudio默认更高。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AAudioStream_getFramesPerBurst/AAudioStream_setBufferSizeInFrames/AAudioStream_getXRunCount",
+          "url": "https://developer.android.com/games/sdk/oboe/low-latency-audio",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_AudioStreamBuilder_SetFrameSizeInCallback(设置回调audioDataSize)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ohaudio-for-playback",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.render.stream_setup",
+      "parent": "media.audio.render",
+      "name": "低延迟PCM流输出",
+      "what": "将应用生成或解码的PCM数据送入原生音频输出流，选择低延迟或功耗通路并按回调或写入模型交付数据；运行时缓冲与欠载调优另列",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Oboe::AudioStreamBuilder / AAudioStreamBuilder_*(Oboe为AAudio的C++封装,8.1+走AAudio,更低版本回退OpenSL ES,含QuirksManager设备纠偏)",
+          "url": "https://developer.android.com/games/sdk/oboe/low-latency-audio",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_AudioStreamBuilder_Create/SetSamplingRate/SetChannelCount/SetSampleFormat/SetEncodingType/SetRendererInfo/GenerateRenderer/OH_AudioRenderer_Release",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ohaudio-for-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFAudio.AVAudioEngine(手动渲染节点图)",
+          "url": "https://developer.apple.com/documentation/avfaudio/avaudioengine",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Oboe builder.setDataCallback / AAudioStreamBuilder_setDataCallback",
+          "url": "https://developer.android.com/games/sdk/oboe/low-latency-audio",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_AudioStreamBuilder_SetRendererWriteDataCallback(API12+)/OH_AudioRenderer_OnWriteDataCallback(AUDIO_DATA_CALLBACK_RESULT_VALID/INVALID)/SetFrameSizeInCallback",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ohaudio-for-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFAudio.AVAudioSourceNode(拉取式渲染回调)",
+          "url": "https://developer.apple.com/documentation/avfaudio/avaudiosourcenode",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "oboe::PerformanceMode::LowLatency/SharingMode::Exclusive + AAudioStreamBuilder_setPerformanceMode/setSharingMode",
+          "url": "https://developer.android.com/games/sdk/oboe/low-latency-audio",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_AudioStreamBuilder_SetLatencyMode(AUDIOSTREAM_LATENCY_MODE_FAST) + audio.AudioStreamManager.isFastPlaybackSupported/isOffloadPlaybackSupported/isDirectPlaybackSupported/isMultichannelPlaybackSupported(26.0.0起)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ohaudio-for-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFAudio.AVAudioSession.preferredIOBufferDuration",
+          "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/preferrediobufferduration",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.short_sounds",
+      "parent": "media.audio",
+      "name": "短音频与音效池",
+      "what": "低延迟重复播放的短音频资源池：预加载、并发播放、系统音效(UX音/提示音)。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.media.SoundPool, SoundPlayer",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-soundpool-for-playback",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.short_sounds.pool",
+      "parent": "media.audio.short_sounds",
+      "name": "池化短音效播放",
+      "what": "短音频资源池：预加载解码后的短音效(HarmonyOS限解码后1MB内)，以soundId并发触发多路流(创建时限定最大流数)，按streamId控制循环/倍速/左右音量/优先级，可卸载与释放。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "media.SoundPool(createSoundPool(maxStreams,AudioRendererInfo)/load/play(PlayParameters)/setLoop/setPriority/setVolume/stop/unload/release)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-soundpool-for-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.media.SoundPool",
+          "url": "https://developer.android.com/reference/android/media/SoundPool",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFoundation.AVAudioPlayer(prepareToPlay，多实例自建池)",
+          "url": "https://developer.apple.com/documentation/avfoundation/avaudioplayer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.short_sounds.tone_generation",
+      "parent": "media.audio.short_sounds",
+      "name": "标准音调与信号音播放",
+      "what": "无需音频文件、由API直接合成播放标准音调：DTMF按键音、电话 supervisory 信号音等。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.ToneGenerator",
+          "url": "https://developer.android.com/reference/android/media/ToneGenerator",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.spatial",
+      "parent": "media.audio",
+      "name": "空间音频",
+      "what": "空间化音频渲染与个性化：空间混音、头部跟踪、3D场景声源定位、空间音频能力查询与开关。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AudioAttributes spatial audio能力",
+          "url": "https://developer.android.com/media/grow/spatial-audio",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Phase(声源节点/空间混音)",
+          "url": "https://developer.apple.com/documentation/phase/playing-sound-from-a-location-in-a-3d-scene",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.audio(空间音频管理)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/public-audio-spatialization-management",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.spatial.head_tracking",
+      "parent": "media.audio.spatial",
+      "name": "头部跟踪空间化",
+      "what": "基于用户头部姿态实时调整空间化音频朝向，并查询/订阅头部跟踪器可用性与期望模式。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Spatializer.isHeadTrackerAvailable/addOnHeadTrackerAvailableListener/getHeadTrackingMode",
+          "url": "https://developer.android.com/media/grow/spatial-audio",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.spatial.query",
+      "parent": "media.audio.spatial",
+      "name": "空间音频能力查询与状态订阅",
+      "what": "查询设备/当前音频路由是否支持并开启空间化渲染，订阅开关与可用性变化，并在内容侧声明是否已空间化以控制平台行为。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Spatializer.getImmersiveAudioLevel/isAvailable/isEnabled/canBeSpatialized/addOnSpatializerStateChangedListener, AudioAttributes.Builder.setIsContentSpatialized/setSpatializationBehavior",
+          "url": "https://developer.android.com/media/grow/spatial-audio",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AudioManager.getSpatializationManager, AudioSpatializationManager.isSpatializationEnabledForCurrentDevice/on('spatializationEnabledChangeForCurrentDevice'), AudioDeviceDescriptor.spatializationSupported",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/public-audio-spatialization-management",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.audio.spatial.scene",
+      "parent": "media.audio.spatial",
+      "name": "3D场景声源定位与空间混音",
+      "what": "在三维场景中放置声源/听者/遮挡物并做空间化混音渲染，声音方位、距离衰减与遮挡随场景变化；与单纯多声道重放不同，声源位置由应用显式建模。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHASESource/PHASEListener/PHASEOccluder/PHASESpatialMixerDefinition",
+          "url": "https://developer.apple.com/documentation/phase/playing-sound-from-a-location-in-a-3d-scene",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "AudioFormat.CHANNEL_OUT_5POINT1+MediaFormat.KEY_MAX_OUTPUT_CHANNEL_COUNT(多声道PCM供平台空间化)",
+          "url": "https://developer.android.com/media/grow/spatial-audio",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Audio Vivid对象音频渲染(OH_AudioStream携带元数据)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/public-audio-spatialization-management",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.capture",
+      "parent": "media",
+      "name": "相机与麦克风采集",
+      "what": "从设备传感器直接采集媒体流：相机管线(预览/拍照/录像)、麦克风音频采集、系统相机委托。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.hardware.camera2.CameraManager, CameraCaptureSession",
+          "url": "https://developer.android.com/media/camera/camera2/capture-sessions-requests",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.camera(CameraManager)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/camera-dev-arkts",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.capture.camera",
+      "parent": "media.capture",
+      "name": "相机管线",
+      "what": "直接控制相机设备的采集管线：设备枚举/能力查询、会话与流配置、预览、拍照、视频流录像、HDR/多摄/微距等拍摄模式与效果。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.hardware.camera2.CameraCaptureSession, androidx.camera.CameraX",
+          "url": "https://developer.android.com/media/camera/camera2/capture-sessions-requests",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "LockedCameraCapture, ImageCaptureCore",
+          "url": "https://developer.apple.com/documentation/lockedcameracapture/creating-a-camera-experience-for-the-lock-screen",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.camera(CameraManager), OH_Camera",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/camera-dev-arkts",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.capture.camera.controls",
+      "parent": "media.capture.camera",
+      "name": "拍摄参数控制与特殊模式",
+      "what": "对运行中的相机管线施加参数与模式控制：对焦/白平衡/旋转/手电筒、微距、多摄同开、HDR Vivid拍照、折叠态摄像头切换等。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "camera对焦/白平衡设置/手电筒使用/微距能力设置/多摄同开/HDR Vivid相机拍照/适配折叠状态摄像头变更",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/camera-focus",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "CaptureRequest键(CONTROL_AF_MODE/CONTROL_AWB_MODE/FLASH_MODE), CameraCharacteristics能力查询",
+          "url": "https://developer.android.com/media/camera/camera2/capture-sessions-requests",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVCaptureDevice(focusMode/whiteBalanceMode/torchMode)",
+          "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.capture.camera.photo",
+      "parent": "media.capture.camera",
+      "name": "静态照片拍摄",
+      "what": "从相机管线触发单次拍照并获取静态图像：拍照模板请求、YUV/分段式/动态照片等拍摄形态。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "CameraDevice.TEMPLATE_STILL_CAPTURE + CameraCaptureSession.capture(与TEMPLATE_PREVIEW重复请求交错), STILL_CAPTURE流用途(ImageReader target)",
+          "url": "https://developer.android.com/media/camera/camera2/capture-sessions-requests",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "camera拍照(PhotoOutput.capture), 分段式拍照, YUV拍照, 动态照片拍摄",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/camera-shooting",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVCapturePhotoOutput(capturePhoto), ImageCaptureCore",
+          "url": "https://developer.apple.com/documentation/avfoundation/avcapturephotooutput",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.capture.camera.preview",
+      "parent": "media.capture.camera",
+      "name": "相机预览流输出",
+      "what": "把相机实时帧输出到显示Surface供取景预览，可声明预览流用途让硬件优化，并支持帧率动态调整与双路预览。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "SurfaceView.holder.surface作为会话target, OutputConfiguration.streamUseCase=PREVIEW/PREVIEW_VIDEO_STILL",
+          "url": "https://developer.android.com/media/camera/camera2/capture-sessions-requests",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "camera预览(PreviewOutput, XComponent surface)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/camera-preview",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVCaptureVideoPreviewLayer",
+          "url": "https://developer.apple.com/documentation/avfoundation/setting-up-a-capture-session",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.capture.camera.session",
+      "parent": "media.capture.camera",
+      "name": "相机会话与多流管线配置",
+      "what": "打开相机设备后创建捕获会话，把多个输出Surface绑定为并行管线，并以捕获请求队列驱动每帧配置(单次/重复/交错请求)。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "CameraDevice.createCaptureSession(OutputConfiguration), CameraCaptureSession.capture/setRepeatingRequest, CameraDevice.createCaptureRequest(TEMPLATE_PREVIEW), CameraCaptureSession.StateCallback",
+          "url": "https://developer.android.com/media/camera/camera2/capture-sessions-requests",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.camera CameraInput/CameraSession(会话创建与流配置)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/camera-dev-arkts",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVCaptureSession(多输出连接配置)",
+          "url": "https://developer.apple.com/documentation/lockedcameracapture/creating-a-camera-experience-for-the-lock-screen",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.capture.camera.video_stream",
+      "parent": "media.capture.camera",
+      "name": "相机视频流录制",
+      "what": "从相机管线输出连续视频流用于录像：视频流用途声明、录制输出绑定与HDR Vivid录像等形态。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Stream Use Case VIDEO_CAPTURE(ImageReader/MediaRecorder surface target)",
+          "url": "https://developer.android.com/media/camera/camera2/capture-sessions-requests",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "camera录像(VideoOutput), HDR Vivid相机录像",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/camera-recording",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVCaptureMovieFileOutput/AVCaptureVideoDataOutput",
+          "url": "https://developer.apple.com/documentation/avfoundation/setting-up-a-capture-session",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.capture.microphone",
+      "parent": "media.capture",
+      "name": "麦克风采集",
+      "what": "从麦克风采集PCM音频流：采集参数配置、状态管理、采集端预处理(AEC/NS)与并发约束。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.audio.AudioCapturer, OH_AudioCapturer",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-audiocapturer-for-recording",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "AudioRecord(正文待补)",
+          "url": "https://developer.android.com/guide/topics/media/sharing-audio-input",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.capture.microphone.concurrent",
+      "parent": "media.capture.microphone",
+      "name": "麦克风并发采集与共享约束",
+      "what": "多应用同时采集音频输入时的优先级/静音策略：并发共享规则、隐私敏感声明、被静音与配置变化通知、静音打断模式。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AudioRecord.Builder.setPrivacySensitive/isPrivacySensitive, MediaRecorder.setPrivacySensitive, AudioManager.AudioRecordingCallback.isClientSilenced, AudioRecord.registerAudioRecordingCallback, AudioManager.getActiveRecordingConfigurations",
+          "url": "https://developer.android.com/guide/topics/media/sharing-audio-input",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AudioCapturer.setWillMuteWhenInterrupted(静音打断模式), setMuteHint(API24,部分PC/2in1生效)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-audiocapturer-for-recording",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.capture.microphone.pcm_stream",
+      "parent": "media.capture.microphone",
+      "name": "PCM采集流创建与参数配置",
+      "what": "创建麦克风采集器，配置采样率/声道/采样格式/音频源类型，以回调或读取方式获取PCM数据并管理采集状态机。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "audio.createAudioCapturer(AudioCapturerOptions{AudioCapturerInfo}), AudioCapturer.start/stop/release, readData回调, on('stateChange')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-audiocapturer-for-recording",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "AudioRecord/AudioRecord.Builder(采样率/声道/编码配置), AudioRecord.startRecording()",
+          "url": "https://developer.android.com/guide/topics/media/sharing-audio-input",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.capture.microphone.preprocess",
+      "parent": "media.capture.microphone",
+      "name": "采集端音频预处理",
+      "what": "对麦克风采集信号在输入路径上施加回声消除/降噪/自动增益等预处理，通常经音频源类型或效果器声明启用。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "SourceType.SOURCE_TYPE_VOICE_COMMUNICATION/SOURCE_TYPE_LIVE(系统自动回声消除)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-audiocapturer-for-recording",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "AcousticEchoCanceler/NoiseSuppressor/AutomaticGainControl(MediaRecorder.AudioSource.VOICE_COMMUNICATION路径)",
+          "url": "https://developer.android.com/guide/topics/media/sharing-audio-input",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.capture.system_camera",
+      "parent": "media.capture",
+      "name": "系统相机调用",
+      "what": "不直接控制相机管线而委托系统相机应用完成拍摄：相机Intent、系统相机Picker、锁屏相机体验。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Intent.ACTION_IMAGE_CAPTURE/ACTION_VIDEO_CAPTURE",
+          "url": "https://developer.android.com/media/camera/camera-intents",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "cameraPicker(CameraPicker)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/camera-picker",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "LockedCameraCapture",
+          "url": "https://developer.apple.com/documentation/lockedcameracapture/creating-a-camera-experience-for-the-lock-screen",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.capture.system_camera.delegate",
+      "parent": "media.capture.system_camera",
+      "name": "委托系统相机应用拍摄",
+      "what": "通过Intent或系统相机界面委托拍照、录像并取回结果，应用不直接控制相机管线；权限要求逐平台核实",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaStore.ACTION_IMAGE_CAPTURE/ACTION_VIDEO_CAPTURE + startActivityForResult",
+          "url": "https://developer.android.com/media/camera/camera-intents",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "cameraPicker.pick(context,[PickerMediaType.PHOTO,PickerMediaType.VIDEO],PickerProfile)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/camera-picker",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIImagePickerController(sourceType=.camera, mediaTypes=image/movie)",
+          "url": "https://developer.apple.com/documentation/lockedcameracapture/creating-a-camera-experience-for-the-lock-screen",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.capture.system_camera.locked",
+      "parent": "media.capture.system_camera",
+      "name": "锁屏与控制中心相机体验",
+      "what": "在设备锁定状态下从控制中心/锁屏/动作按钮启动应用自定义相机扩展完成拍摄，并在解锁后把内容交回主应用。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "LockedCameraCaptureExtension/LockedCameraCaptureUIScene/LockedCameraCaptureSession.openApplication(for:)/LockedCameraCaptureManager.sessionContentUpdates, CameraCaptureIntent",
+          "url": "https://developer.apple.com/documentation/lockedcameracapture/creating-a-camera-experience-for-the-lock-screen",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.codec",
+      "parent": "media",
+      "name": "媒体编解码",
+      "what": "对音视频压缩数据进行编码/解码的能力：音频编解码、视频编解码、容器封装与解封装。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.MediaCodec, MediaCodecInfo",
+          "url": "https://developer.android.com/guide/topics/media/media-codecs",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.mediaAVCodec(VideoEncoder等)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/synchronous-video-encoding",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.codec.audio",
+      "parent": "media.codec",
+      "name": "音频编解码",
+      "what": "音频压缩数据编码/解码：编码器/解码器创建、格式配置、buffer交付与能力查询。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.MediaCodec(audio)",
+          "url": "https://developer.android.com/guide/topics/media/media-codecs",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.mediaAVCodec.AudioDecoder/AudioEncoder",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/synchronous-audio-decoding",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.codec.audio.decode",
+      "parent": "media.codec.audio",
+      "name": "音频解码为PCM",
+      "what": "把压缩音频码流解码为PCM数据：按MIME/名称创建解码器、配置格式、同步或异步模式送帧取帧与生命周期管理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_AudioCodec_CreateByMime/CreateByName, OH_AudioCodec_Configure(OH_MD_KEY_ENABLE_SYNC_MODE同步模式,API20+), OH_AudioCodec_GetInputBuffer/FreeOutputBuffer/Flush/Destroy",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/synchronous-audio-decoding",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaCodec(createDecoderByType, dequeueInputBuffer/queueInputBuffer)",
+          "url": "https://developer.android.com/guide/topics/media/media-codecs",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.codec.audio.encode",
+      "parent": "media.codec.audio",
+      "name": "音频编码为压缩码流",
+      "what": "把PCM音频编码为压缩码流(AAC/MP3/Opus等)：编码器创建、码率/采样率配置与buffer交付。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_AudioCodec_CreateByMime(isEncoder=true, 音频编码)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/synchronous-audio-decoding",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaCodec(createEncoderByType, 音频编码)",
+          "url": "https://developer.android.com/guide/topics/media/media-codecs",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AudioConverter/AudioConverterFillComplexBuffer",
+          "url": "https://developer.apple.com/documentation/audiotoolbox/audioconverter",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.codec.container",
+      "parent": "media.codec",
+      "name": "容器封装与解封装",
+      "what": "把编码后轨道封装为媒体文件或从中解出轨道：muxer/demuxer/extractor、轨道与元数据访问。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AVMuxer(C API), AVSource/AVDemuxer",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-avmuxer",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.media.MediaMuxer/MediaExtractor(正文待补)",
+          "url": "https://developer.android.com/media/media3/exoplayer/retrieving-metadata",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.codec.container.demux",
+      "parent": "media.codec.container",
+      "name": "媒体解封装与轨道访问",
+      "what": "从媒体文件解出压缩轨道样本与轨道级信息：轨道枚举、格式读取、逐样本读取或不经播放的轨道组/时间线检查。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaExtractor(setDataSource/selectTrack/readSampleData), androidx.media3.inspector.MetadataRetriever.retrieveTrackGroups/retrieveTimeline/retrieveDurationUs",
+          "url": "https://developer.android.com/media/media3/exoplayer/retrieving-metadata",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVSource/AVDemuxer(Native解封装)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-avmuxer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.codec.container.mux",
+      "parent": "media.codec.container",
+      "name": "媒体封装(Muxer)",
+      "what": "把编码后的音视频轨道数据按容器格式(MP4等)封装写入文件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AVMuxer(Native, native_avmuxer.h, SystemCapability.Multimedia.Media.Muxer, 起始版本10)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-avmuxer",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaMuxer(addTrack/writeSampleData)",
+          "url": "https://developer.android.com/guide/topics/media/mediarecorder",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.codec.video",
+      "parent": "media.codec",
+      "name": "视频编解码",
+      "what": "视频压缩数据编码/解码：surface/buffer模式、码率控制、HDR Vivid、编码前预处理与智能解码。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.MediaCodec(video)",
+          "url": "https://developer.android.com/guide/topics/media/media-codecs",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "VTCompressionSession, VTDecompressionSession",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtcompressionsession-api-collection",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.mediaAVCodec.VideoEncoder/VideoDecoder",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/synchronous-video-encoding",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.codec.video.capability_query",
+      "parent": "media.codec.video",
+      "name": "编解码器能力查询",
+      "what": "枚举设备编解码器并查询其类别与性能能力：软件/硬件/厂商实现区分、别名解析、分辨率帧率性能点覆盖判断。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaCodecInfo.isSoftwareOnly/isHardwareAccelerated/isVendor/isAlias, MediaCodec.getCanonicalName, MediaCodecInfo.VideoCapabilities.getSupportedPerformancePoints, PerformancePoint.covers",
+          "url": "https://developer.android.com/guide/topics/media/media-codecs",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "VTIsStereoMVHEVCEncodeSupported",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtcompressionsession-api-collection",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_AVCapability_IsVideoSizeSupported等能力查询接口",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/synchronous-video-encoding",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.codec.video.decode",
+      "parent": "media.codec.video",
+      "name": "视频解码",
+      "what": "把压缩视频码流解码为可渲染帧：buffer/surface输出模式、解码器创建与智能解码等增强路径。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_VideoDecoder_CreateByMime/Configure/Start(surface输出模式)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/synchronous-video-encoding",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "VTDecompressionSessionCreate/VTDecompressionSessionDecodeFrame",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtdecompressionsession-api-collection",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaCodec(createDecoderByType, releaseOutputBuffer到Surface)",
+          "url": "https://developer.android.com/guide/topics/media/media-codecs",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.codec.video.encode",
+      "parent": "media.codec.video",
+      "name": "视频编码",
+      "what": "把视频帧编码为压缩码流：surface输入模式与buffer模式、编码属性/码率控制、MV-HEVC多视点帧编码与EOS处理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_VideoEncoder_Configure/GetSurface(Surface输入模式)/Prepare/Start/QueryOutputBuffer/GetOutputBuffer/FreeOutputBuffer/NotifyEndOfStream/Flush",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/synchronous-video-encoding",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "VTCompressionSessionCreate/VTSessionSetProperty(压缩属性)/VTCompressionSessionEncodeFrame/VTCompressionOutputCallback/VTCompressionSessionEncodeMultiImageFrame(MV-HEVC)/VTCompressionSessionCompleteFrames",
+          "url": "https://developer.apple.com/documentation/videotoolbox/vtcompressionsession-api-collection",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaCodec(createEncoderByType, createInputSurface)",
+          "url": "https://developer.android.com/guide/topics/media/media-codecs",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.drm",
+      "parent": "media",
+      "name": "数字版权管理",
+      "what": "受保护媒体内容的许可证与解密播放：证书/许可证管理、受保护内容播放管线。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.MediaDrm",
+          "url": "https://developer.android.com/media/platform/mediaplayer/drm",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.drm(MediaKeySystem/MediaKeySession)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/drm-arkts-dev-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.drm.license",
+      "parent": "media.drm",
+      "name": "证书与许可证管理",
+      "what": "DRM密钥体系管理：设备证书、许可证获取/更新、离线许可证存储与约束查询。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.MediaDrm(证书/许可证)",
+          "url": "https://developer.android.com/media/platform/mediaplayer/drm",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.drm.MediaKeySystem",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/drm-arkts-dev-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.drm.license.device_provisioning",
+      "parent": "media.drm.license",
+      "name": "设备证书开通(Provisioning)",
+      "what": "为设备获取并安装DRM设备证书：查询证书状态、生成证书请求、把服务端响应回灌完成开通。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "MediaKeySystem.getCertificateStatus(): CertificateStatus / on('keySystemRequired') / generateKeySystemRequest(): ProvisionRequest{data,defaultURL} / processKeySystemResponse(bytes)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/drm-arkts-dev-guide",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaPlayer.prepareDrm(UUID)(内部访问provisioning服务器完成设备开通)",
+          "url": "https://developer.android.com/media/platform/mediaplayer/drm",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.drm.license.key_request",
+      "parent": "media.drm.license",
+      "name": "内容许可证请求与授权",
+      "what": "基于内容中的DRM信息(pssh/initData)生成许可证请求、提交许可证服务器响应以完成节目授权，并管理承载授权的密钥会话。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "MediaKeySystem.createMediaKeySession() / MediaKeySession.generateMediaKeyRequest(mimeType, initData, drm.MediaKeyType.MEDIA_KEY_TYPE_ONLINE, optionalData: OptionsData[]): MediaKeyRequest{mediaKeyRequestType,data,defaultURL} / processMediaKeyResponse(bytes): Uint8Array(mediaKeyId) / destroy()",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/drm-arkts-dev-guide",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaPlayer.getKeyRequest(initData, keySetId, mimeType, keyType, optionalParameters) / provideKeyResponse(keyRequest, response) / releaseDrm()",
+          "url": "https://developer.android.com/media/platform/mediaplayer/drm",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.drm.license.key_status_events",
+      "parent": "media.drm.license",
+      "name": "密钥状态查询与失效事件",
+      "what": "查询当前会话内各密钥的状态并在密钥过期、有效期更新或密钥集合变化时收到事件通知。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "MediaKeySession.checkMediaKeyStatus(): MediaKeyStatus[] / on('keyExpired') / on('expirationUpdate') / on('keysChange')(keyInfo: KeysInfo[]{keyId,value}, newKeyAvailable) / on('keyRequired')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/drm-arkts-dev-guide",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaDrm.OnEventListener(EVENT_KEY_EXPIRED/EVENT_KEY_CHANGE) + MediaDrm.getKeyStatus",
+          "url": "https://developer.android.com/reference/android/media/MediaDrm",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.drm.license.keysystem_discovery",
+      "parent": "media.drm.license",
+      "name": "DRM方案发现与支持性查询",
+      "what": "枚举设备可用的DRM解决方案并按媒体类型/安全级别查询某个方案是否受支持。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "drm.getMediaKeySystems(): MediaKeySystemDescription[] / drm.isMediaKeySystemSupported(keySystemName, mimeType, drm.ContentProtectionLevel) / drm.createMediaKeySystem(name)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/drm-arkts-dev-guide",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaDrm.isCryptoSchemeSupported(uuid, mimeType, securityLevel) + MediaDrm.getSupportedCryptoSchemes",
+          "url": "https://developer.android.com/reference/android/media/MediaDrm",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "FairPlay Streaming(AVCaptureContentKeySession/AVContentKeyResponse，方案不可枚举)",
+          "url": "https://developer.apple.com/documentation/avfoundation/avcapturecontentkeysession",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.drm.license.offline_keys",
+      "parent": "media.drm.license",
+      "name": "离线许可证存储与管理",
+      "what": "获取可离线使用的许可证并以密钥集标识持久化，之后查询、恢复或清除这些离线密钥。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "MediaKeySession.generateMediaKeyRequest(..., MEDIA_KEY_TYPE_OFFLINE) + restoreOfflineMediaKeys(offlineMediaKeyId) + MediaKeySystem.getOfflineMediaKeyIds()/getOfflineMediaKeyStatus(id): OfflineMediaKeyStatus/clearOfflineMediaKeys(id)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/drm-arkts-dev-guide",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaPlayer.provideKeyResponse(离线请求返回key-set identifier) + restoreKeys(keySetId)",
+          "url": "https://developer.android.com/media/platform/mediaplayer/drm",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.drm.license.protection_level",
+      "parent": "media.drm.license",
+      "name": "内容保护级别选择",
+      "what": "在查询方案与创建密钥会话时指定/获取DRM内容保护级别(软件加密或硬件级安全保护)。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "drm.ContentProtectionLevel.CONTENT_PROTECTION_LEVEL_SW_CRYPTO(isMediaKeySystemSupported第三参数) + MediaKeySystem.createMediaKeySession()(默认内容保护级别)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/drm-arkts-dev-guide",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaDrm.SECURITY_LEVEL_SW_SECURE_CRYPTO / SECURITY_LEVEL_HW_SECURE_ALL + setSecurityLevel",
+          "url": "https://developer.android.com/reference/android/media/MediaDrm",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.drm.playback",
+      "parent": "media.drm",
+      "name": "受保护内容播放",
+      "what": "把DRM授权接入播放/解码管线：媒体源携带授权、安全解码与输出约束。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AVPlayer(DRM节目播放), AVCodec(DRM解密集成)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/drm-avplayer-arkts-integration",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaPlayer/ExoPlayer DRM集成",
+          "url": "https://developer.android.com/media/platform/mediaplayer/drm",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.drm.playback.async_setup",
+      "parent": "media.drm.playback",
+      "name": "异步DRM准备与自定义配置回调",
+      "what": "以异步方式完成DRM信息发现与准备(避免首次开通阻塞)，并在打开DRM会话前自定义DRM属性。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaPlayer.prepareAsync + OnDrmInfoListener.onDrmInfo / OnDrmPreparedListener / setOnDrmConfigHelper(OnDrmConfigHelper) + getDrmPropertyString/setDrmPropertyString",
+          "url": "https://developer.android.com/media/platform/mediaplayer/drm",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "drm相关异步回调(MediaKeySystem/MediaKeySession事件) 与AVPlayer异步准备的配合",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/drm-arkts-dev-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.drm.playback.encryption_schemes",
+      "parent": "media.drm.playback",
+      "name": "受支持的加密方案与流类型",
+      "what": "播放侧对通用加密方案与逐样本/整段加密的支持范围，以及可解密的音视频编码类型。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaPlayer DRM解密：CENC与HLS样本级加密(METHOD=SAMPLE-AES)，基本流类型H.264与AAC；整段加密(METHOD=AES-128)此前已支持",
+          "url": "https://developer.android.com/media/platform/mediaplayer/drm",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "DRM节目解密(MediaKeySession配合Media Kit/AVCodec Kit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/drm-arkts-dev-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.drm.playback.player_integration",
+      "parent": "media.drm.playback",
+      "name": "播放器内受保护内容播放",
+      "what": "在播放器高层API中直接播放DRM保护内容：设置数据源后由播放器暴露DRM信息、完成授权再开始播放。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaPlayer.setDataSource -> prepare -> getDrmInfo(): MediaPlayer.DrmInfo -> prepareDrm(UUID) -> getKeyRequest -> provideKeyResponse -> start -> releaseDrm (Android 8.0/API level 26起)",
+          "url": "https://developer.android.com/media/platform/mediaplayer/drm",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVPlayer(DRM节目播放) + MediaKeySession配合Media Kit解密",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/drm-avplayer-arkts-integration",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVPlayer + AVURLAsset.resourceLoader(AVAssetResourceLoaderDelegate处理FairPlay contentKeyRequest)",
+          "url": "https://developer.apple.com/documentation/avfoundation/avassetresourceloaderdelegate",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.drm.playback.secure_decode",
+      "parent": "media.drm.playback",
+      "name": "安全解码要求查询与安全输出",
+      "what": "查询指定编码在授权后是否必须使用安全解码器，从而决定解码/输出路径是否走受保护管线。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "MediaKeySession.requireSecureDecoderModule(mimeType: 'video/avc'): boolean",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/drm-arkts-dev-guide",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaDrm.SecurityLevel + MediaCodec.configure(..., MediaCrypto)(安全解码路径)",
+          "url": "https://developer.android.com/reference/android/media/MediaDrm",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.editing",
+      "parent": "media",
+      "name": "媒体编辑与转码",
+      "what": "对已有媒体内容做变换与再输出：视频编辑合成(裁剪/拼接/特效/焦点编辑)与格式/码率转码。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.media3.transformer.Transformer",
+          "url": "https://developer.android.com/media/media3/transformer/getting-started",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Cinematic(CNRenderingSession等)",
+          "url": "https://developer.apple.com/documentation/cinematic/playing-and-editing-cinematic-mode-video",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.media.AVTranscoder",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avtranscoder-for-transcodering",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.editing.transcode",
+      "parent": "media.editing",
+      "name": "媒体转码",
+      "what": "改变媒体编码格式/分辨率/码率/HDR形态的再编码：离线转码、HDR Vivid转SDR、系统兼容转码。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Compatible media transcoding",
+          "url": "https://developer.android.com/media/platform/transcoding",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "VTCompressionSession(offline transcoding)",
+          "url": "https://developer.apple.com/documentation/videotoolbox/encoding-video-for-offline-transcoding",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.media.AVTranscoder",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avtranscoder-for-transcodering",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.editing.transcode.compatibility",
+      "parent": "media.editing.transcode",
+      "name": "面向设备兼容性的系统转码",
+      "what": "应用声明媒体解码能力并在读取媒体时请求兼容性转码，以供不支持源编码格式的应用消费",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ApplicationMediaCapabilities.Builder, MediaStore.EXTRA_MEDIA_CAPABILITIES, ContentResolver.openTypedAssetFileDescriptor",
+          "url": "https://developer.android.com/media/platform/transcoding",
+          "status": "source_read",
+          "locator": "L39-92 应用代码声明与读取示例；L138-160 转发调用者能力",
+          "body_sha256": "abc5a9f1dc9ecb6812ce4a6d08b594e81f06ad96d74a255136d3627c0657ee92"
+        }
+      ]
+    },
+    {
+      "id": "media.editing.transcode.dynamic_range",
+      "parent": "media.editing.transcode",
+      "name": "动态范围转换转码(HDR转SDR)",
+      "what": "在转码过程中改变媒体的动态范围/色彩形态，例如HDR(含HDR Vivid)转SDR以适配不支持的显示或分享目标。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "视频编解码侧HDR Vivid能力与转码/编码前预处理配合(OH_VideoEncoder相关)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-encoding-preproc",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVAssetExportSession/VTCompressionSession 的HDR到SDR色调映射输出设置",
+          "url": "https://developer.apple.com/documentation/videotoolbox/encoding-video-for-offline-transcoding",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.editing.transcode.reencode",
+      "parent": "media.editing.transcode",
+      "name": "参数化音视频转码",
+      "what": "以文件描述符为源和目标、指定音视频编码等参数对媒体文件做整体再编码输出。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "media.createAVTranscoder() + AVTranscoder.fdSrc/fdDst + AVTranscoderConfig{audioCodec: media.CodecMimeType.AUDIO_AAC, videoCodec: media.CodecMimeType.VIDEO_AVC} + prepare(avConfig) + start()",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avtranscoder-for-transcodering",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "VTCompressionSession(offline transcoding) + AVAssetExportSession",
+          "url": "https://developer.apple.com/documentation/videotoolbox/encoding-video-for-offline-transcoding",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Media3 Transformer(EditedMediaItem + 输出格式设置)",
+          "url": "https://developer.android.com/media/media3/transformer/getting-started",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.editing.transcode.task_control",
+      "parent": "media.editing.transcode",
+      "name": "转码任务控制与进度上报",
+      "what": "对转码任务做暂停/恢复/释放控制并接收进度、完成与错误事件，保证输出文件完整性。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AVTranscoder.pause() / resume() / release() + on('complete') / on('error') / on('progressUpdate')(progress: number) + canIUse('SystemCapability.Multimedia.Media.AVTranscoder')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avtranscoder-for-transcodering",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "Media3 Transformer.start/cancel + Listener.onCompleted/onError",
+          "url": "https://developer.android.com/media/media3/transformer/getting-started",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.editing.video",
+      "parent": "media.editing",
+      "name": "视频编辑与合成",
+      "what": "对视频内容做结构性编辑：裁剪/拼接/多素材组合、效果与色调映射、焦点后期编辑、编码前预处理。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.media3.transformer.Transformer(composition/effects)",
+          "url": "https://developer.android.com/media/media3/transformer/getting-started",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Cinematic CNRenderingSession",
+          "url": "https://developer.apple.com/documentation/cinematic/playing-and-editing-cinematic-mode-video",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_VideoEncoder_CreatePrimaryWithPreproc",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-encoding-preproc",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.editing.video.composition_export",
+      "parent": "media.editing.video",
+      "name": "编辑项构建与导出",
+      "what": "把输入媒体与要施加的编辑描述为一个编辑项，配置输出后启动导出任务生成新文件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.media3.transformer: new EditedMediaItem.Builder(inputMediaItem).build() + new Transformer.Builder(context).build() + transformer.start(editedMediaItem, outputPath)",
+          "url": "https://developer.android.com/media/media3/transformer/getting-started",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVAssetExportSession / AVMutableComposition + AVVideoComposition",
+          "url": "https://developer.apple.com/documentation/avfoundation/avassetexportsession",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVTranscoder(整体再编码，无等价的编辑项/合成模型证据)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avtranscoder-for-transcodering",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.editing.video.depth_focus",
+      "parent": "media.editing.video",
+      "name": "景深/焦点后期编辑",
+      "what": "对带深度信息的视频(电影级/景深模式)在拍摄后调整焦点与景深渲染效果。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Cinematic CNRenderingSession(playing and editing Cinematic mode video)",
+          "url": "https://developer.apple.com/documentation/cinematic/playing-and-editing-cinematic-mode-video",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "无AOSP等价公开API(厂商私有景深视频格式)",
+          "url": "https://developer.android.com/reference/android/media/package-summary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.editing.video.effects",
+      "parent": "media.editing.video",
+      "name": "视频效果与色调处理",
+      "what": "在导出/播放前对视频帧施加视觉效果与色彩变换(滤镜、色调映射、叠加层)。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Media3 Transformer Effects(Effects/RgbMatrix/Overlay设置到EditedMediaItem)",
+          "url": "https://developer.android.com/media/media3/transformer/getting-started",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVVideoComposition + CIFilter(CISepiaTone/CIPhotoEffectChrome) + PHContentEditingOutput",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.editing.video.export_control",
+      "parent": "media.editing.video",
+      "name": "导出任务控制与进度查询",
+      "what": "查询导出进度、取消导出任务，并遵守单线程访问与同实例不可并发导出的约束。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Transformer.getProgress(ProgressHolder): @Transformer.ProgressState / Transformer.PROGRESS_STATE_NOT_STARTED / Transformer.cancel() / Transformer.Listener",
+          "url": "https://developer.android.com/media/media3/transformer/getting-started",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVTranscoder.pause()/resume() + on('progressUpdate')(转码侧任务控制)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avtranscoder-for-transcodering",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.editing.video.multiclip",
+      "parent": "media.editing.video",
+      "name": "多素材裁剪与拼接合成",
+      "what": "把多个媒体片段按时间轴裁剪、排序并合成为单个输出(时间线编辑)。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Media3 Transformer的Composition/Sequence输入(多EditedMediaItem时间线)",
+          "url": "https://developer.android.com/media/media3/transformer/getting-started",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVMutableComposition + AVMutableCompositionTrack.insertTimeRange/removeTimeRange",
+          "url": "https://developer.apple.com/documentation/avfoundation/avmutablecomposition",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.editing.video.track_edit",
+      "parent": "media.editing.video",
+      "name": "音视频轨道增删与替换",
+      "what": "在导出时移除或替换输入的音频/视频轨道(如去声、静音、换音轨)，不改动画面内容本身。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "EditedMediaItem.Builder(inputMediaItem).setRemoveAudio(true).build()",
+          "url": "https://developer.android.com/media/media3/transformer/getting-started",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVMutableComposition.insertTimeRange(选择/排除特定轨道)",
+          "url": "https://developer.apple.com/documentation/avfoundation/avmutablecomposition",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image",
+      "parent": "media",
+      "name": "图片处理",
+      "what": "静态图片的解码、编码、像素操作与效果处理能力：ImageSource/ImagePacker、位图变换、滤镜/HDR与色彩空间转换、AI增强。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.image(ImageSource/ImagePacker)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/image-decoding",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "ImageIO(CGImageSource/CGImageDestination)",
+          "url": "https://developer.apple.com/documentation/imageio/image-i-o-functions",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.decode",
+      "parent": "media.image",
+      "name": "图片解码",
+      "what": "把图片文件/缓冲区解码为像素数据：格式覆盖(JPEG/PNG/WebP/GIF/HEIF/AVIF/RAW等)、区域/尺寸/像素格式/动态范围解码选项、动图逐帧解码、并行解码。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.image.createImageSource, ImageSource_DecodingOptions",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/image-decoding",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CGImageSourceCreateImageAtIndex(ImageIO)",
+          "url": "https://developer.apple.com/documentation/imageio/image-i-o-functions",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.decode.animated",
+      "parent": "media.image.decode",
+      "name": "动图逐帧解码",
+      "what": "对GIF/WebP等动图按帧解码：帧列表获取、帧延迟时间与逐帧播放驱动。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ImageSource.createPixelMapList/getDelayTimeList",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-image-imagesource",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "ImageDecoder.decodeDrawable(AnimatedImageDrawable)",
+          "url": "https://developer.android.com/reference/android/graphics/ImageDecoder",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CGImageSourceCreateImageAtIndex按索引逐帧读取",
+          "url": "https://developer.apple.com/documentation/imageio/image-i-o-functions",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.decode.hdr",
+      "parent": "media.image.decode",
+      "name": "HDR图片与动态范围解码",
+      "what": "按指定动态范围(SDR/HDR)解码图片并获知结果HDR属性：动态范围选项、HDR像素格式约束与实际格式确认。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "DecodingOptions.desiredDynamicRange, ImageInfo.isHdr, getImageInfoSync确认实际pixelFormat(正文注明ARGB_8888/RGBA_F16当前不支持,回退RGBA_8888)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/image-decoding",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "ImageDecoder/Bitmap Ultra HDR(ULTRA_HDR_GAINMAP)",
+          "url": "https://developer.android.com/media/platform/hdr-image-format",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CGImageSource HDR/EDR解码选项",
+          "url": "https://developer.apple.com/documentation/imageio",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.decode.still",
+      "parent": "media.image.decode",
+      "name": "静态图片解码",
+      "what": "从沙箱路径/文件描述符/缓冲区/资源创建图片源并解码为像素图，含设备解码格式支持面动态查询。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "image.createImageSource(filePath|fd|buffer|rawFileDescriptor), ImageSource.createPixelMap(DecodingOptions), image.getImageSourceSupportedFormats(API20)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/image-decoding",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CGImageSource族(ImageIO, 含CGImageSourceSetAllowableTypes类型约束)",
+          "url": "https://developer.apple.com/documentation/imageio/image-i-o-functions",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "BitmapFactory.decodeStream/decodeFile, ImageDecoder.decodeBitmap",
+          "url": "https://developer.android.com/reference/android/graphics/ImageDecoder",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.effects",
+      "parent": "media.image",
+      "name": "图片效果与色彩空间处理",
+      "what": "对图片施加处理效果：滤镜/滤镜链、HDR与SDR色彩空间转换、动态元数据生成、AI画质增强。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ImageEffect(Native), EffectFilter",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/image-effect-guidelines",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Media Enhancement API(Play services)",
+          "url": "https://developer.android.com/media/ai-enhancement/get-started",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.effects.ai_enhance",
+      "parent": "media.image.effects",
+      "name": "AI画质增强",
+      "what": "用设备端AI模型对图片做超分/降噪等画质增强，含硬件支持检测与模型模块按需安装。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "EnhancementClient.isDeviceSupportedAsync/isModuleInstalledAsync, play-services-media-effect-enhancement:16.0.0-beta04(Google Play services, Beta)",
+          "url": "https://developer.android.com/media/ai-enhancement/get-started",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.image.effects.color_convert",
+      "parent": "media.image.effects",
+      "name": "色彩空间与动态范围转换",
+      "what": "在图片处理链中做色彩空间映射与HDR/SDR转换、动态元数据生成，输出目标色彩形态的位图。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "DecodingOptions.desiredDynamicRange(解码侧SDR/HDR选择), ImageEffect HDR相关滤镜",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/image-decoding",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CIFilter色彩空间转换(kCIInputColorSpaceKey)/EDR处理",
+          "url": "https://developer.apple.com/documentation/coreimage",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Bitmap色彩空间转换(ColorSpace/HardwareBuffer RGBA_F16), Ultra HDR gainmap生成",
+          "url": "https://developer.android.com/media/platform/hdr-image-format",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.effects.filter",
+      "parent": "media.image.effects",
+      "name": "图片滤镜与滤镜链",
+      "what": "对图片施加亮度等滤镜效果：滤镜/滤镜链组装、强度参数设置、多种输入输出缓冲形态与自定义滤镜注册。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_ImageEffect_AddFilter(OH_EFFECT_BRIGHTNESS_FILTER), OH_EffectFilter_SetValue(OH_EFFECT_FILTER_INTENSITY_KEY), EffectFilter单滤镜接口, 自定义滤镜注册(setValue/render/save), image_effect.h/image_effect_filter.h",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/image-effect-guidelines",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CIFilter/Core Image滤镜链",
+          "url": "https://developer.apple.com/documentation/coreimage/cifilter",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "RenderEffect/ColorFilter(渲染侧), AGSL着色器滤镜",
+          "url": "https://developer.android.com/reference/android/graphics/RenderEffect",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.encode",
+      "parent": "media.image",
+      "name": "图片编码",
+      "what": "把像素数据压缩编码为图片文件：格式选择(JPEG/WebP/HEIF等)、质量/HDR选项、动图编码。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.image.ImagePacker.packToData/packToFile",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/image-encoding",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CGImageDestination(ImageIO)",
+          "url": "https://developer.apple.com/documentation/imageio/image-i-o-functions",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.encode.animated",
+      "parent": "media.image.encode",
+      "name": "动图编码",
+      "what": "把多帧像素数据编码为GIF/WebP等动图文件，含帧延迟与循环设置。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "CGImageDestination多帧写入(同一destination多次AddImage)",
+          "url": "https://developer.apple.com/documentation/imageio/image-i-o-functions",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "ImagePacker动图编码(packing多帧PixelMap)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-image-imagepacker",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "无平台级动图编码API线索(ImageEncoder为CameraX内部/第三方库路径)",
+          "url": "https://developer.android.com/reference/androidx/camera/video/ImageEncoder",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.encode.still",
+      "parent": "media.image.encode",
+      "name": "静态图片编码",
+      "what": "把PixelMap/ImageSource编码为指定格式与质量的图片数据(ArrayBuffer)或文件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "image.createImagePacker, PackingOption{format:'image/jpeg',quality:90}, ImagePacker.packToData/packToFile",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/image-encoding",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CGImageDestinationAddImageAndMetadata/CGImageDestinationCopyImageSource(ImageIO)",
+          "url": "https://developer.apple.com/documentation/imageio/image-i-o-functions",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "Bitmap.compress(format,quality,stream)",
+          "url": "https://developer.android.com/reference/android/graphics/Bitmap",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.pixel",
+      "parent": "media.image",
+      "name": "位图与像素操作",
+      "what": "解码后像素数据的直接操作：读写像素、缩放/旋转/翻转/裁剪、像素格式与内存模型、跨缓冲区共享。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.image.PixelMap, pixelmap_native.h",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/image-decoding",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "IOSurface",
+          "url": "https://developer.apple.com/documentation/coreaudio",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.pixel.access",
+      "parent": "media.image.pixel",
+      "name": "像素读写与内存模型",
+      "what": "直接访问解码后像素数据：读写像素缓冲、查询图像信息(尺寸/格式/HDR)、自定义分配器创建PixelMap。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ImageSource.createPixelMapUsingAllocator(API15,自定义分配器), PixelMap.getImageInfoSync(API12), PixelMap.release",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/image-decoding",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "Bitmap.getPixel/setPixel/copyPixelsToBuffer, Bitmap.Config内存模型",
+          "url": "https://developer.android.com/reference/android/graphics/Bitmap",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CGBitmapContextGetData/Core Graphics位图上下文, CVPixelBuffer基地址访问",
+          "url": "https://developer.apple.com/documentation/coregraphics/cgbitmapcontext",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.pixel.share",
+      "parent": "media.image.pixel",
+      "name": "像素缓冲跨模块共享",
+      "what": "以NativeBuffer/硬件缓冲/Surface等共享内存形态在解码器、渲染、效果处理等模块间传递像素数据，避免拷贝。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ImageEffect输入/输出支持PixelMap、NativeWindow、NativeBuffer(ImageEffect正文核实), OH_PixelMapNative(pixelmap_native.h)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/image-effect-guidelines",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "HardwareBuffer-backed Bitmap(Bitmap.wrapHardwareBuffer)",
+          "url": "https://developer.android.com/reference/android/graphics/Bitmap",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "IOSurface/CVPixelBuffer跨框架零拷贝共享",
+          "url": "https://developer.apple.com/documentation/iosurface",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.image.pixel.transform",
+      "parent": "media.image.pixel",
+      "name": "位图几何变换",
+      "what": "对像素图做缩放/旋转/翻转/裁剪等几何变换并输出新位图或原地修改。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "PixelMap.scale/rotate/flip/crop(解码正文注明PixelMap用于缩放、裁剪等处理)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/image-decoding",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Bitmap.createScaledBitmap/createBitmap(Matrix), Matrix.postRotate/postScale",
+          "url": "https://developer.android.com/reference/android/graphics/Bitmap",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CGContextDrawImage+CGAffineTransform(旋转/缩放/裁剪CGContextClip)",
+          "url": "https://developer.apple.com/documentation/coregraphics",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library",
+      "parent": "media",
+      "name": "图库与媒体库",
+      "what": "访问系统管理的照片/视频资产：系统选择器、相册浏览检索、资产编辑与变更通知、保存到图库。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHPickerViewController(PhotosUI/PhotoKit)",
+          "url": "https://developer.apple.com/documentation/photokit/selecting-photos-and-videos-in-ios",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.file.photoAccessHelper(PhotoViewPicker)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-photoviewpicker",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.widget.photopicker",
+          "url": "https://developer.android.com/reference/android/widget/photopicker/package-summary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.browse",
+      "parent": "media.library",
+      "name": "相册与媒体检索",
+      "what": "检索系统图库中的相册与资产：用户相册/系统相册、按条件筛选分页、缩略图与原图加载。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHFetchOptions, PHAsset",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper用户相册/系统相册",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-photoviewpicker",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.browse.asset_properties",
+      "parent": "media.library.browse",
+      "name": "资产属性与媒体子类型读取",
+      "what": "读取单个资产的描述属性与媒体类型/子类型(图片、视频、Live Photo/动态照片、收藏标记、本地标识符)。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHAsset.mediaType / PHAsset.mediaSubtypes.contains(.photoLive) / PHAsset.isFavorite / PHAsset.localIdentifier",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper.PhotoAsset.get(PhotoKeys.TITLE) + PhotoKeys.URI",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-photoviewpicker",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.library.browse.collections",
+      "parent": "media.library.browse",
+      "name": "相册与集合枚举",
+      "what": "枚举图库中的用户相册、系统智能相册与集合层级，用于构建相册级导航。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular) / PHCollectionList.fetchTopLevelUserCollections",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper.PhotoAccessHelper.getAssets + FetchResult<PhotoAsset>(用户相册/系统相册查询)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-photoviewpicker",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.browse.original_data",
+      "parent": "media.library.browse",
+      "name": "资产原图与视频数据加载",
+      "what": "按指定质量/投递模式取回资产的完整图像或视频数据(含云端资产按需下载与播放项构造)。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper.MediaAssetManager.requestImageData(context, photoAsset, RequestOptions{deliveryMode: DeliveryMode.HIGH_QUALITY_MODE}, MediaAssetDataHandler.onDataPrepared)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-photoviewpicker",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "PHImageManager.default().requestPlayerItem(forVideo:options:resultHandler:) / NSItemProvider.loadObject(ofClass: PHLivePhoto.self)",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.library.browse.privacy_scoped_metadata",
+      "parent": "media.library.browse",
+      "name": "隐私受限元数据可见范围",
+      "what": "系统对图库资产的位置/拍摄参数等敏感元数据做默认脱敏，应用需额外权限或受限授权才能看到完整信息。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ohos.permission.MEDIA_LOCATION(相册管理模块权限) + photoAccessHelper EXIF去隐私化",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-photoviewpicker",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "limited photo library access(PHAccessLevel.readWrite受限授权范围)",
+          "url": "https://developer.apple.com/documentation/photokit/selecting-photos-and-videos-in-ios",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.browse.query",
+      "parent": "media.library.browse",
+      "name": "资产条件查询与排序",
+      "what": "按谓词条件、指定返回列与排序规则检索图库资产，并分页/逐条取回结果。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHFetchOptions.sortDescriptors + PHAsset.fetchAssets(with:) -> PHFetchResult",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "dataSharePredicates.DataSharePredicates.equalTo(PhotoKeys.URI) + photoAccessHelper.FetchOptions{fetchColumns,predicates} + FetchResult.getFirstObject/close",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-photoviewpicker",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.library.manage",
+      "parent": "media.library",
+      "name": "资产编辑与变更",
+      "what": "修改图库资产内容与监听变更：资产属性/内容更新、动态照片编辑、相册成员管理、变更通知订阅。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHPhotoLibrary.performChanges, PHAssetChangeRequest",
+          "url": "https://developer.apple.com/documentation/photokit/fetching-objects-and-requesting-changes",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper(动态照片编辑)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-movingphoto",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.manage.album_membership",
+      "parent": "media.library.manage",
+      "name": "相册创建与成员管理",
+      "what": "创建用户相册并向相册添加/移除资产成员，而不影响资产在图库中的存在。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle:) / addAssets([placeholderForCreatedAsset]) / removeAssets",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper(用户相册创建/成员管理，正文未覆盖)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-photoviewpicker",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.manage.attribute_write",
+      "parent": "media.library.manage",
+      "name": "资产属性写入(收藏等)",
+      "what": "修改资产的轻量属性标记(如收藏状态)而不改动媒体内容本身。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHAssetChangeRequest(for: asset).isFavorite = !asset.isFavorite (在performChanges内)",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper.MediaAssetChangeRequest(资产属性修改，正文未覆盖)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-savebutton",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.manage.change_commit",
+      "parent": "media.library.manage",
+      "name": "图库变更请求提交",
+      "what": "以变更请求对象+统一提交事务的方式修改共享图库，保证多应用/多线程并发安全。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHPhotoLibrary.shared().performChanges({...}, completionHandler:) + PHAssetChangeRequest",
+          "url": "https://developer.apple.com/documentation/photokit/fetching-objects-and-requesting-changes",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper.PhotoAccessHelper.applyChanges(MediaAssetChangeRequest) + MediaAssetChangeRequest.getAsset()",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-savebutton",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.library.manage.change_observer",
+      "parent": "media.library.manage",
+      "name": "图库变更通知订阅",
+      "what": "注册观察者接收图库资产/相册变更通知(含来自其它应用、其它设备与云同步的变更)并据差量刷新UI。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHPhotoLibrary.shared().register(self) / changeInstance.changeDetails(for:).fetchResultAfterChanges / unregisterChangeObserver",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper.PhotoAccessHelper.registerChange(DefaultChangeUri.DEFAULT_PHOTO_URI, true, callback) / unRegisterChange + ChangeData{uris,type:NotifyType.NOTIFY_ADD}",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-savebutton",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.library.manage.content_edit",
+      "parent": "media.library.manage",
+      "name": "资产内容编辑与调整数据回写",
+      "what": "对已有资产施加内容级编辑(滤镜/裁剪等)并把结果与可复用的调整数据(adjustment data)写回图库，支持还原。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHAsset.canPerform(.content) + PHContentEditingInput/PHContentEditingOutput + PHAdjustmentData + PHAssetChangeRequest.contentEditingOutput",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper(资产内容编辑，正文未覆盖)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-movingphoto",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.manage.delete",
+      "parent": "media.library.manage",
+      "name": "资产删除",
+      "what": "把资产从整个图库中删除(触发系统删除确认/回收站语义)，区别于仅移出相册。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHAssetChangeRequest.deleteAssets([...])",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper(资产删除，正文未覆盖)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-savebutton",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.manage.moving_photo_object",
+      "parent": "media.library.manage",
+      "name": "动态照片对象获取与内容导出",
+      "what": "取得复合动态照片对象(MovingPhoto)并导出其图片与视频分量到沙箱或读为内存缓冲区。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "MediaAssetManager.requestMovingPhoto(context, photoAsset, {deliveryMode: FAST_MODE}, onDataPrepared) / MediaAssetManager.loadMovingPhoto(context, imageFileUri, videoFileUri) / MovingPhoto.requestContent(imageFileUri, videoFileUri) 与 requestContent(ResourceType.IMAGE_RESOURCE|VIDEO_RESOURCE) / MovingPhoto.getUri()",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-movingphoto",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "PHLivePhoto(经itemProvider/PHImageManager加载) + PHLivePhotoView.livePhotoBadgeImage",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.picker",
+      "parent": "media.library",
+      "name": "系统媒体选择器",
+      "what": "通过系统UI选择照片/视频等媒体而无需宽域权限：选择模式(单选/多选/内联)、类型过滤与结果交付。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHPickerViewController, PHPickerFilter",
+          "url": "https://developer.apple.com/documentation/photokit/selecting-photos-and-videos-in-ios",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "PhotoViewPicker.select",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-photoviewpicker",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.widget.photopicker(EmbeddedPhotoPickerView)",
+          "url": "https://developer.android.com/reference/android/widget/photopicker/package-summary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.picker.embedded_view",
+      "parent": "media.library.picker",
+      "name": "内联嵌入式选择器视图",
+      "what": "把系统选择器作为可嵌入视图挂载到应用自己的界面层级中，而不是全屏模态弹出。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.widget.photopicker.EmbeddedPhotoPickerProvider/EmbeddedPhotoPickerSession + SurfaceView.setChildSurfacePackage (API level 36)",
+          "url": "https://developer.android.com/reference/android/widget/photopicker/package-summary",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "PHPickerViewController(仅模态present，无内联嵌入)",
+          "url": "https://developer.apple.com/documentation/photokit/selecting-photos-and-videos-in-ios",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.picker.in_picker_capture",
+      "parent": "media.library.picker",
+      "name": "选择器内直接拍摄",
+      "what": "允许用户在选择器界面内直接调起拍摄产生新媒体并作为选择结果返回，无需应用先自行调相机。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper.PhotoSelectOptions.isPhotoTakingSupported",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-photoviewpicker",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "ACTION_IMAGE_CAPTURE + Photo Picker组合(是否由选择器内置拍摄入口)",
+          "url": "https://developer.android.com/reference/android/widget/photopicker/package-summary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.picker.result_delivery",
+      "parent": "media.library.picker",
+      "name": "选择结果交付与按需加载",
+      "what": "把用户所选资产交付给应用的方式：只读URI/标识符返回、异步按需加载数据、下载进度上报与是否转码。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHPickerResult.assetIdentifier + NSItemProvider.loadObject(ofClass: PHLivePhoto.self) / loadDataRepresentation(forTypeIdentifier:) + preferredAssetRepresentationMode = .current",
+          "url": "https://developer.apple.com/documentation/photokit/selecting-photos-and-videos-in-ios",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "PhotoSelectResult.photoUris + fileIo.openSync(uri, OpenMode.READ_ONLY)/readSync",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-photoviewpicker",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.library.picker.selection_mode",
+      "parent": "media.library.picker",
+      "name": "选择数量与顺序控制",
+      "what": "控制单选/多选、可选上限、是否保留用户选择顺序以及预选中已有资产。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHPickerConfiguration.selectionLimit / .selection = .ordered / .preselectedAssetIdentifiers",
+          "url": "https://developer.apple.com/documentation/photokit/selecting-photos-and-videos-in-ios",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper.PhotoSelectOptions.maxSelectNumber",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-photoviewpicker",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.library.picker.type_filter",
+      "parent": "media.library.picker",
+      "name": "选择器媒体类型过滤",
+      "what": "限定系统选择器只展示特定媒体类型/子类型(图片、视频、Live Photo/动态照片或其组合)。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHPickerFilter.any(of: [.livePhotos, .videos]) / PHPickerConfiguration.filter",
+          "url": "https://developer.apple.com/documentation/photokit/selecting-photos-and-videos-in-ios",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper.PhotoSelectOptions.MIMEType = PhotoViewMIMETypes.IMAGE_VIDEO_TYPE",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-photoviewpicker",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.widget.photopicker.PhotoPickerSelectionParams(.Builder)",
+          "url": "https://developer.android.com/reference/android/widget/photopicker/package-summary",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.library.picker.ui_customization",
+      "parent": "media.library.picker",
+      "name": "选择器界面定制",
+      "what": "在不接管选择逻辑的前提下定制系统选择器的界面外观参数(模态与内联形态各自的可定制项)。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.widget.photopicker.PhotoPickerUiCustomizationParams(.Builder), EmbeddedPhotoPickerUiCustomizationParams(.Builder)",
+          "url": "https://developer.android.com/reference/android/widget/photopicker/package-summary",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.library.save",
+      "parent": "media.library",
+      "name": "保存到图库",
+      "what": "把应用生成的媒体写入系统图库：安全授权控件、用户确认流程与写入API。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper SaveButton安全保存",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-savebutton",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "PHPhotoLibrary(performChanges授权)",
+          "url": "https://developer.apple.com/documentation/photokit/fetching-objects-and-requesting-changes",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.save.add_only_permission",
+      "parent": "media.library.save",
+      "name": "仅添加(Add-Only)授权写入",
+      "what": "应用只申请‘向图库添加’这一最小权限级别即可写入资产，不获得读取/浏览权限。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHPhotoLibrary Add Photos Only permission level (PHAccessLevel.addOnly) + PHAssetCreationRequest",
+          "url": "https://developer.apple.com/documentation/photokit/selecting-photos-and-videos-in-ios",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaStore.Images/Video.Media + ContentResolver.insert(无需WRITE_EXTERNAL_STORAGE)",
+          "url": "https://developer.android.com/media/platform/mediaplayer/drm",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.save.composite_asset",
+      "parent": "media.library.save",
+      "name": "复合资产(动态照片/Live Photo)保存",
+      "what": "把图片+短视频配对写入图库成为一个复合资产(动态照片/Live Photo)，而非分别保存两个文件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "MediaAssetChangeRequest.createAssetRequest(PhotoType.IMAGE,'jpg',{subtype:PhotoSubtype.MOVING_PHOTO}) + addResource(IMAGE_RESOURCE/VIDEO_RESOURCE) + applyChanges",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-movingphoto",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "PHAssetCreationRequest.creationRequestForAsset(fromImage:) + addResource(withType: .pairedVideo)",
+          "url": "https://developer.apple.com/documentation/photokit/fetching-objects-and-requesting-changes",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.library.save.creation_dialog",
+      "parent": "media.library.save",
+      "name": "弹窗授权批量保存到图库",
+      "what": "通过系统授权弹窗一次性获取多个目标媒体URI，再由应用把沙箱内容写入这些URI完成保存。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper.PhotoAccessHelper.showAssetsCreationDialog(srcFileUris, photoCreationConfigs)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-savebutton",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.library.save.security_control",
+      "parent": "media.library.save",
+      "name": "安全控件一次性授权保存",
+      "what": "通过系统安全控件的用户操作获得一次性图库写入授权；当前以HarmonyOS SaveButton为实现线索，其它平台的授权路径另行核实",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "SaveButton(SaveButtonOptions) + photoAccessHelper.MediaAssetChangeRequest.createImageAssetRequest + PhotoAccessHelper.applyChanges",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-savebutton",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.library.save.supported_formats",
+      "parent": "media.library.save",
+      "name": "图库可保存格式查询",
+      "what": "在写入前查询系统图库接受的图片/视频资源格式集合，用于避免保存不被识别的编码格式。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper.PhotoAccessHelper.getSupportedPhotoFormats(PhotoType.IMAGE|VIDEO)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/photoaccesshelper-savebutton",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata",
+      "parent": "media",
+      "name": "媒体元数据",
+      "what": "读取与生成媒体描述信息：通用元数据提取、缩略图/视频帧生成、图像EXIF读写。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaMetadataRetriever(正文待补), Media3 metadata",
+          "url": "https://developer.android.com/media/media3/exoplayer/retrieving-metadata",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVMetadataExtractor(ArkTS/C)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ndk-avmetadataextractor-for-media",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.exif",
+      "parent": "media.metadata",
+      "name": "图像EXIF读写",
+      "what": "读写图像EXIF/GPS等拍摄元数据：拍摄参数、方向、位置信息。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "ImageIO EXIF Dictionary",
+          "url": "https://developer.apple.com/documentation/imageio/exif-dictionary-keys",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.image ExifMetadata",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-image-exifmetadata",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.exif.blob_transfer",
+      "parent": "media.metadata.exif",
+      "name": "EXIF数据块导入导出",
+      "what": "以原始字节块形式导出/导入整套EXIF数据，用于在文件或资产之间整体迁移元数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "image.ExifMetadata.getBlob / setBlob",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-image-exifmetadata",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CGImageSourceCopyPropertiesAtIndex + CGImageDestinationAddImage(整套属性字典迁移)",
+          "url": "https://developer.apple.com/documentation/imageio/exif-dictionary-keys",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.exif.gps",
+      "parent": "media.metadata.exif",
+      "name": "GPS位置元数据读写",
+      "what": "读写图像EXIF中的GPS定位字段(经纬度、海拔、时间戳、卫星与精度等)，受位置类权限约束。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "image.ExifMetadata.gpsLatitude/gpsLongitude/gpsLatitudeRef/gpsLongitudeRef/gpsAltitude/gpsAltitudeRef/gpsTimestamp/gpsSatellites/gpsStatus/gpsMeasureMode/gpsDop/gpsSpeed/gpsTrack/gpsMapDatum/gpsAreaInformation/gpsDateStamp/gpsDifferential/gpsVersionID + ohos.permission.MEDIA_LOCATION",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-image-exifmetadata",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "kCGImagePropertyGPSDictionary(ImageIO GPS Dictionary)",
+          "url": "https://developer.apple.com/documentation/imageio/exif-dictionary-keys",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.exifinterface.media.ExifInterface TAG_GPS_LATITUDE/TAG_GPS_LONGITUDE + getLatLong",
+          "url": "https://developer.android.com/reference/androidx/exifinterface/media/ExifInterface",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.exif.read",
+      "parent": "media.metadata.exif",
+      "name": "EXIF属性读取",
+      "what": "从图像元数据对象按属性名批量读取EXIF拍摄参数、方向等字段。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "image.ExifMetadata(implements Metadata) + getProperties / getAllProperties + image.ExifMetadata.createInstance()",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-image-exifmetadata",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "kCGImagePropertyExifDictionary(ImageIO EXIF Dictionary) + CGImageSourceCopyPropertiesAtIndex",
+          "url": "https://developer.apple.com/documentation/imageio/exif-dictionary-keys",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.exifinterface.media.ExifInterface.getAttribute(TAG_*)",
+          "url": "https://developer.android.com/reference/androidx/exifinterface/media/ExifInterface",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.exif.write",
+      "parent": "media.metadata.exif",
+      "name": "EXIF属性写入",
+      "what": "按属性名批量设置/清除图像EXIF字段(可写属性子集)，用于纠正或补充拍摄信息。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "image.ExifMetadata.setProperties(records: Record<string, string | null>) + image.ExifMetadata.createInstance()",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-image-exifmetadata",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CGImageDestinationAddImage(source, kCGImagePropertyExifDictionary)写回EXIF字典",
+          "url": "https://developer.apple.com/documentation/imageio/exif-dictionary-keys",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.exifinterface.media.ExifInterface.setAttribute + saveAttributes",
+          "url": "https://developer.android.com/reference/androidx/exifinterface/media/ExifInterface",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.extraction",
+      "parent": "media.metadata",
+      "name": "媒体元数据提取",
+      "what": "从媒体文件/流读取描述信息：标题/艺术家/时长/分辨率/封面等轨道与容器级元数据。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AVMetadataExtractor",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ndk-avmetadataextractor-for-media",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Media3(元数据检索)",
+          "url": "https://developer.android.com/media/media3/exoplayer/retrieving-metadata",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.extraction.album_cover",
+      "parent": "media.metadata.extraction",
+      "name": "音频专辑封面提取",
+      "what": "从音频文件中提取内嵌专辑封面图像并得到可直接渲染的位图对象。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_AVMetadataExtractor_FetchAlbumCover(extractor, &OH_PixelmapNative*) + OH_PixelmapNative_ConvertPixelmapNativeToNapi / OH_PixelmapNative_Release",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ndk-avmetadataextractor-for-media",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaMetadataRetriever.getEmbeddedPicture()",
+          "url": "https://developer.android.com/reference/android/media/MediaMetadataRetriever",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.extraction.container_metadata",
+      "parent": "media.metadata.extraction",
+      "name": "容器与轨道元数据读取",
+      "what": "从媒体文件/数据源解析并读取容器级与轨道级描述信息(标题、时长、宽高、编码等)为键值集合。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_AVMetadataExtractor_Create / OH_AVMetadataExtractor_SetFDSource(fd, offset, size) / OH_AVMetadataExtractor_FetchMetadata(OH_AVFormat) / OH_AVFormat_GetIntValue,GetStringValueFromAVFormat / OH_AVMetadataExtractor_Release",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ndk-avmetadataextractor-for-media",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaMetadataRetriever.setDataSource/extractMetadata(METADATA_KEY_*)",
+          "url": "https://developer.android.com/reference/android/media/MediaMetadataRetriever",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVAsset.load(.duration,.tracks) + AVMetadataItem.commonKey",
+          "url": "https://developer.apple.com/documentation/avfoundation/avasset",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.extraction.network_source",
+      "parent": "media.metadata.extraction",
+      "name": "网络源元数据提取",
+      "what": "直接以网络URL作为数据源提取媒体元数据，无需应用先下载到本地文件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AVMetadataExtractor.setUrlSource(url)(API 20新增) + fetchMetadata/fetchFrameByTime",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-media-avmetadataextractor",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaMetadataRetriever.setDataSource(url, headers)",
+          "url": "https://developer.android.com/reference/android/media/MediaMetadataRetriever",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.extraction.timed_metadata",
+      "parent": "media.metadata.extraction",
+      "name": "播放流内定时元数据",
+      "what": "在播放/解析过程中随时间轴出现的流内元数据(如ID3、SCTE-35、章节/广告标记)的读取。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Media3 Exoplayer retrieving metadata(MetadataOutput/TimedMetadataCollection)",
+          "url": "https://developer.android.com/media/media3/exoplayer/retrieving-metadata",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVPlayerItemMetadataCollector / ID3 timed metadata(AVPlayerItem legibleOutput之外的元数据输出)",
+          "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemmetadatacollector",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.thumbnail",
+      "parent": "media.metadata",
+      "name": "缩略图与帧生成",
+      "what": "为媒体内容生成预览图：视频指定时间帧提取、图库资产缩略图请求与缓存。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "系统能力获取视频缩略图, AVImageGenerator",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-thumbnail-system",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "PHCachingImageManager",
+          "url": "https://developer.apple.com/documentation/photokit/loading-and-caching-assets-and-thumbnails",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.thumbnail.asset_default",
+      "parent": "media.metadata.thumbnail",
+      "name": "图库资产默认缩略图",
+      "what": "按目标尺寸获取图库资产(图片/视频)的默认缩略图，视频一般取首帧，返回可直接渲染的位图。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "photoAccessHelper.PhotoAsset.getThumbnail(size: Size): Promise<image.PixelMap>(配合getAssets/getAlbums与PhotoKeys.WIDTH/HEIGHT/ORIENTATION)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-thumbnail-system",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "PHImageManager.requestImage(for:targetSize:contentMode:options:resultHandler:)",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.thumbnail.caching",
+      "parent": "media.metadata.thumbnail",
+      "name": "缩略图缓存与滚动预热",
+      "what": "在列表滚动场景预先缓存即将可见资产的缩略图并停止缓存已离屏资产，以降低滚动卡顿。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PHCachingImageManager.startCachingImages(for:targetSize:contentMode:options:) / stopCachingImages(...) + requestImage(for:targetSize:contentMode:options:resultHandler:)",
+          "url": "https://developer.apple.com/documentation/photokit/browsing-and-modifying-photo-albums",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "Glide/Coil等第三方缓存(平台无系统缩略图缓存API)",
+          "url": "https://developer.android.com/media/platform/mediaplayer/drm",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.thumbnail.frame_at_time",
+      "parent": "media.metadata.thumbnail",
+      "name": "指定时间点视频帧提取",
+      "what": "按给定时间从视频中抽取单帧作为图片，支持就近同步帧等取帧策略与目标尺寸。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "media.createAVImageGenerator() + AVImageGenerator.fetchFrameByTime(time, media.AVImageQueryOptions.AV_IMAGE_QUERY_CLOSEST_SYNC, size): Promise<image.PixelMap>",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-thumbnail-system",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVAssetImageGenerator.copyCGImage(atTime:) / PHImageManager.requestPlayerItem之外的帧提取",
+          "url": "https://developer.apple.com/documentation/avfoundation/avassetimagegenerator",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.metadata.thumbnail.network_video",
+      "parent": "media.metadata.thumbnail",
+      "name": "网络视频缩略图获取",
+      "what": "对远程URL视频直接取帧生成缩略图，无需应用自行下载整个文件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AVMetadataExtractor.setUrlSource(url)(API 20) + AVMetadataExtractor.fetchFrameByTime(time)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-thumbnail-system",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.playback",
+      "parent": "media",
+      "name": "音视频播放",
+      "what": "把本地或网络音视频内容渲染给用户的播放器层能力，包括音频播放、视频播放、流式自适应播放、字幕呈现与在线曲库播放。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.media3.MediaPlayer(Media3), ExoPlayer",
+          "url": "https://developer.android.com/media/media3/exoplayer/hello-world",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.mediaAVPlayer(AVPlayer)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avplayer-for-playback",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.audio",
+      "parent": "media.playback",
+      "name": "音频播放",
+      "what": "以音频为主要内容的播放器使用与控制，含本地音频文件、通知/铃声类短音频以外的常规音乐/语音内容播放。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.MediaPlayer",
+          "url": "https://developer.android.com/media/platform/mediaplayer/basics",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.mediaAVPlayer",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avplayer-for-playback",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.audio.background",
+      "parent": "media.playback.audio",
+      "name": "后台与熄屏持续播放",
+      "what": "音频在应用退后台/熄屏后继续播放的接入条件：HarmonyOS需接入AVSession并申请长时任务，Android需前台服务+媒体会话通知，iOS需后台音频模式。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AVSession接入 + 长时任务(continuous task AUDIO_PLAYBACK)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avplayer-for-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "前台服务 + androidx.media3.session.MediaSession媒体通知",
+          "url": "https://developer.android.com/guide/topics/media-apps/working-with-a-media-session",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFAudio.AVAudioSession(.playback category) + UIBackgroundModes audio",
+          "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.audio.prepare_state",
+      "parent": "media.playback.audio",
+      "name": "播放准备与状态机管理",
+      "what": "播放前准备与生命周期状态管理：同步/异步准备、准备完成回调、状态监听约束(须在设源前注册)、reset/release资源回收。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaPlayer.prepare/prepareAsync/OnPreparedListener",
+          "url": "https://developer.android.com/media/platform/mediaplayer/basics",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "media.AVPlayer.prepare/state/on('stateChange')/reset/release + AVPlayerState",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avplayer-for-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFoundation.AVPlayerItem.status/AVPlayer.automaticallyWaitsToMinimizeStalling",
+          "url": "https://developer.apple.com/documentation/avfoundation/avplayeritem",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.audio.source_setup",
+      "parent": "media.playback.audio",
+      "name": "播放源设置与更换",
+      "what": "为播放器设置音频来源并支持运行中更换：本地资源、沙箱文件fd、内容URI、网络URL；网络源需INTERNET权限。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaPlayer.setDataSource(Context+Uri/URL) / MediaPlayer.create(resId)",
+          "url": "https://developer.android.com/media/platform/mediaplayer/basics",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "media.AVPlayer.url(https/沙箱路径) / fd:// + ResourceManager.getRawFd / reset()换源",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avplayer-for-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFoundation.AVPlayerItem(url:)",
+          "url": "https://developer.apple.com/documentation/avfoundation/avplayeritem",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.audio.transport",
+      "parent": "media.playback.audio",
+      "name": "播放传输控制",
+      "what": "播放器传输控制：播放/暂停/跳转(含SeekMode精确模式)/停止/倍速；同一播放器API族同时服务音频与视频内容。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "media.AVPlayer.play/pause/seek(SeekMode)/stop/setSpeed + on('seekDone')/on('speedDone')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avplayer-for-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaPlayer.start()/prepare()",
+          "url": "https://developer.android.com/media/platform/mediaplayer/basics",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaPlayer.pause/seekTo/setPlaybackParams",
+          "url": "https://developer.android.com/reference/android/media/MediaPlayer",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFoundation.AVPlayer.play/pause/seek",
+          "url": "https://developer.apple.com/documentation/avfoundation/avplayer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.audio.volume",
+      "parent": "media.playback.audio",
+      "name": "播放器级音量控制",
+      "what": "调节单个播放器实例的音量与左右声道平衡，独立于系统媒体音量类型。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "media.AVPlayer.setVolume / on('volumeChange')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avplayer-for-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaPlayer.setVolume(left,right)",
+          "url": "https://developer.android.com/reference/android/media/MediaPlayer#setVolume(float,float)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFoundation.AVPlayer.volume",
+          "url": "https://developer.apple.com/documentation/avfoundation/avplayer/volume",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.catalog",
+      "parent": "media.playback",
+      "name": "在线曲库服务集成",
+      "what": "应用接入平台/生态在线音乐目录进行检索、授权与播放的能力(平台独有生态服务能力，非通用文件播放)。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MusicKit, ApplicationMusicPlayer",
+          "url": "https://developer.apple.com/documentation/musickit/using-musickit-to-integrate-with-apple-music",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.catalog.authorization",
+      "parent": "media.playback.catalog",
+      "name": "曲库服务用户授权",
+      "what": "获取用户对访问其音乐库/订阅身份的应用内授权，换取开发者令牌用于曲库API调用。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MusicKit.MusicAuthorization.request() / requestMusicTokenSignature(_:)",
+          "url": "https://developer.apple.com/documentation/musickit/musicauthorization",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.catalog.playback",
+      "parent": "media.playback.catalog",
+      "name": "曲库内容播放",
+      "what": "通过平台曲库播放音乐：调用系统音乐应用播放(ApplicationMusicPlayer)或应用内播放曲库曲目，含用户库与订阅内容访问。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MusicKit.ApplicationMusicPlayer / MediaPlayer.MPMusicPlayerController",
+          "url": "https://developer.apple.com/documentation/musickit/applicationmusicplayer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.catalog.search",
+      "parent": "media.playback.catalog",
+      "name": "在线曲库检索与目录浏览",
+      "what": "在平台在线音乐目录(Apple Music等)中按关键字、专辑、艺人、歌单检索并获取目录元数据，无需用户订阅也可查询目录。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MusicKit.MusicCatalogSearchRequest / MusicCatalogResourcesRequest",
+          "url": "https://developer.apple.com/documentation/musickit/musiccatalogsearchrequest",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.streaming",
+      "parent": "media.playback",
+      "name": "流式与自适应播放",
+      "what": "通过网络协议分发内容的播放能力，含HLS/DASH/SmoothStreaming/RTSP/渐进式下载与自适应码率切换、直播窗口管理。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.media3.datasource, MediaSource(HlsMediaSource/DashMediaSource)",
+          "url": "https://developer.android.com/media/media3/exoplayer/hls",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "HLS(Apple流媒体规范体系)",
+          "url": "https://developer.apple.com/documentation/http-live-streaming/hls-authoring-specification-for-apple-devices",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVPlayer(流媒体url)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/streaming-media-playback-development-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.streaming.adaptive_dash",
+      "parent": "media.playback.streaming",
+      "name": "DASH流播放与轨道控制",
+      "what": "DASH(MPD)协议流播放：自适应码率之外的应用侧控制，含自定义起播分辨率策略与手动切换音视频轨道(切换后自适应失效)。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "media.createMediaSourceWithUrl + PlaybackStrategy(preferredWidth/Height) + getTrackDescription/selectTrack/deselectTrack/on('trackChange')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/streaming-media-playback-development-guide",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "media3-exoplayer-dash DashMediaSource",
+          "url": "https://developer.android.com/media/media3/exoplayer/dash",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.streaming.adaptive_hls",
+      "parent": "media.playback.streaming",
+      "name": "HLS自适应流播放",
+      "what": "HLS协议流播放：multivariant清单解析与按带宽/设备能力自动切换码率，支持TS/FMP4-CMAF/ADTS/MP3容器、CEA-608/708与WebVTT字幕、AES-128/Widevine内容保护。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "media3-exoplayer-hls HlsMediaSource.Factory / MediaItem.fromUri(m3u8)",
+          "url": "https://developer.android.com/media/media3/exoplayer/hls",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "media.AVPlayer(HLS) + on('availableBitrates')/setBitrate/on('bitrateDone')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/streaming-media-playback-development-guide",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFoundation.AVPlayer(原生HLS)",
+          "url": "https://developer.apple.com/documentation/avfoundation/avplayer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.streaming.live",
+      "parent": "media.playback.streaming",
+      "name": "直播流播放",
+      "what": "网络直播播放：HLS/HTTP-FLV直播流、直播窗口管理与低延迟直播(LL-HLS)支持。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "media3 HLS Live playback / Low-latency HLS(Apple)",
+          "url": "https://developer.android.com/media/media3/exoplayer/hls",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "media.AVPlayer(HLS直播/HTTP-FLV直播)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/streaming-media-playback-development-guide",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFoundation.AVPlayer(HLS直播/LL-HLS)",
+          "url": "https://developer.apple.com/documentation/avfoundation/avplayer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.streaming.progressive",
+      "parent": "media.playback.streaming",
+      "name": "渐进式下载播放",
+      "what": "HTTP(S)普通文件边下边播，不依赖清单协议；要求服务器/文件支持渐进下载，含下载速率不足时的缓冲事件与恢复。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaPlayer.setDataSource(url)(正文注明在线文件须支持progressive download)",
+          "url": "https://developer.android.com/media/platform/mediaplayer/basics",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "media.AVPlayer(HTTP/HTTPS点播) + on('bufferingUpdate')/BufferingInfoType",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/streaming-media-playback-development-guide",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.subtitle",
+      "parent": "media.playback",
+      "name": "字幕与隐藏式字幕",
+      "what": "播放期间呈现字幕轨的能力：外挂字幕文件、内嵌字幕轨选择与系统隐藏式字幕(Closed Captions)设置联动。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MediaAccessibility(closed captions)",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/captions",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVPlayer外挂字幕接口",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-subtitle",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.subtitle.cc_settings",
+      "parent": "media.playback.subtitle",
+      "name": "系统隐藏式字幕设置联动",
+      "what": "读取并遵循系统级隐藏式字幕用户偏好：显示类型开关、首选语言栈、字体/颜色/透明度/字号/边缘样式、字幕窗口外观及其变更通知，使播放字幕渲染与系统无障碍设置一致。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MediaAccessibility.MACaptionAppearanceGetDisplayType/SetDisplayType/kMACaptionAppearanceSettingsChangedNotification/CopySelectedLanguages/CopyFontDescriptorForStyle/窗口与颜色系列函数",
+          "url": "https://developer.apple.com/documentation/mediaaccessibility/captions",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.view.accessibility.CaptioningManager",
+          "url": "https://developer.android.com/reference/android/view/accessibility/CaptioningManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.subtitle.external",
+      "parent": "media.playback.subtitle",
+      "name": "外挂字幕加载与显示",
+      "what": "为正在播放的视频挂载独立字幕文件(如SRT)，按播放时间轴获得字幕文本回调并由应用自行渲染；不含内嵌字幕轨选择与系统CC设置。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "media.AVPlayer.addSubtitleFromFd / on('subtitleUpdate')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-subtitle",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.media.MediaPlayer.addTimedTextSource",
+          "url": "https://developer.android.com/reference/android/media/MediaPlayer#addTimedTextSource(java.lang.String)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFoundation.AVPlayerItemLegibleOutput",
+          "url": "https://developer.apple.com/documentation/avfoundation/avplayeritemlegibleoutput",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.subtitle.track_selection",
+      "parent": "media.playback.subtitle",
+      "name": "内嵌字幕轨选择",
+      "what": "枚举媒体内容中内嵌的字幕/文本轨并按语言、可用性选择开启或关闭，由播放器负责渲染。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "AVFoundation.AVPlayerItem.select(_:in:) / AVMediaSelectionGroup",
+          "url": "https://developer.apple.com/documentation/avfoundation/avplayeritem/select(_:in:)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.media3.common.TrackSelectionParameters(字幕轨选择)",
+          "url": "https://developer.android.com/reference/androidx/media3/common/TrackSelectionParameters",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.video",
+      "parent": "media.playback",
+      "name": "视频播放",
+      "what": "视频内容播放器使用，含画面输出surface、播控与画面形态(全屏/窗口/旋转)管理。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.media3.ui.PlayerView, androidx.media3.MediaPlayer",
+          "url": "https://developer.android.com/media/media3/exoplayer/hello-world",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.mediaAVPlayer, ArkUI Video",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-playback",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.video.display_mode",
+      "parent": "media.playback.video",
+      "name": "画面缩放与尺寸适配",
+      "what": "视频画面显示形态：缩放/裁剪模式设置、视频宽高变化监听与窗口比例适配。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AVPlayer缩放模式(videoScaleType) + on('videoSizeChange')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.media3.ui.PlayerView resizeMode / AspectRatioFrameLayout",
+          "url": "https://developer.android.com/reference/androidx/media3/ui/PlayerView",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFoundation.AVPlayerLayer.videoGravity",
+          "url": "https://developer.apple.com/documentation/avfoundation/avplayerlayer/videogravity",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.video.first_frame",
+      "parent": "media.playback.video",
+      "name": "首帧渲染事件",
+      "what": "视频首帧画面渲染到显示层时接收事件通知，用于移除封面图衔接画面与起播耗时打点。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "media.AVPlayer.on('startRenderFrame')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.media3.common.Player.Listener.onRenderedFirstFrame",
+          "url": "https://developer.android.com/reference/androidx/media3/common/Player.Listener#onRenderedFirstFrame()",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFoundation.AVPlayerItem(输出/readyForDisplay观察)",
+          "url": "https://developer.apple.com/documentation/avfoundation/avplayerlayer/isreadyfordisplay",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.video.surface_output",
+      "parent": "media.playback.video",
+      "name": "视频画面输出绑定",
+      "what": "把解码画面输出到显示载体：将SurfaceView/TextureView/Surface或XComponent的surfaceId交给播放器渲染，支持自绘UI场景。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ExoPlayer.setVideoSurfaceView/setVideoTextureView/setVideoSurfaceHolder/setVideoSurface",
+          "url": "https://developer.android.com/media/media3/exoplayer/hello-world",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "media.AVPlayer.surfaceId + XComponent.getXComponentSurfaceId",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFoundation.AVPlayerLayer",
+          "url": "https://developer.apple.com/documentation/avfoundation/avplayerlayer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.playback.video.ui_components",
+      "parent": "media.playback.video",
+      "name": "预置播放UI组件",
+      "what": "平台/官方库封装的开箱播放界面：画面+播控条+字幕视图组合，降低自建播控UI成本。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.media3.ui.PlayerView(封装PlayerControlView/SubtitleView/Surface) + media3-ui-compose-material3 Player",
+          "url": "https://developer.android.com/media/media3/exoplayer/hello-world",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "ArkUI Video组件",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVKit.AVPlayerViewController",
+          "url": "https://developer.apple.com/documentation/avkit/avplayerviewcontroller",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.recording",
+      "parent": "media",
+      "name": "媒体录制",
+      "what": "把音视频内容编码封装为媒体文件：通用音视频文件录制与屏幕录制/屏幕共享采集。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.MediaRecorder",
+          "url": "https://developer.android.com/guide/topics/media/mediarecorder",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.media.AVRecorder",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avrecorder-for-recording",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.recording.av",
+      "parent": "media.recording",
+      "name": "音视频文件录制",
+      "what": "将音频/视频源编码并封装为媒体文件的录制：配置文件格式/编码参数/源，管理录制状态与暂停恢复。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.MediaRecorder",
+          "url": "https://developer.android.com/guide/topics/media/mediarecorder",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.media.AVRecorder",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avrecorder-for-recording",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.recording.av.control",
+      "parent": "media.recording.av",
+      "name": "录制状态控制与暂停恢复",
+      "what": "按状态机管理录制生命周期：开始/暂停/恢复/停止/重置/释放，并订阅状态与错误变化。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AVRecorder.start/pause/resume/stop/reset/release, on('stateChange'), on('error'), state属性",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avrecorder-for-recording",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaRecorder.start/stop/reset/release, MediaRecorder.pause/resume",
+          "url": "https://developer.android.com/guide/topics/media/mediarecorder",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.recording.av.custom_track",
+      "parent": "media.recording.av",
+      "name": "多轨道录制与直接封装写入",
+      "what": "绕开一体化录制器，把多路编码数据经muxer直接写入文件实现多声道/多轨道录制，并可附加位置等录制元数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaMuxer(多声道录制), MediaRecorder.setLocation(元数据)",
+          "url": "https://developer.android.com/guide/topics/media/mediarecorder",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.recording.av.profile",
+      "parent": "media.recording.av",
+      "name": "录制源与格式编码配置",
+      "what": "为录制器指定音频/视频输入源、容器封装格式与编码器及码率/采样参数，完成录制前的profile配置(prepare)。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaRecorder.setAudioSource(AudioSource.MIC)/setOutputFormat(THREE_GPP,MPEG_2_TS API26+)/setAudioEncoder(AMR_NB)",
+          "url": "https://developer.android.com/guide/topics/media/mediarecorder",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "media.AVRecorderConfig{audioSourceType:AUDIO_SOURCE_TYPE_MIC, AVRecorderProfile{audioCodec,fileFormat,audioBitrate...}}, AVRecorder.prepare",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avrecorder-for-recording",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.recording.screen",
+      "parent": "media.recording",
+      "name": "屏幕录制与共享",
+      "what": "采集设备屏幕内容：屏幕视频/音频录制到文件或buffer、指定窗口采集、屏幕共享给其他应用。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.media.projection.MediaProjection",
+          "url": "https://developer.android.com/media/grow/media-projection",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.avScreenCapture(AVScreenCapture)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avscreencapture-arkts",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVScreenCaptureRecorder, AVScreenCapture（libnative_avscreen_capture.so）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avscreencapture-arkts",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaProjection.createVirtualDisplay, MediaRecorder",
+          "url": "https://developer.android.com/media/grow/media-projection",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.recording.screen.authorize",
+      "parent": "media.recording.screen",
+      "name": "屏幕采集授权与隐私约束",
+      "what": "启动屏幕采集前的用户同意机制与会话约束：每次采集的授权弹窗/前台服务要求、录屏胶囊取消、隐私窗口豁免与隐私场景状态。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaProjectionManager.createScreenCaptureIntent(每次会话用户同意), 前台服务类型MEDIA_PROJECTION",
+          "url": "https://developer.android.com/media/grow/media-projection",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVScreenCaptureStateCode.SCREENCAPTURE_STATE_CANCELED/ENTER_PRIVATE_SCENE, 隐私窗口豁免(WindowProperties), ohos.permission.CUSTOM_SCREEN_RECORDING(免隐私弹窗,PC/2in1,API22+)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avscreencapture-arkts",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVScreenCaptureRecorder.skipPrivacyMode(windowIDs) + stateChange回调（ENTER/EXIT_PRIVATE_SCENE、STOPPED_BY_CALL、STOPPED_BY_USER_SWITCHES等）+ PC/2in1受限权限CUSTOM_SCREEN_RECORDING（API 22+）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avscreencapture-arkts",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaProjection.Callback.onStop（状态栏chip、锁屏自动停止，Android 15 QPR1+）/ onCapturedContentVisibilityChanged",
+          "url": "https://developer.android.com/media/grow/media-projection",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.recording.screen.to_file",
+      "parent": "media.recording.screen",
+      "name": "屏幕录制到文件",
+      "what": "将屏幕画面连同麦克风/系统声音频编码封装为视频文件：录制参数(码率/采样率/preset)配置、开始停止与状态监听。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "media.createAVScreenCaptureRecorder, AVScreenCaptureRecorder.init(AVScreenCaptureRecordConfig{videoBitrate,audioSampleRate,audioChannelCount,audioBitrate,preset:SCREEN_RECORD_PRESET_H264_AAC_MP4,displayId}), startRecording/stopRecording, on('stateChange')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avscreencapture-arkts",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaRecorder(setInputSurface)+MediaProjection虚拟显示组合录制",
+          "url": "https://developer.android.com/media/grow/media-projection",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "media.AVScreenCaptureRecorder：init(AVScreenCaptureRecordConfig{fd,frameWidth/Height,videoBitrate,preset:SCREEN_RECORD_PRESET_H264_AAC_MP4})/startRecording/stopRecording/release",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avscreencapture-arkts",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaProjection.createVirtualDisplay(surface由MediaRecorder提供) + MediaRecorder编码写文件",
+          "url": "https://developer.android.com/media/grow/media-projection",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.recording.screen.virtual_display",
+      "parent": "media.recording.screen",
+      "name": "屏幕采集到Surface或缓冲",
+      "what": "把屏幕内容采集为可编程消费的画面流：虚拟显示输出到Surface(ImageReader/SurfaceTexture/编码器输入)或逐帧缓冲，用于共享、直播或自定义处理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaProjection.createVirtualDisplay(Surface由MediaRecorder/SurfaceTexture/ImageReader提供)",
+          "url": "https://developer.android.com/media/grow/media-projection",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVScreenCapture(流模式,采集到surface供共享/处理)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avscreencapture-arkts",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaProjection.createVirtualDisplay(...VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, surface...) + SurfaceTexture/ImageReader消费帧",
+          "url": "https://developer.android.com/media/grow/media-projection",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVScreenCapture（libnative_avscreen_capture.so，流模式/Surface输出）",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avscreencapture-arkts",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "ReplayKit RPBroadcastSampleHandler（广播扩展内获取CMSampleBuffer流，待核）",
+          "url": "https://developer.apple.com/documentation/replaykit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.ringtone",
+      "parent": "media",
+      "name": "铃声与系统提示音设置",
+      "what": "查询与设置系统事件声音(来电/短信/通知/闹钟铃声)及系统提示音播放。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@kit.RingtoneKit(ringtone.setRingtone/getSupportedRingtoneTypes)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ringtone-introduction",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.scan",
+      "parent": "media",
+      "name": "码扫描与生成",
+      "what": "识别与生成一维码/二维码：相机流实时扫码(可定制界面)、静态图片识码、码内容生成。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@kit.ScanKit(customScan/码识别)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-customscan",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.scan.detect",
+      "parent": "media.scan",
+      "name": "码识别",
+      "what": "从相机流或静态图片识别码内容：实时取流识别与定制UI、相册/文件图片识码、多码同帧识别。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "customScan(自定义界面扫码), 图片识别数据",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-customscan",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.scan.detect.assist_control",
+      "parent": "media.scan.detect",
+      "name": "扫码相机辅助控制(补光/变焦/对焦)",
+      "what": "在扫码过程中控制补光灯、变焦比与对焦点，并订阅环境亮度变化以提示用户开灯。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "customScan.getFlashLightStatus()/openFlashLight()/closeFlashLight() / setZoom(number)/getZoom() / setFocusPoint(scanBarcode.Point)/resetFocus() / on('lightingFlash')/off('lightingFlash')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-customscan",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVCaptureDevice.setTorchMode / videoZoomFactor / setFocusPointOfInterest",
+          "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.scan.detect.capability_query",
+      "parent": "media.scan.detect",
+      "name": "扫码能力设备支持性查询",
+      "what": "在启动扫码前查询当前设备是否支持自定义界面扫码及是否具备所需相机硬件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "scanCore.isCustomScanSupported(自API版本26.0.0) + camera.getSupportedCameras(查询后置相机)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-customscan",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "PackageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)",
+          "url": "https://developer.android.com/reference/android/content/pm/PackageManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.scan.detect.default_ui",
+      "parent": "media.scan.detect",
+      "name": "系统默认界面扫码",
+      "what": "直接拉起平台提供的标准扫码界面完成识别，应用只接收结果，不自建相机预览与UI。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "scanBarcode(默认界面扫码) startScanForResult",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/scan-scanbarcode-api",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Google Play services code scanner(GmsBarcodeScanning.getBarcodeScanner(...).startScan())",
+          "url": "https://developers.google.com/ml-kit/vision/barcode-scanning/code-scanner",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "无系统默认扫码界面(需自建AVCaptureSession或使用第三方)",
+          "url": "https://developer.apple.com/documentation/avfoundation/avcapturemetadataoutput",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.scan.detect.image_buffer",
+      "parent": "media.scan.detect",
+      "name": "像素缓冲图像识码",
+      "what": "对应用自己持有的像素数据(NV21等格式的图像缓冲)直接做码识别，不依赖平台扫码相机流。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "detectBarcode.decodeImage(image: ByteImage{byteBuffer,width,height,format: ImageFormat.NV21}, options?: scanBarcode.ScanOptions): Promise<DetectResult>",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-decodeimage",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "ML Kit BarcodeScanner.process(InputImage.fromByteArray(...))",
+          "url": "https://developers.google.com/ml-kit/vision/barcode-scanning",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "VNDetectBarcodesRequest + VNImageRequestHandler(像素缓冲)",
+          "url": "https://developer.apple.com/documentation/vision/vndetectbarcodesrequest",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.scan.detect.live_camera_stream",
+      "parent": "media.scan.detect",
+      "name": "相机流实时扫码(自定义界面)",
+      "what": "应用自行承载扫码UI并控制扫码相机流的初始化/开启/暂停/释放，实时识别预览画面中的码。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "customScan.init(ScanOptions) / customScan.start(viewControl: ViewControl): Promise<Array<scanBarcode.ScanResult>> / stop() / release()",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-customscan",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVCaptureMetadataOutput + AVCaptureMetadataOutputObjectsDelegate(metadataObjects: AVMetadataMachineReadableCodeObject)",
+          "url": "https://developer.apple.com/documentation/avfoundation/avcapturemetadataoutput",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "ML Kit Barcode Scanning(InputImage + BarcodeScanner.process)",
+          "url": "https://developers.google.com/ml-kit/vision/barcode-scanning",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.scan.detect.multi_code",
+      "parent": "media.scan.detect",
+      "name": "同帧多码识别与选码",
+      "what": "在一帧画面中同时识别多个码并返回结果集合，多码时由应用暂停相机流让用户选择目标码。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "scanBarcode.ScanOptions.enableMultiMode + scanBarcode.ScanOptions.scanTypes([scanCore.ScanType.ALL]) + DetectResult.scanResults(Array)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-decodeimage",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "ML Kit BarcodeScanning.getClient(FORMAT_ALL) -> List<Barcode>(process回调返回多码)",
+          "url": "https://developers.google.com/ml-kit/vision/barcode-scanning",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.scan.detect.preview_frame",
+      "parent": "media.scan.detect",
+      "name": "扫码预览帧数据回调",
+      "what": "在扫码的同时逐帧获得相机预览流原始数据(YUV/NV21)，用于识码与识物等综合识别场景。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "customScan.start(viewControl, callback: AsyncCallback<Array<ScanResult>>, frameCallback?: AsyncCallback<ScanFrame>) + ScanFrame",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-customscan",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "CameraX ImageAnalysis.Analyzer(YUV_420_888帧分析)",
+          "url": "https://developer.android.com/training/camerax/analysis",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.scan.detect.result_geometry",
+      "parent": "media.scan.detect",
+      "name": "码位置与几何信息返回",
+      "what": "识别结果除码值外还返回码图在画面中的位置几何(最小外接矩形或四角坐标)与建议放大倍数，供应用绘制框选与引导。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "DetectResult.cornerPoints(四点坐标) / DetectResult.zoomValue(期望图像放大倍数) / scanCore.ScanResult(码位置)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-decodeimage",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVMetadataMachineReadableCodeObject.corners / boundingBox",
+          "url": "https://developer.apple.com/documentation/avfoundation/avmetadatamachinereadablecodeobject",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.scan.detect.static_image",
+      "parent": "media.scan.detect",
+      "name": "静态图片/相册图片识码",
+      "what": "对已存在的图片文件或相册选择的图片进行码识别(含扫码界面内的相册入口)。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "scanBarcode.ScanOptions.enableAlbum(相册识码开关) + detectBarcode.decodeImage",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/scan-decodeimage",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "VNDetectBarcodesRequest(CIImage from file) / CIDetector(ofType: CIDetectorTypeQRCode)",
+          "url": "https://developer.apple.com/documentation/vision/vndetectbarcodesrequest",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "ML Kit InputImage.fromFilePath(context, uri) + BarcodeScanner.process",
+          "url": "https://developers.google.com/ml-kit/vision/barcode-scanning",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.session",
+      "parent": "media",
+      "name": "媒体会话与播控",
+      "what": "应用向系统暴露播放状态与接受系统/外部控制的能力：播控命令、正在播放元数据、音频焦点协调与跨设备投播会话。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.media3.session.MediaSession, android.media.session.MediaSession",
+          "url": "https://developer.android.com/guide/topics/media-apps/working-with-a-media-session",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.multimedia.avsession(AVSession)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avsession-developer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.session.commands",
+      "parent": "media.session",
+      "name": "播控命令与媒体按钮",
+      "what": "系统级播控命令的双向流转：应用作为会话提供方接收媒体按钮(耳机/蓝牙)、通知/锁屏/播控中心与语音助理命令并响应；具备受限权限的应用还可作为媒体会话控制方对其他应用会话统一播控。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "KeyEvent(KEYCODE_MEDIA_*)/MediaSession.Callback/MediaButtonReceiver",
+          "url": "https://developer.android.com/guide/topics/media-apps/mediabuttons",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MediaPlayer.MPRemoteCommandCenter",
+          "url": "https://developer.apple.com/documentation/mediaplayer/remote-command-center-events",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "avSession.AVSessionManager/AVSessionController",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avsession-controller",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.session.commands.controller_role",
+      "parent": "media.session.commands",
+      "name": "跨应用媒体会话控制方",
+      "what": "以系统媒体会话控制方角色枚举/监听其他应用的媒体会话，获取其元数据与播放状态并下发播控命令；HarmonyOS需受限权限且API23起支持。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "avSession.getAllSessionDescriptors/createController/onTopSessionChange/onSessionCreate/onSessionDestroy + controller.getAVMetadata/getAVPlaybackState",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avsession-controller",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.media.MediaController/MediaBrowser(连接他应用会话)",
+          "url": "https://developer.android.com/reference/androidx/media/MediaController",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.session.commands.media_button",
+      "parent": "media.session.commands",
+      "name": "媒体按钮事件路由与处理",
+      "what": "硬件/蓝牙耳机媒体按钮事件的路由与处理：按键码映射到播控回调，覆盖前台活动可见、会话活跃、会话不活跃需重启三种场景的路由优先级。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "KeyEvent(KEYCODE_MEDIA_PLAY等)/MediaSession onMediaButtonEvent/dispatchMediaButtonEvent/MediaButtonReceiver.handleIntent",
+          "url": "https://developer.android.com/guide/topics/media-apps/mediabuttons",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MediaPlayer.MPRemoteCommandCenter(外部配件与系统控件事件)",
+          "url": "https://developer.apple.com/documentation/mediaplayer/remote-command-center-events",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVSession提供方播控命令回调(on('play')等)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avsession-developer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.session.commands.session_control",
+      "parent": "media.session.commands",
+      "name": "会话播控命令集与有效命令",
+      "what": "会话对外暴露的播控命令集与可用状态：标准命令(播放/暂停/上下曲/跳转/倍速/循环/随机/反馈)按队列状态动态声明可用性，含自定义动作；有效命令决定系统播控UI展示哪些控制。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "NowPlaying.MediaCommand(.play/.pause/.next/.previous/.seekToPosition/.feedback + enabled(_:)条件可用)",
+          "url": "https://developer.apple.com/documentation/nowplaying/publishing-media-sessions",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "MediaPlayer.MPRemoteCommand/MPRemoteCommandEvent",
+          "url": "https://developer.apple.com/documentation/mediaplayer/remote-command-center-events",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVSessionController.getValidCommands/on('validCommandChange')/AVControlCommandType",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avsession-controller",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "PlaybackStateCompat有效动作 + addCustomAction/onCustomAction(自定义动作不得替代标准动作)",
+          "url": "https://developer.android.com/guide/topics/media-apps/working-with-a-media-session",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.session.distributed",
+      "parent": "media.session",
+      "name": "投播与共享媒体会话",
+      "what": "把播放控制/内容扩展到其他设备或群组：投播组件、外部播放目标(Cast)、FaceTime共享观看(SharePlay)。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "HarmonyOS投播组件与接口",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/distributed-playback-overview",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "GroupActivities(SharePlay)",
+          "url": "https://developer.apple.com/documentation/groupactivities/defining-your-apps-shareplay-activities",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.mediarouter.MediaRouter, CastPlayer",
+          "url": "https://developer.android.com/guide/topics/media/media-routing",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.session.distributed.cast",
+      "parent": "media.session.distributed",
+      "name": "投播到外部播放设备",
+      "what": "把应用音视频内容投放到其他设备播放：设备发现/连接由系统或路由框架完成，应用通过投播控制器下发播放、暂停、音量、倍速等命令并接收远端状态回调。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AVCastPicker / AVSession(投播设置) / AVCastController",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/distributed-playback-overview",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.mediarouter.media.MediaRouter",
+          "url": "https://developer.android.com/guide/topics/media/media-routing",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVKit.AVRoutePickerView(AirPlay路由选择)",
+          "url": "https://developer.apple.com/documentation/avkit/avroutepickerview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.session.distributed.route_provider",
+      "parent": "media.session.distributed",
+      "name": "对外提供媒体路由",
+      "what": "应用/设备侧把自身播放接收能力发布为媒体路由提供者，使其他应用的MediaRouter能发现并向其投放内容(接收方角色)。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.mediarouter.media.MediaRouteProvider",
+          "url": "https://developer.android.com/guide/topics/media/media-routing",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.session.distributed.shareplay",
+      "parent": "media.session.distributed",
+      "name": "群组共享活动(SharePlay)",
+      "what": "定义可共享的群组活动并经FaceTime/信息/AirDrop发起，多人同步观看内容或协作，含活动元数据(标题/类型/图标)与共享数据模型。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "GroupActivities.GroupActivity协议/GroupActivityMetadata/Transferable+ShareLink发起",
+          "url": "https://developer.apple.com/documentation/groupactivities/defining-your-apps-shareplay-activities",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.session.focus",
+      "parent": "media.session",
+      "name": "音频焦点与并发协调",
+      "what": "多应用音频并发时的焦点获取/失去/混音策略：音频焦点申请、打断响应、通话与录音并发约束。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AudioManager.requestAudioFocus, AudioFocusRequest",
+          "url": "https://developer.android.com/guide/topics/media-apps/audio-focus",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "StreamUsage, AudioInterruptMode",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-right-streamusage-for-playback",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.session.focus.concurrency_policy",
+      "parent": "media.session.focus",
+      "name": "并发混音策略定制",
+      "what": "定制多应用音频并发的组合策略：焦点增益类型(长期/瞬时/可被压低/独占)决定他应用被duck或暂停，系统可代做ducking，应用可声明被duck时改为暂停；HarmonyOS可经AudioSession覆盖默认焦点策略。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AudioFocusRequest焦点增益类型(AUDIOFOCUS_GAIN/GAIN_TRANSIENT/GAIN_TRANSIENT_MAY_DUCK/GAIN_TRANSIENT_EXCLUSIVE)+setWillPauseWhenDucked",
+          "url": "https://developer.android.com/guide/topics/media-apps/audio-focus",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "audio.AudioSession自定义焦点策略(覆盖StreamUsage默认策略)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/audio-playback-concurrency",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVAudioSession.CategoryOptions(.mixWithOthers/.duckOthers)",
+          "url": "https://developer.apple.com/documentation/avfaudio/avaudiosession/categoryoptions",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.session.focus.interrupt_handling",
+      "parent": "media.session.focus",
+      "name": "焦点丢失与打断响应",
+      "what": "监听并响应焦点变化与打断：Android 12+失焦系统强制淡出且保持静音直至重新申请、8.0+自动ducking(语音内容除外)、来电强制静音；HarmonyOS按强制/共享打断类型上报事件；iOS以中断通知与去激活时通知他人恢复。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AudioManager.OnAudioFocusChangeListener + AudioFocusRequest.Builder.setWillPauseWhenDucked(系统行为:强制淡出/自动ducking/来电静音)",
+          "url": "https://developer.android.com/guide/topics/media-apps/audio-focus",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "media.AVPlayer.on('audioInterrupt')(audio.InterruptEvent)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avplayer-for-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_AudioStreamBuilder_SetRendererInterruptCallback(OH_AudioInterrupt_ForceType/Hint)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-ohaudio-for-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVAudioSession.interruptionNotification + setActive(false,.notifyOthersOnDeactivation)",
+          "url": "https://developer.apple.com/documentation/nowplaying/publishing-media-sessions",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.session.focus.request",
+      "parent": "media.session.focus",
+      "name": "音频焦点申请与释放",
+      "what": "播放前申请音频焦点并校验授予结果(GRANTED/FAILED/DELAYED)、结束后放弃；Android 12+由系统强制管理、15+要求前台身份才能申请，支持延迟获焦；HarmonyOS无显式申请接口，由系统按流类型与启动顺序自动决策；iOS以激活音频会话参与竞争。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AudioManager.requestAudioFocus(AudioFocusRequest)/abandonAudioFocusRequest + AudioFocusRequest.Builder(setFocusGain/setAudioAttributes/setAcceptsDelayedFocusGain/setOnAudioFocusChangeListener)",
+          "url": "https://developer.android.com/guide/topics/media-apps/audio-focus",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFAudio.AVAudioSession.setCategory(.playback)+setActive(true)",
+          "url": "https://developer.apple.com/documentation/nowplaying/publishing-media-sessions",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "无显式申请接口(系统按StreamUsage与音频流启动顺序决策焦点)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-right-streamusage-for-playback",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.session.focus.stream_usage",
+      "parent": "media.session.focus",
+      "name": "播放流类型声明",
+      "what": "为音频播放声明用途与内容类型(音乐/视频/游戏/语音等)，系统据此决定音量类别、焦点策略、输出设备与播放通路；Android以AudioAttributes取代流类型，HarmonyOS以StreamUsage枚举，iOS以AVAudioSession类别。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "audio.StreamUsage(AudioRendererInfo.usage/OH_AudioStream_Usage/AVPlayer.audioRendererInfo/SoundPool创建参数)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-right-streamusage-for-playback",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.media.AudioAttributes(usage/contentType,取代stream type,焦点请求默认USAGE_MEDIA)",
+          "url": "https://developer.android.com/guide/topics/media-apps/audio-focus",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "AVFAudio.AVAudioSession.setCategory(.playback,mode:.default)",
+          "url": "https://developer.apple.com/documentation/nowplaying/publishing-media-sessions",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.session.metadata",
+      "parent": "media.session",
+      "name": "正在播放信息展示",
+      "what": "向系统播控中心/锁屏发布当前媒体元数据(标题/作者/时长/封面)与播放状态。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MPNowPlayingInfoCenter/NowPlaying框架",
+          "url": "https://developer.apple.com/documentation/nowplaying/publishing-media-sessions",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "AVSession.setMetadata",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avsession-developer",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.media3.session.MediaSession.setSessionMetadata",
+          "url": "https://developer.android.com/guide/topics/media-apps/working-with-a-media-session",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.session.metadata.launch_ability",
+      "parent": "media.session.metadata",
+      "name": "播控界面拉起应用",
+      "what": "配置用户点击播控中心/锁屏卡片时拉起的应用页面：HarmonyOS经WantAgent启动UIAbility，Android经session activity PendingIntent。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "avSession.AVSession.setLaunchAbility(wantAgent.WantAgent)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avsession-developer",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaSessionCompat.setSessionActivity(PendingIntent)",
+          "url": "https://developer.android.com/reference/android/support/v4/media/session/MediaSessionCompat#setSessionActivity(android.app.PendingIntent)",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.session.metadata.now_playing",
+      "parent": "media.session.metadata",
+      "name": "正在播放元数据发布",
+      "what": "向系统播控中心/锁屏发布当前媒体描述(标题/艺术家/专辑/时长/封面/内容类型)，封面可按系统请求尺寸异步供给。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "NowPlaying.MediaSessionRepresentable.content(MusicContent/PodcastContent/MovieContent等8类)+Artwork异步加载",
+          "url": "https://developer.apple.com/documentation/nowplaying/publishing-media-sessions",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "avSession.AVSession.setAVMetadata(AVMetadata: assetId/previousAssetId/nextAssetId/title/artist/author/album/writer/duration/mediaImage)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avsession-developer",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaMetadataCompat.Builder/setMetadata(艺术家/专辑/曲目/时长/锁屏bitmap≤320x320dp+ContentUris大图)",
+          "url": "https://developer.android.com/guide/topics/media-apps/working-with-a-media-session",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.session.metadata.playback_state",
+      "parent": "media.session.metadata",
+      "name": "播放状态与进度发布",
+      "what": "发布传输状态/播放位置/倍速/缓冲/循环模式/收藏标记与错误状态；iOS以时间戳让系统在两次更新间外推进度，Android区分致命与非致命错误上报。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "NowPlaying.MediaPlaybackSnapshot(state/elapsedTime/timestamp)",
+          "url": "https://developer.apple.com/documentation/nowplaying/publishing-media-sessions",
+          "status": "source_read"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "avSession.AVSession.setAVPlaybackState(AVPlaybackState: state/position/speed/bufferedTime/loopMode/isFavorite/activeItemId/extras)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avsession-developer",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "PlaybackStateCompat.Builder/setPlaybackState(传输状态/位置/有效动作/STATE_ERROR+ERROR_CODE_END_OF_QUEUE等错误码)",
+          "url": "https://developer.android.com/guide/topics/media-apps/working-with-a-media-session",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "media.session.metadata.queue",
+      "parent": "media.session.metadata",
+      "name": "播放队列发布",
+      "what": "向系统发布播放列表(队列项:资产ID/标题/副标题/描述/图)与队列名称，供播控中心展示待播内容。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "avSession.AVSession.setAVQueueItems(AVQueueItem/AVMediaDescription)/setAVQueueTitle",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avsession-developer",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaSessionCompat.setQueue(QueueItem)/setQueueTitle",
+          "url": "https://developer.android.com/reference/android/support/v4/media/session/MediaSessionCompat#setQueue(java.util.List<android.support.v4.media.session.MediaSessionCompat.QueueItem>)",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "media.session.metadata.session_extras",
+      "parent": "media.session.metadata",
+      "name": "会话自定义事件与附加数据",
+      "what": "标准元数据之外的扩展通道：即时会话事件(不落盘，如动态歌词推送)与随会话持久化的自定义数据包(控制方可读取)。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "avSession.AVSession.dispatchSessionEvent(即时)/setExtras(持久化,Controller.getExtras读取)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/using-avsession-developer",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "MediaMetadataCompat/PlaybackStateCompat/CustomAction extras Bundle",
+          "url": "https://developer.android.com/guide/topics/media-apps/working-with-a-media-session",
+          "status": "source_read"
+        },
+        {
+          "platform": "ios",
+          "symbol": "NowPlaying框架自定义数据通道",
+          "url": "https://developer.apple.com/documentation/nowplaying",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

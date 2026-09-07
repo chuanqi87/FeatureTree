@@ -6,7 +6,7 @@ features:
   name:
     zh: 企业与管理
     en: Enterprise and Management
-  definition: MDM 与工作资料。
+  definition: 设备管理、工作资料、设备策略与企业身份接入；不含消费级家长控制。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -17,8 +17,10 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - MDM 与工作资料。
-    excludes: []
+    - MDM、工作资料、设备策略、企业身份
+    excludes:
+    - 家长控制见 digital_wellbeing
+    - 消费账号见 identity
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -28,13 +30,89 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - enterprise
+- id: enterprise.device_policy
+  level: L2
+  parent: enterprise
+  name:
+    zh: 设备策略控制
+    en: Device Policy Controls
+  definition: 密码、限制、证书、擦除等设备策略能力。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/device_policy/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 密码、限制、证书、擦除
+    excludes:
+    - 工作资料生命周期见 work_profile
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: enterprise_capability_family
+- id: enterprise.identity_enterprise
+  level: L2
+  parent: enterprise
+  name:
+    zh: 企业身份接入
+    en: Enterprise Identity
+  definition: 企业单点登录、Kerberos 与学校/企业管理器身份。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/identity_enterprise/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - SSO、Kerberos、学校管理器
+    excludes:
+    - 消费联合登录见 identity
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: enterprise_capability_family
 - id: enterprise.mdm
   level: L2
   parent: enterprise
   name:
-    zh: 设备管理
-    en: Device Management
-  definition: 企业设备策略。
+    zh: 移动设备管理
+    en: Mobile Device Management
+  definition: 企业设备注册、策略通道与远程管理入口。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -45,8 +123,9 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 企业设备策略。
-    excludes: []
+    - 注册、策略通道、远程操作
+    excludes:
+    - 工作资料隔离见 work_profile
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -56,42 +135,20 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: enterprise.mdm.policy
-  level: L3
-  parent: enterprise.mdm
-  name:
-    zh: 管理策略
-    en: Management Policy
-  definition: 远程配置设备/应用策略。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence
-  knowledge_path: knowledge/enterprise/mdm/policy.yaml
-  comparison_scope:
-    includes:
-    - 远程配置设备/应用策略。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - enterprise.mdm
+  sibling_axis: enterprise_capability_family
 - id: enterprise.work_profile
   level: L2
   parent: enterprise
   name:
     zh: 工作资料
     en: Work Profile
-  definition: 个人/工作数据隔离配置。
+  definition: 工作资料创建、隔离与跨资料互操作。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -99,10 +156,12 @@ features:
   - tablet
   privacy_class: none
   knowledge_path: knowledge/enterprise/work_profile/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 个人/工作数据隔离配置。
-    excludes: []
+    - 配置、隔离、跨资料
+    excludes:
+    - 整机 MDM 见 mdm
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -112,26 +171,48 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: enterprise.work_profile.isolation
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - enterprise.work_profile
+  sibling_axis: enterprise_capability_family
+- id: enterprise.device_policy.app_restrict
   level: L3
-  parent: enterprise.work_profile
+  parent: enterprise.device_policy
   name:
-    zh: 工作数据隔离
-    en: Work Data Isolation
-  definition: 工作应用与数据容器隔离。
+    zh: 应用安装限制
+    en: App Install Restrictions
+  definition: 限制应用安装、卸载或可用列表。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: analog
-  knowledge_path: knowledge/enterprise/work_profile/isolation.yaml
+  knowledge_path: knowledge/enterprise/device_policy/app_restrict.yaml
+  bindings:
+    android:
+    - kind: class
+      id: setPackagesSuspended
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: framework
+      id: App lock payload
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MDM app
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-intro
+      role: primary
   comparison_scope:
     includes:
-    - 工作应用与数据容器隔离。
-    excludes: []
+    - app restrictions
+    excludes:
+    - 托管配置见 work_profile.managed_config
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -141,3 +222,1781 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_policy_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.device_policy.camera_mic
+  level: L3
+  parent: enterprise.device_policy
+  name:
+    zh: 相机麦克风禁用
+    en: Camera Mic Disable
+  definition: 策略禁用相机或麦克风。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/device_policy/camera_mic.yaml
+  bindings:
+    android:
+    - kind: class
+      id: setCameraDisabled
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: framework
+      id: Restrictions payload
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MDM
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - disable camera/mic
+    excludes:
+    - 功能限制见 restrictions
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_policy_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.device_policy.certificates
+  level: L3
+  parent: enterprise.device_policy
+  name:
+    zh: 企业证书管理
+    en: Enterprise Certificate Management
+  definition: 安装与管理企业证书。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/device_policy/certificates.yaml
+  bindings:
+    android:
+    - kind: class
+      id: installCaCert
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: framework
+      id: Certificate payload
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MDM cert
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - install cert
+    excludes:
+    - 身份 SSO 见 identity_enterprise
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_policy_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.device_policy.device_admin
+  level: L3
+  parent: enterprise.device_policy
+  name:
+    zh: 设备管理员组件
+    en: Device Admin Component
+  definition: 实现设备管理接收器/管理员组件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/device_policy/device_admin.yaml
+  bindings:
+    android:
+    - kind: class
+      id: DeviceAdminReceiver
+      url: https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: MDM
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - DeviceAdminReceiver
+    excludes:
+    - 策略 API 见 password
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_policy_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.device_policy.network_location
+  level: L3
+  parent: enterprise.device_policy
+  name:
+    zh: 网络与定位管控
+    en: Network and Location Policy
+  definition: 管控 VPN/Wi-Fi/定位等网络相关策略。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/device_policy/network_location.yaml
+  bindings:
+    android:
+    - kind: class
+      id: setAlwaysOnVpnPackage
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: framework
+      id: Network payload
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - network/location policy
+    excludes:
+    - 功能限制见 restrictions
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_policy_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.device_policy.password
+  level: L3
+  parent: enterprise.device_policy
+  name:
+    zh: 密码与锁屏策略
+    en: Password and Lock Policy
+  definition: 设置密码复杂度与锁屏策略。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/device_policy/password.yaml
+  bindings:
+    android:
+    - kind: class
+      id: setPasswordQuality
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: framework
+      id: Passcode policy
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MDM password
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - password quality
+    excludes:
+    - 擦除见 wipe
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_policy_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.device_policy.restrictions
+  level: L3
+  parent: enterprise.device_policy
+  name:
+    zh: 功能限制策略
+    en: Feature Restriction Policy
+  definition: 限制相机、截屏等设备功能。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/device_policy/restrictions.yaml
+  bindings:
+    android:
+    - kind: class
+      id: addUserRestriction
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: framework
+      id: Restrictions payload
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MDM restrictions
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - user restrictions
+    excludes:
+    - 密码见 password
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_policy_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.device_policy.threat_remediation
+  level: L3
+  parent: enterprise.device_policy
+  name:
+    zh: 威胁修复动作
+    en: Threat Remediation Actions
+  definition: 企业威胁防护触发的修复动作入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/device_policy/threat_remediation.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: DeviceManagement
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - threat remediation
+    excludes:
+    - 通用安全见 security
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_policy_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.device_policy.usb_file_transfer
+  level: L3
+  parent: enterprise.device_policy
+  name:
+    zh: USB传输限制
+    en: USB Transfer Restriction
+  definition: 限制 USB 文件传输或调试。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/device_policy/usb_file_transfer.yaml
+  bindings:
+    android:
+    - kind: class
+      id: UserManager.DISALLOW_USB_FILE_TRANSFER
+      url: https://developer.android.com/reference/android/os/UserManager
+      role: primary
+    ios:
+    - kind: framework
+      id: Restrictions payload
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - USB restriction
+    excludes:
+    - 功能限制见 restrictions
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_policy_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.device_policy.wifi_config
+  level: L3
+  parent: enterprise.device_policy
+  name:
+    zh: 企业Wi-Fi配置下发
+    en: Enterprise Wi-Fi Config
+  definition: 下发企业 Wi-Fi 配置档案。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/device_policy/wifi_config.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: WifiNetworkSuggestion / DPC
+      url: https://developer.android.com/work/dpc/build-dpc
+      role: primary
+    ios:
+    - kind: framework
+      id: WiFi payload
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Wi-Fi config
+    excludes:
+    - 网络管控见 network_location
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_policy_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.device_policy.wipe
+  level: L3
+  parent: enterprise.device_policy
+  name:
+    zh: 本地策略擦除
+    en: Local Policy Wipe
+  definition: 按策略触发本地数据擦除。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/device_policy/wipe.yaml
+  bindings:
+    android:
+    - kind: class
+      id: wipeData
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: framework
+      id: EraseDevice
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MDM wipe
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - wipeData
+    excludes:
+    - 远程擦除见 mdm.remote_wipe
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_policy_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.identity_enterprise.acl
+  level: L3
+  parent: enterprise.identity_enterprise
+  name:
+    zh: 企业受限权限ACL
+    en: Enterprise Restricted Permission ACL
+  definition: 对企业受限权限做 ACL 开放。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/identity_enterprise/acl.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: ACL permissions
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - restricted permission ACL
+    excludes:
+    - 运行时权限见 security
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: identity_enterprise_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.identity_enterprise.cert_auth
+  level: L3
+  parent: enterprise.identity_enterprise
+  name:
+    zh: 证书身份认证
+    en: Certificate Based Auth
+  definition: 使用企业证书进行客户端身份认证。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/identity_enterprise/cert_auth.yaml
+  bindings:
+    android:
+    - kind: class
+      id: KeyChain
+      url: https://developer.android.com/reference/android/security/KeyChain
+      role: primary
+    ios:
+    - kind: class
+      id: URLCredential
+      url: https://developer.apple.com/documentation/foundation/urlcredential
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - client cert auth
+    excludes:
+    - 证书管理见 device_policy.certificates
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: identity_enterprise_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.identity_enterprise.education_classkit
+  level: L3
+  parent: enterprise.identity_enterprise
+  name:
+    zh: 课堂作业进度
+    en: Class Assignment Progress
+  definition: 教育场景作业与进度上报。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/identity_enterprise/education_classkit.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: ClassKit
+      url: https://developer.apple.com/documentation/classkit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - ClassKit
+    excludes:
+    - 学校管理器见 school_manager
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: identity_enterprise_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.identity_enterprise.kerberos
+  level: L3
+  parent: enterprise.identity_enterprise
+  name:
+    zh: Kerberos企业认证
+    en: Kerberos Enterprise Auth
+  definition: GSS/Kerberos 企业认证。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/identity_enterprise/kerberos.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: GSS/Kerberos
+      url: https://developer.apple.com/documentation/gss
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - GSSAPI / Kerberos
+    excludes:
+    - SSO 见 sso
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: identity_enterprise_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.identity_enterprise.managed_account
+  level: L3
+  parent: enterprise.identity_enterprise
+  name:
+    zh: 托管企业账号
+    en: Managed Enterprise Account
+  definition: 托管企业账号的添加与状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/identity_enterprise/managed_account.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AccountManager
+      url: https://developer.android.com/reference/android/accounts/AccountManager
+      role: primary
+    ios:
+    - kind: framework
+      id: Managed Apple ID
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - managed account
+    excludes:
+    - SSO 见 sso
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: identity_enterprise_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.identity_enterprise.school_manager
+  level: L3
+  parent: enterprise.identity_enterprise
+  name:
+    zh: 学校企业管理器
+    en: School Manager Identity
+  definition: 学校/教育管理器身份与名册接入。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/identity_enterprise/school_manager.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: Apple School Manager
+      url: https://developer.apple.com/support/apple-school-manager/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - ASM / SchoolManager
+    excludes:
+    - 课堂进度见 education_classkit
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: identity_enterprise_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.identity_enterprise.sso
+  level: L3
+  parent: enterprise.identity_enterprise
+  name:
+    zh: 企业单点登录
+    en: Enterprise SSO
+  definition: 企业身份提供方单点登录接入。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/enterprise/identity_enterprise/sso.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Enterprise SSO
+      url: https://developer.android.com/work
+      role: primary
+    ios:
+    - kind: framework
+      id: AuthenticationServices SSO
+      url: https://developer.apple.com/documentation/authenticationservices
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - SSO extension
+    excludes:
+    - 消费登录见 identity
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: identity_enterprise_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.identity_enterprise.vpn_per_app
+  level: L3
+  parent: enterprise.identity_enterprise
+  name:
+    zh: 按应用企业VPN
+    en: Per-App Enterprise VPN
+  definition: 为企业应用绑定 VPN 隧道。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/identity_enterprise/vpn_per_app.yaml
+  bindings:
+    android:
+    - kind: class
+      id: setAlwaysOnVpnPackage
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: framework
+      id: Per-App VPN
+      url: https://developer.apple.com/documentation/networkextension
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - per-app VPN
+    excludes:
+    - SSO 见 sso
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: identity_enterprise_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.mdm.app_distribution
+  level: L3
+  parent: enterprise.mdm
+  name:
+    zh: 企业应用分发
+    en: Enterprise App Distribution
+  definition: 向托管设备分发企业应用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/mdm/app_distribution.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Managed Google Play
+      url: https://developer.android.com/work/play/emm-api
+      role: primary
+    ios:
+    - kind: framework
+      id: Apps and Books
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - managed Google Play / VPP
+    excludes:
+    - 安装管控见 device_policy
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: mdm_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.mdm.attestation
+  level: L3
+  parent: enterprise.mdm
+  name:
+    zh: 设备证明
+    en: Device Attestation
+  definition: 获取设备完整性/证明令牌供管理端校验。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/mdm/attestation.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: generateKeyPair attestation
+      url: https://developer.android.com/work/dpc/build-dpc
+      role: primary
+    ios:
+    - kind: framework
+      id: DeviceCheck / ManagedDevice
+      url: https://developer.apple.com/documentation/devicecheck
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - attestation
+    excludes:
+    - 合规见 compliance
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: mdm_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.mdm.compliance
+  level: L3
+  parent: enterprise.mdm
+  name:
+    zh: 合规状态上报
+    en: Compliance Status Reporting
+  definition: 上报设备合规状态给管理端。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/mdm/compliance.yaml
+  bindings:
+    android:
+    - kind: class
+      id: DevicePolicyManager
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: framework
+      id: DeviceManagement
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MDM
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - compliance
+    excludes:
+    - 策略见 policy
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: mdm_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.mdm.enrollment
+  level: L3
+  parent: enterprise.mdm
+  name:
+    zh: 设备企业注册
+    en: Enterprise Enrollment
+  definition: 将设备注册到企业管理。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/mdm/enrollment.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Device Policy Controller
+      url: https://developer.android.com/work/dpc/build-dpc
+      role: primary
+    ios:
+    - kind: framework
+      id: Device Enrollment
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MDM enrollment
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - enrollment
+    excludes:
+    - 策略见 policy
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: symbol_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: mdm_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.mdm.financed_device
+  level: L3
+  parent: enterprise.mdm
+  name:
+    zh: 融资设备管控
+    en: Financed Device Controls
+  definition: 融资设备专用管控能力入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/mdm/financed_device.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: FinancedDevice
+      url: https://developer.android.com/work/dpc/build-dpc
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - financed device
+    excludes:
+    - 通用注册见 enrollment
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: mdm_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.mdm.kiosk
+  level: L3
+  parent: enterprise.mdm
+  name:
+    zh: 单应用锁定模式
+    en: Single-App Lock Mode
+  definition: 将设备锁定为展台/单应用模式。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/mdm/kiosk.yaml
+  bindings:
+    android:
+    - kind: class
+      id: setLockTaskPackages
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: framework
+      id: Autonomous Single App Mode
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - lock task / kiosk
+    excludes:
+    - 策略见 policy
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: mdm_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.mdm.policy
+  level: L3
+  parent: enterprise.mdm
+  name:
+    zh: MDM策略下发
+    en: MDM Policy Delivery
+  definition: 通过设备管理通道下发与查询策略。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/mdm/policy.yaml
+  bindings:
+    android:
+    - kind: class
+      id: DevicePolicyManager
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: framework
+      id: DeviceManagement
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MDM Kit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - DevicePolicyManager / MDM
+    excludes:
+    - 具体限制项见 device_policy
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - enterprise.mdm.policy
+  sibling_axis: mdm_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.mdm.remote_wipe
+  level: L3
+  parent: enterprise.mdm
+  name:
+    zh: 远程锁定与擦除
+    en: Remote Lock and Wipe
+  definition: 远程锁定或擦除托管设备。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/mdm/remote_wipe.yaml
+  bindings:
+    android:
+    - kind: class
+      id: DevicePolicyManager.wipeData
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: framework
+      id: DeviceManagement erase
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MDM wipe
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-intro
+      role: primary
+  comparison_scope:
+    includes:
+    - lock/wipe
+    excludes:
+    - 策略见 policy
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: mdm_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.work_profile.cope
+  level: L3
+  parent: enterprise.work_profile
+  name:
+    zh: 公司自备设备模式
+    en: COPE Mode
+  definition: 公司自备设备（COPE）管理模式入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/work_profile/cope.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: COPE
+      url: https://developer.android.com/work/versions
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - COPE
+    excludes:
+    - 纯工作资料见 provisioning
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: work_profile_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.work_profile.cross_profile
+  level: L3
+  parent: enterprise.work_profile
+  name:
+    zh: 跨资料互操作
+    en: Cross-Profile Interop
+  definition: 受控的跨工作/个人资料意图与数据共享。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/work_profile/cross_profile.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CrossProfileApps
+      url: https://developer.android.com/reference/android/content/pm/CrossProfileApps
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - cross-profile intents
+    excludes:
+    - 隔离见 isolation
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: work_profile_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.work_profile.intent_filter
+  level: L3
+  parent: enterprise.work_profile
+  name:
+    zh: 跨资料意图过滤
+    en: Cross-Profile Intent Filters
+  definition: 声明可跨工作/个人资料传递的意图。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/work_profile/intent_filter.yaml
+  bindings:
+    android:
+    - kind: class
+      id: addCrossProfileIntentFilter
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - cross-profile intent filters
+    excludes:
+    - 互操作见 cross_profile
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: work_profile_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.work_profile.isolation
+  level: L3
+  parent: enterprise.work_profile
+  name:
+    zh: 工作资料隔离
+    en: Work Profile Isolation
+  definition: 工作与个人资料数据与进程隔离。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/work_profile/isolation.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Work profiles
+      url: https://developer.android.com/work/versions
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - work profile isolation
+    excludes:
+    - 跨资料互操作见 cross_profile
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - enterprise.work_profile.isolation
+  sibling_axis: work_profile_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.work_profile.managed_config
+  level: L3
+  parent: enterprise.work_profile
+  name:
+    zh: 应用托管配置
+    en: Managed App Configuration
+  definition: 向托管应用下发托管配置字典。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/work_profile/managed_config.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ManagedConfigurations
+      url: https://developer.android.com/work/managed-configurations
+      role: primary
+    ios:
+    - kind: framework
+      id: ManagedAppConfig
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - managed configurations
+    excludes:
+    - 分发见 mdm.app_distribution
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: work_profile_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.work_profile.policy
+  level: L3
+  parent: enterprise.work_profile
+  name:
+    zh: 工作资料策略
+    en: Work Profile Policy
+  definition: 针对工作资料的专用策略项。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/work_profile/policy.yaml
+  bindings:
+    android:
+    - kind: class
+      id: DevicePolicyManager
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - profile policy
+    excludes:
+    - 整机策略见 device_policy
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: work_profile_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.work_profile.provisioning
+  level: L3
+  parent: enterprise.work_profile
+  name:
+    zh: 工作资料配置
+    en: Work Profile Provisioning
+  definition: 创建并配置工作资料。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/work_profile/provisioning.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ACTION_PROVISION_MANAGED_PROFILE
+      url: https://developer.android.com/work/dpc/build-dpc
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - provisioning
+    excludes:
+    - 隔离见 isolation
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: work_profile_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: enterprise.work_profile.widget
+  level: L3
+  parent: enterprise.work_profile
+  name:
+    zh: 工作资料小部件策略
+    en: Work Profile Widget Policy
+  definition: 控制工作资料小部件可用性。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/enterprise/work_profile/widget.yaml
+  bindings:
+    android:
+    - kind: class
+      id: DevicePolicyManager
+      url: https://developer.android.com/reference/android/app/admin/DevicePolicyManager
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - profile widgets
+    excludes:
+    - 隔离见 isolation
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: work_profile_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability

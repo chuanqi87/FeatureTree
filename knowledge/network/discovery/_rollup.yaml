@@ -1,0 +1,26 @@
+schema_version: 2
+feature_id: network.discovery
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 局域网服务发现与解析（含 mDNS/DNS-SD）。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- network.discovery.bonjour_txt
+- network.discovery.browse
+- network.discovery.publish
+- network.discovery.resolve

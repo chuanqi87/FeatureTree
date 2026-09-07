@@ -1,0 +1,28 @@
+schema_version: 2
+feature_id: runtime.packaging_runtime
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 模块/原生库加载与跨语言互操作运行时。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- runtime.packaging_runtime.jni
+- runtime.packaging_runtime.jsvm
+- runtime.packaging_runtime.module_load
+- runtime.packaging_runtime.napi
+- runtime.packaging_runtime.native_lib
+- runtime.packaging_runtime.vm_runtime

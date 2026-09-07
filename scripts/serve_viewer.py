@@ -17,7 +17,7 @@ def main():
         parser.error("前端尚未构建。请先运行：cd web && npm ci && npm run build")
     server = create_server(Repository(), web_root, port=args.port)
     print(f"FeatureTree: http://127.0.0.1:{server.server_port}", flush=True)
-    print("Read-only live view of taxonomy/ and knowledge/. Press Ctrl+C to stop.", flush=True)
+    print("Read-only view of authored data and isolated expansion drafts. Press Ctrl+C to stop.", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

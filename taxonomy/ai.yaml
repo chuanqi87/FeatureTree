@@ -6,9 +6,9 @@ features:
   name:
     zh: AI与智能
     en: AI and Intelligence
-  definition: 端侧推理与系统智能分发。
+  definition: 端侧模型运行、视觉/语音/自然语言能力、系统意图代理与通用推理执行。
   knowledge_role: rollup
-  layer: mixed
+  layer: os
   device_forms:
   - phone
   - tablet
@@ -17,8 +17,11 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 端侧推理与系统智能分发。
-    excludes: []
+    - 端侧运行时、视觉、语音、NLP、意图、推理
+    excludes:
+    - 云端仅业务后端
+    - 无障碍读屏见 a11y
+    - 搜索索引见 storage
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -28,13 +31,124 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - ai
+- id: ai.inference
+  level: L2
+  parent: ai
+  name:
+    zh: 通用模型推理
+    en: General Model Inference
+  definition: 张量级模型加载、编译、执行与加速调度。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/inference/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 加载、张量IO、NPU/GPU、兼容检查
+    excludes:
+    - 高层视觉/语音API见对应分支
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ai_capability_family
+- id: ai.intents
+  level: L2
+  parent: ai
+  name:
+    zh: 智能意图与代理
+    en: Intents and Agents
+  definition: 应用意图声明、系统建议与代理任务入口。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/intents/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - App Intents、建议、代理
+    excludes:
+    - 传统隐式 Intent 见 interop
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ai_capability_family
+- id: ai.nlp
+  level: L2
+  parent: ai
+  name:
+    zh: 自然语言处理
+    en: Natural Language Processing
+  definition: 分词、实体、翻译、智能回复等文本理解生成。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/nlp/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - tokenize、实体、翻译、回复
+    excludes:
+    - 系统意图代理见 intents
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ai_capability_family
 - id: ai.on_device
   level: L2
   parent: ai
   name:
-    zh: 端侧推理
-    en: On-Device Inference
-  definition: 设备上运行 ML 模型。
+    zh: 端侧AI运行时
+    en: On-Device AI Runtime
+  definition: 设备上加载、更新与管理通用 ML/LLM 运行时。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -45,8 +159,9 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 设备上运行 ML 模型。
-    excludes: []
+    - runtime、模型包、版本
+    excludes:
+    - 具体模态能力见 vision/speech/nlp
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -56,29 +171,1316 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - ai.on_device
+  sibling_axis: ai_capability_family
+- id: ai.speech
+  level: L2
+  parent: ai
+  name:
+    zh: 语音与声音智能
+    en: Speech and Sound Intelligence
+  definition: 语音识别、合成与声音分类。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/speech/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - ASR、TTS、声音事件
+    excludes:
+    - 通话音频路由见 telecom/device
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ai_capability_family
+- id: ai.vision
+  level: L2
+  parent: ai
+  name:
+    zh: 视觉智能
+    en: Vision Intelligence
+  definition: 图像/视频理解、检测、识别与增强。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/vision/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - OCR、检测、人脸、分割、条码
+    excludes:
+    - 文档扫描业务编排见 documents
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ai_capability_family
+- id: ai.inference.accel_dispatch
+  level: L3
+  parent: ai.inference
+  name:
+    zh: 异构加速调度
+    en: Heterogeneous Accel Dispatch
+  definition: 在 CPU/GPU/NPU 间调度推理执行。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/inference/accel_dispatch.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: GPU Delegate
+      url: https://ai.google.dev/edge/litert
+      role: primary
+    ios:
+    - kind: class
+      id: MLComputeUnits
+      url: https://developer.apple.com/documentation/coreml/mlcomputeunits
+      role: primary
+    harmonyos:
+    - kind: module
+      id: NPU execution
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - GPU/NPU delegate
+    excludes:
+    - 执行见 execute
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: inference_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.inference.custom_ops
+  level: L3
+  parent: ai.inference
+  name:
+    zh: 自定义算子扩展
+    en: Custom Operator Extension
+  definition: 注册或执行自定义推理算子。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/inference/custom_ops.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Custom ops
+      url: https://ai.google.dev/edge/litert
+      role: primary
+    ios:
+    - kind: framework
+      id: MLCustomLayer
+      url: https://developer.apple.com/documentation/coreml
+      role: primary
+    harmonyos:
+    - kind: module
+      id: custom operator
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - custom ops
+    excludes:
+    - 基础执行见 execute
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: inference_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.inference.execute
+  level: L3
+  parent: ai.inference
+  name:
+    zh: 推理执行
+    en: Inference Execution
+  definition: 执行一次或批量模型推理。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/inference/execute.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Interpreter
+      url: https://ai.google.dev/edge/litert
+      role: primary
+    ios:
+    - kind: class
+      id: MLModel.prediction
+      url: https://developer.apple.com/documentation/coreml/mlmodel
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MindSpore Lite
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - run inference
+    excludes:
+    - 加速调度见 accel_dispatch
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: inference_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.inference.model_loading
+  level: L3
+  parent: ai.inference
+  name:
+    zh: 模型加载与编译
+    en: Model Loading and Compile
+  definition: 加载模型文件并编译为可执行图。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/inference/model_loading.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: LiteRT / TFLite
+      url: https://ai.google.dev/edge/litert
+      role: primary
+    ios:
+    - kind: class
+      id: MLModel
+      url: https://developer.apple.com/documentation/coreml/mlmodel
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MindSpore Lite
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - load/compile
+    excludes:
+    - 执行见 execute
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: inference_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.inference.preprocess
+  level: L3
+  parent: ai.inference
+  name:
+    zh: 输入预处理
+    en: Input Preprocess
+  definition: 对图像/音频等输入做推理前预处理。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/inference/preprocess.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ImageProcessor
+      url: https://ai.google.dev/edge/litert
+      role: primary
+    ios:
+    - kind: class
+      id: VNCoreMLRequest
+      url: https://developer.apple.com/documentation/vision/vncoremlrequest
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MindSpore Lite
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - preprocess
+    excludes:
+    - 张量IO见 tensor_io
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: inference_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.inference.profiling
+  level: L3
+  parent: ai.inference
+  name:
+    zh: 推理性能分析
+    en: Inference Profiling
+  definition: 采集推理耗时与算子级性能数据。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/inference/profiling.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Benchmark
+      url: https://ai.google.dev/edge/litert
+      role: primary
+    ios:
+    - kind: framework
+      id: Core ML performance
+      url: https://developer.apple.com/documentation/coreml
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MindSpore Lite
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - profiling
+    excludes:
+    - 执行见 execute
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: inference_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.inference.tensor_io
+  level: L3
+  parent: ai.inference
+  name:
+    zh: 张量输入输出
+    en: Tensor Input Output
+  definition: 构造推理输入输出张量缓冲区。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/inference/tensor_io.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: TensorImage
+      url: https://ai.google.dev/edge/litert
+      role: primary
+    ios:
+    - kind: class
+      id: MLMultiArray
+      url: https://developer.apple.com/documentation/coreml/mlmultiarray
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MindSpore Lite
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - tensor IO
+    excludes:
+    - 加载见 model_loading
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: inference_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.intents.agent_task
+  level: L3
+  parent: ai.intents
+  name:
+    zh: 代理任务状态
+    en: Agent Task Status
+  definition: 展示或更新智能代理任务执行状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/intents/agent_task.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: AppIntents
+      url: https://developer.apple.com/documentation/appintents
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Intent Framework
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/intent-framework-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - agent task status
+    excludes:
+    - 意图声明见 app_intents
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: intent_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.intents.app_intents
+  level: L3
+  parent: ai.intents
+  name:
+    zh: 应用意图声明
+    en: App Intent Declaration
+  definition: 声明可供系统调用的应用意图与参数。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/intents/app_intents.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: App Actions
+      url: https://developer.android.com/guide/actions
+      role: primary
+    ios:
+    - kind: framework
+      id: AppIntents
+      url: https://developer.apple.com/documentation/appintents
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Intent Framework
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/intent-framework-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - AppIntents / App Actions
+    excludes:
+    - 传统 deeplink 见 interop
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: merged_from
+    sources:
+    - ai.system.suggestions
+  sibling_axis: intent_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.intents.assistant_handoff
+  level: L3
+  parent: ai.intents
+  name:
+    zh: 助手能力交接
+    en: Assistant Capability Handoff
+  definition: 将用户请求交给系统助手或应用意图处理。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/intents/assistant_handoff.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Assistant
+      url: https://developer.android.com/develop/devices/assistant
+      role: primary
+    ios:
+    - kind: framework
+      id: SiriKit
+      url: https://developer.apple.com/documentation/sirikit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - assistant handoff
+    excludes:
+    - 代理状态见 agent_task
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: intent_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.intents.local_intent
+  level: L3
+  parent: ai.intents
+  name:
+    zh: 本地意图识别
+    en: Local Intent Recognition
+  definition: 在端侧将自然语言映射为应用意图。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/intents/local_intent.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: AppIntents
+      url: https://developer.apple.com/documentation/appintents
+      role: primary
+    harmonyos:
+    - kind: module
+      id: local intent
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/intent-framework-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - local intent
+    excludes:
+    - ASR 见 speech.recognition
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: intent_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.intents.system_suggestions
+  level: L3
+  parent: ai.intents
+  name:
+    zh: 系统智能建议
+    en: System Intelligent Suggestions
+  definition: 向系统建议面板贡献或消费建议。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/intents/system_suggestions.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Google Assistant App Actions
+      url: https://developer.android.com/guide/actions
+      role: primary
+    ios:
+    - kind: framework
+      id: Siri Suggestions
+      url: https://developer.apple.com/documentation/sirikit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Intent suggestions
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/intent-framework-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - suggestions
+    excludes:
+    - 意图声明见 app_intents
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: renamed_from
+    sources:
+    - ai.system
+  sibling_axis: intent_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.intents.voice_shortcuts
+  level: L3
+  parent: ai.intents
+  name:
+    zh: 语音快捷指令
+    en: Voice Shortcuts
+  definition: 将应用能力注册为语音或系统快捷指令。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/intents/voice_shortcuts.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: App Shortcuts
+      url: https://developer.android.com/develop/devices/assistant/app-shortcuts
+      role: primary
+    ios:
+    - kind: guide
+      id: App Shortcuts
+      url: https://developer.apple.com/documentation/appintents/app-shortcuts
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - App Shortcuts / Siri
+    excludes:
+    - 意图声明见 app_intents
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: intent_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.nlp.entity_extraction
+  level: L3
+  parent: ai.nlp
+  name:
+    zh: 实体抽取
+    en: Entity Extraction
+  definition: 从文本抽取人名、地址、日期等实体。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/nlp/entity_extraction.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Entity Extraction
+      url: https://developers.google.com/ml-kit/language/entity-extraction
+      role: primary
+    ios:
+    - kind: class
+      id: NLTagger
+      url: https://developer.apple.com/documentation/naturallanguage/nltagger
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - EntityExtractor
+    excludes:
+    - 分词见 tokenization
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nlp_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.nlp.language_id
+  level: L3
+  parent: ai.nlp
+  name:
+    zh: 文本语种识别
+    en: Language Identification
+  definition: 识别文本语种。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/nlp/language_id.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Language Identification
+      url: https://developers.google.com/ml-kit/language/identification
+      role: primary
+    ios:
+    - kind: class
+      id: NLLanguageRecognizer
+      url: https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - LanguageIdentifier
+    excludes:
+    - 翻译见 translation
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nlp_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.nlp.sentiment
+  level: L3
+  parent: ai.nlp
+  name:
+    zh: 情感分析
+    en: Sentiment Analysis
+  definition: 判断文本情感极性或类别。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/nlp/sentiment.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: NLModel
+      url: https://developer.apple.com/documentation/naturallanguage/nlmodel
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - sentiment
+    excludes:
+    - 实体见 entity_extraction
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nlp_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.nlp.smart_reply
+  level: L3
+  parent: ai.nlp
+  name:
+    zh: 智能回复建议
+    en: Smart Reply
+  definition: 基于对话上下文生成短回复建议。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/nlp/smart_reply.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Smart Reply
+      url: https://developers.google.com/ml-kit/language/smart-reply
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - SmartReply
+    excludes:
+    - 系统建议见 intents
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nlp_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.nlp.summarization
+  level: L3
+  parent: ai.nlp
+  name:
+    zh: 文本摘要
+    en: Text Summarization
+  definition: 对长文本生成摘要。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/nlp/summarization.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: Writing Tools
+      url: https://developer.apple.com/documentation/foundationmodels
+      role: primary
+    harmonyos:
+    - kind: module
+      id: text summary
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - summarization
+    excludes:
+    - 翻译见 translation
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nlp_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.nlp.tokenization
+  level: L3
+  parent: ai.nlp
+  name:
+    zh: 分词与词法分析
+    en: Tokenization
+  definition: 对文本进行分词与基础词法分析。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/nlp/tokenization.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ML Kit NLP
+      url: https://developers.google.com/ml-kit
+      role: primary
+    ios:
+    - kind: class
+      id: NLTokenizer
+      url: https://developer.apple.com/documentation/naturallanguage/nltokenizer
+      role: primary
+    harmonyos:
+    - kind: module
+      id: text processing
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - tokenizer
+    excludes:
+    - 实体抽取见 entity_extraction
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nlp_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.nlp.translation
+  level: L3
+  parent: ai.nlp
+  name:
+    zh: 端侧翻译
+    en: On-Device Translation
+  definition: 在设备上进行文本翻译。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/nlp/translation.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Translation
+      url: https://developers.google.com/ml-kit/language/translation
+      role: primary
+    ios:
+    - kind: framework
+      id: TranslationSession
+      url: https://developer.apple.com/documentation/translation
+      role: primary
+    harmonyos:
+    - kind: module
+      id: translation
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-translation
+      role: primary
+  comparison_scope:
+    includes:
+    - Translator
+    excludes:
+    - 语种识别见 language_id
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nlp_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.on_device.compat_check
+  level: L3
+  parent: ai.on_device
+  name:
+    zh: 模型设备兼容检查
+    en: Model Device Compatibility
+  definition: 检查模型与当前设备加速能力是否兼容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/on_device/compat_check.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: AICore availability
+      url: https://developer.android.com/ml/aicore
+      role: primary
+    ios:
+    - kind: class
+      id: MLModelConfiguration
+      url: https://developer.apple.com/documentation/coreml/mlmodelconfiguration
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MindSpore Lite
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - compat check
+    excludes:
+    - 加载见 inference.model_loading
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: on_device_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.on_device.model_package
+  level: L3
+  parent: ai.on_device
+  name:
+    zh: 端侧模型包管理
+    en: On-Device Model Package
+  definition: 下载、缓存与切换端侧模型包。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/on_device/model_package.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ML Model Download
+      url: https://developers.google.com/ml-kit
+      role: primary
+    ios:
+    - kind: framework
+      id: MLModelCollection
+      url: https://developer.apple.com/documentation/coreml
+      role: primary
+    harmonyos:
+    - kind: module
+      id: model management
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - model download/update
+    excludes:
+    - 推理执行见 inference.execute
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: on_device_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.on_device.personalize
+  level: L3
+  parent: ai.on_device
+  name:
+    zh: 端侧模型个性化
+    en: On-Device Model Personalization
+  definition: 在设备上对模型做个性化更新或适配。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/on_device/personalize.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: MLUpdateTask
+      url: https://developer.apple.com/documentation/coreml
+      role: primary
+    harmonyos:
+    - kind: module
+      id: model update
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - LoRA/personalize
+    excludes:
+    - 基础推理见 inference
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: on_device_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
 - id: ai.on_device.runtime
   level: L3
   parent: ai.on_device
   name:
     zh: 端侧ML运行时
     en: On-Device ML Runtime
-  definition: 加载与执行端侧模型。
+  definition: 加载并执行端侧机器学习运行时。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  aliases:
-  - ML Kit
-  - Core ML
-  - MindSpore Lite
   knowledge_path: knowledge/ai/on_device/runtime.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ML Kit
+      url: https://developers.google.com/ml-kit
+      role: primary
+    ios:
+    - kind: framework
+      id: Core ML
+      url: https://developer.apple.com/documentation/coreml
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: MindSpore Lite
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
   comparison_scope:
     includes:
-    - 加载与执行端侧模型。
-    excludes: []
+    - ML Kit / Core ML / MindSpore Lite
+    excludes:
+    - 张量推理细节见 inference
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -88,53 +1490,50 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: ai.system
-  level: L2
-  parent: ai
-  name:
-    zh: 系统智能
-    en: System Intelligence
-  definition: 系统级建议、摘要与意图（生态/OS 混合）。
-  knowledge_role: rollup
-  layer: mixed
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  knowledge_path: knowledge/ai/system/_rollup.yaml
-  comparison_scope:
-    includes:
-    - 系统级建议、摘要与意图（生态/OS 混合）。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: ai.system.suggestions
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - ai.on_device.runtime
+  sibling_axis: on_device_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.on_device.runtime_version
   level: L3
-  parent: ai.system
+  parent: ai.on_device
   name:
-    zh: 系统智能建议
-    en: System Smart Suggestions
-  definition: 系统基于上下文的建议与快捷操作。
+    zh: AI运行时版本查询
+    en: AI Runtime Version Query
+  definition: 查询端侧 AI 运行时与加速库版本。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence
-  knowledge_path: knowledge/ai/system/suggestions.yaml
+  knowledge_path: knowledge/ai/on_device/runtime_version.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: AICore
+      url: https://developer.android.com/ml/aicore
+      role: primary
+    ios:
+    - kind: framework
+      id: Core ML
+      url: https://developer.apple.com/documentation/coreml
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MindSpore Lite
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
   comparison_scope:
     includes:
-    - 系统基于上下文的建议与快捷操作。
-    excludes: []
+    - runtime version
+    excludes:
+    - 模型加载见 inference.model_loading
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -144,3 +1543,895 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: on_device_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.on_device.system_llm
+  level: L3
+  parent: ai.on_device
+  name:
+    zh: 系统端侧大模型
+    en: System On-Device LLM
+  definition: 调用系统提供的端侧大语言模型能力。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/on_device/system_llm.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Gemini Nano / AICore
+      url: https://developer.android.com/ml/aicore
+      role: primary
+    ios:
+    - kind: framework
+      id: Foundation Models
+      url: https://developer.apple.com/documentation/foundationmodels
+      role: primary
+    harmonyos:
+    - kind: module
+      id: System LLM
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - system LLM API
+    excludes:
+    - 通用推理引擎见 inference
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: on_device_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.speech.dictation_session
+  level: L3
+  parent: ai.speech
+  name:
+    zh: 听写会话
+    en: Dictation Session
+  definition: 面向输入场景的连续听写会话。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/ai/speech/dictation_session.yaml
+  bindings:
+    android:
+    - kind: class
+      id: RecognizerIntent
+      url: https://developer.android.com/reference/android/speech/RecognizerIntent
+      role: primary
+    ios:
+    - kind: framework
+      id: Dictation
+      url: https://developer.apple.com/documentation/speech
+      role: primary
+    harmonyos:
+    - kind: module
+      id: speechRecognizer
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-speechrecognizer
+      role: primary
+  comparison_scope:
+    includes:
+    - dictation
+    excludes:
+    - 通用 ASR 见 recognition
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: speech_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.speech.language_id_audio
+  level: L3
+  parent: ai.speech
+  name:
+    zh: 语音语种识别
+    en: Spoken Language Identification
+  definition: 识别语音片段的语种。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/speech/language_id_audio.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: SFSpeechRecognizer
+      url: https://developer.apple.com/documentation/speech/sfspeechrecognizer
+      role: primary
+    harmonyos:
+    - kind: module
+      id: speechRecognizer
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-speechrecognizer
+      role: primary
+  comparison_scope:
+    includes:
+    - spoken language id
+    excludes:
+    - 文本语种见 nlp.language_id
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: speech_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.speech.music_recognition
+  level: L3
+  parent: ai.speech
+  name:
+    zh: 音乐识别
+    en: Music Recognition
+  definition: 识别正在播放的音乐曲目。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/ai/speech/music_recognition.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: ShazamKit
+      url: https://developer.apple.com/documentation/shazamkit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - music recognizer
+    excludes:
+    - 声音分类见 sound_classification
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: speech_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.speech.recognition
+  level: L3
+  parent: ai.speech
+  name:
+    zh: 语音识别
+    en: Speech Recognition
+  definition: 将语音转写为文本。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/ai/speech/recognition.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SpeechRecognizer
+      url: https://developer.android.com/reference/android/speech/SpeechRecognizer
+      role: primary
+    ios:
+    - kind: class
+      id: SFSpeechRecognizer
+      url: https://developer.apple.com/documentation/speech/sfspeechrecognizer
+      role: primary
+    harmonyos:
+    - kind: module
+      id: speechRecognizer
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-speechrecognizer
+      role: primary
+  comparison_scope:
+    includes:
+    - SpeechRecognizer / SFSpeech
+    excludes:
+    - TTS 见 tts
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: speech_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.speech.sound_classification
+  level: L3
+  parent: ai.speech
+  name:
+    zh: 声音事件分类
+    en: Sound Classification
+  definition: 对环境声音事件进行分类识别。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/ai/speech/sound_classification.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Sound Detection
+      url: https://developer.android.com/guide/topics/sensors/sound-detection
+      role: primary
+    ios:
+    - kind: framework
+      id: SoundAnalysis
+      url: https://developer.apple.com/documentation/soundanalysis
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - sound classifier
+    excludes:
+    - 语音转写见 recognition
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: speech_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.speech.tts
+  level: L3
+  parent: ai.speech
+  name:
+    zh: 语音合成
+    en: Text to Speech
+  definition: 将文本合成为语音播放。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/speech/tts.yaml
+  bindings:
+    android:
+    - kind: class
+      id: TextToSpeech
+      url: https://developer.android.com/reference/android/speech/tts/TextToSpeech
+      role: primary
+    ios:
+    - kind: class
+      id: AVSpeechSynthesizer
+      url: https://developer.apple.com/documentation/avfaudio/avspeechsynthesizer
+      role: primary
+    harmonyos:
+    - kind: module
+      id: textToSpeech
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-texttospeech
+      role: primary
+  comparison_scope:
+    includes:
+    - TextToSpeech
+    excludes:
+    - 识别见 recognition
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: speech_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.vision.barcode
+  level: L3
+  parent: ai.vision
+  name:
+    zh: 条码与二维码识别
+    en: Barcode Recognition
+  definition: 识别一维码与二维码。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/vision/barcode.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Barcode Scanning
+      url: https://developers.google.com/ml-kit/vision/barcode-scanning
+      role: primary
+    ios:
+    - kind: class
+      id: VNDetectBarcodesRequest
+      url: https://developer.apple.com/documentation/vision/vndetectbarcodesrequest
+      role: primary
+    harmonyos:
+    - kind: module
+      id: scanBarcode
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-scan
+      role: primary
+  comparison_scope:
+    includes:
+    - BarcodeScanner
+    excludes:
+    - 相机预览见 media
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.vision.face
+  level: L3
+  parent: ai.vision
+  name:
+    zh: 人脸检测
+    en: Face Detection
+  definition: 检测人脸位置、关键点与基础属性。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/ai/vision/face.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Face Detection
+      url: https://developers.google.com/ml-kit/vision/face-detection
+      role: primary
+    ios:
+    - kind: class
+      id: VNDetectFaceRectanglesRequest
+      url: https://developer.apple.com/documentation/vision/vndetectfacerectanglesrequest
+      role: primary
+    harmonyos:
+    - kind: module
+      id: faceDetector
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-faceDetector
+      role: primary
+  comparison_scope:
+    includes:
+    - FaceDetector
+    excludes:
+    - 生物识别解锁见 security
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.vision.gen_image
+  level: L3
+  parent: ai.vision
+  name:
+    zh: 端侧图像生成编辑
+    en: On-Device Image Generation
+  definition: 端侧生成或编辑图像内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/vision/gen_image.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: Image Playground
+      url: https://developer.apple.com/documentation/imageplayground
+      role: primary
+    harmonyos:
+    - kind: module
+      id: genAI image
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - genAI image
+    excludes:
+    - 图像增强见 image_enhance
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.vision.hand_pose
+  level: L3
+  parent: ai.vision
+  name:
+    zh: 手势姿态估计
+    en: Hand Pose Estimation
+  definition: 估计手部关键点与姿态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/vision/hand_pose.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Pose Detection
+      url: https://developers.google.com/ml-kit/vision/pose-detection
+      role: primary
+    ios:
+    - kind: framework
+      id: VNDetectHumanHandPoseRequest
+      url: https://developer.apple.com/documentation/vision
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - hand pose
+    excludes:
+    - 通用姿态传感器见 sensors
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.vision.image_classification
+  level: L3
+  parent: ai.vision
+  name:
+    zh: 图像分类
+    en: Image Classification
+  definition: 对整图进行语义类别分类。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/vision/image_classification.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Image Labeling
+      url: https://developers.google.com/ml-kit/vision/image-labeling
+      role: primary
+    ios:
+    - kind: class
+      id: VNClassifyImageRequest
+      url: https://developer.apple.com/documentation/vision/vnclassifyimagerequest
+      role: primary
+    harmonyos:
+    - kind: module
+      id: image classification
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - ImageLabeler
+    excludes:
+    - 目标检测见 object_detection
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.vision.image_enhance
+  level: L3
+  parent: ai.vision
+  name:
+    zh: 图像增强
+    en: Image Enhancement
+  definition: 端侧图像超分、降噪或质量增强。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/vision/image_enhance.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: Core Image
+      url: https://developer.apple.com/documentation/coreimage
+      role: primary
+    harmonyos:
+    - kind: module
+      id: image super resolution
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - image enhance
+    excludes:
+    - 创意生成见 gen_image
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.vision.object_detection
+  level: L3
+  parent: ai.vision
+  name:
+    zh: 目标检测
+    en: Object Detection
+  definition: 检测图像中的物体类别与边界框。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/vision/object_detection.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Object Detection
+      url: https://developers.google.com/ml-kit/vision/object-detection
+      role: primary
+    ios:
+    - kind: framework
+      id: VNRecognizeObjectsRequest
+      url: https://developer.apple.com/documentation/vision
+      role: primary
+    harmonyos:
+    - kind: module
+      id: object detection
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mindspore-lite-guidelines
+      role: primary
+  comparison_scope:
+    includes:
+    - ObjectDetector
+    excludes:
+    - 分割见 semantic_segmentation
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: body_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.vision.semantic_segmentation
+  level: L3
+  parent: ai.vision
+  name:
+    zh: 语义分割
+    en: Semantic Segmentation
+  definition: 对图像像素进行语义分割。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/vision/semantic_segmentation.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Selfie Segmentation
+      url: https://developers.google.com/ml-kit/vision/selfie-segmentation
+      role: primary
+    ios:
+    - kind: framework
+      id: VNGeneratePersonSegmentationRequest
+      url: https://developer.apple.com/documentation/vision
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - segmentation mask
+    excludes:
+    - 目标检测见 object_detection
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.vision.text_recognition
+  level: L3
+  parent: ai.vision
+  name:
+    zh: 文字识别OCR
+    en: Text Recognition OCR
+  definition: 从图像中识别文字内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/vision/text_recognition.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Text Recognition
+      url: https://developers.google.com/ml-kit/vision/text-recognition
+      role: primary
+    ios:
+    - kind: class
+      id: VNRecognizeTextRequest
+      url: https://developer.apple.com/documentation/vision/vnrecognizetextrequest
+      role: primary
+    harmonyos:
+    - kind: module
+      id: textRecognition
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-textrecognition
+      role: primary
+  comparison_scope:
+    includes:
+    - TextRecognizer / VNRecognizeText
+    excludes:
+    - 文档分页阅读见 documents
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ai.vision.visual_intelligence
+  level: L3
+  parent: ai.vision
+  name:
+    zh: 视觉智能查询
+    en: Visual Intelligence Query
+  definition: 对屏幕或图像内容做系统级视觉问答/提取。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ai/vision/visual_intelligence.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: Visual Intelligence
+      url: https://developer.apple.com/documentation/visualintelligence
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - visual intelligence
+    excludes:
+    - OCR 见 text_recognition
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: vision_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability

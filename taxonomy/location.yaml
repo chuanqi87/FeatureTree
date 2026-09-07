@@ -6,7 +6,7 @@ features:
   name:
     zh: 位置与地理
     en: Location and Geospatial
-  definition: 定位、地理围栏与地图（含生态地图）。
+  definition: 设备定位、地理围栏、地图展示、地理编码与航向；不含近场 UWB/蓝牙测距（见 connectivity）。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -17,8 +17,10 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 定位、地理围栏与地图（含生态地图）。
-    excludes: []
+    - 定位、围栏、地图、地理编码、航向
+    excludes:
+    - UWB/测距见 connectivity.peripherals
+    - 天气业务数据非地理编码
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -28,13 +30,161 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - location
+- id: location.geocoding
+  level: L2
+  parent: location
+  name:
+    zh: 地理编码
+    en: Geocoding
+  definition: 地址与坐标互转及坐标系辅助。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/geocoding/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 正/逆地理编码、坐标换算
+    excludes:
+    - 地图选点见 location.maps
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: location_capability_family
+- id: location.geofence
+  level: L2
+  parent: location
+  name:
+    zh: 地理围栏
+    en: Geofencing
+  definition: 基于区域进出/停留的地理围栏监控。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/geofence/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 圆形/多边形围栏、进出事件
+    excludes:
+    - 连续定位见 location.positioning
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - location.geofence
+  sibling_axis: location_capability_family
+- id: location.heading
+  level: L2
+  parent: location
+  name:
+    zh: 航向与指南针
+    en: Heading
+  definition: 设备航向/指南针朝向。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/heading/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 真北/磁北航向
+    excludes:
+    - 位置坐标见 location.positioning
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: location_capability_family
+- id: location.maps
+  level: L2
+  parent: location
+  name:
+    zh: 地图
+    en: Maps
+  definition: 地图展示、标注、覆盖物与相机控制（能力并集，非品牌并列）。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 地图视图、标记、覆盖物、相机、离线
+    excludes:
+    - 地理编码见 location.geocoding
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - location.maps
+  sibling_axis: location_capability_family
 - id: location.positioning
   level: L2
   parent: location
   name:
     zh: 定位
     en: Positioning
-  definition: 获取设备地理位置。
+  definition: 前台/后台获取与监听设备地理位置。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -45,8 +195,10 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 获取设备地理位置。
-    excludes: []
+    - 前台定位、后台定位、最近位置、精度与权限
+    excludes:
+    - 围栏见 location.geofence
+    - 航向见 location.heading
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -56,25 +208,48 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: location.positioning.foreground
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - location.positioning
+  sibling_axis: location_capability_family
+- id: location.geocoding.autocomplete
   level: L3
-  parent: location.positioning
+  parent: location.geocoding
   name:
-    zh: 前台定位
-    en: Foreground Location
-  definition: 应用可见时获取位置。
+    zh: 地点自动补全
+    en: Place Autocomplete
+  definition: 输入时提示候选地点。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: sensitive
-  leaf_at_this_level: true
-  knowledge_path: knowledge/location/positioning/foreground.yaml
+  knowledge_path: knowledge/location/geocoding/autocomplete.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Places Autocomplete
+      url: https://developers.google.com/maps/documentation/places/android-sdk/autocomplete
+      role: primary
+    ios:
+    - kind: class
+      id: MKLocalSearchCompleter
+      url: https://developer.apple.com/documentation/mapkit/mklocalsearchcompleter
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: 地点搜索
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-site
+      role: primary
   comparison_scope:
     includes:
-    - 应用可见时获取位置。
-    excludes: []
+    - Places Autocomplete、MKLocalSearchCompleter
+    excludes:
+    - location.geocoding.forward
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -84,43 +259,2286 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geocoding_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geocoding.batch
+  level: L3
+  parent: location.geocoding
+  name:
+    zh: 批量地理编码
+    en: Batch Geocoding
+  definition: 批量地址/坐标互转。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/geocoding/batch.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Geocoder
+      url: https://developer.android.com/reference/android/location/Geocoder
+      role: primary
+    ios:
+    - kind: class
+      id: CLGeocoder
+      url: https://developer.apple.com/documentation/corelocation/clgeocoder
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - 批量 geocode
+    excludes:
+    - location.geocoding.forward
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geocoding_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geocoding.coordinate_convert
+  level: L3
+  parent: location.geocoding
+  name:
+    zh: 坐标系转换
+    en: Coordinate Convert
+  definition: 不同地理坐标系之间的转换。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geocoding/coordinate_convert.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: 坐标转换
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - 坐标纠偏/转换 API
+    excludes:
+    - location.geocoding.forward
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geocoding_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geocoding.distance
+  level: L3
+  parent: location.geocoding
+  name:
+    zh: 球面距离计算
+    en: Geodesic Distance
+  definition: 计算两点间大地线距离。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geocoding/distance.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Location.distanceBetween
+      url: https://developer.android.com/reference/android/location/Location#distanceBetween(double,%20double,%20double,%20double,%20float[])
+      role: primary
+    ios:
+    - kind: class
+      id: distance(from:)
+      url: https://developer.apple.com/documentation/corelocation/cllocation/1423680-distance
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - distanceBetween、distanceFrom
+    excludes:
+    - location.geocoding.forward
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geocoding_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geocoding.forward
+  level: L3
+  parent: location.geocoding
+  name:
+    zh: 正地理编码
+    en: Forward Geocoding
+  definition: 将地址字符串解析为坐标。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geocoding/forward.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Geocoder.getFromLocationName
+      url: https://developer.android.com/reference/android/location/Geocoder#getFromLocationName(java.lang.String,%20int)
+      role: primary
+    ios:
+    - kind: class
+      id: CLGeocoder
+      url: https://developer.apple.com/documentation/corelocation/clgeocoder
+      role: primary
+    harmonyos:
+    - kind: module
+      id: geoLocationManager.getAddressesFromLocationName
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - Geocoder.getFromLocationName、CLGeocoder
+    excludes:
+    - location.geocoding.reverse
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geocoding_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geocoding.locale
+  level: L3
+  parent: location.geocoding
+  name:
+    zh: 地理编码区域设置
+    en: Geocoding Locale
+  definition: 按语言/地区偏好返回地址描述。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/geocoding/locale.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Geocoder
+      url: https://developer.android.com/reference/android/location/Geocoder
+      role: primary
+    ios:
+    - kind: class
+      id: CLGeocoder
+      url: https://developer.apple.com/documentation/corelocation/clgeocoder
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Geocoder Locale、CLGeocoder preferredLocale
+    excludes:
+    - location.geocoding.reverse
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geocoding_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geocoding.place_details
+  level: L3
+  parent: location.geocoding
+  name:
+    zh: 地点详情
+    en: Place Details
+  definition: 获取地点详细属性与联系信息。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geocoding/place_details.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Place Details
+      url: https://developers.google.com/maps/documentation/places/android-sdk/details
+      role: primary
+    ios:
+    - kind: class
+      id: MKMapItem
+      url: https://developer.apple.com/documentation/mapkit/mkmapitem
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: site detail
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-site
+      role: primary
+  comparison_scope:
+    includes:
+    - Place Details
+    excludes:
+    - location.geocoding.poi_search
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geocoding_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geocoding.poi_search
+  level: L3
+  parent: location.geocoding
+  name:
+    zh: 地点与POI搜索
+    en: POI Search
+  definition: 按关键字/类别搜索周边地点。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geocoding/poi_search.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Places Search
+      url: https://developers.google.com/maps/documentation/places/android-sdk/search
+      role: primary
+    ios:
+    - kind: class
+      id: MKLocalSearch
+      url: https://developer.apple.com/documentation/mapkit/mklocalsearch
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: site search
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-site
+      role: primary
+  comparison_scope:
+    includes:
+    - Places search、MKLocalSearch
+    excludes:
+    - location.geocoding.autocomplete
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geocoding_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geocoding.reverse
+  level: L3
+  parent: location.geocoding
+  name:
+    zh: 逆地理编码
+    en: Reverse Geocoding
+  definition: 将坐标解析为地址描述。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geocoding/reverse.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Geocoder.getFromLocation
+      url: https://developer.android.com/reference/android/location/Geocoder#getFromLocation(double,%20double,%20int)
+      role: primary
+    ios:
+    - kind: class
+      id: reverseGeocodeLocation
+      url: https://developer.apple.com/documentation/corelocation/clgeocoder/1423626-reversegeocodelocation
+      role: primary
+    harmonyos:
+    - kind: module
+      id: getAddressesFromLocation
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - Geocoder.getFromLocation、reverseGeocodeLocation
+    excludes:
+    - location.geocoding.forward
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geocoding_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geocoding.timezone
+  level: L3
+  parent: location.geocoding
+  name:
+    zh: 时区查询
+    en: Time Zone Lookup
+  definition: 根据坐标查询时区信息。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geocoding/timezone.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: CLLocation / NSTimeZone
+      url: https://developer.apple.com/documentation/foundation/nstimezone
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - TimeZone API / place timezone
+    excludes:
+    - location.geocoding.reverse
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geocoding_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geofence.add_remove
+  level: L3
+  parent: location.geofence
+  name:
+    zh: 围栏增删
+    en: Add Remove Geofence
+  definition: 添加、移除单个或批量地理围栏。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geofence/add_remove.yaml
+  bindings:
+    android:
+    - kind: class
+      id: GeofencingClient.addGeofences
+      url: https://developers.google.com/android/reference/com/google/android/gms/location/GeofencingClient#addGeofences(com.google.android.gms.location.GeofencingRequest,%20android.app.PendingIntent)
+      role: primary
+    ios:
+    - kind: class
+      id: startMonitoring
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423656-startmonitoring
+      role: primary
+    harmonyos:
+    - kind: module
+      id: addGnssGeofence
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - addGeofences、stopMonitoring
+    excludes:
+    - location.geofence.region
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geofence_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geofence.dwell
+  level: L3
+  parent: location.geofence
+  name:
+    zh: 停留围栏
+    en: Dwell Geofence
+  definition: 在区域内停留达到阈值时触发。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geofence/dwell.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Geofence.GEOFENCE_TRANSITION_DWELL
+      url: https://developers.google.com/android/reference/com/google/android/gms/location/Geofence#GEOFENCE_TRANSITION_DWELL
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 可用区域监控+停留逻辑自实现
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - GEOFENCE_TRANSITION_DWELL
+    excludes:
+    - location.geofence.region
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geofence_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geofence.event
+  level: L3
+  parent: location.geofence
+  name:
+    zh: 围栏事件回调
+    en: Geofence Events
+  definition: 接收进入/离开/停留围栏事件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geofence/event.yaml
+  bindings:
+    android:
+    - kind: class
+      id: GeofencingEvent
+      url: https://developers.google.com/android/reference/com/google/android/gms/location/GeofencingEvent
+      role: primary
+    ios:
+    - kind: class
+      id: didEnterRegion
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate/1423560-locationmanager
+      role: primary
+    harmonyos:
+    - kind: module
+      id: GeoFence 回调
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - GeofencingEvent、didEnterRegion
+    excludes:
+    - location.geofence.region
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geofence_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geofence.expiration
+  level: L3
+  parent: location.geofence
+  name:
+    zh: 围栏过期
+    en: Geofence Expiration
+  definition: 设置围栏自动过期时间。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geofence/expiration.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Geofence.Builder.setExpirationDuration
+      url: https://developers.google.com/android/reference/com/google/android/gms/location/Geofence.Builder#setExpirationDuration(long)
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - setExpirationDuration
+    excludes:
+    - location.geofence.add_remove
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geofence_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geofence.limit
+  level: L3
+  parent: location.geofence
+  name:
+    zh: 围栏数量与限制
+    en: Geofence Limits
+  definition: 查询平台围栏数量上限与限制条件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geofence/limit.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Geofence Limits
+      url: https://developer.android.com/develop/sensors-and-location/location/geofencing#add-geofences
+      role: primary
+    ios:
+    - kind: class
+      id: maximumRegionMonitoringDistance
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423652-maximumregionmonitoringdistance
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - max geofences
+    excludes:
+    - location.geofence.add_remove
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geofence_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geofence.permission
+  level: L3
+  parent: location.geofence
+  name:
+    zh: 围栏权限要求
+    en: Geofence Permission
+  definition: 围栏所需的定位/后台权限组合。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geofence/permission.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Geofencing permissions
+      url: https://developer.android.com/develop/sensors-and-location/location/geofencing
+      role: primary
+    ios:
+    - kind: class
+      id: Always authorization
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1620551-requestalwaysauthorization
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: location permission
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/location-permission
+      role: primary
+  comparison_scope:
+    includes:
+    - 后台定位 + 精确位置
+    excludes:
+    - location.positioning.permission
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geofence_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geofence.polygon
+  level: L3
+  parent: location.geofence
+  name:
+    zh: 多边形围栏
+    en: Polygon Geofence
+  definition: 注册多边形区域围栏。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geofence/polygon.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: Geofence 主要为圆形；多边形待核生态 API
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: GeoFence polygon
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - 多边形坐标点围栏
+    excludes:
+    - location.geofence.region
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: geofence_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.geofence.region
+  level: L3
+  parent: location.geofence
+  name:
+    zh: 区域围栏监控
+    en: Region Geofence
+  definition: 注册圆形/多边形区域并接收进出事件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/geofence/region.yaml
+  bindings:
+    android:
+    - kind: class
+      id: GeofencingClient
+      url: https://developers.google.com/android/reference/com/google/android/gms/location/GeofencingClient
+      role: primary
+    ios:
+    - kind: class
+      id: CLCircularRegion
+      url: https://developer.apple.com/documentation/corelocation/clcircularregion
+      role: primary
+    harmonyos:
+    - kind: module
+      id: GeoFence
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - GeofencingClient、CLCircularRegion
+    excludes:
+    - location.geofence.dwell
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - location.geofence.region
+  sibling_axis: geofence_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.heading.accuracy
+  level: L3
+  parent: location.heading
+  name:
+    zh: 航向精度
+    en: Heading Accuracy
+  definition: 查询当前航向精度估计。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/heading/accuracy.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: headingAccuracy
+      url: https://developer.apple.com/documentation/corelocation/clheading/1423739-headingaccuracy
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - headingAccuracy
+    excludes:
+    - location.heading.true_north
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: heading_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.heading.calibration
+  level: L3
+  parent: location.heading
+  name:
+    zh: 罗盘校准提示
+    en: Heading Calibration
+  definition: 罗盘精度不足时的校准提示回调。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/heading/calibration.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: locationManagerShouldDisplayHeadingCalibration
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate/1423707-locationmanagershoulddisplayhead
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - locationManagerShouldDisplayHeadingCalibration
+    excludes:
+    - location.heading.true_north
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: heading_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.heading.filter
+  level: L3
+  parent: location.heading
+  name:
+    zh: 航向滤波
+    en: Heading Filter
+  definition: 设置航向更新最小角度变化阈值。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/heading/filter.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: headingFilter
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423537-headingfilter
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - headingFilter
+    excludes:
+    - location.heading.start
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: heading_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.heading.magnetic
+  level: L3
+  parent: location.heading
+  name:
+    zh: 磁北航向
+    en: Magnetic Heading
+  definition: 获取相对磁北的设备航向。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/heading/magnetic.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Sensor.TYPE_MAGNETIC_FIELD
+      url: https://developer.android.com/reference/android/hardware/Sensor#TYPE_MAGNETIC_FIELD
+      role: primary
+    ios:
+    - kind: class
+      id: magneticHeading
+      url: https://developer.apple.com/documentation/corelocation/clheading/1423763-magneticheading
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MAGNETIC_FIELD
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-sensor
+      role: primary
+  comparison_scope:
+    includes:
+    - magneticHeading、TYPE_MAGNETIC_FIELD
+    excludes:
+    - location.heading.true_north
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: heading_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.heading.orientation_ref
+  level: L3
+  parent: location.heading
+  name:
+    zh: 航向朝向参考
+    en: Heading Orientation Ref
+  definition: 设置航向相对设备朝向的参考系。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/heading/orientation_ref.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: headingOrientation
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423700-headingorientation
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - headingOrientation
+    excludes:
+    - location.heading.true_north
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: heading_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.heading.start
+  level: L3
+  parent: location.heading
+  name:
+    zh: 开始航向更新
+    en: Start Heading Updates
+  definition: 启动航向/罗盘更新回调。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/heading/start.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SensorManager.registerListener
+      url: https://developer.android.com/reference/android/hardware/SensorManager#registerListener(android.hardware.SensorEventListener,%20android.hardware.Sensor,%20int)
+      role: primary
+    ios:
+    - kind: class
+      id: startUpdatingHeading
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423709-startupdatingheading
+      role: primary
+    harmonyos:
+    - kind: module
+      id: 'on'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-sensor
+      role: primary
+  comparison_scope:
+    includes:
+    - startUpdatingHeading
+    excludes:
+    - location.heading.stop
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: heading_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.heading.stop
+  level: L3
+  parent: location.heading
+  name:
+    zh: 停止航向更新
+    en: Stop Heading Updates
+  definition: 停止航向更新以省电。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/heading/stop.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SensorManager.unregisterListener
+      url: https://developer.android.com/reference/android/hardware/SensorManager#unregisterListener(android.hardware.SensorEventListener)
+      role: primary
+    ios:
+    - kind: class
+      id: stopUpdatingHeading
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423561-stopupdatingheading
+      role: primary
+    harmonyos:
+    - kind: module
+      id: 'off'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-sensor
+      role: primary
+  comparison_scope:
+    includes:
+    - stopUpdatingHeading
+    excludes:
+    - location.heading.start
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: heading_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.heading.true_north
+  level: L3
+  parent: location.heading
+  name:
+    zh: 真北航向
+    en: True North Heading
+  definition: 获取相对真北的设备航向。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/heading/true_north.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Sensor.TYPE_ROTATION_VECTOR
+      url: https://developer.android.com/reference/android/hardware/Sensor#TYPE_ROTATION_VECTOR
+      role: primary
+    ios:
+    - kind: class
+      id: trueHeading
+      url: https://developer.apple.com/documentation/corelocation/clheading/1423755-trueheading
+      role: primary
+    harmonyos:
+    - kind: module
+      id: sensor orientation
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-sensor
+      role: primary
+  comparison_scope:
+    includes:
+    - heading、trueHeading
+    excludes:
+    - location.heading.magnetic
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: heading_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.building
+  level: L3
+  parent: location.maps
+  name:
+    zh: 建筑物图层
+    en: Building Layer
+  definition: 显示 3D 建筑物或室内图入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/building.yaml
+  bindings:
+    android:
+    - kind: class
+      id: GoogleMap.setBuildingsEnabled
+      url: https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap#setBuildingsEnabled(boolean)
+      role: primary
+    ios:
+    - kind: class
+      id: MKMapConfiguration
+      url: https://developer.apple.com/documentation/mapkit/mkmapconfiguration
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - isBuildingsEnabled、MKMapFeatureOptions
+    excludes:
+    - location.maps.sdk
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.camera
+  level: L3
+  parent: location.maps
+  name:
+    zh: 地图相机视点
+    en: Map Camera
+  definition: 控制地图中心、缩放、倾斜与动画相机。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/camera.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CameraUpdateFactory
+      url: https://developers.google.com/maps/documentation/android-sdk/views
+      role: primary
+    ios:
+    - kind: class
+      id: setRegion
+      url: https://developer.apple.com/documentation/mapkit/mkmapview/1452463-setregion
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: map camera
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-camera
+      role: primary
+  comparison_scope:
+    includes:
+    - CameraUpdate、region、setCamera
+    excludes:
+    - location.maps.sdk
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.cluster
+  level: L3
+  parent: location.maps
+  name:
+    zh: 点聚合
+    en: Marker Clustering
+  definition: 大量标记的聚合展示。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/cluster.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ClusterManager
+      url: https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering
+      role: primary
+    ios:
+    - kind: class
+      id: MKClusterAnnotation
+      url: https://developer.apple.com/documentation/mapkit/mkclusterannotation
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - ClusterManager、MKClusterAnnotation
+    excludes:
+    - location.maps.marker
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.gesture
+  level: L3
+  parent: location.maps
+  name:
+    zh: 地图手势与控件
+    en: Map Gestures
+  definition: 缩放/旋转手势开关与指南针等控件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/gesture.yaml
+  bindings:
+    android:
+    - kind: class
+      id: UiSettings
+      url: https://developers.google.com/android/reference/com/google/android/gms/maps/UiSettings
+      role: primary
+    ios:
+    - kind: class
+      id: isZoomEnabled
+      url: https://developer.apple.com/documentation/mapkit/mkmapview/1452501-iszoomenabled
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: map gesture
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-gesture
+      role: primary
+  comparison_scope:
+    includes:
+    - uiSettings、isZoomEnabled
+    excludes:
+    - location.maps.camera
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.heatmap
+  level: L3
+  parent: location.maps
+  name:
+    zh: 热力图层
+    en: Heatmap Layer
+  definition: 密度热力图层渲染。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/heatmap.yaml
+  bindings:
+    android:
+    - kind: class
+      id: HeatmapTileProvider
+      url: https://developers.google.com/maps/documentation/android-sdk/utility/heatmap
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - HeatmapTileProvider
+    excludes:
+    - location.maps.overlay
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.launch_external
+  level: L3
+  parent: location.maps
+  name:
+    zh: 拉起系统地图
+    en: Launch System Maps
+  definition: 通过 URL/Intent 拉起系统或已装地图应用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/launch_external.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: 'geo: URI'
+      url: https://developer.android.com/guide/components/intents-common#Maps
+      role: primary
+    ios:
+    - kind: class
+      id: openInMaps
+      url: https://developer.apple.com/documentation/mapkit/mkmapitem/1453911-openinmaps
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: startAbility 地图
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-launch
+      role: primary
+  comparison_scope:
+    includes:
+    - 'geo: Intent、mapItem openInMaps'
+    excludes:
+    - location.maps.sdk
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.marker
+  level: L3
+  parent: location.maps
+  name:
+    zh: 标记与点注释
+    en: Map Markers
+  definition: 添加/更新/移除地图标记与标注。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/marker.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Marker
+      url: https://developers.google.com/maps/documentation/android-sdk/marker
+      role: primary
+    ios:
+    - kind: class
+      id: MKPointAnnotation
+      url: https://developer.apple.com/documentation/mapkit/mkpointannotation
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: map marker
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-marker
+      role: primary
+  comparison_scope:
+    includes:
+    - Marker、MKPointAnnotation
+    excludes:
+    - location.maps.overlay
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.my_location
+  level: L3
+  parent: location.maps
+  name:
+    zh: 我的位置图层
+    en: My Location Layer
+  definition: 在地图上显示用户当前位置蓝点。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/my_location.yaml
+  bindings:
+    android:
+    - kind: class
+      id: GoogleMap.setMyLocationEnabled
+      url: https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap#setMyLocationEnabled(boolean)
+      role: primary
+    ios:
+    - kind: class
+      id: showsUserLocation
+      url: https://developer.apple.com/documentation/mapkit/mkmapview/1452115-showsuserlocation
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: my location
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-location
+      role: primary
+  comparison_scope:
+    includes:
+    - isMyLocationEnabled、showsUserLocation
+    excludes:
+    - location.positioning.foreground
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.offline
+  level: L3
+  parent: location.maps
+  name:
+    zh: 离线地图
+    en: Offline Maps
+  definition: 下载或使用离线地图瓦片/数据包。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/offline.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 厂商 SDK 离线能力并集，待核
+    ios:
+    - kind: class
+      id: MKMapSnapshotter / 缓存
+      url: https://developer.apple.com/documentation/mapkit/mkmapsnapshotter
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: 离线地图
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-offline
+      role: primary
+  comparison_scope:
+    includes:
+    - offline map region
+    excludes:
+    - location.maps.sdk
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.overlay
+  level: L3
+  parent: location.maps
+  name:
+    zh: 覆盖物绘制
+    en: Map Overlays
+  definition: 折线、多边形、圆等矢量覆盖物。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/overlay.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Polyline
+      url: https://developers.google.com/maps/documentation/android-sdk/shapes
+      role: primary
+    ios:
+    - kind: class
+      id: MKOverlay
+      url: https://developer.apple.com/documentation/mapkit/mkoverlay
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: map shape
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-drawing
+      role: primary
+  comparison_scope:
+    includes:
+    - Polyline、MKOverlay
+    excludes:
+    - location.maps.marker
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.route_display
+  level: L3
+  parent: location.maps
+  name:
+    zh: 路线叠加展示
+    en: Route Overlay Display
+  definition: 在地图上展示路径规划结果折线（规划本身可后端）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/route_display.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Polyline
+      url: https://developers.google.com/maps/documentation/android-sdk/shapes
+      role: primary
+    ios:
+    - kind: class
+      id: MKRoute
+      url: https://developer.apple.com/documentation/mapkit/mkroute
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: route
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-route
+      role: primary
+  comparison_scope:
+    includes:
+    - Polyline route、MKRoute.polyline
+    excludes:
+    - location.maps.overlay
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.sdk
+  level: L3
+  parent: location.maps
+  name:
+    zh: 地图 SDK 视图
+    en: Map SDK View
+  definition: 嵌入应用内的地图视图与基础渲染能力（跨厂商能力并集）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/sdk.yaml
+  bindings:
+    android:
+    - kind: class
+      id: MapView
+      url: https://developers.google.com/maps/documentation/android-sdk/map
+      role: primary
+    ios:
+    - kind: class
+      id: MKMapView
+      url: https://developer.apple.com/documentation/mapkit/mkmapview
+      role: primary
+    harmonyos:
+    - kind: module
+      id: MapComponent
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/map-mapcomponent
+      role: primary
+  comparison_scope:
+    includes:
+    - MapView、MKMapView、MapComponent
+    excludes:
+    - location.maps.launch_external
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - location.maps.sdk
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.snapshot
+  level: L3
+  parent: location.maps
+  name:
+    zh: 地图截图
+    en: Map Snapshot
+  definition: 将当前地图视图导出为静态图片。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/snapshot.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SnapshotReadyCallback
+      url: https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap.SnapshotReadyCallback
+      role: primary
+    ios:
+    - kind: class
+      id: MKMapSnapshotter
+      url: https://developer.apple.com/documentation/mapkit/mkmapsnapshotter
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - SnapshotReadyCallback、MKMapSnapshotter
+    excludes:
+    - location.maps.sdk
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.traffic
+  level: L3
+  parent: location.maps
+  name:
+    zh: 路况图层
+    en: Traffic Layer
+  definition: 在地图上显示实时路况。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/traffic.yaml
+  bindings:
+    android:
+    - kind: class
+      id: GoogleMap.setTrafficEnabled
+      url: https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap#setTrafficEnabled(boolean)
+      role: primary
+    ios:
+    - kind: class
+      id: MKMapView showsTraffic 类能力
+      url: https://developer.apple.com/documentation/mapkit/mkmapview
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - isTrafficEnabled
+    excludes:
+    - location.maps.sdk
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.maps.type
+  level: L3
+  parent: location.maps
+  name:
+    zh: 地图类型
+    en: Map Type
+  definition: 标准/卫星/混合等底图类型切换。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/location/maps/type.yaml
+  bindings:
+    android:
+    - kind: class
+      id: GoogleMap.setMapType
+      url: https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap#setMapType(int)
+      role: primary
+    ios:
+    - kind: class
+      id: mapType
+      url: https://developer.apple.com/documentation/mapkit/mkmapview/1452445-maptype
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: map type
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-display
+      role: primary
+  comparison_scope:
+    includes:
+    - mapType、MKMapType
+    excludes:
+    - location.maps.sdk
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: maps_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.positioning.accuracy
+  level: L3
+  parent: location.positioning
+  name:
+    zh: 定位精度与优先级
+    en: Location Accuracy
+  definition: 配置精度、功耗优先级与更新间隔。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/accuracy.yaml
+  bindings:
+    android:
+    - kind: class
+      id: LocationRequest
+      url: https://developers.google.com/android/reference/com/google/android/gms/location/LocationRequest
+      role: primary
+    ios:
+    - kind: class
+      id: desiredAccuracy
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423830-desiredaccuracy
+      role: primary
+    harmonyos:
+    - kind: module
+      id: LocationRequest
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - Priority、desiredAccuracy、LocationRequest
+    excludes:
+    - location.positioning.foreground
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: positioning_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.positioning.activity
+  level: L3
+  parent: location.positioning
+  name:
+    zh: 活动类型辅助
+    en: Activity Recognition Assist
+  definition: 结合活动识别优化定位策略（步行/驾车等）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/activity.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ActivityRecognitionClient
+      url: https://developers.google.com/android/reference/com/google/android/gms/location/ActivityRecognitionClient
+      role: primary
+    ios:
+    - kind: class
+      id: CMMotionActivityManager
+      url: https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - ActivityRecognitionClient
+    excludes:
+    - location.positioning.accuracy
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: positioning_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
 - id: location.positioning.background
   level: L3
   parent: location.positioning
   name:
     zh: 后台定位
     en: Background Location
-  definition: 应用不可见时持续或间歇获取位置。
-  knowledge_role: leaf
+  definition: 应用不在前台时持续或显著位置变更监听。
+  knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
-  privacy_class: highly_sensitive
-  leaf_at_this_level: true
-  split_justification: privacy
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/background/_rollup.yaml
   bindings:
     android:
-    - kind: other
-      id: com.google.android.gms.location
+    - kind: class
+      id: ACCESS_BACKGROUND_LOCATION
+      url: https://developer.android.com/develop/sensors-and-location/location/permissions#background
+      role: primary
+    ios:
+    - kind: class
+      id: allowsBackgroundLocationUpdates
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423568-allowsbackgroundlocationupdates
+      role: primary
+    harmonyos:
+    - kind: module
+      id: geoLocationManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/location-background
+      role: primary
+  comparison_scope:
+    includes:
+    - ACCESS_BACKGROUND_LOCATION、allowsBackgroundLocationUpdates
+    excludes:
+    - location.positioning.foreground
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - location.positioning.background
+  sibling_axis: positioning_capability
+- id: location.positioning.foreground
+  level: L3
+  parent: location.positioning
+  name:
+    zh: 前台定位
+    en: Foreground Location
+  definition: 应用可见或前台服务场景下请求/监听位置。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/foreground/_rollup.yaml
+  bindings:
+    android:
+    - kind: class
+      id: FusedLocationProviderClient
       url: https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient
       role: primary
-      note: Fused location / background
     ios:
-    - kind: framework
-      id: CoreLocation
-      url: https://developer.apple.com/documentation/corelocation
+    - kind: class
+      id: CLLocationManager
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager
       role: primary
     harmonyos:
     - kind: module
       id: '@ohos.geoLocationManager'
       url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
       role: primary
-  knowledge_path: knowledge/location/positioning/background.yaml
   comparison_scope:
     includes:
-    - 应用不可见时持续或间歇获取位置。
-    excludes: []
+    - requestLocationUpdates 前台、CLLocationManager 在用
+    excludes:
+    - location.positioning.background
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -130,112 +2548,100 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: location.geofence
-  level: L2
-  parent: location
-  name:
-    zh: 地理围栏
-    en: Geofencing
-  definition: 进出地理区域时的系统回调。
-  knowledge_role: rollup
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  knowledge_path: knowledge/location/geofence/_rollup.yaml
-  comparison_scope:
-    includes:
-    - 进出地理区域时的系统回调。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: location.geofence.region
+  granularity: branch
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - location.positioning.foreground
+  sibling_axis: positioning_capability
+- id: location.positioning.gnss_status
   level: L3
-  parent: location.geofence
+  parent: location.positioning
   name:
-    zh: 区域围栏
-    en: Region Geofence
-  definition: 圆形/多边形区域进出事件。
+    zh: GNSS状态与原始测量
+    en: GNSS Status
+  definition: 卫星状态与可选原始 GNSS 测量。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/gnss_status.yaml
+  bindings:
+    android:
+    - kind: class
+      id: GnssStatus
+      url: https://developer.android.com/reference/android/location/GnssStatus
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: gnssStatus
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - GnssStatus、GnssMeasurement
+    excludes:
+    - location.positioning.foreground
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: positioning_capability
   leaf_at_this_level: true
-  knowledge_path: knowledge/location/geofence/region.yaml
-  comparison_scope:
-    includes:
-    - 圆形/多边形区域进出事件。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: location.maps
-  level: L2
-  parent: location
-  name:
-    zh: 地图展示
-    en: Maps Display
-  definition: 地图 SDK 展示与标注（生态层）。
-  knowledge_role: rollup
-  layer: ecosystem
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  knowledge_path: knowledge/location/maps/_rollup.yaml
-  bindings: {}
-  comparison_scope:
-    includes:
-    - 地图 SDK 展示与标注（生态层）。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: location.maps.sdk
+  split_justification: independent_capability
+- id: location.positioning.indoor
   level: L3
-  parent: location.maps
+  parent: location.positioning
   name:
-    zh: 地图SDK
-    en: Maps SDK
-  definition: 嵌入式地图渲染与交互。
+    zh: 室内定位增强
+    en: Indoor Positioning
+  definition: 室内/高精度定位增强入口。
   knowledge_role: leaf
-  layer: ecosystem
+  layer: os
   device_forms:
   - phone
   - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  aliases:
-  - Google Maps SDK
-  - MapKit
-  - Map Kit
-  knowledge_path: knowledge/location/maps/sdk.yaml
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/indoor.yaml
+  bindings:
+    android:
+    - kind: class
+      id: WifiRttManager
+      url: https://developer.android.com/guide/topics/connectivity/wifi-rtt
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
   comparison_scope:
     includes:
-    - 嵌入式地图渲染与交互。
-    excludes: []
+    - indoor / Wi-Fi RTT 辅助待核
+    excludes:
+    - location.positioning.foreground
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -245,3 +2651,479 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: positioning_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.positioning.last_known
+  level: L3
+  parent: location.positioning
+  name:
+    zh: 最近历史位置
+    en: Last Known Location
+  definition: 读取系统缓存的最近一次已知位置。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/last_known.yaml
+  bindings:
+    android:
+    - kind: class
+      id: FusedLocationProviderClient.getLastLocation
+      url: https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient#getLastLocation()
+      role: primary
+    ios:
+    - kind: class
+      id: location
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423660-location
+      role: primary
+    harmonyos:
+    - kind: module
+      id: getLastLocation
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - getLastLocation、location
+    excludes:
+    - location.positioning.foreground
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: positioning_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.positioning.mock
+  level: L3
+  parent: location.positioning
+  name:
+    zh: 模拟位置测试
+    en: Mock Location Test
+  definition: 开发/测试场景注入模拟位置。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/mock.yaml
+  bindings:
+    android:
+    - kind: class
+      id: FusedLocationProviderClient.setMockLocation
+      url: https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient#setMockLocation(android.location.Location)
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: Xcode / 模拟器注入，非应用 API
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - setMockMode / Xcode simulated location
+    excludes:
+    - location.positioning.foreground
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: positioning_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.positioning.permission
+  level: L3
+  parent: location.positioning
+  name:
+    zh: 定位权限分级
+    en: Location Permission
+  definition: 请求/查询精确与大致、前台与后台定位授权。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/permission.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ACCESS_FINE_LOCATION
+      url: https://developer.android.com/develop/sensors-and-location/location/permissions
+      role: primary
+    ios:
+    - kind: class
+      id: requestWhenInUseAuthorization
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1620562-requestwheninuseauthorization
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: ohos.permission.LOCATION
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/location-permission
+      role: primary
+  comparison_scope:
+    includes:
+    - ACCESS_FINE_LOCATION、requestWhenInUseAuthorization
+    excludes:
+    - location.positioning.foreground
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: positioning_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.positioning.provider_status
+  level: L3
+  parent: location.positioning
+  name:
+    zh: 定位提供者状态
+    en: Provider Status
+  definition: 监听 GPS/网络提供者启用状态变化。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/provider_status.yaml
+  bindings:
+    android:
+    - kind: class
+      id: LocationManager.PROVIDERS_CHANGED_ACTION
+      url: https://developer.android.com/reference/android/location/LocationManager#PROVIDERS_CHANGED_ACTION
+      role: primary
+    ios:
+    - kind: class
+      id: locationManagerDidChangeAuthorization
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate/3563956-locationmanagerdidchangeauthoriz
+      role: primary
+    harmonyos:
+    - kind: module
+      id: locationEnabledChange
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - GnssStatus / ProvidersChanged
+    excludes:
+    - location.positioning.services_check
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: positioning_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.positioning.services_check
+  level: L3
+  parent: location.positioning
+  name:
+    zh: 定位服务可用性
+    en: Location Services Check
+  definition: 检查系统定位开关与提供者可用性。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/services_check.yaml
+  bindings:
+    android:
+    - kind: class
+      id: LocationManager.isLocationEnabled
+      url: https://developer.android.com/reference/android/location/LocationManager#isLocationEnabled()
+      role: primary
+    ios:
+    - kind: class
+      id: locationServicesEnabled
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423567-locationservicesenabled
+      role: primary
+    harmonyos:
+    - kind: module
+      id: isLocationEnabled
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - isLocationEnabled、locationServicesEnabled
+    excludes:
+    - location.positioning.permission
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: positioning_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.positioning.background.continuous
+  level: L4
+  parent: location.positioning.background
+  name:
+    zh: 后台连续定位
+    en: Background Continuous Location
+  definition: 后台持续位置更新（需相应授权与前台服务/后台模式）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/background/continuous.yaml
+  bindings:
+    android:
+    - kind: class
+      id: foregroundServiceType location
+      url: https://developer.android.com/develop/sensors-and-location/location/background
+      role: primary
+    ios:
+    - kind: guide
+      id: UIBackgroundModes location
+      url: https://developer.apple.com/documentation/bundleresources/information_property_list/uibackgroundmodes
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: 后台定位
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/location-background
+      role: primary
+  comparison_scope:
+    includes:
+    - foreground service location、UIBackgroundModes location
+    excludes:
+    - location.positioning.background.significant
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: bg_positioning_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.positioning.background.significant
+  level: L4
+  parent: location.positioning.background
+  name:
+    zh: 显著位置变更
+    en: Significant Location Change
+  definition: 低功耗显著位置变化监控。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/background/significant.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PRIORITY_BALANCED_POWER_ACCURACY
+      url: https://developers.google.com/android/reference/com/google/android/gms/location/Priority#PRIORITY_BALANCED_POWER_ACCURACY
+      role: primary
+    ios:
+    - kind: class
+      id: startMonitoringSignificantLocationChanges
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423531-startmonitoringsignificantlocati
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - startMonitoringSignificantLocationChanges
+    excludes:
+    - location.positioning.background.continuous
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: bg_positioning_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.positioning.foreground.once
+  level: L4
+  parent: location.positioning.foreground
+  name:
+    zh: 单次前台定位
+    en: One-shot Foreground Location
+  definition: 在前台获取一次当前位置。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/foreground/once.yaml
+  bindings:
+    android:
+    - kind: class
+      id: FusedLocationProviderClient.getCurrentLocation
+      url: https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient#getCurrentLocation(int,%20com.google.android.gms.tasks.CancellationToken)
+      role: primary
+    ios:
+    - kind: class
+      id: requestLocation
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1620548-requestlocation
+      role: primary
+    harmonyos:
+    - kind: module
+      id: getCurrentLocation
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - getCurrentLocation、requestLocation
+    excludes:
+    - location.positioning.foreground.watch
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: fg_positioning_op
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: location.positioning.foreground.watch
+  level: L4
+  parent: location.positioning.foreground
+  name:
+    zh: 前台连续定位
+    en: Foreground Location Updates
+  definition: 前台持续接收位置更新。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/location/positioning/foreground/watch.yaml
+  bindings:
+    android:
+    - kind: class
+      id: requestLocationUpdates
+      url: https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient#requestLocationUpdates(com.google.android.gms.location.LocationRequest,%20com.google.android.gms.location.LocationCallback,%20android.os.Looper)
+      role: primary
+    ios:
+    - kind: class
+      id: startUpdatingLocation
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/1424056-startupdatinglocation
+      role: primary
+    harmonyos:
+    - kind: module
+      id: onLocationChange
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-geolocationmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - requestLocationUpdates、startUpdatingLocation
+    excludes:
+    - location.positioning.foreground.once
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: fg_positioning_op
+  leaf_at_this_level: true
+  split_justification: independent_capability

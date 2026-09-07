@@ -1,0 +1,28 @@
+schema_version: 2
+feature_id: documents.generate
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 生成 PDF/富文本文档。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- documents.generate.from_view
+- documents.generate.html_to_pdf
+- documents.generate.image_pdf
+- documents.generate.pdf_create
+- documents.generate.template_merge
+- documents.generate.watermark

@@ -1,0 +1,21 @@
+schema_version: 2
+feature_id: security.data_protection.clear_on_logout
+role: leaf
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 在退出登录或注销时清理内存与本地敏感缓存的系统辅助能力边界。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []

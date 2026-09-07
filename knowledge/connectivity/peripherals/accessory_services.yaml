@@ -1,0 +1,21 @@
+schema_version: 2
+feature_id: connectivity.peripherals.accessory_services
+role: leaf
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 配件侧可调用的系统服务能力（通知转发、音频切换等）入口簇。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []

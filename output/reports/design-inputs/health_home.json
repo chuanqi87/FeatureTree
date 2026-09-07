@@ -1,0 +1,856 @@
+{
+  "domain": "health_home",
+  "authored_count": 7,
+  "draft_clue_count": 44,
+  "authored": [
+    {
+      "id": "health_home",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "健康运动家居车",
+        "en": "Health Fitness Home Auto"
+      },
+      "definition": "健康、运动、家居与车载扩展；形态用属性区分。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "health_home.auto",
+      "parent": "health_home",
+      "level": "L2",
+      "name": {
+        "zh": "车载投影",
+        "en": "Automotive Projection"
+      },
+      "definition": "手机应用在车机上的投影/适配。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "health_home.auto.projection",
+      "parent": "health_home.auto",
+      "level": "L3",
+      "name": {
+        "zh": "车机应用投影",
+        "en": "Car App Projection"
+      },
+      "definition": "Android Auto / CarPlay / 车机 Kit 类能力。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "health_home.health",
+      "parent": "health_home",
+      "level": "L2",
+      "name": {
+        "zh": "健康数据",
+        "en": "Health Data"
+      },
+      "definition": "健康指标读写。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "health_home.health.records",
+      "parent": "health_home.health",
+      "level": "L3",
+      "name": {
+        "zh": "健康记录",
+        "en": "Health Records"
+      },
+      "definition": "步数、心率等健康记录访问。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "health_home.home",
+      "parent": "health_home",
+      "level": "L2",
+      "name": {
+        "zh": "智能家居",
+        "en": "Smart Home"
+      },
+      "definition": "家居设备发现与控制。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "health_home.home.accessories",
+      "parent": "health_home.home",
+      "level": "L3",
+      "name": {
+        "zh": "家居配件控制",
+        "en": "Home Accessory Control"
+      },
+      "definition": "控制灯、锁等家居配件。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "health_home.auto",
+      "parent": "health_home",
+      "name": "车载扩展",
+      "what": "车载应用开发、导航流转与车机互联（手机主线之外的形态）。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "health_home.auto.address_transfer",
+      "parent": "health_home.auto",
+      "name": "地址流转与下车步行",
+      "what": "地址文本流转车机搜索与下车步行导航反向流转。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "carHopAddress / getOffCarNavi metadata",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/car-address-hop",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.auto.app_templates",
+      "parent": "health_home.auto",
+      "name": "车载应用模板化开发",
+      "what": "以模板体系构建车载应用（导航/媒体/POI/通信等）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "CarAppService/Screen (Car App Library)",
+          "url": "https://developer.android.com/reference/androidx/car/app/CarAppService",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Android Automotive OS",
+          "url": "https://developer.android.com/training/cars",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.auto.hardware",
+      "parent": "health_home.auto",
+      "name": "车载硬件访问",
+      "what": "车载专属硬件属性与麦克风API。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "CarAudioManager/CarPropertyManager (Car API)",
+          "url": "https://developer.android.com/reference/android/car/car/content/Car property",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.auto.hicar_status",
+      "parent": "health_home.auto",
+      "name": "车机连接状态",
+      "what": "查询与监听HiCar/超级桌面等智慧出行连接状态与事件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "smartMobilityCommon.getSmartMobilityStatus/on (Car Kit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-car-kit-smartmobilitycommon",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.auto.media",
+      "parent": "health_home.auto",
+      "name": "车载媒体应用",
+      "what": "媒体应用接入车载场景（MediaBrowserService+MediaSession）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MediaLibraryService on Android Auto",
+          "url": "https://developer.android.com/media/media-sessions",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.auto.navi_transfer",
+      "parent": "health_home.auto",
+      "name": "导航流转上车",
+      "what": "碰一碰/上车自动将手机导航流转到车机。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "navigationInfoMgr.registerSystemNavigationListener (Car Kit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/car-navi-hop",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.auto.super_desktop_camera",
+      "parent": "health_home.auto",
+      "name": "超级桌面分布式相机",
+      "what": "手机应用在车机超级桌面场景接入远端分布式相机。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "超级桌面应用接入分布式相机 (Car Kit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/car-superdesktop-camera",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.fitness",
+      "parent": "health_home",
+      "name": "运动与穿戴服务",
+      "what": "手表等穿戴设备上的运动健康服务客户端与传感器。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "health_home.fitness.wear_sensors",
+      "parent": "health_home.fitness",
+      "name": "穿戴传感器数据订阅",
+      "what": "订阅心率告警、佩戴状态与HR/ECG/PPG等人体数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Wear Engine 传感器获取",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wear-sensor",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.fitness.wear_services",
+      "parent": "health_home.fitness",
+      "name": "穿戴运动健康服务",
+      "what": "手表端运动/测量/被动监测客户端自动配置传感器输出指标。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ExerciseClient/MeasureClient/PassiveClient (Wear OS Health Services)",
+          "url": "https://developer.android.com/reference/androidx/health/services/client/ExerciseClient",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data",
+      "parent": "health_home",
+      "name": "健康数据",
+      "what": "健康与运动数据的存取、授权与类型体系。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "health_home.health_data.auth",
+      "parent": "health_home.health_data",
+      "name": "健康数据授权管理",
+      "what": "请求/取消/查询健康数据读写授权。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "healthStore.requestAuthorizations",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-health-data",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "HealthPermissionRequest",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/permissions",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "requestAuthorization(toShare:read:)",
+          "url": "https://developer.apple.com/documentation/healthkit/hkhealthstore",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.heart_rate",
+      "parent": "health_home.health_data.types",
+      "name": "心率数据",
+      "what": "动态心率采样数据的读取",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "samplePointHelper.heartRate.DATA_TYPE",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-health-data",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "HKQuantityTypeIdentifierHeartRate",
+          "url": "https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifierheart",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Health Connect HeartRate",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/data-types",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.journal",
+      "parent": "health_home.health_data",
+      "name": "手记建议",
+      "what": "端上近期事件选择器供建记类应用使用。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "JournalingSuggestions",
+          "url": "https://developer.apple.com/documentation/journalingsuggestions",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.observer",
+      "parent": "health_home.health_data",
+      "name": "健康数据变化订阅",
+      "what": "发现健康数据新增、变更与删除并增量同步；主动订阅与轮询机制逐平台核实，不推定各端均支持后台推送",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HKObserverQuery/HKAnchoredObjectQuery+background delivery（HealthKit）",
+          "url": "https://developer.apple.com/documentation/healthkit/hkobserverquery",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "HealthConnectClient.getChanges, getChangesToken",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/read-data",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.realtime",
+      "parent": "health_home.health_data",
+      "name": "实时最新数据",
+      "what": "读取最新采样数据与实时三环等当前状态。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "healthStore.readData (最新一条)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-health-data",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.records",
+      "parent": "health_home.health_data",
+      "name": "临床健康记录（病历）",
+      "what": "按FHIR等标准读取医疗机构同步的临床健康记录数据",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HKClinicalRecord（HealthKit Clinical Health Records）",
+          "url": "https://developer.apple.com/documentation/healthkit/hkclinicalrecord",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Health Connect Medical Records（FHIR，可用性待核）",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.stats",
+      "parent": "health_home.health_data",
+      "name": "健康数据聚合统计",
+      "what": "按时间窗对度量数据做求和/平均/最大最小等聚合统计查询",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HKStatisticsQuery/HKStatisticsCollectionQuery（HealthKit）",
+          "url": "https://developer.apple.com/documentation/healthkit/hkstatisticsquery",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Health Connect aggregateGroupByDuration（AggregateMetric）",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/read-data",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.store",
+      "parent": "health_home.health_data",
+      "name": "健康数据聚合存取",
+      "what": "经系统健康数据服务读写健康与运动数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "healthStore (Health Service Kit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-health-data",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "HealthDataClient (Health Connect)",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/get-started",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "HKHealthStore (HealthKit)",
+          "url": "https://developer.apple.com/documentation/healthkit/hkhealthstore",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.types",
+      "parent": "health_home.health_data",
+      "name": "健康数据类型体系",
+      "what": "按数据族组织的健康与运动数据类型读写（心率/体重/睡眠/血压/血糖/血氧等）；聚合统计与授权另立节点",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "health_home.health_data.types.activity_metrics",
+      "parent": "health_home.health_data.types",
+      "name": "日常运动度量数据",
+      "what": "距离、活动能量、爬楼层数、步数等日常运动度量读写（与锻炼记录内度量互补）",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HKQuantityTypeIdentifierDistanceWalkingRunning/ActiveEnergyBurned（HealthKit）",
+          "url": "https://developer.apple.com/documentation/healthkit/hkquantitytype",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "DistanceRecord/TotalCaloriesBurnedRecord/FloorsClimbedRecord（Health Connect）",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/data-types",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.types.blood_glucose",
+      "parent": "health_home.health_data.types",
+      "name": "血糖数据",
+      "what": "血糖浓度采样及餐前餐后场景标注读写",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HKQuantityTypeIdentifierBloodGlucose（HealthKit）",
+          "url": "https://developer.apple.com/documentation/healthkit/hkquantitytype",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "BloodGlucoseRecord（Health Connect）",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/data-types",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.types.blood_oxygen",
+      "parent": "health_home.health_data.types",
+      "name": "血氧饱和度",
+      "what": "外周血氧饱和度采样数据读写",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HKQuantityTypeIdentifierOxygenSaturation（HealthKit）",
+          "url": "https://developer.apple.com/documentation/healthkit/hkquantitytype",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "OxygenSaturationRecord（Health Connect）",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/data-types",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.types.blood_pressure",
+      "parent": "health_home.health_data.types",
+      "name": "血压数据",
+      "what": "收缩压/舒张压采样及血压关联测量组数据读写",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HKCorrelationTypeIdentifierBloodPressure（收缩/舒张关联）",
+          "url": "https://developer.apple.com/documentation/healthkit/hkcorrelation",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "BloodPressureRecord（Health Connect）",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/data-types",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.types.body_temperature",
+      "parent": "health_home.health_data.types",
+      "name": "体温数据",
+      "what": "体温及腕部等部位温度采样读写",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HKQuantityTypeIdentifierBodyTemperature（HealthKit）",
+          "url": "https://developer.apple.com/documentation/healthkit/hkquantitytype",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.types.cardio_respiratory",
+      "parent": "health_home.health_data.types",
+      "name": "心肺功能指标",
+      "what": "呼吸频率、最大摄氧量VO2max、心率变异性HRV等心肺与自主神经指标读写",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HKQuantityTypeIdentifierRespiratoryRate/VO2Max/HeartRateVariabilitySDNN（HealthKit）",
+          "url": "https://developer.apple.com/documentation/healthkit/hkquantitytype",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Vo2MaxRecord（Health Connect）",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/data-types",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.types.hearing",
+      "parent": "health_home.health_data.types",
+      "name": "听力健康数据",
+      "what": "耳机音量暴露、环境声暴露与听力图数据读写",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HKQuantityTypeIdentifierHeadphoneAudioExposure/HKAudiogramSample（HealthKit）",
+          "url": "https://developer.apple.com/documentation/healthkit/hkquantitytype",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.types.menstrual",
+      "parent": "health_home.health_data.types",
+      "name": "女性健康周期数据",
+      "what": "月经流量、排卵与受孕相关事件采样读写",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HKCategoryTypeIdentifierMenstrualFlow/OvulationTestResult（HealthKit）",
+          "url": "https://developer.apple.com/documentation/healthkit/hkcategorytype",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "MenstruationFlowRecord（Health Connect，待核）",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/data-types",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.types.nutrition",
+      "parent": "health_home.health_data.types",
+      "name": "营养与饮食记录",
+      "what": "饮食摄入能量、宏量营养素与水分摄入等营养采样读写",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HKQuantityTypeIdentifierDietaryEnergyConsumed等Dietary系列（HealthKit）",
+          "url": "https://developer.apple.com/documentation/healthkit/hkquantitytype",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "NutritionRecord（Health Connect）",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/data-types",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.types.sleep",
+      "parent": "health_home.health_data.types",
+      "name": "睡眠数据",
+      "what": "睡眠时段、分期（深浅/REM）与入睡醒来等睡眠相关采样读写",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HKCategoryTypeIdentifierSleepAnalysis（HealthKit睡眠分期）",
+          "url": "https://developer.apple.com/documentation/healthkit/hkcategorytype",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "SleepSessionRecord/SleepStage（Health Connect）",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/data-types",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.ui",
+      "parent": "health_home.health_data",
+      "name": "健康数据展示UI",
+      "what": "系统提供的健康数据展示界面元素。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HealthKitUI",
+          "url": "https://developer.apple.com/documentation/healthkitui",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.wear_access",
+      "parent": "health_home.health_data",
+      "name": "手机侧访问穿戴数据",
+      "what": "手机应用经健康服务访问已配对手表数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Health Service Kit穿戴数据组(5.1.1+)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/health-wearable-data",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.weight",
+      "parent": "health_home.health_data.types",
+      "name": "体重体脂数据",
+      "what": "体重与身体脂肪度量的采样数据读写；各平台设备条件待核实",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "samplePointHelper.weight.DATA_TYPE",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-health-data",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "HKQuantityTypeIdentifierBodyMass",
+          "url": "https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifierbodymass",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.health_data.workout",
+      "parent": "health_home.health_data",
+      "name": "锻炼记录",
+      "what": "一段持续锻炼的记录类型、统计与详情数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ExerciseSequence (Health Service Kit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-health-data",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "HKWorkout (HealthKit)",
+          "url": "https://developer.apple.com/documentation/healthkit/hkworkout",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "ExerciseSessionRecord (Health Connect)",
+          "url": "https://developer.android.com/health-and-fitness/guides/health-connect/develop/data-types",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "exerciseSequenceHelper.walking/hiking EXERCISE_TYPE",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-health-data",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.home",
+      "parent": "health_home",
+      "name": "智能家居",
+      "what": "家居配件的配置、控制与系统面板集成。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "health_home.home.commissioning",
+      "parent": "health_home.home",
+      "name": "Matter配件入网",
+      "what": "将Matter配件加入生态并协调跨平台设置。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "MatterSupport (MatterAddDeviceRequest)",
+          "url": "https://developer.apple.com/documentation/mattersupport",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.home.control",
+      "parent": "health_home.home",
+      "name": "家居配件控制",
+      "what": "配置和控制家居配件与集群级设备操作。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HomeKit (HMAccessory/HMHome)",
+          "url": "https://developer.apple.com/documentation/homekit",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Matter (MTRDevice)",
+          "url": "https://developer.android.com/reference/com/google/chip/device",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.home.device_controls",
+      "parent": "health_home.home",
+      "name": "系统设备控制面板",
+      "what": "应用作为控制提供方接入系统设备控制面板。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ControlsProviderService",
+          "url": "https://developer.android.com/reference/android/service/controls/ControlsProviderService",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.wellbeing",
+      "parent": "health_home",
+      "name": "数字健康",
+      "what": "屏幕时间守护、应用限制与家庭监护。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "health_home.wellbeing.app_limit",
+      "parent": "health_home.wellbeing",
+      "name": "应用访问限制",
+      "what": "按应用token立即设置或解除访问限制。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "setAppsRestriction / removeAppsRestriction (Screen Time Guard Kit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-screen-time-guard",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.wellbeing.app_picker",
+      "parent": "health_home.wellbeing",
+      "name": "应用选择与拦截页",
+      "what": "拉起应用选择页供勾选被管理应用；被拦截应用跳转管控应用管理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "拉起应用选择页/拦截页跳转",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/screen-time-app-picker",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.wellbeing.family",
+      "parent": "health_home.wellbeing",
+      "name": "家庭监护与儿童通信许可",
+      "what": "家长侧屏幕时间管控与儿童账户通信规则许可（与identity域交叉）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "PermissionKit (AskCenter)",
+          "url": "https://developer.apple.com/documentation/permissionkit",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "FamilyControls (Screen Time API)",
+          "url": "https://developer.apple.com/documentation/familycontrols",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "health_home.wellbeing.strategy",
+      "parent": "health_home.wellbeing",
+      "name": "守护策略管理",
+      "what": "起止时间/总时长/共享时长策略的增删改查与启停及用量查询。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "addGuardStrategy/startGuardStrategy/queryGuardStrategies",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-screen-time-guard",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

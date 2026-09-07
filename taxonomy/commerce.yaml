@@ -6,7 +6,7 @@ features:
   name:
     zh: 商业与增长
     en: Commerce and Growth
-  definition: 支付、内购、广告与分析（生态层为主）。
+  definition: 应用内购订阅、广告变现、分析事件、支付收银/钱包与增长运营 API。
   knowledge_role: rollup
   layer: ecosystem
   device_forms:
@@ -17,8 +17,10 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 支付、内购、广告与分析（生态层为主）。
-    excludes: []
+    - iap、ads、analytics、payment、growth
+    excludes:
+    - 开发者商户入驻与分成结算控制台
+    - 纯网页支付无公开移动 SDK
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -28,73 +30,19 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: commerce.iap
-  level: L2
-  parent: commerce
-  name:
-    zh: 应用内购买
-    en: In-App Purchase
-  definition: 数字商品内购与订阅。
-  knowledge_role: rollup
-  layer: ecosystem
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  knowledge_path: knowledge/commerce/iap/_rollup.yaml
-  bindings: {}
-  comparison_scope:
-    includes:
-    - 数字商品内购与订阅。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: commerce.iap.products
-  level: L3
-  parent: commerce.iap
-  name:
-    zh: 内购商品
-    en: IAP Products
-  definition: 查询与购买可消耗/订阅商品。
-  knowledge_role: leaf
-  layer: ecosystem
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  aliases:
-  - Play Billing
-  - StoreKit
-  - IAP Kit
-  knowledge_path: knowledge/commerce/iap/products.yaml
-  comparison_scope:
-    includes:
-    - 查询与购买可消耗/订阅商品。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - commerce
 - id: commerce.ads
   level: L2
   parent: commerce
   name:
     zh: 广告
     en: Advertising
-  definition: 应用内广告展示。
+  definition: 广告展示 SDK、广告标识、归因与个性化控制。
   knowledge_role: rollup
   layer: ecosystem
   device_forms:
@@ -105,8 +53,10 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 应用内广告展示。
-    excludes: []
+    - display、identifier、attribution、personalization、privacy_signals
+    excludes:
+    - 分析事件见 analytics
+    - 增长归因设备见 growth
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -116,42 +66,20 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: commerce.ads.sdk
-  level: L3
-  parent: commerce.ads
-  name:
-    zh: 广告SDK
-    en: Ads SDK
-  definition: 横幅/激励等广告单元。
-  knowledge_role: leaf
-  layer: ecosystem
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence
-  knowledge_path: knowledge/commerce/ads/sdk.yaml
-  comparison_scope:
-    includes:
-    - 横幅/激励等广告单元。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - commerce.ads
+  sibling_axis: commerce_capability_family
 - id: commerce.analytics
   level: L2
   parent: commerce
   name:
     zh: 分析
     en: Analytics
-  definition: 事件上报与漏斗分析。
+  definition: 应用内分析事件、用户属性与转化上报。
   knowledge_role: rollup
   layer: ecosystem
   device_forms:
@@ -159,10 +87,13 @@ features:
   - tablet
   privacy_class: none
   knowledge_path: knowledge/commerce/analytics/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 事件上报与漏斗分析。
-    excludes: []
+    - events、user_properties、conversion
+    excludes:
+    - 广告归因见 ads.attribution
+    - 崩溃观测见 observability
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -172,25 +103,529 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - commerce.analytics
+  sibling_axis: commerce_capability_family
+- id: commerce.growth
+  level: L2
+  parent: commerce
+  name:
+    zh: 增长运营
+    en: Growth Operations
+  definition: 应用内评价、远程配置、安装来源、动态图标与运营触达。
+  knowledge_role: rollup
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/growth/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - inapp_review、remote_config、install_referrer、dynamic_icon、engage、product_view
+    excludes:
+    - 分析事件见 analytics
+    - 广告展示见 ads.display
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: commerce_capability_family
+- id: commerce.iap
+  level: L2
+  parent: commerce
+  name:
+    zh: 应用内购买
+    en: In-App Purchase
+  definition: 数字商品查询购买、订阅、权益确认、退款与沙盒。
+  knowledge_role: rollup
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/iap/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - products、purchase、subscription、entitlement、refund、sandbox、server
+    excludes:
+    - 实物/线下收银见 payment
+    - 广告变现见 ads
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - commerce.iap
+  sibling_axis: commerce_capability_family
+- id: commerce.payment
+  level: L2
+  parent: commerce
+  name:
+    zh: 支付与钱包
+    en: Payment and Wallet
+  definition: 系统支付授权、第三方收银台、卡券钱包与订单追踪。
+  knowledge_role: rollup
+  layer: ecosystem
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/payment/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - request_payment、third_party、wallet、order_tracking
+    excludes:
+    - 数字内购见 iap
+    - NFC 卡模拟见 connectivity.nfc
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: commerce_capability_family
+- id: commerce.ads.app_set_id
+  level: L3
+  parent: commerce.ads
+  name:
+    zh: 应用集标识
+    en: App Set Identifier
+  definition: 开发者应用集合级标识，用于分析与反欺诈。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/commerce/ads/app_set_id.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: App Set ID
+      url: https://developer.android.com/training/articles/app-set-id
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - App Set ID
+    excludes:
+    - 设备广告标识见 identifier
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ads_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.ads.attribution
+  level: L3
+  parent: commerce.ads
+  name:
+    zh: 广告归因
+    en: Ad Attribution
+  definition: 安装/转化归因测量（SKAN/Attribution Reporting/AdAttribution 等同一能力簇）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/ads/attribution.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Attribution Reporting
+      url: https://developer.android.com/design-for-safety/privacy-sandbox/attribution
+      role: primary
+    ios:
+    - kind: framework
+      id: AdAttributionKit
+      url: https://developer.apple.com/documentation/adattributionkit
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: ads-attribution
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ads-attribution
+      role: primary
+  comparison_scope:
+    includes:
+    - SKAdNetwork、Attribution Reporting、AdAttributionKit、Ads attribution
+    excludes:
+    - 分析事件见 analytics.events
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ads_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - commerce.analytics.events
+- id: commerce.ads.display
+  level: L3
+  parent: commerce.ads
+  name:
+    zh: 广告展示
+    en: Ad Display
+  definition: 加载并展示横幅/插屏/激励等应用内广告。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/ads/display.yaml
+  bindings:
+    android:
+    - kind: package
+      id: Mobile Ads SDK
+      url: https://developer.android.com/reference/com/google/android/gms/ads/package-summary
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: Google Mobile Ads / AdMob iOS 同能力，待核官方入口
+    harmonyos:
+    - kind: module
+      id: '@kit.AdsKit advertising'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-advertising
+      role: primary
+  comparison_scope:
+    includes:
+    - Mobile Ads SDK、AdsKit AdComponent
+    excludes:
+    - 广告标识见 identifier
+    - 归因见 attribution
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: renamed_from
+    sources:
+    - commerce.ads.sdk
+  sibling_axis: ads_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.ads.identifier
+  level: L3
+  parent: commerce.ads
+  name:
+    zh: 广告标识符
+    en: Advertising Identifier
+  definition: 读取可重置的广告标识（AAID/OAID/IDFA 等）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/commerce/ads/identifier.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: AdvertisingIdClient
+      url: https://developer.android.com/training/articles/ad-id
+      role: primary
+    ios:
+    - kind: class
+      id: ASIdentifierManager
+      url: https://developer.apple.com/documentation/adsupport/asidentifiermanager
+      role: primary
+    harmonyos:
+    - kind: module
+      id: identifier.oaid
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-oaid
+      role: primary
+  comparison_scope:
+    includes:
+    - AdvertisingIdClient、ASIdentifierManager、oaid
+    excludes:
+    - 应用集标识见 app_set_id
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ads_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.ads.personalization
+  level: L3
+  parent: commerce.ads
+  name:
+    zh: 广告个性化控制
+    en: Ad Personalization Controls
+  definition: 请求非个性化广告或用户个性化同意控制。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/commerce/ads/personalization.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: UMP / request configuration
+      url: https://developers.google.com/admob/android/privacy
+      role: primary
+    ios:
+    - kind: framework
+      id: AppTrackingTransparency
+      url: https://developer.apple.com/documentation/apptrackingtransparency
+      role: primary
+    harmonyos:
+    - kind: module
+      id: AdOptions.nonPersonalizedAd
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-advertising
+      role: primary
+  comparison_scope:
+    includes:
+    - nonPersonalizedAd、UMP/ATT 边界
+    excludes:
+    - 展示见 display
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ads_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.ads.privacy_signals
+  level: L3
+  parent: commerce.ads
+  name:
+    zh: 广告隐私信号与运行时
+    en: Ad Privacy Signals and Runtime
+  definition: 隐私沙箱类广告信号与隔离 SDK 运行时入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/ads/privacy_signals.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Privacy Sandbox
+      url: https://developer.android.com/design-for-safety/privacy-sandbox
+      role: primary
+    ios:
+    - kind: framework
+      id: AdServices
+      url: https://developer.apple.com/documentation/adservices
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Privacy Sandbox AdServices、SDK Runtime
+    excludes:
+    - 归因见 attribution
+    - 展示见 display
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ads_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.analytics.conversion
+  level: L3
+  parent: commerce.analytics
+  name:
+    zh: 转化上报
+    en: Conversion Reporting
+  definition: 关键转化点上报供分析/增长漏斗使用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/analytics/conversion.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Firebase recommended events
+      url: https://firebase.google.com/docs/analytics/android/start
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: guide
+      id: Analytics Kit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/analytics-kit-introduction
+      role: primary
+  comparison_scope:
+    includes:
+    - conversion events
+    excludes:
+    - 广告归因测量见 ads.attribution
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: analytics_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - commerce.ads.attribution
+  - commerce.growth.install_referrer
 - id: commerce.analytics.events
   level: L3
   parent: commerce.analytics
   name:
     zh: 分析事件
     en: Analytics Events
-  definition: 自定义事件采集与上传。
+  definition: 记录自定义/推荐分析事件。
   knowledge_role: leaf
-  layer: ecosystem
+  layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
   knowledge_path: knowledge/commerce/analytics/events.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: FirebaseAnalytics
+      url: https://firebase.google.com/docs/analytics/android/start
+      role: primary
+    ios:
+    - kind: framework
+      id: Analytics
+      url: https://developer.apple.com/documentation/analytics
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: AppGallery analytics
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/analytics-kit-introduction
+      role: primary
   comparison_scope:
     includes:
-    - 自定义事件采集与上传。
-    excludes: []
+    - logEvent、FirebaseAnalytics、AGC analytics
+    excludes:
+    - 广告归因见 ads.attribution
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -200,3 +635,1120 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - commerce.analytics.events
+  sibling_axis: analytics_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - commerce.ads.attribution
+- id: commerce.analytics.user_properties
+  level: L3
+  parent: commerce.analytics
+  name:
+    zh: 用户属性
+    en: User Properties
+  definition: 设置分析用用户属性/用户 ID（合规边界内）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: sensitive
+  knowledge_path: knowledge/commerce/analytics/user_properties.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: FirebaseAnalytics.setUserProperty
+      url: https://firebase.google.com/docs/analytics/android/start
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: guide
+      id: Analytics Kit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/analytics-kit-introduction
+      role: primary
+  comparison_scope:
+    includes:
+    - setUserProperty
+    excludes:
+    - 事件见 events
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: analytics_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.growth.dynamic_icon
+  level: L3
+  parent: commerce.growth
+  name:
+    zh: 动态图标
+    en: Dynamic App Icon
+  definition: 切换应用备用图标/动态图标。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/growth/dynamic_icon.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: setAlternateIconName
+      url: https://developer.apple.com/documentation/uikit/uiapplication/1627681-setalternateiconname
+      role: primary
+    harmonyos:
+    - kind: module
+      id: iconManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-appgallery-iconmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - setAlternateIconName、selectDynamicIcon
+    excludes:
+    - 桌面快捷方式见 pin_shortcut
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: growth_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.growth.engage
+  level: L3
+  parent: commerce.growth
+  name:
+    zh: 系统内容推荐承接
+    en: System Engage Surfaces
+  definition: 向系统推荐/内容聚合表面发布应用内容实体。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/growth/engage.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Engage SDK
+      url: https://developer.android.com/guide/playcore/engage
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Engage SDK
+    excludes:
+    - 应用内消息见 inapp_messaging
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: growth_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.growth.inapp_messaging
+  level: L3
+  parent: commerce.growth
+  name:
+    zh: 应用内消息
+    en: In-App Messaging
+  definition: 展示运营配置的应用内消息活动。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/growth/inapp_messaging.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: FirebaseInAppMessaging
+      url: https://firebase.google.com/docs/in-app-messaging/android/get-started
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Firebase In-App Messaging
+    excludes:
+    - 推送通知见 notifications
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: growth_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.growth.inapp_review
+  level: L3
+  parent: commerce.growth
+  name:
+    zh: 应用内评价
+    en: In-App Review
+  definition: 请求系统应用内评分/评论对话框。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/growth/inapp_review.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Play In-App Review
+      url: https://developer.android.com/guide/playcore/in-app-review
+      role: primary
+    ios:
+    - kind: class
+      id: SKStoreReviewController
+      url: https://developer.apple.com/documentation/storekit/skstorereviewcontroller
+      role: primary
+    harmonyos:
+    - kind: module
+      id: commentManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-appgallery-commentmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - In-App Review、SKStoreReviewController、commentManager
+    excludes:
+    - 商店详情页跳转见 product_view
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: growth_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.growth.install_referrer
+  level: L3
+  parent: commerce.growth
+  name:
+    zh: 安装来源
+    en: Install Referrer
+  definition: 读取应用安装来源/引荐信息。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/growth/install_referrer.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Install Referrer
+      url: https://developer.android.com/google/play/installreferrer/library
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: attributionManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-appgallery-attributionmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - Install Referrer API、attributionManager
+    excludes:
+    - 广告归因见 ads.attribution
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: growth_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - commerce.ads.attribution
+  - commerce.analytics.conversion
+- id: commerce.growth.pin_shortcut
+  level: L3
+  parent: commerce.growth
+  name:
+    zh: 固定快捷方式
+    en: Pin Shortcut
+  definition: 请求将快捷方式固定到桌面/启动器。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/growth/pin_shortcut.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ShortcutManager.requestPinShortcut
+      url: https://developer.android.com/reference/android/content/pm/ShortcutManager
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: requestNewPinShortcut
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-appgallery-productviewmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - requestPinShortcut
+    excludes:
+    - 动态图标见 dynamic_icon
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: growth_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.growth.product_view
+  level: L3
+  parent: commerce.growth
+  name:
+    zh: 商店商品页
+    en: Store Product View
+  definition: 应用内加载应用商店商品/详情页。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/growth/product_view.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: Play 应用内更新/详情 待核
+    ios:
+    - kind: class
+      id: SKStoreProductViewController
+      url: https://developer.apple.com/documentation/storekit/skstoreproductviewcontroller
+      role: primary
+    harmonyos:
+    - kind: module
+      id: productViewManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-appgallery-productviewmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - loadProduct、SKStoreProductViewController
+    excludes:
+    - 应用内评价见 inapp_review
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: growth_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.growth.remote_config
+  level: L3
+  parent: commerce.growth
+  name:
+    zh: 远程配置
+    en: Remote Config
+  definition: 拉取云端远程配置参数驱动客户端行为。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/growth/remote_config.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: FirebaseRemoteConfig
+      url: https://firebase.google.com/docs/remote-config/android/get-started
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: Firebase Remote Config iOS 同能力
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Firebase Remote Config
+    excludes:
+    - 分析事件见 analytics
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: growth_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.iap.entitlement
+  level: L3
+  parent: commerce.iap
+  name:
+    zh: 权益确认与查询
+    en: Entitlement Confirm and Query
+  definition: 确认发货/完成交易并查询当前权益。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/iap/entitlement.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: BillingClient.acknowledgePurchase
+      url: https://developer.android.com/google/play/billing
+      role: primary
+    ios:
+    - kind: class
+      id: Transaction
+      url: https://developer.apple.com/documentation/storekit/transaction
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: iap.confirmDelivery
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-delivering-products
+      role: primary
+  comparison_scope:
+    includes:
+    - acknowledgePurchase、Transaction.finish、confirmDelivery、queryPurchases
+    excludes:
+    - 退款见 refund
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: iap_stage
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.iap.products
+  level: L3
+  parent: commerce.iap
+  name:
+    zh: 内购商品
+    en: IAP Products
+  definition: 查询可消耗/非消耗/订阅等数字商品目录。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/iap/products.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: BillingClient.queryProductDetailsAsync
+      url: https://developer.android.com/google/play/billing
+      role: primary
+    ios:
+    - kind: class
+      id: Product
+      url: https://developer.apple.com/documentation/storekit/product
+      role: primary
+    harmonyos:
+    - kind: module
+      id: iap.queryProducts
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap
+      role: primary
+  comparison_scope:
+    includes:
+    - queryProduct、Product.products
+    excludes:
+    - 发起购买见 iap.purchase
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - commerce.iap.products
+  sibling_axis: iap_stage
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  aliases:
+  - Play Billing
+  - StoreKit
+  - IAP Kit
+- id: commerce.iap.purchase
+  level: L3
+  parent: commerce.iap
+  name:
+    zh: 发起购买
+    en: Launch Purchase
+  definition: 拉起系统内购流程完成数字商品购买。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/iap/purchase.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: BillingClient.launchBillingFlow
+      url: https://developer.android.com/google/play/billing
+      role: primary
+    ios:
+    - kind: class
+      id: Product.purchase
+      url: https://developer.apple.com/documentation/storekit/product
+      role: primary
+    harmonyos:
+    - kind: module
+      id: iap.createPurchase
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap
+      role: primary
+  comparison_scope:
+    includes:
+    - launchBillingFlow、Product.purchase、createPurchase
+    excludes:
+    - 商品查询见 products
+    - 订阅专型见 subscription
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: iap_stage
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.iap.refund
+  level: L3
+  parent: commerce.iap
+  name:
+    zh: 退款请求
+    en: Refund Request
+  definition: 应用内发起退款请求流程。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/iap/refund.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: Play 退款多为控制台/API，应用侧入口待核
+    ios:
+    - kind: guide
+      id: beginRefundRequest
+      url: https://developer.apple.com/documentation/storekit/requesting-a-refund
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: iap.createRefundRequest
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-refund
+      role: primary
+  comparison_scope:
+    includes:
+    - beginRefundRequest、createRefundRequest
+    excludes:
+    - 权益查询见 entitlement
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: iap_stage
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.iap.sandbox
+  level: L3
+  parent: commerce.iap
+  name:
+    zh: 内购沙盒
+    en: IAP Sandbox
+  definition: 沙盒/许可测试账号下的内购联调。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/iap/sandbox.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Play Billing testing
+      url: https://developer.android.com/google/play/billing/testing
+      role: primary
+    ios:
+    - kind: framework
+      id: StoreKit Test
+      url: https://developer.apple.com/documentation/storekittest
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: IAP sandbox
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-sandbox-testing
+      role: primary
+  comparison_scope:
+    includes:
+    - StoreKit Test、license testers、IAP sandbox
+    excludes:
+    - 正式购买见 purchase
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: iap_stage
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.iap.server_notify
+  level: L3
+  parent: commerce.iap
+  name:
+    zh: 服务端交易通知
+    en: Server Transaction Notifications
+  definition: 商店服务端实时开发者通知与服务端 API。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/iap/server_notify.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Real-time developer notifications
+      url: https://developer.android.com/google/play/billing/rtdn
+      role: primary
+    ios:
+    - kind: framework
+      id: App Store Server Notifications
+      url: https://developer.apple.com/documentation/app-store-server-notifications
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: IAP Server API
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-server-api
+      role: primary
+  comparison_scope:
+    includes:
+    - RTDN、ASSN、IAP Server API
+    excludes:
+    - 客户端购买见 purchase
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: iap_stage
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.iap.subscription
+  level: L3
+  parent: commerce.iap
+  name:
+    zh: 自动续期订阅
+    en: Auto-Renewable Subscriptions
+  definition: 自动续期订阅购买、状态与管理入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/iap/subscription.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Play Billing subscriptions
+      url: https://developer.android.com/google/play/billing/subscriptions
+      role: primary
+    ios:
+    - kind: class
+      id: Product.SubscriptionInfo
+      url: https://developer.apple.com/documentation/storekit/product/subscriptioninfo
+      role: primary
+    harmonyos:
+    - kind: module
+      id: iap subscription
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap
+      role: primary
+  comparison_scope:
+    includes:
+    - SUBS products、SubscriptionInfo
+    excludes:
+    - 非订阅内购见 purchase
+    - 服务端延期见 server_notify
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: iap_stage
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.payment.order_tracking
+  level: L3
+  parent: commerce.payment
+  name:
+    zh: 订单追踪
+    en: Order Tracking
+  definition: 将订单状态同步到系统钱包/订单界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/payment/order_tracking.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: Orders
+      url: https://developer.apple.com/documentation/passkit/orders
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Orders in Wallet
+    excludes:
+    - 卡券添加见 wallet
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: payment_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.payment.quick_access_wallet
+  level: L3
+  parent: commerce.payment
+  name:
+    zh: 快捷访问钱包卡
+    en: Quick Access Wallet Cards
+  definition: 向系统快捷访问钱包表面提供卡片。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/payment/quick_access_wallet.yaml
+  bindings:
+    android:
+    - kind: package
+      id: Quick Access Wallet
+      url: https://developer.android.com/reference/android/service/quickaccesswallet/package-summary
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - WalletCardViewService
+    excludes:
+    - Pass 添加见 wallet
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: payment_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.payment.request_payment
+  level: L3
+  parent: commerce.payment
+  name:
+    zh: 系统支付授权
+    en: System Payment Authorization
+  definition: 拉起系统级支付表单完成付款授权（Apple Pay / Google Pay / Payment Kit 等）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/payment/request_payment.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Google Pay API
+      url: https://developer.android.com/google/pay/android
+      role: primary
+    ios:
+    - kind: class
+      id: PKPaymentAuthorizationViewController
+      url: https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller
+      role: primary
+    harmonyos:
+    - kind: module
+      id: paymentService.requestPayment
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/payment-service
+      role: primary
+  comparison_scope:
+    includes:
+    - PKPaymentAuthorization、PaymentsClient、requestPayment
+    excludes:
+    - 数字内购见 iap
+    - 第三方聚合收银台见 third_party
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: payment_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.payment.third_party
+  level: L3
+  parent: commerce.payment
+  name:
+    zh: 第三方收银台
+    en: Third-Party Checkout
+  definition: 调用第三方/合单/代扣等收银台能力。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/payment/third_party.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: thirdPaymentService
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/third-paymentservice
+      role: primary
+  comparison_scope:
+    includes:
+    - ThirdPay、combined prepay、sign deduct
+    excludes:
+    - 系统支付授权见 request_payment
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: payment_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: commerce.payment.wallet
+  level: L3
+  parent: commerce.payment
+  name:
+    zh: 卡券钱包
+    en: Passes Wallet
+  definition: 向系统钱包添加/管理会员卡、票证等卡券。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/commerce/payment/wallet.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Google Wallet API
+      url: https://developer.android.com/google/wallet/overview
+      role: primary
+    ios:
+    - kind: class
+      id: PKAddPassesViewController
+      url: https://developer.apple.com/documentation/passkit/pkaddpassesviewcontroller
+      role: primary
+    harmonyos:
+    - kind: module
+      id: WalletPassClient
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/walletpass
+      role: primary
+  comparison_scope:
+    includes:
+    - PKAddPasses、WalletPassClient、Save to Wallet
+    excludes:
+    - 数字证件核身见 identity.session.digital_id
+    - 支付授权见 request_payment
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: payment_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+  related_features:
+  - identity.session.digital_id

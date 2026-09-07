@@ -1,0 +1,28 @@
+schema_version: 2
+feature_id: storage.file_access
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 应用沙箱、系统选择器/SAF 与用户可见文件的受控读写。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- storage.file_access.native_io
+- storage.file_access.scoped_storage
+- storage.file_access.stats
+- storage.file_access.watch
+- storage.sandbox
+- storage.user_files

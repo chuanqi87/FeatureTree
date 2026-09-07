@@ -9,7 +9,7 @@ rules:
   relationship: capability
 - platform: harmonyos
   pattern: ^@ohos\.net\.socket$
-  feature_id: network.socket.tcp_udp
+  feature_id: network.socket
   relationship: capability
 - platform: harmonyos
   pattern: ^@ohos\.net\.http$
@@ -33,11 +33,11 @@ rules:
   relationship: capability
 - platform: ios
   pattern: ^uikit$
-  feature_id: ui.imperative
+  feature_id: ui.paradigm.imperative
   relationship: catalog
 - platform: ios
   pattern: ^swiftui$
-  feature_id: ui.declarative
+  feature_id: ui.paradigm.declarative
   relationship: catalog
 - platform: ios
   pattern: ^foundation$|^corefoundation$
@@ -73,7 +73,7 @@ rules:
   relationship: catalog
 - platform: ios
   pattern: ^healthkit$|^healthkitui$|^workoutkit$
-  feature_id: health_home.health
+  feature_id: health_home.health_data
   relationship: catalog
 - platform: ios
   pattern: ^homekit$|^matter$
@@ -293,7 +293,7 @@ rules:
   relationship: catalog
 - platform: harmonyos
   pattern: ^apis-arkui$|apis-arkui/
-  feature_id: ui.declarative
+  feature_id: ui.paradigm.declarative
   relationship: catalog
 - platform: harmonyos
   pattern: ^apis-arkweb$|^@ohos\.web
@@ -461,7 +461,7 @@ rules:
   relationship: catalog
 - platform: android
   pattern: ^android\.health|^androidx\.health
-  feature_id: health_home.health
+  feature_id: health_home.health_data
   relationship: catalog
 - platform: android
   pattern: ^android\.adservices|^android\.privacy

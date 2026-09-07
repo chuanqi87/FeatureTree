@@ -297,6 +297,69 @@
     "total_comparisons": 21
   },
   {
+    "feature_id": "connectivity.bluetooth",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.ir",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.nearlink",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.nfc",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.peripherals",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.serial",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.usb",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
     "feature_id": "connectivity.wifi",
     "state": "not_started",
     "conclusion": "unknown",
@@ -306,25 +369,7 @@
     "total_comparisons": 21
   },
   {
-    "feature_id": "connectivity.wifi.scan",
-    "state": "not_started",
-    "conclusion": "unknown",
-    "confirmed_support": 0,
-    "total_support": 3,
-    "confirmed_comparisons": 0,
-    "total_comparisons": 21
-  },
-  {
-    "feature_id": "connectivity.wifi.connect",
-    "state": "not_started",
-    "conclusion": "unknown",
-    "confirmed_support": 0,
-    "total_support": 3,
-    "confirmed_comparisons": 0,
-    "total_comparisons": 21
-  },
-  {
-    "feature_id": "connectivity.bluetooth",
+    "feature_id": "connectivity.bluetooth.bond",
     "state": "not_started",
     "conclusion": "unknown",
     "confirmed_support": 0,
@@ -351,7 +396,7 @@
     "total_comparisons": 21
   },
   {
-    "feature_id": "connectivity.bluetooth.le.advertise",
+    "feature_id": "connectivity.bluetooth.le_audio",
     "state": "not_started",
     "conclusion": "unknown",
     "confirmed_support": 0,
@@ -360,7 +405,7 @@
     "total_comparisons": 21
   },
   {
-    "feature_id": "connectivity.bluetooth.le.scan",
+    "feature_id": "connectivity.ir.transmit",
     "state": "not_started",
     "conclusion": "unknown",
     "confirmed_support": 0,
@@ -369,16 +414,7 @@
     "total_comparisons": 21
   },
   {
-    "feature_id": "connectivity.bluetooth.le.scan.filter",
-    "state": "in_progress",
-    "conclusion": "unknown",
-    "confirmed_support": 0,
-    "total_support": 3,
-    "confirmed_comparisons": 0,
-    "total_comparisons": 21
-  },
-  {
-    "feature_id": "connectivity.bluetooth.le.scan.background",
+    "feature_id": "connectivity.nearlink.discovery",
     "state": "not_started",
     "conclusion": "unknown",
     "confirmed_support": 0,
@@ -387,7 +423,7 @@
     "total_comparisons": 21
   },
   {
-    "feature_id": "connectivity.bluetooth.le.scan.batch",
+    "feature_id": "connectivity.nearlink.manager",
     "state": "not_started",
     "conclusion": "unknown",
     "confirmed_support": 0,
@@ -396,34 +432,7 @@
     "total_comparisons": 21
   },
   {
-    "feature_id": "connectivity.bluetooth.le.connect",
-    "state": "not_started",
-    "conclusion": "unknown",
-    "confirmed_support": 0,
-    "total_support": 3,
-    "confirmed_comparisons": 0,
-    "total_comparisons": 21
-  },
-  {
-    "feature_id": "connectivity.bluetooth.le.gatt",
-    "state": "not_started",
-    "conclusion": "unknown",
-    "confirmed_support": 0,
-    "total_support": 3,
-    "confirmed_comparisons": 0,
-    "total_comparisons": 21
-  },
-  {
-    "feature_id": "connectivity.nfc",
-    "state": "not_started",
-    "conclusion": "unknown",
-    "confirmed_support": 0,
-    "total_support": 3,
-    "confirmed_comparisons": 0,
-    "total_comparisons": 21
-  },
-  {
-    "feature_id": "connectivity.nfc.reader",
+    "feature_id": "connectivity.nearlink.ssap",
     "state": "not_started",
     "conclusion": "unknown",
     "confirmed_support": 0,
@@ -441,7 +450,106 @@
     "total_comparisons": 21
   },
   {
-    "feature_id": "connectivity.usb",
+    "feature_id": "connectivity.nfc.se",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.nfc.tag",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.peripherals.accessory_services",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.peripherals.discovery",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.peripherals.mfi",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.peripherals.midi",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.peripherals.partner_interop",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.peripherals.uwb",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.serial.uart",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.serial.usb",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.usb.accessory",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.usb.ddk",
     "state": "not_started",
     "conclusion": "unknown",
     "confirmed_support": 0,
@@ -451,6 +559,195 @@
   },
   {
     "feature_id": "connectivity.usb.host",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.usb.mtp",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.wifi.aware",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.wifi.connect",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.wifi.hotspot_local",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.wifi.p2p",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.wifi.rtt",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.wifi.scan",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.wifi.state",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.bluetooth.bond.discovery",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.bluetooth.bond.pairing",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.bluetooth.classic.a2dp",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.bluetooth.classic.hfp",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.bluetooth.classic.hid",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.bluetooth.classic.pan",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.bluetooth.classic.spp",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.bluetooth.le.advertise",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.bluetooth.le.channel_sounding",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.bluetooth.le.filter",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.bluetooth.le.gatt_client",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.bluetooth.le.gatt_server",
+    "state": "not_started",
+    "conclusion": "unknown",
+    "confirmed_support": 0,
+    "total_support": 3,
+    "confirmed_comparisons": 0,
+    "total_comparisons": 21
+  },
+  {
+    "feature_id": "connectivity.bluetooth.le.scan",
     "state": "not_started",
     "conclusion": "unknown",
     "confirmed_support": 0,

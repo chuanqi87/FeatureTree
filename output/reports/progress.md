@@ -2,14 +2,14 @@
 
 结构校验：passed。差异确认完成：否。
 
-比较节点：212；文章编辑状态：{'stub': 199, 'draft': 12, 'reviewed': 1}。
+比较节点：245；文章编辑状态：{'stub': 234, 'draft': 11}。
 
-平台支持已确认：0 / 636。
-维度 × 平台对已确认：0 / 4452。
+平台支持已确认：0 / 735。
+维度 × 平台对已确认：0 / 5145。
 
 旧文章 reviewed 状态不自动确认结构化结论。空白比较项表示待确认。
 
-知识置信度（逐项）：{'high': 0, 'medium': 0, 'low': 0, 'unassessed': 5088}；真机复核状态：{'unassessed': 5088}。
+知识置信度（逐项）：{'high': 0, 'medium': 0, 'low': 0, 'unassessed': 5880}；真机复核状态：{'unassessed': 5880}。
 所列计划真机复核完成：False；不表示覆盖全部机型。
 叶子与分支的分级统计分别保存在 audit.json 的 quality_by_role。
 按置信度、实测需求和预算筛选：scripts/export_review_scope.py；逐项清单：../exports/review_queue.json。

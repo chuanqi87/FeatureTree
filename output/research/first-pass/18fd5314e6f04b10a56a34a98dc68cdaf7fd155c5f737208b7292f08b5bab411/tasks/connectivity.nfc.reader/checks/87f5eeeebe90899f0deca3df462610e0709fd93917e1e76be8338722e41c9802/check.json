@@ -1,9 +1,0 @@
-{
-  "task_id": "d09a1a19693bfbb83e61d2af5087ae1a1ac81c97bf3fa93c63f73def4944852b",
-  "feature_id": "connectivity.nfc.reader",
-  "response_sha256": "50f3b9a297af7ec4cc1693d7c4a048d3482de86feb22a59f3af314926d186c08",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

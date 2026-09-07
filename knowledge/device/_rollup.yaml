@@ -1,13 +1,12 @@
+schema_version: 2
 feature_id: device
 role: rollup
 status: stub
 baseline:
-  android: API 35
-  ios: iOS 18
-  harmonyos: API 12+
-  gms: Play services BOM 24.x
-  hms: HMS / NEXT Kits
-definition: 电量、热、显示与音频路由。
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 显示亮度与屏幕属性、电池与电源策略、音频路由、热状态；振动触感见 sensors.haptics。
 presence:
   android:
     status: unknown
@@ -18,21 +17,10 @@ presence:
   harmonyos:
     status: unknown
     verification: unreviewed
-child_index:
-- device.power
-- device.display
-- device.audio_route
-architecture_diff: 分支综述：仅描述本域范围与跨子节点架构差异，禁止展开子叶子细节。
-legacy_presence:
-  android:
-    status: full
-  ios:
-    status: full
-  harmonyos:
-    status: full
-schema_version: 2
 comparisons: []
-migration_notes:
-- v1 有无与 analog/unique 断言保存在 legacy_presence，不作为已确认结论。
-- 原正文、编辑状态及 baseline 保留；需按当前比较范围与固定版本逐项复核。
 evidence: []
+child_index:
+- device.audio_route
+- device.display
+- device.power
+- device.thermal

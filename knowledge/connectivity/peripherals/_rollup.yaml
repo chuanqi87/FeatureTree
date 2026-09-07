@@ -1,0 +1,28 @@
+schema_version: 2
+feature_id: connectivity.peripherals
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 系统级配件发现、厂商协议会话、测距与伙伴设备互通。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- connectivity.peripherals.accessory_services
+- connectivity.peripherals.discovery
+- connectivity.peripherals.mfi
+- connectivity.peripherals.midi
+- connectivity.peripherals.partner_interop
+- connectivity.peripherals.uwb

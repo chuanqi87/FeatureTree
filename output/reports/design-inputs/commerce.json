@@ -1,0 +1,1145 @@
+{
+  "domain": "commerce",
+  "authored_count": 7,
+  "draft_clue_count": 60,
+  "authored": [
+    {
+      "id": "commerce",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "商业与增长",
+        "en": "Commerce and Growth"
+      },
+      "definition": "支付、内购、广告与分析（生态层为主）。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "commerce.ads",
+      "parent": "commerce",
+      "level": "L2",
+      "name": {
+        "zh": "广告",
+        "en": "Advertising"
+      },
+      "definition": "应用内广告展示。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "commerce.ads.sdk",
+      "parent": "commerce.ads",
+      "level": "L3",
+      "name": {
+        "zh": "广告SDK",
+        "en": "Ads SDK"
+      },
+      "definition": "横幅/激励等广告单元。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "commerce.analytics",
+      "parent": "commerce",
+      "level": "L2",
+      "name": {
+        "zh": "分析",
+        "en": "Analytics"
+      },
+      "definition": "事件上报与漏斗分析。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "commerce.analytics.events",
+      "parent": "commerce.analytics",
+      "level": "L3",
+      "name": {
+        "zh": "分析事件",
+        "en": "Analytics Events"
+      },
+      "definition": "自定义事件采集与上传。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "commerce.iap",
+      "parent": "commerce",
+      "level": "L2",
+      "name": {
+        "zh": "应用内购买",
+        "en": "In-App Purchase"
+      },
+      "definition": "数字商品内购与订阅。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "commerce.iap.products",
+      "parent": "commerce.iap",
+      "level": "L3",
+      "name": {
+        "zh": "内购商品",
+        "en": "IAP Products"
+      },
+      "definition": "查询与购买可消耗/订阅商品。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "commerce.ads",
+      "parent": "commerce",
+      "name": "广告",
+      "what": "应用内广告变现、广告标识与归因测量。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "commerce.ads.apple_ads",
+      "parent": "commerce.ads",
+      "name": "Apple Ads归因",
+      "what": "检索Apple Search Ads广告活动归因数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "AdServices (AAAttribution)",
+          "url": "https://developer.apple.com/documentation/adservices",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.ads.appset",
+      "parent": "commerce.ads",
+      "name": "应用集标识",
+      "what": "开发者名下应用集合级标识用于分析与反欺诈。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "App Set ID API",
+          "url": "https://developer.android.com/google/play-services/app-set",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.ads.attribution",
+      "parent": "commerce.ads",
+      "name": "广告归因回传",
+      "what": "安装归因与转化回传的签名postback机制。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "AdAttributionKit (iOS 17.4+)",
+          "url": "https://developer.apple.com/documentation/adattributionkit",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "SKAdNetwork",
+          "url": "https://developer.apple.com/documentation/skadnetwork",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Attribution Reporting API",
+          "url": "https://developer.android.com/privacy-sandbox/attribution",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "归因结果HTTPS POST回传",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ads-attribution",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.ads.display",
+      "parent": "commerce.ads",
+      "name": "应用内广告请求与展示",
+      "what": "请求并展示横幅/插屏/原生/激励/开屏/贴片广告组件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "advertising + AdComponent/AutoAdComponent (@kit.AdsKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-advertising",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "AdMob / Mobile Ads SDK",
+          "url": "https://developer.android.com/reference/com/google/android/gms/ads/package-summary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.ads.identifier",
+      "parent": "commerce.ads",
+      "name": "广告标识符",
+      "what": "读取用户可重置广告标识用于个性化与归因。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "identifier.oaid (@kit.AdsKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-oaid",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "AdvertisingIdClient (ads-identifier)",
+          "url": "https://developer.android.com/google/play-services/ads-identifier",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "ASIdentifierManager.advertisingIdentifier (AdSupport)",
+          "url": "https://developer.apple.com/documentation/adsupport/asidentifiermanager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.ads.personalization",
+      "parent": "commerce.ads",
+      "name": "个性化广告开关",
+      "what": "请求参数配置是否投放个性化广告。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AdOptions.nonPersonalizedAd",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-advertising",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.ads.privacy_sandbox",
+      "parent": "commerce.ads",
+      "name": "隐私沙箱广告API",
+      "what": "Topics、Protected Audience等广告隐私API（Topics已弃用API37）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Privacy Sandbox on Android (AdServices)",
+          "url": "https://developer.android.com/privacy-sandbox",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.ads.rtb",
+      "parent": "commerce.ads",
+      "name": "实时竞价",
+      "what": "曝光时多DSP实时竞价竞价广告交易机制。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "RTB实时竞价",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ads-rtb",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.ads.sdk_runtime",
+      "parent": "commerce.ads",
+      "name": "广告SDK运行时隔离",
+      "what": "广告SDK在独立沙箱运行时中运行以隔离数据访问（与security域交叉）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "SDK Runtime (Privacysandbox SdkRuntime)",
+          "url": "https://developer.android.com/privacy-sandbox/sdk-runtime",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.cashier",
+      "parent": "commerce",
+      "name": "通用支付收银台",
+      "what": "面向实体商品/服务的系统支付收银台（华为支付/Apple Pay等）。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "commerce.cashier.combined",
+      "parent": "commerce.cashier",
+      "name": "合单支付",
+      "what": "多个子订单合并为主订单一次支付。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "平台类商户合单支付 prepay(combined)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/payment-partner-combined-app-prepay",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.cashier.ecny",
+      "parent": "commerce.cashier",
+      "name": "数字人民币支付",
+      "what": "应用内拉起数字人民币收银台完成支付。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ecnyPaymentService (@kit.PaymentKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ecny-paymentservice",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.cashier.realname",
+      "parent": "commerce.cashier",
+      "name": "支付实名验证与人脸核身",
+      "what": "支付合规场景的实名信息验证/授权与实人核验（与identity域交叉）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "realNameService (@kit.PaymentKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/realname-service",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.cashier.request_payment",
+      "parent": "commerce.cashier",
+      "name": "拉起系统支付收银台",
+      "what": "客户端拉起系统级收银台完成一笔订单支付。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "paymentService.requestPayment (@kit.PaymentKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/payment-service",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "PKPaymentAuthorizationViewController (PassKit)",
+          "url": "https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Google Pay API (PaymentsClient)",
+          "url": "https://developer.android.com/google/pay/android",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.cashier.sandbox_pay",
+      "parent": "commerce.cashier",
+      "name": "支付沙盒环境",
+      "what": "无需真实商户入网调试支付接口且不产生真实扣款。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "华为支付沙盒环境",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/payment-sandbox",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.cashier.server_prepay",
+      "parent": "commerce.cashier",
+      "name": "服务端支付REST",
+      "what": "预下单获取prepayId、退款、关单、订单与退款查询及回调。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Payment Kit REST 预下单/退款/回调",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/payment-restapi-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.cashier.sign_deduct",
+      "parent": "commerce.cashier",
+      "name": "支付并签约与签约代扣",
+      "what": "一次完成支付并开通免密代扣签约、按协议周期扣款。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "预签约preSignNo+申请代扣+解约",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/payment-sign-withholding",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.cashier.thirdpay",
+      "parent": "commerce.cashier",
+      "name": "三方支付收银台拉起",
+      "what": "经SDK或URL拉起第三方支付方式（微信等）收银台。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ThirdPayClient.pay (thirdPaymentService)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/third-paymentservice",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth",
+      "parent": "commerce",
+      "name": "增长与分析",
+      "what": "应用商店增长、归因分析与运营实验能力。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "commerce.growth.account_linking",
+      "parent": "commerce.growth",
+      "name": "分销商账户关联",
+      "what": "将零售商账户标识注册到用户Apple媒体与购买账户。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "ServicesAccounting (iOS 16.4+)",
+          "url": "https://developer.apple.com/documentation/servicesaccounting",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.ad_jump",
+      "parent": "commerce.growth",
+      "name": "广告深链承接",
+      "what": "广告载体经App Linking/延迟深链直达应用商品页。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "App Linking广告跳转",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ads-app-linking",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.agent_pay",
+      "parent": "commerce.growth",
+      "name": "智能体数字商品付费",
+      "what": "智能体内数字商品付费与权益查询接口（内测期仅企业开发者）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "superlink://vassistant收银台+订单通知/权益查询接口",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/assistant-payment",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.analytics",
+      "parent": "commerce.growth",
+      "name": "应用分析事件与报告",
+      "what": "采集分析事件并批量下载增长分析报告。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Firebase Analytics",
+          "url": "https://developer.android.com/reference/com/google/firebase/analytics/FirebaseAnalytics",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Analytics Report API (App Store Connect)",
+          "url": "https://developer.apple.com/documentation/app-store-connect-api",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.app_indexing",
+      "parent": "commerce.growth",
+      "name": "应用内容索引",
+      "what": "应用内容可被搜索引擎检索（遗留能力，现状待核）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Firebase App Indexing (已停止维护)",
+          "url": "https://developer.android.com/reference/com/google/android/gms/appindex/package-summary",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.attribution_device",
+      "parent": "commerce.growth",
+      "name": "端侧应用归因",
+      "what": "不依赖用户标识符的端侧归因来源登记与转化事件上报。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "attributionManager.registerSource/registerTrigger (@kit.AppGalleryKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-appgallery-attributionmanager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.dynamic_icon",
+      "parent": "commerce.growth",
+      "name": "动态图标",
+      "what": "查询/切换/恢复应用动态桌面图标。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "queryDynamicIcons/selectDynamicIcon (@kit.AppGalleryKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-appgallery-iconmanager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "setAlternateIconName",
+          "url": "https://developer.apple.com/documentation/uikit/uiapplication/1627681-setalternateiconname",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.engage",
+      "parent": "commerce.growth",
+      "name": "内容发布到系统表面",
+      "what": "将应用各垂直内容发布到Google系统表面提升触达。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Engage SDK (com.google.android.engage)",
+          "url": "https://developer.android.com/engage",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.game_service",
+      "parent": "commerce.growth",
+      "name": "游戏生态服务",
+      "what": "游戏登录/排行榜/成就/玩家统计等参与类游戏服务（跨identity等域）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Play Games Services (leaderboards/achievements)",
+          "url": "https://developer.android.com/games/pgs/unity/unity-start",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Game Service Kit (gamePlayer/miniGamePay)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/gameservice-gameplayer-minigame-pay",
+          "status": "source_read"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.inapp_messaging",
+      "parent": "commerce.growth",
+      "name": "应用内运营消息",
+      "what": "按运营活动触发应用内卡片/横幅消息。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Firebase In-App Messaging",
+          "url": "https://developer.android.com/reference/com/google/firebase/inappmessaging/FirebaseInAppMessaging",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.inapp_review",
+      "parent": "commerce.growth",
+      "name": "应用内评分评论",
+      "what": "应用内拉起评分评论弹窗无需跳转商店。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "commentManager.showCommentDialog (@kit.AppGalleryKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-appgallery-commentmanager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Play In-App Review API",
+          "url": "https://developer.android.com/google/play/review",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "SKStoreReviewController.requestReview",
+          "url": "https://developer.apple.com/documentation/storekit/skstorereviewcontroller",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.install_referrer",
+      "parent": "commerce.growth",
+      "name": "安装来源归因",
+      "what": "获取安装来源与引荐数据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Install Referrer API (installreferrer)",
+          "url": "https://developer.android.com/google/play/installreferrer/library",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.pin_shortcut",
+      "parent": "commerce.growth",
+      "name": "快捷方式与卡片加桌",
+      "what": "应用内添加桌面快捷方式与元服务卡片。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "requestNewPinShortcut / loadService (@kit.AppGalleryKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-appgallery-productviewmanager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "ShortcutManager.requestPinShortcut",
+          "url": "https://developer.android.com/reference/android/content/pm/ShortcutManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.points",
+      "parent": "commerce.growth",
+      "name": "积分忠诚计划兑换",
+      "what": "检测用户积分兑换并交付应用内商品。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Play Points商品兑换",
+          "url": "https://developer.android.com/google/play/billing/points",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.product_view",
+      "parent": "commerce.growth",
+      "name": "应用详情页拉起",
+      "what": "应用内拉起应用市场详情页进行推荐转化。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "productViewManager.loadProduct (@kit.AppGalleryKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-appgallery-productviewmanager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.remote_config",
+      "parent": "commerce.growth",
+      "name": "远程配置与A/B实验",
+      "what": "云端定义参数免更新改变应用行为并按比例实验放量。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Firebase Remote Config",
+          "url": "https://developer.android.com/reference/com/google/firebase/remoteconfig/FirebaseRemoteConfig",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.growth.scene_code",
+      "parent": "commerce.growth",
+      "name": "场景值查询",
+      "what": "查询应用/元服务打开场景值与广告验签版本。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "sceneManager.getSelfSceneCode (@kit.AppGalleryKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-appgallery-scenemanager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.payment",
+      "parent": "commerce",
+      "name": "应用内购买",
+      "what": "数字商品（虚拟物品/会员/订阅）在应用内完成交易的内购体系。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "commerce.payment.cashier_embedded",
+      "parent": "commerce.payment",
+      "name": "嵌入式收银台组件",
+      "what": "应用页内直接嵌入商品选择与支付界面（当前仅TV扫码场景）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "CashierComponent + cashierComponentManager",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-cashiercomponent",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.payment.entitlement",
+      "parent": "commerce.payment",
+      "name": "发货确认与权益发放",
+      "what": "购买成功后确认发货、掉单补偿与差异化权益发放流程。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "iap.confirmDelivery / createPurchase PRODUCT_OWNED",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-delivering-products",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "BillingClient.acknowledgePurchase",
+          "url": "https://developer.android.com/google/play/billing",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Transaction.finish (StoreKit 2)",
+          "url": "https://developer.apple.com/documentation/storekit/transaction",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.payment.iap",
+      "parent": "commerce.payment",
+      "name": "数字商品购买",
+      "what": "拉起系统内购收银台购买消耗型/非消耗型数字商品。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "iap.createPurchase (@kit.IAPKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "BillingClient.launchBillingFlow",
+          "url": "https://developer.android.com/google/play/billing",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Product.purchase (StoreKit 2)",
+          "url": "https://developer.apple.com/documentation/storekit/product",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.payment.invoice",
+      "parent": "commerce.payment",
+      "name": "应用内开票",
+      "what": "应用内携订单号拉起开发票页面。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "iap.showManagedInvoices",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-invoice",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.payment.nonrenewing",
+      "parent": "commerce.payment",
+      "name": "非续期订阅购买",
+      "what": "周期访问权益但不自动续费的非续期订阅商品内购。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "iap (非续期订阅商品)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-non-renewable-subscription",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.payment.paid_app",
+      "parent": "commerce.payment",
+      "name": "付费应用分发",
+      "what": "应用本身付费购买的分发授权模式（客户端许可校验边界待核实）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AppGallery付费应用服务",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/paid-app",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.payment.purchased_query",
+      "parent": "commerce.payment",
+      "name": "已购记录与订单查询",
+      "what": "查询用户已购商品、历史购买记录与订单状态。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "iap.queryPurchases / REST订单查询",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "BillingClient.queryPurchasesAsync",
+          "url": "https://developer.android.com/google/play/billing",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Transaction.currentEntitlements (StoreKit 2)",
+          "url": "https://developer.apple.com/documentation/storekit/transaction",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.payment.refund",
+      "parent": "commerce.payment",
+      "name": "应用内退款入口",
+      "what": "应用内拉起退款页面发起退款申请。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "iap.createRefundRequest",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-refund",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "beginRefundRequest (StoreKit 2)",
+          "url": "https://developer.apple.com/documentation/storekit/requesting-a-refund",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.payment.sandbox",
+      "parent": "commerce.payment",
+      "name": "内购沙盒测试",
+      "what": "测试账号在沙盒环境模拟支付全流程。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "IAP沙盒测试",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-sandbox-testing",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "StoreKit Testing (SKTestSession)",
+          "url": "https://developer.apple.com/documentation/storekittest",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "License Testing / testing tracks",
+          "url": "https://developer.android.com/google/play/billing/testing",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.payment.server_api",
+      "parent": "commerce.payment",
+      "name": "内购服务端接口与事件通知",
+      "what": "服务端订单/订阅校验与关键事件推送（类比RTDN/App Store Server Notifications）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "IAP Server API + JWT鉴权 + 关键事件通知",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-server-api",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Play Real-Time Developer Notifications",
+          "url": "https://developer.android.com/google/play/billing/rtdn",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "App Store Server Notifications V2",
+          "url": "https://developer.apple.com/documentation/app-store-server-notifications",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.payment.subscription",
+      "parent": "commerce.payment",
+      "name": "自动续期订阅购买",
+      "what": "订阅组、续费周期与保留期等自动续期订阅内购。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "iap.createPurchase (自动续期订阅)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap",
+          "status": "source_read"
+        },
+        {
+          "platform": "android",
+          "symbol": "BillingClient (SUBS)",
+          "url": "https://developer.android.com/google/play/billing/subscriptions",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Product.SubscriptionInfo (StoreKit 2)",
+          "url": "https://developer.apple.com/documentation/storekit/product",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.payment.subscription_mgmt",
+      "parent": "commerce.payment",
+      "name": "订阅状态管理与延期",
+      "what": "查询订阅列表、延迟续期日期、退订处理等订阅生命周期管理。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "IAP服务端API 延迟续订",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-server-api",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Play Billing Subscriptions deferral",
+          "url": "https://developer.android.com/google/play/billing/subscriptions",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "App Store Server API extendSubscriptionRenewalDate",
+          "url": "https://developer.apple.com/documentation/app-store-server-api",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.wallet",
+      "parent": "commerce",
+      "name": "钱包与卡券",
+      "what": "系统钱包内卡、票、证、钥匙等数字凭证的添加与管理。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "commerce.wallet.car_key",
+      "parent": "commerce.wallet",
+      "name": "数字车钥匙",
+      "what": "基于SE/TEE与ICCE标准的NFC/蓝牙/星闪数字车钥匙。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Wallet Kit 数字车钥匙",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wallet-digital-key",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.wallet.finance",
+      "parent": "commerce.wallet",
+      "name": "金融数据与订单访问",
+      "what": "访问端上金融数据、Apple Card/Cash与钱包订单。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "FinanceStore (FinanceKit)",
+          "url": "https://developer.apple.com/documentation/financekit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.wallet.order_tracking",
+      "parent": "commerce.wallet",
+      "name": "钱包订单跟踪",
+      "what": "在Apple Wallet中创建、分发与更新购物订单跟踪。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Orders in Apple Wallet (PKPaymentOrder)",
+          "url": "https://developer.apple.com/documentation/passkit/orders",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.wallet.pass_add",
+      "parent": "commerce.wallet",
+      "name": "钱包凭证添加管理",
+      "what": "应用侧向系统钱包添加与管理数字凭证。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "WalletPassClient (@kit.WalletKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/walletpass",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "PKAddPassesViewController (PassKit)",
+          "url": "https://developer.apple.com/documentation/passkit/pkaddpassesviewcontroller",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Save to Google Wallet API",
+          "url": "https://developer.android.com/google/wallet/loyalty",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.wallet.pass_server",
+      "parent": "commerce.wallet",
+      "name": "服务端发卡",
+      "what": "开发者业务系统向钱包云发行卡券的REST管道。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Wallet Kit REST发卡接口族",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wallet-rest-api",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.wallet.pass_types",
+      "parent": "commerce.wallet",
+      "name": "票券凭证类型",
+      "what": "会员卡、门票、出行凭证、酒店房卡、园区卡、通用凭证等钱包票证类型。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Wallet Kit 会员卡/门票/出行凭证/房卡/园区卡",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wallet-introduction",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.wallet.pay_web",
+      "parent": "commerce.wallet",
+      "name": "Web端收款",
+      "what": "Safari网站经ApplePay JS/W3C Payment Request收款。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Apple Pay on the Web (ApplePay JS)",
+          "url": "https://developer.apple.com/documentation/apple_pay_on_the_web",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.wallet.quick_access",
+      "parent": "commerce.wallet",
+      "name": "快捷钱包访问",
+      "what": "系统快捷钱包卡片展示支付卡（设备绑定服务扩展）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Quick Access Wallet (WalletCardViewService)",
+          "url": "https://developer.android.com/reference/android/service/quickaccesswallet/WalletCardViewService",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "commerce.wallet.transit_card",
+      "parent": "commerce.wallet",
+      "name": "交通卡",
+      "what": "NFC交通卡开通、读卡、充值与删卡（仅对生态伙伴开放）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "TransitCardClient (@kit.WalletKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/wallettransitcard",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

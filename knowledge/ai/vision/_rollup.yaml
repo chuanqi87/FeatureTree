@@ -1,0 +1,32 @@
+schema_version: 2
+feature_id: ai.vision
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 图像/视频理解、检测、识别与增强。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- ai.vision.barcode
+- ai.vision.face
+- ai.vision.gen_image
+- ai.vision.hand_pose
+- ai.vision.image_classification
+- ai.vision.image_enhance
+- ai.vision.object_detection
+- ai.vision.semantic_segmentation
+- ai.vision.text_recognition
+- ai.vision.visual_intelligence

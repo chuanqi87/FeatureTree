@@ -1,0 +1,29 @@
+schema_version: 2
+feature_id: security.device_safety
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 系统完整性、恶意 URL、风控与反诈等设备侧安全检测。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- security.device_safety.antivirus
+- security.device_safety.audit
+- security.device_safety.fraud
+- security.device_safety.malicious_url
+- security.device_safety.risk_engine
+- security.device_safety.sys_integrity
+- security.device_safety.trusted_app

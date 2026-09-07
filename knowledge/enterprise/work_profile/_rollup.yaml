@@ -1,13 +1,12 @@
+schema_version: 2
 feature_id: enterprise.work_profile
 role: rollup
 status: stub
 baseline:
-  android: API 35
-  ios: iOS 18
-  harmonyos: API 12+
-  gms: Play services BOM 24.x
-  hms: HMS / NEXT Kits
-definition: 个人/工作数据隔离配置。
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 工作资料创建、隔离与跨资料互操作。
 presence:
   android:
     status: unknown
@@ -18,19 +17,14 @@ presence:
   harmonyos:
     status: unknown
     verification: unreviewed
-child_index:
-- enterprise.work_profile.isolation
-architecture_diff: 分支综述：仅描述本域范围与跨子节点架构差异，禁止展开子叶子细节。
-legacy_presence:
-  android:
-    status: full
-  ios:
-    status: analog
-  harmonyos:
-    status: partial
-schema_version: 2
 comparisons: []
-migration_notes:
-- v1 有无与 analog/unique 断言保存在 legacy_presence，不作为已确认结论。
-- 原正文、编辑状态及 baseline 保留；需按当前比较范围与固定版本逐项复核。
 evidence: []
+child_index:
+- enterprise.work_profile.cope
+- enterprise.work_profile.cross_profile
+- enterprise.work_profile.intent_filter
+- enterprise.work_profile.isolation
+- enterprise.work_profile.managed_config
+- enterprise.work_profile.policy
+- enterprise.work_profile.provisioning
+- enterprise.work_profile.widget

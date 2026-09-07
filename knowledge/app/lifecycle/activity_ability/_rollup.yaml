@@ -1,0 +1,24 @@
+schema_version: 2
+feature_id: app.lifecycle.activity_ability
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 前台界面入口组件的创建、可见、销毁与状态保存回调。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- app.lifecycle.activity_ability.multi_instance
+- app.lifecycle.activity_ability.state_restore

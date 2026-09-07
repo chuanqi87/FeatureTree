@@ -1,0 +1,35 @@
+schema_version: 2
+feature_id: sensors.access
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 传感器枚举、采样配置与订阅/取消。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- sensors.access.batching
+- sensors.access.direct_channel
+- sensors.access.dynamic
+- sensors.access.flush
+- sensors.access.list
+- sensors.access.max_rate
+- sensors.access.one_shot
+- sensors.access.permission
+- sensors.access.reporting_mode
+- sensors.access.sampling
+- sensors.access.subscribe
+- sensors.access.unsubscribe
+- sensors.access.wake_up

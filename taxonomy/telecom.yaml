@@ -6,7 +6,7 @@ features:
   name:
     zh: 通信与内容
     en: Telecom and Personal Content
-  definition: 电话短信、联系人与日历。
+  definition: 通话、短信、联系人、日历与邮件撰写等个人通信内容能力。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -17,8 +17,10 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 电话短信、联系人与日历。
-    excludes: []
+    - 通话、短信、联系人、日历、邮件
+    excludes:
+    - 蜂窝数据链路见 network
+    - 推送见 notifications
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -28,182 +30,19 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: telecom.phone
-  level: L2
-  parent: telecom
-  name:
-    zh: 电话
-    en: Telephony
-  definition: 拨号与通话状态。
-  knowledge_role: rollup
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  knowledge_path: knowledge/telecom/phone/_rollup.yaml
-  bindings: {}
-  comparison_scope:
-    includes:
-    - 拨号与通话状态。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: telecom.phone.dial
-  level: L3
-  parent: telecom.phone
-  name:
-    zh: 发起通话
-    en: Place Call
-  definition: 发起系统电话呼叫。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: sensitive
-  leaf_at_this_level: true
-  knowledge_path: knowledge/telecom/phone/dial.yaml
-  comparison_scope:
-    includes:
-    - 发起系统电话呼叫。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: telecom.sms
-  level: L2
-  parent: telecom
-  name:
-    zh: 短信
-    en: SMS
-  definition: 短信发送与读取。
-  knowledge_role: rollup
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  knowledge_path: knowledge/telecom/sms/_rollup.yaml
-  bindings: {}
-  comparison_scope:
-    includes:
-    - 短信发送与读取。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: telecom.sms.send
-  level: L3
-  parent: telecom.sms
-  name:
-    zh: 发送短信
-    en: Send SMS
-  definition: 应用发送短信（iOS 通常仅 UI 分享）。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: sensitive
-  leaf_at_this_level: true
-  split_justification: analog
-  knowledge_path: knowledge/telecom/sms/send.yaml
-  comparison_scope:
-    includes:
-    - 应用发送短信（iOS 通常仅 UI 分享）。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: telecom.contacts
-  level: L2
-  parent: telecom
-  name:
-    zh: 联系人
-    en: Contacts
-  definition: 系统通讯录访问。
-  knowledge_role: rollup
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  knowledge_path: knowledge/telecom/contacts/_rollup.yaml
-  bindings: {}
-  comparison_scope:
-    includes:
-    - 系统通讯录访问。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: telecom.contacts.read
-  level: L3
-  parent: telecom.contacts
-  name:
-    zh: 读取联系人
-    en: Read Contacts
-  definition: 查询通讯录条目。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: sensitive
-  leaf_at_this_level: true
-  knowledge_path: knowledge/telecom/contacts/read.yaml
-  comparison_scope:
-    includes:
-    - 查询通讯录条目。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - telecom
 - id: telecom.calendar
   level: L2
   parent: telecom
   name:
     zh: 日历
     en: Calendar
-  definition: 系统日历事件。
+  definition: 日历账户、日程与提醒。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -214,8 +53,9 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 系统日历事件。
-    excludes: []
+    - 账户、日程、提醒
+    excludes:
+    - 系统闹钟见 device
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -225,25 +65,191 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: telecom.calendar.events
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - telecom.calendar
+  sibling_axis: telecom_capability_family
+- id: telecom.contacts
+  level: L2
+  parent: telecom
+  name:
+    zh: 联系人
+    en: Contacts
+  definition: 联系人读写、选择器与名片交换。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/contacts/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 读写、选择器、vCard
+    excludes:
+    - 通话记录见 phone
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - telecom.contacts
+  sibling_axis: telecom_capability_family
+- id: telecom.mail
+  level: L2
+  parent: telecom
+  name:
+    zh: 邮件撰写
+    en: Mail Compose
+  definition: 系统邮件撰写与发送入口。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/mail/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - mailto、撰写界面
+    excludes:
+    - 通用分享见 interop
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: telecom_capability_family
+- id: telecom.phone
+  level: L2
+  parent: telecom
+  name:
+    zh: 通话
+    en: Phone Calls
+  definition: 拨号、通话状态、系统通话与 VoIP 接入。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/phone/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 拨号、状态、筛选、VoIP
+    excludes:
+    - 短信见 sms
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - telecom.phone
+  sibling_axis: telecom_capability_family
+- id: telecom.sms
+  level: L2
+  parent: telecom
+  name:
+    zh: 短信彩信
+    en: SMS and MMS
+  definition: 短信发送、过滤与相关消息能力。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/sms/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 发送、过滤、RCS/卫星入口
+    excludes:
+    - 通话见 phone
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - telecom.sms
+  sibling_axis: telecom_capability_family
+- id: telecom.calendar.accounts
   level: L3
   parent: telecom.calendar
   name:
-    zh: 日历事件
-    en: Calendar Events
-  definition: 读写日历事件。
+    zh: 日历账户
+    en: Calendar Accounts
+  definition: 枚举与管理日历账户。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
-  privacy_class: sensitive
-  leaf_at_this_level: true
-  knowledge_path: knowledge/telecom/calendar/events.yaml
+  privacy_class: none
+  knowledge_path: knowledge/telecom/calendar/accounts.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CalendarContract.Calendars
+      url: https://developer.android.com/reference/android/provider/CalendarContract.Calendars
+      role: primary
+    ios:
+    - kind: class
+      id: EKSource
+      url: https://developer.apple.com/documentation/eventkit/eksource
+      role: primary
+    harmonyos:
+    - kind: module
+      id: calendarManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-calendarManager
+      role: primary
   comparison_scope:
     includes:
-    - 读写日历事件。
-    excludes: []
+    - calendars / EKSource
+    excludes:
+    - 日程见 events
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -253,3 +259,1939 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: calendar_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.calendar.attendees
+  level: L3
+  parent: telecom.calendar
+  name:
+    zh: 日程参与者
+    en: Event Attendees
+  definition: 管理日程参与者与响应状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/calendar/attendees.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CalendarContract.Attendees
+      url: https://developer.android.com/reference/android/provider/CalendarContract.Attendees
+      role: primary
+    ios:
+    - kind: class
+      id: EKParticipant
+      url: https://developer.apple.com/documentation/eventkit/ekparticipant
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Attendees
+    excludes:
+    - 日程见 events
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: calendar_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.calendar.availability
+  level: L3
+  parent: telecom.calendar
+  name:
+    zh: 忙闲查询
+    en: Freebusy Availability
+  definition: 查询日历忙闲状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/calendar/availability.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: EKEventStore
+      url: https://developer.apple.com/documentation/eventkit/ekeventstore
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - freebusy
+    excludes:
+    - 日程见 events
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: calendar_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.calendar.event_ui
+  level: L3
+  parent: telecom.calendar
+  name:
+    zh: 日程系统界面
+    en: Calendar Event UI
+  definition: 拉起系统日程创建/编辑界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/calendar/event_ui.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Intent INSERT
+      url: https://developer.android.com/guide/components/intents-common#Calendar
+      role: primary
+    ios:
+    - kind: framework
+      id: EKEventEditViewController
+      url: https://developer.apple.com/documentation/eventkitui
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - INTENT insert / EKEventEdit
+    excludes:
+    - API 读写见 events
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: calendar_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.calendar.events
+  level: L3
+  parent: telecom.calendar
+  name:
+    zh: 日程读写
+    en: Calendar Events CRUD
+  definition: 创建、查询、更新与删除日程。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/telecom/calendar/events.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CalendarContract
+      url: https://developer.android.com/reference/android/provider/CalendarContract
+      role: primary
+    ios:
+    - kind: framework
+      id: EventKit
+      url: https://developer.apple.com/documentation/eventkit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: calendarManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-calendarManager
+      role: primary
+  comparison_scope:
+    includes:
+    - CalendarContract / EventKit
+    excludes:
+    - 提醒见 reminders
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - telecom.calendar.events
+  sibling_axis: calendar_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.calendar.recurrence
+  level: L3
+  parent: telecom.calendar
+  name:
+    zh: 重复日程规则
+    en: Recurrence Rules
+  definition: 设置与解析重复日程规则。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/calendar/recurrence.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CalendarContract.Events
+      url: https://developer.android.com/reference/android/provider/CalendarContract.Events
+      role: primary
+    ios:
+    - kind: class
+      id: EKRecurrenceRule
+      url: https://developer.apple.com/documentation/eventkit/ekrecurrencerule
+      role: primary
+    harmonyos:
+    - kind: module
+      id: calendarManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-calendarManager
+      role: primary
+  comparison_scope:
+    includes:
+    - RRULE
+    excludes:
+    - 日程见 events
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: calendar_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.calendar.reminders
+  level: L3
+  parent: telecom.calendar
+  name:
+    zh: 日程提醒
+    en: Event Reminders
+  definition: 为日程设置提醒。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/calendar/reminders.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CalendarContract.Reminders
+      url: https://developer.android.com/reference/android/provider/CalendarContract.Reminders
+      role: primary
+    ios:
+    - kind: class
+      id: EKAlarm
+      url: https://developer.apple.com/documentation/eventkit/ekalarm
+      role: primary
+    harmonyos:
+    - kind: module
+      id: calendarManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-calendarManager
+      role: primary
+  comparison_scope:
+    includes:
+    - Reminders / EKAlarm
+    excludes:
+    - 日程见 events
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: calendar_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.contacts.accounts
+  level: L3
+  parent: telecom.contacts
+  name:
+    zh: 联系人账户源
+    en: Contacts Account Sources
+  definition: 管理联系人同步账户源。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/contacts/accounts.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ContactsContract.Settings
+      url: https://developer.android.com/reference/android/provider/ContactsContract.Settings
+      role: primary
+    ios:
+    - kind: class
+      id: CNContainer
+      url: https://developer.apple.com/documentation/contacts/cncontainer
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - RawContacts account
+    excludes:
+    - 读写见 read/write
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: contacts_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.contacts.aggregation
+  level: L3
+  parent: telecom.contacts
+  name:
+    zh: 联系人聚合
+    en: Contacts Aggregation
+  definition: 聚合同一人的多账户联系人数据。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/contacts/aggregation.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ContactsContract.AggregationSuggestions
+      url: https://developer.android.com/reference/android/provider/ContactsContract
+      role: primary
+    ios:
+    - kind: class
+      id: CNContact
+      url: https://developer.apple.com/documentation/contacts/cncontact
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - aggregation
+    excludes:
+    - 读取见 read
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: contacts_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.contacts.picker
+  level: L3
+  parent: telecom.contacts
+  name:
+    zh: 联系人选择器
+    en: Contacts Picker
+  definition: 拉起系统联系人选择界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/contacts/picker.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ACTION_PICK
+      url: https://developer.android.com/guide/components/intents-common#Contacts
+      role: primary
+    ios:
+    - kind: class
+      id: CNContactPickerViewController
+      url: https://developer.apple.com/documentation/contactsui/cncontactpickerviewcontroller
+      role: primary
+    harmonyos:
+    - kind: module
+      id: contact
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-contact
+      role: primary
+  comparison_scope:
+    includes:
+    - ACTION_PICK / CNContactPicker
+    excludes:
+    - 读取见 read
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: contacts_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.contacts.quick_access
+  level: L3
+  parent: telecom.contacts
+  name:
+    zh: 联系人快捷访问按钮
+    en: Contacts Quick Access
+  definition: 系统级联系人快捷访问入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/contacts/quick_access.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: CNContactViewController
+      url: https://developer.apple.com/documentation/contactsui
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - access button
+    excludes:
+    - 选择器见 picker
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: contacts_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.contacts.read
+  level: L3
+  parent: telecom.contacts
+  name:
+    zh: 联系人读取
+    en: Contacts Read
+  definition: 查询联系人与原始数据。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/telecom/contacts/read.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ContactsContract
+      url: https://developer.android.com/reference/android/provider/ContactsContract
+      role: primary
+    ios:
+    - kind: class
+      id: CNContactStore
+      url: https://developer.apple.com/documentation/contacts/cncontactstore
+      role: primary
+    harmonyos:
+    - kind: module
+      id: contact
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-contact
+      role: primary
+  comparison_scope:
+    includes:
+    - ContactsContract / CNContactStore
+    excludes:
+    - 写入见 write
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - telecom.contacts.read
+  sibling_axis: contacts_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.contacts.vcard
+  level: L3
+  parent: telecom.contacts
+  name:
+    zh: vCard导入导出
+    en: vCard Import Export
+  definition: 导入导出 vCard 名片。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/contacts/vcard.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ImportVCardActivity hooks
+      url: https://developer.android.com/guide/topics/providers/contacts-provider
+      role: primary
+    ios:
+    - kind: framework
+      id: CNContactVCardSerialization
+      url: https://developer.apple.com/documentation/contacts
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - vCard
+    excludes:
+    - 写入见 write
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: contacts_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.contacts.write
+  level: L3
+  parent: telecom.contacts
+  name:
+    zh: 联系人写入
+    en: Contacts Write
+  definition: 创建、更新与删除联系人。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/telecom/contacts/write.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ContactsContract
+      url: https://developer.android.com/reference/android/provider/ContactsContract
+      role: primary
+    ios:
+    - kind: class
+      id: CNContactStore
+      url: https://developer.apple.com/documentation/contacts/cncontactstore
+      role: primary
+    harmonyos:
+    - kind: module
+      id: contact
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-contact
+      role: primary
+  comparison_scope:
+    includes:
+    - insert/update/delete
+    excludes:
+    - 读取见 read
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: contacts_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.mail.accounts_query
+  level: L3
+  parent: telecom.mail
+  name:
+    zh: 邮件账户可用性
+    en: Mail Account Availability
+  definition: 查询设备是否可发送邮件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/mail/accounts_query.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: MFMailComposeViewController.canSendMail
+      url: https://developer.apple.com/documentation/messageui/mfmailcomposeviewcontroller
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - canSendMail
+    excludes:
+    - 撰写见 compose
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: mail_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.mail.attachments
+  level: L3
+  parent: telecom.mail
+  name:
+    zh: 邮件附件
+    en: Mail Attachments
+  definition: 在系统邮件撰写中添加附件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/mail/attachments.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Intent EXTRA_STREAM
+      url: https://developer.android.com/guide/components/intents-common#Email
+      role: primary
+    ios:
+    - kind: class
+      id: MFMailComposeViewController addAttachmentData
+      url: https://developer.apple.com/documentation/messageui/mfmailcomposeviewcontroller
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - addAttachment
+    excludes:
+    - 撰写见 compose
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: mail_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.mail.compose
+  level: L3
+  parent: telecom.mail
+  name:
+    zh: 邮件撰写发送
+    en: Mail Compose Send
+  definition: 拉起系统邮件撰写并发送。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/mail/compose.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ACTION_SENDTO mailto
+      url: https://developer.android.com/guide/components/intents-common#Email
+      role: primary
+    ios:
+    - kind: class
+      id: MFMailComposeViewController
+      url: https://developer.apple.com/documentation/messageui/mfmailcomposeviewcontroller
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - 'mailto: / MFMailCompose'
+    excludes:
+    - 通用分享见 interop
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: mail_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.mail.mailto_parse
+  level: L3
+  parent: telecom.mail
+  name:
+    zh: mailto链接处理
+    en: Mailto Link Handling
+  definition: 解析并处理 mailto 链接。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/mail/mailto_parse.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Intent.parseUri
+      url: https://developer.android.com/reference/android/content/Intent
+      role: primary
+    ios:
+    - kind: guide
+      id: mailto
+      url: https://developer.apple.com/library/archive/featuredarticles/iPhoneURLScheme_Reference/MailLinks/MailLinks.html
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - mailto parse
+    excludes:
+    - 撰写见 compose
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: mail_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.mail.recipients
+  level: L3
+  parent: telecom.mail
+  name:
+    zh: 收件人字段
+    en: Mail Recipients
+  definition: 设置收件/抄送/密送收件人。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/mail/recipients.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Intent EXTRA_EMAIL
+      url: https://developer.android.com/guide/components/intents-common#Email
+      role: primary
+    ios:
+    - kind: class
+      id: MFMailComposeViewController
+      url: https://developer.apple.com/documentation/messageui/mfmailcomposeviewcontroller
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - to/cc/bcc
+    excludes:
+    - 撰写见 compose
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: mail_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.mail.subject_body
+  level: L3
+  parent: telecom.mail
+  name:
+    zh: 主题与正文预填
+    en: Subject Body Prefill
+  definition: 预填邮件主题与正文。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/mail/subject_body.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Intent EXTRA_SUBJECT
+      url: https://developer.android.com/guide/components/intents-common#Email
+      role: primary
+    ios:
+    - kind: class
+      id: MFMailComposeViewController
+      url: https://developer.apple.com/documentation/messageui/mfmailcomposeviewcontroller
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - subject/body
+    excludes:
+    - 撰写见 compose
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: mail_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.phone.audio_route
+  level: L3
+  parent: telecom.phone
+  name:
+    zh: 通话音频路由
+    en: Call Audio Route
+  definition: 切换听筒/扬声器/蓝牙等通话音频路由。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/phone/audio_route.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CallAudioState
+      url: https://developer.android.com/reference/android/telecom/CallAudioState
+      role: primary
+    ios:
+    - kind: class
+      id: AVAudioSession
+      url: https://developer.apple.com/documentation/avfaudio/avaudiosession
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - call audio route
+    excludes:
+    - 媒体路由见 device
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: phone_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.phone.caller_id
+  level: L3
+  parent: telecom.phone
+  name:
+    zh: 来电显示增强
+    en: Caller ID Enrichment
+  definition: 提供来电号码识别与企业来电信息。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/telecom/phone/caller_id.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CallScreeningService
+      url: https://developer.android.com/reference/android/telecom/CallScreeningService
+      role: primary
+    ios:
+    - kind: framework
+      id: Call Directory Extension
+      url: https://developer.apple.com/documentation/callkit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - caller ID
+    excludes:
+    - 筛选见 screening
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: phone_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.phone.conference
+  level: L3
+  parent: telecom.phone
+  name:
+    zh: 电话会议
+    en: Conference Calls
+  definition: 合并通话形成会议。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/telecom/phone/conference.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Connection.conference
+      url: https://developer.android.com/reference/android/telecom/Connection
+      role: primary
+    ios:
+    - kind: framework
+      id: CallKit
+      url: https://developer.apple.com/documentation/callkit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - conference
+    excludes:
+    - 状态见 state
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: phone_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.phone.dial
+  level: L3
+  parent: telecom.phone
+  name:
+    zh: 拉起拨号
+    en: Place Call Dial
+  definition: 发起或拉起系统拨号。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/telecom/phone/dial.yaml
+  bindings:
+    android:
+    - kind: class
+      id: TelecomManager
+      url: https://developer.android.com/reference/android/telecom/TelecomManager
+      role: primary
+    ios:
+    - kind: framework
+      id: CallKit / tel URL
+      url: https://developer.apple.com/documentation/callkit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: call
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-call
+      role: primary
+  comparison_scope:
+    includes:
+    - 'ACTION_DIAL / tel:'
+    excludes:
+    - 通话状态见 state
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - telecom.phone.dial
+  sibling_axis: phone_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.phone.emergency
+  level: L3
+  parent: telecom.phone
+  name:
+    zh: 紧急号码识别
+    en: Emergency Number Detect
+  definition: 识别紧急号码并走紧急呼叫路径。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/phone/emergency.yaml
+  bindings:
+    android:
+    - kind: class
+      id: TelephonyManager.isEmergencyNumber
+      url: https://developer.android.com/reference/android/telephony/TelephonyManager
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: call
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-call
+      role: primary
+  comparison_scope:
+    includes:
+    - isEmergencyNumber
+    excludes:
+    - 拨号见 dial
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: phone_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.phone.incall_ui
+  level: L3
+  parent: telecom.phone
+  name:
+    zh: 通话中界面
+    en: In-Call UI
+  definition: 提供或定制通话中界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/phone/incall_ui.yaml
+  bindings:
+    android:
+    - kind: class
+      id: InCallService
+      url: https://developer.android.com/reference/android/telecom/InCallService
+      role: primary
+    ios:
+    - kind: framework
+      id: CallKit UI
+      url: https://developer.apple.com/documentation/callkit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - InCallService
+    excludes:
+    - VoIP 见 voip
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: phone_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.phone.rtt_video
+  level: L3
+  parent: telecom.phone
+  name:
+    zh: RTT与视频通话
+    en: RTT and Video Call
+  definition: 实时文本与运营商视频通话能力入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/phone/rtt_video.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Connection RTT
+      url: https://developer.android.com/reference/android/telecom/Connection
+      role: primary
+    ios:
+    - kind: framework
+      id: CallKit
+      url: https://developer.apple.com/documentation/callkit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - RTT / video call
+    excludes:
+    - VoIP 见 voip
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: phone_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.phone.screening
+  level: L3
+  parent: telecom.phone
+  name:
+    zh: 来电筛选
+    en: Call Screening
+  definition: 实现来电筛选与拦截。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/telecom/phone/screening.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CallScreeningService
+      url: https://developer.android.com/reference/android/telecom/CallScreeningService
+      role: primary
+    ios:
+    - kind: framework
+      id: Call Directory
+      url: https://developer.apple.com/documentation/callkit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - CallScreeningService
+    excludes:
+    - 状态见 state
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: phone_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.phone.state
+  level: L3
+  parent: telecom.phone
+  name:
+    zh: 通话状态监听
+    en: Call State Listen
+  definition: 监听来电、摘机与空闲等状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/telecom/phone/state.yaml
+  bindings:
+    android:
+    - kind: class
+      id: TelephonyCallback
+      url: https://developer.android.com/reference/android/telephony/TelephonyCallback
+      role: primary
+    ios:
+    - kind: class
+      id: CXCallObserver
+      url: https://developer.apple.com/documentation/callkit/cxcallobserver
+      role: primary
+    harmonyos:
+    - kind: module
+      id: call
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-call
+      role: primary
+  comparison_scope:
+    includes:
+    - TelephonyCallback / CXCallObserver
+    excludes:
+    - 拨号见 dial
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: phone_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.phone.voip
+  level: L3
+  parent: telecom.phone
+  name:
+    zh: VoIP通话接入
+    en: VoIP Call Integration
+  definition: 将 VoIP 通话接入系统通话界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/telecom/phone/voip.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ConnectionService
+      url: https://developer.android.com/reference/android/telecom/ConnectionService
+      role: primary
+    ios:
+    - kind: framework
+      id: CallKit
+      url: https://developer.apple.com/documentation/callkit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - ConnectionService / CallKit
+    excludes:
+    - 蜂窝拨号见 dial
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: phone_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.sms.compose_ui
+  level: L3
+  parent: telecom.sms
+  name:
+    zh: 短信撰写界面
+    en: SMS Compose UI
+  definition: 拉起系统短信撰写界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/sms/compose_ui.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ACTION_SENDTO
+      url: https://developer.android.com/guide/components/intents-common#Messaging
+      role: primary
+    ios:
+    - kind: class
+      id: MFMessageComposeViewController
+      url: https://developer.apple.com/documentation/messageui/mfmessagecomposeviewcontroller
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - 'sms: / MFMessageCompose'
+    excludes:
+    - 直接发送见 send
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: sms_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.sms.delivery_report
+  level: L3
+  parent: telecom.sms
+  name:
+    zh: 短信送达报告
+    en: SMS Delivery Report
+  definition: 接收短信送达状态报告。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/telecom/sms/delivery_report.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SmsManager
+      url: https://developer.android.com/reference/android/telephony/SmsManager
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: sms
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-telephony-sms
+      role: primary
+  comparison_scope:
+    includes:
+    - delivery report
+    excludes:
+    - 发送见 send
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: sms_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.sms.filter
+  level: L3
+  parent: telecom.sms
+  name:
+    zh: 短信过滤
+    en: SMS Filtering
+  definition: 实现短信过滤扩展。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/sms/filter.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: IdentityLookup
+      url: https://developer.apple.com/documentation/identitylookup
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - SMS filter extension
+    excludes:
+    - 发送见 send
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: sms_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.sms.rcs
+  level: L3
+  parent: telecom.sms
+  name:
+    zh: 富通信入口
+    en: RCS Messaging Entry
+  definition: RCS 富通信能力入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/sms/rcs.yaml
+  bindings:
+    android:
+    - kind: class
+      id: RcsUceAdapter
+      url: https://developer.android.com/reference/android/telephony/ims/RcsUceAdapter
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - RCS
+    excludes:
+    - 短信见 send
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: sms_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.sms.receive
+  level: L3
+  parent: telecom.sms
+  name:
+    zh: 短信接收
+    en: SMS Receive
+  definition: 接收短信广播或回调。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/telecom/sms/receive.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SMS_RECEIVED_ACTION
+      url: https://developer.android.com/reference/android/provider/Telephony.Sms.Intents
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: sms
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-telephony-sms
+      role: primary
+  comparison_scope:
+    includes:
+    - SMS_RECEIVED
+    excludes:
+    - 过滤见 filter
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: sms_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.sms.satellite
+  level: L3
+  parent: telecom.sms
+  name:
+    zh: 卫星消息入口
+    en: Satellite Messaging Entry
+  definition: 卫星短信/消息能力入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/telecom/sms/satellite.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SatelliteManager
+      url: https://developer.android.com/reference/android/telephony/satellite/SatelliteManager
+      role: primary
+    ios:
+    - kind: guide
+      id: Emergency SOS via satellite
+      url: https://developer.apple.com/documentation/
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - satellite SMS
+    excludes:
+    - 普通短信见 send
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: sms_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.sms.send
+  level: L3
+  parent: telecom.sms
+  name:
+    zh: 短信发送
+    en: SMS Send
+  definition: 发送短信或彩信。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/telecom/sms/send.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SmsManager
+      url: https://developer.android.com/reference/android/telephony/SmsManager
+      role: primary
+    ios:
+    - kind: class
+      id: MFMessageComposeViewController
+      url: https://developer.apple.com/documentation/messageui/mfmessagecomposeviewcontroller
+      role: primary
+    harmonyos:
+    - kind: module
+      id: sms
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-telephony-sms
+      role: primary
+  comparison_scope:
+    includes:
+    - SmsManager
+    excludes:
+    - 过滤见 filter
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - telecom.sms.send
+  sibling_axis: sms_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: telecom.sms.voicemail
+  level: L3
+  parent: telecom.sms
+  name:
+    zh: 语音信箱
+    en: Visual Voicemail
+  definition: 访问视觉语音信箱。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/telecom/sms/voicemail.yaml
+  bindings:
+    android:
+    - kind: class
+      id: VoicemailContract
+      url: https://developer.android.com/reference/android/provider/VoicemailContract
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - VoicemailContract
+    excludes:
+    - 通话见 phone
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: sms_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability

@@ -1,0 +1,26 @@
+schema_version: 2
+feature_id: app.model
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 应用入口、上下文、界面组件与后台服务组件模型。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- app.model.app_entry
+- app.model.context
+- app.model.service_component
+- app.model.ui_entry

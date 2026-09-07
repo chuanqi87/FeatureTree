@@ -1,0 +1,27 @@
+schema_version: 2
+feature_id: interop.data_transfer
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 拖放、内容提供者、文件提供者、URI 授权与内容嵌入。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- interop.data_transfer.content_embed
+- interop.data_transfer.content_provider
+- interop.data_transfer.drag_drop
+- interop.data_transfer.file_provider
+- interop.data_transfer.uri_grant

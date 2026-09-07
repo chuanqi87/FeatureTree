@@ -6,7 +6,7 @@ features:
   name:
     zh: 分布式与多端
     en: Distributed and Continuity
-  definition: 接续、附近设备与分布式软总线。
+  definition: 跨设备任务接续、近场发现连接、软总线、配件与穿戴链路、共享体验与跨端数据同步。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -17,8 +17,11 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 接续、附近设备与分布式软总线。
-    excludes: []
+    - 接续、附近连接、软总线、配件、穿戴链路、共享体验、跨端同步
+    excludes:
+    - connectivity 近距无线协议
+    - network HTTP/Socket
+    - storage 本机持久化
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -28,13 +31,54 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - distributed
+- id: distributed.companion
+  level: L2
+  parent: distributed
+  name:
+    zh: 配件关联与虚拟外设
+    en: Companion and Virtual Peripherals
+  definition: 手机与配件信任配对及虚拟外设能力共享。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/companion/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 配对、虚拟外设
+    excludes:
+    - 穿戴消息见 wear_link
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: distributed_capability_family
 - id: distributed.continuity
   level: L2
   parent: distributed
   name:
     zh: 任务接续
     en: Task Continuity
-  definition: 跨设备接续同一用户任务。
+  definition: 跨已登录设备接续同一用户任务与应用状态。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -42,10 +86,12 @@ features:
   - tablet
   privacy_class: none
   knowledge_path: knowledge/distributed/continuity/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 跨设备接续同一用户任务。
-    excludes: []
+    - handoff、迁移、多端协同
+    excludes:
+    - 附近临时会话见 nearby
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -55,29 +101,33 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: distributed.continuity.handoff
-  level: L3
-  parent: distributed.continuity
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - distributed.continuity
+  sibling_axis: distributed_capability_family
+- id: distributed.data_sync
+  level: L2
+  parent: distributed
   name:
-    zh: 跨设备接续
-    en: Cross-Device Handoff
-  definition: 在另一台已登录设备上继续活动。
-  knowledge_role: leaf
+    zh: 跨端数据同步
+    en: Cross-Device Data Sync
+  definition: 分布式对象/库/文件及穿戴数据层同步。
+  knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: analog
-  aliases:
-  - Handoff
-  - App Continuity
-  knowledge_path: knowledge/distributed/continuity/handoff.yaml
+  knowledge_path: knowledge/distributed/data_sync/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 在另一台已登录设备上继续活动。
-    excludes: []
+    - 对象、库、文件、穿戴数据层
+    excludes:
+    - 账号云同步见 storage.cloud
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -87,13 +137,19 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: distributed_capability_family
 - id: distributed.nearby
   level: L2
   parent: distributed
   name:
-    zh: 附近设备
-    en: Nearby Devices
-  definition: 发现并连接附近设备。
+    zh: 附近设备发现与连接
+    en: Nearby Discovery and Connection
+  definition: 近场设备发现、会话建立与点对点数据通道。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -104,8 +160,9 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 发现并连接附近设备。
-    excludes: []
+    - 发现、连接、会话、快传
+    excludes:
+    - 账号接续见 continuity
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -115,29 +172,33 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: distributed.nearby.discovery
-  level: L3
-  parent: distributed.nearby
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - distributed.nearby
+  sibling_axis: distributed_capability_family
+- id: distributed.share_experience
+  level: L2
+  parent: distributed
   name:
-    zh: 附近发现
-    en: Nearby Discovery
-  definition: 发现附近对等设备。
-  knowledge_role: leaf
+    zh: 跨端共享体验
+    en: Cross-Device Shared Experience
+  definition: 跨设备剪贴板、拖拽、同屏协作与共享活动。
+  knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  aliases:
-  - Nearby
-  - MultipeerConnectivity
-  - 近场通信分布式
-  knowledge_path: knowledge/distributed/nearby/discovery.yaml
+  knowledge_path: knowledge/distributed/share_experience/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 发现附近对等设备。
-    excludes: []
+    - 剪贴板、拖拽、共享活动
+    excludes:
+    - 文件快传见 nearby
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -147,13 +208,19 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: distributed_capability_family
 - id: distributed.softbus
   level: L2
   parent: distributed
   name:
-    zh: 跨设备通信
-    en: Cross-device Communication
-  definition: 建立设备间通信会话，传输数据并调用远端能力。
+    zh: 分布式软总线
+    en: Distributed Soft Bus
+  definition: 跨设备设备管理、RPC/代理通道与链路增强。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -161,15 +228,12 @@ features:
   - tablet
   privacy_class: none
   knowledge_path: knowledge/distributed/softbus/_rollup.yaml
-  aliases:
-  - 分布式软总线
+  bindings: {}
   comparison_scope:
     includes:
-    - 设备间会话
-    - 跨设备数据传输与远端调用
+    - 设备管理、RPC、代理通道
     excludes:
-    - 应用界面与任务接续
-  notes: 保留历史 ID 以维持引用；节点名称和比较对象已中立化。
+    - 应用层接续见 continuity
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -179,40 +243,135 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: distributed.softbus.fabric
-  level: L3
-  parent: distributed.softbus
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - distributed.softbus
+  sibling_axis: distributed_capability_family
+- id: distributed.wear_link
+  level: L2
+  parent: distributed
   name:
-    zh: 跨设备调用与数据传输
-    en: Cross-device Calls and Data Transfer
-  definition: 在多个设备之间调用远端能力、传输消息或数据流，并处理连接中断。
+    zh: 穿戴设备链路
+    en: Wearable Device Link
+  definition: 手机与穿戴设备的消息、文件、状态与远程应用通道。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/wear_link/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 消息、文件、状态、远程应用
+    excludes:
+    - 通用 BLE 见 connectivity
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: distributed_capability_family
+- id: distributed.companion.pairing
+  level: L3
+  parent: distributed.companion
+  name:
+    zh: 配件信任配对
+    en: Companion Trust Pairing
+  definition: 建立手机与配件间的信任关联与授权。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/distributed/companion/pairing.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CompanionDeviceManager
+      url: https://developer.android.com/develop/connectivity/bluetooth/companion-device-pairing
+      role: primary
+    ios:
+    - kind: framework
+      id: AccessorySetupKit
+      url: https://developer.apple.com/documentation/accessorysetupkit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - CompanionDeviceManager
+    excludes:
+    - 穿戴消息见 wear_link
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: companion_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.companion.richeditor
+  level: L3
+  parent: distributed.companion
+  name:
+    zh: 控件级跨端互通
+    en: Control-Level Interop
+  definition: 编辑控件在跨端场景下的互通接入。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence
-  aliases:
-  - 软总线
-  - Distributed Soft Bus
-  - 软总线通信织物
+  knowledge_path: knowledge/distributed/companion/richeditor.yaml
   bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
     harmonyos:
-    - kind: syscap
-      id: SystemCapability.DistributedHardware.DistributedHardware
+    - kind: module
+      id: RichEditor
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-common-components-richtext
       role: primary
-      note: 示意 SysCap；以官方软总线文档为准
-  knowledge_path: knowledge/distributed/softbus/fabric.yaml
   comparison_scope:
     includes:
-    - 远端能力调用
-    - 消息与数据流传输
-    - 连接中断处理
+    - distributed rich editor
     excludes:
-    - 某一厂商总线实现的内部机制
-  notes: 保留历史 ID 以维持引用；节点名称和比较对象已中立化。
+    - 共享拖拽见 share_experience
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -222,3 +381,2406 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: companion_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.companion.state
+  level: L3
+  parent: distributed.companion
+  name:
+    zh: 配件关联状态
+    en: Companion Association State
+  definition: 查询并监听配件关联与在线状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/companion/state.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CompanionDeviceManager
+      url: https://developer.android.com/reference/android/companion/CompanionDeviceManager
+      role: primary
+    ios:
+    - kind: class
+      id: WCSession
+      url: https://developer.apple.com/documentation/watchconnectivity/wcsession
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - association state
+    excludes:
+    - 配对见 pairing
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: companion_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.companion.virtual_camera
+  level: L3
+  parent: distributed.companion
+  name:
+    zh: 虚拟相机共享
+    en: Virtual Camera Share
+  definition: 将一端相机能力作为虚拟设备供另一端使用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/distributed/companion/virtual_camera.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: distributed camera
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/camera-distributed
+      role: primary
+  comparison_scope:
+    includes:
+    - distributed camera
+    excludes:
+    - 媒体采集见 media.capture
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: companion_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.companion.virtual_keyboard_mouse
+  level: L3
+  parent: distributed.companion
+  name:
+    zh: 虚拟键鼠共享
+    en: Virtual Keyboard Mouse
+  definition: 将键鼠输入虚拟化为跨设备输入源。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/companion/virtual_keyboard_mouse.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: distributed input
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hop-multi-device-collaboration
+      role: primary
+  comparison_scope:
+    includes:
+    - virtual keyboard/mouse
+    excludes:
+    - 配对见 pairing
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: companion_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.companion.virtual_wear
+  level: L3
+  parent: distributed.companion
+  name:
+    zh: 虚拟穿戴外设
+    en: Virtual Wear Peripheral
+  definition: 将穿戴侧传感器或交互能力虚拟化给主机应用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/companion/virtual_wear.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Wearable Data Layer
+      url: https://developer.android.com/training/wearables/data
+      role: primary
+    ios:
+    - kind: framework
+      id: Watch Connectivity
+      url: https://developer.apple.com/documentation/watchconnectivity
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - wear virtual peripheral
+    excludes:
+    - wear 消息见 wear_link
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: companion_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.continuity.device_picker
+  level: L3
+  parent: distributed.continuity
+  name:
+    zh: 接续设备选择
+    en: Continuity Device Picker
+  definition: 按能力过滤并展示可选接续目标设备。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/distributed/continuity/device_picker.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: distributedDeviceManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributeddevicemanager
+      role: primary
+  comparison_scope:
+    includes:
+    - device picker、capability filter
+    excludes:
+    - 附近发现见 nearby.discovery
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: continuity_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.continuity.handoff
+  level: L3
+  parent: distributed.continuity
+  name:
+    zh: 跨设备活动接续
+    en: Activity Handoff
+  definition: 将当前活动状态传到另一台同账号设备并继续。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/distributed/continuity/handoff.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: App Continuity
+      url: https://developer.android.com/guide/topics/large-screens/app-continuity
+      role: primary
+    ios:
+    - kind: class
+      id: NSUserActivity
+      url: https://developer.apple.com/documentation/foundation/nsuseractivity
+      role: primary
+    harmonyos:
+    - kind: module
+      id: UIAbility migration
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hop-cross-device-migration
+      role: primary
+  comparison_scope:
+    includes:
+    - NSUserActivity、App Continuity
+    excludes:
+    - 整包迁移见 migration
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - distributed.continuity.handoff
+  sibling_axis: continuity_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.continuity.migration
+  level: L3
+  parent: distributed.continuity
+  name:
+    zh: 应用跨端迁移
+    en: App Cross-Device Migration
+  definition: 将应用任务整体迁移到另一设备并恢复运行上下文。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/continuity/migration.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: Handoff
+      url: https://developer.apple.com/handoff/
+      role: primary
+    harmonyos:
+    - kind: module
+      id: startAbility migrate
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hop-cross-device-migration
+      role: primary
+  comparison_scope:
+    includes:
+    - migrateTo、continue
+    excludes:
+    - 轻量接续见 handoff
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: continuity_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.continuity.multi_device
+  level: L3
+  parent: distributed.continuity
+  name:
+    zh: 多端协同会话
+    en: Multi-Device Collaboration
+  definition: 同一业务在多台设备上协同运行并同步协作状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/continuity/multi_device.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: Group Activities
+      url: https://developer.apple.com/documentation/groupactivities
+      role: primary
+    harmonyos:
+    - kind: module
+      id: distributed collaboration
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hop-multi-device-collaboration
+      role: primary
+  comparison_scope:
+    includes:
+    - multi-device collaboration
+    excludes:
+    - 单设备接续见 handoff
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: continuity_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.continuity.spec
+  level: L3
+  parent: distributed.continuity
+  name:
+    zh: 接续兼容规格
+    en: Continuity Compatibility Spec
+  definition: 声明与校验跨端接续所需能力与兼容规格。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/continuity/spec.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: continueType
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hop-cross-device-migration
+      role: primary
+  comparison_scope:
+    includes:
+    - continueType、兼容声明
+    excludes:
+    - 实际迁移见 migration
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: continuity_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.continuity.state
+  level: L3
+  parent: distributed.continuity
+  name:
+    zh: 接续状态回调
+    en: Continuity State Callbacks
+  definition: 监听接续成功、失败与进行中状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/continuity/state.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: NSUserActivityDelegate
+      url: https://developer.apple.com/documentation/foundation/nsuseractivitydelegate
+      role: primary
+    harmonyos:
+    - kind: module
+      id: UIAbility onContinue
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hop-cross-device-migration
+      role: primary
+  comparison_scope:
+    includes:
+    - onContinue、completion
+    excludes:
+    - 发起接续见 handoff
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: continuity_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.data_sync.cloud_bridge
+  level: L3
+  parent: distributed.data_sync
+  name:
+    zh: 端云桥接同步
+    en: Device-Cloud Bridge Sync
+  definition: 将跨端同步与账号云存储桥接。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/data_sync/cloud_bridge.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: framework
+      id: CloudKit
+      url: https://developer.apple.com/documentation/cloudkit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: cloud sync
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/data-cloud-sync
+      role: primary
+  comparison_scope:
+    includes:
+    - device-cloud bridge
+    excludes:
+    - 纯云记录见 storage.cloud
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: data_sync_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.data_sync.conflict
+  level: L3
+  parent: distributed.data_sync
+  name:
+    zh: 跨端同步冲突处理
+    en: Sync Conflict Handling
+  definition: 处理分布式同步冲突与版本合并策略入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/data_sync/conflict.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: NSFileVersion
+      url: https://developer.apple.com/documentation/foundation/nsfileversion
+      role: primary
+    harmonyos:
+    - kind: module
+      id: distributedKVStore
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributedkvstore
+      role: primary
+  comparison_scope:
+    includes:
+    - conflict resolver
+    excludes:
+    - 同步通道见 distributed_db
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: data_sync_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.data_sync.data_object
+  level: L3
+  parent: distributed.data_sync
+  name:
+    zh: 分布式数据对象
+    en: Distributed Data Object
+  definition: 跨设备同步内存对象图并监听变更。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/data_sync/data_object.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: distributedDataObject
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-data-distributeddataobject
+      role: primary
+  comparison_scope:
+    includes:
+    - distributedDataObject
+    excludes:
+    - 关系库同步见 distributed_db
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: data_sync_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.data_sync.distributed_db
+  level: L3
+  parent: distributed.data_sync
+  name:
+    zh: 分布式数据库同步
+    en: Distributed Database Sync
+  definition: 跨设备同步关系或键值数据库。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/data_sync/distributed_db.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: NSUbiquitousKeyValueStore
+      url: https://developer.apple.com/documentation/foundation/nsubiquitouskeyvaluestore
+      role: primary
+    harmonyos:
+    - kind: module
+      id: distributedKVStore
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributedkvstore
+      role: primary
+  comparison_scope:
+    includes:
+    - distributed KV/RDB
+    excludes:
+    - 对象同步见 data_object
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: data_sync_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.data_sync.distributed_file
+  level: L3
+  parent: distributed.data_sync
+  name:
+    zh: 分布式文件同步
+    en: Distributed File Sync
+  definition: 跨设备访问或同步分布式文件系统路径。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/data_sync/distributed_file.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: NSFileCoordinator
+      url: https://developer.apple.com/documentation/foundation/nsfilecoordinator
+      role: primary
+    harmonyos:
+    - kind: module
+      id: distributedFileManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-file-distributedfilemanager
+      role: primary
+  comparison_scope:
+    includes:
+    - distributed file
+    excludes:
+    - 本机文件见 storage
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: data_sync_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.data_sync.wear_data_layer
+  level: L3
+  parent: distributed.data_sync
+  name:
+    zh: 穿戴数据层同步
+    en: Wear Data Layer Sync
+  definition: 通过穿戴数据层同步数据项与资源。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/data_sync/wear_data_layer.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: DataClient
+      url: https://developer.android.com/training/wearables/data/sync
+      role: primary
+    ios:
+    - kind: class
+      id: WCSession.transferUserInfo
+      url: https://developer.apple.com/documentation/watchconnectivity/wcsession
+      role: primary
+    harmonyos:
+    - kind: module
+      id: wearEngine
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wearengine
+      role: primary
+  comparison_scope:
+    includes:
+    - DataClient putDataItem
+    excludes:
+    - 消息通道见 wear_link.message
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: data_sync_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.nearby.connection
+  level: L3
+  parent: distributed.nearby
+  name:
+    zh: 附近点对点连接
+    en: Nearby Peer Connection
+  definition: 建立近场点对点连接并收发载荷。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/distributed/nearby/connection.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ConnectionsClient
+      url: https://developers.google.com/nearby/connections/android/get-started
+      role: primary
+    ios:
+    - kind: class
+      id: MCSession
+      url: https://developer.apple.com/documentation/multipeerconnectivity/mcsession
+      role: primary
+    harmonyos:
+    - kind: module
+      id: SoftBus session
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/softbus-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - requestConnection、payload
+    excludes:
+    - 发现见 discovery
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nearby_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.nearby.discovery
+  level: L3
+  parent: distributed.nearby
+  name:
+    zh: 附近设备发现
+    en: Nearby Device Discovery
+  definition: 发现周边可连接设备并接收发现结果。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/distributed/nearby/discovery.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Nearby Connections
+      url: https://developers.google.com/nearby/connections/overview
+      role: primary
+    ios:
+    - kind: framework
+      id: Multipeer Connectivity
+      url: https://developer.apple.com/documentation/multipeerconnectivity
+      role: primary
+    harmonyos:
+    - kind: module
+      id: distributedDeviceManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributeddevicemanager
+      role: primary
+  comparison_scope:
+    includes:
+    - startDiscovery、advertising
+    excludes:
+    - 连接见 connection
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - distributed.nearby.discovery
+  sibling_axis: nearby_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.nearby.file_transfer
+  level: L3
+  parent: distributed.nearby
+  name:
+    zh: 近场文件快传
+    en: Nearby File Transfer
+  definition: 在附近设备间高速传输文件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/distributed/nearby/file_transfer.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Nearby Payload
+      url: https://developers.google.com/nearby/connections/android/exchange-data
+      role: primary
+    ios:
+    - kind: framework
+      id: Multipeer Connectivity
+      url: https://developer.apple.com/documentation/multipeerconnectivity
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Share Kit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/share-kit-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - file payload
+    excludes:
+    - 穿戴文件见 wear_link.file_transfer
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nearby_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.nearby.gesture_share
+  level: L3
+  parent: distributed.nearby
+  name:
+    zh: 隔空手势分享
+    en: Air Gesture Share
+  definition: 基于空间手势将内容投向附近设备。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/nearby/gesture_share.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: AirDrop
+      url: https://developer.apple.com/airdrop/
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Share Kit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/share-kit-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - air gesture share
+    excludes:
+    - 碰一碰见 knock
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nearby_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.nearby.knock
+  level: L3
+  parent: distributed.nearby
+  name:
+    zh: 碰一碰触发
+    en: Tap Knock Trigger
+  definition: 通过轻碰触发近场配对或分享。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/nearby/knock.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Nearby Share
+      url: https://developers.google.com/nearby/sharing
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: Share Kit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/share-kit-guide
+      role: primary
+  comparison_scope:
+    includes:
+    - knock share
+    excludes:
+    - 通用分享见 interop
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nearby_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.nearby.session
+  level: L3
+  parent: distributed.nearby
+  name:
+    zh: 附近会话管理
+    en: Nearby Session Management
+  definition: 管理近场会话生命周期与成员。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/nearby/session.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Nearby Connections
+      url: https://developers.google.com/nearby/connections/overview
+      role: primary
+    ios:
+    - kind: class
+      id: MCSession
+      url: https://developer.apple.com/documentation/multipeerconnectivity/mcsession
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - session create/join/leave
+    excludes:
+    - 连接通道见 connection
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nearby_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.nearby.uwb_session
+  level: L3
+  parent: distributed.nearby
+  name:
+    zh: 近场UWB会话
+    en: Nearby UWB Session
+  definition: 基于超宽带建立空间感知近场会话。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/distributed/nearby/uwb_session.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: UwbManager
+      url: https://developer.android.com/develop/connectivity/uwb
+      role: primary
+    ios:
+    - kind: framework
+      id: Nearby Interaction
+      url: https://developer.apple.com/documentation/nearbyinteraction
+      role: primary
+    harmonyos:
+    - kind: module
+      id: nearbyInteraction
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-nearbyinteraction
+      role: primary
+  comparison_scope:
+    includes:
+    - UWB session
+    excludes:
+    - UWB 测距硬件见 connectivity
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nearby_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.nearby.wakeup
+  level: L3
+  parent: distributed.nearby
+  name:
+    zh: 近场设备唤醒
+    en: Nearby Device Wakeup
+  definition: 通过近场机制唤醒目标设备侧应用或服务。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/nearby/wakeup.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: remote wakeup
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hop-cross-device-migration
+      role: primary
+  comparison_scope:
+    includes:
+    - wakeup
+    excludes:
+    - 发现见 discovery
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: nearby_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.share_experience.clipboard
+  level: L3
+  parent: distributed.share_experience
+  name:
+    zh: 跨设备剪贴板
+    en: Cross-Device Clipboard
+  definition: 在受信任设备间同步剪贴板内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/share_experience/clipboard.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: UIPasteboard
+      url: https://developer.apple.com/documentation/uikit/uipasteboard
+      role: primary
+    harmonyos:
+    - kind: module
+      id: pasteboard
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-pasteboard
+      role: primary
+  comparison_scope:
+    includes:
+    - universal clipboard
+    excludes:
+    - 本机剪贴板见 input
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: share_experience_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.share_experience.cross_drag
+  level: L3
+  parent: distributed.share_experience
+  name:
+    zh: 跨设备拖拽
+    en: Cross-Device Drag and Drop
+  definition: 在多设备间拖拽传递内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/share_experience/cross_drag.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: UIDragInteraction
+      url: https://developer.apple.com/documentation/uikit/uidraginteraction
+      role: primary
+    harmonyos:
+    - kind: module
+      id: drag drop
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-common-components-drag-drop
+      role: primary
+  comparison_scope:
+    includes:
+    - cross-device drag
+    excludes:
+    - 本机拖拽见 input
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: share_experience_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.share_experience.group_activity
+  level: L3
+  parent: distributed.share_experience
+  name:
+    zh: 共享群组活动
+    en: Shared Group Activity
+  definition: 创建跨用户或跨设备共享活动会话。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/share_experience/group_activity.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: GroupActivity
+      url: https://developer.apple.com/documentation/groupactivities/groupactivity
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - GroupSession
+    excludes:
+    - 接续见 continuity
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: share_experience_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.share_experience.screen_share
+  level: L3
+  parent: distributed.share_experience
+  name:
+    zh: 跨端屏幕共享
+    en: Cross-Device Screen Share
+  definition: 将屏幕内容共享到另一受信任设备。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/distributed/share_experience/screen_share.yaml
+  bindings:
+    android:
+    - kind: class
+      id: MediaProjection
+      url: https://developer.android.com/reference/android/media/projection/MediaProjection
+      role: primary
+    ios:
+    - kind: framework
+      id: RPBroadcastSampleHandler
+      url: https://developer.apple.com/documentation/replaykit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: screen share
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hop-multi-device-collaboration
+      role: primary
+  comparison_scope:
+    includes:
+    - screen share
+    excludes:
+    - 录屏见 graphics.capture
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: share_experience_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.share_experience.state
+  level: L3
+  parent: distributed.share_experience
+  name:
+    zh: 共享体验状态
+    en: Share Experience State
+  definition: 监听共享体验会话状态与成员变更。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/share_experience/state.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: GroupSession
+      url: https://developer.apple.com/documentation/groupactivities/groupsession
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - session state
+    excludes:
+    - 建立会话见 group_activity
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: share_experience_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.share_experience.tabletop
+  level: L3
+  parent: distributed.share_experience
+  name:
+    zh: 桌面同屏协作
+    en: Tabletop Collaboration
+  definition: 多设备在同一桌面场景下同屏协作。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/share_experience/tabletop.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: SharePlay
+      url: https://developer.apple.com/shareplay/
+      role: primary
+    harmonyos:
+    - kind: module
+      id: multi-device collaboration
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hop-multi-device-collaboration
+      role: primary
+  comparison_scope:
+    includes:
+    - tabletop share
+    excludes:
+    - 共享活动见 group_activity
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: share_experience_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.softbus.capability_call
+  level: L3
+  parent: distributed.softbus
+  name:
+    zh: 跨端能力调用
+    en: Cross-Device Capability Call
+  definition: 按能力描述调用远端设备已发布能力。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/softbus/capability_call.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: distributed capability
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hop-multi-device-collaboration
+      role: primary
+  comparison_scope:
+    includes:
+    - capability call
+    excludes:
+    - RPC 底层见 rpc
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: softbus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.softbus.device_manager
+  level: L3
+  parent: distributed.softbus
+  name:
+    zh: 分布式设备管理
+    en: Distributed Device Manager
+  definition: 查询可信设备列表与在线状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/softbus/device_manager.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: distributedDeviceManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-distributeddevicemanager
+      role: primary
+  comparison_scope:
+    includes:
+    - getAvailableDeviceList
+    excludes:
+    - 组网见 fabric
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: softbus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.softbus.fabric
+  level: L3
+  parent: distributed.softbus
+  name:
+    zh: 软总线组网
+    en: Soft Bus Fabric
+  definition: 加入并维护分布式软总线组网拓扑。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/softbus/fabric.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: SoftBus
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/softbus-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - fabric join
+    excludes:
+    - RPC 见 rpc
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - distributed.softbus.fabric
+  sibling_axis: softbus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.softbus.link_enhance
+  level: L3
+  parent: distributed.softbus
+  name:
+    zh: 链路增强
+    en: Link Enhancement
+  definition: 对跨设备链路做带宽与时延增强调度。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/softbus/link_enhance.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: SoftBus
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/softbus-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - link enhance
+    excludes:
+    - 组网见 fabric
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: softbus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.softbus.mechanic
+  level: L3
+  parent: distributed.softbus
+  name:
+    zh: 特殊外设总线扩展
+    en: Specialty Bus Extension
+  definition: 面向机械臂等特殊外设的软总线扩展接入。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/softbus/mechanic.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: SoftBus
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/softbus-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - mechanic bus
+    excludes:
+    - USB 见 connectivity.usb
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: softbus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.softbus.proxy_channel
+  level: L3
+  parent: distributed.softbus
+  name:
+    zh: 代理数据通道
+    en: Proxy Data Channel
+  definition: 建立跨设备代理字节流或消息通道。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/softbus/proxy_channel.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: SoftBus session
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/softbus-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - proxy channel
+    excludes:
+    - RPC 见 rpc
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: softbus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.softbus.rpc
+  level: L3
+  parent: distributed.softbus
+  name:
+    zh: 跨设备RPC
+    en: Cross-Device RPC
+  definition: 通过软总线发起跨设备远程过程调用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/softbus/rpc.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: RPC
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ipc-rpc-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - RPC stub/proxy
+    excludes:
+    - 代理通道见 proxy_channel
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: softbus_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.wear_link.device_select
+  level: L3
+  parent: distributed.wear_link
+  name:
+    zh: 穿戴设备选择
+    en: Wear Device Selection
+  definition: 选择目标穿戴节点作为通信对端。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/wear_link/device_select.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: CapabilityClient
+      url: https://developer.android.com/training/wearables/data/capabilities
+      role: primary
+    ios:
+    - kind: class
+      id: WCSession
+      url: https://developer.apple.com/documentation/watchconnectivity/wcsession
+      role: primary
+    harmonyos:
+    - kind: module
+      id: wearEngine
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wearengine
+      role: primary
+  comparison_scope:
+    includes:
+    - connected nodes
+    excludes:
+    - 状态见 device_status
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wear_link_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.wear_link.device_status
+  level: L3
+  parent: distributed.wear_link
+  name:
+    zh: 穿戴设备状态
+    en: Wear Device Status
+  definition: 查询穿戴在线、佩戴与电量等状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/wear_link/device_status.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: NodeClient
+      url: https://developer.android.com/training/wearables/data/nodes
+      role: primary
+    ios:
+    - kind: class
+      id: WCSession.isReachable
+      url: https://developer.apple.com/documentation/watchconnectivity/wcsession/1615683-isreachable
+      role: primary
+    harmonyos:
+    - kind: module
+      id: wearEngine
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wearengine
+      role: primary
+  comparison_scope:
+    includes:
+    - NodeClient、isReachable
+    excludes:
+    - 消息见 message
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wear_link_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.wear_link.file_transfer
+  level: L3
+  parent: distributed.wear_link
+  name:
+    zh: 穿戴文件传输
+    en: Wear File Transfer
+  definition: 在手机与穿戴间传输文件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/wear_link/file_transfer.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: DataClient
+      url: https://developer.android.com/training/wearables/data/sync
+      role: primary
+    ios:
+    - kind: class
+      id: WCSession.transferFile
+      url: https://developer.apple.com/documentation/watchconnectivity/wcsession
+      role: primary
+    harmonyos:
+    - kind: module
+      id: wearEngine
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wearengine
+      role: primary
+  comparison_scope:
+    includes:
+    - DataClient assets、transferFile
+    excludes:
+    - 消息见 message
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wear_link_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.wear_link.lite_profile
+  level: L3
+  parent: distributed.wear_link
+  name:
+    zh: 轻量穿戴配置
+    en: Lite Wear Profile
+  definition: 面向轻量穿戴设备的精简链路配置与能力协商。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/wear_link/lite_profile.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: wearEngine
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wearengine
+      role: primary
+  comparison_scope:
+    includes:
+    - lite wear profile
+    excludes:
+    - 完整消息见 message
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wear_link_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.wear_link.message
+  level: L3
+  parent: distributed.wear_link
+  name:
+    zh: 穿戴消息通道
+    en: Wear Message Channel
+  definition: 手机与穿戴间收发消息与数据项。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/wear_link/message.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: MessageClient
+      url: https://developer.android.com/training/wearables/data/messages
+      role: primary
+    ios:
+    - kind: class
+      id: WCSession.sendMessage
+      url: https://developer.apple.com/documentation/watchconnectivity/wcsession
+      role: primary
+    harmonyos:
+    - kind: module
+      id: wearEngine
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wearengine
+      role: primary
+  comparison_scope:
+    includes:
+    - MessageClient、sendMessage
+    excludes:
+    - 文件见 file_transfer
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wear_link_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.wear_link.p2p_message
+  level: L3
+  parent: distributed.wear_link
+  name:
+    zh: 穿戴直连消息
+    en: Wear P2P Message
+  definition: 在手机与穿戴间建立直连消息通道。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/wear_link/p2p_message.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ChannelClient
+      url: https://developer.android.com/training/wearables/data/messages
+      role: primary
+    ios:
+    - kind: class
+      id: WCSession
+      url: https://developer.apple.com/documentation/watchconnectivity/wcsession
+      role: primary
+    harmonyos:
+    - kind: module
+      id: wearEngine
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wearengine
+      role: primary
+  comparison_scope:
+    includes:
+    - ChannelClient
+    excludes:
+    - 通用消息见 message
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wear_link_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.wear_link.remote_app
+  level: L3
+  parent: distributed.wear_link
+  name:
+    zh: 穿戴远程应用控制
+    en: Wear Remote App Control
+  definition: 在穿戴上启动或控制配对应用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/wear_link/remote_app.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: RemoteActivityHelper
+      url: https://developer.android.com/training/wearables/apps/opening-on-phone
+      role: primary
+    ios:
+    - kind: framework
+      id: WatchKit
+      url: https://developer.apple.com/documentation/watchkit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: wearEngine
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wearengine
+      role: primary
+  comparison_scope:
+    includes:
+    - remote launch
+    excludes:
+    - 消息见 message
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wear_link_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.wear_link.sensor_data
+  level: L3
+  parent: distributed.wear_link
+  name:
+    zh: 穿戴传感器数据订阅
+    en: Wear Sensor Data Subscribe
+  definition: 订阅穿戴侧运动或健康传感器数据流。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/distributed/wear_link/sensor_data.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Wearable Sensors
+      url: https://developer.android.com/training/wearables/apps/sensors
+      role: primary
+    ios:
+    - kind: framework
+      id: HealthKit
+      url: https://developer.apple.com/documentation/healthkit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: wearEngine
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wearengine
+      role: primary
+  comparison_scope:
+    includes:
+    - sensor subscribe
+    excludes:
+    - 健康库见 health_home
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wear_link_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: distributed.wear_link.template_notification
+  level: L3
+  parent: distributed.wear_link
+  name:
+    zh: 穿戴模板通知
+    en: Wear Template Notification
+  definition: 向穿戴下发模板化通知或卡片。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/distributed/wear_link/template_notification.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: NotificationCompat.WearableExtender
+      url: https://developer.android.com/develop/ui/views/notifications/wear
+      role: primary
+    ios:
+    - kind: framework
+      id: UserNotifications
+      url: https://developer.apple.com/documentation/usernotifications
+      role: primary
+    harmonyos:
+    - kind: module
+      id: wearEngine
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-wearengine
+      role: primary
+  comparison_scope:
+    includes:
+    - wear notification bridge
+    excludes:
+    - 本机通知见 notifications
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: wear_link_operation
+  leaf_at_this_level: true
+  split_justification: independent_capability

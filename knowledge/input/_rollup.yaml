@@ -1,13 +1,12 @@
+schema_version: 2
 feature_id: input
 role: rollup
 status: stub
 baseline:
-  android: API 35
-  ios: iOS 18
-  harmonyos: API 12+
-  gms: Play services BOM 24.x
-  hms: HMS / NEXT Kits
-definition: 触控、键盘、IME、剪贴板与拖放。
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 触控、按键、输入法、剪贴板、手写笔、手柄、文本编辑与拖放等输入能力。
 presence:
   android:
     status: unknown
@@ -18,22 +17,14 @@ presence:
   harmonyos:
     status: unknown
     verification: unreviewed
+comparisons: []
+evidence: []
 child_index:
-- input.touch
-- input.ime
 - input.clipboard
 - input.dragdrop
-architecture_diff: 分支综述：仅描述本域范围与跨子节点架构差异，禁止展开子叶子细节。
-legacy_presence:
-  android:
-    status: full
-  ios:
-    status: full
-  harmonyos:
-    status: full
-schema_version: 2
-comparisons: []
-migration_notes:
-- v1 有无与 analog/unique 断言保存在 legacy_presence，不作为已确认结论。
-- 原正文、编辑状态及 baseline 保留；需按当前比较范围与固定版本逐项复核。
-evidence: []
+- input.gamepad
+- input.ime
+- input.key
+- input.stylus
+- input.text_editing
+- input.touch

@@ -1,9 +1,0 @@
-{
-  "task_id": "9da7741e7870459d97280ffd1b15de9c671965c35ab63d014c203859de8d61a1",
-  "feature_id": "ui.declarative.vs_imperative",
-  "response_sha256": "ca325ca661bcc5fcda381f46843c759a7171e58c53945036bee5aa11ba06161c",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

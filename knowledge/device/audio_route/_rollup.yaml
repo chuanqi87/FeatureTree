@@ -1,13 +1,12 @@
+schema_version: 2
 feature_id: device.audio_route
 role: rollup
 status: stub
 baseline:
-  android: API 35
-  ios: iOS 18
-  harmonyos: API 12+
-  gms: Play services BOM 24.x
-  hms: HMS / NEXT Kits
-definition: 听筒、扬声器、蓝牙音频路由。
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 音频输出设备选择、音量与路由变更。
 presence:
   android:
     status: unknown
@@ -18,19 +17,20 @@ presence:
   harmonyos:
     status: unknown
     verification: unreviewed
-child_index:
-- device.audio_route.output
-architecture_diff: 分支综述：仅描述本域范围与跨子节点架构差异，禁止展开子叶子细节。
-legacy_presence:
-  android:
-    status: full
-  ios:
-    status: full
-  harmonyos:
-    status: full
-schema_version: 2
 comparisons: []
-migration_notes:
-- v1 有无与 analog/unique 断言保存在 legacy_presence，不作为已确认结论。
-- 原正文、编辑状态及 baseline 保留；需按当前比较范围与固定版本逐项复核。
 evidence: []
+child_index:
+- device.audio_route.bluetooth_sco
+- device.audio_route.change_listen
+- device.audio_route.communication
+- device.audio_route.devices
+- device.audio_route.focus
+- device.audio_route.mode
+- device.audio_route.mute
+- device.audio_route.noisy
+- device.audio_route.output
+- device.audio_route.preferred_device
+- device.audio_route.ringer
+- device.audio_route.spatial
+- device.audio_route.volume
+- device.audio_route.wired_headset

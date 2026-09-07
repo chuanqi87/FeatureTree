@@ -1,0 +1,29 @@
+schema_version: 2
+feature_id: observability.tracing
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 跨组件调用链与系统 trace 采集。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- observability.tracing.async_spans
+- observability.tracing.deep_recording
+- observability.tracing.distributed
+- observability.tracing.export
+- observability.tracing.flow_events
+- observability.tracing.sections
+- observability.tracing.system_trace

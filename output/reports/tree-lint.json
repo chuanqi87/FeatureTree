@@ -1,0 +1,104 @@
+{
+  "domain": null,
+  "feature_count": 1517,
+  "error_count": 0,
+  "warning_count": 16,
+  "issues": [
+    {
+      "severity": "warning",
+      "id": "connectivity.ir",
+      "code": "single_child_branch",
+      "message": "only one child: connectivity.ir.transmit"
+    },
+    {
+      "severity": "warning",
+      "id": "media",
+      "code": "wide_branch",
+      "message": "12 siblings under one parent"
+    },
+    {
+      "severity": "warning",
+      "id": "device.power",
+      "code": "wide_branch",
+      "message": "16 siblings under one parent"
+    },
+    {
+      "severity": "warning",
+      "id": "sensors.access",
+      "code": "wide_branch",
+      "message": "13 siblings under one parent"
+    },
+    {
+      "severity": "warning",
+      "id": "health_home.health_data",
+      "code": "wide_branch",
+      "message": "15 siblings under one parent"
+    },
+    {
+      "severity": "warning",
+      "id": "print_scan.print",
+      "code": "wide_branch",
+      "message": "12 siblings under one parent"
+    },
+    {
+      "severity": "warning",
+      "id": "location.maps",
+      "code": "wide_branch",
+      "message": "15 siblings under one parent"
+    },
+    {
+      "severity": "warning",
+      "id": "web.webview",
+      "code": "wide_branch",
+      "message": "13 siblings under one parent"
+    },
+    {
+      "severity": "warning",
+      "id": "device.audio_route",
+      "code": "wide_branch",
+      "message": "14 siblings under one parent"
+    },
+    {
+      "severity": "warning",
+      "id": "sensors.motion",
+      "code": "wide_branch",
+      "message": "13 siblings under one parent"
+    },
+    {
+      "severity": "warning",
+      "id": "device.display",
+      "code": "wide_branch",
+      "message": "18 siblings under one parent"
+    },
+    {
+      "severity": "warning",
+      "id": "app.desktop.dynamic_icon",
+      "code": "duplicate_name",
+      "message": "duplicate zh name '动态图标': ['app.desktop.dynamic_icon', 'commerce.growth.dynamic_icon']"
+    },
+    {
+      "severity": "warning",
+      "id": "app.desktop.shortcuts.pin",
+      "code": "duplicate_name",
+      "message": "duplicate zh name '固定快捷方式': ['app.desktop.shortcuts.pin', 'commerce.growth.pin_shortcut']"
+    },
+    {
+      "severity": "warning",
+      "id": "input.dragdrop",
+      "code": "duplicate_name",
+      "message": "duplicate zh name '拖放': ['input.dragdrop', 'interop.data_transfer.drag_drop']"
+    },
+    {
+      "severity": "warning",
+      "id": "network.http.cookies",
+      "code": "duplicate_name",
+      "message": "duplicate zh name 'Cookie管理': ['network.http.cookies', 'web.webview.cookies']"
+    },
+    {
+      "severity": "warning",
+      "id": "notifications.actions.buttons",
+      "code": "duplicate_name",
+      "message": "duplicate zh name '动作按钮': ['notifications.actions.buttons', 'ui.controls.button_selection.action']"
+    }
+  ]
+}

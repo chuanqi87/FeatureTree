@@ -6,7 +6,7 @@ features:
   name:
     zh: 安全与隐私
     en: Security and Privacy
-  definition: 权限模型、密钥、生物识别、安全存储与数据保护。
+  definition: 权限模型、密码学、证书、生物识别、安全存储、证明、设备安全与隐私数据保护。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -17,8 +17,11 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 权限模型、密钥、生物识别、安全存储与数据保护。
-    excludes: []
+    - 权限、密码学、证书、生物识别、安全存储、证明、设备安全、隐私、数据保护
+    excludes:
+    - 静态文件加密容器见 storage.encryption
+    - 账号登录编排见 identity
+    - VPN 见 network.vpn
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -28,25 +31,32 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: security.permissions
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - security
+- id: security.attestation
   level: L2
   parent: security
   name:
-    zh: 权限模型
-    en: Permission Model
-  definition: 安装时/运行时权限与敏感能力授权（横切主文）。
+    zh: 完整性与信任证明
+    en: Integrity and Attestation
+  definition: 应用/设备/密钥完整性证明与信任令牌。
   knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  knowledge_path: knowledge/security/permissions/_rollup.yaml
+  knowledge_path: knowledge/security/attestation/_rollup.yaml
   bindings: {}
   comparison_scope:
     includes:
-    - 安装时/运行时权限与敏感能力授权（横切主文）。
-    excludes: []
+    - 应用完整性、密钥证明、设备令牌
+    excludes:
+    - 本地生物解锁见 biometrics
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -56,143 +66,19 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: security.permissions.runtime
-  level: L3
-  parent: security.permissions
-  name:
-    zh: 运行时权限请求
-    en: Runtime Permission Request
-  definition: 运行时向用户请求危险权限。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: runtime_permission
-  leaf_at_this_level: true
-  split_justification: analog
-  bindings:
-    android:
-    - kind: class
-      id: android.content.pm.PackageManager
-      url: https://developer.android.com/reference/android/content/pm/PackageManager
-      role: related
-      note: requestPermissions
-    ios:
-    - kind: other
-      id: Info.plist usage descriptions + per-API prompts
-      url: https://developer.apple.com/documentation/uikit/requesting-access-to-protected-resources
-      role: primary
-    harmonyos:
-    - kind: module
-      id: '@ohos.abilityAccessCtrl'
-      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-abilityaccessctrl
-      role: primary
-  knowledge_path: knowledge/security/permissions/runtime.yaml
-  comparison_scope:
-    includes:
-    - 运行时向用户请求危险权限。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: security.permissions.special
-  level: L3
-  parent: security.permissions
-  name:
-    zh: 特殊权限与设置页
-    en: Special Permissions Settings
-  definition: 需跳转系统设置的特殊授权（如所有文件、悬浮窗）。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence
-  knowledge_path: knowledge/security/permissions/special.yaml
-  comparison_scope:
-    includes:
-    - 需跳转系统设置的特殊授权（如所有文件、悬浮窗）。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: security.crypto
-  level: L2
-  parent: security
-  name:
-    zh: 密钥与密码学
-    en: Keys and Cryptography
-  definition: 密钥库与加解密原语。
-  knowledge_role: rollup
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  knowledge_path: knowledge/security/crypto/_rollup.yaml
-  comparison_scope:
-    includes:
-    - 密钥库与加解密原语。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: security.crypto.keystore
-  level: L3
-  parent: security.crypto
-  name:
-    zh: 硬件支持密钥库
-    en: Hardware-Backed Keystore
-  definition: 系统密钥库中的密钥生成与使用。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  knowledge_path: knowledge/security/crypto/keystore.yaml
-  comparison_scope:
-    includes:
-    - 系统密钥库中的密钥生成与使用。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: security_capability_family
 - id: security.biometrics
   level: L2
   parent: security
   name:
     zh: 生物识别
     en: Biometrics
-  definition: 指纹、面容等本地认证。
+  definition: 指纹/面容等本地生物认证与设备凭据策略。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -203,8 +89,9 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 指纹、面容等本地认证。
-    excludes: []
+    - 生物提示、设备凭据、能力探测
+    excludes:
+    - 远程身份登录见 identity
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -214,25 +101,33 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: security.biometrics.local_auth
-  level: L3
-  parent: security.biometrics
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - security.biometrics
+  sibling_axis: security_capability_family
+- id: security.certificates
+  level: L2
+  parent: security
   name:
-    zh: 本地生物认证
-    en: Local Biometric Auth
-  definition: 解锁应用或密钥的生物识别。
-  knowledge_role: leaf
+    zh: 证书管理
+    en: Certificate Management
+  definition: X.509 证书解析校验与系统证书存储。
+  knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
-  privacy_class: sensitive
-  leaf_at_this_level: true
-  knowledge_path: knowledge/security/biometrics/local_auth.yaml
+  privacy_class: none
+  knowledge_path: knowledge/security/certificates/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 解锁应用或密钥的生物识别。
-    excludes: []
+    - 解析校验、证书存储
+    excludes:
+    - TLS 会话配置见 network.http.tls
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -242,13 +137,196 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: security_capability_family
+- id: security.crypto
+  level: L2
+  parent: security
+  name:
+    zh: 密钥与密码学
+    en: Keys and Cryptography
+  definition: 密钥库、加解密、签名、摘要与安全随机数。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/crypto/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 密钥库、Cipher、签名、KDF、随机数
+    excludes:
+    - 凭据条目存储见 security.secure_storage
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - security.crypto
+  sibling_axis: security_capability_family
+- id: security.data_protection
+  level: L2
+  parent: security
+  name:
+    zh: 数据防泄漏保护
+    en: Data Loss Protection
+  definition: 企业级文件分级管控与恢复密钥等数据保护。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/data_protection/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 文件分级、恢复密钥
+    excludes:
+    - 通用文件加密见 storage.encryption
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: security_capability_family
+- id: security.device_safety
+  level: L2
+  parent: security
+  name:
+    zh: 设备安全检测
+    en: Device Safety Detection
+  definition: 系统完整性、恶意 URL、风控与反诈等设备侧安全检测。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/device_safety/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 完整性、恶意链接、风控
+    excludes:
+    - 应用证明令牌见 attestation
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: security_capability_family
+- id: security.permissions
+  level: L2
+  parent: security
+  name:
+    zh: 权限模型
+    en: Permission Model
+  definition: 敏感能力的声明、请求、校验与特殊授权。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/permissions/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 运行时权限、特殊权限、校验
+    excludes:
+    - 生物识别解锁见 security.biometrics
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - security.permissions
+  sibling_axis: security_capability_family
+- id: security.privacy
+  level: L2
+  parent: security
+  name:
+    zh: 隐私保护
+    en: Privacy Controls
+  definition: 跟踪授权、隐私模式与界面防窥等隐私控制。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/privacy/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - 跟踪授权、隐私模式、防窥
+    excludes:
+    - 运行时权限见 permissions
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: security_capability_family
 - id: security.secure_storage
   level: L2
   parent: security
   name:
     zh: 安全存储
     en: Secure Storage
-  definition: 密钥串/凭据加密存储。
+  definition: 钥匙串/凭据等敏感数据的系统安全存储。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -259,8 +337,9 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 密钥串/凭据加密存储。
-    excludes: []
+    - 凭据条目、访问控制
+    excludes:
+    - 文件加密见 storage.encryption
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -270,29 +349,3017 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - security.secure_storage
+  sibling_axis: security_capability_family
+- id: security.attestation.app_integrity
+  level: L3
+  parent: security.attestation
+  name:
+    zh: 应用完整性证明
+    en: App Integrity Attestation
+  definition: 获取应用未被篡改/来源可信的证明令牌。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/attestation/app_integrity.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Play Integrity
+      url: https://developer.android.com/google/play/integrity/overview
+      role: primary
+    ios:
+    - kind: class
+      id: DCAppAttestService
+      url: https://developer.apple.com/documentation/devicecheck/dcappattestservice
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Play Integrity、App Attest
+    excludes:
+    - 密钥证明见 key_attestation
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: attestation_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.attestation.device_token
+  level: L3
+  parent: security.attestation
+  name:
+    zh: 设备信任令牌
+    en: Device Trust Token
+  definition: 获取设备维度信任令牌用于防刷与真机判定。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/attestation/device_token.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: Play Integrity 设备判决部分可覆盖
+    ios:
+    - kind: class
+      id: DCDevice.generateToken
+      url: https://developer.apple.com/documentation/devicecheck/dcdevice/generatetoken(completionhandler:)
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: DeviceVerify
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-verify-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - DeviceCheck token、DeviceVerify
+    excludes:
+    - 应用完整性见 app_integrity
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: attestation_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.attestation.key_attestation
+  level: L3
+  parent: security.attestation
+  name:
+    zh: 密钥证明
+    en: Key Attestation
+  definition: 证明密钥生成于安全硬件及其属性。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/attestation/key_attestation.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Key Attestation
+      url: https://developer.android.com/privacy-and-security/security-key-attestation
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: Secure Enclave 证明能力待核
+    harmonyos:
+    - kind: module
+      id: attestKeyItem
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/huks-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - Key Attestation、attestKey
+    excludes:
+    - 应用完整性见 app_integrity
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: attestation_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.attestation.nonce
+  level: L3
+  parent: security.attestation
+  name:
+    zh: 证明挑战随机数
+    en: Attestation Challenge Nonce
+  definition: 为证明流程提供服务端挑战随机数并绑定令牌。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/attestation/nonce.yaml
+  bindings:
+    android:
+    - kind: class
+      id: IntegrityTokenRequest.setNonce
+      url: https://developer.android.com/reference/com/google/android/play/core/integrity/IntegrityTokenRequest.Builder
+      role: primary
+    ios:
+    - kind: class
+      id: App Attest clientDataHash
+      url: https://developer.apple.com/documentation/devicecheck/dcappattestservice
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - nonce/challenge
+    excludes:
+    - 令牌获取见 app_integrity
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: attestation_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.attestation.server_verify
+  level: L3
+  parent: security.attestation
+  name:
+    zh: 证明服务端核验入口
+    en: Attestation Server Verify
+  definition: 将端侧证明令牌提交服务端核验的配套能力说明（端侧取证）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/attestation/server_verify.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Integrity token decode
+      url: https://developer.android.com/google/play/integrity/verdict
+      role: primary
+    ios:
+    - kind: guide
+      id: App Attest validation
+      url: https://developer.apple.com/documentation/devicecheck/validating_apps_that_connect_to_your_server
+      role: primary
+    harmonyos:
+    - kind: module
+      id: DeviceVerify REST
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-verify-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - 端侧取证 + 服务核验流程
+    excludes:
+    - 令牌获取见 app_integrity/device_token
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: attestation_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.biometrics.capability
+  level: L3
+  parent: security.biometrics
+  name:
+    zh: 生物能力探测
+    en: Biometric Capability Probe
+  definition: 查询设备可用的生物识别强度与可用性。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/biometrics/capability.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BiometricManager.canAuthenticate
+      url: https://developer.android.com/reference/androidx/biometric/BiometricManager#canAuthenticate(int)
+      role: primary
+    ios:
+    - kind: class
+      id: LAContext.biometryType
+      url: https://developer.apple.com/documentation/localauthentication/lacontext/1622648-biometrytype
+      role: primary
+    harmonyos:
+    - kind: module
+      id: getAvailableStatus
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-useriam-userauth
+      role: primary
+  comparison_scope:
+    includes:
+    - canAuthenticate、biometryType
+    excludes:
+    - 发起认证见 local_auth
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: biometric_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.biometrics.crypto_bind
+  level: L3
+  parent: security.biometrics
+  name:
+    zh: 生物绑定密钥使用
+    en: Biometric-Bound Key Use
+  definition: 在生物认证成功后解锁并使用绑定密钥。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/biometrics/crypto_bind.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BiometricPrompt.CryptoObject
+      url: https://developer.android.com/reference/androidx/biometric/BiometricPrompt.CryptoObject
+      role: primary
+    ios:
+    - kind: class
+      id: SecAccessControlCreateWithFlags
+      url: https://developer.apple.com/documentation/security/1394338-secaccesscontrolcreatewithflags
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - CryptoObject、SecAccessControl biometry
+    excludes:
+    - 密钥生成见 crypto.keystore
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: biometric_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.biometrics.device_credential
+  level: L3
+  parent: security.biometrics
+  name:
+    zh: 设备凭据认证
+    en: Device Credential Auth
+  definition: 以锁屏 PIN/密码作为后备或替代认证。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/biometrics/device_credential.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BIOMETRIC_STRONG | DEVICE_CREDENTIAL
+      url: https://developer.android.com/reference/androidx/biometric/BiometricManager.Authenticators
+      role: primary
+    ios:
+    - kind: other
+      id: deviceOwnerAuthentication
+      url: https://developer.apple.com/documentation/localauthentication/lapolicy/deviceownerauthentication
+      role: primary
+    harmonyos:
+    - kind: module
+      id: AuthType PIN
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-useriam-userauth
+      role: primary
+  comparison_scope:
+    includes:
+    - DEVICE_CREDENTIAL、deviceOwnerAuthentication
+    excludes:
+    - 纯生物见 local_auth
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: biometric_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.biometrics.enrollment_change
+  level: L3
+  parent: security.biometrics
+  name:
+    zh: 生物登记变更感知
+    en: Enrollment Change Detection
+  definition: 感知生物特征登记集变更以作废旧密钥策略。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/biometrics/enrollment_change.yaml
+  bindings:
+    android:
+    - kind: class
+      id: setInvalidatedByBiometricEnrollment
+      url: https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec.Builder#setInvalidatedByBiometricEnrollment(boolean)
+      role: primary
+    ios:
+    - kind: class
+      id: evaluatedPolicyDomainState
+      url: https://developer.apple.com/documentation/localauthentication/lacontext/1624652-evaluatedpolicydomainstate
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - setInvalidatedByBiometricEnrollment
+    excludes:
+    - 认证提示见 local_auth
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: biometric_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.biometrics.local_auth
+  level: L3
+  parent: security.biometrics
+  name:
+    zh: 本地生物认证
+    en: Local Biometric Auth
+  definition: 拉起系统生物识别提示完成本地认证。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/biometrics/local_auth.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BiometricPrompt
+      url: https://developer.android.com/reference/androidx/biometric/BiometricPrompt
+      role: primary
+    ios:
+    - kind: class
+      id: LAContext
+      url: https://developer.apple.com/documentation/localauthentication/lacontext
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.userIAM.userAuth'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-useriam-userauth
+      role: primary
+  comparison_scope:
+    includes:
+    - BiometricPrompt、LAContext、userAuth
+    excludes:
+    - 设备 PIN 策略见 device_credential
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - security.biometrics.local_auth
+  sibling_axis: biometric_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.certificates.ct
+  level: L3
+  parent: security.certificates
+  name:
+    zh: 证书透明度感知
+    en: Certificate Transparency Awareness
+  definition: 在信任评估中考虑证书透明度信息（平台支持时）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/certificates/ct.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Network Security Config
+      url: https://developer.android.com/privacy-and-security/security-config
+      role: primary
+    ios:
+    - kind: class
+      id: SecTrust
+      url: https://developer.apple.com/documentation/security/sectrust
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - CT policy
+    excludes:
+    - 证书固定见 pinning
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: certificate_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.certificates.parse
+  level: L3
+  parent: security.certificates
+  name:
+    zh: 证书解析与校验
+    en: Certificate Parse and Verify
+  definition: 解析证书链并校验签名与有效期。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/certificates/parse.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CertificateFactory
+      url: https://developer.android.com/reference/java/security/cert/CertificateFactory
+      role: primary
+    ios:
+    - kind: class
+      id: SecTrustEvaluateWithError
+      url: https://developer.apple.com/documentation/security/2980705-sectrustevaluatewitherror
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: Device Certificate Kit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-certificate-kit-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - CertificateFactory、SecTrustEvaluate
+    excludes:
+    - 系统存储见 certificates.storage
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: certificate_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.certificates.pinning
+  level: L3
+  parent: security.certificates
+  name:
+    zh: 证书固定
+    en: Certificate Pinning
+  definition: 将期望公钥/证书固定到网络信任决策。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/certificates/pinning.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Network Security Config pinning
+      url: https://developer.android.com/privacy-and-security/security-config#CertificatePinning
+      role: primary
+    ios:
+    - kind: plist_key
+      id: NSAppTransportSecurity
+      url: https://developer.apple.com/documentation/bundleresources/information_property_list/nsapptransportsecurity
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - CertificatePinner、NSPinnedDomains
+    excludes:
+    - TLS 会话见 network.http.tls
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: certificate_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.certificates.storage
+  level: L3
+  parent: security.certificates
+  name:
+    zh: 证书与私钥存储
+    en: Certificate and Key Storage
+  definition: 在系统证书管理服务中存储/获取证书与私钥。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/certificates/storage.yaml
+  bindings:
+    android:
+    - kind: class
+      id: KeyChain
+      url: https://developer.android.com/reference/android/security/KeyChain
+      role: primary
+    ios:
+    - kind: class
+      id: SecItemAdd certificate
+      url: https://developer.apple.com/documentation/security/1396431-secitemadd
+      role: primary
+    harmonyos:
+    - kind: module
+      id: 证书管理服务
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-certificate-kit-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - KeyChain、Keychain 证书、证书管理服务
+    excludes:
+    - 解析校验见 parse
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: certificate_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.certificates.user_install
+  level: L3
+  parent: security.certificates
+  name:
+    zh: 用户证书安装提示
+    en: User Certificate Install
+  definition: 引导用户安装或信任用户 CA/客户端证书。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/certificates/user_install.yaml
+  bindings:
+    android:
+    - kind: class
+      id: KeyChain.createInstallIntent
+      url: https://developer.android.com/reference/android/security/KeyChain#createInstallIntent()
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 通常经配置描述文件/MDM
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - KeyChain.createInstallIntent、配置描述文件
+    excludes:
+    - 应用内校验见 parse
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: certificate_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.crypto.algorithm_probe
+  level: L3
+  parent: security.crypto
+  name:
+    zh: 算法套件能力探测
+    en: Algorithm Suite Probe
+  definition: 查询设备支持的算法/曲线/工作模式。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/crypto/algorithm_probe.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Security.getProviders
+      url: https://developer.android.com/reference/java/security/Security#getProviders()
+      role: primary
+    ios:
+    - kind: framework
+      id: CryptoKit
+      url: https://developer.apple.com/documentation/cryptokit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: cryptoFramework
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cryptoframework
+      role: primary
+  comparison_scope:
+    includes:
+    - Provider、CryptoKit availability
+    excludes:
+    - 执行加解密见 cipher
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: crypto_primitive
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.crypto.asymmetric
+  level: L3
+  parent: security.crypto
+  name:
+    zh: 非对称加解密
+    en: Asymmetric Encryption
+  definition: 使用公钥/私钥对执行加解密。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/crypto/asymmetric.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Cipher RSA
+      url: https://developer.android.com/reference/javax/crypto/Cipher
+      role: primary
+    ios:
+    - kind: framework
+      id: ChaChaPoly / CryptoKit
+      url: https://developer.apple.com/documentation/cryptokit
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Cipher asymmetric
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cryptoframework
+      role: primary
+  comparison_scope:
+    includes:
+    - RSA/ECIES 加解密
+    excludes:
+    - 签名见 signature
+    - HPKE 见 hpke
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: crypto_primitive
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.crypto.cipher
+  level: L3
+  parent: security.crypto
+  name:
+    zh: 对称加解密
+    en: Symmetric Cipher
+  definition: 执行对称加解密（如 AES）与工作模式。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/crypto/cipher.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Cipher
+      url: https://developer.android.com/reference/javax/crypto/Cipher
+      role: primary
+    ios:
+    - kind: class
+      id: AES.GCM
+      url: https://developer.apple.com/documentation/cryptokit/aes/gcm
+      role: primary
+    harmonyos:
+    - kind: module
+      id: cryptoFramework Cipher
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cryptoframework
+      role: primary
+  comparison_scope:
+    includes:
+    - Cipher、AES.GCM、cryptoFramework Cipher
+    excludes:
+    - 非对称签名见 signature
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: crypto_primitive
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.crypto.digest
+  level: L3
+  parent: security.crypto
+  name:
+    zh: 摘要与MAC
+    en: Digest and MAC
+  definition: 计算哈希摘要与消息认证码。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/crypto/digest.yaml
+  bindings:
+    android:
+    - kind: class
+      id: MessageDigest
+      url: https://developer.android.com/reference/java/security/MessageDigest
+      role: primary
+    ios:
+    - kind: class
+      id: SHA256
+      url: https://developer.apple.com/documentation/cryptokit/sha256
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Md
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cryptoframework
+      role: primary
+  comparison_scope:
+    includes:
+    - MessageDigest、SHA256、HMAC、Mac
+    excludes:
+    - 签名见 signature
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: crypto_primitive
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.crypto.hpke
+  level: L3
+  parent: security.crypto
+  name:
+    zh: 混合公钥加密
+    en: Hybrid Public Key Encryption
+  definition: 按 HPKE 进行混合公钥加密收发。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/crypto/hpke.yaml
+  bindings:
+    android:
+    - kind: package
+      id: android.crypto.hpke
+      url: https://developer.android.com/reference/android/crypto/hpke/package-summary
+      role: primary
+    ios:
+    - kind: class
+      id: HPKE
+      url: https://developer.apple.com/documentation/cryptokit/hpke
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - HPKE
+    excludes:
+    - 经典非对称见 asymmetric
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: crypto_primitive
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.crypto.kdf
+  level: L3
+  parent: security.crypto
+  name:
+    zh: 密钥派生与协商
+    en: Key Derivation and Agreement
+  definition: 从口令/共享秘密派生密钥或完成密钥协商。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/crypto/kdf.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SecretKeyFactory
+      url: https://developer.android.com/reference/javax/crypto/SecretKeyFactory
+      role: primary
+    ios:
+    - kind: class
+      id: HKDF
+      url: https://developer.apple.com/documentation/cryptokit/hkdf
+      role: primary
+    harmonyos:
+    - kind: module
+      id: HUKS derive
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/huks-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - PBKDF2、HKDF、KeyAgreement
+    excludes:
+    - 密钥存储见 keystore
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: crypto_primitive
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.crypto.key_export_policy
+  level: L3
+  parent: security.crypto
+  name:
+    zh: 密钥不可导出策略
+    en: Non-Exportable Key Policy
+  definition: 配置密钥不可导出及用户认证绑定策略。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/crypto/key_export_policy.yaml
+  bindings:
+    android:
+    - kind: class
+      id: KeyGenParameterSpec.Builder.setUserAuthenticationRequired
+      url: https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec.Builder#setUserAuthenticationRequired(boolean)
+      role: primary
+    ios:
+    - kind: other
+      id: kSecAttrAccessible
+      url: https://developer.apple.com/documentation/security/ksecattraccessible
+      role: primary
+    harmonyos:
+    - kind: module
+      id: HUKS access control
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/huks-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - setUserAuthenticationRequired、kSecAttrTokenID
+    excludes:
+    - 密钥生成见 keystore
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: crypto_primitive
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.crypto.key_import
+  level: L3
+  parent: security.crypto
+  name:
+    zh: 密钥导入导出边界
+    en: Key Import Export Boundary
+  definition: 在策略允许时导入外部密钥材料或导出公钥。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/crypto/key_import.yaml
+  bindings:
+    android:
+    - kind: class
+      id: KeyStore.setEntry
+      url: https://developer.android.com/reference/java/security/KeyStore#setEntry(java.lang.String,%20java.security.KeyStore.Entry,%20java.security.KeyStore.ProtectionParameter)
+      role: primary
+    ios:
+    - kind: class
+      id: SecItemImport
+      url: https://developer.apple.com/documentation/security/1394828-secitemimport
+      role: primary
+    harmonyos:
+    - kind: module
+      id: HUKS importKeyItem
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/huks-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - importKey、SecItemImport
+    excludes:
+    - 不可导出策略见 key_export_policy
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: crypto_primitive
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.crypto.keystore
+  level: L3
+  parent: security.crypto
+  name:
+    zh: 系统密钥库
+    en: System Keystore
+  definition: 在安全环境生成、导入、存储与使用密钥。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/crypto/keystore.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Android Keystore
+      url: https://developer.android.com/privacy-and-security/keystore
+      role: primary
+    ios:
+    - kind: guide
+      id: Secure Enclave
+      url: https://developer.apple.com/documentation/security/certificate_key_and_trust_services/keys/storing_keys_in_the_secure_enclave
+      role: primary
+    harmonyos:
+    - kind: guide
+      id: HUKS
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/huks-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - AndroidKeyStore、Secure Enclave、HUKS
+    excludes:
+    - 凭据密码条目见 secure_storage
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - security.crypto.keystore
+  sibling_axis: crypto_primitive
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.crypto.rand
+  level: L3
+  parent: security.crypto
+  name:
+    zh: 安全随机数
+    en: Secure Random
+  definition: 生成密码学安全随机数。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/crypto/rand.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SecureRandom
+      url: https://developer.android.com/reference/java/security/SecureRandom
+      role: primary
+    ios:
+    - kind: class
+      id: SecRandomCopyBytes
+      url: https://developer.apple.com/documentation/security/1399291-secrandomcopybytes
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Random
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cryptoframework
+      role: primary
+  comparison_scope:
+    includes:
+    - SecureRandom、SecRandomCopyBytes
+    excludes:
+    - 密钥生成见 keystore
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: crypto_primitive
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.crypto.signature
+  level: L3
+  parent: security.crypto
+  name:
+    zh: 签名与验签
+    en: Sign and Verify
+  definition: 非对称数字签名的生成与验证。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/crypto/signature.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Signature
+      url: https://developer.android.com/reference/java/security/Signature
+      role: primary
+    ios:
+    - kind: class
+      id: SecKeyCreateSignature
+      url: https://developer.apple.com/documentation/security/1644057-seckeycreatesignature
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Sign
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-cryptoframework
+      role: primary
+  comparison_scope:
+    includes:
+    - Signature、SecKeyCreateSignature、Sign/Verify
+    excludes:
+    - 对称加密见 cipher
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: crypto_primitive
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.data_protection.clear_on_logout
+  level: L3
+  parent: security.data_protection
+  name:
+    zh: 退出时敏感数据清理
+    en: Sensitive Data Clear on Logout
+  definition: 在退出登录或注销时清理内存与本地敏感缓存的系统辅助能力边界。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/data_protection/clear_on_logout.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AccountManager clear
+      url: https://developer.android.com/reference/android/accounts/AccountManager
+      role: primary
+    ios:
+    - kind: class
+      id: SecItemDelete
+      url: https://developer.apple.com/documentation/security/1396430-secitemdelete
+      role: primary
+    harmonyos:
+    - kind: module
+      id: asset delete
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-security-asset
+      role: primary
+  comparison_scope:
+    includes:
+    - 凭据删除、缓存清理入口
+    excludes:
+    - 凭据存储见 secure_storage.credentials
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: data_protection_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.data_protection.clipboard_redact
+  level: L3
+  parent: security.data_protection
+  name:
+    zh: 敏感内容剪贴板策略
+    en: Sensitive Clipboard Policy
+  definition: 限制敏感内容进入剪贴板或设置短暂有效期。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/data_protection/clipboard_redact.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ClipDescription
+      url: https://developer.android.com/reference/android/content/ClipDescription
+      role: primary
+    ios:
+    - kind: class
+      id: UIPasteboard.DetectionPattern
+      url: https://developer.apple.com/documentation/uikit/uipasteboard/detectionpattern
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - 敏感标记、短暂剪贴板
+    excludes:
+    - 剪贴板访问感知见 privacy.pasteboard_protect
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: data_protection_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.data_protection.dlp
+  level: L3
+  parent: security.data_protection
+  name:
+    zh: 文件分级管控
+    en: File Classification Control
+  definition: 识别敏感资产文件并限制外发（企业场景）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/data_protection/dlp.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: guide
+      id: FileProvider / MDM
+      url: https://developer.apple.com/documentation/devicemanagement
+      role: primary
+    harmonyos:
+    - kind: module
+      id: fileGuard
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/fileguard
+      role: primary
+  comparison_scope:
+    includes:
+    - fileGuard、DLP
+    excludes:
+    - 通用文件加密见 storage.encryption
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: data_protection_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.data_protection.managed_config
+  level: L3
+  parent: security.data_protection
+  name:
+    zh: 托管数据隔离
+    en: Managed Data Isolation
+  definition: 工作资料/托管配置下的数据隔离入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/data_protection/managed_config.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Work Profile
+      url: https://developer.android.com/work/managed-profiles
+      role: primary
+    ios:
+    - kind: guide
+      id: Managed App Configuration
+      url: https://developer.apple.com/documentation/devicemanagement/apps/managedappconfiguration
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Work Profile、Managed App Config
+    excludes:
+    - DLP 文件级见 dlp
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: data_protection_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.data_protection.recovery_key
+  level: L3
+  parent: security.data_protection
+  name:
+    zh: 企业恢复密钥
+    en: Enterprise Recovery Key
+  definition: 企业场景下磁盘加密数据解密与锁屏密码重置相关能力。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/data_protection/recovery_key.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: MDM 托管恢复，待核
+    harmonyos:
+    - kind: module
+      id: recoveryKey
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/recovery-key
+      role: primary
+  comparison_scope:
+    includes:
+    - recoveryKey
+    excludes:
+    - 用户备份见 storage.backup
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: data_protection_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.data_protection.screen_secure
+  level: L3
+  parent: security.data_protection
+  name:
+    zh: 界面防泄密标志
+    en: Secure Window Flag
+  definition: 禁止敏感窗口被截屏或出现在最近任务预览。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/data_protection/screen_secure.yaml
+  bindings:
+    android:
+    - kind: class
+      id: FLAG_SECURE
+      url: https://developer.android.com/reference/android/view/WindowManager.LayoutParams#FLAG_SECURE
+      role: primary
+    ios:
+    - kind: class
+      id: isSecure
+      url: https://developer.apple.com/documentation/uikit/uitextfield/1619613-issecuretextentry
+      role: primary
+    harmonyos:
+    - kind: module
+      id: window privacy
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/window-privacy
+      role: primary
+  comparison_scope:
+    includes:
+    - FLAG_SECURE、isSecure
+    excludes:
+    - 截屏事件感知见 privacy.screenshot_detect
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: data_protection_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.device_safety.antivirus
+  level: L3
+  parent: security.device_safety
+  name:
+    zh: 病毒防护状态
+    en: Antivirus Protection Status
+  definition: 查询设备病毒查杀与防护状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/device_safety/antivirus.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: SecurityAntivirus
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-security-antivirus
+      role: primary
+  comparison_scope:
+    includes:
+    - SecurityAntivirus
+    excludes:
+    - 系统完整性见 sys_integrity
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_safety_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.device_safety.audit
+  level: L3
+  parent: security.device_safety
+  name:
+    zh: 安全审计订阅
+    en: Security Audit Subscription
+  definition: 订阅统一安全审计数据流。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/device_safety/audit.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: SecurityAudit
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/security-audit
+      role: primary
+  comparison_scope:
+    includes:
+    - SecurityAudit
+    excludes:
+    - 风控评分见 risk_engine
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_safety_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.device_safety.fraud
+  level: L3
+  parent: security.device_safety
+  name:
+    zh: 反诈与业务风险
+    en: Anti-Fraud and Business Risk
+  definition: 识别涉诈通信/消息或自动化作弊风险。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/device_safety/fraud.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: AntifraudPicker
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/antifraud-picker
+      role: primary
+  comparison_scope:
+    includes:
+    - AntifraudPicker、BusinessRisk
+    excludes:
+    - 恶意 URL 见 malicious_url
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_safety_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.device_safety.malicious_url
+  level: L3
+  parent: security.device_safety
+  name:
+    zh: 恶意URL检测
+    en: Malicious URL Detection
+  definition: 检测 URL 是否为恶意或钓鱼链接。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/device_safety/malicious_url.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: SafetyDetect URL
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/safetydetect-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - 恶意 URL API
+    excludes:
+    - 网络 TLS 见 network.http.tls
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_safety_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.device_safety.risk_engine
+  level: L3
+  parent: security.device_safety
+  name:
+    zh: 综合风控评估
+    en: Risk Assessment Engine
+  definition: 提交多维风险因子获得综合风险评估。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/device_safety/risk_engine.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: RiskControlEngine
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/risk-control-engine
+      role: primary
+  comparison_scope:
+    includes:
+    - RiskControlEngine
+    excludes:
+    - 单点完整性见 sys_integrity
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_safety_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.device_safety.sys_integrity
+  level: L3
+  parent: security.device_safety
+  name:
+    zh: 系统完整性检测
+    en: System Integrity Detection
+  definition: 检测设备系统是否被破解并给出风险评级。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/device_safety/sys_integrity.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Play Integrity device verdict
+      url: https://developer.android.com/google/play/integrity/verdicts
+      role: primary
+    ios:
+    - kind: framework
+      id: DeviceCheck
+      url: https://developer.apple.com/documentation/devicecheck
+      role: primary
+    harmonyos:
+    - kind: module
+      id: SafetyDetect
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/safetydetect-sysintegrity
+      role: primary
+  comparison_scope:
+    includes:
+    - SafetyDetect 系统完整性、root 检测
+    excludes:
+    - 应用完整性令牌见 attestation.app_integrity
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_safety_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.device_safety.trusted_app
+  level: L3
+  parent: security.device_safety
+  name:
+    zh: 可信应用数据证明
+    en: Trusted App Data Proof
+  definition: 对应用数据/会话/媒体进行安全证明。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/device_safety/trusted_app.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: TrustedAppService
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/trusted-app-service
+      role: primary
+  comparison_scope:
+    includes:
+    - TrustedAppService
+    excludes:
+    - 密钥证明见 attestation.key_attestation
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: device_safety_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.permissions.background
+  level: L3
+  parent: security.permissions
+  name:
+    zh: 后台敏感权限
+    en: Background Sensitive Permission
+  definition: 请求或校验后台位置等后台敏感权限。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/permissions/background.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ACCESS_BACKGROUND_LOCATION
+      url: https://developer.android.com/reference/android/Manifest.permission#ACCESS_BACKGROUND_LOCATION
+      role: primary
+    ios:
+    - kind: plist_key
+      id: background modes
+      url: https://developer.apple.com/documentation/bundleresources/information_property_list/uibackgroundmodes
+      role: primary
+    harmonyos:
+    - kind: module
+      id: background permissions
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/declare-permissions
+      role: primary
+  comparison_scope:
+    includes:
+    - ACCESS_BACKGROUND_LOCATION、后台模式
+    excludes:
+    - 前台运行时权限见 runtime
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: permission_phase
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.permissions.check
+  level: L3
+  parent: security.permissions
+  name:
+    zh: 权限校验
+    en: Permission Check
+  definition: 查询自身或目标权限的授予状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/permissions/check.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ContextCompat.checkSelfPermission
+      url: https://developer.android.com/reference/androidx/core/content/ContextCompat#checkSelfPermission(android.content.Context,%20java.lang.String)
+      role: primary
+    ios:
+    - kind: class
+      id: authorizationStatus
+      url: https://developer.apple.com/documentation/avfoundation/avcapturedevice/1624613-authorizationstatus
+      role: primary
+    harmonyos:
+    - kind: module
+      id: checkAccessToken
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-abilityaccessctrl
+      role: primary
+  comparison_scope:
+    includes:
+    - checkSelfPermission、checkAccessToken
+    excludes:
+    - 发起请求见 runtime
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: permission_phase
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.permissions.declare
+  level: L3
+  parent: security.permissions
+  name:
+    zh: 权限声明
+    en: Permission Declaration
+  definition: 在应用清单中声明所需权限与用途说明。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/permissions/declare.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: uses-permission
+      url: https://developer.android.com/guide/topics/manifest/uses-permission-element
+      role: primary
+    ios:
+    - kind: guide
+      id: Protected resources keys
+      url: https://developer.apple.com/documentation/bundleresources/information_property_list/protected_resources
+      role: primary
+    harmonyos:
+    - kind: module
+      id: requestPermissions
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/declare-permissions
+      role: primary
+  comparison_scope:
+    includes:
+    - uses-permission、Info.plist usage、module.json5
+    excludes:
+    - 运行时请求见 runtime
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: permission_phase
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.permissions.one_time
+  level: L3
+  parent: security.permissions
+  name:
+    zh: 一次性授权
+    en: One-Time Grant
+  definition: 支持仅这一次的运行时授权选项。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/permissions/one_time.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: one-time permissions
+      url: https://developer.android.com/training/permissions/requesting#one-time
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 部分 API 会话级授权
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - one-time permission
+    excludes:
+    - 永久授权见 runtime
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: permission_phase
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.permissions.rationale
+  level: L3
+  parent: security.permissions
+  name:
+    zh: 权限说明与二次请求
+    en: Permission Rationale
+  definition: 在再次请求前展示用途说明或引导设置。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/permissions/rationale.yaml
+  bindings:
+    android:
+    - kind: class
+      id: shouldShowRequestPermissionRationale
+      url: https://developer.android.com/reference/androidx/core/app/ActivityCompat#shouldShowRequestPermissionRationale(android.app.Activity,%20java.lang.String)
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 自定义 UI + Open Settings
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - shouldShowRequestPermissionRationale
+    excludes:
+    - 首次请求见 runtime
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: permission_phase
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.permissions.revoke_listen
+  level: L3
+  parent: security.permissions
+  name:
+    zh: 权限变更监听
+    en: Permission Change Listen
+  definition: 监听权限授予状态变化。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/permissions/revoke_listen.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PackageManager.OnPermissionsChangedListener
+      url: https://developer.android.com/reference/android/content/pm/PackageManager.OnPermissionsChangedListener
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: on('selfPermissionChange')
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-abilityaccessctrl
+      role: primary
+  comparison_scope:
+    includes:
+    - OnPermissionsChangeListener、token 变更
+    excludes:
+    - 单次校验见 check
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: permission_phase
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.permissions.runtime
+  level: L3
+  parent: security.permissions
+  name:
+    zh: 运行时权限请求
+    en: Runtime Permission Request
+  definition: 向用户请求危险/受保护资源访问权限并处理结果。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/permissions/runtime.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ActivityCompat.requestPermissions
+      url: https://developer.android.com/reference/androidx/core/app/ActivityCompat#requestPermissions(android.app.Activity,%20java.lang.String[],%20int)
+      role: primary
+    ios:
+    - kind: guide
+      id: requesting access
+      url: https://developer.apple.com/documentation/uikit/requesting-access-to-protected-resources
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.abilityAccessCtrl'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-abilityaccessctrl
+      role: primary
+  comparison_scope:
+    includes:
+    - requestPermissions、requestPermission
+    excludes:
+    - 特殊设置页授权见 special
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - security.permissions.runtime
+  sibling_axis: permission_phase
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.permissions.special
+  level: L3
+  parent: security.permissions
+  name:
+    zh: 特殊权限与设置页
+    en: Special Permissions Settings
+  definition: 需跳转系统设置完成的特殊授权（如所有文件、悬浮窗）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/permissions/special.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION
+      url: https://developer.android.com/reference/android/provider/Settings#ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION
+      role: primary
+    ios:
+    - kind: class
+      id: UIApplication OpenSettings
+      url: https://developer.apple.com/documentation/uikit/uiapplication/1623042-opensettingsurlstring
+      role: primary
+    harmonyos:
+    - kind: module
+      id: requestPermissionsFromUser
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/request-user-authorization
+      role: primary
+  comparison_scope:
+    includes:
+    - MANAGE_EXTERNAL_STORAGE、特殊设置 Intent
+    excludes:
+    - 普通运行时弹窗见 runtime
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - security.permissions.special
+  sibling_axis: permission_phase
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.privacy.anti_peep
+  level: L3
+  parent: security.privacy
+  name:
+    zh: 防窥保护
+    en: Anti-Peep Protection
+  definition: 感知窥视状态并拉起系统蒙层遮盖敏感信息。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/privacy/anti_peep.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: DlpAntiPeep
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/dlp-anti-peep
+      role: primary
+  comparison_scope:
+    includes:
+    - DlpAntiPeep
+    excludes:
+    - 截屏感知见 screenshot_detect
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: privacy_control
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.privacy.data_usage_flag
+  level: L3
+  parent: security.privacy
+  name:
+    zh: 数据使用目的标记
+    en: Data Use Purpose Flagging
+  definition: 为敏感 API 调用声明数据使用目的（平台支持时）。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/privacy/data_usage_flag.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Privacy Sandbox Attribution
+      url: https://developer.android.com/design-for-safety/privacy-sandbox
+      role: primary
+    ios:
+    - kind: guide
+      id: Purpose strings
+      url: https://developer.apple.com/documentation/bundleresources/information_property_list/protected_resources
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - data usage flags
+    excludes:
+    - 权限请求见 permissions.runtime
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: privacy_control
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.privacy.local_network
+  level: L3
+  parent: security.privacy
+  name:
+    zh: 本地网络访问授权
+    en: Local Network Access Consent
+  definition: 请求访问本地网络的隐私授权。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/privacy/local_network.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: CHANGE_WIFI_MULTICAST 等边界待核
+    ios:
+    - kind: plist_key
+      id: Local Network Privacy
+      url: https://developer.apple.com/documentation/bundleresources/information_property_list/nslocalnetworkusagedescription
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - local network privacy
+    excludes:
+    - mDNS 发现见 network.discovery
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: privacy_control
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.privacy.pasteboard_protect
+  level: L3
+  parent: security.privacy
+  name:
+    zh: 剪贴板访问保护
+    en: Pasteboard Access Protection
+  definition: 感知或限制对剪贴板敏感内容的访问。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/privacy/pasteboard_protect.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ClipboardManager
+      url: https://developer.android.com/reference/android/content/ClipboardManager
+      role: primary
+    ios:
+    - kind: class
+      id: UIPasteboard
+      url: https://developer.apple.com/documentation/uikit/uipasteboard
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - UIPasteboard 检测、剪贴板提示
+    excludes:
+    - 通用权限见 permissions
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: privacy_control
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.privacy.precise_toggle
+  level: L3
+  parent: security.privacy
+  name:
+    zh: 精确/模糊数据粒度选择
+    en: Precise Versus Approximate Data
+  definition: 在精确与模糊位置等粒度之间尊重用户选择。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/privacy/precise_toggle.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ACCESS_COARSE_LOCATION
+      url: https://developer.android.com/reference/android/Manifest.permission#ACCESS_COARSE_LOCATION
+      role: primary
+    ios:
+    - kind: class
+      id: accuracyAuthorization
+      url: https://developer.apple.com/documentation/corelocation/cllocationmanager/3601124-accuracyauthorization
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - precise/approximate location
+    excludes:
+    - 权限请求见 permissions.runtime
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: privacy_control
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.privacy.screenshot_detect
+  level: L3
+  parent: security.privacy
+  name:
+    zh: 截屏/录屏感知
+    en: Screenshot and Capture Detect
+  definition: 感知截屏或屏幕录制以保护敏感界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/privacy/screenshot_detect.yaml
+  bindings:
+    android:
+    - kind: class
+      id: FLAG_SECURE
+      url: https://developer.android.com/reference/android/view/WindowManager.LayoutParams#FLAG_SECURE
+      role: primary
+    ios:
+    - kind: class
+      id: userDidTakeScreenshotNotification
+      url: https://developer.apple.com/documentation/uikit/uiapplication/1622920-userdidtakescreenshotnotification
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - userDidTakeScreenshot、capture callbacks
+    excludes:
+    - 防窥蒙层见 anti_peep
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: privacy_control
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.privacy.super_privacy
+  level: L3
+  parent: security.privacy
+  name:
+    zh: 增强隐私模式感知
+    en: Enhanced Privacy Mode
+  definition: 查询增强/超级隐私模式状态并调整行为。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/privacy/super_privacy.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: SuperPrivacyMode
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/super-privacy-mode
+      role: primary
+  comparison_scope:
+    includes:
+    - SuperPrivacyMode
+    excludes:
+    - 跟踪授权见 tracking_consent
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: privacy_control
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.privacy.tracking_consent
+  level: L3
+  parent: security.privacy
+  name:
+    zh: 跟踪授权
+    en: Tracking Consent
+  definition: 请求跨应用跟踪授权并读取广告标识相关状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: runtime_permission
+  knowledge_path: knowledge/security/privacy/tracking_consent.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Advertising ID
+      url: https://developer.android.com/design-for-safety/privacy-sandbox/rights-preserving-api-android
+      role: primary
+    ios:
+    - kind: class
+      id: ATTrackingManager
+      url: https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - ATTrackingManager、广告标识授权
+    excludes:
+    - 普通运行时权限见 permissions.runtime
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: privacy_control
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.secure_storage.access_control
+  level: L3
+  parent: security.secure_storage
+  name:
+    zh: 凭据访问控制
+    en: Credential Access Control
+  definition: 为凭据条目设置解锁状态/生物访问控制。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/secure_storage/access_control.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: MasterKey / Keystore 绑定待核
+    ios:
+    - kind: other
+      id: kSecAttrAccessibleWhenUnlocked
+      url: https://developer.apple.com/documentation/security/ksecattraccessiblewhenunlocked
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Asset access control
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/asset-store-kit-overview
+      role: primary
+  comparison_scope:
+    includes:
+    - kSecAttrAccessible、访问控制表
+    excludes:
+    - 写入条目见 credentials
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: secure_storage_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.secure_storage.autofill
+  level: L3
+  parent: security.secure_storage
+  name:
+    zh: 系统自动填充对接
+    en: Autofill Integration
+  definition: 向系统自动填充框架暴露或消费凭据字段。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/secure_storage/autofill.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AutofillService
+      url: https://developer.android.com/reference/android/service/autofill/AutofillService
+      role: primary
+    ios:
+    - kind: class
+      id: ASCredentialProviderExtensionViewController
+      url: https://developer.apple.com/documentation/authenticationservices/ascredentialproviderextensionviewcontroller
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - AutofillService、ASCredentialProvider
+    excludes:
+    - 通用凭据存储见 credentials
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: secure_storage_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
 - id: security.secure_storage.credentials
   level: L3
   parent: security.secure_storage
   name:
     zh: 凭据安全存储
     en: Credential Secure Storage
-  definition: 密码、令牌等敏感凭据存储。
+  definition: 在系统安全存储中保存密码、令牌等凭据。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
-  privacy_class: highly_sensitive
-  leaf_at_this_level: true
-  aliases:
-  - Keychain
-  - EncryptedSharedPreferences
-  - HUKS
+  privacy_class: none
   knowledge_path: knowledge/security/secure_storage/credentials.yaml
+  bindings:
+    android:
+    - kind: class
+      id: EncryptedSharedPreferences
+      url: https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences
+      role: primary
+    ios:
+    - kind: class
+      id: SecItemAdd
+      url: https://developer.apple.com/documentation/security/1396431-secitemadd
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.security.asset'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-security-asset
+      role: primary
   comparison_scope:
     includes:
-    - 密码、令牌等敏感凭据存储。
-    excludes: []
+    - Keychain、EncryptedSharedPreferences、Asset Store
+    excludes:
+    - 密钥对象见 crypto.keystore
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -302,3 +3369,64 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - security.secure_storage.credentials
+  sibling_axis: secure_storage_role
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: security.secure_storage.shared
+  level: L3
+  parent: security.secure_storage
+  name:
+    zh: 跨应用凭据共享
+    en: Shared Credential Access
+  definition: 在应用组或授权应用间共享凭据条目。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/security/secure_storage/shared.yaml
+  bindings:
+    android:
+    - kind: class
+      id: KeyChain
+      url: https://developer.android.com/reference/android/security/KeyChain
+      role: primary
+    ios:
+    - kind: other
+      id: kSecAttrAccessGroup
+      url: https://developer.apple.com/documentation/security/ksecattraccessgroup
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Keychain access group、SharedPreferences 非适用
+    excludes:
+    - 单应用条目见 credentials
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: secure_storage_role
+  leaf_at_this_level: true
+  split_justification: independent_capability

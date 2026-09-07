@@ -1,0 +1,3161 @@
+{
+  "domain": "ui",
+  "authored_count": 18,
+  "draft_clue_count": 148,
+  "authored": [
+    {
+      "id": "ui",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "界面与窗口",
+        "en": "UI and Windowing"
+      },
+      "definition": "布局、控件、导航、窗口形态与主题。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "ui.controls",
+      "parent": "ui",
+      "level": "L2",
+      "name": {
+        "zh": "控件类别",
+        "en": "Control Categories"
+      },
+      "definition": "面向用户的标准控件类别（非属性级）。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "ui.controls.button",
+      "parent": "ui.controls",
+      "level": "L3",
+      "name": {
+        "zh": "按钮",
+        "en": "Button"
+      },
+      "definition": "跨框架同类用户控件：按钮。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "ui.controls.dialog",
+      "parent": "ui.controls",
+      "level": "L3",
+      "name": {
+        "zh": "弹层对话框",
+        "en": "Dialog Overlay"
+      },
+      "definition": "跨框架同类用户控件：弹层对话框。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "ui.controls.image",
+      "parent": "ui.controls",
+      "level": "L3",
+      "name": {
+        "zh": "图像视图",
+        "en": "Image View"
+      },
+      "definition": "跨框架同类用户控件：图像视图。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "ui.controls.list",
+      "parent": "ui.controls",
+      "level": "L3",
+      "name": {
+        "zh": "列表",
+        "en": "List"
+      },
+      "definition": "跨框架同类用户控件：列表。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "ui.controls.navigation_bar",
+      "parent": "ui.controls",
+      "level": "L3",
+      "name": {
+        "zh": "导航栏",
+        "en": "Navigation Bar"
+      },
+      "definition": "跨框架同类用户控件：导航栏。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "ui.controls.text_field",
+      "parent": "ui.controls",
+      "level": "L3",
+      "name": {
+        "zh": "文本输入框",
+        "en": "Text Field"
+      },
+      "definition": "跨框架同类用户控件：文本输入框。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "ui.declarative",
+      "parent": "ui",
+      "level": "L2",
+      "name": {
+        "zh": "声明式UI框架",
+        "en": "Declarative UI Framework"
+      },
+      "definition": "以状态驱动描述界面的声明式框架。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "ui.declarative.vs_imperative",
+      "parent": "ui.declarative",
+      "level": "L3",
+      "name": {
+        "zh": "状态驱动界面更新",
+        "en": "State-driven UI Updates"
+      },
+      "definition": "将应用状态变化同步为界面变化，并维护状态与显示的一致性。",
+      "knowledge_role": "leaf",
+      "bindings": {
+        "android": [
+          {
+            "kind": "package",
+            "id": "androidx.compose.ui",
+            "url": "https://developer.android.com/reference/kotlin/androidx/compose/ui/package-summary",
+            "role": "primary",
+            "note": "声明式"
+          }
+        ],
+        "ios": [
+          {
+            "kind": "framework",
+            "id": "SwiftUI",
+            "url": "https://developer.apple.com/documentation/swiftui",
+            "role": "primary"
+          },
+          {
+            "kind": "framework",
+            "id": "UIKit",
+            "url": "https://developer.apple.com/documentation/uikit",
+            "role": "related"
+          }
+        ],
+        "harmonyos": [
+          {
+            "kind": "kit",
+            "id": "ArkUI",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkui-overview",
+            "role": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ui.imperative",
+      "parent": "ui",
+      "level": "L2",
+      "name": {
+        "zh": "命令式视图系统",
+        "en": "Imperative View System"
+      },
+      "definition": "以命令式构建与变更视图树的系统。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "ui.navigation",
+      "parent": "ui",
+      "level": "L2",
+      "name": {
+        "zh": "导航栈",
+        "en": "Navigation Stack"
+      },
+      "definition": "页面栈、路由与返回栈管理。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "ui.navigation.stack",
+      "parent": "ui.navigation",
+      "level": "L3",
+      "name": {
+        "zh": "页面导航栈",
+        "en": "Page Navigation Stack"
+      },
+      "definition": "压栈/出栈式页面导航。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "ui.theme",
+      "parent": "ui",
+      "level": "L2",
+      "name": {
+        "zh": "主题与外观",
+        "en": "Theme and Appearance"
+      },
+      "definition": "深色模式、动态取色与系统外观。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "ui.theme.dark_mode",
+      "parent": "ui.theme",
+      "level": "L3",
+      "name": {
+        "zh": "深色模式",
+        "en": "Dark Mode"
+      },
+      "definition": "跟随或强制深色/浅色外观。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "ui.window",
+      "parent": "ui",
+      "level": "L2",
+      "name": {
+        "zh": "窗口与多窗",
+        "en": "Window and Multi-Window"
+      },
+      "definition": "窗口、分屏、画中画与自由窗。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "ui.window.multiwindow",
+      "parent": "ui.window",
+      "level": "L3",
+      "name": {
+        "zh": "分屏与多窗",
+        "en": "Split and Multi-Window"
+      },
+      "definition": "同时显示多个应用窗口或分屏。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "ui.window.pip",
+      "parent": "ui.window",
+      "level": "L3",
+      "name": {
+        "zh": "画中画",
+        "en": "Picture in Picture"
+      },
+      "definition": "悬浮小窗持续播放或展示内容。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "ui.animation",
+      "parent": "ui",
+      "name": "动效与动画",
+      "what": "界面元素随时间变化的动画驱动体系。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "animateTo, animation",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-explicit-animation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.animation.curve",
+      "parent": "ui.animation",
+      "name": "动画曲线与物理动效",
+      "what": "动画插值的曲线体系与基于物理的动效。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "springMotion, responsiveSpringMotion, curves",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-spring-curve",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.dynamicanimation.animation.SpringAnimation, SpringForce",
+          "url": "https://developer.android.com/develop/ui/views/animations/spring-animation",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.Animation.spring",
+          "url": "https://developer.apple.com/documentation/swiftui/animations",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.animation.curve.spring",
+      "parent": "ui.animation.curve",
+      "name": "弹簧物理动效",
+      "what": "以弹性力与阻尼驱动界面运动，保留速度连续性",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "SpringAnimation, SpringForce",
+          "url": "https://developer.android.com/develop/ui/views/animations/spring-animation",
+          "status": "source_read",
+          "evidence_ref": {
+            "url": "https://developer.android.com/develop/ui/views/animations/spring-animation",
+            "symbol": "SpringAnimation, SpringForce",
+            "body_sha256": "dd19c91d1e91e42a3bd6975b7438e7f60d24ec91dc4c96f856a2b44893c9c354",
+            "raw_sha256": "6d78b602bd9748454d13e0ecf8a1a5b30ff47b39ac66ddb691bbc55bee8f748f",
+            "line_start": 11,
+            "line_end": 55,
+            "body_path": "snapshots/android/43/43eff862984f70ce129aa996e65d6563a50e6d9d684f98f8315b105f55e8ad9c/6d78b602bd9748454d13e0ecf8a1a5b30ff47b39ac66ddb691bbc55bee8f748f/document-dd19c91d1e91e42a3bd6975b7438e7f60d24ec91dc4c96f856a2b44893c9c354.md",
+            "read_by": "coordinator",
+            "scope": "已实读的能力描述；正式版本/设备仍待核实"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ui.animation.particle_effect",
+      "parent": "ui.animation",
+      "name": "粒子动效",
+      "what": "声明式粒子发射器动画。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Particle, ParticleEmitter",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-particle-animation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.animation.particle_effect.particles",
+      "parent": "ui.animation.particle_effect",
+      "name": "粒子效果呈现",
+      "what": "通过发射器和粒子运动规则呈现动态视觉效果",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Particle, ParticleEmitter",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-particle-animation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.animation.property",
+      "parent": "ui.animation",
+      "name": "属性与显式动画",
+      "what": "对组件属性插值的动画驱动机制。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "animateTo, animation, keyframeAnimateTo, motionPath, @AnimatableExtend",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-explicit-animation",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.animation.ObjectAnimator, ValueAnimator, AnimatorSet",
+          "url": "https://developer.android.com/training/animation",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.withAnimation, swiftui.Animation",
+          "url": "https://developer.apple.com/documentation/swiftui/animations",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.animation.property.interpolation",
+      "parent": "ui.animation.property",
+      "name": "属性插值动画",
+      "what": "让界面属性在目标状态之间连续变化",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ObjectAnimator, ValueAnimator",
+          "url": "https://developer.android.com/training/animation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.animation.property.keyframes",
+      "parent": "ui.animation.property",
+      "name": "关键帧动画编排",
+      "what": "定义动画路径中的多个状态与时间位置，表达分阶段运动",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "keyframeAnimateTo",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-explicit-animation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.animation.shared_element",
+      "parent": "ui.animation",
+      "name": "共享元素转场",
+      "what": "元素在页面/容器间迁移的连续过渡（一镜到底）。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "geometryTransition",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-shared-element-transition",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "SharedTransitionScope, Modifier.sharedElement",
+          "url": "https://developer.android.com/develop/ui/compose/animation/shared-elements",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.animation.shared_element.geometry",
+      "parent": "ui.animation.shared_element",
+      "name": "共享元素几何连续转场",
+      "what": "在不同界面状态中保持对应元素的几何运动连续",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "SharedTransitionScope, Modifier.sharedElement",
+          "url": "https://developer.android.com/develop/ui/compose/animation/shared-elements",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.animation.transition",
+      "parent": "ui.animation",
+      "name": "转场动画",
+      "what": "元素/页面/场景切换时的过渡动画体系。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "pageTransition, PageTransitionEnter, PageTransitionExit, transition",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-page-transition-animation",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.transition.TransitionManager, Fade, Slide",
+          "url": "https://developer.android.com/guide/fragments/animate",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning",
+          "url": "https://developer.apple.com/documentation/uikit/enhancing-your-app-with-fluid-transitions",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.animation.transition.page",
+      "parent": "ui.animation.transition",
+      "name": "自定义页面转场",
+      "what": "定义页面切换时两个界面之间的呈现过程",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIViewControllerAnimatedTransitioning",
+          "url": "https://developer.apple.com/documentation/uikit/uiviewcontrolleranimatedtransitioning",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.animation.transition.visibility",
+      "parent": "ui.animation.transition",
+      "name": "内容进入退出转场",
+      "what": "在内容插入或移除时协调可见性和几何变化",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "TransitionManager, Fade, Slide",
+          "url": "https://developer.android.com/reference/android/transition/TransitionManager",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls",
+      "parent": "ui",
+      "name": "控件库",
+      "what": "面向用户交互与信息展示的标准控件族。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Button, Text, Image",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-button",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.advanced",
+      "parent": "ui.controls",
+      "name": "系统扩展组件库",
+      "what": "平台官方提供的高级/场景化预置组件库。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ComposeListItem, TreeView, Filter, Counter",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/system-preset-ui-component-library",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.advanced.counter",
+      "parent": "ui.controls.advanced",
+      "name": "计数调整控件",
+      "what": "通过递增递减交互编辑受约束的数量",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Counter",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-advanced-counter",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.advanced.filter",
+      "parent": "ui.controls.advanced",
+      "name": "多条件筛选控件",
+      "what": "组织筛选维度与选项，收集用户组合筛选条件",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Filter",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-advanced-filter",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.advanced.tree",
+      "parent": "ui.controls.advanced",
+      "name": "层级数据树控件",
+      "what": "以可展开折叠的节点表达层级数据并支持节点选择",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "TreeView",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-advanced-treeview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.button_selection",
+      "parent": "ui.controls",
+      "name": "按钮与选择控件",
+      "what": "触发操作与多值选择的基础控件族。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Button, Toggle, Checkbox, Radio, Slider, Rating, Select",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-button",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.widget.Button, androidx.compose.material3.Button",
+          "url": "https://developer.android.com/develop/ui/compose/components/button",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.Button, swiftui.Toggle",
+          "url": "https://developer.apple.com/documentation/technologyoverviews/swiftui",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.button_selection.action",
+      "parent": "ui.controls.button_selection",
+      "name": "按钮触发操作",
+      "what": "将明确的用户动作绑定到可访问的按钮控件；外观样式不另列能力",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.compose.material3.Button",
+          "url": "https://developer.android.com/develop/ui/compose/components/button",
+          "status": "source_read",
+          "evidence_ref": {
+            "url": "https://developer.android.com/develop/ui/compose/components/button",
+            "symbol": "androidx.compose.material3.Button",
+            "body_sha256": "f931524aefa4d35e5a367f18caeec9fa90a8cca43b6bc2dcd95de76f97b98f44",
+            "raw_sha256": "dc09acd20332a3b725071e322bea56181cef0369e3c330bbc826d7cef375d2fd",
+            "line_start": 3,
+            "line_end": 53,
+            "body_path": "snapshots/android/8a/8a31ca8a50df51abffec7a6eef6dd32ed97a87e5440992d57ba0a072c8b3f6cf/dc09acd20332a3b725071e322bea56181cef0369e3c330bbc826d7cef375d2fd/document-f931524aefa4d35e5a367f18caeec9fa90a8cca43b6bc2dcd95de76f97b98f44.md",
+            "read_by": "coordinator",
+            "scope": "已实读的能力描述；正式版本/设备仍待核实"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.button_selection.choices",
+      "parent": "ui.controls.button_selection",
+      "name": "单选与多选集合",
+      "what": "在候选集合中表达互斥或可组合的选择结果",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Radio, Checkbox, CheckboxGroup",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-checkbox",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.button_selection.range",
+      "parent": "ui.controls.button_selection",
+      "name": "连续数值选择",
+      "what": "用滑块在范围内调整连续或离散数值，不按取值范围复制节点",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Slider",
+          "url": "https://developer.apple.com/documentation/swiftui/slider",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.button_selection.rating",
+      "parent": "ui.controls.button_selection",
+      "name": "评分交互",
+      "what": "用等级或星级控件收集和展示评分",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Rating",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-rating",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.button_selection.segment",
+      "parent": "ui.controls.button_selection",
+      "name": "分段选项切换",
+      "what": "在并列的少量选项间切换选择，不承担页面导航栈",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UISegmentedControl",
+          "url": "https://developer.apple.com/documentation/uikit/uisegmentedcontrol",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.button_selection.toggle",
+      "parent": "ui.controls.button_selection",
+      "name": "布尔状态选择",
+      "what": "使用开关让用户查看和改变一个开闭状态",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Toggle",
+          "url": "https://developer.apple.com/documentation/swiftui/toggle",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.chart",
+      "parent": "ui.controls",
+      "name": "图表控件",
+      "what": "数据可视化的声明式图表组件/框架。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "DataPanel, Gauge",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-datapanel",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftcharts.Chart, Chart3D",
+          "url": "https://developer.apple.com/documentation/charts/creating-a-chart-using-swift-charts",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.chart.data_chart",
+      "parent": "ui.controls.chart",
+      "name": "数据驱动图表",
+      "what": "将数据映射成图表标记、坐标与比例尺用于比较趋势",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Chart, BarMark, LineMark",
+          "url": "https://developer.apple.com/documentation/charts/creating-a-chart-using-swift-charts",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.chart.gauge",
+      "parent": "ui.controls.chart",
+      "name": "仪表度量展示",
+      "what": "在刻度或区间背景下呈现单一指标的当前值",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Gauge",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-gauge",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.dialog",
+      "parent": "ui.controls",
+      "name": "弹窗与模态",
+      "what": "模态/非模态弹窗与半模态页面的展示体系。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AlertDialog, ActionSheet, CustomDialog, promptAction, bindSheet, bindContentCover",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-base-dialog-overview",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.compose.ui.window.Dialog, AlertDialog",
+          "url": "https://developer.android.com/develop/ui/compose/components/dialog",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIKit.UIAlertController, swiftui.alert",
+          "url": "https://developer.apple.com/documentation/uikit/getting-the-user-s-attention-with-alerts-and-action-sheets",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.dialog.alert",
+      "parent": "ui.controls.dialog",
+      "name": "警告与确认对话框",
+      "what": "以中断式提示让用户确认信息并选择后续动作",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIAlertController",
+          "url": "https://developer.apple.com/documentation/uikit/uialertcontroller",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.dialog.custom",
+      "parent": "ui.controls.dialog",
+      "name": "自定义内容对话框",
+      "what": "以模态窗口承载应用自定义内容和布局",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.compose.ui.window.Dialog",
+          "url": "https://developer.android.com/develop/ui/compose/components/dialog",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.dialog.full_cover",
+      "parent": "ui.controls.dialog",
+      "name": "全屏模态呈现",
+      "what": "在当前页面上方呈现独立全屏流程并返回原上下文",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "View.fullScreenCover",
+          "url": "https://developer.apple.com/documentation/swiftui/view/fullscreencover(ispresented:ondismiss:content:)",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.dialog.sheet",
+      "parent": "ui.controls.dialog",
+      "name": "半模态面板",
+      "what": "让部分高度面板承载补充内容并保留底层页面上下文",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UISheetPresentationController",
+          "url": "https://developer.apple.com/documentation/uikit/uisheetpresentationcontroller",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.image",
+      "parent": "ui.controls",
+      "name": "图像显示控件",
+      "what": "在界面中展示图片资源的控件与效果。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Image, colorFilter, resizable",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-image",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.widget.ImageView, androidx.compose.foundation.Image",
+          "url": "https://developer.android.com/training/wearables/wff/group/part/animated-image/animated-images",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.Image, resizable()",
+          "url": "https://developer.apple.com/documentation/swiftui/fitting-images-into-available-space",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.image.display",
+      "parent": "ui.controls.image",
+      "name": "图像内容适配",
+      "what": "将图像按视图尺寸保持比例、裁剪或拉伸展示；像素处理另归graphics",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Image, Image.resizable(capInsets:resizingMode:)",
+          "url": "https://developer.apple.com/documentation/swiftui/image",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.image.frame_animation",
+      "parent": "ui.controls.image",
+      "name": "图像序列动画展示",
+      "what": "按时间序列播放多帧图像，区别于视频解码播放和属性插值",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ImageAnimator",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-imageanimator",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.menu",
+      "parent": "ui.controls",
+      "name": "菜单控件",
+      "what": "菜单/上下文菜单的展示与挂载控件。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Menu, MenuItem, bindMenu, bindContextMenu",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-menu",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.view.Menu, PopupMenu, ContextMenu",
+          "url": "https://developer.android.com/develop/ui/views/components/menus",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.Menu, UIKit.UIMenu",
+          "url": "https://developer.apple.com/documentation/swiftui/menus-and-commands",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.menu.context",
+      "parent": "ui.controls.menu",
+      "name": "上下文菜单",
+      "what": "对目标内容提供上下文相关的操作菜单",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIContextMenuInteraction",
+          "url": "https://developer.apple.com/documentation/uikit/uicontextmenuinteraction",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.menu.hierarchy",
+      "parent": "ui.controls.menu",
+      "name": "分组与嵌套菜单",
+      "what": "将命令组织成带分组、子菜单和选择状态的层级",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIMenu, UIAction",
+          "url": "https://developer.apple.com/documentation/uikit/uimenu",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.picker",
+      "parent": "ui.controls",
+      "name": "选择器控件",
+      "what": "日期/时间/文本等滚动或日历选择控件。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "DatePicker, TimePicker, TextPicker, CalendarPicker",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-datepicker",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.widget.DatePicker, androidx.compose.material3.DatePicker",
+          "url": "https://developer.android.com/develop/ui/compose/components/datepickers",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.DatePicker, UIKit.UIDatePicker",
+          "url": "https://developer.apple.com/documentation/uikit/customizing-an-image-picker-controller",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.picker.date_time",
+      "parent": "ui.controls.picker",
+      "name": "日期时间选择",
+      "what": "用专用选择控件输入日期或时刻；不按日期精度组合扩节点",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIDatePicker",
+          "url": "https://developer.apple.com/documentation/uikit/uidatepicker",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.picker.wheel",
+      "parent": "ui.controls.picker",
+      "name": "滚轮选项选择",
+      "what": "在单列或多列滚轮中选择离散文本选项",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIPickerView",
+          "url": "https://developer.apple.com/documentation/uikit/uipickerview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.popup_toast",
+      "parent": "ui.controls",
+      "name": "气泡与轻提示",
+      "what": "非模态轻量反馈：气泡、Toast、Tip。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "bindPopup, openPopup, promptAction.showToast",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-popup-overview",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.widget.Toast, androidx.compose.material3.Snackbar",
+          "url": "https://developer.android.com/guide/topics/ui/notifiers/toasts",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "TipKit, swiftui.popover",
+          "url": "https://developer.apple.com/documentation/tipkit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.popup_toast.guidance",
+      "parent": "ui.controls.popup_toast",
+      "name": "情境操作引导",
+      "what": "在合适的应用使用情境展示功能提示，管理提示的出现条件",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Tip, TipView",
+          "url": "https://developer.apple.com/documentation/tipkit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.popup_toast.popover",
+      "parent": "ui.controls.popup_toast",
+      "name": "锚定气泡内容",
+      "what": "让临时浮层与界面目标保持位置关联",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIPopoverPresentationController",
+          "url": "https://developer.apple.com/documentation/uikit/uipopoverpresentationcontroller",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.popup_toast.toast",
+      "parent": "ui.controls.popup_toast",
+      "name": "短暂轻量提示",
+      "what": "短暂显示结果反馈，避免中断当前输入流程",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Toast",
+          "url": "https://developer.android.com/reference/android/widget/Toast",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.progress_indicator",
+      "parent": "ui.controls",
+      "name": "进度与指示控件",
+      "what": "向用户展示进度/等待状态的控件。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Progress, LoadingProgress",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-progress",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.widget.ProgressBar, androidx.compose.material3.CircularProgressIndicator",
+          "url": "https://developer.android.com/develop/ui/compose/components/progress",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.ProgressView",
+          "url": "https://developer.apple.com/documentation/clockkit/displaying-progress-views-and-gauges",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.progress_indicator.determinate",
+      "parent": "ui.controls.progress_indicator",
+      "name": "确定进度反馈",
+      "what": "显示可测量任务的完成比例，可用条状或环状外观",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "ProgressView",
+          "url": "https://developer.apple.com/documentation/swiftui/progressview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.progress_indicator.indeterminate",
+      "parent": "ui.controls.progress_indicator",
+      "name": "不确定进度反馈",
+      "what": "在无法计算完成比例时反馈持续等待状态",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "LoadingProgress",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-loadingprogress",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.text_display",
+      "parent": "ui.controls",
+      "name": "文本展示控件",
+      "what": "展示文本与图文混排内容的控件体系。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Text, Span, ImageSpan, StyledString, font.registerFont",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-text",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.widget.TextView, androidx.compose.material3.Text",
+          "url": "https://developer.android.com/develop/ui/compose/quick-guides/collections/display-text",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.Text, TextKit",
+          "url": "https://developer.apple.com/documentation/technologyoverviews/text-display",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.text_display.rich",
+      "parent": "ui.controls.text_display",
+      "name": "富文本与图文混排展示",
+      "what": "在同一文本内容中呈现不同文字样式和内联图像；编辑输入另归input",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Text, Span, ImageSpan, StyledString",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-text",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.controls.text_display.selection",
+      "parent": "ui.controls.text_display",
+      "name": "只读文本选择与复制",
+      "what": "允许用户对展示文本进行范围选择和复制；可编辑光标另归input",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "View.textSelection(_:)",
+          "url": "https://developer.apple.com/documentation/swiftui/view/textselection(_:)",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout",
+      "parent": "ui",
+      "name": "布局系统",
+      "what": "在窗口内组织组件位置与尺寸的容器体系与响应式适配。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Row, Column, Stack",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-column",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.constraint",
+      "parent": "ui.layout",
+      "name": "约束与相对布局",
+      "what": "以约束/相对关系声明子组件位置的布局体系。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "RelativeContainer",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-relativecontainer",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.constraintlayout.widget.ConstraintLayout, MotionLayout",
+          "url": "https://developer.android.com/develop/ui/views/layout/constraint-layout",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.Layout",
+          "url": "https://developer.apple.com/documentation/swiftui/custom-layout",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.constraint.relative",
+      "parent": "ui.layout.constraint",
+      "name": "约束关系布局",
+      "what": "通过组件间锚点和约束表达相对位置，处理多组件联动尺寸",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "RelativeContainer",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-relativecontainer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.custom_measure",
+      "parent": "ui.layout",
+      "name": "自定义测量与布局算法",
+      "what": "由应用定义测量子视图和安排位置的布局算法",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Layout",
+          "url": "https://developer.apple.com/documentation/swiftui/layout",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.grid",
+      "parent": "ui.layout",
+      "name": "网格与栅格布局",
+      "what": "二维网格与响应式栅格布局容器。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Grid, GridItem, GridRow, GridCol",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-layout-development-grid-layout",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.gridlayout.widget.GridLayout, LazyVerticalGrid",
+          "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive/grid",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.Grid, LazyVGrid",
+          "url": "https://developer.apple.com/documentation/swiftui/reordering-items-in-lists-stacks-grids-and-custom-layouts",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.grid.cells",
+      "parent": "ui.layout.grid",
+      "name": "二维网格布局",
+      "what": "以行列单元组织内容，允许内容跨单元分布",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "Grid, GridRow",
+          "url": "https://developer.apple.com/documentation/swiftui/grid",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.grid.lazy",
+      "parent": "ui.layout.grid",
+      "name": "懒加载网格",
+      "what": "只为可见区域附近的网格内容创建视图，承载大量同类项目",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "LazyVGrid, LazyHGrid",
+          "url": "https://developer.apple.com/documentation/swiftui/lazyvgrid",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.linear_stack",
+      "parent": "ui.layout",
+      "name": "线性与堆叠布局",
+      "what": "沿主轴依次排列或叠加子组件的布局容器。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Row, Column, Flex, Stack",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-column",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.widget.LinearLayout, android.widget.FrameLayout",
+          "url": "https://developer.android.com/guide/topics/ui/layout/linear",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.HStack, swiftui.VStack, swiftui.ZStack",
+          "url": "https://developer.apple.com/documentation/swiftui/building-layouts-with-stack-views",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.linear_stack.flex",
+      "parent": "ui.layout.linear_stack",
+      "name": "弹性与换行布局",
+      "what": "让内容按可用空间伸缩和自动换行，适用于流式标签和弹性排布",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Flex",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-flex",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.linear_stack.linear",
+      "parent": "ui.layout.linear_stack",
+      "name": "线性内容布局",
+      "what": "沿水平或垂直方向排列子视图，并分配剩余空间；不按方向重复建节点",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "HStack, VStack",
+          "url": "https://developer.apple.com/documentation/swiftui/building-layouts-with-stack-views",
+          "status": "source_read",
+          "evidence_ref": {
+            "url": "https://developer.apple.com/documentation/swiftui/building-layouts-with-stack-views",
+            "symbol": "HStack, VStack",
+            "body_sha256": "8e61a932fced3bd26ce2dd62bfe15a441e2dcb37f17fbbfda665c4f738d9f58d",
+            "raw_sha256": "5276347b3aad7fd50fcd10cb876b94b563c22e3f7a851543aa6599007eb62ddf",
+            "line_start": 7,
+            "line_end": 18,
+            "body_path": "snapshots/ios/33/334a0a066f23dcb64272545d5212898a6c38639100c900b8cdd91ffdce003780/5276347b3aad7fd50fcd10cb876b94b563c22e3f7a851543aa6599007eb62ddf/document-8e61a932fced3bd26ce2dd62bfe15a441e2dcb37f17fbbfda665c4f738d9f58d.md",
+            "read_by": "coordinator",
+            "scope": "已实读的能力描述；正式版本/设备仍待核实"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.linear_stack.overlay",
+      "parent": "ui.layout.linear_stack",
+      "name": "层叠内容布局",
+      "what": "让多个子视图沿深度方向覆盖并按容器对齐",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "ZStack",
+          "url": "https://developer.apple.com/documentation/swiftui/building-layouts-with-stack-views",
+          "status": "source_read",
+          "evidence_ref": {
+            "url": "https://developer.apple.com/documentation/swiftui/building-layouts-with-stack-views",
+            "symbol": "ZStack",
+            "body_sha256": "8e61a932fced3bd26ce2dd62bfe15a441e2dcb37f17fbbfda665c4f738d9f58d",
+            "raw_sha256": "5276347b3aad7fd50fcd10cb876b94b563c22e3f7a851543aa6599007eb62ddf",
+            "line_start": 7,
+            "line_end": 18,
+            "body_path": "snapshots/ios/33/334a0a066f23dcb64272545d5212898a6c38639100c900b8cdd91ffdce003780/5276347b3aad7fd50fcd10cb876b94b563c22e3f7a851543aa6599007eb62ddf/document-8e61a932fced3bd26ce2dd62bfe15a441e2dcb37f17fbbfda665c4f738d9f58d.md",
+            "read_by": "coordinator",
+            "scope": "已实读的能力描述；正式版本/设备仍待核实"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.pagination",
+      "parent": "ui.layout",
+      "name": "翻页与轮播容器",
+      "what": "按页横向切换内容的容器。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Swiper, SwiperController",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-swiper",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.viewpager2.widget.ViewPager2, HorizontalPager",
+          "url": "https://developer.android.com/develop/ui/compose/layouts/pager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.TabView, UIKit.UIPageViewController",
+          "url": "https://developer.apple.com/documentation/swiftui/enhancing-your-app-content-with-tab-navigation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.pagination.indicator",
+      "parent": "ui.layout.pagination",
+      "name": "分页位置指示",
+      "what": "呈现当前页与总页关系，并允许通过页指示控件选择页面",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIPageControl",
+          "url": "https://developer.apple.com/documentation/uikit/uipagecontrol",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.pagination.pages",
+      "parent": "ui.layout.pagination",
+      "name": "分页浏览容器",
+      "what": "将内容组织成可滑动切换的页面，保持当前页状态",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ViewPager2",
+          "url": "https://developer.android.com/reference/androidx/viewpager2/widget/ViewPager2",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.responsive",
+      "parent": "ui.layout",
+      "name": "响应式与自适应布局",
+      "what": "按窗口尺寸/设备形态调整布局结构的适配机制。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "GridRow断点, mediaquery, FolderStack",
+          "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-multi-device-adaptive-layout",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "WindowWidthSizeClass, WindowSizeClass, calculateWindowSizeClass",
+          "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive/use-window-size-classes",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "NavigationSplitView",
+          "url": "https://developer.apple.com/documentation/technotes/tn3154-adopting-swiftui-navigation-split-view",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.responsive.breakpoints",
+      "parent": "ui.layout.responsive",
+      "name": "窗口尺寸分级适配",
+      "what": "根据窗口可用宽高类别选择布局，不把屏幕型号作为固定分支",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WindowSizeClass",
+          "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive/use-window-size-classes",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.responsive.list_detail",
+      "parent": "ui.layout.responsive",
+      "name": "列表详情自适应布局",
+      "what": "按空间将列表与详情并列或折叠展示，保留选择上下文",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "NavigationSplitView",
+          "url": "https://developer.apple.com/documentation/technotes/tn3154-adopting-swiftui-navigation-split-view",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.scroll",
+      "parent": "ui.layout",
+      "name": "滚动与列表容器",
+      "what": "内容超出视口时的滚动容器与长列表懒加载/复用体系。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Scroll, List, WaterFlow, Scroller",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-scroll",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.recyclerview.widget.RecyclerView, android.widget.ScrollView",
+          "url": "https://developer.android.com/develop/ui/views/layout/recyclerview",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.ScrollView, swiftui.List",
+          "url": "https://developer.apple.com/documentation/swiftui/scroll-views",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.scroll.container",
+      "parent": "ui.layout.scroll",
+      "name": "连续内容滚动",
+      "what": "为超出视口的连续内容提供滚动与位置控制；大型列表复用另列",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "ScrollView",
+          "url": "https://developer.apple.com/documentation/swiftui/scroll-views",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.scroll.nested",
+      "parent": "ui.layout.scroll",
+      "name": "嵌套滚动协同",
+      "what": "协调嵌套容器对同一次滚动的消耗和传递",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "NestedScrollingChild, NestedScrollingParent",
+          "url": "https://developer.android.com/reference/androidx/core/view/NestedScrollingChild",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.scroll.recycling",
+      "parent": "ui.layout.scroll",
+      "name": "长列表复用",
+      "what": "按可见区域动态创建和复用条目，降低大列表视图开销",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "RecyclerView, RecyclerView.Adapter",
+          "url": "https://developer.android.com/develop/ui/views/layout/recyclerview",
+          "status": "source_read",
+          "evidence_ref": {
+            "url": "https://developer.android.com/develop/ui/views/layout/recyclerview",
+            "symbol": "RecyclerView, RecyclerView.Adapter",
+            "body_sha256": "57459adb3c1447d50a0a7d54bf2d499142c701e9232e003647cfa162bd53fb9e",
+            "raw_sha256": "f405b66221576f9438d60e909173e61a455feaf367334c26c83adb8d8eec2ad2",
+            "line_start": 15,
+            "line_end": 49,
+            "body_path": "snapshots/android/37/37accda7c279789964177e2e71cbc5f485b2f27276fe81200b352c4850491f24/f405b66221576f9438d60e909173e61a455feaf367334c26c83adb8d8eec2ad2/document-57459adb3c1447d50a0a7d54bf2d499142c701e9232e003647cfa162bd53fb9e.md",
+            "read_by": "coordinator",
+            "scope": "已实读的能力描述；正式版本/设备仍待核实"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.scroll.refresh",
+      "parent": "ui.layout.scroll",
+      "name": "下拉刷新交互",
+      "what": "将下拉手势和刷新状态绑定到列表内容更新",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "View.refreshable(action:)",
+          "url": "https://developer.apple.com/documentation/swiftui/view/refreshable(action:)",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.scroll.swipe_actions",
+      "parent": "ui.layout.scroll",
+      "name": "列表侧滑操作",
+      "what": "在条目侧滑时呈现删除、收藏等应用动作",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "View.swipeActions(edge:allowsFullSwipe:content:)",
+          "url": "https://developer.apple.com/documentation/swiftui/view/swipeactions(edge:allowsfullswipe:content:)",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.layout.scroll.waterfall",
+      "parent": "ui.layout.scroll",
+      "name": "瀑布流内容布局",
+      "what": "排列高度不等的条目形成多列连续内容流",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "WaterFlow",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-waterflow",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.navigation",
+      "parent": "ui",
+      "name": "导航结构",
+      "what": "应用内页面/目的地之间的跳转、返回与层级组织。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Navigation, NavDestination",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-navigation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.navigation.app_bar",
+      "parent": "ui.navigation",
+      "name": "应用栏与工具栏",
+      "what": "页面顶部操作栏/工具栏的承载与定制。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ToolBar, ToolBarItem",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-toolbaritem",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.appcompat.app.ActionBar, com.google.android.material.appbar.AppBarLayout",
+          "url": "https://developer.android.com/guide/fragments/appbar",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIKit.UINavigationBar, UINavigationBarAppearance",
+          "url": "https://developer.apple.com/documentation/technotes/tn3106-customizing-uinavigationbar-appearance",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.navigation.app_bar.collapse",
+      "parent": "ui.navigation.app_bar",
+      "name": "滚动联动折叠标题",
+      "what": "让标题区域随内容滚动在展开和紧凑形态之间过渡",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "CollapsingToolbarLayout",
+          "url": "https://developer.android.com/reference/com/google/android/material/appbar/CollapsingToolbarLayout",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.navigation.app_bar.commands",
+      "parent": "ui.navigation.app_bar",
+      "name": "应用栏命令呈现",
+      "what": "在页面应用栏或工具栏中组织标题和当前上下文操作",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIToolbar, UIBarButtonItem",
+          "url": "https://developer.apple.com/documentation/uikit/uitoolbar",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.navigation.drawer_sidebar",
+      "parent": "ui.navigation",
+      "name": "抽屉与侧边栏",
+      "what": "边缘抽屉与常驻侧栏的内容组织结构。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "SideBarContainer",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-sidebarcontainer",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.drawerlayout.widget.DrawerLayout, SlidingPaneLayout",
+          "url": "https://developer.android.com/training/implementing-navigation/nav-drawer",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.NavigationSplitView",
+          "url": "https://developer.apple.com/documentation/technotes/tn3154-adopting-swiftui-navigation-split-view",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.navigation.drawer_sidebar.drawer",
+      "parent": "ui.navigation.drawer_sidebar",
+      "name": "边缘抽屉导航",
+      "what": "以可拉出的边缘面板承载应用导航目的地",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "DrawerLayout",
+          "url": "https://developer.android.com/reference/androidx/drawerlayout/widget/DrawerLayout",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.navigation.drawer_sidebar.sidebar",
+      "parent": "ui.navigation.drawer_sidebar",
+      "name": "常驻或折叠侧栏",
+      "what": "让辅助导航侧栏与主要内容共同布局并按空间折叠",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "SideBarContainer",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-sidebarcontainer",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.navigation.stack",
+      "parent": "ui.navigation",
+      "name": "页面导航栈",
+      "what": "应用内页面压栈/出栈与返回栈管理。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Navigation, NavDestination, @ohos.router.pushUrl",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-navigation",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.navigation.NavController, NavHost",
+          "url": "https://developer.android.com/topic/libraries/architecture/navigation",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.NavigationStack, UIKit.UINavigationController",
+          "url": "https://developer.apple.com/documentation/swiftui/navigation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.navigation.stack.back_stack",
+      "parent": "ui.navigation.stack",
+      "name": "返回栈与导航状态",
+      "what": "保存导航历史并执行返回或回到指定页面，处理导航状态恢复",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "NavigationStack, NavigationPath",
+          "url": "https://developer.apple.com/documentation/swiftui/navigationstack",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.navigation.stack.predictive_back",
+      "parent": "ui.navigation.stack",
+      "name": "预测性返回交互",
+      "what": "让应用内容响应系统返回手势的进行和取消状态，呈现返回预览",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "OnBackAnimationCallback",
+          "url": "https://developer.android.com/reference/android/window/OnBackAnimationCallback",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.navigation.stack.routes",
+      "parent": "ui.navigation.stack",
+      "name": "页面路由与参数",
+      "what": "按路由选择目的地并传递页面输入；系统外部链接唤起另归app",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "NavController, NavHost",
+          "url": "https://developer.android.com/guide/navigation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.navigation.tabs",
+      "parent": "ui.navigation",
+      "name": "标签页导航",
+      "what": "平级目的地的标签页切换结构。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Tabs, TabContent, TabBar",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-navigation-tabs",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "com.google.android.material.bottomnavigation.BottomNavigationView, TabLayout",
+          "url": "https://developer.android.com/guide/navigation/navigation-3/recipes/material-listdetail",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.TabView, UIKit.UITabBarController",
+          "url": "https://developer.apple.com/documentation/swiftui/enhancing-your-app-content-with-tab-navigation",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.navigation.tabs.tab_container",
+      "parent": "ui.navigation.tabs",
+      "name": "标签页内容切换",
+      "what": "在同一层级的多个内容目的地之间切换并保留各页状态",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "TabView",
+          "url": "https://developer.apple.com/documentation/swiftui/tabview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm",
+      "parent": "ui",
+      "name": "UI开发范式与组件模型",
+      "what": "构建界面的编程范式、状态模型、渲染控制与自定义扩展机制。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@Component, build()",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-declarative-ui-description",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.custom_component",
+      "parent": "ui.paradigm",
+      "name": "自定义组件与复用",
+      "what": "开发者封装可复用UI单元的机制与组件复用治理。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@Component, @Builder, @BuilderParam, @Reusable, wrapBuilder",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-create-custom-components",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.view.View.onCreateDrawableState, View自定义子类",
+          "url": "https://developer.android.com/develop/ui/views/layout/custom-views/create-view",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.Layout, View自定义实现",
+          "url": "https://developer.apple.com/documentation/swiftui/composing-custom-layouts-with-swiftui",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.custom_component.slots",
+      "parent": "ui.paradigm.custom_component",
+      "name": "内容插槽与组件组合",
+      "what": "将可替换的子内容作为组件输入，复用界面结构",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@Builder, @BuilderParam",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-builderparam",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.declarative",
+      "parent": "ui.paradigm",
+      "name": "声明式UI框架",
+      "what": "以描述式语法声明界面结构、由框架 diffs 状态到视图的UI框架。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@Component, @Entry, build()",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-declarative-ui-description",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.compose.runtime.Composable, setContent",
+          "url": "https://developer.android.com/develop/ui/compose/migrate/migrate-xml-views-to-jetpack-compose",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.View, body",
+          "url": "https://developer.apple.com/documentation/technologyoverviews/swiftui",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.declarative.dsl",
+      "parent": "ui.paradigm.declarative",
+      "name": "声明式组件描述语法",
+      "what": "以描述式语法声明组件树：组件创建、链式属性/事件配置与尾随闭包嵌套子组件（build()/body/@Composable）；状态绑定另归ui.paradigm.state。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@Component build(), 链式属性方法, 尾随闭包子组件",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-declarative-ui-description",
+          "status": "source_read",
+          "locator": "正文L5-53(创建组件不用new、有参/无参构造)、L55-94(链式属性配置)、L96-144(事件方法)、L146-177(尾随闭包配置子组件与多级嵌套)"
+        },
+        {
+          "platform": "ios",
+          "symbol": "SwiftUI.View, body, View modifiers",
+          "url": "https://developer.apple.com/documentation/technologyoverviews/swiftui",
+          "status": "source_read",
+          "locator": "正文L70-109：视图为轻量结构，body声明内容，modifier赋予行为且顺序影响外观"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.compose.runtime.Composable, setContent",
+          "url": "https://developer.android.com/develop/ui/compose",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.declarative.refresh",
+      "parent": "ui.paradigm.declarative",
+      "name": "状态驱动的声明式刷新模型",
+      "what": "数据/状态变化时框架重新求值UI描述并差分更新实际视图（重组/最小化更新/body重算），开发者不手写视图更新代码。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "SwiftUI @State/@Binding/@ObservedObject 驱动界面自动更新",
+          "url": "https://developer.apple.com/documentation/technologyoverviews/swiftui",
+          "status": "source_read",
+          "locator": "正文L78-82(改数据由SwiftUI负责更新界面)、L124-147(属性包装器告知SwiftUI数据变化时如何响应并自动更新)"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.compose.runtime recomposition, State/remember",
+          "url": "https://developer.android.com/develop/ui/compose/mental-model",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@State装饰器驱动build()最小化更新",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-detailed-description-of-declarative-ui",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.imperative",
+      "parent": "ui.paradigm",
+      "name": "命令式视图系统",
+      "what": "以命令式API创建、修改视图树节点的UI体系。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.arkui.frameNode, FrameNode, RenderNode",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-user-defined-arktsnode-framenode",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.view.View, android.view.ViewGroup",
+          "url": "https://developer.android.com/develop/ui/views/layout/linear",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIKit.UIView, UIKit.UIWindow",
+          "url": "https://developer.apple.com/documentation/technologyoverviews/uikit-appkit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.imperative.custom_draw",
+      "parent": "ui.paradigm.imperative",
+      "name": "自定义视图与自绘",
+      "what": "继承/扩展基础视图节点，在测量布局绘制回调中以画布API自绘内容；区别于用预置组件拼装界面。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIView子类自绘(draw(_:)/CoreGraphics), UIKit drawing",
+          "url": "https://developer.apple.com/documentation/technologyoverviews/uikit-appkit",
+          "status": "source_read",
+          "locator": "正文L129-139：Custom view作为空白画布可绘制形状/贝塞尔路径、位图矢量图、格式化文本、阴影渐变"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "FrameNode onDraw(DrawContext), getRenderNode修改绘制属性",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-user-defined-arktsnode-framenode",
+          "status": "source_read",
+          "locator": "正文L31-37(getRenderNode动态修改绘制属性)、L632起(DrawContext自定义绘制示例)"
+        },
+        {
+          "platform": "android",
+          "symbol": "View.onDraw(Canvas), 自定义View",
+          "url": "https://developer.android.com/develop/ui/views/custom-views/custom-drawing",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.imperative.view_tree",
+      "parent": "ui.paradigm.imperative",
+      "name": "视图树的命令式构建与修改",
+      "what": "运行时以API直接创建视图节点、挂载/移除/移动子节点并修改属性，界面状态由开发者代码维护；与声明式互嵌归native_embed。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "FrameNode, NodeController, appendChild/removeChild/moveTo, NodeContainer",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-user-defined-arktsnode-framenode",
+          "status": "source_read",
+          "locator": "正文L52-135(new FrameNode+appendChild/removeChild)、L368-416(节点树搭建与moveTo跨容器移动)、L510-560(modifyNode修改尺寸/事件)"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIView.addSubview/removeFromSuperview, UIKit视图层级",
+          "url": "https://developer.apple.com/documentation/technologyoverviews/uikit-appkit",
+          "status": "source_read",
+          "locator": "正文L46-54(用系统视图组装界面或组织子视图)、L85-88(UI任务须在主线程)"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.view.ViewGroup.addView/removeView",
+          "url": "https://developer.android.com/reference/android/view/ViewGroup",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.native_embed",
+      "parent": "ui.paradigm",
+      "name": "混合开发与跨语言UI",
+      "what": "在同一应用内混用多语言UI栈与跨进程嵌入UI组件。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ArkUI_NodeHandle, ArkUI_NativeNodeAPI, EmbeddedComponent, ContentSlot",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-arkui-nativemodule-arkui-nativenodeapi-1",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "AndroidView, ComposeView, AbstractComposeView",
+          "url": "https://developer.android.com/develop/ui/compose/migrate/interoperability-apis",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIViewRepresentable, UIViewControllerRepresentable, UIHostingController",
+          "url": "https://developer.apple.com/documentation/uikit/integrating-pointer-interactions-into-your-ipad-app",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.native_embed.interop",
+      "parent": "ui.paradigm.native_embed",
+      "name": "命令式与声明式视图互嵌",
+      "what": "在同一界面组合两种UI范式并协调视图状态",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AndroidView, ComposeView",
+          "url": "https://developer.android.com/develop/ui/compose/migrate/interoperability-apis",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.native_embed.native",
+      "parent": "ui.paradigm.native_embed",
+      "name": "原生代码界面节点",
+      "what": "通过原生接口创建和组织UI节点，用于C/C++组件集成",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ArkUI_NativeNodeAPI_1, ArkUI_NodeHandle",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-arkui-nativemodule-arkui-nativenodeapi-1",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.render_control",
+      "parent": "ui.paradigm",
+      "name": "渲染控制",
+      "what": "按条件与数据集合控制组件树生成与懒加载的机制。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ForEach, LazyForEach, Repeat, ContentSlot",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-rendering-control-foreach",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.recyclerview.widget.RecyclerView, LazyColumn",
+          "url": "https://developer.android.com/develop/ui/views/layout/recyclerview",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "swiftui.ForEach, LazyVStack",
+          "url": "https://developer.apple.com/documentation/swiftui/displaying-data-in-lists",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.render_control.conditional",
+      "parent": "ui.paradigm.render_control",
+      "name": "条件渲染",
+      "what": "按布尔条件决定组件子树是否生成/切换生成（if/else分支进入UI描述），区别于数据集合的循环展开。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "if/else条件渲染",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-rendering-control-ifelse",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "SwiftUI ViewBuilder if/else, ConditionalContent",
+          "url": "https://developer.apple.com/documentation/swiftui/conditionalcontent",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Compose中Kotlin if表达式控制组件生成",
+          "url": "https://developer.android.com/develop/ui/compose/mental-model",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.render_control.iteration",
+      "parent": "ui.paradigm.render_control",
+      "name": "数据集合循环渲染",
+      "what": "将数据数组按项展开为组件子树的声明式循环（ForEach），含键值生成与差量更新规则；长列表视口级复用另归ui.layout.scroll.recycling。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ForEach(arr, itemGenerator, keyGenerator)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-rendering-control-foreach",
+          "status": "source_read",
+          "locator": "正文L1(ForEach循环渲染)、L9-72(键值生成规则)、L77/L163(首次渲染与非首次渲染的差量更新规则)"
+        },
+        {
+          "platform": "ios",
+          "symbol": "SwiftUI ForEach, List/ForEach嵌套sections",
+          "url": "https://developer.apple.com/documentation/swiftui/displaying-data-in-lists",
+          "status": "source_read",
+          "locator": "正文L54-79(List内容用ForEach迭代Identifiable数据)、L175-186(嵌套ForEach表达数据层级sections)"
+        },
+        {
+          "platform": "android",
+          "symbol": "Compose LazyColumn items()/Kotlin for循环",
+          "url": "https://developer.android.com/develop/ui/compose/lists",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.state",
+      "parent": "ui.paradigm",
+      "name": "状态管理与数据绑定",
+      "what": "将应用状态与界面绑定并驱动更新的机制体系。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@State, @Link, @Prop, @Provide, @Consume, AppStorage, @ObservedV2, @Local",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-application-state-management-overview",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "remember, mutableStateOf, androidx.lifecycle.ViewModel",
+          "url": "https://developer.android.com/develop/ui/compose/state",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "@State, @Bindable, Observation.Observation",
+          "url": "https://developer.apple.com/documentation/swiftui/managing-model-data-in-your-app",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.state.local",
+      "parent": "ui.paradigm.state",
+      "name": "组件本地状态与绑定",
+      "what": "让组件拥有局部可变状态并将状态变化反映到界面",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "State, Binding",
+          "url": "https://developer.apple.com/documentation/swiftui/state",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.paradigm.state.shared",
+      "parent": "ui.paradigm.state",
+      "name": "跨组件共享状态",
+      "what": "通过可观察对象向多个视图共享状态并传播变化",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "EnvironmentObject, ObservableObject",
+          "url": "https://developer.apple.com/documentation/swiftui/environmentobject",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.system_integration",
+      "parent": "ui",
+      "name": "系统UI集成",
+      "what": "应用向系统壳层（状态栏/快捷栏/表盘等）贡献UI的扩展点。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "quickBarManager, addToStatusBar",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/desktop-quickbar-extension-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.system_integration.desktop_shell",
+      "parent": "ui.system_integration",
+      "name": "桌面壳层UI扩展",
+      "what": "应用向PC/桌面系统壳层贡献UI的集成点（状态栏/快捷栏/Agent任务呈现）。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "addToStatusBar, removeFromStatusBar, updateStatusBarIcon, quickBarManager",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/desktop-quickbar-extension-guide",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "StatusBarManager.setAgentTask, AgentTaskEvent",
+          "url": "https://developer.android.com/reference/android/agenticon/package-summary",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "statusBarManager.addToStatusBar, removeFromStatusBar, desktop-quickbar-extension-manager",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/statusbar-extension-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.system_integration.desktop_shell.quickbar_appearance",
+      "parent": "ui.system_integration.desktop_shell",
+      "name": "快捷栏图标与进度呈现",
+      "what": "应用自定义快捷栏图标的合成/分层外观，并在图标上呈现任务进度值与进度状态。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "quickBarManager.setQuickBarCombineIcon/setQuickBarLayeredIcon/setProgressValue/setProgressState(ProgressState.PAUSED等)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/desktop-quickbar-extension-guide",
+          "status": "source_read",
+          "locator": "正文L453-540：setQuickBarCombineIcon合成图标(L478)、setQuickBarLayeredIcon分层图标(L505)、setProgressValue进度值(L523)、setProgressState进度状态(L540)"
+        }
+      ]
+    },
+    {
+      "id": "ui.system_integration.desktop_shell.quickbar_tasks",
+      "parent": "ui.system_integration.desktop_shell",
+      "name": "快捷栏自定义菜单与快速任务",
+      "what": "应用在PC快捷栏(任务栏)图标菜单中创建自定义分组与快速任务项，并管理其增删改查；含快捷栏能力检测。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "quickBarManager.isQuickBarCapabilitySupported/addCustomCategory/addQuickTask/getTasksFromCategory/updateQuickTask/deleteQuickTask (@kit.DeskTopExtensionKit)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/desktop-quickbar-extension-guide",
+          "status": "source_read",
+          "locator": "正文L49-66(isQuickBarCapabilitySupported能力检测)、L73-201(addCustomCategory创建菜单分组、QuickTaskInfo/ParameterItem构造并addQuickTask)、L221-357(任务查询/更新/删除)"
+        }
+      ]
+    },
+    {
+      "id": "ui.system_integration.desktop_shell.quickbar_window_groups",
+      "parent": "ui.system_integration.desktop_shell",
+      "name": "快捷栏窗口分组",
+      "what": "应用在PC快捷栏中创建窗口分组并将指定窗口归入分组，实现多窗口的任务栏组织。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "quickBarManager.addQuickBarGroup/getQuickBarGroups/setWindowToGroup/deleteQuickBarGroup",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/desktop-quickbar-extension-guide",
+          "status": "source_read",
+          "locator": "正文L364-447：addQuickBarGroup创建分组(L392)、getQuickBarGroups查询(L412)、setWindowToGroup按窗口ID归组(L430)、deleteQuickBarGroup删除(L447)"
+        }
+      ]
+    },
+    {
+      "id": "ui.system_integration.desktop_shell.statusbar_entries",
+      "parent": "ui.system_integration.desktop_shell",
+      "name": "桌面状态栏条目接入",
+      "what": "应用向PC/桌面系统状态栏贡献条目：自定义状态栏图标与Agent任务状态呈现（含一次性任务事件）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.agenticon.AgentTaskUpdate/AgentTaskEvent/AgentTaskState, StatusBarManager.setAgentTask",
+          "url": "https://developer.android.com/reference/android/agenticon/package-summary",
+          "status": "source_read",
+          "locator": "正文L16-23(AgentTaskEvent一次性事件/AgentTaskUpdate请求状态栏Agent Task区UI变更/AgentTaskState当前状态)、L18(StatusBarManager.setAgentTask(AgentTaskUpdate,Executor,OutcomeReceiver))"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "addToStatusBar/removeFromStatusBar/updateStatusBarIcon",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/desktop-quickbar-extension-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.system_integration.watchface",
+      "parent": "ui.system_integration",
+      "name": "表盘与穿戴UI",
+      "what": "穿戴设备表盘与复杂功能的UI模板扩展（手表形态单列）。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WatchFaceFormat watchface.xml, WatchFace",
+          "url": "https://developer.android.com/reference/wear-os/wff/watch-face",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "ClockKit, CLKComplication",
+          "url": "https://developer.apple.com/documentation/widgetkit/converting-a-clockkit-app",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.system_integration.watchface.complication",
+      "parent": "ui.system_integration.watchface",
+      "name": "表盘复杂功能数据槽",
+      "what": "应用向系统表盘提供小型数据展示槽位(complication)：时间线数据供给、槽位族适配与渲染模式（穿戴形态）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "WidgetKit TimelineProvider/TimelineEntry, WidgetFamily.accessoryRectangular/accessoryCircular/accessoryCorner/accessoryInline, CLKComplicationWidgetMigrator",
+          "url": "https://developer.apple.com/documentation/widgetkit/converting-a-clockkit-app",
+          "status": "source_read",
+          "locator": "正文L5-7(watchOS 9+用WidgetKit/SwiftUI创建complications)、L28-38(TimelineProvider三方法placeholder/getSnapshot/getTimeline驱动更新)、L206-217(12个ClockKit family收敛为4个accessory family)、L290-327(ClockKit→WidgetKit迁移)"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.wear.watch.face.complications.data源(ComplicationDataSourceService), WFF <Complication>元素",
+          "url": "https://developer.android.com/develop/ui/views/wearables/watchface/complications",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "表盘复杂功能(穿戴)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wearable-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.system_integration.watchface.format",
+      "parent": "ui.system_integration.watchface",
+      "name": "声明式表盘格式",
+      "what": "以声明式标记语言(watchface.xml)定义表盘场景、绘制元素与用户可配置项，由系统渲染（穿戴形态，Wear OS 4+）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WatchFaceFormat <WatchFace>/<Scene>/<UserConfigurations>/<BitmapFonts> (watchface.xml)",
+          "url": "https://developer.android.com/reference/wear-os/wff/watch-face",
+          "status": "source_read",
+          "locator": "正文L10-26(watchface.xml根元素WatchFace含width/height/clipShape，Wear OS 4引入，必含Scene)、L71-79(内部元素Scene必需，可选BitmapFonts/Metadata/UserConfigurations)"
+        }
+      ]
+    },
+    {
+      "id": "ui.system_integration.watchface.service",
+      "parent": "ui.system_integration.watchface",
+      "name": "表盘服务与渲染引擎",
+      "what": "以WatchFaceService承载表盘生命周期，用Canvas/GPU渲染引擎在交互/环境模式下自绘表盘（穿戴形态）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.wear.watch.face.WatchFaceService, Engine, CanvasRenderer",
+          "url": "https://developer.android.com/develop/ui/views/wearables/watchface",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "表盘应用/复杂功能扩展(Wearable)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/wearable-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme",
+      "parent": "ui",
+      "name": "主题与外观",
+      "what": "应用级外观定制：深浅色、配色与主题资源、样式机制、视觉特效。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ColorMode, WithTheme",
+          "url": "https://developer.huawei.com/consumer/cn/doc/design-guides/dark-mode-0000001823255497",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.customization",
+      "parent": "ui.theme",
+      "name": "主题定制与动态取色",
+      "what": "应用内主题配置、换肤与系统取色机制。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "WithTheme, Theme",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-with-theme",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "dynamicLightColorScheme, dynamicDarkColorScheme",
+          "url": "https://developer.android.com/develop/ui/views/theming/dynamic-colors",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIAppearance, UIAppearanceContainer",
+          "url": "https://developer.apple.com/documentation/uikit/appearance-customization",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.customization.dynamic_color",
+      "parent": "ui.theme.customization",
+      "name": "系统动态配色适配",
+      "what": "从系统动态配色生成应用主题颜色方案",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "dynamicLightColorScheme, dynamicDarkColorScheme",
+          "url": "https://developer.android.com/develop/ui/views/theming/dynamic-colors",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.customization.scoped",
+      "parent": "ui.theme.customization",
+      "name": "局部主题覆盖",
+      "what": "在指定组件子树覆盖配色和主题资源，不影响其它区域",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "WithTheme, Theme",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-with-theme",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.dark_mode",
+      "parent": "ui.theme",
+      "name": "深浅色模式",
+      "what": "深色/浅色外观的跟随、强制与组件适配。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "ColorMode, getApplication, setColorMode, allowForceDark",
+          "url": "https://developer.huawei.com/consumer/cn/doc/design-guides/dark-mode-0000001823255497",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Theme.Material.DayNight, uiMode",
+          "url": "https://developer.android.com/develop/ui/views/theming/darktheme",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIUserInterfaceStyle, overrideUserInterfaceStyle",
+          "url": "https://developer.apple.com/documentation/uikit/adopting-ios-dark-mode",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.dark_mode.app_override",
+      "parent": "ui.theme.dark_mode",
+      "name": "应用内深浅色强制指定",
+      "what": "应用在运行时将自身外观强制为深色/浅色或恢复跟随系统，独立于系统当前设置。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AppCompatDelegate.setDefaultNightMode, UiModeManager.setApplicationNightMode",
+          "url": "https://developer.android.com/develop/ui/views/theming/darktheme",
+          "status": "source_read",
+          "locator": "正文L77-106：API31+用UiModeManager#setApplicationNightMode(系统可在启动屏匹配主题)，API30及以下用AppCompatDelegate.setDefaultNightMode，MODE_NIGHT_NO/YES/FOLLOW_SYSTEM三档"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIUserInterfaceStyle, overrideUserInterfaceStyle",
+          "url": "https://developer.apple.com/documentation/uikit/uiuserinterfacestyle",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "ApplicationContext.setColorMode(ColorMode.COLOR_MODE_DARK/LIGHT/NOT_SET)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-application-configurationconstant",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.dark_mode.follow",
+      "parent": "ui.theme.dark_mode",
+      "name": "深浅色跟随与切换感知",
+      "what": "应用外观随系统深浅色设置自动切换，并在切换发生时感知/处理配置变化；不含应用内强制指定（见app_override）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Theme.AppCompat.DayNight, Configuration.uiMode, Activity.onConfigurationChanged",
+          "url": "https://developer.android.com/develop/ui/views/theming/darktheme",
+          "status": "source_read",
+          "locator": "正文L39-56(DayNight主题绑定系统夜间模式)、L183-215(uiMode配置变化与onConfigurationChanged读取UI_MODE_NIGHT_MASK)"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIUserInterfaceStyle, UITraitEnvironment.traitCollectionDidChange",
+          "url": "https://developer.apple.com/documentation/uikit/adopting-ios-dark-mode",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "ConfigurationConstant.ColorMode, EnvironmentCallback.onConfigurationUpdated",
+          "url": "https://developer.huawei.com/consumer/cn/doc/design-guides/dark-mode-0000001823255497",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.dark_mode.force_dark",
+      "parent": "ui.theme.dark_mode",
+      "name": "未适配界面自动变暗",
+      "what": "系统对仅支持浅色主题的界面按算法自动生成深色呈现，开发者可整体或按视图选择加入/排除；区别于开发者自备深色资源。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android:forceDarkAllowed, View.setForceDarkAllowed",
+          "url": "https://developer.android.com/develop/ui/views/theming/darktheme",
+          "status": "source_read",
+          "locator": "正文L109-132：Android 10 Force Dark分析浅色主题视图绘制前自动应用深色；主题需opt-in android:forceDarkAllowed=true；DayNight主题不触发；View.setForceDarkAllowed按视图排除"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "allowForceDark (通用属性)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-universal-attributes-color",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.resource",
+      "parent": "ui.theme",
+      "name": "UI资源与限定符",
+      "what": "界面资源（颜色/图片/样式）的组织与按配置限定。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "$r, ResourceManager",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-native-audio-resource-manager-h",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.R, getResources()",
+          "url": "https://developer.android.com/guide/topics/resources",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.resource.access",
+      "parent": "ui.theme.resource",
+      "name": "UI资源引用与运行时访问",
+      "what": "在代码/界面中引用资源标识并在运行时读取字符串、颜色、图片、原始文件等资源内容。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "R资源ID, Resources.getString/openRawResource/getXML, getResources(), AssetManager",
+          "url": "https://developer.android.com/guide/topics/resources",
+          "status": "source_read",
+          "locator": "正文L51-53(raw/与xml/经Resources.openRawResource/getXML读取)、L250-334(Access your app resources：XML/代码/Compose中访问、getResources获取Resources实例、assets原始文件)"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "$r()/资源引用, resourceManager.ResourceManager getStringByName/getRawFileContent",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-resource-manager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIImage(named:), NSLocalizedString, Color资源访问",
+          "url": "https://developer.apple.com/documentation/uikit/uiimage",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.resource.qualifiers",
+      "parent": "ui.theme.resource",
+      "name": "限定符与配置化资源选择",
+      "what": "按设备/环境配置（深浅色、语言、密度、屏幕尺寸等限定符）组织资源变体并由系统自动选择最佳匹配。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "配置限定符目录(values-night/drawable-hdpi等), 资源最佳匹配算法",
+          "url": "https://developer.android.com/guide/topics/resources",
+          "status": "source_read",
+          "locator": "正文L73-192(Provide alternative resources、限定符命名规则与Table 2优先级)、L376-487(How Android finds the best-matching resource逐步淘汰算法)"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "资源目录限定符(dark/light、语言、设备类型), $r按配置匹配",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/resource-categories-and-access",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Asset Catalog外观/宽度变体, UITraitCollection驱动资源选择",
+          "url": "https://developer.apple.com/documentation/uikit/uitraitcollection",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.styling",
+      "parent": "ui.theme",
+      "name": "组件样式机制",
+      "what": "组件样式的复用、多态与动态修改机制。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "stateStyles, @Styles, @Extend, attributeModifier",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-statestyles",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android:theme, R.style",
+          "url": "https://developer.android.com/develop/ui/compose/styles/theming",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIAppearance",
+          "url": "https://developer.apple.com/documentation/uikit/appearance-customization",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.styling.reuse",
+      "parent": "ui.theme.styling",
+      "name": "样式与修饰逻辑复用",
+      "what": "将共同外观和修饰行为封装后复用于多个视图",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "ViewModifier",
+          "url": "https://developer.apple.com/documentation/swiftui/viewmodifier",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.styling.states",
+      "parent": "ui.theme.styling",
+      "name": "交互状态样式",
+      "what": "让同一组件随按下、禁用、聚焦等状态切换样式",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "stateStyles",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-statestyles",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.visual_effects",
+      "parent": "ui.theme",
+      "name": "视觉特效与材质",
+      "what": "组件级视觉增强：模糊、阴影、裁剪、渐变与材质。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "blur, backdropBlur, backgroundBlurStyle, clipShape, shadow",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-blur-effect",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.theme.visual_effects.material",
+      "parent": "ui.theme.visual_effects",
+      "name": "背景模糊与材质",
+      "what": "对视图后方内容产生模糊或材质效果；离线图像滤镜另归graphics",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "backdropBlur, backgroundBlurStyle",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-blur-effect",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window",
+      "parent": "ui",
+      "name": "窗口与多窗",
+      "what": "应用窗口的创建、属性、形态与系统区域协同。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Window, WindowStage",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-oh-window-h",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.manage",
+      "parent": "ui.window",
+      "name": "窗口创建与属性管理",
+      "what": "应用窗口的获取、属性设置与生命周期管理。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.window.Window, WindowStage, setWindowLayoutFullScreen",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-oh-window-h",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIKit.UIWindow, UIWindowScene",
+          "url": "https://developer.apple.com/documentation/uikit/windows-and-screens",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.manage.acquire",
+      "parent": "ui.window.manage",
+      "name": "窗口获取与内容装载",
+      "what": "应用取得其主窗口/窗口舞台并装载根内容的入口机制（窗口生命周期与场景绑定）；子窗口、分屏形态归同级其它分支。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "UIWindow, UIWindowScene, rootViewController",
+          "url": "https://developer.apple.com/documentation/uikit/windows-and-screens",
+          "status": "source_read",
+          "locator": "正文L5-11(UIWindow是内容容器、可见内容全部由rootViewController提供、UIKit提供初始窗口可再创建额外窗口)、L25-29(Scenes管理多UI实例)"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "window.WindowStage.loadContent, getLastWindow",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-window",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Activity.setContentView, Activity.getWindow",
+          "url": "https://developer.android.com/reference/android/app/Activity",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.manage.properties",
+      "parent": "ui.window.manage",
+      "name": "窗口显示与行为属性设置",
+      "what": "对已获取窗口设置显示与行为属性：亮度、常亮、隐私防窥、背景色、可触摸/可聚焦等；系统栏避让归ui.window.system_bars，方向归ui.window.orientation。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "OH_WindowManager_SetWindowBrightness/SetWindowKeepScreenOn/SetWindowPrivacyMode/SetWindowBackgroundColor/SetWindowTouchable/SetWindowFocusable/GetWindowProperties",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-oh-window-h",
+          "status": "source_read",
+          "locator": "正文L304(亮度)、L345(常亮)、L370(隐私模式)、L279(背景色)、L229/L254(可触摸/可聚焦)、L397(GetWindowProperties)"
+        },
+        {
+          "platform": "ios",
+          "symbol": "UIWindow.windowLevel, UIScreen.brightness, isHidden/makeKeyAndVisible",
+          "url": "https://developer.apple.com/documentation/uikit/uiwindow",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "WindowManager.LayoutParams.screenBrightness/flags(FLAG_KEEP_SCREEN_ON), Window.setNavigationBarColor",
+          "url": "https://developer.android.com/reference/android/view/WindowManager.LayoutParams",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.orientation",
+      "parent": "ui.window",
+      "name": "窗口方向与旋转",
+      "what": "窗口显示方向锁定与旋转适配。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "setWindowOrientation, module.json5 orientation",
+          "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-landscape-and-portrait-development",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android:screenOrientation, setRequestedOrientation",
+          "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive/app-orientation-aspect-ratio-resizability",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.orientation.policy",
+      "parent": "ui.window.orientation",
+      "name": "应用窗口方向策略",
+      "what": "由应用声明或请求内容方向；最终行为受设备与系统限制",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Activity.setRequestedOrientation",
+          "url": "https://developer.android.com/reference/android/app/Activity",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.pip",
+      "parent": "ui.window",
+      "name": "画中画",
+      "what": "悬浮小窗持续展示内容的窗口形态。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "startPiP, PiPConfiguration, stopPiP",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/pipwindow-xcomponent",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android.app.PictureInPictureParams, enterPictureInPictureMode",
+          "url": "https://developer.android.com/develop/ui/compose/system/picture-in-picture",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.pip.content",
+      "parent": "ui.window.pip",
+      "name": "画中画内容呈现",
+      "what": "将持续内容呈现为小型悬浮画中画；媒体后台执行另归media",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "PictureInPictureParams, Activity.enterPictureInPictureMode",
+          "url": "https://developer.android.com/develop/ui/compose/system/picture-in-picture",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.split_free",
+      "parent": "ui.window",
+      "name": "分屏/多窗/自由窗口",
+      "what": "多应用窗口共存形态：分屏、自由窗口、多实例。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "isInFreeWindowMode, on('freeWindowModeChange'), setWindowLimits",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/application-adaptation-freeform-window",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "android:resizeableActivity, WindowManager, desktop windowing",
+          "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive/support-multi-window-mode",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.split_free.multiwindow",
+      "parent": "ui.window.split_free",
+      "name": "多窗口内容适配",
+      "what": "在应用窗口大小变化或与其他应用并列时维持内容可用",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Activity.isInMultiWindowMode",
+          "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive/support-multi-window-mode",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.subwindow",
+      "parent": "ui.window",
+      "name": "子窗口",
+      "what": "应用内独立于主窗口的子窗口创建与管理。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "createSubWindow, createSubWindowWithOptions",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/subwindow-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.subwindow.child",
+      "parent": "ui.window.subwindow",
+      "name": "应用子窗口呈现",
+      "what": "在应用主窗口之外承载独立的子窗口内容和交互",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "WindowStage.createSubWindow",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/subwindow-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.system_bars",
+      "parent": "ui.window",
+      "name": "系统栏与沉浸式布局",
+      "what": "状态栏/导航条避让与edge-to-edge沉浸式内容布局。",
+      "kind": "branch",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "setWindowLayoutFullScreen, getWindowAvoidArea, setWindowSystemBarProperties",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-develop-apply-immersive-effects",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "WindowInsetsCompat, WindowCompat.setDecorFitsSystemWindows",
+          "url": "https://developer.android.com/develop/ui/views/layout/edge-to-edge",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "safeAreaInset, UIStatusBarManager",
+          "url": "https://developer.apple.com/documentation/technotes/tn3105-customizing-uistatusbar-syle",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.system_bars.edge_to_edge",
+      "parent": "ui.window.system_bars",
+      "name": "边到边内容布局",
+      "what": "让应用内容延伸到系统栏区域并调整内容避让",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WindowInsetsCompat, WindowCompat",
+          "url": "https://developer.android.com/develop/ui/views/layout/edge-to-edge",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "ui.window.system_bars.immersive",
+      "parent": "ui.window.system_bars",
+      "name": "临时隐藏系统栏",
+      "what": "为沉浸式内容控制系统栏的隐藏与用户唤回",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "WindowInsetsControllerCompat",
+          "url": "https://developer.android.com/develop/ui/views/layout/immersive",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

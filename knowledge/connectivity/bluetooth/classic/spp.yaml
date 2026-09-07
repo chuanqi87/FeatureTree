@@ -1,0 +1,21 @@
+schema_version: 2
+feature_id: connectivity.bluetooth.classic.spp
+role: leaf
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 通过 RFCOMM/SPP 建立面向字节流的经典蓝牙数据通道。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []

@@ -1,9 +1,0 @@
-{
-  "task_id": "84eba8d3a29810c4b8a6701ed67fe949cbd46bf80c519c58e3fd8b170269adb6",
-  "feature_id": "commerce.iap.products",
-  "response_sha256": "321254507f85694b68fb9a6fc15754d41662cda9567ffed494a450cb06a76acd",
-  "delivery_valid": true,
-  "semantic_review_passed": false,
-  "production_accepted": false,
-  "errors": []
-}

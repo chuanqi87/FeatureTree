@@ -1,0 +1,815 @@
+{
+  "domain": "network",
+  "authored_count": 9,
+  "draft_clue_count": 35,
+  "authored": [
+    {
+      "id": "network",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "网络",
+        "en": "Networking"
+      },
+      "definition": "HTTP、套接字、DNS、热点与 VPN。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "network.hotspot",
+      "parent": "network",
+      "level": "L2",
+      "name": {
+        "zh": "热点与网络共享",
+        "en": "Hotspot and Tethering"
+      },
+      "definition": "本地热点与网络共享控制。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "network.hotspot.local",
+      "parent": "network.hotspot",
+      "level": "L3",
+      "name": {
+        "zh": "本地热点",
+        "en": "Local Hotspot"
+      },
+      "definition": "开启设备本地热点。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "network.http",
+      "parent": "network",
+      "level": "L2",
+      "name": {
+        "zh": "HTTP客户端",
+        "en": "HTTP Client"
+      },
+      "definition": "应用层 HTTP/HTTPS 请求。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "network.http.client",
+      "parent": "network.http",
+      "level": "L3",
+      "name": {
+        "zh": "HTTP请求",
+        "en": "HTTP Request"
+      },
+      "definition": "发起与管理 HTTP 请求。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "network.socket",
+      "parent": "network",
+      "level": "L2",
+      "name": {
+        "zh": "套接字",
+        "en": "Sockets"
+      },
+      "definition": "TCP/UDP 原始套接字。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "network.socket.tcp_udp",
+      "parent": "network.socket",
+      "level": "L3",
+      "name": {
+        "zh": "TCP与UDP",
+        "en": "TCP and UDP"
+      },
+      "definition": "面向连接与数据报套接字。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "network.vpn",
+      "parent": "network",
+      "level": "L2",
+      "name": {
+        "zh": "VPN",
+        "en": "VPN"
+      },
+      "definition": "应用层 VPN 服务扩展。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "network.vpn.app_vpn",
+      "parent": "network.vpn",
+      "level": "L3",
+      "name": {
+        "zh": "应用VPN扩展",
+        "en": "App VPN Extension"
+      },
+      "definition": "应用提供的系统 VPN 通道。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "network.connection",
+      "parent": "network",
+      "name": "网络连接与状态",
+      "what": "默认网络与按能力网络的获取、状态与计费感知（与connectivity域边界待审查）。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "network.connection.capability_request",
+      "parent": "network.connection",
+      "name": "按能力请求网络",
+      "what": "按传输类型/能力（WiFi/蜂窝/免计量）请求绑定特定网络。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ConnectivityManager.requestNetwork (NetworkRequest)",
+          "url": "https://developer.android.com/reference/android/net/ConnectivityManager#requestNetwork(android.net.NetworkRequest,%20android.net.ConnectivityManager.NetworkCallback)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "connection NetBearType/NetCap过滤 (候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-net-connection",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.connection.default_net",
+      "parent": "network.connection",
+      "name": "默认网络与能力查询",
+      "what": "获取当前默认网络及其传输/能力信息并监听变化。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ConnectivityManager.getActiveNetwork / registerNetworkCallback",
+          "url": "https://developer.android.com/reference/android/net/ConnectivityManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "NWPathMonitor",
+          "url": "https://developer.apple.com/documentation/network/nwpathmonitor",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.net.connection getDefaultNet / createNetConnection / on('netCapabilitiesChange')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-net-connection",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.connection.metered",
+      "parent": "network.connection",
+      "name": "计费网络感知",
+      "what": "感知当前网络是否计量计费/昂贵以控制流量。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "NET_CAPABILITY_NOT_METERED",
+          "url": "https://developer.android.com/reference/android/net/NetworkCapabilities",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "NWPath.isExpensive",
+          "url": "https://developer.apple.com/documentation/network/nwpath/isexpensive",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.dns",
+      "parent": "network",
+      "name": "DNS解析",
+      "what": "域名解析的自定义与查询能力。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "network.dns.custom",
+      "parent": "network.dns",
+      "name": "自定义DNS规则",
+      "what": "为请求指定自定义DNS服务器与静态/动态解析规则。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "rcp Rcp_DnsConfiguration (dnsRules/DnsServerRule/StaticDnsRuleItem)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/rcp-development-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.dns.doh",
+      "parent": "network.dns",
+      "name": "DNS over HTTPS",
+      "what": "以加密HTTPS通道执行DNS解析。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "rcp dnsOverHttps配置",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/rcp-development-guide",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "OkHttp DnsOverHttps (生态)",
+          "url": "https://square.github.io/okhttp/",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.dns.lookup",
+      "parent": "network.dns",
+      "name": "主机名解析查询",
+      "what": "将主机名解析为IP地址（含IPv6）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "InetAddress.getAllByName",
+          "url": "https://developer.android.com/reference/java/net/InetAddress",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "getaddrinfo / NWEndpoint主机解析 (候选)",
+          "url": "https://developer.apple.com/documentation/network/nwendpoint",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "connection.getAddresses (候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-net-connection",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.handover",
+      "parent": "network",
+      "name": "网络切换增强",
+      "what": "Wi-Fi/蜂窝间无缝切换与网络加速决策。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "network.handover.boost",
+      "parent": "network.handover",
+      "name": "网络加速与切换",
+      "what": "订阅网络切换事件并申请传输加速（HarmonyOS Network Boost候选）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "@kit.NetworkBoostKit netHandover.on('handoverChange')",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/net-boost-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.http",
+      "parent": "network",
+      "name": "HTTP客户端",
+      "what": "HTTP(S)请求的构建、发送、响应处理与高级控制。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "network.http.basic",
+      "parent": "network.http",
+      "name": "基础HTTP请求",
+      "what": "发起GET/POST/PUT/DELETE等HTTP请求并处理响应。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "HttpURLConnection / OkHttp(生态)",
+          "url": "https://developer.android.com/reference/java/net/HttpURLConnection",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "URLSession dataTask",
+          "url": "https://developer.apple.com/documentation/foundation/urlsession",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.net.http http.createHttp().request",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-http",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.http.cache",
+      "parent": "network.http",
+      "name": "HTTP缓存",
+      "what": "配置与清理HTTP响应缓存。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "HttpResponseCache",
+          "url": "https://developer.android.com/reference/java/net/HttpResponseCache",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "URLCache",
+          "url": "https://developer.apple.com/documentation/foundation/urlcache",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.net.http HttpRequestOptions usingCache (候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-http",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.http.cookies",
+      "parent": "network.http",
+      "name": "Cookie管理",
+      "what": "存储、读取与序列化HTTP Cookie。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "CookieHandler / CookieManager",
+          "url": "https://developer.android.com/reference/java/net/CookieManager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "HTTPCookieStorage",
+          "url": "https://developer.apple.com/documentation/foundation/httpcookiestorage",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "rcp 响应/请求Cookie结构 (Rcp_RequestCookies)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/rcp-development-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.http.diagnostics",
+      "parent": "network.http",
+      "name": "请求级诊断",
+      "what": "收集单次请求的调试信息与收发事件用于排障。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "rcp Rcp_DebugInfo / 事件收集开关 (请求级)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/rcp-development-guide",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "URLSession metrics (URLSessionTaskMetrics)",
+          "url": "https://developer.apple.com/documentation/foundation/urlsessiontaskmetrics",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.http.headers",
+      "parent": "network.http",
+      "name": "HTTP头处理",
+      "what": "读写请求/响应头映射。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "URLConnection.setRequestProperty",
+          "url": "https://developer.android.com/reference/java/net/URLConnection",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "URLRequest.allHTTPHeaderFields / HTTPURLResponse",
+          "url": "https://developer.apple.com/documentation/foundation/nsurlrequest",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "rcp Rcp_HeaderMap / Rcp_Header",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/rcp-development-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.http.interceptor",
+      "parent": "network.http",
+      "name": "请求拦截器",
+      "what": "在请求发送前后插入拦截处理逻辑。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "okhttp3.Interceptor (生态)",
+          "url": "https://square.github.io/okhttp/interceptors/",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "rcp 异步拦截器 Rcp_RequestInterceptor (请求前/响应后处理)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/rcp-development-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.http.progress_events",
+      "parent": "network.http",
+      "name": "传输进度与流式回调",
+      "what": "订阅上传/下载进度、数据到达、头部到达与取消等事件。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "URLSession delegate didReceive data/didSendBodyData",
+          "url": "https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "OkHttp ProgressListener模式 (生态)",
+          "url": "https://square.github.io/okhttp/",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "rcp onProgress/onDataReceive/onHeaderReceive/onDataEnd/onCanceled 回调集",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/rcp-development-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.http.proxy",
+      "parent": "network.http",
+      "name": "代理配置",
+      "what": "为HTTP请求配置代理及代理例外列表。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ProxySelector",
+          "url": "https://developer.android.com/reference/java/net/ProxySelector",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "URLSessionConfiguration.connectionProxyDictionary",
+          "url": "https://developer.apple.com/documentation/foundation/urlsessionconfiguration",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "rcp Rcp_Proxy / 代理例外列表",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/rcp-development-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.http.quic",
+      "parent": "network.http",
+      "name": "QUIC/HTTP3传输",
+      "what": "使用QUIC协议进行低时延HTTP传输。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "URLSession (HTTP/3自动协商,候选)",
+          "url": "https://developer.apple.com/documentation/foundation/urlsession",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "rcp C API QUIC会话 (rcp_quic.h, 26.0.0起)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/rcp-development-guide",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Cronet QUIC (生态)",
+          "url": "https://developer.android.com/develop/connectivity/cronet/reference/org/chromium/net/CronetEngine",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.http.rcp",
+      "parent": "network.http",
+      "name": "高性能HTTP客户端",
+      "what": "RCP等高性能传输库的会话化HTTP请求能力。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "Remote Communication Kit rcp (Rcp_Session/Rcp_Request, @kit.RemoteCommunicationKit 4.1.0+)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/rcp-development-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.http.request_body",
+      "parent": "network.http",
+      "name": "请求构建与表单上传",
+      "what": "构建请求体、表单字段与multipart文件上传。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "RequestBody.create / MultipartBody (OkHttp生态)",
+          "url": "https://square.github.io/okhttp/",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "URLRequest.httpBody",
+          "url": "https://developer.apple.com/documentation/foundation/nsurlrequest",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "rcp Rcp_Form / Rcp_MultipartForm / Rcp_FormFieldFileValue",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/rcp-development-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.http.server_auth",
+      "parent": "network.http",
+      "name": "HTTP服务器认证",
+      "what": "提供用户名密码等服务器侧认证凭据。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Authenticator (java.net)",
+          "url": "https://developer.android.com/reference/java/net/Authenticator",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "rcp Rcp_ServerAuthentication (用户名/密码凭据)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/rcp-development-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.http.tls",
+      "parent": "network.http",
+      "name": "TLS与证书配置",
+      "what": "配置CA、客户端证书与服务器认证等传输安全参数。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Network Security Config (manifest) / SSLSocketFactory",
+          "url": "https://developer.android.com/privacy-and-security/security-config",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "URLSessionDelegate didReceiveChallenge / urlAuthenticationMethodClientCertificate",
+          "url": "https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "rcp Rcp_SecurityConfig (远端认证/CA/客户端证书)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/rcp-development-guide",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.rpc",
+      "parent": "network",
+      "name": "RPC通信",
+      "what": "高性能远程过程调用库（非Web服务）。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "network.rpc.urpc",
+      "parent": "network.rpc",
+      "name": "高性能RPC",
+      "what": "基于urpc等库的低时延RPC通信（HarmonyOS候选）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "urpc RPC通信库 (5.0.1(13)起,候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.sockets",
+      "parent": "network",
+      "name": "套接字",
+      "what": "TCP/UDP及本地套接字基础网络通信。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "network.sockets.local",
+      "parent": "network.sockets",
+      "name": "本地套接字",
+      "what": "UNIX域套接字的本机进程间网络式通信。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "LocalSocket / LocalServerSocket",
+          "url": "https://developer.android.com/reference/android/net/LocalSocket",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.net.socket 本地socket (候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-socket",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.sockets.mcast",
+      "parent": "network.sockets",
+      "name": "组播",
+      "what": "加入组播组进行一对多数据报收发（iOS需组播 entitlement）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MulticastSocket",
+          "url": "https://developer.android.com/reference/java/net/MulticastSocket",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "NWParameters requiredLocalEndpoint / multicast (需entitlement,候选)",
+          "url": "https://developer.apple.com/documentation/network/nwparameters",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.sockets.tcp",
+      "parent": "network.sockets",
+      "name": "TCP套接字",
+      "what": "建立TCP连接进行流式数据收发。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "java.net.Socket",
+          "url": "https://developer.android.com/reference/java/net/Socket",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Network.framework NWConnection (tcp)",
+          "url": "https://developer.apple.com/documentation/network/nwconnection",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.net.socket constructTCPSocketInstance",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-socket",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.sockets.udp",
+      "parent": "network.sockets",
+      "name": "UDP套接字",
+      "what": "发送与接收UDP数据报。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "java.net.DatagramSocket",
+          "url": "https://developer.android.com/reference/java/net/DatagramSocket",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "NWConnection (udp)",
+          "url": "https://developer.apple.com/documentation/network/nwconnection",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.net.socket constructUDPSocketInstance",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-socket",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.vpn",
+      "parent": "network",
+      "name": "VPN",
+      "what": "应用级VPN通道的建立与管理。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "network.vpn.tunnel",
+      "parent": "network.vpn",
+      "name": "VPN隧道建立",
+      "what": "以VPN服务形式建立系统级隧道并路由流量（需用户授权）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "VpnService / Builder.establish",
+          "url": "https://developer.android.com/reference/android/net/VpnService",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "NEVPNManager / NEPacketTunnelProvider (NetworkExtension)",
+          "url": "https://developer.apple.com/documentation/networkextension/nevpnikev2protocol",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "VPN扩展能力 (候选,版本与权限未核实)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "network.websocket",
+      "parent": "network",
+      "name": "WebSocket",
+      "what": "全双工WebSocket长连接通信。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "network.websocket.client",
+      "parent": "network.websocket",
+      "name": "WebSocket客户端",
+      "what": "建立WebSocket连接并收发消息与状态回调。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "URLSessionWebSocketTask",
+          "url": "https://developer.apple.com/documentation/foundation/urlsessionwebsockettask",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "okhttp3.WebSocket (生态,平台无OS API)",
+          "url": "https://square.github.io/okhttp/",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.net.webSocket webSocket.createWebSocket",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-web-socket",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

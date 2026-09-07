@@ -1,0 +1,864 @@
+{
+  "domain": "security",
+  "authored_count": 10,
+  "draft_clue_count": 39,
+  "authored": [
+    {
+      "id": "security",
+      "parent": null,
+      "level": "L1",
+      "name": {
+        "zh": "安全与隐私",
+        "en": "Security and Privacy"
+      },
+      "definition": "权限模型、密钥、生物识别、安全存储与数据保护。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "security.biometrics",
+      "parent": "security",
+      "level": "L2",
+      "name": {
+        "zh": "生物识别",
+        "en": "Biometrics"
+      },
+      "definition": "指纹、面容等本地认证。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "security.biometrics.local_auth",
+      "parent": "security.biometrics",
+      "level": "L3",
+      "name": {
+        "zh": "本地生物认证",
+        "en": "Local Biometric Auth"
+      },
+      "definition": "解锁应用或密钥的生物识别。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "security.crypto",
+      "parent": "security",
+      "level": "L2",
+      "name": {
+        "zh": "密钥与密码学",
+        "en": "Keys and Cryptography"
+      },
+      "definition": "密钥库与加解密原语。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "security.crypto.keystore",
+      "parent": "security.crypto",
+      "level": "L3",
+      "name": {
+        "zh": "硬件支持密钥库",
+        "en": "Hardware-Backed Keystore"
+      },
+      "definition": "系统密钥库中的密钥生成与使用。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "security.permissions",
+      "parent": "security",
+      "level": "L2",
+      "name": {
+        "zh": "权限模型",
+        "en": "Permission Model"
+      },
+      "definition": "安装时/运行时权限与敏感能力授权（横切主文）。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "security.permissions.runtime",
+      "parent": "security.permissions",
+      "level": "L3",
+      "name": {
+        "zh": "运行时权限请求",
+        "en": "Runtime Permission Request"
+      },
+      "definition": "运行时向用户请求危险权限。",
+      "knowledge_role": "leaf",
+      "bindings": {
+        "android": [
+          {
+            "kind": "class",
+            "id": "android.content.pm.PackageManager",
+            "url": "https://developer.android.com/reference/android/content/pm/PackageManager",
+            "role": "related",
+            "note": "requestPermissions"
+          }
+        ],
+        "ios": [
+          {
+            "kind": "other",
+            "id": "Info.plist usage descriptions + per-API prompts",
+            "url": "https://developer.apple.com/documentation/uikit/requesting-access-to-protected-resources",
+            "role": "primary"
+          }
+        ],
+        "harmonyos": [
+          {
+            "kind": "module",
+            "id": "@ohos.abilityAccessCtrl",
+            "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-abilityaccessctrl",
+            "role": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "id": "security.permissions.special",
+      "parent": "security.permissions",
+      "level": "L3",
+      "name": {
+        "zh": "特殊权限与设置页",
+        "en": "Special Permissions Settings"
+      },
+      "definition": "需跳转系统设置的特殊授权（如所有文件、悬浮窗）。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    },
+    {
+      "id": "security.secure_storage",
+      "parent": "security",
+      "level": "L2",
+      "name": {
+        "zh": "安全存储",
+        "en": "Secure Storage"
+      },
+      "definition": "密钥串/凭据加密存储。",
+      "knowledge_role": "rollup",
+      "bindings": {}
+    },
+    {
+      "id": "security.secure_storage.credentials",
+      "parent": "security.secure_storage",
+      "level": "L3",
+      "name": {
+        "zh": "凭据安全存储",
+        "en": "Credential Secure Storage"
+      },
+      "definition": "密码、令牌等敏感凭据存储。",
+      "knowledge_role": "leaf",
+      "bindings": {}
+    }
+  ],
+  "draft_clues": [
+    {
+      "id": "security.attestation",
+      "parent": "security",
+      "name": "完整性与信任证明",
+      "what": "应用/设备完整性的证明与验证。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "security.attestation.app_integrity",
+      "parent": "security.attestation",
+      "name": "应用完整性证明",
+      "what": "获取应用未被篡改/正版安装的证明用于服务端风控。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Play Integrity API (requestIntegrityToken)",
+          "url": "https://developer.android.com/google/play/integrity/overview",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "App Attest Service DCAppAttestService generateKey/attestKey",
+          "url": "https://developer.apple.com/documentation/devicecheck/dcappattestservice",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.attestation.device_token",
+      "parent": "security.attestation",
+      "name": "设备维度信任令牌",
+      "what": "获取/验证跨设备一致的可信设备令牌用于防刷与真机判定。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "DeviceCheck DCDevice.generateToken",
+          "url": "https://developer.apple.com/documentation/devicecheck/dcdevice/generatetoken(completionhandler:)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "DeviceVerify deviceToken (端侧获取+REST服务端验证)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-verify-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.attestation.key_attestation",
+      "parent": "security.attestation",
+      "name": "密钥证明",
+      "what": "证明密钥生成于安全硬件及其属性。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "Key Attestation (KeyMint attestation)",
+          "url": "https://developer.android.com/privacy-and-security/security-key-attestation",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "HUKS 密钥证明 attestKeyItem (候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/huks-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.biometrics",
+      "parent": "security",
+      "name": "生物识别",
+      "what": "指纹/人脸等生物特征的系统认证能力。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "security.biometrics.device_credential",
+      "parent": "security.biometrics",
+      "name": "设备凭据认证",
+      "what": "以锁屏PIN/密码作为后备或替代的生物识别认证策略。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "BiometricPrompt.Builder.setAllowedAuthenticators(BIOMETRIC_DEVICE_CREDENTIAL)",
+          "url": "https://developer.android.com/reference/androidx/biometric/BiometricPrompt.Builder",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "LAPolicy.deviceOwnerAuthentication",
+          "url": "https://developer.apple.com/documentation/localauthentication/lapolicy/deviceownerauthentication",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "userAuth AuthType PIN (候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-useriam-userauth",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.biometrics.prompt",
+      "parent": "security.biometrics",
+      "name": "生物识别认证",
+      "what": "拉起系统生物识别弹窗完成认证并处理成功/失败/取消。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "androidx.biometric.BiometricPrompt",
+          "url": "https://developer.android.com/reference/androidx/biometric/BiometricPrompt",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "LAContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics)",
+          "url": "https://developer.apple.com/documentation/localauthentication/lacontext/evaluatepolicy(_:options:completion:)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.userIAM.userAuth getUserAuthInstance / start",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-useriam-userauth",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.certificates",
+      "parent": "security",
+      "name": "证书管理",
+      "what": "X.509证书的解析校验与安全存储。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "security.certificates.parse",
+      "parent": "security.certificates",
+      "name": "证书解析与校验",
+      "what": "解析证书链并做签名与有效期校验。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "java.security.cert.CertificateFactory / PKIXParameters",
+          "url": "https://developer.android.com/reference/java/security/cert/CertificateFactory",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "SecTrustEvaluateWithError / SecCertificateCreateWithData",
+          "url": "https://developer.apple.com/documentation/security/sectrustevaluatewitherror(_:)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Device Certificate Kit 证书算法库 (解析/校验)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-certificate-kit-intro",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.certificates.storage",
+      "parent": "security.certificates",
+      "name": "证书与私钥存储",
+      "what": "在系统证书管理服务中存储/获取证书与私钥。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.security.KeyChain",
+          "url": "https://developer.android.com/reference/android/security/KeyChain",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Keychain 证书条目 / SCEP配置描述文件(企业)",
+          "url": "https://developer.apple.com/documentation/security/keychain-services",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Device Certificate Kit 证书管理服务",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-certificate-kit-intro",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.crypto",
+      "parent": "security",
+      "name": "密钥与加密",
+      "what": "加解密原语与系统密钥管理。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "security.crypto.cipher",
+      "parent": "security.crypto",
+      "name": "加解密原语",
+      "what": "对称加解密（AES等）与填充模式的执行。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "javax.crypto.Cipher",
+          "url": "https://developer.android.com/reference/javax/crypto/Cipher",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CryptoKit SymmetricCryptoModule? AES.GCM / CommonCrypto",
+          "url": "https://developer.apple.com/documentation/cryptokit/aes/gcm",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.security.cryptoFramework Cipher (加密/解密)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-crypto-framework",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.crypto.digest",
+      "parent": "security.crypto",
+      "name": "摘要与MAC",
+      "what": "哈希摘要与消息认证码计算。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "MessageDigest / javax.crypto.Mac",
+          "url": "https://developer.android.com/reference/java/security/MessageDigest",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CryptoKit SHA256 / HMAC",
+          "url": "https://developer.apple.com/documentation/cryptokit/hmac",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "cryptoFramework Md / Mac",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-crypto-framework",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.crypto.hpke",
+      "parent": "security.crypto",
+      "name": "HPKE混合公钥加密",
+      "what": "RFC 9180混合公钥加密收发（新版API候选）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "android.crypto.hpke (API35+)",
+          "url": "https://developer.android.com/reference/android/crypto/hpke/Hpke",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CryptoKit HPKE (候选)",
+          "url": "https://developer.apple.com/documentation/cryptokit/hpke",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.crypto.kdf",
+      "parent": "security.crypto",
+      "name": "密钥派生与协商",
+      "what": "从口令/共享秘密派生密钥或完成双方密钥协商。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "SecretKeyFactory (PBKDF2) / KeyAgreement (ECDH)",
+          "url": "https://developer.android.com/reference/javax/crypto/SecretKeyFactory",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CryptoKit HKDF / Curve25519.KeyAgreement",
+          "url": "https://developer.apple.com/documentation/cryptokit/hkdf",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "HUKS 密钥派生/密钥协商",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/huks-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.crypto.keystore",
+      "parent": "security.crypto",
+      "name": "系统密钥库与密钥管理",
+      "what": "在安全环境生成、导入、存储与管理密钥的生命周期。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "AndroidKeyStore (KeyGenerator/KeyPairGenerator)",
+          "url": "https://developer.android.com/reference/java/security/KeyStore",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "Secure Enclave密钥 (kSecAttrTokenIDSecureEnclavePassword)",
+          "url": "https://developer.apple.com/documentation/security/certificate_key_and_trust_services/keys",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "HUKS (Universal Keystore Kit) 密钥生成/导入/派生/协商/证明",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/huks-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.crypto.rand",
+      "parent": "security.crypto",
+      "name": "安全随机数",
+      "what": "生成密码学安全随机数。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "SecureRandom",
+          "url": "https://developer.android.com/reference/java/security/SecureRandom",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "SecRandomCopyBytes",
+          "url": "https://developer.apple.com/documentation/security/1399291-secrandomcopybytes",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "cryptoFramework Random (候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-crypto-framework",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.crypto.signature",
+      "parent": "security.crypto",
+      "name": "签名与验签",
+      "what": "非对称数字签名的生成与验证。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "java.security.Signature",
+          "url": "https://developer.android.com/reference/java/security/Signature",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "CryptoKit Curve25519.Signing / SecKeyCreateSignature",
+          "url": "https://developer.apple.com/documentation/cryptokit/curve25519/signing/privatekey",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "cryptoFramework Sign / Verify",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-crypto-framework",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.data_protection",
+      "parent": "security",
+      "name": "数据保护",
+      "what": "文件与企业级数据防泄漏与加密恢复。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "security.data_protection.dlp",
+      "parent": "security.data_protection",
+      "name": "文件分级管控",
+      "what": "企业MDM场景识别关键资产文件并阻断外发（HarmonyOS候选）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "fileGuard (KIA文件识别/外发管控, MDM限定)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.data_protection.recovery_key",
+      "parent": "security.data_protection",
+      "name": "企业恢复密钥",
+      "what": "企业场景磁盘加密数据解密与锁屏密码重置（MDM限定候选）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "recoveryKey (企业恢复密钥, MDM限定)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/mdm-kit-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.device_safety",
+      "parent": "security",
+      "name": "设备安全服务",
+      "what": "HarmonyOS Device Security Kit系安全检测与风控能力（多为他端无对应）。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "security.device_safety.antivirus",
+      "parent": "security.device_safety",
+      "name": "病毒防护检测",
+      "what": "查询设备病毒查杀与防护状态（NDK候选）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "SecurityAntivirus C API (security_antivirus.h,候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/device-security-kit",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.device_safety.fraud_detection",
+      "parent": "security.device_safety",
+      "name": "反诈与业务风险检测",
+      "what": "获取用户选择的诈骗消息/通话记录或识别涉诈与自动化作弊风险。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "AntifraudPicker / BusinessRiskIntelligentDetection",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-security-kit-intro",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.device_safety.malicious_url",
+      "parent": "security.device_safety",
+      "name": "恶意URL检测",
+      "what": "检测URL是否为恶意/钓鱼链接。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "SafetyDetect 恶意URL检测",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/safety-detect-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.device_safety.risk_engine",
+      "parent": "security.device_safety",
+      "name": "风控引擎",
+      "what": "提交多维风险因子获得综合风险评估结果。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "RiskControlEngine (星盾机密风控引擎)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-security-kit-intro",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.device_safety.security_audit",
+      "parent": "security.device_safety",
+      "name": "安全审计订阅",
+      "what": "订阅统一安全审计数据流。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "SecurityAudit 订阅/取消订阅接口",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-security-kit-intro",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.device_safety.sys_integrity",
+      "parent": "security.device_safety",
+      "name": "系统完整性检测",
+      "what": "检测设备系统是否被root/破解并给出风险评级。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "SafetyDetect 系统完整性检测",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/safety-detect-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.device_safety.trusted_app",
+      "parent": "security.device_safety",
+      "name": "可信应用服务与数据证明",
+      "what": "应用数据安全证明（证明密钥/会话、安全位置、媒体防篡改）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "TrustedAppService (TrustedAppServiceClient)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-security-kit-intro",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.device_safety.trusted_auth",
+      "parent": "security.device_safety",
+      "name": "数字盾交易认证",
+      "what": "面向金融应用的数字盾密码管理、交易与生物特征认证（HarmonyOS候选）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "TrustedAuthentication (数字盾服务)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-security-kit-intro",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.permissions",
+      "parent": "security",
+      "name": "权限模型",
+      "what": "应用敏感权限的声明、请求与校验机制。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "security.permissions.check",
+      "parent": "security.permissions",
+      "name": "权限校验",
+      "what": "查询自身/他方权限授予状态。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ContextCompat.checkSelfPermission",
+          "url": "https://developer.android.com/reference/androidx/core/content/ContextCompat",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "查询API如 AVCaptureDevice.authorizationStatus",
+          "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice/authorizationstatus(for:)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "abilityAccessCtrl.checkAccessToken / verifyAccessToken",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-ability-access-control",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.permissions.request",
+      "parent": "security.permissions",
+      "name": "运行时权限请求",
+      "what": "向用户弹窗请求敏感资源访问权限并处理授权结果。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "android",
+          "symbol": "ActivityCompat.requestPermissions / registerForActivityResult",
+          "url": "https://developer.android.com/reference/androidx/core/app/ActivityCompat",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "ios",
+          "symbol": "请求模式如 AVCaptureDevice.requestAccess / PHPhotoLibrary.requestAuthorization",
+          "url": "https://developer.apple.com/documentation/avfoundation/avcapturedevice/requestaccess(for:completionhandler:)",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "@ohos.abilityAccessCtrl requestPermissionsFromUser",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-ability-access-control",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.privacy",
+      "parent": "security",
+      "name": "隐私保护",
+      "what": "应用侧隐私状态感知与数据防泄漏控制。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "security.privacy.anti_peep",
+      "parent": "security.privacy",
+      "name": "防窥保护",
+      "what": "感知窥视状态并拉起系统蒙层遮盖敏感信息（HarmonyOS候选）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "DlpAntiPeep 窥视状态查询/系统蒙层",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-security-kit-intro",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.privacy.super_privacy",
+      "parent": "security.privacy",
+      "name": "超级隐私模式感知",
+      "what": "查询超级隐私模式状态并调整个性化等行为（HarmonyOS候选）。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "harmonyos",
+          "symbol": "SuperPrivacyMode 状态查询",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/device-security-kit-intro",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.privacy.tracking_consent",
+      "parent": "security.privacy",
+      "name": "跟踪授权与广告标识",
+      "what": "跨应用跟踪的授权请求与广告标识符读取。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "AppTrackingTransparency ATTrackingManager.requestTrackingAuthorization",
+          "url": "https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "Privacy Sandbox / 广告ID (AdId) 读取(候选,与commerce域交叉)",
+          "url": "https://developer.android.com/privacy-and-security/privacy-sandbox",
+          "status": "candidate_unverified"
+        }
+      ]
+    },
+    {
+      "id": "security.secure_storage",
+      "parent": "security",
+      "name": "安全存储",
+      "what": "凭据与敏感数据的加密存储。",
+      "kind": "branch",
+      "api": []
+    },
+    {
+      "id": "security.secure_storage.keychain",
+      "parent": "security.secure_storage",
+      "name": "钥匙串与凭据安全存储",
+      "what": "在系统安全存储中保存密码/令牌/密钥并控制访问。",
+      "kind": "capability",
+      "api": [
+        {
+          "platform": "ios",
+          "symbol": "SecItemAdd / kSecClassGenericPassword",
+          "url": "https://developer.apple.com/documentation/security/keychain-services",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "android",
+          "symbol": "androidx.security.crypto EncryptedSharedPreferences",
+          "url": "https://developer.android.com/reference/androidx/security/crypto/EncryptedSharedPreferences",
+          "status": "candidate_unverified"
+        },
+        {
+          "platform": "harmonyos",
+          "symbol": "Asset Store Kit @ohos.security.asset (关键资产存储,候选)",
+          "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/asset-store-kit-overview",
+          "status": "candidate_unverified"
+        }
+      ]
+    }
+  ],
+  "notice": "Discovery input only; do not copy draft nodes into taxonomy unchanged."
+}

@@ -1,0 +1,27 @@
+schema_version: 2
+feature_id: ui.layout.scroll
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 可滚动内容容器及其回收、刷新与嵌套协调。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- ui.layout.scroll.container
+- ui.layout.scroll.nested
+- ui.layout.scroll.recycling
+- ui.layout.scroll.refresh
+- ui.layout.scroll.waterfall

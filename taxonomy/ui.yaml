@@ -6,7 +6,7 @@ features:
   name:
     zh: 界面与窗口
     en: UI and Windowing
-  definition: 布局、控件、导航、窗口形态与主题。
+  definition: 应用界面范式、布局、控件、导航、窗口形态、主题、动效与系统壳层 UI 集成；不含无障碍与原生绘图底层。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -17,8 +17,11 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 布局、控件、导航、窗口形态与主题。
-    excludes: []
+    - 声明/命令式 UI、布局容器、控件、导航、多窗、主题资源、动画、桌面壳/表盘 UI 入口
+    excludes:
+    - a11y 无障碍树
+    - graphics 底层绘制
+    - app.desktop 小组件宿主生命周期
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -28,61 +31,32 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: ui.declarative
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - ui
+- id: ui.animation
   level: L2
   parent: ui
   name:
-    zh: 声明式UI框架
-    en: Declarative UI Framework
-  definition: 以状态驱动描述界面的声明式框架。
+    zh: 动效与动画
+    en: Animation and Motion
+  definition: 属性动画、转场、曲线与共享元素过渡。
   knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  aliases:
-  - Jetpack Compose
-  - SwiftUI
-  - ArkUI
-  knowledge_path: knowledge/ui/declarative/_rollup.yaml
+  knowledge_path: knowledge/ui/animation/_rollup.yaml
   bindings: {}
   comparison_scope:
     includes:
-    - 以状态驱动描述界面的声明式框架。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: ui.imperative
-  level: L2
-  parent: ui
-  name:
-    zh: 命令式视图系统
-    en: Imperative View System
-  definition: 以命令式构建与变更视图树的系统。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  aliases:
-  - Android View
-  - UIKit
-  knowledge_path: knowledge/ui/imperative/_rollup.yaml
-  bindings: {}
-  comparison_scope:
-    includes:
-    - 显式创建、更新与销毁界面对象
+    - property、transition、curve、shared_element
     excludes:
-    - 与声明式框架的总体比较文章
+    - 控件内帧动画见 ui.controls.image
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -92,69 +66,19 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: ui.declarative.vs_imperative
-  level: L3
-  parent: ui.declarative
-  name:
-    zh: 状态驱动界面更新
-    en: State-driven UI Updates
-  definition: 将应用状态变化同步为界面变化，并维护状态与显示的一致性。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: analog
-  bindings:
-    android:
-    - kind: package
-      id: androidx.compose.ui
-      url: https://developer.android.com/reference/kotlin/androidx/compose/ui/package-summary
-      role: primary
-      note: 声明式
-    ios:
-    - kind: framework
-      id: SwiftUI
-      url: https://developer.apple.com/documentation/swiftui
-      role: primary
-    - kind: framework
-      id: UIKit
-      url: https://developer.apple.com/documentation/uikit
-      role: related
-    harmonyos:
-    - kind: kit
-      id: ArkUI
-      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkui-overview
-      role: primary
-  knowledge_path: knowledge/ui/declarative/vs_imperative.yaml
-  aliases:
-  - 声明式与命令式模型对照
-  comparison_scope:
-    includes:
-    - 状态与界面绑定
-    - 更新触发与更新范围
-    - 状态保存与组件生命周期的协作
-    excludes:
-    - 按钮等具体控件的属性全集
-  notes: 保留历史 ID 以维持引用；节点名称和比较对象已中立化。
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ui_concern
 - id: ui.controls
   level: L2
   parent: ui
   name:
-    zh: 控件类别
-    en: Control Categories
-  definition: 面向用户的标准控件类别（非属性级）。
+    zh: 控件与交互件
+    en: Controls and Widgets
+  definition: 可复用交互与展示控件类别：选择、文本、弹层、菜单、选择器、进度、图像、图表与高级控件。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -162,41 +86,13 @@ features:
   - tablet
   privacy_class: none
   knowledge_path: knowledge/ui/controls/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 面向用户的标准控件类别（非属性级）。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: ui.controls.button
-  level: L3
-  parent: ui.controls
-  name:
-    zh: 按钮
-    en: Button
-  definition: 跨框架同类用户控件：按钮。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  knowledge_path: knowledge/ui/controls/button.yaml
-  comparison_scope:
-    includes:
-    - 表达可点击操作
-    - 触发动作和表达交互状态
+    - button_selection、text_display、dialog、menu、picker、progress、image、chart、advanced
     excludes:
-    - 每个框架的属性与修饰符全集
+    - 布局容器见 ui.layout
+    - 导航栏见 ui.navigation.app_bar
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -206,26 +102,34 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: ui.controls.list
-  level: L3
-  parent: ui.controls
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - ui.controls
+  sibling_axis: ui_concern
+- id: ui.layout
+  level: L2
+  parent: ui
   name:
-    zh: 列表
-    en: List
-  definition: 跨框架同类用户控件：列表。
-  knowledge_role: leaf
+    zh: 布局与滚动
+    en: Layout and Scrolling
+  definition: 线性/弹性/网格/约束布局、滚动容器与响应式分页。
+  knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  knowledge_path: knowledge/ui/controls/list.yaml
+  knowledge_path: knowledge/ui/layout/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 跨框架同类用户控件：列表。
-    excludes: []
+    - linear、flex、grid、constraint、scroll、responsive、pagination
+    excludes:
+    - 列表项控件外观见 ui.controls
+    - 导航结构见 ui.navigation
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -235,129 +139,20 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: ui.controls.navigation_bar
-  level: L3
-  parent: ui.controls
-  name:
-    zh: 导航栏
-    en: Navigation Bar
-  definition: 跨框架同类用户控件：导航栏。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  knowledge_path: knowledge/ui/controls/navigation_bar.yaml
-  comparison_scope:
-    includes:
-    - 跨框架同类用户控件：导航栏。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: ui.controls.dialog
-  level: L3
-  parent: ui.controls
-  name:
-    zh: 弹层对话框
-    en: Dialog Overlay
-  definition: 跨框架同类用户控件：弹层对话框。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  knowledge_path: knowledge/ui/controls/dialog.yaml
-  comparison_scope:
-    includes:
-    - 跨框架同类用户控件：弹层对话框。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: ui.controls.text_field
-  level: L3
-  parent: ui.controls
-  name:
-    zh: 文本输入框
-    en: Text Field
-  definition: 跨框架同类用户控件：文本输入框。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  knowledge_path: knowledge/ui/controls/text_field.yaml
-  comparison_scope:
-    includes:
-    - 跨框架同类用户控件：文本输入框。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: ui.controls.image
-  level: L3
-  parent: ui.controls
-  name:
-    zh: 图像视图
-    en: Image View
-  definition: 跨框架同类用户控件：图像视图。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  knowledge_path: knowledge/ui/controls/image.yaml
-  comparison_scope:
-    includes:
-    - 跨框架同类用户控件：图像视图。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: merged_from
+    sources:
+    - ui.controls.list
+  sibling_axis: ui_concern
 - id: ui.navigation
   level: L2
   parent: ui
   name:
-    zh: 导航栈
-    en: Navigation Stack
-  definition: 页面栈、路由与返回栈管理。
+    zh: 导航结构
+    en: Navigation Structure
+  definition: 页面栈、标签、抽屉/侧栏与应用栏导航模式。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -368,8 +163,10 @@ features:
   bindings: {}
   comparison_scope:
     includes:
-    - 页面栈、路由与返回栈管理。
-    excludes: []
+    - stack、tabs、drawer_sidebar、app_bar
+    excludes:
+    - 窗口分屏见 ui.window
+    - 转场动画见 ui.animation.transition
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -379,52 +176,34 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: ui.navigation.stack
-  level: L3
-  parent: ui.navigation
-  name:
-    zh: 页面导航栈
-    en: Page Navigation Stack
-  definition: 压栈/出栈式页面导航。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  knowledge_path: knowledge/ui/navigation/stack.yaml
-  comparison_scope:
-    includes:
-    - 压栈/出栈式页面导航。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
-- id: ui.window
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - ui.navigation
+  sibling_axis: ui_concern
+- id: ui.paradigm
   level: L2
   parent: ui
   name:
-    zh: 窗口与多窗
-    en: Window and Multi-Window
-  definition: 窗口、分屏、画中画与自由窗。
+    zh: 界面范式与状态
+    en: UI Paradigm and State
+  definition: 声明式/命令式构建模型、状态作用域、自定义组件与原生嵌入。
   knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  knowledge_path: knowledge/ui/window/_rollup.yaml
+  knowledge_path: knowledge/ui/paradigm/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 窗口、分屏、画中画与自由窗。
-    excludes: []
+    - 声明式 DSL、命令式视图树、本地/共享状态、自定义组件、原生嵌入
+    excludes:
+    - 具体控件见 ui.controls
+    - 布局算法见 ui.layout
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -434,26 +213,35 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: ui.window.multiwindow
-  level: L3
-  parent: ui.window
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: merged_from
+    sources:
+    - ui.declarative
+    - ui.imperative
+    - ui.declarative.vs_imperative
+  sibling_axis: ui_concern
+- id: ui.system_integration
+  level: L2
+  parent: ui
   name:
-    zh: 分屏与多窗
-    en: Split and Multi-Window
-  definition: 同时显示多个应用窗口或分屏。
-  knowledge_role: leaf
+    zh: 系统壳层UI集成
+    en: System Shell UI Integration
+  definition: 状态栏/快捷栏等桌面壳层条目与表盘/复杂功能 UI 扩展入口。
+  knowledge_role: rollup
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  split_justification: presence
-  knowledge_path: knowledge/ui/window/multiwindow.yaml
+  knowledge_path: knowledge/ui/system_integration/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 同时显示多个应用窗口或分屏。
-    excludes: []
+    - desktop_shell、watchface
+    excludes:
+    - 桌面小组件见 app.desktop.widget
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -463,42 +251,19 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: ui.window.pip
-  level: L3
-  parent: ui.window
-  name:
-    zh: 画中画
-    en: Picture in Picture
-  definition: 悬浮小窗持续播放或展示内容。
-  knowledge_role: leaf
-  layer: os
-  device_forms:
-  - phone
-  - tablet
-  privacy_class: none
-  leaf_at_this_level: true
-  split_justification: task
-  knowledge_path: knowledge/ui/window/pip.yaml
-  comparison_scope:
-    includes:
-    - 悬浮小窗持续播放或展示内容。
-    excludes: []
-  schema_version: 2
-  comparison_dimensions:
-  - availability
-  - programming_model
-  - lifecycle_background
-  - permissions_privacy
-  - limits_precision
-  - device_forms
-  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: ui_concern
 - id: ui.theme
   level: L2
   parent: ui
   name:
     zh: 主题与外观
     en: Theme and Appearance
-  definition: 深色模式、动态取色与系统外观。
+  definition: 深色模式、样式复用、动态配色、资源限定符与材质视觉效果。
   knowledge_role: rollup
   layer: os
   device_forms:
@@ -506,10 +271,12 @@ features:
   - tablet
   privacy_class: none
   knowledge_path: knowledge/ui/theme/_rollup.yaml
+  bindings: {}
   comparison_scope:
     includes:
-    - 深色模式、动态取色与系统外观。
-    excludes: []
+    - dark_mode、styling、customization、resource、visual_effects
+    excludes:
+    - 动效曲线见 ui.animation
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -519,25 +286,84 @@ features:
   - limits_precision
   - device_forms
   - api_surface
-- id: ui.theme.dark_mode
-  level: L3
-  parent: ui.theme
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - ui.theme
+  sibling_axis: ui_concern
+- id: ui.window
+  level: L2
+  parent: ui
   name:
-    zh: 深色模式
-    en: Dark Mode
-  definition: 跟随或强制深色/浅色外观。
+    zh: 窗口与系统栏
+    en: Window and System Bars
+  definition: 窗口获取与属性、系统栏、分屏/自由窗、画中画、方向与子窗。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/window/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - manage、system_bars、split_free、pip、orientation、subwindow
+    excludes:
+    - 导航栈见 ui.navigation.stack
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - ui.window
+  sibling_axis: ui_concern
+- id: ui.animation.curve
+  level: L3
+  parent: ui.animation
+  name:
+    zh: 动画曲线
+    en: Animation Curves
+  definition: 缓动与弹簧等时间曲线。
   knowledge_role: leaf
   layer: os
   device_forms:
   - phone
   - tablet
   privacy_class: none
-  leaf_at_this_level: true
-  knowledge_path: knowledge/ui/theme/dark_mode.yaml
+  knowledge_path: knowledge/ui/animation/curve.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SpringAnimation
+      url: https://developer.android.com/reference/androidx/dynamicanimation/animation/SpringAnimation
+      role: primary
+    ios:
+    - kind: class
+      id: spring
+      url: https://developer.apple.com/documentation/swiftui/animation/spring(response:dampingfraction:blendduration:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: curves / springMotion
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-curve
+      role: primary
   comparison_scope:
     includes:
-    - 跟随或强制深色/浅色外观。
-    excludes: []
+    - Interpolator/spring/curves
+    excludes:
+    - 属性驱动见 property
   schema_version: 2
   comparison_dimensions:
   - availability
@@ -547,3 +373,3756 @@ features:
   - limits_precision
   - device_forms
   - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: animation_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.animation.property
+  level: L3
+  parent: ui.animation
+  name:
+    zh: 属性动画
+    en: Property Animation
+  definition: 对透明度、位移、缩放等属性做插值动画。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/animation/property.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ObjectAnimator
+      url: https://developer.android.com/reference/android/animation/ObjectAnimator
+      role: primary
+    ios:
+    - kind: class
+      id: withAnimation
+      url: https://developer.apple.com/documentation/swiftui/withanimation(_:_:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: animateTo
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-explicit-animation
+      role: primary
+  comparison_scope:
+    includes:
+    - ObjectAnimator/animateTo/withAnimation
+    excludes:
+    - 页面转场见 transition
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: animation_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.animation.shared_element
+  level: L3
+  parent: ui.animation
+  name:
+    zh: 共享元素过渡
+    en: Shared Element Transition
+  definition: 跨页面/层级的共享元素几何过渡。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/animation/shared_element.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: SharedTransitionScope
+      url: https://developer.android.com/develop/ui/compose/animation/shared-elements
+      role: primary
+    ios:
+    - kind: class
+      id: matchedGeometryEffect
+      url: https://developer.apple.com/documentation/swiftui/view/matchedgeometryeffect(id:in:properties:anchor:issource:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: geometryTransition
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-transition-animation-geometrytransition
+      role: primary
+  comparison_scope:
+    includes:
+    - sharedElement/geometryTransition/matchedGeometryEffect
+    excludes:
+    - 普通转场见 transition
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: animation_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.animation.transition
+  level: L3
+  parent: ui.animation
+  name:
+    zh: 转场动画
+    en: Transition Animation
+  definition: 视图出现/消失与页面切换转场。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/animation/transition.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Transition
+      url: https://developer.android.com/reference/android/transition/Transition
+      role: primary
+    ios:
+    - kind: class
+      id: AnyTransition
+      url: https://developer.apple.com/documentation/swiftui/anytransition
+      role: primary
+    harmonyos:
+    - kind: module
+      id: pageTransition
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-transition-animation-page
+      role: primary
+  comparison_scope:
+    includes:
+    - Transition/pageTransition
+    excludes:
+    - 共享元素见 shared_element
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: animation_kind
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.advanced
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 高级复合控件
+    en: Advanced Controls
+  definition: 树、过滤器、计数器等复合/行业控件。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/advanced/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - tree、filter、counter
+    excludes:
+    - 基础按钮见 button_selection
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: control_category
+- id: ui.controls.button_selection
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 按钮与选择
+    en: Buttons and Selection
+  definition: 动作按钮与开关/单选/多选/分段/滑条等选择控件。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/button_selection/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - action、toggle、choices、segment、range、rating
+    excludes:
+    - 文本输入见 text_display
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: renamed_from
+    sources:
+    - ui.controls.button
+  sibling_axis: control_category
+- id: ui.controls.chart
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 图表控件
+    en: Charts
+  definition: 数据图表与仪表盘类可视化控件。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/chart/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - data_chart、gauge
+    excludes:
+    - 通用图像见 image
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: control_category
+- id: ui.controls.dialog
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 对话框与弹层
+    en: Dialogs and Sheets
+  definition: 告警、自定义、半屏 sheet 与全屏覆盖弹层。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/dialog/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - alert、sheet、custom、full_cover
+    excludes:
+    - 轻提示见 popup_toast
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - ui.controls.dialog
+  sibling_axis: control_category
+- id: ui.controls.image
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 图像视图
+    en: Image Views
+  definition: 静态图像展示与简单帧动画图像。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/image/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - display、frame_animation
+    excludes:
+    - 媒体解码见 media.image
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: kept
+    sources:
+    - ui.controls.image
+  sibling_axis: control_category
+- id: ui.controls.menu
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 菜单
+    en: Menus
+  definition: 上下文菜单与层级菜单。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/menu/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - context、hierarchy
+    excludes:
+    - 导航抽屉见 ui.navigation.drawer_sidebar
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: control_category
+- id: ui.controls.picker
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 选择器
+    en: Pickers
+  definition: 日期时间与滚轮/列表选择器。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/picker/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - date_time、wheel
+    excludes:
+    - 分段选择见 button_selection
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: control_category
+- id: ui.controls.popup_toast
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 弹出提示
+    en: Popups and Toasts
+  definition: Toast/Snackbar、气泡与引导浮层。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/popup_toast/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - toast、popover、guidance
+    excludes:
+    - 模态对话框见 dialog
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: control_category
+- id: ui.controls.progress
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 进度指示
+    en: Progress Indicators
+  definition: 确定与不确定进度指示。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/progress/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - determinate、indeterminate
+    excludes:
+    - 图表见 chart
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: control_category
+- id: ui.controls.text_display
+  level: L3
+  parent: ui.controls
+  name:
+    zh: 文本展示与输入
+    en: Text Display and Input
+  definition: 文本展示、富文本与文本输入编辑。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/text_display/_rollup.yaml
+  bindings: {}
+  comparison_scope:
+    includes:
+    - plain/rich text、selection、text field
+    excludes:
+    - 按钮文案见 button_selection
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: unverified
+  legacy:
+    disposition: renamed_from
+    sources:
+    - ui.controls.text_field
+  sibling_axis: control_category
+- id: ui.layout.constraint
+  level: L3
+  parent: ui.layout
+  name:
+    zh: 约束布局
+    en: Constraint Layout
+  definition: 以相对约束与锚点定位子项的布局。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/layout/constraint.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: ConstraintLayout
+      url: https://developer.android.com/develop/ui/views/layout/constraint-layout
+      role: primary
+    ios:
+    - kind: class
+      id: Auto Layout
+      url: https://developer.apple.com/documentation/uikit/nslayoutconstraint
+      role: primary
+    harmonyos:
+    - kind: module
+      id: RelativeContainer
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-relativecontainer
+      role: primary
+  comparison_scope:
+    includes:
+    - ConstraintLayout、RelativeContainer、Auto Layout 约束
+    excludes:
+    - 线性/弹性见 layout.linear / flex
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: layout_model
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.layout.flex
+  level: L3
+  parent: ui.layout
+  name:
+    zh: 弹性布局
+    en: Flex Layout
+  definition: 基于弹性伸缩与换行的主/交叉轴布局。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/layout/flex.yaml
+  bindings:
+    android:
+    - kind: class
+      id: FlexboxLayout
+      url: https://developer.android.com/reference/com/google/android/flexbox/FlexboxLayout
+      role: primary
+    ios:
+    - kind: class
+      id: flexible frames
+      url: https://developer.apple.com/documentation/swiftui/view/frame(minwidth:idealwidth:maxwidth:minheight:idealheight:maxheight:alignment:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Flex
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-flex
+      role: primary
+  comparison_scope:
+    includes:
+    - Flex、Modifier.weight、flexible frames
+    excludes:
+    - 固定线性见 layout.linear
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: layout_model
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.layout.grid
+  level: L3
+  parent: ui.layout
+  name:
+    zh: 网格布局
+    en: Grid Layout
+  definition: 行列网格与惰性网格单元布局。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/layout/grid.yaml
+  bindings:
+    android:
+    - kind: class
+      id: LazyVerticalGrid
+      url: https://developer.android.com/jetpack/compose/lists#grids
+      role: primary
+    ios:
+    - kind: class
+      id: GridItem
+      url: https://developer.apple.com/documentation/swiftui/griditem
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Grid
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-grid
+      role: primary
+  comparison_scope:
+    includes:
+    - Grid/LazyVerticalGrid、UICollectionView 网格、GridRow
+    excludes:
+    - 瀑布流见 scroll.waterfall
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: layout_model
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.layout.linear
+  level: L3
+  parent: ui.layout
+  name:
+    zh: 线性布局
+    en: Linear Layout
+  definition: 按主轴单向排列子项的线性容器。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/layout/linear.yaml
+  bindings:
+    android:
+    - kind: class
+      id: LinearLayout
+      url: https://developer.android.com/reference/android/widget/LinearLayout
+      role: primary
+    ios:
+    - kind: class
+      id: HStack / VStack
+      url: https://developer.apple.com/documentation/swiftui/hstack
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Row / Column
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-row
+      role: primary
+  comparison_scope:
+    includes:
+    - Row/Column、LinearLayout、HStack/VStack
+    excludes:
+    - 弹性权重见 layout.flex
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: layout_model
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.layout.pagination
+  level: L3
+  parent: ui.layout
+  name:
+    zh: 分页容器
+    en: Pagination Container
+  definition: 可左右翻页的页面容器与指示器。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/layout/pagination.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ViewPager2
+      url: https://developer.android.com/reference/androidx/viewpager2/widget/ViewPager2
+      role: primary
+    ios:
+    - kind: class
+      id: TabView
+      url: https://developer.apple.com/documentation/swiftui/tabview
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Swiper
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-swiper
+      role: primary
+  comparison_scope:
+    includes:
+    - ViewPager2/Swiper、TabView 页式、PageControl
+    excludes:
+    - 标签导航见 ui.navigation.tabs
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: layout_model
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.layout.responsive
+  level: L3
+  parent: ui.layout
+  name:
+    zh: 响应式尺寸布局
+    en: Responsive Size Layout
+  definition: 按窗口尺寸类/断点切换布局形态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/layout/responsive.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: WindowSizeClass
+      url: https://developer.android.com/develop/ui/compose/layouts/adaptive
+      role: primary
+    ios:
+    - kind: class
+      id: horizontalSizeClass
+      url: https://developer.apple.com/documentation/swiftui/environmentvalues/horizontalsizeclass
+      role: primary
+    harmonyos:
+    - kind: module
+      id: GridRow 断点
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-layout-development-grid-layout
+      role: primary
+  comparison_scope:
+    includes:
+    - WindowSizeClass、GridRow 断点、size classes
+    excludes:
+    - 分屏窗口见 ui.window.split_free
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: layout_model
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.layout.scroll
+  level: L3
+  parent: ui.layout
+  name:
+    zh: 滚动容器
+    en: Scroll Containers
+  definition: 可滚动内容容器及其回收、刷新与嵌套协调。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/layout/scroll/_rollup.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: RecyclerView
+      url: https://developer.android.com/guide/topics/ui/layout/recyclerview
+      role: primary
+    ios:
+    - kind: class
+      id: ScrollView / List
+      url: https://developer.apple.com/documentation/swiftui/scrollview
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Scroll / List
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-scroll
+      role: primary
+  comparison_scope:
+    includes:
+    - container、recycling、refresh、nested、waterfall
+    excludes:
+    - 分页见 layout.pagination
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: url_ok
+  legacy:
+    disposition: merged_from
+    sources:
+    - ui.controls.list
+  sibling_axis: layout_model
+- id: ui.navigation.app_bar
+  level: L3
+  parent: ui.navigation
+  name:
+    zh: 应用栏
+    en: App Bar
+  definition: 顶栏标题、导航图标与动作命令区。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/navigation/app_bar.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AppBarLayout
+      url: https://developer.android.com/reference/com/google/android/material/appbar/AppBarLayout
+      role: primary
+    ios:
+    - kind: class
+      id: toolbar / navigationTitle
+      url: https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: ToolBar
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-common-components-toolbar
+      role: primary
+  comparison_scope:
+    includes:
+    - AppBarLayout/Toolbar/ToolBar
+    excludes:
+    - 旧 navigation_bar 控件归此
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: renamed_from
+    sources:
+    - ui.controls.navigation_bar
+  sibling_axis: navigation_pattern
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.navigation.drawer_sidebar
+  level: L3
+  parent: ui.navigation
+  name:
+    zh: 抽屉与侧栏
+    en: Drawer and Sidebar
+  definition: 侧滑抽屉或常驻侧栏导航。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/navigation/drawer_sidebar.yaml
+  bindings:
+    android:
+    - kind: class
+      id: DrawerLayout
+      url: https://developer.android.com/reference/androidx/drawerlayout/widget/DrawerLayout
+      role: primary
+    ios:
+    - kind: class
+      id: NavigationSplitView
+      url: https://developer.apple.com/documentation/swiftui/navigationsplitview
+      role: primary
+    harmonyos:
+    - kind: module
+      id: SideBarContainer
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-sidebarcontainer
+      role: primary
+  comparison_scope:
+    includes:
+    - DrawerLayout/SideBarContainer/NavigationSplitView
+    excludes:
+    - 应用栏见 app_bar
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: navigation_pattern
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.navigation.stack
+  level: L3
+  parent: ui.navigation
+  name:
+    zh: 页面导航栈
+    en: Navigation Stack
+  definition: 基于路由/目的地的页面进出栈导航。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/navigation/stack/_rollup.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: NavController
+      url: https://developer.android.com/guide/navigation
+      role: primary
+    ios:
+    - kind: class
+      id: NavigationStack
+      url: https://developer.apple.com/documentation/swiftui/navigationstack
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Navigation
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-navigation
+      role: primary
+  comparison_scope:
+    includes:
+    - back_stack、routes、predictive_back
+    excludes:
+    - 标签见 tabs
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - ui.navigation.stack
+  sibling_axis: navigation_pattern
+- id: ui.navigation.tabs
+  level: L3
+  parent: ui.navigation
+  name:
+    zh: 标签导航
+    en: Tab Navigation
+  definition: 底部或顶部标签切换主入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/navigation/tabs.yaml
+  bindings:
+    android:
+    - kind: class
+      id: BottomNavigationView
+      url: https://developer.android.com/reference/com/google/android/material/bottomnavigation/BottomNavigationView
+      role: primary
+    ios:
+    - kind: class
+      id: TabView
+      url: https://developer.apple.com/documentation/swiftui/tabview
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Tabs
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-tabs
+      role: primary
+  comparison_scope:
+    includes:
+    - TabLayout/Tabs/TabView
+    excludes:
+    - 分页 Swiper 见 layout.pagination
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: navigation_pattern
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.paradigm.custom_component
+  level: L3
+  parent: ui.paradigm
+  name:
+    zh: 自定义组件
+    en: Custom Component
+  definition: 封装可复用自定义 UI 组件及其插槽/构建器参数。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/paradigm/custom_component.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: View 自定义子类
+      url: https://developer.android.com/develop/ui/views/layout/custom-views/create-view
+      role: primary
+    ios:
+    - kind: class
+      id: View
+      url: https://developer.apple.com/documentation/swiftui/view
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@Builder / @BuilderParam'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-builder
+      role: primary
+  comparison_scope:
+    includes:
+    - 自定义 View/@Component/@Builder、ViewModifier
+    excludes:
+    - 系统控件类别见 ui.controls
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: paradigm_model
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.paradigm.declarative
+  level: L3
+  parent: ui.paradigm
+  name:
+    zh: 声明式UI
+    en: Declarative UI
+  definition: 以状态驱动描述界面树并由框架差分更新的声明式构建模型。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/paradigm/declarative.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Composable
+      url: https://developer.android.com/develop/ui/compose
+      role: primary
+    ios:
+    - kind: framework
+      id: SwiftUI
+      url: https://developer.apple.com/documentation/swiftui
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@Component'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-create-custom-components
+      role: primary
+  comparison_scope:
+    includes:
+    - Composable/@Component/build、状态驱动刷新
+    excludes:
+    - 命令式视图树见 paradigm.imperative
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: body_ok
+  legacy:
+    disposition: renamed_from
+    sources:
+    - ui.declarative
+    - ui.declarative.vs_imperative
+  sibling_axis: paradigm_model
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.paradigm.imperative
+  level: L3
+  parent: ui.paradigm
+  name:
+    zh: 命令式视图树
+    en: Imperative View Tree
+  definition: 通过命令式创建、挂载与变更视图节点构建界面。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/paradigm/imperative.yaml
+  bindings:
+    android:
+    - kind: class
+      id: android.view.View
+      url: https://developer.android.com/reference/android/view/View
+      role: primary
+    ios:
+    - kind: class
+      id: UIView
+      url: https://developer.apple.com/documentation/uikit/uiview
+      role: primary
+    harmonyos:
+    - kind: module
+      id: FrameNode
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-arkui-framenode
+      role: primary
+  comparison_scope:
+    includes:
+    - View/ViewGroup、UIView、FrameNode
+    excludes:
+    - 声明式见 paradigm.declarative
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: renamed_from
+    sources:
+    - ui.imperative
+  sibling_axis: paradigm_model
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.paradigm.native_embed
+  level: L3
+  parent: ui.paradigm
+  name:
+    zh: 原生视图嵌入
+    en: Native View Embedding
+  definition: 在声明式树中嵌入命令式原生视图，或反向承载声明式内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/paradigm/native_embed.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AndroidView
+      url: https://developer.android.com/jetpack/compose/migrate/interoperability-apis/views-in-compose
+      role: primary
+    ios:
+    - kind: class
+      id: UIViewRepresentable
+      url: https://developer.apple.com/documentation/swiftui/uiviewrepresentable
+      role: primary
+    harmonyos:
+    - kind: module
+      id: EmbeddedComponent
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-embedded-component
+      role: primary
+  comparison_scope:
+    includes:
+    - AndroidView/UIViewRepresentable、EmbeddedComponent/ContentSlot
+    excludes:
+    - 纯声明式见 paradigm.declarative
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: paradigm_model
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.paradigm.state
+  level: L3
+  parent: ui.paradigm
+  name:
+    zh: UI状态管理
+    en: UI State Management
+  definition: 本地与共享作用域的界面状态绑定模型。
+  knowledge_role: rollup
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/paradigm/state/_rollup.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: State in Compose
+      url: https://developer.android.com/develop/ui/compose/state
+      role: primary
+    ios:
+    - kind: guide
+      id: State and Data Flow
+      url: https://developer.apple.com/documentation/swiftui/state-and-data-flow
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@State'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-state
+      role: primary
+  comparison_scope:
+    includes:
+    - local、shared
+    excludes:
+    - 持久化存储见 storage
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: branch
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: paradigm_model
+- id: ui.system_integration.desktop_shell
+  level: L3
+  parent: ui.system_integration
+  name:
+    zh: 桌面壳层条目
+    en: Desktop Shell Entries
+  definition: 状态栏图标、快捷栏任务等桌面壳层 UI 扩展入口。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/system_integration/desktop_shell.yaml
+  bindings:
+    android:
+    - kind: class
+      id: StatusBarManager
+      url: https://developer.android.com/reference/android/app/StatusBarManager
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: addToStatusBar / quickBarManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-statusbarmanager
+      role: primary
+  comparison_scope:
+    includes:
+    - StatusBarManager、quickBar、addToStatusBar
+    excludes:
+    - 小组件见 app.desktop.widget
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: shell_surface
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.system_integration.watchface
+  level: L3
+  parent: ui.system_integration
+  name:
+    zh: 表盘与复杂功能
+    en: Watch Face and Complications
+  definition: 表盘格式、复杂功能与表盘服务 UI 扩展。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  - watch
+  privacy_class: none
+  knowledge_path: knowledge/ui/system_integration/watchface.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Watch Face Format
+      url: https://developer.android.com/training/wearables/watch-faces
+      role: primary
+    ios:
+    - kind: framework
+      id: ClockKit
+      url: https://developer.apple.com/documentation/clockkit
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - Watch Face Format、CLKComplication、表盘服务
+    excludes:
+    - 健康数据见 health_home
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: shell_surface
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.theme.customization
+  level: L3
+  parent: ui.theme
+  name:
+    zh: 动态配色定制
+    en: Dynamic Color Customization
+  definition: 基于壁纸/品牌色的动态配色与作用域主题。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/theme/customization.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: dynamicLightColorScheme
+      url: https://developer.android.com/develop/ui/compose/designsystems/material3#dynamic_color
+      role: primary
+    ios:
+    - kind: class
+      id: Accent Color
+      url: https://developer.apple.com/documentation/appkit/nscolor/controlaccentcolor
+      role: primary
+    harmonyos:
+    - kind: module
+      id: WithTheme
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-theme
+      role: primary
+  comparison_scope:
+    includes:
+    - Dynamic Color、WithTheme
+    excludes:
+    - 深色模式开关见 dark_mode
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: theme_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.theme.dark_mode
+  level: L3
+  parent: ui.theme
+  name:
+    zh: 深色模式
+    en: Dark Mode
+  definition: 跟随系统或应用覆盖的深/浅色外观。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/theme/dark_mode.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: UiModeManager / DayNight
+      url: https://developer.android.com/develop/ui/views/theming/darktheme
+      role: primary
+    ios:
+    - kind: class
+      id: colorScheme / preferredColorScheme
+      url: https://developer.apple.com/documentation/swiftui/view/preferredcolorscheme(_:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: ColorMode
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-global-interface
+      role: primary
+  comparison_scope:
+    includes:
+    - DayNight、ColorScheme、ColorMode
+    excludes:
+    - 动态取色见 customization
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: kept
+    sources:
+    - ui.theme.dark_mode
+  sibling_axis: theme_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.theme.resource
+  level: L3
+  parent: ui.theme
+  name:
+    zh: 主题资源访问
+    en: Theme Resource Access
+  definition: 按限定符解析颜色/尺寸/字符串等 UI 资源。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/theme/resource.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Resources
+      url: https://developer.android.com/guide/topics/resources/providing-resources
+      role: primary
+    ios:
+    - kind: guide
+      id: Asset Catalog
+      url: https://developer.apple.com/documentation/xcode/adding-images-to-your-app
+      role: primary
+    harmonyos:
+    - kind: module
+      id: $r / ResourceManager
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/resource-categories-and-access
+      role: primary
+  comparison_scope:
+    includes:
+    - Resources/$r、Asset catalog
+    excludes:
+    - 样式语法见 styling
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: theme_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.theme.styling
+  level: L3
+  parent: ui.theme
+  name:
+    zh: 样式复用
+    en: Style Reuse
+  definition: 主题样式、状态样式与修饰符复用。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/theme/styling.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Themes and styles
+      url: https://developer.android.com/guide/topics/ui/themes
+      role: primary
+    ios:
+    - kind: class
+      id: ViewModifier
+      url: https://developer.apple.com/documentation/swiftui/viewmodifier
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@Styles / stateStyles'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-style
+      role: primary
+  comparison_scope:
+    includes:
+    - styles、@Styles、ViewModifier
+    excludes:
+    - 资源限定符见 resource
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: theme_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.theme.visual_effects
+  level: L3
+  parent: ui.theme
+  name:
+    zh: 材质与视觉效果
+    en: Material Visual Effects
+  definition: 模糊、材质、阴影等主题级视觉效果。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/theme/visual_effects.yaml
+  bindings:
+    android:
+    - kind: class
+      id: RenderEffect
+      url: https://developer.android.com/reference/android/graphics/RenderEffect
+      role: primary
+    ios:
+    - kind: class
+      id: Material
+      url: https://developer.apple.com/documentation/swiftui/material
+      role: primary
+    harmonyos:
+    - kind: module
+      id: backdropBlur / backgroundBlurStyle
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-universal-attributes-background
+      role: primary
+  comparison_scope:
+    includes:
+    - blur、Material、shadow
+    excludes:
+    - 属性动画见 ui.animation.property
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: theme_aspect
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.window.manage
+  level: L3
+  parent: ui.window
+  name:
+    zh: 窗口获取与属性
+    en: Window Acquire and Properties
+  definition: 获取主窗/场景并设置尺寸、全屏等窗口属性。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/window/manage.yaml
+  bindings:
+    android:
+    - kind: class
+      id: WindowManager
+      url: https://developer.android.com/reference/android/view/WindowManager
+      role: primary
+    ios:
+    - kind: class
+      id: UIWindow / UIWindowScene
+      url: https://developer.apple.com/documentation/uikit/uiwindow
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@ohos.window'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-window
+      role: primary
+  comparison_scope:
+    includes:
+    - Window/WindowStage/UIWindow
+    excludes:
+    - 系统栏见 system_bars
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: window_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.window.orientation
+  level: L3
+  parent: ui.window
+  name:
+    zh: 窗口方向策略
+    en: Window Orientation Policy
+  definition: 锁定或跟随的窗口方向策略。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/window/orientation.yaml
+  bindings:
+    android:
+    - kind: class
+      id: setRequestedOrientation
+      url: https://developer.android.com/reference/android/app/Activity#setRequestedOrientation(int)
+      role: primary
+    ios:
+    - kind: class
+      id: supportedInterfaceOrientations
+      url: https://developer.apple.com/documentation/uikit/uiviewcontroller/supportedinterfaceorientations
+      role: primary
+    harmonyos:
+    - kind: module
+      id: setWindowOrientation
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-window
+      role: primary
+  comparison_scope:
+    includes:
+    - screenOrientation、setWindowOrientation
+    excludes:
+    - 旋转传感器见 sensors
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: window_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.window.pip
+  level: L3
+  parent: ui.window
+  name:
+    zh: 画中画窗口
+    en: Picture-in-Picture
+  definition: 将界面内容转入系统画中画小窗。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/window/pip.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PictureInPictureParams
+      url: https://developer.android.com/reference/android/app/PictureInPictureParams
+      role: primary
+    ios:
+    - kind: class
+      id: AVPictureInPictureController
+      url: https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller
+      role: primary
+    harmonyos:
+    - kind: module
+      id: startPiP
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/pip-window
+      role: primary
+  comparison_scope:
+    includes:
+    - enterPictureInPictureMode、startPiP、AVPictureInPictureController
+    excludes:
+    - 分屏见 split_free
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: kept
+    sources:
+    - ui.window.pip
+  sibling_axis: window_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.window.split_free
+  level: L3
+  parent: ui.window
+  name:
+    zh: 分屏与自由窗
+    en: Split and Freeform Windows
+  definition: 分屏、自由窗口与可调整多窗形态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/window/split_free.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Multi-window support
+      url: https://developer.android.com/guide/topics/large-screens/multi-window-support
+      role: primary
+    ios:
+    - kind: class
+      id: UIScene / Stage Manager
+      url: https://developer.apple.com/documentation/uikit/uiscene
+      role: primary
+    harmonyos:
+    - kind: module
+      id: freeWindowMode
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/window-manager
+      role: primary
+  comparison_scope:
+    includes:
+    - multi-window、freeform、resizeableActivity
+    excludes:
+    - 画中画见 pip
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: renamed_from
+    sources:
+    - ui.window.multiwindow
+  sibling_axis: window_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.window.subwindow
+  level: L3
+  parent: ui.window
+  name:
+    zh: 子窗口
+    en: Subwindows
+  definition: 依附于主窗的子窗口/浮层窗口创建与管理。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/window/subwindow.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Dialog / PopupWindow
+      url: https://developer.android.com/reference/android/widget/PopupWindow
+      role: primary
+    ios:
+    - kind: class
+      id: UIWindow
+      url: https://developer.apple.com/documentation/uikit/uiwindow
+      role: primary
+    harmonyos:
+    - kind: module
+      id: createSubWindow
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-window
+      role: primary
+  comparison_scope:
+    includes:
+    - createSubWindow、辅助 UIWindow
+    excludes:
+    - 系统对话框见 ui.controls.dialog
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: window_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.window.system_bars
+  level: L3
+  parent: ui.window
+  name:
+    zh: 系统栏与边到边
+    en: System Bars and Edge-to-Edge
+  definition: 状态栏/导航栏外观与边到边避让。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/window/system_bars.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: WindowInsetsCompat
+      url: https://developer.android.com/develop/ui/views/layout/edge-to-edge
+      role: primary
+    ios:
+    - kind: class
+      id: safeAreaInset
+      url: https://developer.apple.com/documentation/uikit/uiview/safeareainsets
+      role: primary
+    harmonyos:
+    - kind: module
+      id: setWindowSystemBarProperties
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-window
+      role: primary
+  comparison_scope:
+    includes:
+    - WindowInsets、setDecorFitsSystemWindows、systemBarProperties
+    excludes:
+    - 沉浸式内容策略可同属此能力
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: window_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.advanced.filter
+  level: L4
+  parent: ui.controls.advanced
+  name:
+    zh: 过滤器控件
+    en: Filter Control
+  definition: 条件过滤芯片/面板类复合控件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/advanced/filter.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: Filter
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-filter
+      role: primary
+  comparison_scope:
+    includes:
+    - Filter
+    excludes:
+    - 分段选择见 button_selection.segment
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: advanced_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.advanced.tree
+  level: L4
+  parent: ui.controls.advanced
+  name:
+    zh: 树形控件
+    en: Tree Control
+  definition: 可展开层级的树形列表控件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/advanced/tree.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    harmonyos:
+    - kind: module
+      id: TreeView
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-treeview
+      role: primary
+  comparison_scope:
+    includes:
+    - TreeView
+    excludes:
+    - 普通列表见 layout.scroll.recycling
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: advanced_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.button_selection.action
+  level: L4
+  parent: ui.controls.button_selection
+  name:
+    zh: 动作按钮
+    en: Action Button
+  definition: 触发动作的按钮控件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/button_selection/action.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Button
+      url: https://developer.android.com/reference/android/widget/Button
+      role: primary
+    ios:
+    - kind: class
+      id: Button
+      url: https://developer.apple.com/documentation/swiftui/button
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Button
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-button
+      role: primary
+  comparison_scope:
+    includes:
+    - Button
+    excludes:
+    - 开关见 toggle
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: renamed_from
+    sources:
+    - ui.controls.button
+  sibling_axis: button_selection_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.button_selection.range
+  level: L4
+  parent: ui.controls.button_selection
+  name:
+    zh: 范围滑条
+    en: Range Slider
+  definition: 连续或离散数值范围选择。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/button_selection/range.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SeekBar / Slider
+      url: https://developer.android.com/reference/android/widget/SeekBar
+      role: primary
+    ios:
+    - kind: class
+      id: Slider
+      url: https://developer.apple.com/documentation/swiftui/slider
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Slider
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-slider
+      role: primary
+  comparison_scope:
+    includes:
+    - Slider
+    excludes:
+    - 评分见 rating
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: button_selection_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.button_selection.segment
+  level: L4
+  parent: ui.controls.button_selection
+  name:
+    zh: 分段控件
+    en: Segmented Control
+  definition: 互斥分段选项控件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/button_selection/segment.yaml
+  bindings:
+    android:
+    - kind: class
+      id: MaterialButtonToggleGroup
+      url: https://developer.android.com/reference/com/google/android/material/button/MaterialButtonToggleGroup
+      role: primary
+    ios:
+    - kind: class
+      id: Picker .segmented
+      url: https://developer.apple.com/documentation/swiftui/pickerstyle/segmented
+      role: primary
+    harmonyos:
+    - kind: module
+      id: SegmentButton
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-segmentbutton
+      role: primary
+  comparison_scope:
+    includes:
+    - SegmentedButton/Picker segmented
+    excludes:
+    - 标签导航见 navigation.tabs
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: button_selection_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.button_selection.toggle
+  level: L4
+  parent: ui.controls.button_selection
+  name:
+    zh: 开关与勾选
+    en: Toggle and Checkbox
+  definition: 布尔开关、复选与单选控件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/button_selection/toggle.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Switch / CheckBox
+      url: https://developer.android.com/guide/topics/ui/controls
+      role: primary
+    ios:
+    - kind: class
+      id: Toggle
+      url: https://developer.apple.com/documentation/swiftui/toggle
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Toggle / Checkbox
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-toggle
+      role: primary
+  comparison_scope:
+    includes:
+    - Switch/Checkbox/Radio
+    excludes:
+    - 动作按钮见 action
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: button_selection_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.chart.data_chart
+  level: L4
+  parent: ui.controls.chart
+  name:
+    zh: 数据图表
+    en: Data Charts
+  definition: 折线/柱状等数据系列图表控件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/chart/data_chart.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 可用第三方或 Compose Canvas；系统无统一 Chart API
+    ios:
+    - kind: framework
+      id: Charts
+      url: https://developer.apple.com/documentation/charts
+      role: primary
+    harmonyos:
+    - kind: module
+      id: DataPanel
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-datapanel
+      role: primary
+  comparison_scope:
+    includes:
+    - Chart/Swift Charts
+    excludes:
+    - 仪表见 gauge
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: chart_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.chart.gauge
+  level: L4
+  parent: ui.controls.chart
+  name:
+    zh: 仪表盘控件
+    en: Gauge Control
+  definition: 环形/指针类仪表进度可视化控件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/chart/gauge.yaml
+  bindings:
+    android:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+    ios:
+    - kind: class
+      id: Gauge
+      url: https://developer.apple.com/documentation/swiftui/gauge
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Gauge
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-gauge
+      role: primary
+  comparison_scope:
+    includes:
+    - Gauge
+    excludes:
+    - 数据系列图见 data_chart
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: chart_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.dialog.alert
+  level: L4
+  parent: ui.controls.dialog
+  name:
+    zh: 告警对话框
+    en: Alert Dialog
+  definition: 系统风格确认/告警对话框。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/dialog/alert.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AlertDialog
+      url: https://developer.android.com/reference/android/app/AlertDialog
+      role: primary
+    ios:
+    - kind: class
+      id: alert
+      url: https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:actions:message:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: AlertDialog
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-methods-alert-dialog-box
+      role: primary
+  comparison_scope:
+    includes:
+    - AlertDialog
+    excludes:
+    - 自定义见 custom
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: split_from
+    sources:
+    - ui.controls.dialog
+  sibling_axis: dialog_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.dialog.custom
+  level: L4
+  parent: ui.controls.dialog
+  name:
+    zh: 自定义对话框
+    en: Custom Dialog
+  definition: 应用自定义内容的模态对话框。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/dialog/custom.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: Dialog
+      url: https://developer.android.com/guide/topics/ui/dialogs
+      role: primary
+    ios:
+    - kind: class
+      id: confirmationDialog
+      url: https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:actions:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: CustomDialog
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-methods-custom-dialog-box
+      role: primary
+  comparison_scope:
+    includes:
+    - Dialog/CustomDialog
+    excludes:
+    - 告警见 alert
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: split_from
+    sources:
+    - ui.controls.dialog
+  sibling_axis: dialog_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.dialog.sheet
+  level: L4
+  parent: ui.controls.dialog
+  name:
+    zh: 半屏面板
+    en: Sheet
+  definition: 自底部或侧向滑出的半屏内容面板。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/dialog/sheet.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ModalBottomSheet
+      url: https://developer.android.com/reference/com/google/android/material/bottomsheet/BottomSheetDialog
+      role: primary
+    ios:
+    - kind: class
+      id: sheet
+      url: https://developer.apple.com/documentation/swiftui/view/sheet(ispresented:ondismiss:content:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: bindSheet
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-universal-attributes-sheet-transition
+      role: primary
+  comparison_scope:
+    includes:
+    - BottomSheet/sheet/bindSheet
+    excludes:
+    - 全屏覆盖见 full_cover
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: split_from
+    sources:
+    - ui.controls.dialog
+  sibling_axis: dialog_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.image.display
+  level: L4
+  parent: ui.controls.image
+  name:
+    zh: 图像展示
+    en: Image Display
+  definition: 在界面中展示位图/矢量图像。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/image/display.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ImageView
+      url: https://developer.android.com/reference/android/widget/ImageView
+      role: primary
+    ios:
+    - kind: class
+      id: Image
+      url: https://developer.apple.com/documentation/swiftui/image
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Image
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-image
+      role: primary
+  comparison_scope:
+    includes:
+    - ImageView/Image
+    excludes:
+    - 帧动画见 frame_animation
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: renamed_from
+    sources:
+    - ui.controls.image
+  sibling_axis: image_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.image.frame_animation
+  level: L4
+  parent: ui.controls.image
+  name:
+    zh: 帧动画图像
+    en: Frame Animation Image
+  definition: 基于多帧图像的简单逐帧动画展示。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/image/frame_animation.yaml
+  bindings:
+    android:
+    - kind: class
+      id: AnimationDrawable
+      url: https://developer.android.com/reference/android/graphics/drawable/AnimationDrawable
+      role: primary
+    ios:
+    - kind: class
+      id: UIImage.animatedImage
+      url: https://developer.apple.com/documentation/uikit/uiimage/1624991-animatedimage
+      role: primary
+    harmonyos:
+    - kind: module
+      id: ImageAnimator
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-imageanimator
+      role: primary
+  comparison_scope:
+    includes:
+    - AnimationDrawable、ImageAnimator
+    excludes:
+    - 属性动画见 ui.animation.property
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: image_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.menu.context
+  level: L4
+  parent: ui.controls.menu
+  name:
+    zh: 上下文菜单
+    en: Context Menu
+  definition: 长按或右键触发的上下文菜单。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/menu/context.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PopupMenu
+      url: https://developer.android.com/reference/android/widget/PopupMenu
+      role: primary
+    ios:
+    - kind: class
+      id: contextMenu
+      url: https://developer.apple.com/documentation/swiftui/view/contextmenu(menuitems:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: bindContextMenu
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-universal-attributes-menu
+      role: primary
+  comparison_scope:
+    includes:
+    - ContextMenu/bindContextMenu
+    excludes:
+    - 层级菜单见 hierarchy
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: menu_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.menu.hierarchy
+  level: L4
+  parent: ui.controls.menu
+  name:
+    zh: 层级菜单
+    en: Hierarchical Menu
+  definition: 可嵌套的菜单项层级。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/menu/hierarchy.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: android.view.Menu
+      url: https://developer.android.com/guide/topics/ui/menus
+      role: primary
+    ios:
+    - kind: class
+      id: Menu
+      url: https://developer.apple.com/documentation/swiftui/menu
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Menu / MenuItem
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-menu
+      role: primary
+  comparison_scope:
+    includes:
+    - Menu/MenuItem
+    excludes:
+    - 上下文菜单见 context
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: menu_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.picker.date_time
+  level: L4
+  parent: ui.controls.picker
+  name:
+    zh: 日期时间选择
+    en: Date Time Picker
+  definition: 日期与/或时间选择控件。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/picker/date_time.yaml
+  bindings:
+    android:
+    - kind: class
+      id: DatePicker
+      url: https://developer.android.com/reference/android/widget/DatePicker
+      role: primary
+    ios:
+    - kind: class
+      id: DatePicker
+      url: https://developer.apple.com/documentation/swiftui/datepicker
+      role: primary
+    harmonyos:
+    - kind: module
+      id: DatePicker / TimePicker
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-datepicker
+      role: primary
+  comparison_scope:
+    includes:
+    - DatePicker/TimePicker
+    excludes:
+    - 滚轮通用见 wheel
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: picker_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.picker.wheel
+  level: L4
+  parent: ui.controls.picker
+  name:
+    zh: 滚轮选择器
+    en: Wheel Picker
+  definition: 通用滚轮或列选择器。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/picker/wheel.yaml
+  bindings:
+    android:
+    - kind: class
+      id: NumberPicker
+      url: https://developer.android.com/reference/android/widget/NumberPicker
+      role: primary
+    ios:
+    - kind: class
+      id: Picker
+      url: https://developer.apple.com/documentation/swiftui/picker
+      role: primary
+    harmonyos:
+    - kind: module
+      id: TextPicker
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-textpicker
+      role: primary
+  comparison_scope:
+    includes:
+    - NumberPicker/TextPicker/Picker
+    excludes:
+    - 日期见 date_time
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: picker_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.popup_toast.popover
+  level: L4
+  parent: ui.controls.popup_toast
+  name:
+    zh: 气泡弹出层
+    en: Popover
+  definition: 锚定到控件的气泡/弹出层内容。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/popup_toast/popover.yaml
+  bindings:
+    android:
+    - kind: class
+      id: PopupWindow
+      url: https://developer.android.com/reference/android/widget/PopupWindow
+      role: primary
+    ios:
+    - kind: class
+      id: popover
+      url: https://developer.apple.com/documentation/swiftui/view/popover(ispresented:attachmentanchor:arrowedge:content:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: bindPopup
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-universal-attributes-popup
+      role: primary
+  comparison_scope:
+    includes:
+    - PopupWindow、popover、bindPopup
+    excludes:
+    - Toast 见 toast
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: popup_toast_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.popup_toast.toast
+  level: L4
+  parent: ui.controls.popup_toast
+  name:
+    zh: 轻提示
+    en: Toast / Snackbar
+  definition: 短暂非模态轻提示。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/popup_toast/toast.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Snackbar
+      url: https://developer.android.com/reference/com/google/android/material/snackbar/Snackbar
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 无系统 Toast；可用临时 overlay
+    harmonyos:
+    - kind: module
+      id: promptAction.showToast
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-promptaction
+      role: primary
+  comparison_scope:
+    includes:
+    - Toast/Snackbar/showToast
+    excludes:
+    - 对话框见 dialog
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: popup_toast_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.progress.determinate
+  level: L4
+  parent: ui.controls.progress
+  name:
+    zh: 确定进度
+    en: Determinate Progress
+  definition: 可知完成比例的进度条。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/progress/determinate.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ProgressBar
+      url: https://developer.android.com/reference/android/widget/ProgressBar
+      role: primary
+    ios:
+    - kind: class
+      id: ProgressView(value:)
+      url: https://developer.apple.com/documentation/swiftui/progressview
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Progress
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-progress
+      role: primary
+  comparison_scope:
+    includes:
+    - ProgressBar determinate
+    excludes:
+    - 不确定见 indeterminate
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: progress_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.progress.indeterminate
+  level: L4
+  parent: ui.controls.progress
+  name:
+    zh: 不确定进度
+    en: Indeterminate Progress
+  definition: 未知时长的加载指示。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/progress/indeterminate.yaml
+  bindings:
+    android:
+    - kind: class
+      id: CircularProgressIndicator
+      url: https://developer.android.com/reference/com/google/android/material/progressindicator/CircularProgressIndicator
+      role: primary
+    ios:
+    - kind: class
+      id: ProgressView()
+      url: https://developer.apple.com/documentation/swiftui/progressview
+      role: primary
+    harmonyos:
+    - kind: module
+      id: LoadingProgress
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-loadingprogress
+      role: primary
+  comparison_scope:
+    includes:
+    - CircularProgress/LoadingProgress
+    excludes:
+    - 确定进度见 determinate
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: progress_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.text_display.input
+  level: L4
+  parent: ui.controls.text_display
+  name:
+    zh: 文本输入
+    en: Text Input
+  definition: 单行/多行文本输入与编辑。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/text_display/input.yaml
+  bindings:
+    android:
+    - kind: class
+      id: EditText
+      url: https://developer.android.com/reference/android/widget/EditText
+      role: primary
+    ios:
+    - kind: class
+      id: TextField
+      url: https://developer.apple.com/documentation/swiftui/textfield
+      role: primary
+    harmonyos:
+    - kind: module
+      id: TextInput
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-textinput
+      role: primary
+  comparison_scope:
+    includes:
+    - EditText/TextField
+    excludes:
+    - 纯展示见 plain
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: renamed_from
+    sources:
+    - ui.controls.text_field
+  sibling_axis: text_display_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.text_display.plain
+  level: L4
+  parent: ui.controls.text_display
+  name:
+    zh: 文本展示
+    en: Plain Text Display
+  definition: 静态或样式化文本展示。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/text_display/plain.yaml
+  bindings:
+    android:
+    - kind: class
+      id: TextView
+      url: https://developer.android.com/reference/android/widget/TextView
+      role: primary
+    ios:
+    - kind: class
+      id: Text
+      url: https://developer.apple.com/documentation/swiftui/text
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Text
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-text
+      role: primary
+  comparison_scope:
+    includes:
+    - Text/TextView
+    excludes:
+    - 输入见 input
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: text_display_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.controls.text_display.rich
+  level: L4
+  parent: ui.controls.text_display
+  name:
+    zh: 富文本
+    en: Rich Text
+  definition: 可含多样式/嵌入的富文本展示与编辑。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/controls/text_display/rich.yaml
+  bindings:
+    android:
+    - kind: class
+      id: Spannable
+      url: https://developer.android.com/reference/android/text/Spannable
+      role: primary
+    ios:
+    - kind: class
+      id: AttributedString
+      url: https://developer.apple.com/documentation/foundation/attributedstring
+      role: primary
+    harmonyos:
+    - kind: module
+      id: StyledString
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-universal-styled-string
+      role: primary
+  comparison_scope:
+    includes:
+    - Spannable/AttributedString/StyledString
+    excludes:
+    - 纯文本见 plain
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: text_display_variant
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.layout.scroll.container
+  level: L4
+  parent: ui.layout.scroll
+  name:
+    zh: 基础滚动容器
+    en: Basic Scroll Container
+  definition: 承载可超出视口内容的基础滚动视图。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/layout/scroll/container.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ScrollView
+      url: https://developer.android.com/reference/android/widget/ScrollView
+      role: primary
+    ios:
+    - kind: class
+      id: ScrollView
+      url: https://developer.apple.com/documentation/swiftui/scrollview
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Scroll
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-scroll
+      role: primary
+  comparison_scope:
+    includes:
+    - ScrollView、Scroll
+    excludes:
+    - 列表回收见 scroll.recycling
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: scroll_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.layout.scroll.nested
+  level: L4
+  parent: ui.layout.scroll
+  name:
+    zh: 嵌套滚动协调
+    en: Nested Scroll Coordination
+  definition: 父子滚动区域之间的嵌套滚动与联动。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/layout/scroll/nested.yaml
+  bindings:
+    android:
+    - kind: class
+      id: NestedScrollView
+      url: https://developer.android.com/reference/androidx/core/widget/NestedScrollView
+      role: primary
+    ios:
+    - kind: class
+      id: ScrollViewReader
+      url: https://developer.apple.com/documentation/swiftui/scrollviewreader
+      role: primary
+    harmonyos:
+    - kind: module
+      id: nestedScroll
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-universal-attributes-nested-scrolling
+      role: primary
+  comparison_scope:
+    includes:
+    - NestedScrollConnection、nestedScroll、coordinator
+    excludes:
+    - 单层滚动见 scroll.container
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: scroll_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.layout.scroll.recycling
+  level: L4
+  parent: ui.layout.scroll
+  name:
+    zh: 列表回收与惰性
+    en: List Recycling and Laziness
+  definition: 大列表项回收复用或惰性构建。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/layout/scroll/recycling.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: RecyclerView
+      url: https://developer.android.com/guide/topics/ui/layout/recyclerview
+      role: primary
+    ios:
+    - kind: class
+      id: UITableView
+      url: https://developer.apple.com/documentation/uikit/uitableview
+      role: primary
+    harmonyos:
+    - kind: module
+      id: List / LazyForEach
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-list
+      role: primary
+  comparison_scope:
+    includes:
+    - RecyclerView/LazyColumn、UITableView、List/LazyForEach
+    excludes:
+    - 下拉刷新见 scroll.refresh
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: renamed_from
+    sources:
+    - ui.controls.list
+  sibling_axis: scroll_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.layout.scroll.refresh
+  level: L4
+  parent: ui.layout.scroll
+  name:
+    zh: 下拉刷新
+    en: Pull to Refresh
+  definition: 滚动容器上的下拉刷新手势与指示。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/layout/scroll/refresh.yaml
+  bindings:
+    android:
+    - kind: class
+      id: SwipeRefreshLayout
+      url: https://developer.android.com/reference/androidx/swiperefreshlayout/widget/SwipeRefreshLayout
+      role: primary
+    ios:
+    - kind: class
+      id: refreshable
+      url: https://developer.apple.com/documentation/swiftui/view/refreshable(action:)
+      role: primary
+    harmonyos:
+    - kind: module
+      id: Refresh
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-refresh
+      role: primary
+  comparison_scope:
+    includes:
+    - SwipeRefreshLayout、refreshable、Refresh
+    excludes:
+    - 滚动本身见 scroll.container
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: scroll_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.layout.scroll.waterfall
+  level: L4
+  parent: ui.layout.scroll
+  name:
+    zh: 瀑布流布局
+    en: Waterfall Layout
+  definition: 不等高多列瀑布流滚动布局。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/layout/scroll/waterfall.yaml
+  bindings:
+    android:
+    - kind: class
+      id: StaggeredGridLayoutManager
+      url: https://developer.android.com/reference/androidx/recyclerview/widget/StaggeredGridLayoutManager
+      role: primary
+    ios:
+    - kind: other
+      id: pending
+      role: related
+      note: 可用 UICollectionView 自定义布局实现
+    harmonyos:
+    - kind: module
+      id: WaterFlow
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-container-waterflow
+      role: primary
+  comparison_scope:
+    includes:
+    - StaggeredGrid、WaterFlow
+    excludes:
+    - 规则网格见 layout.grid
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: failed
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: scroll_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.navigation.stack.back_stack
+  level: L4
+  parent: ui.navigation.stack
+  name:
+    zh: 返回栈管理
+    en: Back Stack Management
+  definition: 压入/弹出目的地并维护返回栈。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/navigation/stack/back_stack.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: NavController.navigate
+      url: https://developer.android.com/guide/navigation
+      role: primary
+    ios:
+    - kind: class
+      id: NavigationPath
+      url: https://developer.apple.com/documentation/swiftui/navigationpath
+      role: primary
+    harmonyos:
+    - kind: module
+      id: NavPathStack
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-navigation
+      role: primary
+  comparison_scope:
+    includes:
+    - push/pop、back queue
+    excludes:
+    - 预测性返回见 predictive_back
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: stack_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.navigation.stack.predictive_back
+  level: L4
+  parent: ui.navigation.stack
+  name:
+    zh: 预测性返回手势
+    en: Predictive Back Gesture
+  definition: 系统级预测性返回手势与动画协调。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/navigation/stack/predictive_back.yaml
+  bindings:
+    android:
+    - kind: guide
+      id: OnBackPressedCallback
+      url: https://developer.android.com/guide/navigation/custom-back/predictive-back-gesture
+      role: primary
+    ios:
+    - kind: class
+      id: interactivePopGestureRecognizer
+      url: https://developer.apple.com/documentation/uikit/uinavigationcontroller
+      role: primary
+    harmonyos:
+    - kind: other
+      id: pending
+      role: related
+      note: 未查到公开入口，待核
+  comparison_scope:
+    includes:
+    - OnBackPressedCallback predictive
+    excludes:
+    - 普通返回栈见 back_stack
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: unverified
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: stack_capability
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.paradigm.state.local
+  level: L4
+  parent: ui.paradigm.state
+  name:
+    zh: 本地组件状态
+    en: Local Component State
+  definition: 绑定到单个组件作用域的可变 UI 状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/paradigm/state/local.yaml
+  bindings:
+    android:
+    - kind: class
+      id: mutableStateOf
+      url: https://developer.android.com/develop/ui/compose/state
+      role: primary
+    ios:
+    - kind: class
+      id: '@State'
+      url: https://developer.apple.com/documentation/swiftui/state
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@State'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-state
+      role: primary
+  comparison_scope:
+    includes:
+    - '@State/remember、@StateObject 局部'
+    excludes:
+    - 跨组件共享见 state.shared
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: state_scope
+  leaf_at_this_level: true
+  split_justification: independent_capability
+- id: ui.paradigm.state.shared
+  level: L4
+  parent: ui.paradigm.state
+  name:
+    zh: 共享与提升状态
+    en: Shared and Lifted State
+  definition: 跨组件共享、依赖注入或应用级可观察状态。
+  knowledge_role: leaf
+  layer: os
+  device_forms:
+  - phone
+  - tablet
+  privacy_class: none
+  knowledge_path: knowledge/ui/paradigm/state/shared.yaml
+  bindings:
+    android:
+    - kind: class
+      id: ViewModel
+      url: https://developer.android.com/topic/libraries/architecture/viewmodel
+      role: primary
+    ios:
+    - kind: class
+      id: EnvironmentObject
+      url: https://developer.apple.com/documentation/swiftui/environmentobject
+      role: primary
+    harmonyos:
+    - kind: module
+      id: '@Provide / @Consume'
+      url: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-provide-and-consume
+      role: primary
+  comparison_scope:
+    includes:
+    - ViewModel/@Provide/@Consume、EnvironmentObject、AppStorage
+    excludes:
+    - 单组件本地状态见 state.local
+  schema_version: 2
+  comparison_dimensions:
+  - availability
+  - programming_model
+  - lifecycle_background
+  - permissions_privacy
+  - limits_precision
+  - device_forms
+  - api_surface
+  granularity: atomic
+  anchor_status: url_ok
+  legacy:
+    disposition: new
+    sources: []
+  sibling_axis: state_scope
+  leaf_at_this_level: true
+  split_justification: independent_capability

@@ -1,0 +1,30 @@
+schema_version: 2
+feature_id: commerce.growth
+role: rollup
+status: stub
+baseline:
+  android: 待确定并固定版本
+  ios: 待确定并固定版本
+  harmonyos: 待确定并固定版本
+definition: 应用内评价、远程配置、安装来源、动态图标与运营触达。
+presence:
+  android:
+    status: unknown
+    verification: unreviewed
+  ios:
+    status: unknown
+    verification: unreviewed
+  harmonyos:
+    status: unknown
+    verification: unreviewed
+comparisons: []
+evidence: []
+child_index:
+- commerce.growth.dynamic_icon
+- commerce.growth.engage
+- commerce.growth.inapp_messaging
+- commerce.growth.inapp_review
+- commerce.growth.install_referrer
+- commerce.growth.pin_shortcut
+- commerce.growth.product_view
+- commerce.growth.remote_config

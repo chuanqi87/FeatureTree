@@ -19,12 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- app.background
-- app.desktop
-- app.extensions
-- app.install
-- app.launch
-- app.lifecycle
-- app.model
-- app.process
+child_index: []

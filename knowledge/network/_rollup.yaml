@@ -19,12 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- network.connection
-- network.discovery
-- network.handover
-- network.http
-- network.rpc
-- network.socket
-- network.vpn
-- network.websocket
+child_index: []

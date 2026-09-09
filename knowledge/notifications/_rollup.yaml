@@ -19,11 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- notifications.actions
-- notifications.badges
-- notifications.channels
-- notifications.dnd
-- notifications.live_activities
-- notifications.local
-- notifications.push
+child_index: []

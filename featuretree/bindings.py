@@ -1,7 +1,7 @@
-"""Complete reverse index over authored bindings and catalog mappings."""
+"""Reverse index of API bindings authored on the current tree."""
 
 
-def build_index(features, inventory):
+def build_index(features):
     index = {}
 
     def add(record, source):
@@ -18,9 +18,4 @@ def build_index(features, inventory):
                 add({"platform": platform, "native_id": binding["id"], "feature_id": fid,
                      **{k: v for k, v in binding.items() if k != "id"},
                      "verification": "candidate"}, "taxonomy")
-    for row in inventory:
-        for mapping in row["mappings"]:
-            add({"platform": row["platform"], "native_id": row["native_id"],
-                 "kind": row["kind"], "url": row["url"], "scope": row["scope"],
-                 "visibility": row["visibility"], **mapping}, "inventory")
     return [index[key] for key in sorted(index)]

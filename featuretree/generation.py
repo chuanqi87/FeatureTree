@@ -77,10 +77,9 @@ def export_views(repo):
     config = repo.config()
     require_valid_knowledge(repo, features, knowledge, paths, config)
     platforms = config["platforms"]
-    inventory = repo.inventory()
     support, comparisons = matrix_rows(features, knowledge, platforms)
     output = repo.root / EXPORTS_DIR
-    write_json(output / "index.json", build_index(features, inventory))
+    write_json(output / "index.json", build_index(features))
     write_json(output / "tree.json", tree_view(features, knowledge, platforms))
     write_text(output / "presence_matrix.csv", csv_text(support, list(support[0])))
     write_text(output / "comparison_matrix.csv", csv_text(comparisons, list(comparisons[0])))

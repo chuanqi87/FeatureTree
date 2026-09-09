@@ -19,8 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- identity.authn_factors
-- identity.federated
-- identity.session
-- identity.system_account
+child_index: []

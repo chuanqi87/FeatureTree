@@ -28,18 +28,17 @@ import NodeDetails from "./NodeDetails.jsx";
 const { Header, Sider, Content } = Layout;
 
 export default function App() {
+  const [page, setPage] = useState(() => {
+    const selected = new URLSearchParams(location.hash.slice(1)).get("page");
+    return selected === "evaluation" ? selected : "tree";
+  });
   const explorer = useExplorer();
   const { model, loading, error } = explorer;
-  const [page, setPage] = useState(() =>
-    new URLSearchParams(location.hash.slice(1)).get("page") === "evaluation"
-      ? "evaluation"
-      : "tree",
-  );
   useEffect(() => {
     const onHash = () =>
       setPage(
         new URLSearchParams(location.hash.slice(1)).get("page") === "evaluation"
-          ? "evaluation"
+          ? new URLSearchParams(location.hash.slice(1)).get("page")
           : "tree",
       );
     window.addEventListener("hashchange", onHash);

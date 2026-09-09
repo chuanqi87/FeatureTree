@@ -94,14 +94,3 @@ class Repository:
             records[fid] = doc
             paths[fid] = path.relative_to(self.root).as_posix()
         return records, paths
-
-    def inventory(self):
-        rows = []
-        # Backups and generated unmapped lists are never source catalogs.
-        for platform in self.config()["platforms"]:
-            path = self.root / "inventory" / platform / "catalog.json"
-            for row in json.loads(path.read_text(encoding="utf-8")):
-                if row.get("platform") != platform:
-                    raise ValueError(f"Inventory platform mismatch: {path}: {row.get('native_id')}")
-                rows.append(row)
-        return rows

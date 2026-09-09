@@ -19,9 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- sensors.access
-- sensors.environment
-- sensors.fusion
-- sensors.haptics
-- sensors.motion
+child_index: []

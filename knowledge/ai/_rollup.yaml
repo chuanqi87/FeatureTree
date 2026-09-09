@@ -19,10 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- ai.inference
-- ai.intents
-- ai.nlp
-- ai.on_device
-- ai.speech
-- ai.vision
+child_index: []

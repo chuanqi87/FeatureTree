@@ -19,14 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- graphics.2d
-- graphics.3d
-- graphics.capture
-- graphics.color
-- graphics.composite
-- graphics.gpu
-- graphics.imagefx
-- graphics.ink
-- graphics.pdf
-- graphics.text
+child_index: []

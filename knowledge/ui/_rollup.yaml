@@ -19,12 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- ui.animation
-- ui.controls
-- ui.layout
-- ui.navigation
-- ui.paradigm
-- ui.system_integration
-- ui.theme
-- ui.window
+child_index: []

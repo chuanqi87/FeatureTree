@@ -19,8 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- games.achievements
-- games.engine_services
-- games.multiplayer
-- games.player
+child_index: []

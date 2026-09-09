@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
-    "test": "node --test ../tests/viewer.test.mjs && node scripts/check-render.mjs",
+    "test": "node --test ../tests/*.test.mjs && node scripts/check-render.mjs",
     "format": "prettier --write src *.js *.json index.html"
   },
   "dependencies": {

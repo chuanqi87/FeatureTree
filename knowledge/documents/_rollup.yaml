@@ -19,10 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- documents.annotation
-- documents.generate
-- documents.pagination
-- documents.parse
-- documents.preview
-- documents.reading
+child_index: []

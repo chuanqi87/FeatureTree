@@ -44,7 +44,7 @@
 .venv/bin/python scripts/export_review_scope.py --domain connectivity.bluetooth --role leaf --confidence unassessed --limit 10
 ```
 
-结果在 `output/exports/review-scopes/<scope_hash>.json`，包含 feature_ids 和逐项 claim_id。相同筛选与输入得到同一哈希；输入改变另存新文件。后续执行者只生产选中的知识项；可阅读其他节点作背景，但不能把它们计为完成。preflight 仍检查全局输入与启动基线，不因小范围绕过证据要求。
+结果在 `output/exports/review-scopes/<scope_hash>.json`，包含 feature_ids 和逐项 claim_id。相同筛选与输入得到同一哈希；输入改变另存新文件。后续执行者只生产选中的知识项；可阅读其他节点作背景，但不能把它们计为完成。开始研究前重新核对输入与启动日基线，不因小范围省略证据要求。
 
 排序：0 实测不符，1 必须待实测，2 建议待抽样，3 补证据/未评估，4 其他；同档按节点 ID、知识项 ID。它不是业务影响评分，也不是随机/统计代表性抽样。小预算可能集中同一节点，可按领域拆批；一项跨平台结论可能需要多台设备，实际成本查看 cases。
 

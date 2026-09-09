@@ -19,10 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- a11y.framework
-- a11y.hearing
-- a11y.motor
-- a11y.service
-- a11y.testing
-- a11y.vision
+child_index: []

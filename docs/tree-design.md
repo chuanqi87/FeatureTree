@@ -1,83 +1,45 @@
-# 特性树设计契约
+# 特性树设计规则
 
-本文件定义如何直接设计并写入正式 `taxonomy/`。inventory-first / tree-expansion 流程已归档，不再使用。
+从 29 个稳定 L1 领域入口重新设计。正式源为 `taxonomy/<domain>.yaml`，领域顺序为 `taxonomy/_index.yaml`。当前没有子能力，树未冻结。
 
-## 分层原则
+## 范围与粒度
 
-| 阶段 | 谁做 | 做到什么程度就够 |
-| --- | --- | --- |
-| 树设计 | 协调者 | 定义、边界、切分轴、粒度、至少一端 API 锚点；可先用模型知识 |
-| 结构验收 | 协调者 + `tree_lint.py` | 轴一致、去重、层数、品牌命名、旧 ID 去向 |
-| 锚点核实 | `verify_anchors.py` + 可选模型 | URL/正文/符号命中；失败保留节点标 failed |
-| 知识生产 | 并行模型（树冻结后） | 三端实现、条件、置信度、evidence_refs |
+- 取 Android、iOS、HarmonyOS 公开应用开发能力的并集，单平台能力同样进入公共树。
+- 只纳入公开 API/SDK 可调用能力；排除注册入驻、认证、结算和纯控制台操作。
+- 先设计 L2/L3 的划分轴和边界，再按独立可比较能力细化到 L4/L5 或更深。
+- 不按平台品牌、API 方法、回调、参数或枚举值凑节点；能力叶子目标约两千个，数量不代替质量。
+- 同父节点的子节点共用 `sibling_axis`，避免单子分支和过宽分支。
+- `branch` 是待细分或汇总范围；`atomic` 是独立能力。未展开 L1 保持 `branch`，不得算作能力叶子。
 
-## L1 领域（29）
+## 节点内容
 
-现有 25 根 + `documents`、`digital_wellbeing`、`print_scan`、`games`。新增 L1 前须先与用户对齐。
+按 `config/schema/feature.schema.json` 填写中英文名称、定义、父节点、层级、比较范围 includes/excludes、`sibling_axis`、`granularity` 与知识路径。
 
-## 节点必填标准
+能力叶子使用 `knowledge_role: leaf` 和 `leaf_at_this_level: true`；分支使用 `knowledge_role: rollup`。跨域关联通过 `related_features` 明确表达，不能保留指向不存在节点的引用。
 
-每个节点写入 `taxonomy/<domain>.yaml`，符合 `config/schema/feature.schema.json`：
+新设计节点至少提供一端的具体 API 符号和官方 URL，其他端未核实就保留未知。设计阶段 `anchor_status: unverified`；脚本核实失败时保留节点复审，不据此声称平台不支持。L1 起点暂不要求能力锚点。
 
-- `name.zh` / `name.en`、`definition`（能力定义 + 边界）
-- `comparison_scope.includes`（≥1）、`excludes`（原子节点应指向其他节点 ID 或明确“无相邻混淆项”）
-- `sibling_axis`：与同父兄弟共用的切分轴字符串；同一父下所有子节点必须相同
-- `granularity`：`branch` 或 `atomic`；`atomic` 须 `leaf_at_this_level: true` 且 `knowledge_role: leaf`
-- `bindings`：至少一端 `{kind, id, url}`；其他端未查到时 `note: 未查到公开入口，待核`，**禁止**写“不支持”
-- `legacy`：见下节
-- `anchor_status`：设计阶段默认 `unverified`；核实脚本回写
+`legacy` 用于明确的概念沿用、合并和拆分，新增节点用 `new`。历史 ID 的遗漏对照在新树形成后再做，不能为了旧数量恢复归档子树。
 
-## 切分规则
+## 每域步骤
 
-- 按**独立可比较的应用能力**切分，不按 start/stop、callback、错误码、参数枚举、文件格式值凑节点。
-- 不按平台品牌建平行节点（App Links / Universal Links / App Linking → 同一能力）。
-- 同级必须共用同一 `sibling_axis`；单子分支应避免（除非过渡）。
-- 能力节点不要直接挂在 L1；至少经过 L2。
-- 未细分完保留 `granularity: branch`，不要为清零未展开而假 atomic。
-
-## Legacy（旧 212 节点）
-
-```yaml
-legacy:
-  disposition: kept          # kept | renamed_from | merged_from | split_from | new
-  sources: []                # 相关旧 feature id 列表；kept 且 id 未变时可省略或填自身
-```
-
-- 能延续概念的**保留旧 ID**（`disposition: kept`）。
-- 改名：`renamed_from` + `sources: [old.id]`，新 id 为当前 id。
-- 合并：保留 canonical id，`merged_from` + 被合并旧 id。
-- 拆分：多个新节点各自 `split_from` + 同一旧 id。
-- 全新能力：`new`。
-- `scripts/legacy_map.py` 要求每个旧 212 id 至少出现在一处 `sources` 或作为现网 `kept` id。
-
-## 每域工作流
-
-1. 读 `scripts/export_design_inputs.py --domain <id>` 输出（旧树 + 归档草稿线索）。
-2. 先定 L2 与各 L2 的 `sibling_axis`，再细分到 atomic（目标每域约 50–150 节点，按密度调整）。
-3. 写入 `taxonomy/<id>.yaml`，运行：
-   ```bash
-   .venv/bin/python scripts/tree_lint.py --domain <id>
-   .venv/bin/python scripts/refresh.py
-   ```
-4. 知识空壳由 `create_missing_knowledge` 生成；阶段 1 **不**手写三端知识正文。
-
-## 验收清单（全树）
-
-- [ ] `tree_lint.py` 无 error
-- [ ] 29 个 L1 均有合理 L2+ 子树
-- [ ] 跨域已知重复已合并或 `related_features` 互指
-- [ ] 旧 212 id 全部有 legacy 去向（`legacy_map.py`）
-- [ ] 锚点核实完成或 failed 清单已交付用户
-- [ ] ID 冻结后再启动知识生产
-
-## 命令速查
+1. 阅读该 L1 的范围，设计 L2 和各分支的切分轴。
+2. 用模型知识与官方语料提出能力、边界和 API 线索。
+3. 协调者写入正式 YAML，检查跨域重复和相邻能力的边界。
+4. 执行结构检查与刷新；只生成必要的知识空壳。
+5. 树设计稳定后核实锚点，明确未解决问题，再决定是否冻结 ID。
 
 ```bash
 .venv/bin/python scripts/export_design_inputs.py --domain connectivity
-.venv/bin/python scripts/tree_lint.py
-.venv/bin/python scripts/tree_lint.py --domain ui
-.venv/bin/python scripts/verify_anchors.py --domain connectivity
-.venv/bin/python scripts/legacy_map.py
+.venv/bin/python scripts/tree_lint.py --domain connectivity
 .venv/bin/python scripts/refresh.py
-.venv/bin/python scripts/serve_viewer.py
+.venv/bin/python scripts/verify_anchors.py --domain connectivity --write
 ```
+
+设计输入只来自当前树。旧产物在 `archive/`，不参与默认生成。
+
+## 冻结前验收
+
+确认各领域有合理子树、切分轴一致、粒度合理、跨域边界已处理、节点锚点已核实或缺口有清单。分别报告领域、总节点、分支与能力叶子数量。树结构通过和空分支清零均不代表覆盖完整。
+
+冻结后才按 [知识研究原则](research-runbook.md) 生产三端知识；冻结必须基于实际验收，不能由脚本写死通过结论。

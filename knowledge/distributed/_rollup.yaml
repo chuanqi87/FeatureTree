@@ -19,11 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- distributed.companion
-- distributed.continuity
-- distributed.data_sync
-- distributed.nearby
-- distributed.share_experience
-- distributed.softbus
-- distributed.wear_link
+child_index: []

@@ -1,6 +1,5 @@
 """Read-only snapshots for the authored taxonomy tree."""
 
-import json
 from datetime import date, datetime, timezone
 
 from .generation import tree_view
@@ -35,14 +34,3 @@ def build_snapshot(repo):
         "roots": roots,
         "nodes": nodes,
     }
-
-
-def build_draft_snapshot(repo):
-    """Retired: inventory-first draft campaigns are archived.
-
-    Kept as a stub so `/api/draft-tree` returns a clear error instead of 500 from missing modules.
-    """
-    del repo
-    raise FileNotFoundError(
-        "Draft tree-expansion campaigns were archived; use /api/tree for authored taxonomy"
-    )

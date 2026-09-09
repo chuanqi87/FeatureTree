@@ -19,6 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- print_scan.print
-- print_scan.scan
+child_index: []

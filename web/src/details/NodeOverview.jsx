@@ -195,7 +195,9 @@ export function NodeOverview({ node, model, onSelect }) {
           </Space>
         ) : (
           <Typography.Text type="secondary">
-            叶子节点，没有子节点。
+            {node.knowledge_role === "rollup"
+              ? "领域分支尚未展开，子能力待生成。"
+              : "叶子节点，没有子节点。"}
           </Typography.Text>
         )}
       </Section>

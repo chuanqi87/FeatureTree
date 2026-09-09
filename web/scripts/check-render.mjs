@@ -43,8 +43,16 @@ try {
             node.comparison_progress.state === "complete",
         );
         assert(!html.includes("完整支持"));
+        if (node.knowledge_role === "rollup" && !node.children.length) {
+          assert(html.includes("子能力待生成"));
+          assert(!html.includes("叶子节点，没有子节点"));
+        }
       }
-      if (component === "NodeSource") assert(html.includes("历史支持判断"));
+      if (component === "NodeSource") {
+        assert(html.includes("树节点 · 全部字段"));
+        assert(html.includes("知识记录 · 全部字段"));
+        assert(html.includes(node.id));
+      }
       count++;
     }
   }

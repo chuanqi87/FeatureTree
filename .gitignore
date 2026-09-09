@@ -11,4 +11,7 @@ docs-raw/official/
 output/reports/official-documents/documents.jsonl
 output/contexts/
 output/research/
-archive/*/output/
+archive/
+
+# Generated views and reports are rebuilt from current sources.
+output/

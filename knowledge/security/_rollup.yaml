@@ -19,13 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- security.attestation
-- security.biometrics
-- security.certificates
-- security.crypto
-- security.data_protection
-- security.device_safety
-- security.permissions
-- security.privacy
-- security.secure_storage
+child_index: []

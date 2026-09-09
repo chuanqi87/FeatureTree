@@ -6,8 +6,6 @@ from pathlib import Path
 from featuretree.bindings import build_index
 from featuretree.comparison import new_knowledge
 from featuretree.generation import create_missing_knowledge, export_views, matrix_rows
-from featuretree.inventory import classify_scope, prepare_row
-from featuretree.mapping import map_row, propose_mapping
 from featuretree.storage import ROOT, Repository, read_yaml, write_json, write_yaml
 from featuretree.validation import validate_tree
 from tests.test_comparison import feature
@@ -40,8 +38,6 @@ class RepositoryTests(unittest.TestCase):
 
     def test_export_views_uses_output_without_overwriting_sources_or_reports(self):
         create_missing_knowledge(self.repo)
-        for platform in self.config["platforms"]:
-            write_json(self.root / f"inventory/{platform}/catalog.json", [])
         history = self.root / "output/reports/migration_verification.json"
         write_json(history, {"historical_assertions_preserved": True})
         protected = [history, self.root / "taxonomy/sample.yaml", self.root / "knowledge/sample.yaml"]
@@ -55,13 +51,6 @@ class RepositoryTests(unittest.TestCase):
         self.assertEqual(json.loads((output / "tree.json").read_text())[0]["id"], "sample")
         self.assertFalse((self.root / "bindings").exists())
         self.assertEqual({path: path.read_bytes() for path in protected}, original)
-
-    def test_backup_and_unmapped_files_do_not_count_as_inventory(self):
-        for platform in self.config["platforms"]:
-            write_json(self.root / f"inventory/{platform}/catalog.json", [])
-            write_json(self.root / f"inventory/{platform}/catalog.seed-backup.json", [{"visibility": "public"}])
-        write_json(self.root / "inventory/unmapped/android.json", [{"visibility": "public"}])
-        self.assertEqual(self.repo.inventory(), [])
 
     def test_duplicate_yaml_keys_and_feature_ids_fail(self):
         path = self.root / "bad.yaml"
@@ -91,61 +80,29 @@ class RepositoryTests(unittest.TestCase):
         self.assertEqual({r["feature_id"] for r in support}, set(features))
         self.assertEqual(len(comparisons), 2)
 
+    def test_pending_l1_is_valid_but_empty_nested_rollup_is_not(self):
+        parent = feature()
+        parent.update(knowledge_role="rollup", granularity="branch")
+        docs = {"sample": new_knowledge(parent, self.config["platforms"])}
+        paths = {"sample": parent["knowledge_path"]}
+        self.assertEqual(validate_tree({"sample": parent}, docs, paths, self.config), [])
 
-class MappingTests(unittest.TestCase):
-    def setUp(self):
-        self.rules = read_yaml(ROOT / "config/mapping-rules.yaml")["rules"]
-        self.features = Repository().features()
+        child = feature()
+        child.update(id="sample.child", parent="sample", level="L2", knowledge_role="rollup",
+                     granularity="branch", knowledge_path="knowledge/sample/child.yaml")
+        docs[child["id"]] = new_knowledge(child, self.config["platforms"])
+        paths[child["id"]] = child["knowledge_path"]
+        errors = validate_tree({"sample": parent, child["id"]: child}, docs, paths, self.config)
+        self.assertIn("Rollup has no children: sample.child", errors)
 
-    def row(self, native, platform="harmonyos"):
-        return {"native_id": native, "platform": platform, "scope": "included", "mappings": []}
 
-    def test_specific_job_rule_precedes_app_rule(self):
-        row = self.row("android.app.job", "android")
-        self.assertEqual(propose_mapping(row, self.features, self.rules)[0]["feature_id"], "app.background.deferred_work")
-
-    def test_socket_is_not_http(self):
-        row = self.row("@ohos.net.socket")
-        self.assertEqual(propose_mapping(row, self.features, self.rules)[0]["feature_id"], "network.socket")
-
-    def test_unknown_module_stays_unmapped(self):
-        self.assertEqual(propose_mapping(self.row("@ohos.unknownCapability"), self.features, self.rules), [])
-
-    def test_missing_rule_target_does_not_fall_back(self):
-        rules = [{"platform": "harmonyos", "pattern": "socket", "feature_id": "network.missing", "relationship": "capability"}]
-        with self.assertRaises(ValueError):
-            propose_mapping(self.row("@ohos.net.socket"), self.features, rules)
-
-    def test_confirmed_manual_mapping_survives_rule_refresh(self):
-        row = self.row("@ohos.net.socket")
-        row["mappings"] = [{"feature_id": "network.socket", "method": "manual", "verification": "confirmed"}]
-        self.assertEqual(map_row(row, self.features, self.rules)["mappings"], row["mappings"])
-
-    def test_system_and_standard_library_scope_excluded(self):
-        for native in ["apis-camera-kit/js-apis-camera-sys.md", "java.util"]:
-            row = {**self.row(native), "title": "sample", "visibility": "public"}
-            self.assertEqual(classify_scope(row)[0], "excluded")
-
-    def test_catalog_proxy_remains_catalog_candidate(self):
-        row = self.row("apis-camera-kit/js-apis-cameraPicker.md")
-        row["parent"] = "apis-camera-kit"
-        mapping = propose_mapping(row, self.features, self.rules)[0]
-        self.assertEqual(mapping["feature_id"], "media.capture.camera")
-        self.assertEqual(mapping["relationship"], "catalog")
-        self.assertEqual(mapping["verification"], "candidate")
-
-    def test_reverse_index_does_not_cap_or_discard_many_to_many(self):
-        rows = []
-        for i in range(20):
-            rows.append({**self.row(f"module{i}"), "kind": "module", "url": "https://example.com", "visibility": "public",
-                         "mappings": [{"feature_id": fid, "method": "rule", "verification": "candidate", "relationship": "catalog"}
-                                      for fid in ["network", "network.socket"]]})
-        self.assertEqual(len(build_index({}, rows)), 40)
-
-    def test_reharvest_preserves_manual_scope_and_mapping(self):
-        row = {**self.row("corebluetooth", "ios"), "title": "Core Bluetooth", "kind": "framework", "visibility": "public"}
-        previous = {**row, "scope": "excluded", "scope_method": "manual", "scope_reason": "本批次不纳入",
-                    "mappings": [{"feature_id": "connectivity", "method": "manual"}]}
-        refreshed = prepare_row(row, ROOT, previous)
-        self.assertEqual(refreshed["scope"], "excluded")
-        self.assertEqual(refreshed["mappings"], previous["mappings"])
+class BindingTests(unittest.TestCase):
+    def test_reverse_index_keeps_all_authored_associations(self):
+        features = {
+            f"sample.item{i}": {"bindings": {"android": [{"id": "SharedApi", "kind": "class", "url": "https://example.com/api"}]}}
+            for i in range(20)
+        }
+        rows = build_index(features)
+        self.assertEqual(len(rows), 20)
+        self.assertEqual({row["feature_id"] for row in rows}, set(features))
+        self.assertTrue(all(row["sources"][0]["origin"] == "taxonomy" for row in rows))

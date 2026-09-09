@@ -19,7 +19,7 @@ const snapshot = JSON.parse(
     `${root}/.venv/bin/python`,
     [
       "-c",
-      "import json; from featuretree.storage import Repository; from featuretree.viewer import build_snapshot, json_default; print(json.dumps(build_snapshot(Repository()), default=json_default))",
+      "import json; from tests.viewer_fixture import snapshot; print(json.dumps(snapshot()))",
     ],
     { cwd: root, maxBuffer: 20_000_000 },
   ),
@@ -29,8 +29,8 @@ const options = { domain: "", query: "", collapsed: new Set() };
 const knowledgeIndex = buildKnowledgeIndex(model);
 
 test("natural-language keyword query ranks the relevant difference node first", () => {
-  const results = searchKnowledge(knowledgeIndex, "BLE 扫描过滤有哪些差异？");
-  assert.equal(results[0].node.id, "connectivity.bluetooth.le.scan.filter");
+  const results = searchKnowledge(knowledgeIndex, "样例扫描过滤有哪些差异？");
+  assert.equal(results[0].node.id, "sample.group.stage.operation.filter");
   const comparison = results[0].snippets.find((item) =>
     item.field.startsWith("comparisons["),
   );
@@ -40,8 +40,8 @@ test("natural-language keyword query ranks the relevant difference node first", 
 });
 
 test("knowledge search finds API text and preserves source locations", () => {
-  const results = searchKnowledge(knowledgeIndex, "scanForPeripherals");
-  assert.equal(results[0].node.id, "connectivity.bluetooth.le.scan.filter");
+  const results = searchKnowledge(knowledgeIndex, "readSampleRecord");
+  assert.equal(results[0].node.id, "sample.group.stage.operation.filter");
   assert(
     results[0].snippets.some((item) => item.field === "programming_model"),
   );
@@ -76,10 +76,10 @@ test("deep knowledge search retains the entire ancestor path even when collapsed
   const collapsed = new Set(snapshot.nodes.map((node) => node.id));
   const { rows } = visibleTree(model, {
     ...options,
-    query: "scanForPeripherals",
+    query: "readSampleRecord",
     collapsed,
   });
-  const target = "connectivity.bluetooth.le.scan.filter";
+  const target = "sample.group.stage.operation.filter";
   assert(rows.some((row) => row.node.id === target));
   for (const parent of model.ancestors.get(target))
     assert(rows.some((row) => row.node.id === parent));
@@ -89,19 +89,19 @@ test("deep knowledge search retains the entire ancestor path even when collapsed
 test("domain scoping, collapse and empty results do not leak unrelated nodes", () => {
   const { rows } = visibleTree(model, {
     ...options,
-    domain: "connectivity",
-    collapsed: new Set(["connectivity.bluetooth"]),
+    domain: "sample",
+    collapsed: new Set(["sample.group"]),
   });
   assert(
     rows.every(
       (row) =>
-        row.node.id === "connectivity" ||
-        model.ancestors.get(row.node.id).includes("connectivity"),
+        row.node.id === "sample" ||
+        model.ancestors.get(row.node.id).includes("sample"),
     ),
   );
   assert(
     !rows.some(
-      (row) => row.node.id === "connectivity.bluetooth.le.scan.filter",
+      (row) => row.node.id === "sample.group.stage.operation.filter",
     ),
   );
   assert.equal(
@@ -158,7 +158,7 @@ test("status filter retains paths and does not interpret legacy claims as confir
   assert(result.matchCount > 0);
   assert(
     result.rows.some(
-      (row) => row.node.id === "connectivity.bluetooth.le.scan.filter",
+      (row) => row.node.id === "sample.group.stage.operation.filter",
     ),
   );
   for (const row of result.rows.filter((row) => row.match))
@@ -191,20 +191,20 @@ test("quality filters require both conditions on the same claim", () => {
 });
 
 test("scope export excludes navigation ancestors and observes claim budget", () => {
-  const filters = { ...options, domain: "connectivity", role: "leaf", confidence: "unassessed" };
+  const filters = { ...options, domain: "sample", role: "leaf", confidence: "unassessed" };
   const tree = visibleTree(model, filters);
   assert(tree.rows.some((row) => !row.match));
   const scope = reviewSelection(model, tree.matchedIds, filters, 5);
   assert.equal(scope.selected_claims, 5);
   assert(scope.omitted_claims > 0);
   assert(scope.claims.every((claim) => claim.role === "leaf"));
-  assert(!scope.feature_ids.includes("connectivity"));
+  assert(!scope.feature_ids.includes("sample"));
   const collapsed = visibleTree(model, { ...filters, collapsed: new Set(model.roots) });
   assert.deepEqual(collapsed.matchedIds, tree.matchedIds);
 });
 
 test("an exact feature ID does not export parents mentioning it in child_index", () => {
-  const id = "connectivity.bluetooth.le.scan.filter";
+  const id = "sample.group.stage.operation.filter";
   const filters = { ...options, query: id };
   const result = visibleTree(model, filters);
   assert.deepEqual(result.matchedIds, [id]);

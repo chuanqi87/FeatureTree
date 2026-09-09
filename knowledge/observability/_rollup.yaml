@@ -19,9 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- observability.crash
-- observability.logging
-- observability.metrics
-- observability.perf
-- observability.tracing
+child_index: []

@@ -45,6 +45,8 @@ export function useExplorer() {
   }, []);
 
   useEffect(() => {
+    setModel(null);
+    setError("");
     refresh();
   }, [refresh]);
 

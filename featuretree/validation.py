@@ -20,10 +20,9 @@ def schema_validators(root: Path):
             for name, s in schemas.items()}
 
 
-def validate_schemas(validators, features, knowledge, inventory):
+def validate_schemas(validators, features, knowledge):
     errors = []
-    groups = [("feature", features.items()), ("knowledge", knowledge.items()),
-              ("inventory", ((f"{r.get('platform')}:{r.get('native_id')}", r) for r in inventory))]
+    groups = [("feature", features.items()), ("knowledge", knowledge.items())]
     for kind, records in groups:
         for key, record in records:
             for error in validators[kind].iter_errors(record):
@@ -77,7 +76,9 @@ def validate_tree(features, knowledge, paths, config):
     for fid, feature in features.items():
         if feature["knowledge_role"] == "leaf" and children[fid]:
             errors.append(f"Leaf has children: {fid}")
-        if feature["knowledge_role"] == "rollup" and not children[fid]:
+        pending_domain = (feature["level"] == "L1" and feature["parent"] is None
+                          and feature.get("granularity") == "branch")
+        if feature["knowledge_role"] == "rollup" and not children[fid] and not pending_domain:
             errors.append(f"Rollup has no children: {fid}")
         if fid in knowledge and "child_index" in knowledge[fid]:
             if set(knowledge[fid]["child_index"]) != set(children[fid]):

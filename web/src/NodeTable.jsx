@@ -39,7 +39,7 @@ export default function NodeTable({ explorer }) {
       render: (_, node) => (
         <div className="node-cell">
           <span className="node-type-icon">
-            {node.children.length ? <FolderOpenOutlined /> : <FileOutlined />}
+            {node.knowledge_role === "rollup" ? <FolderOpenOutlined /> : <FileOutlined />}
           </span>
           <div>
             <Button
@@ -71,7 +71,7 @@ export default function NodeTable({ explorer }) {
       width: 94,
       render: (_, node) => (
         <Typography.Text>
-          {node.children.length ? "分支节点" : "叶子节点"}
+          {node.knowledge_role === "rollup" ? "分支节点" : "叶子节点"}
         </Typography.Text>
       ),
     },

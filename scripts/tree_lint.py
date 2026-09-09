@@ -139,13 +139,6 @@ def lint_features(features: dict, old_ids: set[str], domain: str | None = None) 
     return issues
 
 
-def load_old_ids(repo: Repository) -> set[str]:
-    # Prefer archived snapshot of previous taxonomy if present; else current ids as baseline.
-    archive_tax = ROOT / "archive/2026-09-06-inventory-first"
-    # Current repo taxonomy before rebuild still is the 212-node set until rewritten.
-    return set(repo.features())
-
-
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--domain")
@@ -155,8 +148,7 @@ def main(argv=None) -> int:
 
     repo = Repository()
     features = repo.features()
-    old_ids = load_old_ids(repo)
-    issues = lint_features(features, old_ids, args.domain)
+    issues = lint_features(features, set(), args.domain)
     errors = [item for item in issues if item["severity"] == "error"]
     warnings = [item for item in issues if item["severity"] == "warning"]
 

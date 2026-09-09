@@ -19,12 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- connectivity.bluetooth
-- connectivity.ir
-- connectivity.nearlink
-- connectivity.nfc
-- connectivity.peripherals
-- connectivity.serial
-- connectivity.usb
-- connectivity.wifi
+child_index: []

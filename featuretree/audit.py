@@ -1,7 +1,6 @@
 """Validate data integrity separately from research completion."""
 
 import argparse
-import hashlib
 import json
 import re
 from collections import Counter
@@ -12,10 +11,8 @@ from .bindings import build_index
 from .comparison import progress
 from .confidence import claim_rows, quality_summary
 from .evidence import validate_knowledge_evidence
-from .inventory import inventory_coverage
-from .mapping import validate_inventory
 from .paths import EXPORTS_DIR, REPORTS_DIR
-from .storage import Repository, contained_path, read_yaml, write_json, write_text
+from .storage import Repository, contained_path, write_json, write_text
 from .validation import schema_validators, validate_schemas, validate_tree
 
 
@@ -28,39 +25,19 @@ def audit(repo, domain=None, check_index=True):
             raise ValueError(f"Invalid comparison config id: {identifier}")
     features = repo.features()
     knowledge, paths = repo.knowledge()
-    inventory = repo.inventory()
-    errors = validate_schemas(schema_validators(repo.root), features, knowledge, inventory)
+    errors = validate_schemas(schema_validators(repo.root), features, knowledge)
     if errors:
         return {"integrity": "failed", "errors": errors, "research_complete": False}
     errors += validate_tree(features, knowledge, paths, config)
-    errors += validate_inventory(inventory, features, config["platforms"])
     for feature in features.values():
         contained_path(repo.root, feature["knowledge_path"], "knowledge")
         if set(feature.get("bindings", {})) - set(config["platforms"]):
             errors.append(f"Unknown binding platform: {feature['id']}")
     if not errors:
         errors += validate_knowledge_evidence(features, knowledge, config["platforms"], repo.root)
-    hashes = {}
-    for row in inventory:
-        source = row["source"]
-        path = contained_path(repo.root, source["local_path"], "docs-raw")
-        if path not in hashes:
-            hashes[path] = hashlib.sha256(path.read_bytes()).hexdigest()
-        if hashes[path] != source["sha256"]:
-            errors.append(f"Inventory source changed: {row['platform']}:{row['native_id']}")
-    rules = read_yaml(repo.root / "config/mapping-rules.yaml")["rules"]
-    for rule in rules:
-        if rule["platform"] not in config["platforms"]:
-            errors.append(f"Unknown platform in mapping rule: {rule['platform']}")
-        try:
-            re.compile(rule["pattern"])
-        except re.error as exc:
-            errors.append(f"Invalid mapping pattern: {exc}")
-        if rule["feature_id"] not in features:
-            errors.append(f"Missing mapping rule target: {rule['feature_id']}")
     if check_index:
         path = repo.root / EXPORTS_DIR / "index.json"
-        if not path.exists() or json.loads(path.read_text()) != build_index(features, inventory):
+        if not path.exists() or json.loads(path.read_text()) != build_index(features):
             errors.append(f"Stale or incomplete {EXPORTS_DIR}/index.json; run scripts/refresh.py")
     selected = {fid: f for fid, f in features.items()
                 if domain is None or fid == domain or fid.startswith(domain + ".")}
@@ -70,15 +47,16 @@ def audit(repo, domain=None, check_index=True):
              for fid, f in selected.items()]
     totals = {key: sum(q[key] for q in queue) for key in
               ("confirmed_support", "total_support", "confirmed_comparisons", "total_comparisons")}
-    coverage = {p: inventory_coverage([r for r in inventory if r["platform"] == p])
-                for p in config["platforms"]}
     quality = [row for fid, feature in selected.items()
                for row in claim_rows(feature, knowledge[fid], config["platforms"])]
     return {"integrity": "failed" if errors else "passed", "errors": errors,
             "research_complete": not errors and bool(queue) and all(q["state"] == "complete" for q in queue),
             "selection": domain or "all", "feature_count": len(selected),
             "article_status": dict(Counter(knowledge[fid]["status"] for fid in selected if fid in knowledge)),
-            "progress": totals, "inventory": coverage,
+            "progress": totals,
+            "tree_counts": {"domains": sum(f["parent"] is None for f in selected.values()),
+                            "branches": sum(f["knowledge_role"] == "rollup" for f in selected.values()),
+                            "atomic_leaves": sum(f["knowledge_role"] == "leaf" for f in selected.values())},
             "quality": quality_summary(quality),
             "quality_by_role": {role: quality_summary([r for r in quality if r["role"] == role]) for role in ("leaf", "rollup")},
             "device_review_complete": not errors and bool(quality) and all(r["device_state"] in ("not_required", "passed") for r in quality),
@@ -92,19 +70,15 @@ def report_markdown(report):
     lines = ["# 当前进度（自动生成）", "",
              f"结构校验：{report['integrity']}。差异确认完成：{'是' if report['research_complete'] else '否'}。",
              "", f"比较节点：{report['feature_count']}；文章编辑状态：{report['article_status']}。",
+             f"领域：{report['tree_counts']['domains']}；分支：{report['tree_counts']['branches']}；能力叶子：{report['tree_counts']['atomic_leaves']}。",
              "", f"平台支持已确认：{p['confirmed_support']} / {p['total_support']}。",
              f"维度 × 平台对已确认：{p['confirmed_comparisons']} / {p['total_comparisons']}。", "",
              "旧文章 reviewed 状态不自动确认结构化结论。空白比较项表示待确认。", "",
              f"知识置信度（逐项）：{report['quality']['counts']}；真机复核状态：{report['quality']['device_states']}。",
              f"所列计划真机复核完成：{report['device_review_complete']}；不表示覆盖全部机型。",
              "叶子与分支的分级统计分别保存在 audit.json 的 quality_by_role。",
-             "按置信度、实测需求和预算筛选：scripts/export_review_scope.py；逐项清单：../exports/review_queue.json。", "",
-             "| 平台 | 已纳入 | 范围待定 | 已排除 | 候选目录归类 | 候选能力关联 | 已确认能力关联 | 未映射 |",
-             "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"]
-    for platform, c in report["inventory"].items():
-        lines.append(f"| {platform} | {c['included']} | {c['pending_scope']} | {c['excluded']} | "
-                     f"{c['candidate_catalog']} | {c['candidate_capability']} | {c['confirmed_capability']} | {c['unmapped_included']} |")
-    lines += ["", "目录候选、能力关联和节点差异确认分别统计，不互相代替。",
+             "按置信度、实测需求和预算筛选：scripts/export_review_scope.py；逐项清单：../exports/review_queue.json。"]
+    lines += ["", "领域入口与能力叶子分开统计；结构通过不代表树覆盖完整。",
               "", "待确认节点见 review_queue.json；逐项空缺见 ../exports/comparison_matrix.csv。", ""]
     return "\n".join(lines)
 

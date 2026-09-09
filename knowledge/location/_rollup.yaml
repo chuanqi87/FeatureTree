@@ -19,9 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- location.geocoding
-- location.geofence
-- location.heading
-- location.maps
-- location.positioning
+child_index: []

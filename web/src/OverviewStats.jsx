@@ -22,7 +22,7 @@ export default function OverviewStats({ stats, model, domain }) {
           value: stats ? stats.total - stats.leaves : null,
           icon: <BranchesOutlined />,
           color: "purple",
-          note: "可展开查看下级能力",
+          note: "领域与分类分支，包含尚待生成子能力的入口",
         },
         {
           title: "叶子节点",

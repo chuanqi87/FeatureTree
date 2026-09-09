@@ -19,8 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- enterprise.device_policy
-- enterprise.identity_enterprise
-- enterprise.mdm
-- enterprise.work_profile
+child_index: []

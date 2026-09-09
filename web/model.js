@@ -101,7 +101,7 @@ export function treeStats(model, domain) {
   const nodes = scopeIds(model, domain).map((id) => model.byId.get(id));
   return {
     total: nodes.length,
-    leaves: nodes.filter((node) => !node.children.length).length,
+    leaves: nodes.filter((node) => node.knowledge_role === "leaf").length,
     depth: Math.max(
       0,
       ...nodes.map((node) => model.ancestors.get(node.id).length + 1),

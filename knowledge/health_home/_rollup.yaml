@@ -19,8 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- health_home.auto
-- health_home.health_data
-- health_home.home
-- health_home.workout
+child_index: []

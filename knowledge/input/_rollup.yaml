@@ -19,12 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- input.clipboard
-- input.dragdrop
-- input.gamepad
-- input.ime
-- input.key
-- input.stylus
-- input.text_editing
-- input.touch
+child_index: []

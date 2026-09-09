@@ -19,9 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- interop.action_dispatch
-- interop.data_transfer
-- interop.deeplink
-- interop.lightweight_ui
-- interop.share
+child_index: []

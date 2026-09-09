@@ -19,9 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- commerce.ads
-- commerce.analytics
-- commerce.growth
-- commerce.iap
-- commerce.payment
+child_index: []

@@ -19,16 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- media.audio
-- media.capture
-- media.codec
-- media.drm
-- media.editing
-- media.image
-- media.library
-- media.metadata
-- media.playback
-- media.recording
-- media.scan
-- media.session
+child_index: []

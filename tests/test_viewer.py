@@ -11,7 +11,7 @@ from urllib.request import urlopen
 
 from featuretree.comparison import new_knowledge
 from featuretree.storage import ROOT, Repository, write_yaml
-from featuretree.viewer import build_draft_snapshot, build_snapshot, json_default
+from featuretree.viewer import build_snapshot, json_default
 from featuretree.viewer_server import create_server
 from tests.test_comparison import feature
 
@@ -67,10 +67,6 @@ class ViewerTests(unittest.TestCase):
         self.assertEqual(build_snapshot(self.repo)["nodes"], [])
         self.assertEqual(json.loads(json.dumps({"date": date(2026, 9, 5)}, default=json_default))["date"], "2026-09-05")
 
-    def test_draft_snapshot_endpoint_is_retired(self):
-        with self.assertRaisesRegex(FileNotFoundError, "archived"):
-            build_draft_snapshot(self.repo)
-
     def test_http_serves_ui_and_live_data_without_exposing_repository(self):
         server = create_server(self.repo, ROOT / "web", port=0)
         thread = threading.Thread(target=server.serve_forever, daemon=True)
@@ -84,7 +80,7 @@ class ViewerTests(unittest.TestCase):
         with urlopen(origin + "/api/tree") as response:
             self.assertEqual(len(json.load(response)["nodes"]), 1)
             self.assertEqual(response.headers["Cache-Control"], "no-store")
-        for path in ["/../README.md", "/%2e%2e/config/comparison.yaml", "/.git/config", "/knowledge/sample.yaml"]:
+        for path in ["/api/draft-tree", "/../README.md", "/%2e%2e/config/comparison.yaml", "/.git/config", "/knowledge/sample.yaml"]:
             with self.assertRaises(HTTPError) as error:
                 urlopen(origin + path)
             self.assertEqual(error.exception.code, 404)

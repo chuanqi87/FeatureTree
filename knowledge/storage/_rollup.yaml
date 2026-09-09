@@ -19,15 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- storage.archive
-- storage.backup
-- storage.cloud
-- storage.db
-- storage.document
-- storage.encryption
-- storage.file_access
-- storage.kv
-- storage.search_index
-- storage.sharing
-- storage.type_id
+child_index: []

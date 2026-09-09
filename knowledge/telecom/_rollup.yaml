@@ -19,9 +19,4 @@ presence:
     verification: unreviewed
 comparisons: []
 evidence: []
-child_index:
-- telecom.calendar
-- telecom.contacts
-- telecom.mail
-- telecom.phone
-- telecom.sms
+child_index: []

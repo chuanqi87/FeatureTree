@@ -5,6 +5,7 @@ from featuretree.corpus.urls import canonical, platform as url_platform
 
 from featuretree.workflow.stages import CHECKS, PLATFORMS
 from featuretree.workflow.state import digest, read_json
+from featuretree.workflow.api_inventory import api_index
 
 
 def output_schema(root, stage):
@@ -23,6 +24,7 @@ def validate_result(root, packet, result):
     payload = result["payload"]
     stage = packet["stage"]
     if stage in PLATFORMS:
+        api_index(payload, stage)
         ids = [c["id"] for c in payload["candidates"]]
         if len(ids) != len(set(ids)) or any(not i.startswith(stage + ":") for i in ids):
             raise ValueError("Candidate IDs must be unique and platform-prefixed")

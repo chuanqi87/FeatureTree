@@ -24,6 +24,16 @@ export function useWorkflow() {
   const generation = useRef(0);
   const submission = useRef(null);
 
+  useEffect(() => {
+    const onHash = () => {
+      const params = new URLSearchParams(location.hash.slice(1));
+      if (params.get("page") === "workflow")
+        setSelected(params.get("run") || "");
+    };
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
   const refresh = useCallback(
     async (signal) => {
       const version = ++generation.current;

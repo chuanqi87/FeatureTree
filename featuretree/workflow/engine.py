@@ -23,10 +23,15 @@ def execute_attempt(root, packet, folder, state, backend, snapshot):
     else:
         result, metadata = backend.execute(root, "ft-" + stage, packet, folder, state["timeout"],
                                             state["model"], state["variant"])
-        validate_result(root, packet, result)
-        if stage == "synthesize":
-            validate_proposal(root, snapshot, packet["work"], result["payload"],
-                              [packet["inputs"][p] for p in PLATFORMS])
+        try:
+            validate_result(root, packet, result)
+            if stage == "synthesize":
+                validate_proposal(root, snapshot, packet["work"], result["payload"],
+                                  [packet["inputs"][p] for p in PLATFORMS])
+        except Exception as exc:
+            exc.metadata = metadata
+            write_json(folder / "metadata.json", metadata)
+            raise
     write_json(folder / "result.json", result)
     write_json(folder / "metadata.json", metadata)
     return result, metadata
@@ -94,11 +99,11 @@ def execute_run(root, run_id, backend: Backend, on_event=print):
                                     result_hash=digest(result))
                         attempt.update(status=task["status"], metadata=metadata)
                     except Exception as exc:
-                        attempt.update(status="failed", error=f"{type(exc).__name__}: {exc}")
-                        task["status"] = "pending" if len(task["attempts"]) < task["allowance"] else "failed"
+                        attempt.update(status="failed", error=f"{type(exc).__name__}: {exc}",
+                                       metadata=getattr(exc, "metadata", {}), retryable=getattr(exc, "retryable", True))
+                        retry = attempt["retryable"] and len(task["attempts"]) < task["allowance"]
+                        task["status"] = "pending" if retry else "failed"
                     attempt["ended_at"] = now()
                     save_state(folder, state)
                     on_event(f"{task['id']}: {task['status']}")
         return state
-
-

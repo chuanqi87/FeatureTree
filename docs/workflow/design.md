@@ -21,7 +21,10 @@ flowchart LR
     G --> H[锚点检测]
     H --> I[整批跨域审查]
     I --> J[协调者发布]
-    G -- 定向返工 --> F
+    G -- 结构返工 --> F
+    G -- 平台证据返工 --> C
+    G -- 平台证据返工 --> D
+    G -- 平台证据返工 --> E
     I -- 定向返工 --> F
 ```
 
@@ -65,6 +68,7 @@ v1 采用**新增式下钻**：已有节点、ID、定义不变，只添加所�
 
 - 公共信封：`schema_version`、`task_id`、`input_hash`、`stage`、`payload`。哈希由输入给出，必须原样回传。
 - scope：`axis`、`groups`（名称/定义）、`boundaries`、`questions`。
+- scope 补充 `research_queries`：三端各自的具体检索短语，供调度器准备有界、分组去重的官方正文摘录；检索线索不作能力结论。
 - 平台候选：稳定的批内 candidate ID、名称/定义、binding、distribution、device_forms、conditions、public_api、线索理由；附 queries 和 gaps。
 - synthesis：完整 feature Schema 节点、candidate disposition、每个节点的继续/停止理由、未解决问题。
 - review / integrate：受审输入哈希、verdict、具名 checks（pass/issue + 理由）、issues（节点、code、severity、修复建议）。失败产物也永久保存。
@@ -73,9 +77,9 @@ v1 采用**新增式下钻**：已有节点、ID、定义不变，只添加所�
 
 ## 执行、重试与返工
 
-任务状态是 `pending → running → succeeded / failed / blocked`。依赖失败时下游不执行。网络/进程/格式/契约失败按 max_attempts 有界重试；成功产物复用，不为恢复一个失败节点重跑全树。进程崩溃后，下一次获得运行锁的调度器把遗留 running 作为中断尝试记录，再继续。
+任务状态是 `pending → running → succeeded / failed / blocked`。依赖失败时下游不执行。可重试的传输/格式/契约失败按 max_attempts 有界重试；超时、信号终止和缺失结构化答案停止自动重试；成功产物复用，不为恢复一个失败节点重跑全树。进程崩溃后，下一次获得运行锁的调度器把遗留 running 作为中断尝试记录，再继续。
 
-语义审查 revise 不做无上限自动对话。`revise` 命令把失败审查与原提案传回 synthesis，重跑 synthesis → 局部审查 → 检测 → 全局审查；其他节点成功阶段复用。全局边界问题涉及几个节点就显式返工几个节点。配置限制每个节点的返工轮数。基础设施失败修复后用 `retry` 追加有限尝试，不清除历史。
+语义审查 revise 不做无上限自动对话。`revise` 依据 blocking issue 的 target_stage，把候选/证据错误退回被点名的平台，把结构错误退回 synthesis；随后重跑综合 → 局部审查 → 检测 → 全局审查。未受影响的平台和节点复用，旧审查未指定 target_stage 时保留综合返工行为。全局边界问题涉及几个节点就显式返工几个节点。配置限制每个节点的返工轮数。基础设施失败修复后用 `retry` 追加有限尝试，不清除历史。
 
 一个运行只允许一个调度器写状态，内部用线程池管理独立 OpenCode 进程。不同运行可研究同一树快照；发布串行，并拒绝过期快照。v1 过期后重新 plan，避免未经复审的自动 rebase。单机文件锁适用于共享本地目录；v1 不提供跨机器远程结果导入，不能把本地文件锁当作分布式租约。
 
@@ -105,4 +109,4 @@ v1 采用**新增式下钻**：已有节点、ID、定义不变，只添加所�
 
 ## OpenCode 对接依据
 
-使用官方支持的[项目级 Markdown agents](https://opencode.ai/docs/agents/)，并用 [CLI](https://opencode.ai/docs/cli/) 的 `run --agent NAME --format json` 启动独立会话。agent [权限](https://opencode.ai/docs/permissions/)默认拒绝，仅开放阅读、检索、官方网页获取；禁止编辑、shell、嵌套派单与交互提问。运行器把本地候选资料和输出 Schema 放入输入，批次调度集中管理。模型与 variant 由运行参数固定；省略时继承用户 OpenCode 默认配置，不在 agent 文件硬编码供应商。
+使用官方支持的[项目级 Markdown agents](https://opencode.ai/docs/agents/)，并用 [CLI](https://opencode.ai/docs/cli/) 的 `run --agent NAME --format json` 启动独立会话。agent [权限](https://opencode.ai/docs/permissions/)默认拒绝，三个结构角色无工具，平台研究/局部审查仅开放限定路径阅读与网页获取；禁止编辑、shell、嵌套派单与交互提问。运行器把本地候选资料和输出 Schema 放入输入，批次调度集中管理。模型与 variant 由运行参数固定；省略时继承用户 OpenCode 默认配置，不在 agent 文件硬编码供应商。

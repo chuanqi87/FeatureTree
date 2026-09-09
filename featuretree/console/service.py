@@ -32,7 +32,8 @@ class WorkflowConsole:
         for path in sorted((self.root / "config/workflow/baselines").glob("*.json")):
             presets.append({"id": path.stem, "label": path.stem, "baseline": read_json(path)})
         return {"available": self.launcher.available(), "slots": self.slots, "baselines": presets,
-                "defaults": {"depth": 2, "max_nodes": 40, "workers": min(3, self.slots), "timeout": 600}}
+                "defaults": {"depth": 1, "max_nodes": 12, "workers": min(3, self.slots), "timeout": 600,
+                             "first_response_timeout": 120}}
 
     def states(self):
         result = []
@@ -89,7 +90,7 @@ class WorkflowConsole:
 
     def create(self, body):
         allowed = {"nodes", "action", "source_node", "baseline_id", "request_id", "depth",
-                   "max_nodes", "workers", "timeout", "model", "variant"}
+                   "max_nodes", "workers", "timeout", "first_response_timeout", "model", "variant", "parent_run"}
         if set(body) - allowed:
             raise ValueError("包含未知的执行参数")
         action = body.get("action", "drilldown")
@@ -108,7 +109,15 @@ class WorkflowConsole:
         if variant is not None and (not isinstance(variant, str) or not re.fullmatch(r"[\w.-]{1,60}", variant)):
             raise ValueError("无效的推理配置")
         baselines = {p["id"]: p["baseline"] for p in options["baselines"]}
-        if body.get("baseline_id") not in baselines:
+        baseline = baselines.get(body.get("baseline_id"))
+        parent_run = body.get("parent_run")
+        if parent_run:
+            parent = self.get_run(parent_run)
+            allowed_nodes = {r["node_id"] for r in parent["next_work_orders"]}
+            if not parent.get("published") or not set(body.get("nodes", [])) <= allowed_nodes or action != "drilldown":
+                raise ValueError("下一层只能分析已合并父批次的待展开分支")
+            baseline = parent["baseline"]
+        if baseline is None:
             raise ValueError("请选择可用的版本基线")
         with lock(self.root / ".workflow/console.lock"):
             for _, state in self.states():
@@ -120,8 +129,8 @@ class WorkflowConsole:
                 raise ValueError("未找到 OpenCode，请先在本机配置后重新启动管理台")
             nodes = self.resolve_targets(body.get("nodes"), action)
             self.check_capacity(nodes, values["workers"])
-            state = make_plan(self.root, nodes, baselines[body["baseline_id"]], **values, model=model, variant=variant)
-            state.update(request_id=request_id, request_hash=digest(body),
+            state = make_plan(self.root, nodes, baseline, **values, model=model, variant=variant)
+            state.update(request_id=request_id, request_hash=digest(body), parent_run=parent_run,
                          trigger={"action": action, "source_node": body.get("source_node")})
             save_state(run_path(self.root, state["id"]), state)
             self.start(state["id"])

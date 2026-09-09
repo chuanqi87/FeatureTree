@@ -17,7 +17,7 @@ from tests.fixtures.workflow import FixtureBackend
 def workspace(root):
     root = root.resolve()
     shutil.copytree(ROOT / "config", root / "config")
-    shutil.copytree(ROOT / ".opencode", root / ".opencode")
+    shutil.copytree(ROOT / ".opencode", root / ".opencode", ignore=shutil.ignore_patterns("node_modules"))
     (root / "AGENTS.md").write_text("Synthetic console fixture. No actual platform research.")
     nodes = [feature("sample", parent=None, level="L1", zh="测试领域", en="Fixture domain", definition="Synthetic root", includes=["fixture"]),
              feature("sample.branch", parent="sample", level="L2", zh="测试分支", en="Fixture branch", definition="Synthetic branch", includes=["fixture"], sibling_axis="synthetic task category"),

@@ -8,6 +8,7 @@ from featuretree.workflow.contracts import output_schema
 from featuretree.workflow.gates import validate_proposal
 from featuretree.workflow.planning import work_order
 from featuretree.workflow.sources import source_context
+from featuretree.workflow.repairs import repair_packet
 
 
 def snapshot_for(folder, state):
@@ -23,6 +24,9 @@ def node_inputs(folder, state, node):
 
 
 def make_packet(root, folder, state, task, snapshot):
+    repaired = repair_packet(folder, task)
+    if repaired is not None:
+        return seal_packet(repaired, state)
     stage, node = task["stage"], task["node"]
     work = work_order(snapshot, state, node)
     if node:
@@ -40,7 +44,11 @@ def make_packet(root, folder, state, task, snapshot):
             raise ValueError("Merged candidate tree fails structural lint")
     packet = {"schema_version": 1, "task_id": task["id"], "stage": stage,
               "run_id": state["id"], "work": work, "inputs": inputs,
+              "limits": {"first_response_timeout": state.get("first_response_timeout", 120)},
               "snapshot_path": str((folder / "snapshot.json").resolve())}
+    packet["policy_context"] = {path: (root / path).read_text() for path in
+                                ("docs/knowledge/sources.md", "docs/corpus/entrypoints.md")
+                                if (root / path).is_file()}
     if "feedback" in task:
         packet["revision_feedback"] = task["feedback"]
     if task["attempts"] and task["attempts"][-1].get("error"):
@@ -50,13 +58,33 @@ def make_packet(root, folder, state, task, snapshot):
     if stage == "review":
         packet["inputs"]["structural_gate"] = validate_proposal(
             root, snapshot, work, inputs["synthesize"], [inputs[p] for p in PLATFORMS])
+        packet["inputs"]["source_refs"] = platform_source_refs(folder, state, node)
     if stage != "anchors":
         packet["output_schema"] = output_schema(root, stage)
         if stage == "synthesize":
             packet["feature_schema"] = read_json(root / "config/schema/feature.schema.json")
     if stage in ("review", "integrate"):
         packet["reviewed_hash"] = digest(packet["inputs"])
+    return seal_packet(packet, state)
+
+
+def seal_packet(packet, state):
     packet["input_hash"] = digest(packet)
     if len(json.dumps(packet, ensure_ascii=False)) > state["max_input_chars"]:
         raise ValueError("Input exceeds max_input_chars; select a smaller/deeper work order or split the batch")
     return packet
+
+
+def platform_source_refs(folder, state, node):
+    """Give reviewers verified source locations instead of searching other runs."""
+    refs = {}
+    for platform in PLATFORMS:
+        task = state["tasks"][f"{node}/{platform}"]
+        result = artifact(folder, task)
+        packet = read_json((folder / task["result_path"]).parent / "input.json")
+        expected = packet.pop("input_hash")
+        if digest(packet) != expected or expected != result["input_hash"]:
+            raise ValueError("Platform source input was modified")
+        refs[platform] = [{key: row[key] for key in ("url", "title", "body_path", "body_sha256")}
+                          for row in packet.get("sources", {}).get("sources", [])]
+    return refs

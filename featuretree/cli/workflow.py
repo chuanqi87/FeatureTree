@@ -23,12 +23,14 @@ def main(argv=None):
     plan = commands.add_parser("plan", help="Snapshot existing branches and prepare a batch without invoking models")
     plan.add_argument("--node", action="append", required=True)
     plan.add_argument("--baseline", type=Path, required=True)
-    for flag, default in (("depth", 2), ("max-nodes", 40), ("workers", 3), ("timeout", 600),
+    for flag, default in (("depth", 1), ("max-nodes", 12), ("workers", 3), ("timeout", 600),
                           ("max-attempts", 2), ("max-revisions", 2)):
         plan.add_argument("--" + flag, type=int, default=default)
     plan.add_argument("--model")
     plan.add_argument("--variant")
     plan.add_argument("--max-input-chars", type=int, default=500000)
+    plan.add_argument("--first-response-timeout", type=int, default=120,
+                      help="Stop without automatic retry if no model text/tool event arrives in this many seconds")
     for command in ("run", "report", "publish", "retry"):
         commands.add_parser(command).add_argument("run_id")
     revise = commands.add_parser("revise")
@@ -44,7 +46,7 @@ def main(argv=None):
         if args.command == "plan":
             state = make_plan(root, args.node, read_json(args.baseline), args.depth, args.max_nodes,
                               args.workers, args.timeout, args.max_attempts, args.max_revisions,
-                              args.model, args.variant, args.max_input_chars)
+                              args.model, args.variant, args.max_input_chars, args.first_response_timeout)
             result = {"run_id": state["id"], "nodes": state["nodes"], "tasks": len(state["tasks"]),
                       "next": f"python scripts/workflow.py run {state['id']}"}
         elif args.command == "doctor":

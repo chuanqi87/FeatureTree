@@ -6,11 +6,13 @@ import {
   Descriptions,
   Space,
   Table,
+  Tag,
   Typography,
 } from "antd";
-import { stageNames } from "./model.js";
+import { stageNames, duration } from "./model.js";
 import { RunStatus } from "./RunList.jsx";
 import StageResult from "./StageResult.jsx";
+import ApiAssessment from "./ApiAssessment.jsx";
 
 export default function RunDetails({ run, workflow, model, onPublished }) {
   const [error, setError] = useState("");
@@ -112,6 +114,16 @@ export default function RunDetails({ run, workflow, model, onPublished }) {
               children: run.baseline.as_of,
             },
             {
+              key: "elapsed",
+              label: "执行耗时",
+              children: duration(run.metrics?.wall_seconds),
+            },
+            {
+              key: "calls",
+              label: "Agent 执行次数",
+              children: run.metrics?.model_calls ?? "—",
+            },
+            {
               key: "versions",
               label: "平台版本",
               children: Object.entries(run.baseline.platforms)
@@ -137,6 +149,7 @@ export default function RunDetails({ run, workflow, model, onPublished }) {
               render: (_, task) => (
                 <div>
                   {stageNames[task.stage] || task.stage}
+                  {task.metrics?.reused && <Tag>复用已有结果</Tag>}
                   <div>
                     <Typography.Text type="secondary">
                       {task.node || "整批任务"}
@@ -155,6 +168,16 @@ export default function RunDetails({ run, workflow, model, onPublished }) {
               key: "attempts",
               render: (_, t) => t.attempts.length,
             },
+            {
+              title: "累计耗时",
+              key: "elapsed",
+              render: (_, t) => duration(t.metrics?.elapsed_seconds),
+            },
+            {
+              title: "首次响应",
+              key: "first",
+              render: (_, t) => duration(t.metrics?.first_response_seconds),
+            },
           ]}
           expandable={{
             expandedRowRender: (task) => <StageResult task={task} />,
@@ -164,6 +187,7 @@ export default function RunDetails({ run, workflow, model, onPublished }) {
         />
       </Card>
       <Card title={`候选结果 · ${run.additions.total} 个节点`}>
+        {run.updated_nodes?.length > 0 && <Typography.Paragraph>确认当前节点停止拆分：{run.updated_nodes.join("、")}</Typography.Paragraph>}
         <Typography.Paragraph type="secondary">
           {run.additions.branches} 个分支、{run.additions.atomic_leaves}{" "}
           个能力叶子。阶段完成数量不代表能力覆盖率。
@@ -200,6 +224,7 @@ export default function RunDetails({ run, workflow, model, onPublished }) {
           locale={{ emptyText: "候选结构尚未生成" }}
         />
       </Card>
+      <ApiAssessment run={run} workflow={workflow} onError={setError} />
     </div>
   );
 }

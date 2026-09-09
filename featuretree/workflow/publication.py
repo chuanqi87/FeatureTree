@@ -13,6 +13,8 @@ from featuretree.workflow.contracts import validate_result
 from featuretree.workflow.packets import node_inputs, snapshot_for
 from featuretree.workflow.gates import counts, validate_proposal
 from featuretree.workflow.planning import work_order
+from featuretree.workflow.metrics import execution_metrics
+from featuretree.workflow.api_inventory import assess_allocations
 
 
 def accepted_tree(root, folder, state):
@@ -34,12 +36,14 @@ def accepted_tree(root, folder, state):
         proposal = inputs["synthesize"]
         validate_proposal(root, snapshot, work_order(snapshot, state, node), proposal,
                           [inputs[p] for p in PLATFORMS])
+        surfaces = {r["node_id"]: r["platforms"] for r in assess_allocations(proposal, [inputs[p] for p in PLATFORMS])}
         statuses = {r["id"]: r["anchor_status"] for r in inputs["anchors"]["results"]}
         for feature in proposal["nodes"]:
-            if feature["id"] in merged:
+            if feature["id"] in merged and feature["id"] != node:
                 raise ValueError("Cross-work-order duplicate ID")
             feature = deepcopy(feature)
             feature["anchor_status"] = statuses[feature["id"]]
+            feature["api_surface"] = surfaces[feature["id"]]
             merged[feature["id"]] = feature
     return snapshot, merged
 
@@ -52,6 +56,11 @@ def report(root, run_id):
                 for s in ("pending", "running", "succeeded", "failed", "blocked")}
     additions = [n for t in tasks if t["stage"] == "synthesize" and t["status"] == "succeeded"
                  for n in artifact(folder, t)["payload"]["nodes"]]
+    updates = [n for n in additions if n["id"] in snapshot["features"]]
+    additions = [n for n in additions if n["id"] not in snapshot["features"]]
+    assessments = [r for t in tasks if t["stage"] == "synthesize" and t["status"] == "succeeded"
+                   for r in assess_allocations(artifact(folder, t)["payload"],
+                   [node_inputs(folder, state, t["node"])[p] for p in PLATFORMS])]
     anchors = [r for t in tasks if t["stage"] == "anchors" and t["status"] == "succeeded"
                for r in artifact(folder, t)["payload"]["results"]]
     issues = {t["id"]: artifact(folder, t)["payload"] for t in tasks if t["status"] == "blocked"}
@@ -61,7 +70,10 @@ def report(root, run_id):
     deferred = [d for t in tasks if t["stage"] == "synthesize" and t["status"] == "succeeded"
                 for d in artifact(folder, t)["payload"]["dispositions"] if d["decision"] == "deferred"]
     result = {"run_id": run_id, "state_counts": statuses, "additions": counts(additions),
-              "total_tree": counts([*snapshot["features"].values(), *additions]),
+              "metrics": execution_metrics(state), "updated_nodes": [n["id"] for n in updates],
+              "api_assessments": assessments,
+              "next_work_orders": [r for r in assessments if r["next_action"] == "analyze"],
+              "total_tree": counts({**snapshot["features"], **{n["id"]: n for n in [*updates, *additions]}}.values()),
               "baseline_unverified": [p for p in PLATFORMS if snapshot["baseline"]["platforms"][p]["status"] != "verified"],
               "anchor_counts": {s: sum(r["anchor_status"] == s for r in anchors)
                                 for s in ("failed", "url_ok", "body_ok", "symbol_ok")},
@@ -104,13 +116,26 @@ def prepare_journal(root, folder, state):
         path = contained_path(root, feature["knowledge_path"], "knowledge")
         if fid not in snapshot["features"] and path.exists():
             raise ValueError(f"New knowledge path already exists: {path}")
-        if path.exists():
-            doc = read_yaml(path)
+        original = snapshot["features"].get(fid)
+        old_path = contained_path(root, original["knowledge_path"], "knowledge") if original else path
+        migrating = old_path != path
+        if migrating and path.exists():
+            raise ValueError(f"Terminal knowledge destination already exists: {path}")
+        source_path = old_path if migrating else path
+        if source_path.exists():
+            doc = read_yaml(source_path)
             if doc["feature_id"] != fid:
                 raise ValueError("Existing knowledge subject mismatch")
         else:
             doc = new_knowledge(feature, repo.config()["platforms"])
         before = deepcopy(doc)
+        if migrating or doc["role"] != feature["knowledge_role"]:
+            if doc.get("status") != "stub" or doc.get("comparisons") or doc.get("evidence"):
+                raise ValueError("Terminal confirmation cannot migrate existing knowledge research")
+            doc["role"] = feature["knowledge_role"]
+            doc.pop("child_index", None)
+            if migrating and old_path.exists():
+                targets[old_path] = None
         if feature["knowledge_role"] == "rollup":
             doc["child_index"] = sorted(n["id"] for n in merged.values() if n["parent"] == fid)
         if not path.exists() or doc != before:
@@ -121,7 +146,8 @@ def prepare_journal(root, folder, state):
         if before == after:
             continue
         files.append({"path": str(path.relative_to(root)), "before": before, "after": after,
-                      "before_hash": file_hash(path), "after_hash": hashlib.sha256(after.encode()).hexdigest()})
+                      "before_hash": file_hash(path),
+                      "after_hash": hashlib.sha256(after.encode()).hexdigest() if after is not None else None})
     return {"run_id": state["id"], "prepared_at": now(), "tree_hash": digest(merged), "files": files}
 
 
@@ -141,7 +167,10 @@ def apply_journal(root, journal):
         # Detect an external editor racing after the preflight.
         if file_hash(path) != entry["before_hash"]:
             raise ValueError(f"Publication conflict: {entry['path']}")
-        write_text(path, entry["after"])
+        if entry["after"] is None:
+            path.unlink(missing_ok=True)
+        else:
+            write_text(path, entry["after"])
 
 
 def publish(root, run_id):

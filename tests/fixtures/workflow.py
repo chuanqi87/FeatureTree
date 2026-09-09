@@ -17,6 +17,9 @@ def fixture_proposal(work):
             sibling_axis="synthetic task category", bindings=bind("android", "class", "FixtureApi",
                 "https://developer.android.com/reference/fixture")))
     return {"nodes": nodes,
+            "api_allocations": [{"node_id": n["id"], "platforms": {p: {
+                "api_ids": ["FixtureApi.run"] if i == 0 else [], "completeness": "partial" if i == 0 else "unknown",
+                "reason": "Synthetic API allocation"} for p in PLATFORMS}} for i, n in enumerate(nodes)],
             "dispositions": [{"candidate_id": f"{p}:candidate", "decision": "adopted",
                               "node_ids": [nodes[0]["id"]], "reason": "Synthetic mapping"} for p in PLATFORMS],
             "decisions": [{"node_id": n["id"], "action": "expand", "reason": "Fixture pending branch"}
@@ -54,8 +57,10 @@ class FixtureBackend:
                 payload = {"candidates": [{"id": stage + ":candidate", "name": "Fixture", "definition": "Fixture",
                     "binding": {"kind": "class", "id": "FixtureApi", "url": urls[stage]},
                     "distribution": stage, "device_forms": ["phone"], "conditions": [],
-                    "public_api": "unknown", "rationale": "Synthetic candidate"}], "queries": ["fixture"],
-                    "gaps": ["Synthetic candidate has no real public API evidence"]}
+                    "public_api": "unknown", "rationale": "Synthetic candidate",
+                    "api_ids": ["FixtureApi.run"], "api_completeness": "partial"}], "queries": ["fixture"],
+                    "gaps": ["Synthetic candidate has no real public API evidence"],
+                    "apis": [{"id": "FixtureApi.run", "kind": "method", "url": urls[stage], "evidence": "Synthetic only"}]}
             elif stage == "synthesize":
                 payload = fixture_proposal(packet["work"])
             else:

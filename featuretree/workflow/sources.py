@@ -6,8 +6,8 @@ import re
 import sqlite3
 from types import SimpleNamespace
 
-from featuretree.corpus.search import search
 from featuretree.corpus.urls import canonical
+from featuretree.workflow.retrieval import build_context
 
 
 @contextmanager
@@ -25,16 +25,9 @@ def corpus_reader(root):
         connection.close()
 
 
-def source_context(root, work, platform):
-    node = work["subtree"][work["node_id"]]
-    query = node["name"]["en"] + " " + " ".join(node["comparison_scope"]["includes"])
+def source_context(root, work, platform, scope=None):
     with corpus_reader(root) as corpus:
-        if corpus is None:
-            return {"query": query, "sources": [], "gap": "Local official corpus unavailable"}
-        rows = search(corpus, query, platform, limit=4)
-        fields = ("url", "title", "body_path", "body_sha256", "fetched_at", "excerpt", "metadata")
-        return {"query": query, "sources": [{k: r.get(k) for k in fields} for r in rows],
-                "gap": "Retrieval candidates only; read the actual official body and check applicability"}
+        return build_context(corpus, work, platform, scope)
 
 
 def detect_binding(root, corpus, platform, binding):

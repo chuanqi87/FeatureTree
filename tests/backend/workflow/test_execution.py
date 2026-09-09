@@ -34,7 +34,7 @@ class WorkflowTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         shutil.copytree(ROOT / "config", self.root / "config")
-        shutil.copytree(ROOT / ".opencode", self.root / ".opencode")
+        shutil.copytree(ROOT / ".opencode", self.root / ".opencode", ignore=shutil.ignore_patterns("node_modules"))
         (self.root / "AGENTS.md").write_text("Synthetic test repository")
         for fid in ("sample", "other"):
             node = feature(fid, parent=None, level="L1", zh=fid, en=fid, definition="Fixture root", includes=[fid])
@@ -92,7 +92,7 @@ class WorkflowTests(unittest.TestCase):
     def test_invalid_envelope_is_bounded_and_blocks_dependents(self):
         run_id, backend = self.run_batch(FixtureBackend(mutate=lambda r: r.update(input_hash="wrong")))
         state = report(self.root, run_id)
-        self.assertEqual(len(backend.calls), 2)
+        self.assertEqual(len(backend.calls), 6)
         self.assertFalse(state["ready_to_publish"])
         with self.assertRaises(ValueError):
             publish(self.root, run_id)
@@ -116,6 +116,32 @@ class WorkflowTests(unittest.TestCase):
         self.assertTrue(report(self.root, run_id)["ready_to_publish"])
         self.assertEqual(backend.calls.count("other/synthesize"), 1)
         self.assertEqual(backend.calls.count("batch/integrate"), 2)
+
+    def test_platform_field_revision_returns_to_its_owner_without_repeating_other_research(self):
+        def route(result):
+            if result['stage'] == 'review' and result['payload']['verdict'] == 'revise':
+                result['payload']['issues'][0]['target_stage'] = 'ios'
+        backend = FixtureBackend(reject_once='review', mutate=route)
+        run_id, _ = self.run_batch(backend)
+        reset_tasks(self.root, run_id, ['sample'])
+        execute_run(self.root, run_id, backend, lambda _: None)
+        self.assertTrue(report(self.root, run_id)['ready_to_publish'])
+        self.assertEqual(backend.calls.count('sample/ios'), 2)
+        self.assertEqual(backend.calls.count('sample/android'), 1)
+        self.assertEqual(backend.calls.count('sample/harmonyos'), 1)
+        self.assertEqual(backend.calls.count('sample/scope'), 2)
+        folder, _ = load_run(self.root, run_id)
+        packet = read_json(folder/'attempts/sample/ios/2/input.json')
+        self.assertIn('previous_result', packet['revision_feedback'])
+
+    def test_upstream_revision_does_not_route_other_nodes_or_nonblocking_warnings(self):
+        from featuretree.workflow.recovery import upstream_stages
+        feedback = {'review': {'issues': [
+            {'node_id':'other.first','target_stage':'ios','severity':'blocking'},
+            {'node_id':'sample.first','target_stage':'android','severity':'warning'},
+            {'node_id':'sample.first','target_stage':'harmonyos','severity':'blocking'},
+        ]}}
+        self.assertEqual(upstream_stages(feedback, 'sample'), {'harmonyos'})
 
     def test_publish_is_idempotent_and_creates_unknown_stubs(self):
         run_id, _ = self.run_batch()
@@ -176,7 +202,11 @@ class WorkflowTests(unittest.TestCase):
         snapshot = read_json(folder / "snapshot.json")
         work = work_order(snapshot, state, "sample")
         proposal = fixture_proposal(work)
-        scouts = [{"candidates": [{"id": p + ":candidate"}]} for p in PLATFORMS]
+        scouts = [{"candidates": [{"id": p + ":candidate", "api_ids": ["FixtureApi.run"],
+                   "api_completeness": "partial", "public_api": "unknown"}], "apis": [{"id": "FixtureApi.run",
+                   "kind": "method", "evidence": "Synthetic", "url": url}]} for p, url in zip(PLATFORMS, (
+                   "https://developer.android.com/reference/fixture", "https://developer.apple.com/documentation/fixture",
+                   "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/fixture"))]
         validate_proposal(self.root, snapshot, work, proposal, scouts)
         for mutate in (
             lambda p: p["nodes"][0].update(parent="other"),

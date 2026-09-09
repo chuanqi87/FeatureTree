@@ -20,7 +20,7 @@ class ProcessLauncher:
     def start(self, root, run_id):
         folder = run_path(root, run_id)
         with (folder / "console-runner.log").open("ab") as log:
-            process = subprocess.Popen([sys.executable, str(root / "scripts/workflow.py"),
+            process = subprocess.Popen([sys.executable, "-u", str(root / "scripts/workflow.py"),
                 "--root", str(root), "run", run_id], cwd=root, stdin=subprocess.DEVNULL,
                 stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
         write_json(folder / "console-process.json", {"pid": process.pid, "identity": identity(process.pid)})

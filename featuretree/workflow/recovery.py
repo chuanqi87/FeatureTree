@@ -1,6 +1,19 @@
 """Retry failed stages and revise rejected candidates under the run lock."""
 
 from featuretree.workflow.state import artifact, load_run, lock, run_path, save_state
+from featuretree.workflow.stages import PLATFORMS
+
+
+def upstream_stages(feedback, node):
+    stages = set()
+    for review in feedback.values():
+        for issue in review["issues"]:
+            owner = issue.get("node_id")
+            target = issue.get("target_stage")
+            if (issue["severity"] == "blocking" and target in PLATFORMS
+                    and (owner is None or owner == node or owner.startswith(node + "."))):
+                stages.add(target)
+    return stages
 
 
 def reset_tasks(root, run_id, nodes=None):
@@ -26,7 +39,11 @@ def reset_tasks(root, run_id, nodes=None):
                 state["revisions"][n] += 1
                 synth = state["tasks"][f"{n}/synthesize"]
                 synth["feedback"] = {"reviews": feedback, "previous_proposal": artifact(folder, synth)["payload"]}
-                for stage in ("synthesize", "review", "anchors"):
+                upstream = upstream_stages(feedback, n)
+                for stage in upstream:
+                    task = state["tasks"][f"{n}/{stage}"]
+                    task["feedback"] = {"reviews": feedback, "previous_result": artifact(folder, task)["payload"]}
+                for stage in (*sorted(upstream), *(("scope",) if upstream else ()), "synthesize", "review", "anchors"):
                     task = state["tasks"][f"{n}/{stage}"]
                     task.update(status="pending", allowance=len(task["attempts"]) + state["max_attempts"])
             task = state["tasks"]["batch/integrate"]

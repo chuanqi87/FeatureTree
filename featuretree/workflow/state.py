@@ -46,6 +46,7 @@ def lock(path):
 def rule_hash(root):
     """Fingerprint nested rules and the implementation actually executing this run."""
     paths = [root / "AGENTS.md", *sorted((root / ".opencode/agents").glob("ft-*.md")),
+             *sorted((root / ".opencode/tools").glob("*.ts")),
              *sorted((root / "config").rglob("*.json")),
              *sorted((root / "config").rglob("*.yaml")),
              *sorted((root / "docs").rglob("*.md"))]

@@ -12,11 +12,11 @@ export const workflowStates = {
   succeeded: ["已完成", "success"],
 };
 export const stageNames = {
-  scope: "公共结构设计",
-  android: "Android 候选研究",
-  ios: "iOS 候选研究",
-  harmonyos: "HarmonyOS 候选研究",
-  synthesize: "三端并集合成",
+  scope: "根据 API 划分下一层",
+  android: "Android 实现路径与 API 清单",
+  ios: "iOS 实现路径与 API 清单",
+  harmonyos: "HarmonyOS 实现路径与 API 清单",
+  synthesize: "子特性与 API 分配",
   review: "局部审查",
   anchors: "锚点检测",
   integrate: "整批跨域审查",
@@ -44,4 +44,10 @@ export function nodeRuns(runs, nodeId) {
   return runs.filter(
     (run) => run.nodes.includes(nodeId) || run.trigger?.source_node === nodeId,
   );
+}
+export function duration(seconds) {
+  if (seconds == null) return "—";
+  return seconds < 60
+    ? `${seconds.toFixed(1)} 秒`
+    : `${Math.floor(seconds / 60)} 分 ${Math.round(seconds % 60)} 秒`;
 }

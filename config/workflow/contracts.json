@@ -50,6 +50,47 @@
             "type": "string",
             "minLength": 1
           }
+        },
+        "research_queries": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "android",
+            "ios",
+            "harmonyos"
+          ],
+          "properties": {
+            "android": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 4,
+              "items": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 180
+              }
+            },
+            "ios": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 4,
+              "items": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 180
+              }
+            },
+            "harmonyos": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 4,
+              "items": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 180
+              }
+            }
+          }
         }
       }
     },
@@ -59,7 +100,8 @@
       "required": [
         "candidates",
         "queries",
-        "gaps"
+        "gaps",
+        "apis"
       ],
       "properties": {
         "candidates": {
@@ -76,7 +118,9 @@
               "device_forms",
               "conditions",
               "public_api",
-              "rationale"
+              "rationale",
+              "api_ids",
+              "api_completeness"
             ],
             "properties": {
               "id": {
@@ -151,6 +195,21 @@
               "rationale": {
                 "type": "string",
                 "minLength": 1
+              },
+              "api_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "api_completeness": {
+                "enum": [
+                  "complete",
+                  "partial",
+                  "unknown"
+                ]
               }
             }
           }
@@ -169,6 +228,13 @@
             "type": "string",
             "minLength": 1
           }
+        },
+        "apis": {
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "$ref": "#/$defs/api"
+          }
         }
       }
     },
@@ -179,7 +245,8 @@
         "nodes",
         "dispositions",
         "decisions",
-        "gaps"
+        "gaps",
+        "api_allocations"
       ],
       "properties": {
         "nodes": {
@@ -260,6 +327,124 @@
           "items": {
             "type": "string",
             "minLength": 1
+          }
+        },
+        "api_allocations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "node_id",
+              "platforms"
+            ],
+            "properties": {
+              "node_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "platforms": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "android",
+                  "ios",
+                  "harmonyos"
+                ],
+                "properties": {
+                  "android": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "api_ids",
+                      "completeness",
+                      "reason"
+                    ],
+                    "properties": {
+                      "api_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "uniqueItems": true
+                      },
+                      "completeness": {
+                        "enum": [
+                          "complete",
+                          "partial",
+                          "unknown"
+                        ]
+                      },
+                      "reason": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "ios": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "api_ids",
+                      "completeness",
+                      "reason"
+                    ],
+                    "properties": {
+                      "api_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "uniqueItems": true
+                      },
+                      "completeness": {
+                        "enum": [
+                          "complete",
+                          "partial",
+                          "unknown"
+                        ]
+                      },
+                      "reason": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "harmonyos": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "api_ids",
+                      "completeness",
+                      "reason"
+                    ],
+                    "properties": {
+                      "api_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "uniqueItems": true
+                      },
+                      "completeness": {
+                        "enum": [
+                          "complete",
+                          "partial",
+                          "unknown"
+                        ]
+                      },
+                      "reason": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -473,9 +658,51 @@
               "requested_change": {
                 "type": "string",
                 "minLength": 1
+              },
+              "target_stage": {
+                "enum": [
+                  "synthesize",
+                  "android",
+                  "ios",
+                  "harmonyos"
+                ]
               }
             }
           }
+        }
+      }
+    },
+    "api": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "url",
+        "evidence"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "function",
+            "method",
+            "constructor",
+            "property",
+            "event",
+            "callback"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1
         }
       }
     }

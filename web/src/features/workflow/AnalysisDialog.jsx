@@ -37,7 +37,7 @@ export default function AnalysisDialog({
     form.setFieldsValue({
       ...workflow.config.defaults,
       nodes: [selection.nodeId],
-      depth: action === "root" ? 1 : 2,
+      depth: 1,
       baseline_id: workflow.config.baselines[0]?.id,
     });
     // Initialize this dialog once; background status polling must not reset edits.
@@ -61,7 +61,7 @@ export default function AnalysisDialog({
     <div className="workflow-form-grid">
       <Form.Item
         name="max_nodes"
-        label="每节点候选预算"
+        label="每节点直接子能力预算"
         rules={[{ required: true }]}
       >
         <InputNumber min={1} max={200} />
@@ -75,6 +75,14 @@ export default function AnalysisDialog({
         rules={[{ required: true }]}
       >
         <InputNumber min={30} max={7200} />
+      </Form.Item>
+      <Form.Item
+        name="first_response_timeout"
+        label="首次响应等待（秒）"
+        tooltip="在此时间内没有模型文本或工具结果会停止，不自动重复消耗同一调用。已有活动的研究仍受单阶段超时限制。"
+        rules={[{ required: true }]}
+      >
+        <InputNumber min={1} max={7200} />
       </Form.Item>
       <Form.Item name="model" label="模型">
         <Input placeholder="留空使用 OpenCode 默认模型" />
@@ -99,8 +107,8 @@ export default function AnalysisDialog({
     >
       <Typography.Paragraph type="secondary">
         {action === "root"
-          ? "从所属 L1 领域重新梳理能力结构，可同时选择多个领域。"
-          : "围绕所选分支细化子能力，可同时分析多个互不包含的分支。"}
+          ? "先研究所属 L1 领域的三端实现 API，再设计直接 L2 特性。"
+          : "先研究所选分支的三端实现 API，再决定继续细分或确认停止；可多选并行。"}
       </Typography.Paragraph>
       {error && (
         <Alert type="error" showIcon title="未能开始分析" description={error} />
@@ -136,10 +144,10 @@ export default function AnalysisDialog({
         <div className="workflow-form-grid">
           <Form.Item
             name="depth"
-            label="本轮下钻层数"
+            label="每轮一层（父层先验收）"
             rules={[{ required: true }]}
           >
-            <InputNumber min={1} max={10} />
+            <InputNumber min={1} max={1} disabled />
           </Form.Item>
           <Form.Item
             name="baseline_id"
@@ -167,7 +175,7 @@ export default function AnalysisDialog({
         />
       </Form>
       <Typography.Paragraph className="workflow-explanation" type="secondary">
-        分析将在后台执行，结果先进入候选区，通过验收后可合入正式树。
+        各平台分别去重计数，目标约 40 个 API，任一端超过 50 必须拆分。清单不完整不能认定已拆分完成。
       </Typography.Paragraph>
     </Modal>
   );

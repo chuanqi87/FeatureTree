@@ -58,12 +58,6 @@ def lint_features(features: dict, old_ids: set[str], domain: str | None = None) 
             issues.append({"severity": "error", "id": fid, "code": "non_l1_root",
                            "message": "only L1 may have null parent"})
 
-        # Capability / leaf directly under L1
-        if parent and parent in features and features[parent].get("level") == "L1":
-            if role == "leaf" or granularity == "atomic":
-                issues.append({"severity": "error", "id": fid, "code": "capability_under_l1",
-                               "message": "atomic/leaf must not hang directly under L1"})
-
         name_zh = ((feature.get("name") or {}).get("zh") or "")
         if BRAND_RE.search(name_zh) or BRAND_RE.search(((feature.get("name") or {}).get("en") or "")):
             issues.append({"severity": "warning", "id": fid, "code": "brand_name",

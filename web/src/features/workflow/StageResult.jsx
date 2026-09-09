@@ -1,5 +1,5 @@
 import { Alert, Descriptions, List, Space, Tag, Typography } from "antd";
-import { checkNames } from "./model.js";
+import { checkNames, stageNames } from "./model.js";
 import { safeUrl } from "../../shared/format.js";
 
 export default function StageResult({ task }) {
@@ -35,6 +35,19 @@ export default function StageResult({ task }) {
           )}
         />
       )}
+      {result?.research_queries && (
+        <Descriptions
+          size="small"
+          column={1}
+          items={Object.entries(result.research_queries).map(
+            ([platform, queries]) => ({
+              key: platform,
+              label: `${platform} 检索计划`,
+              children: queries.join("；"),
+            }),
+          )}
+        />
+      )}
       {result?.candidates && (
         <List
           size="small"
@@ -46,6 +59,7 @@ export default function StageResult({ task }) {
                   <Space wrap>
                     {c.name}
                     <Tag>{c.distribution}</Tag>
+                    {c.api_ids && <Tag>已识别 {new Set(c.api_ids).size} 个 API · {c.api_completeness === "complete" ? "清单完整" : "待补全"}</Tag>}
                   </Space>
                 }
                 description={
@@ -96,7 +110,14 @@ export default function StageResult({ task }) {
           type={issue.severity === "blocking" ? "error" : "warning"}
           showIcon
           title={`${issue.node_id} · ${issue.message}`}
-          description={issue.requested_change}
+          description={
+            <>
+              {issue.target_stage && (
+                <div>返工环节：{stageNames[issue.target_stage]}</div>
+              )}
+              {issue.requested_change}
+            </>
+          }
         />
       ))}
       {result?.results && (

@@ -4,7 +4,7 @@
 PLATFORMS = ("android", "ios", "harmonyos")
 
 
-STAGES = ("scope", *PLATFORMS, "synthesize", "review", "anchors")
+STAGES = (*PLATFORMS, "scope", "synthesize", "review", "anchors")
 
 
 CHECKS = ("coverage", "axis", "boundaries", "granularity", "naming", "anchors", "dispositions")

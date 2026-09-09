@@ -8,6 +8,8 @@ from featuretree.taxonomy.structure import lint_features
 from featuretree.core.schemas import schema_validators
 from featuretree.workflow.stages import PLATFORMS
 from featuretree.taxonomy.traversal import descendants
+from featuretree.workflow.api_inventory import assess_allocations
+from featuretree.workflow.terminal import is_terminal_proposal, validate_terminal
 
 
 def validate_proposal(root, snapshot, work, proposal, scouts):
@@ -19,7 +21,10 @@ def validate_proposal(root, snapshot, work, proposal, scouts):
     for node in nodes:
         validator.validate(node)
     ids = [n["id"] for n in nodes]
-    if len(ids) != len(set(ids)) or set(ids) & base.keys():
+    terminal = is_terminal_proposal(work, nodes)
+    if terminal:
+        validate_terminal(base, work, nodes[0])
+    if len(ids) != len(set(ids)) or (set(ids) & base.keys() and not terminal):
         raise ValueError("Duplicate ID or attempt to overwrite an existing node")
     merged = {**base, **{n["id"]: n for n in nodes}}
     selected = descendants(merged, work["node_id"])
@@ -32,8 +37,10 @@ def validate_proposal(root, snapshot, work, proposal, scouts):
     for n in nodes:
         parent = merged[n["parent"]]
         level = int(n["level"][1:])
-        if level != int(parent["level"][1:]) + 1 or not depth < level <= depth + work["depth"]:
+        if not terminal and (n["parent"] != work["node_id"] or level != depth + 1):
             raise ValueError(f"Invalid depth: {n['id']}")
+        if not terminal and "api_surface" in n:
+            raise ValueError("API counts are supplied by the coordinator, not the designer")
         if n["id"].split(".")[0] != work["node_id"].split(".")[0]:
             raise ValueError("Wrong domain namespace")
         if parent.get("granularity") != "branch":
@@ -83,7 +90,8 @@ def validate_proposal(root, snapshot, work, proposal, scouts):
     errors = [i for i in relevant if i["severity"] == "error"]
     if errors:
         raise ValueError(f"Structural gate failed: {errors}")
-    return {"issues": relevant, "counts": counts(nodes)}
+    return {"issues": relevant, "counts": counts(nodes), "api_assessments": assess_allocations(proposal, scouts),
+            "terminal_confirmation": terminal}
 
 
 def counts(nodes):

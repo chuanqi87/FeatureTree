@@ -5,6 +5,10 @@ import fcntl
 from featuretree.workflow.state import artifact, read_json, run_path
 from featuretree.workflow.gates import counts
 from featuretree.workflow.backends.processes import identity
+from featuretree.workflow.metrics import execution_metrics, task_metrics
+from featuretree.workflow.api_inventory import assess_allocations
+from featuretree.workflow.packets import node_inputs
+from featuretree.workflow.stages import PLATFORMS
 
 
 def active_process(folder):
@@ -48,7 +52,9 @@ def summarize(folder, state, current_rules, active):
     return {"id": state["id"], "nodes": state["nodes"], "created_at": state["created_at"],
             "status": status, "active": active, "stale_rules": not fresh, "state_counts": statuses,
             "total_tasks": len(tasks), "trigger": state.get("trigger"), "depth": state["depth"],
-            "workers": state["workers"], "max_nodes": state["max_nodes"], "model": state["model"],
+            "workers": state["workers"], "timeout": state["timeout"], "max_nodes": state["max_nodes"], "model": state["model"],
+            "metrics": execution_metrics(state, active),
+            "first_response_timeout": state.get("first_response_timeout"),
             "actions": {"start": mutable and status in ("planned", "interrupted"),
                         "retry": mutable and status == "failed" and not publication_started,
                         "revise": mutable and status == "blocked" and all(
@@ -60,6 +66,7 @@ def details(folder, state, summary):
     snapshot = read_json(folder / "snapshot.json")
     tasks = []
     additions = []
+    assessments = []
     for task in state["tasks"].values():
         payload, error = None, None
         if task.get("result_path") and task["status"] in ("succeeded", "blocked"):
@@ -69,11 +76,18 @@ def details(folder, state, summary):
                 error = str(exc)
         if task["stage"] == "synthesize" and payload:
             additions.extend(payload["nodes"])
+            if "api_allocations" in payload:
+                inputs = node_inputs(folder, state, task["node"])
+                assessments.extend(assess_allocations(payload, [inputs[p] for p in PLATFORMS]))
         tasks.append({"id": task["id"], "node": task["node"], "stage": task["stage"],
                       "status": task["status"], "attempts": task["attempts"],
+                      "metrics": task_metrics(task, summary["active"]),
                       "payload": payload, "artifact_error": error})
     marker = folder / "console-error.json"
     return {**summary, "tasks": tasks, "baseline": snapshot["baseline"],
-            "additions": counts(additions), "nodes_proposed": additions,
+            "additions": counts([n for n in additions if n["id"] not in snapshot["features"]]),
+            "updated_nodes": [n["id"] for n in additions if n["id"] in snapshot["features"]],
+            "nodes_proposed": additions, "api_assessments": assessments,
+            "next_work_orders": [r for r in assessments if r["next_action"] == "analyze"],
             "execution_error": read_json(marker).get("error") if marker.exists() else None,
             "published": state.get("published")}

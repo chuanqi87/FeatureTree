@@ -6,8 +6,8 @@ import json
 from os.path import relpath
 from pathlib import Path
 
-from ..storage import ROOT
-from .store import now
+from featuretree.core.storage import ROOT
+from featuretree.corpus.store import now
 
 
 def verify_catalogs(root):

@@ -4,12 +4,12 @@ import json
 from pathlib import Path
 import re
 
-from ..comparison import subject_hash
-from ..research_profile import fingerprint, research_policy
-from ..source_policy import ios_applicability, official_source_error
-from ..storage import write_json
-from .search import search, terms
-from .store import now
+from featuretree.knowledge.comparison import subject_hash
+from featuretree.knowledge.research_profile import fingerprint, research_policy
+from featuretree.knowledge.source_policy import ios_applicability, official_source_error
+from featuretree.core.storage import write_json
+from featuretree.corpus.search import search, terms
+from featuretree.corpus.store import now
 
 
 CONTEXT_VERSION = 3

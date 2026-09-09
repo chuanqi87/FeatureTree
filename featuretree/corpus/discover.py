@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
-from .urls import canonical
+from featuretree.corpus.urls import canonical
 
 
 def walk(nodes):

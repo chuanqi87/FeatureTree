@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
-import { createModel } from "../model.js";
+import { createModel } from "../src/features/tree/model.js";
 
 const root = fileURLToPath(new URL("../..", import.meta.url));
 const snapshot = JSON.parse(
@@ -12,7 +12,7 @@ const snapshot = JSON.parse(
     `${root}/.venv/bin/python`,
     [
       "-c",
-      "import json; from featuretree.storage import Repository; from featuretree.viewer import build_snapshot, json_default; print(json.dumps(build_snapshot(Repository()), default=json_default))",
+      "import json; from featuretree.core.storage import Repository; from featuretree.console.snapshot import build_snapshot, json_default; print(json.dumps(build_snapshot(Repository()), default=json_default))",
     ],
     { cwd: root, maxBuffer: 20_000_000 },
   ),
@@ -23,7 +23,9 @@ const server = await createServer({
   appType: "custom",
 });
 try {
-  const detail = await server.ssrLoadModule("/src/NodeDetails.jsx");
+  const detail = await server.ssrLoadModule(
+    "/src/features/tree/NodeDetails.jsx",
+  );
   let count = 0;
   for (const node of model.nodes) {
     for (const component of [
@@ -56,7 +58,9 @@ try {
       count++;
     }
   }
-  const { ValueFields } = await server.ssrLoadModule("/src/ValueFields.jsx");
+  const { ValueFields } = await server.ssrLoadModule(
+    "/src/shared/components/ValueFields.jsx",
+  );
   const html = renderToStaticMarkup(
     createElement(ValueFields, {
       value: {

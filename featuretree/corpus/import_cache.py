@@ -4,8 +4,8 @@ import hashlib
 import json
 from pathlib import Path
 
-from .extract import parse
-from .urls import canonical
+from featuretree.corpus.extract import parse
+from featuretree.corpus.urls import canonical
 
 
 def import_response(corpus, url, path, expected_hash, fetched_at, content_type):

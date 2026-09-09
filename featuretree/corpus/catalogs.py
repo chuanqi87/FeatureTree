@@ -10,8 +10,8 @@ import xml.etree.ElementTree as ET
 
 import requests
 
-from .store import now
-from .http import request_proxies
+from featuretree.corpus.store import now
+from featuretree.corpus.http import request_proxies
 
 
 HUAWEI_CATALOG = 'https://svc-drcn.developer.huawei.com/community/servlet/consumer/cn/documentPortal/getCatalogTree'

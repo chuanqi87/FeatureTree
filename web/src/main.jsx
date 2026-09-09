@@ -1,9 +1,9 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Button, Result } from "antd";
-import App from "./App.jsx";
+import App from "./app/App.jsx";
 import "antd/dist/reset.css";
-import "./styles.css";
+import "./app/styles.css";
 
 class ErrorBoundary extends React.Component {
   state = { error: null };

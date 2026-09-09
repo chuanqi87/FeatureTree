@@ -9,9 +9,9 @@ from urllib.parse import urlsplit
 import requests
 from lxml import etree
 
-from .extract import parse
-from .http import request_proxies
-from .urls import canonical, fetch_url, platform
+from featuretree.corpus.extract import parse
+from featuretree.corpus.http import request_proxies
+from featuretree.corpus.urls import canonical, fetch_url, platform
 
 
 def link_priority(url, source_platform):

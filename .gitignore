@@ -15,3 +15,6 @@ archive/
 
 # Generated views and reports are rebuilt from current sources.
 output/
+
+# Durable workflow artifacts and raw model events; keep locally for resume/audit.
+.workflow/

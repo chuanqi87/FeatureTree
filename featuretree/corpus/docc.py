@@ -2,7 +2,7 @@
 
 import json
 
-from .urls import canonical
+from featuretree.corpus.urls import canonical
 
 
 def render(raw, url):

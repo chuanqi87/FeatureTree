@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Save verified source bytes and a machine-generated metadata index."""
+"""Stable command entry point; implementation: featuretree.cli.evidence."""
 
-from _bootstrap import ROOT
-from featuretree.research_sources import main
+import _bootstrap  # noqa: F401
+from featuretree.cli.evidence import main
 
 if __name__ == "__main__":
     raise SystemExit(main())

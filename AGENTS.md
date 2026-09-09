@@ -22,18 +22,27 @@
 
 ## 分层工作流
 
-树设计与证据核实分层，详见 [docs/tree-design.md](docs/tree-design.md)。
+树设计与证据核实分层，详见 [docs/taxonomy/design.md](docs/taxonomy/design.md)。
 
-1. **树设计（协调者直接写入 `taxonomy/`）**：按域自上而下设计；可使用模型知识 + 本地语料检索提出 API 锚点；每个节点至少一端具体符号与官方 URL。生成后由脚本核实，核实不过标 `anchor_status: failed` 保留复审，不因单端缺锚点删节点。
+1. **树设计（协调者通过发布器写入 `taxonomy/`）**：按域自上而下设计；标准 OpenCode agent 按指定节点输出候选到 `.workflow/`，不直接改正式树。可使用模型知识 + 本地语料检索提出 API 锚点；每个节点至少一端具体符号与官方 URL。生成后由脚本核实，核实不过标 `anchor_status: failed` 保留复审，不因单端缺锚点删节点。
 2. **结构验收**：同级切分轴、边界互斥、跨域去重、层数与品牌命名检查（`scripts/tree_lint.py`）。
 3. **锚点核实**：`scripts/verify_anchors.py` + 可选模型读正文；只回写 `anchor_status` 与 note，不改树结构。
-4. **知识生产（树冻结后）**：按节点 × 三端并行；遵循 `docs/research-runbook.md` 与 `docs/knowledge-confidence.md`。旧模型执行器已归档，未来按当次任务明确执行方案。
+4. **知识生产（树冻结后）**：按节点 × 三端并行；遵循 `docs/knowledge/research-runbook.md` 与 `docs/knowledge/confidence.md`。旧模型执行器已归档，未来按当次任务明确执行方案。
 
 **禁止**：重启已归档的 inventory-first / tree-expansion 批次；用目录盘点完成率冒充树覆盖；在树未冻结前大规模写平台知识正文。
 
+## 标准节点工作流
+
+新工作流设计见 [docs/workflow/design.md](docs/workflow/design.md)，操作见 [docs/workflow/operations.md](docs/workflow/operations.md)。入口为 `scripts/workflow.py`，agent 位于 `.opencode/agents/`，契约位于 `config/workflow/`。
+
+- 按现有 branch 指定下钻工作单，固定树与基线快照；不同分支和三端研究可并行，祖孙工作单不重叠。
+- 协调器管理状态与预算，agent 只读产出 JSON，机器验收与独立审查分层，发布器统一合并。
+- v1 仅新增后代，不自动删除、移动或重定义已有节点。空 branch 是待下钻状态，不计为能力叶子，也不代表可冻结。
+- `.workflow/` 保存新运行的可恢复记录，不与归档旧运行混用。局部通过、整批可发布、树冻结和知识确认是不同状态。
+
 ## 知识与证据（树冻结后适用）
 
-- 生成或确认知识前阅读 `docs/official-documentation-entrypoints.md`、`docs/sources.md`，使用 `scripts/official_docs.py`。
+- 生成或确认知识前阅读 `docs/corpus/entrypoints.md`、`docs/knowledge/sources.md`，使用 `scripts/official_docs.py`。
 - 未检索到文档 ≠ 不支持；声称不支持、独有或完全等价需要额外核对。
 - OpenHarmony 与 HarmonyOS、Android SDK / AndroidX / 生态服务、Apple 目录的 iOS 适用性须分开标明。
 - 置信度与真机需求独立；不得从目录数量或自动测试推导高可信。
@@ -41,3 +50,5 @@
 ## 工程约定
 
 代码高内聚、低耦合、单一职责；副作用与纯计算分离；重大架构改动先说明。保留其他任务与用户的修改。归档数据在 `archive/`，不是当前真相源。
+
+目录职责与依赖方向见 [代码地图](docs/architecture/code-map.md)。后端按 `core / taxonomy / knowledge / corpus / reporting / workflow / console / cli` 归属，前端按 `app / features / shared` 归属。`scripts/` 只保留薄入口；核心业务不得反向依赖 CLI、HTTP 或测试。共享测试样例放 `tests/fixtures/`。新增代码须保持架构依赖测试通过。

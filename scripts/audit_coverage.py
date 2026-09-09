@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""FeatureTree command entry point. See README.md for the authoring workflow."""
+"""Stable command entry point; implementation: featuretree.cli.audit."""
 
-from _bootstrap import ROOT
-from featuretree.audit import main
+import _bootstrap  # noqa: F401
+from featuretree.cli.audit import main
 
 if __name__ == "__main__":
     raise SystemExit(main())

@@ -9,7 +9,7 @@ import sqlite3
 from itertools import zip_longest
 from urllib.parse import urlsplit
 
-from .urls import canonical, document_id, kind, platform
+from featuretree.corpus.urls import canonical, document_id, kind, platform
 
 
 def now():

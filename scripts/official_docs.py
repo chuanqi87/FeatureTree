@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Official document acquisition and evidence retrieval commands."""
+"""Stable command entry point; implementation: featuretree.cli.corpus."""
 
-from _bootstrap import ROOT
-from featuretree.corpus.cli import main
+import _bootstrap  # noqa: F401
+from featuretree.cli.corpus import main
 
-if __name__=='__main__':
-    main()
+if __name__ == "__main__":
+    raise SystemExit(main())

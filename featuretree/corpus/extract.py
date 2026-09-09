@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from markdownify import markdownify
 from lxml import html as lxml_html
 
-from .urls import canonical
+from featuretree.corpus.urls import canonical
 
 
 @dataclass
@@ -100,7 +100,7 @@ def parse_html(raw, url):
 def parse(raw, url, content_type):
     content_type = (content_type or '').lower()
     if 'json' in content_type and 'developer.apple.com/' in url:
-        from .docc import render
+        from featuretree.corpus.docc import render
         title,body,links,metadata=render(raw,url)
         quality='partial' if metadata['unhandled_render_types'] else 'thin' if len(body)<100 else 'ready'
         return Content(title,body,links,metadata,quality)

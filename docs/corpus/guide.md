@@ -1,37 +1,11 @@
-# 官方资料库
+# 来源建设
 
-`docs-raw/official/` 保存已有官方正文、原始响应、目录与 SQLite 全文索引，可继续复用。下载状态不是能力覆盖率，也不是知识确认进度。
+一次性历史导入：`sources import --reference /absolute/reference/project`。参考项目原始 JSONL 复制到 data/imports/<hash>，保留原身份、文件哈希和冲突记录；正常运行不依赖参考目录。缺少公开性、SDK 适用性或多语言别名依据的记录保持未知。
 
-## 查找与阅读
+SDK 提取：`sources extract --request sdk.json`。请求包含 adapter（android-xml/native/arkts/swift）、sdk_root、patterns、platform、distribution、language、module、sdk_version，可附 clang_args。每个匹配源文件均记录成功/失败、哈希与字节数，原始源文件保存在 data/imports/sdk，防止外部 SDK 升级后无法复核。
 
-```bash
-.venv/bin/python scripts/official_docs.py search 'Bluetooth scan filter' --platform android
-.venv/bin/python scripts/official_docs.py search '蓝牙扫描' --platform harmonyos
-.venv/bin/python scripts/official_docs.py locate 'PeriodicWorkRequest' --platform android
-.venv/bin/python scripts/official_docs.py fetch 'https://developer.android.com/reference/androidx/work/PeriodicWorkRequest'
-.venv/bin/python scripts/official_docs.py read 'https://developer.android.com/reference/androidx/work/PeriodicWorkRequest' --start-line 1 --lines 100
-.venv/bin/python scripts/official_docs.py context connectivity --limit 5
-```
+Android 适配器读取 api-versions.xml，保留重载、继承和已移除声明。Native 用 Clang AST，保留公开属性、方法、函数等；必需头文件缺失会标失败并降公开性为未知。ArkTS 用 TypeScript AST，继承 systemapi/internal 标记。Swift 使用移植的 SwiftParser，保留私有记录以便处置，提取 public/open、继承适用性和重载；条件编译分支的实际设备适用性仍需核实。适配代码来自参考项目思路，运行路径无参考项目硬依赖。
 
-`context` 只针对当前存在的节点生成候选资料，不生成平台结论。节点细化后使用对应新 ID。候选包按需写入 `output/contexts/`，可删除重建。
+来源封存不代表完成。来源文件处理、API 处置、官方目录处置及独立用法覆盖分别记账。未处理、进入研究、已关联/辅助、依据排除、证据不足、归属歧义和失败都必须有去向；排除必须有规则、理由和证据。
 
-阅读时核对正文、具体版本、发行版、设备与调用条件。查看 `binding_source_gaps`，按需补抓缺失正文。检索片段不能代替引用的完整章节。
-
-## 状态与维护
-
-```bash
-.venv/bin/python scripts/official_docs.py status
-.venv/bin/python scripts/official_docs.py audit --verify-files
-.venv/bin/python scripts/official_docs.py catalogs
-.venv/bin/python scripts/official_docs.py seed
-.venv/bin/python scripts/official_docs.py crawl --workers 6 --max-priority 40 --limit 100
-```
-
-- `ready`：存在可检索正文；`thin` / `partial`：正文或转换不完整，需要继续查读。
-- `pending`：待获取；`failed` / `blocked`：获取失败或访问受限；`not_found`：此次请求未找到正文，不代表平台无该能力。
-- `catalogs/` 保存目录快照，`snapshots/` 保存原始响应、正文及元数据，`corpus.sqlite` 保存索引与下载状态。
-- `audit` 报告按需生成到 `output/reports/official-documents/`，不保留旧报告作为当前研究结论。
-
-用 `fetch URL --refresh` 更新具体来源。迁移资料库时整体复制数据库、catalogs 和 snapshots，再验文件哈希；不能只复制数据库。
-
-证据采用规则见 [sources.md](../knowledge/sources.md)，知识研究见 [research-runbook.md](../knowledge/research-runbook.md)。
+新官方资料用 sources capture。正文缺失是来源缺口，不是平台不支持。网络采集创建新快照，不能覆盖已封存的源版本。声明相同但 SDK 不同属于版本差异；名称/签名/语言决定身份，SDK 版本不混入展示名。

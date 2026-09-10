@@ -1,13 +1,9 @@
-# 官方文档入口
+# 来源入口
 
-以下是发现资料的入口，不代表已核实本轮最新正式版本或完整能力覆盖。使用 [官方资料工具](guide.md) 查找具体符号并阅读正文。
+- 原文：docs-raw/official/corpus.sqlite 与其 snapshots。原文库继续保存，导入只记录身份/路径/哈希，不复制约 2.8 GB 正文。
+- 来源快照：data/sources/<snapshot_id>，声明、符号族、目录与正文索引分别为 JSONL；manifest.json 记录清单与哈希。
+- 查询：sources query --snapshot ID --query TEXT --platform PLATFORM；HTTP /api/v2/apis、topics、documents 固定 snapshot_id 并分页。
+- Agent：仅 source_catalog 工具。平台阶段只拿本端清单；对齐和设计共享三端资料；分页与正文窗口均留记录。
+- 完整枚举：ApiCatalog.enumerate_records 读取并验证封存 JSONL，不用 SQLite 缓存作为覆盖分母。
 
-| 平台 | 指南与导航 | API 参考 |
-| --- | --- | --- |
-| Android | [开发指南](https://developer.android.com/develop) | [API Reference](https://developer.android.com/reference) |
-| iOS | [Technologies](https://developer.apple.com/documentation/technologies)、[技术概览](https://developer.apple.com/documentation/technologyoverviews) | 从框架目录继续阅读具体符号及其 iOS availability |
-| HarmonyOS | [文档中心](https://developer.huawei.com/consumer/cn/doc/)、[应用开发导读](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/application-dev-guide) | [API 开发说明](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/development-intro-api) |
-
-[OpenHarmony 文档仓库](https://github.com/openharmony/docs) 可作补充线索，不能代替 HarmonyOS 特定发行版证据。AndroidX、Google/Firebase 和 HMS 等生态组件也需分别标记来源和运行条件。
-
-先读节点定义与比较范围，再定位具体文档。目录页只用于发现；来源要求见 [证据规则](../knowledge/sources.md)。当前没有沿用历史检查日期、下载统计或 SDK 版本结论。
+详细导入、SDK 提取和缺口说明见 guide.md。来源事实不因候选分析成功自动成为正式基线。

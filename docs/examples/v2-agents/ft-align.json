@@ -1,0 +1,607 @@
+{
+  "notice": "Synthetic fixture, NOT platform evidence, actual model execution, human approval or production knowledge. References exist only in this disposable test repository.",
+  "agent": "ft-align",
+  "input": {
+    "implementation_files": {
+      "../tools/opencode/package-lock.json": "7c9ad2b3826b3505ded1c3c05dfdbdeb352bdd36507c9975d00b04ca2a415f32",
+      "../tools/opencode/package.json": "75772f842b1e4142e76731b0308258108e32054d39e16693938c41d85ff5eb37",
+      "core/__init__.py": "0713b4d36050010c3810d2b04b435bc1bb3fcef3bc3b1ab45e2b08e502e03c79",
+      "core/artifacts.py": "0aee8a761335033e07bb48ff7829c9a9c6c319064da9b67292107acb47bd002a",
+      "core/content.py": "04222cdce7d03816551e233fe36be2e74d4b964ca5871ec9ffc21c0df8d42c93",
+      "core/contracts.py": "bc2ff4479d11cb64503d02e25d70d34f40e4550ad3e02bfd94cddc0331de689d",
+      "core/io.py": "5d7a4e3385ad2896114966bb4da62561b177c5b781fcbbaa95b7a3c045945665",
+      "core/requests.py": "a2af14220f7740cc18841f596141bb29eb0e21d3b4d735ea9425376830a1e7ba",
+      "core/storage.py": "e09b5bc2e8217ea805ca360cf3754ff68a24ee7b776bd03d3dd9d4d527fe1214",
+      "core/versions.py": "582cbe4df841c7e89555683612181ca84c6f364cb4c645819b5863defad2d103",
+      "corpus/catalog.py": "2fb9f148712a2451b89b0904098e17ed9a601b295c6a12c61dcd6d67d358d2ab",
+      "corpus/snapshots.py": "7508188836c93c25591398550dd5644a2f272f58a2c6e3255b6703bc66bb6ab9",
+      "corpus/source_policy.py": "5265ceaadc43526689485b8c5a7094175cd9fa703ae4341bfde7f198264f883f",
+      "taxonomy/__init__.py": "aa24e591a7375f0ec01c10c086b43af716cc8192a5dd2084bb845d8456fabb31",
+      "taxonomy/coverage.py": "6a665191b7d882c7ce4245076afd861efea6a16346a00694d5e090eefd83ca4b",
+      "taxonomy/model.py": "92735ff822e82969a9c9570da8c9defa407c4fa60fc598509a4f60c854a49b94",
+      "taxonomy/revisions.py": "bf4f1a1ff1c36b9caaad976cefc2d5f6909dbda3fd051afd5c01e3c24d249045",
+      "taxonomy/routes.py": "334ab58467672e985dbb8b275123724ebe1b6bdbe7ee21e4cc19c507341358aa",
+      "taxonomy/source_migration.py": "c74b413fb9c8004fc1bfd1f6a0ca4f84b2f393d6cea38a430245a3d35c21aaf7",
+      "workflow/backends/__init__.py": "6864974e11f9093019eb926bb9a03057905b3660f2fd3b97180b383cd7f4246a",
+      "workflow/backends/base.py": "b0623595467f4bc916c035ff4a836e4545aba8a89ab368a2c347ac711168457a",
+      "workflow/backends/errors.py": "868a45f6cadb5daf4d36b8b89d47865d78540a2d26b5f09038404defa75ed607",
+      "workflow/backends/monitor.py": "e012ab8a5563d79e280d6933dfe996a1dfe7b689ddfbcccc5df7a46e260bee94",
+      "workflow/backends/opencode.py": "5d674bcf55693ba401858c6a50aa46c9e0878858ba5e50cad058a1cc95e4334d",
+      "workflow/backends/processes.py": "c34866c779608d950ec31562a98e258c139ca621d143f7a5972d1de356218461",
+      "workflow/backends/provider_errors.py": "eb4c698a9336b8ce163930c89c51d2fb456c027f94ac4f579832f94cdcd18ef6",
+      "workflow/backends/runtime.py": "390d8f4290c08243906faaed300002ab7b0aaa67b323d03bec711f1763fc954c",
+      "workflow/execution.py": "eea82dd8bc81df417b69477bfd253c9e17963a4042021d951b118f2226ce1979",
+      "workflow/handlers.py": "32c9af1da5d1906f676560ba622ac9b1363b9e0ea968574e8b71e755629536ee",
+      "workflow/implementation.py": "5e6e9f866e39c031a6007ba180be4d9f6863b7ac9bb8ffe785ebffe2fb4fe867",
+      "workflow/packaging.py": "2121e4bc7a908dfd068788dd0b242e5ea75e09e9ab77faa33367751229180a17",
+      "workflow/source_tool.py": "41eb1c9836c33b96272203cf7001e24994faf60ea916f9ff3e107ab880ea8cb4",
+      "workflow/tree_handlers.py": "947a67e068e630fccae9404fa697fbea9870e87ef7daaef47d2525d9a6392da3"
+    },
+    "input_hash": "86fdf387a1b190ced8019160266d41a287238290e2f8177aa553961b36a00749",
+    "inputs": {
+      "baseline_ref": {
+        "created_at": "2026-09-10T00:00:00+00:00",
+        "id": "baseline_test",
+        "platforms": {
+          "android": {
+            "device_forms": [
+              "phone"
+            ],
+            "distribution": "android SDK",
+            "evidence_refs": [
+              "ce38381d29b3913423dc7721b2cd85dad79aacd32e4f2e167ec6bd52632b9f03"
+            ],
+            "release": "historical",
+            "sdk": "historical",
+            "status": "verified_stable",
+            "verified_at": "2026-09-10T00:00:00+00:00"
+          },
+          "harmonyos": {
+            "device_forms": [
+              "phone"
+            ],
+            "distribution": "harmonyos SDK",
+            "evidence_refs": [
+              "1ff5199c341b2202f9e501286bd6d84349b04345b72650d907c14cf73ded2cca"
+            ],
+            "release": "historical",
+            "sdk": "historical",
+            "status": "verified_stable",
+            "verified_at": "2026-09-10T00:00:00+00:00"
+          },
+          "ios": {
+            "device_forms": [
+              "phone"
+            ],
+            "distribution": "ios SDK",
+            "evidence_refs": [
+              "55f57e4dea01c6af201d70d6ec31e98b084b6d093c013533118ff61919b73610"
+            ],
+            "release": "historical",
+            "sdk": "historical",
+            "status": "verified_stable",
+            "verified_at": "2026-09-10T00:00:00+00:00"
+          }
+        },
+        "schema_version": 3,
+        "scope": "Test only"
+      }
+    },
+    "issue_routes": {
+      "alignment": "ft-align",
+      "binding": "ft-bind",
+      "comparison": "fk-compare",
+      "confidence": "fk-confidence",
+      "coverage": "ft-bind",
+      "granularity": "ft-design",
+      "specification": "fk-scope",
+      "structure": "ft-design"
+    },
+    "limits": {
+      "first_response_timeout": 120,
+      "max_attempts": 2,
+      "max_input_characters": 500000,
+      "max_semantic_rounds": 2,
+      "max_source_rounds": 2,
+      "max_tool_calls": 24,
+      "project_capacity": 6,
+      "timeout_seconds": 600,
+      "workers": 3
+    },
+    "model": "test/substitute",
+    "output_schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "properties": {
+        "input_hash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "issues": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "evidence_refs": {
+                "items": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "id": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "kind": {
+                "enum": [
+                  "source",
+                  "fact",
+                  "alignment",
+                  "structure",
+                  "binding",
+                  "granularity",
+                  "coverage",
+                  "specification",
+                  "comparison",
+                  "confidence",
+                  "execution"
+                ]
+              },
+              "reason": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "severity": {
+                "enum": [
+                  "blocking",
+                  "gap",
+                  "advisory"
+                ]
+              },
+              "subject_ids": {
+                "items": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "target_stage": {
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "severity",
+              "target_stage",
+              "subject_ids",
+              "reason",
+              "evidence_refs"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "outcome": {
+          "enum": [
+            "pass",
+            "needs_sources",
+            "revise",
+            "completed_with_gaps"
+          ]
+        },
+        "payload": {
+          "additionalProperties": false,
+          "properties": {
+            "relationships": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "common_scope": {
+                    "type": "string"
+                  },
+                  "differences": {
+                    "items": {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "evidence_refs": {
+                    "items": {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "fact_ids": {
+                    "items": {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "goal": {
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "id": {
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "relationship": {
+                    "enum": [
+                      "common_goal",
+                      "partial_overlap",
+                      "distinct",
+                      "unknown"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "fact_ids",
+                  "relationship",
+                  "goal",
+                  "common_scope",
+                  "differences",
+                  "evidence_refs"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "unmatched_fact_ids": {
+              "items": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "relationships",
+            "unmatched_fact_ids"
+          ],
+          "type": "object"
+        },
+        "protocol_version": {
+          "const": 2
+        },
+        "run_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_requests": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "platform": {
+                "enum": [
+                  "android",
+                  "ios",
+                  "harmonyos"
+                ]
+              },
+              "query": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "reason": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "source_urls": {
+                "items": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "subject_ids": {
+                "items": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "platform",
+              "query",
+              "reason",
+              "subject_ids",
+              "source_urls"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "stage_id": {
+          "const": "ft-align"
+        },
+        "task_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "work_id": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "run_id",
+        "work_id",
+        "task_id",
+        "stage_id",
+        "input_hash",
+        "outcome",
+        "payload",
+        "issues",
+        "source_requests"
+      ],
+      "type": "object"
+    },
+    "protocol_version": 2,
+    "revision": 0,
+    "revision_feedback": [],
+    "rules": {
+      "granularity": {
+        "calibration_scopes": [
+          "camera-capture",
+          "file-directory-access",
+          "background-scheduling"
+        ],
+        "domain_ranges": {},
+        "id": "granularity-candidate-v1",
+        "principles": [
+          "independent_comparison_goal",
+          "count_core_families_per_platform_per_route",
+          "do_not_add_alternative_routes",
+          "incomplete_enumeration_is_lower_bound"
+        ],
+        "status": "awaiting_calibration"
+      }
+    },
+    "run_id": "run_ec545c4839b455042abf79ea",
+    "source_access": {
+      "api_ids": [
+        "api_android",
+        "api_harmonyos",
+        "api_ios"
+      ],
+      "platform": null,
+      "snapshot_id": "s_faaf4b83ef3938d02fab47b24bd967202cc51f93c5135eeb2d11c7584ff22eab",
+      "topic_ids": [
+        "topic_android",
+        "topic_harmonyos",
+        "topic_ios"
+      ]
+    },
+    "stage_fingerprint": "a715385500c30144e344eb24802f367c5f4536b1ff61516df1b8d313fcac3e17",
+    "stage_id": "ft-align",
+    "task_id": "w_0000--ft-align",
+    "upstream": {
+      "ft-android": {
+        "api_dispositions": [
+          {
+            "evidence_refs": [
+              "doc_android"
+            ],
+            "id": "api_android",
+            "reason": "Documented goal",
+            "rule": "public-sdk",
+            "status": "assigned"
+          }
+        ],
+        "facts": [
+          {
+            "api_ids": [
+              "api_android"
+            ],
+            "conditions": [],
+            "evidence_refs": [
+              "doc_android"
+            ],
+            "gaps": [],
+            "goal": "Example goal",
+            "id": "fact_android",
+            "implementation_steps": [
+              "Call example.run"
+            ],
+            "statement": "Example behavior"
+          }
+        ],
+        "platform": "android",
+        "topic_dispositions": [
+          {
+            "evidence_refs": [
+              "doc_android"
+            ],
+            "id": "topic_android",
+            "reason": "Documented goal",
+            "rule": "public-sdk",
+            "status": "assigned"
+          }
+        ]
+      },
+      "ft-harmonyos": {
+        "api_dispositions": [
+          {
+            "evidence_refs": [
+              "doc_harmonyos"
+            ],
+            "id": "api_harmonyos",
+            "reason": "Documented goal",
+            "rule": "public-sdk",
+            "status": "assigned"
+          }
+        ],
+        "facts": [
+          {
+            "api_ids": [
+              "api_harmonyos"
+            ],
+            "conditions": [],
+            "evidence_refs": [
+              "doc_harmonyos"
+            ],
+            "gaps": [],
+            "goal": "Example goal",
+            "id": "fact_harmonyos",
+            "implementation_steps": [
+              "Call example.run"
+            ],
+            "statement": "Example behavior"
+          }
+        ],
+        "platform": "harmonyos",
+        "topic_dispositions": [
+          {
+            "evidence_refs": [
+              "doc_harmonyos"
+            ],
+            "id": "topic_harmonyos",
+            "reason": "Documented goal",
+            "rule": "public-sdk",
+            "status": "assigned"
+          }
+        ]
+      },
+      "ft-ios": {
+        "api_dispositions": [
+          {
+            "evidence_refs": [
+              "doc_ios"
+            ],
+            "id": "api_ios",
+            "reason": "Documented goal",
+            "rule": "public-sdk",
+            "status": "assigned"
+          }
+        ],
+        "facts": [
+          {
+            "api_ids": [
+              "api_ios"
+            ],
+            "conditions": [],
+            "evidence_refs": [
+              "doc_ios"
+            ],
+            "gaps": [],
+            "goal": "Example goal",
+            "id": "fact_ios",
+            "implementation_steps": [
+              "Call example.run"
+            ],
+            "statement": "Example behavior"
+          }
+        ],
+        "platform": "ios",
+        "topic_dispositions": [
+          {
+            "evidence_refs": [
+              "doc_ios"
+            ],
+            "id": "topic_ios",
+            "reason": "Documented goal",
+            "rule": "public-sdk",
+            "status": "assigned"
+          }
+        ]
+      }
+    },
+    "upstream_refs": {
+      "ft-android": "a64c68ccdf1811db60d204d2a87c8d75a1b34c96f8cfa25831651314ad11f59d",
+      "ft-harmonyos": "4664eb83874de82cc01554e5c544a6327a754638b763c216f01664b4d7c5058e",
+      "ft-ios": "fb01cde849bfaa9dcf2395d5b7cbbb872d116f606e332990750b59cedc9f0a0b"
+    },
+    "variant": null,
+    "work": {
+      "api_ids": [
+        "api_android",
+        "api_harmonyos",
+        "api_ios"
+      ],
+      "enumeration_complete": true,
+      "id": "w_0000",
+      "inputs": {
+        "baseline_ref": "a4064a1d77dc356337af79272a8a110b2ea9a8a6b4e85a677cc2d50362f3a76a"
+      },
+      "mode": "calibration",
+      "revision_of": null,
+      "scope": "Synthetic integration scope",
+      "scope_root_ids": [],
+      "selection": {},
+      "snapshot_id": "s_faaf4b83ef3938d02fab47b24bd967202cc51f93c5135eeb2d11c7584ff22eab",
+      "source_groups": {
+        "declarations": {
+          "android": [
+            "api_android"
+          ],
+          "harmonyos": [
+            "api_harmonyos"
+          ],
+          "ios": [
+            "api_ios"
+          ]
+        },
+        "topics": {
+          "android": [
+            "topic_android"
+          ],
+          "harmonyos": [
+            "topic_harmonyos"
+          ],
+          "ios": [
+            "topic_ios"
+          ]
+        }
+      },
+      "source_round": 0,
+      "topic_ids": [
+        "topic_android",
+        "topic_harmonyos",
+        "topic_ios"
+      ],
+      "work_type": "refine"
+    },
+    "work_id": "w_0000"
+  },
+  "output": {
+    "input_hash": "86fdf387a1b190ced8019160266d41a287238290e2f8177aa553961b36a00749",
+    "issues": [],
+    "outcome": "pass",
+    "payload": {
+      "relationships": [
+        {
+          "common_scope": "One outcome",
+          "differences": [],
+          "evidence_refs": [
+            "doc_android",
+            "doc_ios",
+            "doc_harmonyos"
+          ],
+          "fact_ids": [
+            "fact_android",
+            "fact_ios",
+            "fact_harmonyos"
+          ],
+          "goal": "Example goal",
+          "id": "alignment",
+          "relationship": "common_goal"
+        }
+      ],
+      "unmatched_fact_ids": []
+    },
+    "protocol_version": 2,
+    "run_id": "run_ec545c4839b455042abf79ea",
+    "source_requests": [],
+    "stage_id": "ft-align",
+    "task_id": "w_0000--ft-align",
+    "work_id": "w_0000"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "manifest_path": "data/backup-manifests/v2-engineering-checkpoint.json",
+  "manifest_sha256": "25245c10e1338e7f6adc97f25d8fe2d3b98b2a937c19071acfefe75a37a0f497",
+  "created_at": "2026-09-10T04:20:45.596472+00:00",
+  "file_count": 120789,
+  "bytes": 6360714507,
+  "current_release": null,
+  "notice": "Hash inventory, not an off-device backup. Paused research runs; caches excluded explicitly.",
+  "excluded_cache_directory_count": 152,
+  "legacy_archive": "archive/v2-cutover-20260910-091230 (separate verified M0 manifest)"
+}

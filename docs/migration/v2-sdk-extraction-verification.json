@@ -1,0 +1,82 @@
+[
+  {
+    "platform": "android",
+    "snapshot_id": "s_9a5546baba96db2870c82457630f219fbb7bcefea3ee05894a156f5dbd42d18c",
+    "counts": {
+      "declarations": 89058,
+      "documents": 0,
+      "families": 89058,
+      "topics": 0
+    },
+    "status": "candidate",
+    "gaps": [],
+    "sdk_version": "36",
+    "visibility_counts": {
+      "nonpublic": 3211,
+      "public": 85847
+    },
+    "file_hashes": [
+      {
+        "bytes": 5674817,
+        "path": "data/api-versions.xml",
+        "reason": "",
+        "sha256": "923f7e6367759e127679b6b5a4156ee801100e3cc07dc1d99cb811e791e45435",
+        "status": "extracted"
+      }
+    ],
+    "note": "本机 SDK 提取验证；不是最新正式比较基线，也不是校准范围完整枚举。"
+  },
+  {
+    "platform": "harmonyos",
+    "snapshot_id": "s_58d6495643fba5070c261c05edefd737cc862b729e35ce65aabc8f030c0d3418",
+    "counts": {
+      "declarations": 685,
+      "documents": 0,
+      "families": 685,
+      "topics": 0
+    },
+    "status": "candidate",
+    "gaps": [],
+    "sdk_version": "26.0.0.32 Beta2",
+    "visibility_counts": {
+      "public": 685
+    },
+    "file_hashes": [
+      {
+        "bytes": 334650,
+        "path": "@ohos.multimedia.camera.d.ts",
+        "reason": "",
+        "sha256": "c0295b345ccb86b08fc889068be3f4185222a02faa4eb3e404d1f8ff8d93b844",
+        "status": "extracted"
+      }
+    ],
+    "note": "本机 SDK 提取验证；不是最新正式比较基线，也不是校准范围完整枚举。"
+  },
+  {
+    "platform": "ios",
+    "snapshot_id": "s_d6702d5d8a792691a0a5c4d8da209066bdc6eacb06ba47930839dee6014fb111",
+    "counts": {
+      "declarations": 404,
+      "documents": 0,
+      "families": 404,
+      "topics": 0
+    },
+    "status": "candidate",
+    "gaps": [],
+    "sdk_version": "26.5",
+    "visibility_counts": {
+      "nonpublic": 8,
+      "public": 396
+    },
+    "file_hashes": [
+      {
+        "bytes": 198237,
+        "path": "System/Library/Frameworks/AVFoundation.framework/Headers/AVCapturePhotoOutput.h",
+        "reason": "",
+        "sha256": "227736c691b96960124e3169b725a91bbfa3a2077754d36e3c07ee106647d7e9",
+        "status": "extracted"
+      }
+    ],
+    "note": "本机 SDK 提取验证；不是最新正式比较基线，也不是校准范围完整枚举。"
+  }
+]

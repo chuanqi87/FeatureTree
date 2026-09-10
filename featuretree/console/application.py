@@ -1,5 +1,7 @@
 """Dependency composition for local CLI/HTTP use cases; no implicit Repository state."""
 
+from featuretree.reporting.workflow_activity import workflow_activity
+from featuretree.workflow.backends.processes import identity
 from featuretree.core.artifacts import FileArtifactStore
 from featuretree.core.contracts import SchemaRegistry
 from featuretree.core.requests import RequestStore
@@ -86,4 +88,5 @@ class Application:
 
     def run_detail(self, run_id):
         plan, state = self.runs.load(run_id)
-        return {"plan": plan, "state": state, "batch_progress": self.runs.batch_progress(state)}
+        return {"plan": plan, "state": state, "batch_progress": self.runs.batch_progress(state),
+                "activity": workflow_activity(self.runs.folder(run_id), state, self.artifacts, identity)}

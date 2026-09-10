@@ -1,0 +1,11 @@
+.workflow-pipeline { margin: 24px 0; }
+.pipeline-layer { position: relative; display: flex; gap: 18px; padding-bottom: 28px; }
+.pipeline-layer:not(:last-child)::before { content: ""; position: absolute; top: 34px; bottom: 0; left: 16px; border-left: 2px solid #cad9ec; }
+.pipeline-layer:not(:last-child)::after { content: "▼"; position: absolute; bottom: 5px; left: 11px; color: #7195c3; font-size: 12px; }
+.pipeline-number { flex: 0 0 34px; height: 34px; border-radius: 50%; background: #2463b4; color: white; text-align: center; line-height: 34px; font-weight: 600; }
+.pipeline-content { flex: 1; min-width: 0; }
+.pipeline-content h5 { margin: 5px 0 14px; }
+.pipeline-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 14px; }
+.pipeline-lane { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.pipeline-lane .ant-card { flex: 1; }
+@media (max-width: 800px) { .pipeline-layer { gap: 10px; } .pipeline-cards { grid-template-columns: minmax(0, 1fr); } }

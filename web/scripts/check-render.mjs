@@ -24,5 +24,13 @@ try {
   assert(progress.includes('复用 1 批'));
   assert(progress.includes('第 3 批失败，已完成批次保留'));
   assert.equal(renderToStaticMarkup(createElement(BatchProgress)), '');
+  const { default: LiveActivity, ActivityOverview } = await server.ssrLoadModule('/src/features/workflow/LiveActivity.jsx');
+  const activity = { status: 'running', scheduler_status: 'failed', checkpoint_errors: [], completed: 1, total: 16, accepted: [{ batch: 1, api_count: 32, topic_count: 0, fact_count: 8, outcome: 'completed_with_gaps', result_ref: 'abc' }], live: { recovery: true, process_alive: true, batch: 2, last_activity_at: '2026-09-10T13:00:00Z', api_ids: ['API'], topic_ids: [], source_calls: 5, payload_chunks: 2, events: [] } };
+  const liveHtml = renderToStaticMarkup(createElement(LiveActivity, { activity, onArtifact() {} }));
+  assert(liveHtml.includes('恢复续跑'));
+  assert(liveHtml.includes('原尝试失败'));
+  assert(liveHtml.includes('查看内容'));
+  const overview = renderToStaticMarkup(createElement(ActivityOverview, { activity: { active_stages: 3, completed_batches: 7, total_batches: 56, observed_at: '2026-09-10T13:00:00Z' }, model: 'test/model' }));
+  assert(overview.includes('7 / 56'));
   console.log('Rendered six v2 pages and a low-confidence article; escaped source text and draft status verified.');
 } finally { await server.close(); }

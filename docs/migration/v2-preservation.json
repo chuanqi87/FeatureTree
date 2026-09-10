@@ -1,0 +1,10 @@
+{
+  "archive": "archive/v2-cutover-20260910-091230",
+  "branch": "codex/archive-v1-20260910-091230",
+  "head": "8d8ac2522002ed059615d8f85fd8b19a234516e0",
+  "backup_files": 4060,
+  "manifest_sha256": "e7ec3e4ebd177074ef114cb91e676da789083dd37dd0f44fc4031b72fe71aded",
+  "corpus_files": 116545,
+  "corpus_bytes": 2789326916,
+  "verified": true
+}

@@ -17,4 +17,4 @@
 
 前端维持 app/features/shared。六个功能域分别是 tree、sources、workflow、knowledge、review、release；共享层只提供请求、状态、展示和纯计算。树接口只返回节点与知识摘要；完整知识、绑定和正文按需读取。
 
-OpenCode 是唯一模型执行后端。每次调用使用独立目录和固定 Agent 文本，通过 `OPENCODE_CONFIG_DIR` 加载该次调用的 source_catalog；禁用写入、shell、委派等权限。不会修改用户全局 OpenCode 配置。
+OpenCode 是唯一模型执行后端。每次调用使用独立目录和固定 Agent 文本，通过 `OPENCODE_CONFIG_DIR` 加载该次调用的 source_catalog、submit_payload 和 finish_payload。来源只读，交付工具仅能在当前尝试目录分批写入不可变内容并完成 JSON 文件；任意文件写入、shell、委派仍禁用。文件完成即读取并执行完整业务校验，无须等待聊天返回长 JSON。不会修改用户全局 OpenCode 配置。

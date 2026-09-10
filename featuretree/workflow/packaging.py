@@ -12,6 +12,8 @@ def build_packet(plan, task, state, registry, artifacts):
         work["api_ids"] = work["source_groups"]["declarations"][platform]
         work["topic_ids"] = work["source_groups"]["topics"][platform]
         work["source_groups"] = {kind: {platform: rows[platform]} for kind, rows in work["source_groups"].items()}
+        if "research_order" in work:
+            work["research_order"] = {platform: work["research_order"][platform]}
     upstream, upstream_refs = {}, {}
     for stage_id in sorted(registry.ancestors(task["stage_id"])):
         dependency = state["tasks"][work["id"] + "--" + stage_id]
@@ -25,7 +27,8 @@ def build_packet(plan, task, state, registry, artifacts):
     inputs = {name: artifacts.get(reference) for name, reference in work["inputs"].items() if reference}
     packet = {"protocol_version": 2, "run_id": plan["run_id"], "work_id": work["id"],
               "task_id": task["id"], "stage_id": task["stage_id"], "work": work,
-              "revision": task["revision"], "revision_feedback": task["feedback"],
+              "revision": task["revision"], "batch_revision": task.get("batch_revision", task["revision"]),
+              "revision_feedback": task["feedback"],
               "upstream": upstream, "upstream_refs": upstream_refs, "inputs": inputs,
               "rules": config["rules"], "stage_fingerprint": config["fingerprint"],
               "implementation_files": config.get("implementation_files", {}),

@@ -56,3 +56,12 @@ class RunStore:
 
     def list(self):
         return [self.load(path.parent.name)[1] for path in sorted(self.directory.glob("*/state.json"))]
+
+    def batch_progress(self, state):
+        progress = {}
+        for task in state["tasks"].values():
+            if task["attempts"]:
+                path = self.folder(state["run_id"]) / task["attempts"][-1]["folder"] / "batch-progress.json"
+                if path.exists():
+                    progress[task["id"]] = read_json(path)
+        return progress

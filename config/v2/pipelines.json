@@ -313,6 +313,12 @@
     "max_semantic_rounds": 2,
     "max_source_rounds": 2,
     "max_input_characters": 500000,
-    "max_tool_calls": 24
+    "max_tool_calls": 24,
+    "max_output_tokens": 32000,
+    "max_agent_steps": 96,
+    "max_delivery_chunks": 256,
+    "source_batch_size": 32,
+    "batch_timeout_seconds": 900,
+    "batch_max_tool_calls": 8
   }
 }

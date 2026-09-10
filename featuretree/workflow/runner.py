@@ -5,7 +5,7 @@ import json
 
 from featuretree.core.content import digest, file_digest, timestamp
 from featuretree.core.io import ConflictError, IntegrityError, file_lock, read_json, write_json
-from featuretree.workflow.backends.processes import terminate_recorded
+from featuretree.workflow.backends.processes import terminate_attempt
 from featuretree.workflow.backends.errors import SemanticValidationError
 from featuretree.workflow.packaging import build_packet
 from featuretree.workflow.registry import PipelineRegistry
@@ -32,7 +32,7 @@ class Runner:
                     if (folder / "CANCEL.json").exists():
                         for task in state["tasks"].values():
                             if task["status"] == "running":
-                                terminate_recorded(folder / task["attempts"][-1]["folder"] / "process.json")
+                                terminate_attempt(folder / task["attempts"][-1]["folder"])
                         if not futures:
                             state["status"] = "cancelled"
                             break
@@ -163,7 +163,7 @@ class Runner:
         for task in state["tasks"].values():
             if task["status"] == "running":
                 attempt = task["attempts"][-1]
-                terminate_recorded(folder / attempt["folder"] / "process.json")
+                terminate_attempt(folder / attempt["folder"])
                 attempt.update(status="interrupted", finished_at=timestamp())
                 task["status"] = "failed"
                 self.runs.event(state, "orphan_recovered", {"task_id": task["id"]})
@@ -207,7 +207,9 @@ class Runner:
                 raise ValueError("Only failed execution can be retried")
             if action not in ("retry", "revise"):
                 raise ValueError("Unknown run action")
-            affected = revise_tasks(state, registry, plan["pipeline"], task["work_id"], task["stage_id"], list(feedback))
+            feedback = list(feedback) if feedback else task["feedback"] if action == "retry" else []
+            affected = revise_tasks(state, registry, plan["pipeline"], task["work_id"], task["stage_id"],
+                                    feedback, preserve_batches=action == "retry")
             state["status"] = "planned"
             self.runs.event(state, action, {"target": task_id, "affected": affected})
             return state

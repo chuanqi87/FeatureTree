@@ -3,7 +3,7 @@
 from featuretree.core.io import ConflictError
 
 
-def revise_tasks(state, registry, pipeline, work_id, target_stage, feedback):
+def revise_tasks(state, registry, pipeline, work_id, target_stage, feedback, *, preserve_batches=False):
     if target_stage not in registry.pipelines[pipeline]:
         raise ValueError("Revision target is outside this pipeline; create a linked structure/source revision")
     affected = [target_stage, *registry.descendants(target_stage, pipeline)]
@@ -17,7 +17,9 @@ def revise_tasks(state, registry, pipeline, work_id, target_stage, feedback):
         stage_id = task["stage_id"]
         if task["result_ref"]:
             task["history"].append({"result_ref": task["result_ref"], "revision": task["revision"]})
-        task.update(status="waiting", result_ref=None, outcome=None, revision=task["revision"] + 1)
+        task.update(status="waiting", result_ref=None, outcome=None,
+                    batch_revision=task.get("batch_revision", task["revision"]) + (0 if preserve_batches else 1),
+                    revision=task["revision"] + 1)
         if stage_id == target_stage:
             task["feedback"] = feedback
     return [task["id"] for task in tasks]

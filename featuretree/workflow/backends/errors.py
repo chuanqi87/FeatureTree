@@ -11,6 +11,10 @@ class MissingStructuredAnswer(ValueError):
     retryable = False
 
 
+class OutputLimitError(ValueError):
+    retryable = False
+
+
 class SemanticValidationError(ValueError):
     retryable = False
 
@@ -22,4 +26,4 @@ class SemanticValidationError(ValueError):
 def has_repairable_answer(text):
     return (text.rstrip().endswith(("}", "```")) and
             all(re.search(r'"' + key + r'"\s*:', text) for key in
-                ("protocol_version", "task_id", "stage_id", "input_hash", "payload")))
+                ("protocol_version", "task_id", "stage_id", "input_hash", "payload(?:_chunks)?")))

@@ -4,6 +4,7 @@ from featuretree.core.content import digest, identifier, timestamp
 from featuretree.core.io import read_json, write_json
 from featuretree.workflow.implementation import implementation_files
 from featuretree.workflow.planning_gates import validate_scope, validate_work_boundaries
+from featuretree.workflow.attempt_tools import configure_agent
 
 
 class Planner:
@@ -64,6 +65,10 @@ class Planner:
                           "snapshot_id": snapshot_id, "selection": selection,
                           "api_ids": api_ids, "topic_ids": topics, "inputs": inputs,
                           "source_groups": groups,
+                          "research_order": {platform: [row["id"] for row in sorted(
+                              (row for row in api_records if row["platform"] == platform),
+                              key=lambda row: (row.get("qualified_name", ""), row["id"]))]
+                              for platform in ("android", "ios", "harmonyos")},
                           "scope_root_ids": roots,
                           "enumeration_complete": scope.get("enumeration_complete", False),
                           "source_round": scope.get("source_round", 0),
@@ -80,6 +85,8 @@ class Planner:
         for stage_id in self.registry.pipelines[pipeline]:
             stage = self.registry.stages[stage_id]
             agent_text = (self.root / ".opencode/agents" / f"{stage.agent_name}.md").read_text() if stage.agent_name else ""
+            if agent_text:
+                agent_text = configure_agent(agent_text, budget["max_agent_steps"])
             rules = {name: read_json(self.root / "config/v2/rules" / f"{name}.json") for name in stage.rules}
             stage_configs[stage_id] = {"definition": stage.__dict__, "agent_text": agent_text,
                                       "implementation_files": implementation_files(stage_id),

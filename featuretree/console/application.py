@@ -86,4 +86,4 @@ class Application:
 
     def run_detail(self, run_id):
         plan, state = self.runs.load(run_id)
-        return {"plan": plan, "state": state}
+        return {"plan": plan, "state": state, "batch_progress": self.runs.batch_progress(state)}

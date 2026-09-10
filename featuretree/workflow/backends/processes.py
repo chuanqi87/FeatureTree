@@ -33,3 +33,9 @@ def terminate_recorded(path):
         os.killpg(pid, signal.SIGKILL)
     except ProcessLookupError:
         return
+
+
+def terminate_attempt(directory):
+    # Completed batch PIDs are checked by identity before any signal is sent.
+    for path in directory.rglob("process.json"):
+        terminate_recorded(path)

@@ -1,6 +1,8 @@
 """Separate an unresponsive model from a long but active research stage."""
 
 import json
+import os
+import signal
 import subprocess
 import time
 
@@ -43,13 +45,25 @@ class EventActivity:
         return False
 
 
-def wait_for_model(process, prompt, events, timeout, first_response_timeout):
+def wait_for_model(process, prompt, events, timeout, first_response_timeout, completion_path=None):
     started = time.monotonic()
     activity = EventActivity(events)
     first_response = None
     first_response_timeout = min(first_response_timeout, timeout)
     while True:
         elapsed = time.monotonic() - started
+        if completion_path is not None and completion_path.is_file():
+            # File completion is the transport boundary; do not wait for a redundant chat reply.
+            try:
+                os.killpg(process.pid, signal.SIGTERM)
+            except ProcessLookupError:
+                pass
+            try:
+                process.wait(timeout=3)
+            except subprocess.TimeoutExpired:
+                os.killpg(process.pid, signal.SIGKILL)
+                process.wait()
+            return {"delivery_completed": True, "first_response_seconds": first_response}
         if first_response is None and activity.poll():
             first_response = elapsed
         if elapsed >= timeout:

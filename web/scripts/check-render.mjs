@@ -18,5 +18,11 @@ try {
   assert(html.includes('决定整体评级的结论'));
   assert(html.includes('&lt;img'));
   assert(!html.includes('<img src=x'));
+  const { default: BatchProgress } = await server.ssrLoadModule('/src/features/workflow/BatchProgress.jsx');
+  const progress = renderToStaticMarkup(createElement(BatchProgress, { progress: { completed: 2, total: 5, reused: 1, current: 3, status: 'failed' } }));
+  assert(progress.includes('已校验批次 2 / 5'));
+  assert(progress.includes('复用 1 批'));
+  assert(progress.includes('第 3 批失败，已完成批次保留'));
+  assert.equal(renderToStaticMarkup(createElement(BatchProgress)), '');
   console.log('Rendered six v2 pages and a low-confidence article; escaped source text and draft status verified.');
 } finally { await server.close(); }

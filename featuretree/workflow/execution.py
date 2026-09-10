@@ -11,6 +11,9 @@ from featuretree.core.content import canonical_bytes, digest
 from featuretree.core.io import ConflictError, IntegrityError, file_lock, write_bytes, write_json
 from featuretree.workflow.backends.errors import ResponseFormatError, SemanticValidationError
 from featuretree.workflow.implementation import verify_implementation
+from featuretree.workflow.attempt_tools import delivery_adapter
+from featuretree.workflow.batch_packets import research_batches
+from featuretree.workflow.batch_execution import BatchExecutor
 
 
 @contextmanager
@@ -37,6 +40,19 @@ class AttemptExecutor:
         self.root, self.artifacts, self.backend, self.handlers = root, artifacts, backend, handlers
 
     def execute(self, plan, task, packet, folder):
+        verify_implementation(task["stage_id"], plan["stage_configs"][task["stage_id"]].get("implementation_files"))
+        batches = research_batches(packet)
+        if not batches:
+            return self._execute_single(plan, task, packet, folder)
+        folder.mkdir(parents=True, exist_ok=True)
+        write_json(folder / "input.json", packet, immutable=True)
+        started = time.monotonic()
+        response, metadata = BatchExecutor(self.artifacts, self.handlers, self._execute_single).execute(
+            plan, task, packet, batches, folder)
+        write_json(folder / "model-response.json", response, immutable=True)
+        return self.accept_response(plan, task, packet, response, metadata, folder, started)
+
+    def _execute_single(self, plan, task, packet, folder):
         folder.mkdir(parents=True, exist_ok=True)
         write_json(folder / "input.json", packet, immutable=True)
         if len(canonical_bytes(packet).decode("utf-8")) > plan["budget"]["max_input_characters"]:
@@ -53,11 +69,15 @@ class AttemptExecutor:
             write_bytes(agent_file, stage["agent_text"].encode(), immutable=True)
             write_bytes(workspace / ".opencode/tools/source_catalog.ts",
                         self._source_tool().encode(), immutable=True)
+            write_bytes(workspace / ".opencode/tools/submit_payload.ts",
+                        delivery_adapter(self.root).encode(), immutable=True)
+            write_bytes(workspace / ".opencode/tools/finish_payload.ts",
+                        delivery_adapter(self.root, finalize=True).encode(), immutable=True)
             write_json(workspace / "task.json", packet, immutable=True)
-            with capacity_slot(self.root / ".workflow/v2/capacity", plan["budget"]["timeout_seconds"]):
+            with capacity_slot(self.root / ".workflow/v2/capacity", packet["limits"]["timeout_seconds"]):
                 response, metadata = self.backend.execute(
                     workspace, definition["agent_name"], packet, folder,
-                    plan["budget"]["timeout_seconds"], plan["model"], plan["variant"])
+                    packet["limits"]["timeout_seconds"], plan["model"], plan["variant"])
         else:
             response = self.handlers.execute(definition["executor"], packet, folder)
             metadata = {"executor": definition["executor"], "model": None, "usage": []}

@@ -1,30 +1,29 @@
-import { useMemo, useState } from "react";
-import { Alert, Button, Descriptions, Drawer, Empty, Select, Space, Table, Tag, Typography } from "antd";
-import { useResource } from "../../shared/useResource.js";
-import { PageHeader, ResourceState, Status, JsonDetails } from "../../shared/components.jsx";
-import { treeRows } from "../../shared/model.js";
-export default function TreePage({ releaseId, navigate }) {
-  const candidates = useResource("candidates", 10000);
-  const [candidate, setCandidate] = useState(null);
-  const [selected, setSelected] = useState(null);
-  const tree = useResource(candidate ? `objects/${candidate}` : `tree${releaseId ? `?release_id=${releaseId}` : ""}`);
-  const features = candidate ? tree.data?.object.features || [] : tree.data?.features || [];
-  const rows = useMemo(() => treeRows(features), [features]);
-  const detail = useResource(selected && !candidate ? `features/${selected}?release_id=${releaseId}` : null);
-  const node = features.find(row => row.id === selected);
-  return <><PageHeader title="平台中立特性树" description="每个叶子定义一条可独立比较的知识；来源与知识按需展开。"><Button onClick={() => navigate("workflow")}>创建分析任务</Button></PageHeader>
-    <div className="toolbar"><Select style={{ minWidth: 340 }} value={candidate || "formal"} onChange={value => { setCandidate(value === "formal" ? null : value); setSelected(null); }} options={[{ value: "formal", label: "正式版本" }, ...(candidates.data?.items || []).filter(row => row.tree_ref).map(row => ({ value: row.tree_ref, label: `候选 · ${row.run_id} / ${row.work_id}` }))]} /></div>
-    {candidate && <Alert type="info" showIcon title="候选快照：尚未冻结，不能计为正式特性或知识" />}
-    <ResourceState resource={tree}><Table rowKey="id" dataSource={rows} pagination={false} locale={{ emptyText: <Empty description="尚未发布特性树。可查看候选快照，或开始校准分析。" /> }} columns={[
-      { title: "特性 / 能力范围", dataIndex: "name", render: (name, row) => <Button type="link" onClick={() => setSelected(row.id)}>{name}</Button> },
-      { title: "节点类型", dataIndex: "node_type", render: value => <Tag>{value === "leaf" ? "能力叶子" : "待展开分支"}</Tag> },
-      { title: "知识状态", render: (_, row) => <Status value={row.knowledge?.validity || "not_produced"} /> },
-      { title: "可信度", render: (_, row) => row.knowledge?.confidence ? <Status value={row.knowledge.confidence} /> : "待评级" },
-    ]} /></ResourceState>
-    <Drawer title={node?.name || "节点详情"} open={!!selected} onClose={() => setSelected(null)} size="large">
-      {node && <><Descriptions column={1} items={[{ key: "id", label: "稳定身份", children: <Typography.Text copyable>{node.id}</Typography.Text> }, { key: "definition", label: "定义", children: node.definition }, { key: "include", label: "包含范围", children: node.includes.join("；") }, { key: "exclude", label: "排除范围", children: node.excludes.join("；") }, { key: "success", label: "成功标准", children: node.success_criteria.join("；") }]} />
-      <Space style={{ margin: "20px 0" }}><Button onClick={() => navigate("knowledge")}>查看叶子知识</Button><Tag>{candidate ? "候选" : detail.data?.freeze_refs.length ? "已冻结" : "未冻结"}</Tag></Space>
-      <ResourceState resource={detail}>{detail.data && <JsonDetails value={detail.data.bindings} title="API 绑定与具体实现路线" />}</ResourceState></>}
-    </Drawer>
+import { useMemo, useState } from 'react';
+import { ApartmentOutlined, FileTextOutlined, FolderOutlined, SearchOutlined } from '@ant-design/icons';
+import { Button, Empty, Input, Segmented, Space, Switch, Tag, Tree, Typography } from 'antd';
+import { useResource } from '../../shared/useResource.js';
+import { ResourceState } from '../../shared/components.jsx';
+import { browseNodes, flattenNodes, visibleViews } from './browserModel.js';
+import FeatureDetail from './FeatureDetail.jsx';
+
+export default function TreePage({ releaseId }) {
+  const resource = useResource(`tree-browser${releaseId ? `?release_id=${releaseId}` : ''}`, 10000);
+  const [status, setStatus] = useState('all'), [history, setHistory] = useState(false), [query, setQuery] = useState('');
+  const [selected, setSelected] = useState(null), [expanded, setExpanded] = useState([]);
+  const views = useMemo(() => visibleViews(resource.data?.items || [], status, history), [resource.data, status, history]);
+  const nodes = useMemo(() => browseNodes(views, query), [views, query]);
+  const flat = useMemo(() => flattenNodes(nodes), [nodes]);
+  const active = flat.find(node => node.key === selected) || null;
+  const leaves = visibleViews(resource.data?.items || [], 'all', history).flatMap(view => view.features.filter(node => node.node_type === 'leaf').map(node => ({ ...node, view })));
+  function select(node) { setSelected(node.key); setExpanded(keys => [...new Set([...keys, ...node.ancestors, node.key])]); }
+  return <>
+    <div className="tree-heading"><div><Typography.Title level={2}><ApartmentOutlined /> 特性树</Typography.Title><Typography.Text type="secondary">展开特性，逐层查看子特性、叶子与三端 API。</Typography.Text></div><Space wrap><Tag color="green">正式 {new Set(leaves.filter(node => node.view.status === 'formal').map(node => node.id)).size} 叶子</Tag><Tag color="gold">候选 {new Set(leaves.filter(node => node.view.status === 'candidate').map(node => node.id)).size} 叶子</Tag></Space></div>
+    <div className="tree-browser"><aside className="tree-navigation">
+      <Input prefix={<SearchOutlined />} placeholder="搜索特性名称或定义" value={query} onChange={event => setQuery(event.target.value)} allowClear />
+      <Segmented block value={status} onChange={setStatus} options={[{ value: 'all', label: '全部' }, { value: 'formal', label: '正式' }, { value: 'candidate', label: '候选' }]} />
+      <div className="tree-controls"><Button size="small" type="text" onClick={() => setExpanded(flat.filter(node => !node.isLeaf).map(node => node.key))}>全部展开</Button><Button size="small" type="text" onClick={() => { setQuery(''); setExpanded([]); }}>收起</Button></div>
+      <ResourceState resource={resource}>{nodes.length ? <Tree blockNode showLine={{ showLeafIcon: false }} showIcon treeData={nodes} expandedKeys={query ? flat.filter(node => node.children.length).map(node => node.key) : expanded} onExpand={setExpanded} selectedKeys={active ? [active.key] : []} onSelect={(_, info) => select(info.node)} icon={node => node.isLeaf ? <FileTextOutlined /> : <FolderOutlined />} titleRender={node => <div className="feature-tree-label"><span>{node.name}</span><span className="tree-node-tags"><Tag color={node.view.status === 'candidate' ? 'gold' : 'green'}>{node.view.status === 'candidate' ? '候选' : '正式'}</Tag><small>{node.isLeaf ? '叶子' : `${node.children.length} 项`}</small>{history && !node.parent_id && <small>{node.view.updated_at ? new Date(node.view.updated_at).toLocaleString('zh-CN') : '当前发布'}{node.view.run_status === 'cancelled' ? ' · 已取消' : ''}</small>}</span></div>} /> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={query ? '没有匹配的特性' : status === 'formal' ? '尚未正式发布，可切换到全部查看候选' : '暂无特性'} />}</ResourceState>
+      <div className="tree-history"><Switch size="small" checked={history} onChange={setHistory} /><Typography.Text type="secondary">显示历史候选快照</Typography.Text><p>默认按相同范围显示较新的未取消候选。候选与正式版本分别标记。</p></div>
+    </aside><main className="tree-detail-panel"><FeatureDetail node={active} onSelect={select} /></main></div>
   </>;
 }

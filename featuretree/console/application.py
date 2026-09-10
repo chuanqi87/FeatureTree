@@ -8,6 +8,7 @@ from featuretree.corpus.catalog import IndexedCatalog
 from featuretree.corpus.snapshots import SnapshotStore
 from featuretree.knowledge.reviews import ReviewLedger, project_reviews
 from featuretree.reporting.releases import ReleaseReader
+from featuretree.reporting.tree_browser import TreeBrowser
 from featuretree.workflow.backends.opencode import OpenCodeBackend
 from featuretree.workflow.calibration import CalibrationService
 from featuretree.workflow.observations import ObservationService
@@ -49,6 +50,7 @@ class Application:
         self.releases = LocalReleaseService(self.versions, self.artifacts, self.schemas,
                                             self.snapshots, self.catalog, self.ledger, self.freezes)
         self.reader = ReleaseReader(self.versions, self.artifacts)
+        self.tree_browser = TreeBrowser(self.artifacts, self.versions, self.reader, self.catalog)
         self.structure_revisions = StructureRevisionService(self.artifacts, self.versions, self.planner, self.runs)
         self.reviews = LocalReviewService(self.ledger, self.artifacts, self.runner, self.releases, self.structure_revisions)
         self.requests = RequestStore(data / "requests")

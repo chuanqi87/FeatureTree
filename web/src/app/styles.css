@@ -19,3 +19,32 @@ body { margin: 0; }
 .ant-table-cell { overflow-wrap: anywhere; }
 .ant-table-cell .ant-btn-link { max-width: 100%; white-space: normal; height: auto; text-align: left; overflow-wrap: anywhere; }
 @media(max-width: 800px) { .topbar { height: auto; min-height: 64px; flex-wrap: wrap; gap: 8px; padding-block: 12px; } .stage-grid { grid-template-columns: minmax(0, 1fr); } }
+.tree-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.tree-heading h2 { margin: 0 0 8px; }
+.tree-browser { display: grid; grid-template-columns: minmax(300px, 38%) minmax(0, 1fr); background: white; border: 1px solid #e3e8ef; border-radius: 12px; min-height: 68vh; overflow: hidden; }
+.tree-navigation { padding: 20px 14px; border-right: 1px solid #e3e8ef; min-width: 0; }
+.tree-navigation > .ant-segmented { margin-top: 14px; }
+.tree-controls { display: flex; justify-content: flex-end; margin: 12px 0; }
+.tree-navigation .ant-tree .ant-tree-treenode { padding: 5px 0; align-items: flex-start; }
+.tree-navigation .ant-tree-node-content-wrapper { min-width: 0; padding: 5px 8px; }
+.feature-tree-label { display: inline-flex; flex-direction: column; vertical-align: top; max-width: calc(100% - 28px); white-space: normal; line-height: 1.65; overflow-wrap: anywhere; }
+.tree-node-tags { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+.tree-node-tags .ant-tag { margin: 0; font-size: 11px; line-height: 18px; }
+.tree-node-tags small { color: #6b7c91; }
+.tree-history { margin-top: 28px; padding: 16px 8px 0; border-top: 1px solid #edf0f4; }
+.tree-history .ant-switch { margin-right: 8px; }
+.tree-history p { color: #79889a; font-size: 12px; line-height: 1.7; }
+.tree-detail-panel { min-width: 0; }
+.tree-detail-empty { display: grid; min-height: 60vh; place-items: center; }
+.feature-detail { padding: 28px; }
+.feature-detail h3 { margin: 14px 0; }
+.feature-breadcrumb { color: #718096; font-size: 12px; line-height: 1.8; margin-bottom: 20px; }
+.feature-detail .ant-descriptions ul { padding-left: 18px; margin: 0; }
+.feature-detail .ant-descriptions li { margin-bottom: 8px; }
+.child-features { margin: 24px 0; }
+.child-feature.ant-btn { justify-content: space-between; height: auto; min-height: 48px; white-space: normal; text-align: left; margin: 8px 0; padding: 12px; }
+.api-list { display: grid; gap: 12px; }
+.api-name, .api-signature { overflow-wrap: anywhere; word-break: break-word; }
+.api-usage { margin: 12px 0; line-height: 1.8; }
+@media(max-width: 1050px) { .tree-browser { grid-template-columns: minmax(260px, 40%) minmax(0, 1fr); } .feature-detail { padding: 20px; } }
+@media(max-width: 760px) { .tree-browser { grid-template-columns: minmax(0, 1fr); } .tree-navigation { border-right: 0; border-bottom: 1px solid #e3e8ef; } .tree-heading { align-items: flex-start; flex-direction: column; } .tree-detail-empty { min-height: 180px; } }

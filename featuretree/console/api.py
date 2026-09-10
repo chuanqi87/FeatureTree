@@ -18,6 +18,15 @@ class Api:
             from featuretree.core.io import read_json
             return {'pipelines': app.registry.configuration, 'protocol_version': 2,
                     'policies': {name: read_json(app.root / 'config/v2/rules' / f'{name}.json') for name in ('granularity', 'confidence')}}
+        if parts and parts[0] == 'tree-browser':
+            views = app.tree_browser.views(app.candidates(), app.runs.list(), release_id)
+            if len(parts) == 1:
+                return views
+            if len(parts) == 3:
+                view = next((row for row in views['items'] if row['id'] == parts[1]), None)
+                if view is None:
+                    raise KeyError(parts[1])
+                return app.tree_browser.detail(view, parts[2])
         if parts == ['tree']:
             return app.reader.tree(release_id)
         if len(parts) == 2 and parts[0] == 'features':

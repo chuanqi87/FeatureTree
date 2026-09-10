@@ -42,7 +42,10 @@ class OpenCodeBackend:
         environment = dict(os.environ)
         environment["OPENCODE_CONFIG_DIR"] = str(root / ".opencode")
         environment["FEATURETREE_PACKET"] = str(root / "task.json")
-        environment["OPENCODE_EXPERIMENTAL_OUTPUT_TOKEN_MAX"] = str(limits.get("max_output_tokens", 32000))
+        if limits.get("max_output_tokens", 32000) is not None:
+            environment["OPENCODE_EXPERIMENTAL_OUTPUT_TOKEN_MAX"] = str(limits.get("max_output_tokens", 32000))
+        else:
+            environment.pop("OPENCODE_EXPERIMENTAL_OUTPUT_TOKEN_MAX", None)
         # Only source reads and immutable attempt-local payload writes are authorized. Provider credentials
         # remain in the user's configuration and are never copied into run artifacts.
         environment["OPENCODE_CONFIG_CONTENT"] = json.dumps({

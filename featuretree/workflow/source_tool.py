@@ -64,7 +64,7 @@ def main(argv=None):
     folder = args.packet.parent / "source_calls"
     with file_lock(folder / "calls.lock"):
         number = len(list(folder.glob("*.json"))) + 1
-        if number > packet["limits"]["max_tool_calls"]:
+        if packet["limits"]["max_tool_calls"] is not None and number > packet["limits"]["max_tool_calls"]:
             raise ValueError("Source tool call budget exhausted; return explicit remaining gaps")
         try:
             result = query(catalog, packet, request)

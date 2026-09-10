@@ -13,7 +13,7 @@ class SourceSupplementService:
         work = next(row for row in plan['works'] if row['id'] == work_id)
         if any(row['status'] == 'running' for row in state['tasks'].values()):
             raise ConflictError('Stop the current run before replacing its source inputs')
-        if work.get('source_round', 0) >= plan['budget']['max_source_rounds']:
+        if plan['budget']['max_source_rounds'] is not None and work.get('source_round', 0) >= plan['budget']['max_source_rounds']:
             raise ValueError('Source research budget exhausted; retain the explicit gap or create a reviewed budget revision')
         requests = source_requests if source_requests is not None else [request for task in state['tasks'].values()
             if task['work_id'] == work_id and task['result_ref']

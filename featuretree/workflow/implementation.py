@@ -10,6 +10,7 @@ def implementation_files(stage_id):
     names = ["workflow/implementation.py", "workflow/packaging.py", "workflow/execution.py", "workflow/handlers.py",
              "workflow/source_tool.py", "workflow/delivery_tool.py", "workflow/attempt_tools.py",
              "workflow/batch_packets.py", "workflow/batch_execution.py",
+             "workflow/checkpoint_reuse.py",
              "workflow/provenance.py", "workflow/revisions.py",
              "corpus/catalog.py", "corpus/snapshots.py", "corpus/source_policy.py"]
     names += [str(path.relative_to(package)) for path in (package / "core").glob("*.py")]

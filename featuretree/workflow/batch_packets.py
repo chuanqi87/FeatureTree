@@ -9,6 +9,11 @@ from featuretree.workflow.packaging import envelope
 PLATFORM_RESEARCH = {"ft-android", "ft-ios", "ft-harmonyos"}
 
 
+def minimum_limit(*values):
+    bounded = [value for value in values if value is not None]
+    return min(bounded) if bounded else None
+
+
 def research_batches(packet):
     limit = packet["limits"].get("source_batch_size")
     if packet["stage_id"] not in PLATFORM_RESEARCH or not limit:
@@ -44,10 +49,8 @@ def research_batches(packet):
         child["batch"] = {"index": index, "count": count,
                           "parent_scope_hash": digest(packet["work"]),
                           "instruction": "这是代码分配的单批研究，只处置本批 API/主题，勿尝试遍历整个领域。批次不是叶子边界；跨批实现链留待对齐阶段整合。范围外依赖记缺口，不猜测不支持。使用交付工具写文件。"}
-        child["limits"]["timeout_seconds"] = min(packet["limits"]["timeout_seconds"],
-                                                   packet["limits"]["batch_timeout_seconds"])
-        child["limits"]["max_tool_calls"] = min(packet["limits"]["max_tool_calls"],
-                                                packet["limits"]["batch_max_tool_calls"])
+        child["limits"]["timeout_seconds"] = minimum_limit(packet["limits"]["timeout_seconds"], packet["limits"]["batch_timeout_seconds"])
+        child["limits"]["max_tool_calls"] = minimum_limit(packet["limits"]["max_tool_calls"], packet["limits"]["batch_max_tool_calls"])
         child["input_hash"] = digest(child)
         batches.append(child)
     return batches
@@ -82,3 +85,14 @@ def merge_research(packet, responses):
     result = envelope(packet, payload, max(outcomes, key=rank.__getitem__), issues)
     result["source_requests"] = requests
     return result
+
+
+def research_identity(packet):
+    value = deepcopy(packet)
+    for key in ("input_hash", "run_id", "task_id", "work_id", "revision", "batch_revision",
+                "revision_feedback", "stage_fingerprint", "implementation_files", "limits"):
+        value.pop(key, None)
+    value["work"].pop("revision_of", None)
+    if "batch" in value:
+        value["batch"].pop("parent_scope_hash", None)
+    return value

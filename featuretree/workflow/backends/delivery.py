@@ -3,11 +3,8 @@
 from copy import deepcopy
 import re
 
-from featuretree.core.content import canonical_bytes, digest
+from featuretree.core.content import digest
 from featuretree.core.io import IntegrityError, file_lock, read_json, write_json
-
-
-MAX_CHUNK_CHARACTERS = 24000
 
 
 def field_schema(packet, path):
@@ -23,8 +20,6 @@ def field_schema(packet, path):
 
 def save_chunk(workspace, packet, path, value):
     schema = field_schema(packet, path)
-    if len(canonical_bytes(value).decode("utf-8")) > MAX_CHUNK_CHARACTERS:
-        raise ValueError("Chunk exceeds 24000 characters; submit fewer array items")
     # Validate individual array items now; collection cardinality is checked after assembly.
     from jsonschema import Draft202012Validator
     item_schema = {key: item for key, item in schema.items() if key not in
@@ -37,7 +32,7 @@ def save_chunk(workspace, packet, path, value):
         if (directory / "completed.json").exists():
             raise ValueError("Delivery is already finalized; create a new revision")
         target = directory / (reference + ".json")
-        if not target.exists() and len(list(directory.glob("*.json"))) >= packet["limits"]["max_delivery_chunks"]:
+        if packet["limits"]["max_delivery_chunks"] is not None and not target.exists() and len(list(directory.glob("*.json"))) >= packet["limits"]["max_delivery_chunks"]:
             raise ValueError("Payload chunk budget exhausted")
         write_json(target, chunk, immutable=True)
     return {"chunk_ref": reference, "path": path,
@@ -51,7 +46,7 @@ def assemble_chunks(response, workspace, packet):
         raise ValueError("Use either payload or payload_chunks, never both")
     references = response["payload_chunks"]
     if (not isinstance(references, list) or not references
-            or len(references) > packet["limits"]["max_delivery_chunks"]
+            or (packet["limits"]["max_delivery_chunks"] is not None and len(references) > packet["limits"]["max_delivery_chunks"])
             or any(not isinstance(ref, str) or not re.fullmatch(r"[0-9a-f]{64}", ref) for ref in references)
             or len(set(references)) != len(references)):
         raise ValueError("Invalid or duplicate payload chunk references")
@@ -110,7 +105,7 @@ def read_delivery(workspace, packet):
 def delivery_prompt():
     return """使用文件交付模式：submit_payload 分批写 JSON 内容，finish_payload 写成最终交付文件。
 工具 path 是 payload 内字段路径（如 ["facts"]、["api_dispositions"] 或 ["spec","questions"]）；
-value_json 是该字段的 JSON 值。数组按每批最多约 20 项、24000 字符提交，可多次追加同一数组。
+value_json 是该字段的 JSON 值。建议数组按每批约 20 项提交，可多次追加同一数组。
 非数组字段只提交一次，不能同时提交父字段及其子字段。每次工具返回不可变 chunk_ref。
 最后调用 finish_payload，chunk_refs 填所有选用的 chunk_ref（按追加顺序），填写 outcome、issues_json、source_requests_json。
 代码自动填写固定任务身份并将完整 JSON 写入 delivery/completed.json，执行同一完整 schema、输入守恒和证据校验。

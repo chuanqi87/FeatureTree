@@ -49,7 +49,8 @@ def wait_for_model(process, prompt, events, timeout, first_response_timeout, com
     started = time.monotonic()
     activity = EventActivity(events)
     first_response = None
-    first_response_timeout = min(first_response_timeout, timeout)
+    if timeout is not None and first_response_timeout is not None:
+        first_response_timeout = min(first_response_timeout, timeout)
     while True:
         elapsed = time.monotonic() - started
         if completion_path is not None and completion_path.is_file():
@@ -66,14 +67,14 @@ def wait_for_model(process, prompt, events, timeout, first_response_timeout, com
             return {"delivery_completed": True, "first_response_seconds": first_response}
         if first_response is None and activity.poll():
             first_response = elapsed
-        if elapsed >= timeout:
+        if timeout is not None and elapsed >= timeout:
             raise StageTimeout(process.args, timeout)
-        if first_response is None and elapsed >= first_response_timeout:
+        if first_response is None and first_response_timeout is not None and elapsed >= first_response_timeout:
             raise NoResponseTimeout(
                 f"No model text or tool result within {first_response_timeout}s; "
                 "automatic retry stopped. Check the provider/model before retrying.")
-        remaining = timeout - elapsed
-        if first_response is None:
+        remaining = timeout - elapsed if timeout is not None else 1
+        if first_response is None and first_response_timeout is not None:
             remaining = min(remaining, first_response_timeout - elapsed)
         try:
             process.communicate(prompt, timeout=min(1, remaining))

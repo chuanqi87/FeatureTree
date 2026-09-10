@@ -18,8 +18,8 @@ from featuretree.workflow.batch_execution import BatchExecutor
 
 @contextmanager
 def capacity_slot(directory, timeout):
-    deadline = time.monotonic() + timeout
-    while time.monotonic() < deadline:
+    deadline = time.monotonic() + timeout if timeout is not None else None
+    while deadline is None or time.monotonic() < deadline:
         for number in range(6):
             lock = file_lock(directory / f"slot-{number}.lock", blocking=False)
             try:
@@ -55,7 +55,7 @@ class AttemptExecutor:
     def _execute_single(self, plan, task, packet, folder):
         folder.mkdir(parents=True, exist_ok=True)
         write_json(folder / "input.json", packet, immutable=True)
-        if len(canonical_bytes(packet).decode("utf-8")) > plan["budget"]["max_input_characters"]:
+        if plan["budget"]["max_input_characters"] is not None and len(canonical_bytes(packet).decode("utf-8")) > plan["budget"]["max_input_characters"]:
             raise ValueError("Complete input exceeds context budget; replan into bounded scopes. No IDs were truncated.")
         stage = plan["stage_configs"][task["stage_id"]]
         verify_implementation(task["stage_id"], stage.get("implementation_files"))

@@ -99,6 +99,7 @@ class FileDeliveryTests(unittest.TestCase):
     def test_backend_accepts_file_and_stops_waiting_for_chat(self):
         with tempfile.TemporaryDirectory() as directory:
             root, p = Path(directory), packet()
+            p["limits"]["first_response_timeout"] = None
             (root / "task.json").write_text(json.dumps(p))
             executable = root / "fake-opencode"
             project = Path(__file__).resolve().parents[3]
@@ -116,7 +117,7 @@ finalize_delivery(root, p, refs, "pass", [], [])
 time.sleep(20)
 ''')
             executable.chmod(0o755)
-            result, metadata = OpenCodeBackend(str(executable)).execute(root, "ft-android", p, root, 10, "test/model", None)
+            result, metadata = OpenCodeBackend(str(executable)).execute(root, "ft-android", p, root, None, "test/model", None)
             self.assertEqual(["one", "two"], result["payload"]["rows"])
             self.assertEqual("file", metadata["transport"])
             self.assertTrue(metadata["delivery_completed"])

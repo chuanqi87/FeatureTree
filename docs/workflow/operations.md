@@ -71,3 +71,6 @@ length 记录为 OutputLimitError，保留用量与预算且不原样自动重�
 HTTP 只保留 `/api/v2/`。current/tree/features/knowledge/sources/apis/runs/reviews/releases 为主要读取面；runs、knowledge/plans、runs/{id}/actions、calibrations/approve、freezes、releases/prepare|publish|rollback、reviews/{id}/decisions 为写入面。写请求必须带 JSON、Idempotency-Key、X-FeatureTree-Token 和 expected_release_id。令牌从本机 config 接口读取；Host、Origin、Sec-Fetch-Site 校验不允许跨站写入。版本冲突为 409；创建和启动模型任务为 202。
 
 原文正文按窗口读取，source_catalog 的 body+query 可返回匹配段落和偏移。每个结果都固定快照；未采集正文返回 needs_sources。导出是指定发布的投影，修改导出不会自动改变正式事实。
+
+
+执行资源限制支持 JSON `null`：阶段与首响应超时、Agent 步数、来源调用次数、交付块数、输入字符数，以及自动重试、语义返工和来源补充轮数均可取消，当前默认如此。分批大小仍用于划分完整输入，不限制总研究量；取消和业务校验保持有效。交付块字符数不再硬拒绝。`max_output_tokens: null` 仅取消 FeatureTree 注入的环境变量；OpenCode 原生默认和服务端硬上限仍存在，不能称为无限输出。改变执行政策后，可通过 checkpoint_reuse 重新校验旧批次，保留原始收据与内容，禁止跨模型或研究输入变化复用。

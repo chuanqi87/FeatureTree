@@ -103,7 +103,7 @@ class Runner:
                 for target in targets:
                     key = task["work_id"] + "--" + target
                     rounds = state["semantic_rounds"].get(key, 0)
-                    if target not in plan["pipeline_stages"] or rounds >= plan["budget"]["max_semantic_rounds"]:
+                    if target not in plan["pipeline_stages"] or (plan["budget"]["max_semantic_rounds"] is not None and rounds >= plan["budget"]["max_semantic_rounds"]):
                         task["status"] = "blocked"
                         continue
                     if any(other["status"] == "running" and other["work_id"] == task["work_id"]
@@ -122,7 +122,7 @@ class Runner:
             if retained.exists():
                 attempt["response_sha256"] = file_digest(retained)
             attempts = sum(row["revision"] == task["revision"] for row in task["attempts"])
-            if getattr(error, "retryable", False) and attempts < plan["budget"]["max_attempts"]:
+            if getattr(error, "retryable", False) and (plan["budget"]["max_attempts"] is None or attempts < plan["budget"]["max_attempts"]):
                 task["status"] = "ready"
             if isinstance(error, SemanticValidationError):
                 self._semantic_failure(error, task, state, plan, registry)
@@ -134,7 +134,7 @@ class Runner:
     def _semantic_failure(self, error, task, state, plan, registry):
         key = task["work_id"] + "--" + error.target_stage
         rounds = state["semantic_rounds"].get(key, 0)
-        if error.target_stage not in plan["pipeline_stages"] or rounds >= plan["budget"]["max_semantic_rounds"]:
+        if error.target_stage not in plan["pipeline_stages"] or (plan["budget"]["max_semantic_rounds"] is not None and rounds >= plan["budget"]["max_semantic_rounds"]):
             return
         feedback = [{"reason": str(error), "origin": "machine_validation", "retained_response_ref": error.retained_ref}]
         try:

@@ -26,6 +26,14 @@ def verify_receipt(receipt, packet, artifacts, handlers=None):
     Draft202012Validator(packet["output_schema"]).validate(response)
     if handlers:
         handlers.validate(packet["stage_id"], response, packet)
+    if metadata.get("original_receipt"):
+        from featuretree.workflow.batch_packets import research_identity
+        origin = metadata["original_receipt"]
+        original_packet = artifacts.get(origin["input_ref"])
+        original = verify_receipt(origin, original_packet, artifacts, handlers)
+        if research_identity(original_packet) != research_identity(packet) or any(
+                original[key] != response[key] for key in ("payload", "outcome", "issues", "source_requests")):
+            raise IntegrityError("Revalidated checkpoint differs from its original research")
     return response
 
 

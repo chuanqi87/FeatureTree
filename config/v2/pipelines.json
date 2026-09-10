@@ -307,18 +307,18 @@
   "defaults": {
     "workers": 3,
     "project_capacity": 6,
-    "timeout_seconds": 600,
-    "first_response_timeout": 120,
-    "max_attempts": 2,
-    "max_semantic_rounds": 2,
-    "max_source_rounds": 2,
-    "max_input_characters": 500000,
-    "max_tool_calls": 24,
-    "max_output_tokens": 32000,
-    "max_agent_steps": 96,
-    "max_delivery_chunks": 256,
+    "timeout_seconds": null,
+    "first_response_timeout": null,
+    "max_attempts": null,
+    "max_semantic_rounds": null,
+    "max_source_rounds": null,
+    "max_input_characters": null,
+    "max_tool_calls": null,
+    "max_output_tokens": null,
+    "max_agent_steps": null,
+    "max_delivery_chunks": null,
     "source_batch_size": 32,
-    "batch_timeout_seconds": 900,
-    "batch_max_tool_calls": 8
+    "batch_timeout_seconds": null,
+    "batch_max_tool_calls": null
   }
 }

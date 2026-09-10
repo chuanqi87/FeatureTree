@@ -11,6 +11,8 @@ from featuretree.core.io import read_json, write_json
 from featuretree.workflow.backends.processes import identity
 from featuretree.workflow.backends.monitor import ExecutionInterrupted, wait_for_model
 from featuretree.workflow.backends.errors import MissingStructuredAnswer, ResponseFormatError, has_repairable_answer
+from featuretree.workflow.backends.provider_errors import provider_error
+from featuretree.workflow.backends.runtime import prepare_runtime
 
 
 def parse_events(lines):
@@ -48,10 +50,12 @@ def parse_events(lines):
 
 
 class OpenCodeBackend:
-    def __init__(self, executable="opencode"):
+    def __init__(self, executable="opencode", runtime_directory=None):
         self.executable = executable
+        self.runtime_directory = runtime_directory
 
     def execute(self, root, agent, packet, folder, timeout, model, variant):
+        runtime = prepare_runtime(self.executable, self.runtime_directory, root) if self.runtime_directory else {}
         args = [self.executable, "run", "--pure", "--agent", agent, "--format", "json"]
         if model:
             args.extend(["--model", model])
@@ -64,9 +68,17 @@ class OpenCodeBackend:
             prompt = ("本次只修复 response_repair 中的 JSON 格式，禁止重新检索或修改研究结论。"
                       "使用当前信封 input_hash，直接输出 JSON，不加说明句或 Markdown。\n" + prompt)
         started = time.monotonic()
+        environment = dict(os.environ)
+        environment["OPENCODE_CONFIG_DIR"] = str(root / ".opencode")
+        environment["FEATURETREE_PACKET"] = str(root / "task.json")
+        # Only this attempt's read-only source tool is authorized. Provider credentials
+        # remain in the user's configuration and are never copied into run artifacts.
+        environment["OPENCODE_CONFIG_CONTENT"] = json.dumps({
+            "permission": {"*": "deny", "source_catalog": "allow"},
+            "tools": {"*": False, "source_catalog": True}, "share": "disabled"})
         with (folder / "events.jsonl").open("w") as stdout, (folder / "stderr.log").open("w") as stderr:
             process = subprocess.Popen(args, cwd=root, stdin=subprocess.PIPE, stdout=stdout,
-                                       stderr=stderr, text=True, start_new_session=True)
+                                       stderr=stderr, text=True, start_new_session=True, env=environment)
             try:
                 write_json(folder / "process.json", {"pid": process.pid, "identity": identity(process.pid)})
                 timing = wait_for_model(process, prompt, folder / "events.jsonl", timeout,
@@ -91,11 +103,19 @@ class OpenCodeBackend:
                               "error_type": "ExecutionInterrupted"}
             write_json(folder / "metadata.json", error.metadata)
             raise error
+        lines = (folder / "events.jsonl").read_text().splitlines()
+        error = provider_error(lines)
+        if error:
+            error.metadata = {"model": model, "provider_status": error.status_code,
+                              "elapsed_seconds": round(time.monotonic() - started, 3), **runtime}
+            write_json(folder / "metadata.json", error.metadata)
+            raise error
         if process.returncode:
             raise ValueError(f"OpenCode exited {process.returncode}; inspect {folder / 'stderr.log'}")
-        final, metadata = parse_events((folder / "events.jsonl").read_text().splitlines())
+        final, metadata = parse_events(lines)
         (folder / "response.json").write_text(final, encoding="utf-8")
         metadata.update(**timing, elapsed_seconds=round(time.monotonic() - started, 3),
+                        **runtime,
                         input_chars=len(prompt), output_chars=len(final),
                         model=model or "OpenCode configured default", variant=variant,
                         recovery="format_repair" if packet.get("response_repair") else None)

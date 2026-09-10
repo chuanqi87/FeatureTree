@@ -16,6 +16,8 @@ class Stage:
     accepts_gaps: bool
     rules: tuple[str, ...]
     platform: str | None
+    dependency_scope: str = "work"
+    validation_failure_target: str | None = None
 
 
 class PipelineRegistry:
@@ -27,7 +29,9 @@ class PipelineRegistry:
         for row in configuration["stages"]:
             stage = Stage(row["stage_id"], row["agent_name"], row["executor"],
                           tuple(row["dependencies"]), row["output_schema"], row["accepts_gaps"],
-                          tuple(row["rules"]), row["platform"])
+                          tuple(row["rules"]), row["platform"], row.get("dependency_scope", "work"), row.get("validation_failure_target"))
+            if stage.dependency_scope not in ("work", "run"):
+                raise ValueError("Unknown stage dependency scope")
             if stage.id in self.stages:
                 raise ValueError("Duplicate pipeline stage")
             self.stages[stage.id] = stage
@@ -61,5 +65,5 @@ class PipelineRegistry:
     def fingerprint(self, stage_id, agent_text, schemas, rules):
         stage = self.stages[stage_id]
         return digest({"stage": stage.__dict__, "agent": agent_text,
-                       "schema": schemas.get(stage.output_schema), "rules": rules,
+                       "schema": schemas.expanded(stage.output_schema), "rules": rules,
                        "executor_version": self.configuration["executor_version"]})

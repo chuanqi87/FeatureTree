@@ -153,6 +153,12 @@
         ],
         "additionalProperties": false
       }
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "$ref": "https://featuretree.local/schema/business/v3/implementation-route"
+      }
     }
   },
   "required": [
@@ -161,7 +167,8 @@
     "tree_ref",
     "bindings",
     "declarations",
-    "topics"
+    "topics",
+    "routes"
   ],
   "additionalProperties": false
 }

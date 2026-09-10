@@ -3,9 +3,10 @@
 from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
 import json
 
-from featuretree.core.content import digest, timestamp
-from featuretree.core.io import file_lock, read_json, write_json
+from featuretree.core.content import digest, file_digest, timestamp
+from featuretree.core.io import ConflictError, IntegrityError, file_lock, read_json, write_json
 from featuretree.workflow.backends.processes import terminate_recorded
+from featuretree.workflow.backends.errors import SemanticValidationError
 from featuretree.workflow.packaging import build_packet
 from featuretree.workflow.registry import PipelineRegistry
 from featuretree.workflow.revisions import revise_tasks
@@ -40,8 +41,14 @@ class Runner:
                             if len(futures) >= plan["budget"]["workers"]:
                                 break
                             if self._ready(task, state, registry):
-                                packet = build_packet(plan, task, state, registry, self.artifacts)
-                                self._repair_input(task, packet, folder)
+                                try:
+                                    packet = build_packet(plan, task, state, registry, self.artifacts)
+                                    self._repair_input(task, packet, folder)
+                                except (ValueError, KeyError, OSError) as error:
+                                    task["status"] = "blocked"
+                                    task["feedback"].append({"reason": str(error), "origin": "input_validation"})
+                                    self.runs.event(state, "input_rejected", {"task_id": task["id"], "reason": str(error)})
+                                    continue
                                 attempt = {"number": len(task["attempts"]) + 1, "revision": task["revision"],
                                            "status": "running", "started_at": timestamp()}
                                 attempt["folder"] = f"attempts/{task['id']}/{attempt['number']:04d}"
@@ -66,11 +73,13 @@ class Runner:
             return False
         stage = registry.stages[task["stage_id"]]
         for dependency in stage.dependencies:
-            upstream = state["tasks"][task["work_id"] + "--" + dependency]
-            if upstream["status"] != "completed" or upstream["outcome"] in ("needs_sources", "revise"):
-                return False
-            if upstream["outcome"] == "completed_with_gaps" and not stage.accepts_gaps:
-                return False
+            relevant = [row for row in state["tasks"].values() if row["stage_id"] == dependency
+                        and (stage.dependency_scope == "run" or row["work_id"] == task["work_id"])]
+            for upstream in relevant:
+                if upstream["status"] != "completed" or upstream["outcome"] in ("needs_sources", "revise"):
+                    return False
+                if upstream["outcome"] == "completed_with_gaps" and not stage.accepts_gaps:
+                    return False
         return True
 
     def _finish(self, future, task, state, plan, registry, folder):
@@ -105,16 +114,35 @@ class Runner:
                     affected = revise_tasks(state, registry, plan["pipeline"], task["work_id"], target, issues)
                     self.runs.event(state, "semantic_revision", {"target": target, "affected": affected})
         except Exception as error:
+            metadata_path = folder / attempt["folder"] / "metadata.json"
             attempt.update(status="failed", error=str(error), error_type=type(error).__name__,
-                           metadata=getattr(error, "metadata", {}))
+                           metadata=getattr(error, "metadata", None) or (read_json(metadata_path) if metadata_path.exists() else {}))
             task["status"] = "failed"
+            retained = folder / attempt["folder"] / "response.json"
+            if retained.exists():
+                attempt["response_sha256"] = file_digest(retained)
             attempts = sum(row["revision"] == task["revision"] for row in task["attempts"])
             if getattr(error, "retryable", False) and attempts < plan["budget"]["max_attempts"]:
                 task["status"] = "ready"
+            if isinstance(error, SemanticValidationError):
+                self._semantic_failure(error, task, state, plan, registry)
             self.runs.event(state, "attempt_failed", {"task_id": task["id"], "error": str(error),
                                                       "retry_scheduled": task["status"] == "ready"})
         finally:
             self.runs.save(state)
+
+    def _semantic_failure(self, error, task, state, plan, registry):
+        key = task["work_id"] + "--" + error.target_stage
+        rounds = state["semantic_rounds"].get(key, 0)
+        if error.target_stage not in plan["pipeline_stages"] or rounds >= plan["budget"]["max_semantic_rounds"]:
+            return
+        feedback = [{"reason": str(error), "origin": "machine_validation", "retained_response_ref": error.retained_ref}]
+        try:
+            affected = revise_tasks(state, registry, plan["pipeline"], task["work_id"], error.target_stage, feedback)
+        except (ValueError, OSError):
+            return  # An in-flight dependent must finish before explicit revision.
+        state["semantic_rounds"][key] = rounds + 1
+        self.runs.event(state, "machine_revision", {"target": key, "affected": affected, "reason": str(error)})
 
     def _repair_input(self, task, packet, folder):
         if not task["attempts"]:
@@ -124,6 +152,8 @@ class Runner:
             return
         response_path = folder / previous["folder"] / "response.json"
         if response_path.exists():
+            if file_digest(response_path) != previous.get("response_sha256"):
+                raise IntegrityError("Retained response changed; format repair refused")
             packet.pop("input_hash")
             packet["response_repair"] = {"text": response_path.read_text(), "error": previous["error"],
                                          "source_attempt": previous["number"]}
@@ -155,6 +185,15 @@ class Runner:
         folder = self.runs.folder(run_id)
         if action == "cancel":
             write_json(folder / "CANCEL.json", {"requested_at": timestamp()})
+            try:
+                with file_lock(folder / "run.lock", blocking=False):
+                    _, state = self.runs.load(run_id)
+                    if state["status"] != "published":
+                        state["status"] = "cancelled"
+                        self.runs.event(state, "run_cancelled", {})
+                    return state
+            except ConflictError:
+                pass
             return {"run_id": run_id, "action": "cancel_requested"}
         with file_lock(folder / "run.lock", blocking=False):
             plan, state = self.runs.load(run_id)
@@ -162,6 +201,8 @@ class Runner:
             if task_id not in state["tasks"]:
                 raise ValueError("A valid task_id is required")
             task = state["tasks"][task_id]
+            if action == "revalidate":
+                return self._revalidate(plan, state, task, folder)
             if action == "retry" and task["status"] != "failed":
                 raise ValueError("Only failed execution can be retried")
             if action not in ("retry", "revise"):
@@ -170,3 +211,29 @@ class Runner:
             state["status"] = "planned"
             self.runs.event(state, action, {"target": task_id, "affected": affected})
             return state
+
+    def _revalidate(self, plan, state, task, folder):
+        if task["status"] != "failed" or not task["attempts"]:
+            raise ValueError("Only a failed retained complete delivery can be revalidated")
+        attempt = task["attempts"][-1]
+        directory = folder / attempt["folder"]
+        response_path = directory / "model-response.json"
+        if not response_path.exists():
+            response_path = directory / "response.json"
+        if not response_path.exists() or file_digest(response_path) != attempt.get("response_sha256"):
+            raise IntegrityError("Retained delivery changed or is absent")
+        packet = read_json(directory / "input.json")
+        if digest({key: value for key, value in packet.items() if key != "input_hash"}) != packet["input_hash"]:
+            raise IntegrityError("Retained delivery inputs were modified")
+        response = read_json(response_path)
+        write_json(directory / "model-response.json", response, immutable=True)
+        previous = {key: attempt[key] for key in ("status", "error", "error_type") if key in attempt}
+        reference, metadata = self.executor.accept_response(plan, task, packet, response,
+                        dict(attempt.get("metadata", {})), directory)
+        attempt.setdefault("validation_history", []).append(previous)
+        attempt.update(status="success", result_ref=reference, metadata=metadata)
+        task.update(status="completed", outcome=self.artifacts.get(reference)["outcome"], result_ref=reference)
+        state["status"] = "planned"
+        self.runs.event(state, "retained_delivery_revalidated", {"task_id": task["id"], "reference": reference,
+                                                               "issue_route_adjustments": metadata["issue_route_adjustments"]})
+        return state

@@ -19,4 +19,17 @@ class StageHandlers:
         return self.executors[executor](packet, folder)
 
     def validate(self, stage, response, packet):
+        if response["outcome"] == "needs_sources" and not response["source_requests"]:
+            raise ValueError("A source-blocked result requires an actionable source request")
+        if response["outcome"] == "revise" and not any(issue["severity"] == "blocking" for issue in response["issues"]):
+            raise ValueError("A revision outcome requires a blocking issue and a responsible stage")
+        if response["outcome"] == "pass" and any(issue["severity"] == "blocking" for issue in response["issues"]):
+            raise ValueError("A passing result cannot conceal blocking issues")
+        routes = {"alignment": {"ft-align"}, "structure": {"ft-design"}, "binding": {"ft-bind"},
+                  "granularity": {"ft-design"}, "specification": {"fk-scope"},
+                  "comparison": {"fk-compare"}, "confidence": {"fk-confidence"},
+                  "fact": {prefix + platform for prefix in ("ft-", "fk-") for platform in ("android", "ios", "harmonyos")}}
+        for issue in response["issues"]:
+            if issue["kind"] in routes and issue["target_stage"] not in routes[issue["kind"]]:
+                raise ValueError("Issue was routed to an agent outside its responsibility")
         return self.validators[stage](stage, response, packet)

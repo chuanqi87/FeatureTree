@@ -1,14 +1,16 @@
 """One isolated attempt, bounded by project capacity and immutable packet configuration."""
 
 from contextlib import contextmanager
+from copy import deepcopy
 import json
 import time
 
 from jsonschema import Draft202012Validator
 
 from featuretree.core.content import canonical_bytes, digest
-from featuretree.core.io import ConflictError, file_lock, write_bytes, write_json
-from featuretree.workflow.backends.errors import ResponseFormatError
+from featuretree.core.io import ConflictError, IntegrityError, file_lock, write_bytes, write_json
+from featuretree.workflow.backends.errors import ResponseFormatError, SemanticValidationError
+from featuretree.workflow.implementation import verify_implementation
 
 
 @contextmanager
@@ -40,6 +42,9 @@ class AttemptExecutor:
         if len(canonical_bytes(packet).decode("utf-8")) > plan["budget"]["max_input_characters"]:
             raise ValueError("Complete input exceeds context budget; replan into bounded scopes. No IDs were truncated.")
         stage = plan["stage_configs"][task["stage_id"]]
+        verify_implementation(task["stage_id"], stage.get("implementation_files"))
+        if packet["work"]["mode"] == "formal" and not stage.get("implementation_files"):
+            raise ConflictError("Formal execution requires a pinned executable fingerprint")
         started = time.monotonic()
         definition = stage["definition"]
         if definition["agent_name"]:
@@ -56,16 +61,40 @@ class AttemptExecutor:
         else:
             response = self.handlers.execute(definition["executor"], packet, folder)
             metadata = {"executor": definition["executor"], "model": None, "usage": []}
+        write_json(folder / "model-response.json", response, immutable=True)
         write_json(folder / "response.json", response)
+        return self.accept_response(plan, task, packet, response, metadata, folder, started)
+
+    def accept_response(self, plan, task, packet, response, metadata, folder, started=None):
+        verify_implementation(task["stage_id"], plan["stage_configs"][task["stage_id"]].get("implementation_files"))
+        response = deepcopy(response)
+        adjustments = []
+        for issue in response.get("issues", []):
+            target = plan["registry"]["issue_routes"].get(issue["kind"])
+            if target and issue["target_stage"] != target:
+                adjustments.append({"issue_id": issue["id"], "submitted_target": issue["target_stage"], "resolved_target": target})
+                issue["target_stage"] = target
+        metadata["issue_route_adjustments"] = adjustments
+        metadata.update(elapsed_seconds=round(time.monotonic() - started, 3) if started else metadata.get("elapsed_seconds"),
+                        input_hash=packet["input_hash"], stage_fingerprint=packet["stage_fingerprint"],
+                        implementation_files=plan["stage_configs"][task["stage_id"]].get("implementation_files", {}),
+                        validation="pending")
+        write_json(folder / "metadata.json", metadata)
         errors = list(Draft202012Validator(packet["output_schema"]).iter_errors(response))
         if errors:
             raise ResponseFormatError("Response schema: " + "; ".join(error.message for error in errors[:8]))
         for key in ("protocol_version", "run_id", "work_id", "task_id", "stage_id", "input_hash"):
             if response[key] != packet[key]:
                 raise ValueError(f"Response envelope does not match fixed {key}")
-        self.handlers.validate(task["stage_id"], response, packet)
-        metadata.update(elapsed_seconds=round(time.monotonic() - started, 3),
-                        input_hash=packet["input_hash"], stage_fingerprint=packet["stage_fingerprint"])
+        try:
+            self.handlers.validate(task["stage_id"], response, packet)
+        except (ConflictError, IntegrityError):
+            raise
+        except ValueError as error:
+            target = plan["stage_configs"][task["stage_id"]]["definition"].get("validation_failure_target") or task["stage_id"]
+            raise SemanticValidationError(target, str(error), self.artifacts.put(response)) from error
+        metadata["validation"] = "accepted"
+        write_json(folder / "response.json", response)
         write_json(folder / "metadata.json", metadata)
         return self.artifacts.put(response), metadata
 
@@ -74,17 +103,17 @@ class AttemptExecutor:
         project = str(self.root)
         return '''import { tool } from "@opencode-ai/plugin";
 import { spawn } from "node:child_process";
-import path from "node:path";
 export default tool({
-  description: "Read the fixed source snapshot. api/topic enumerate only authorized IDs; documents search captured official text. Pages are stable. body returns a verified window; preserve evidence identity and hashes.",
+  description: "Read the fixed source snapshot. apis/topics enumerate only authorized IDs; documents search official records. body returns a verified window; body with query finds bounded matching excerpts with offsets. Preserve document id and body hash for evidence_refs. Pages are stable; use next_cursor/next_offset.",
   args: { operation: tool.schema.enum(["apis","topics","documents","body"]),
     query: tool.schema.string().optional(), id: tool.schema.string().optional(),
     cursor: tool.schema.string().optional(), offset: tool.schema.number().optional(),
     limit: tool.schema.number().optional() },
   async execute(args, context) {
+    if (!process.env.FEATURETREE_PACKET) throw new Error("No pinned FeatureTree packet");
     return await new Promise((resolve, reject) => {
       const child = spawn(PYTHON, ["-m","featuretree.workflow.source_tool", "--root", PROJECT,
-        "--packet", path.join(context.directory,"task.json")], {cwd: PROJECT, stdio:["pipe","pipe","pipe"]});
+        "--packet", process.env.FEATURETREE_PACKET], {cwd: PROJECT, stdio:["pipe","pipe","pipe"]});
       let out="", err="";
       child.stdout.on("data", chunk => {out += chunk; if(out.length>160000){child.kill();reject(new Error("Source output exceeded budget"));}});
       child.stderr.on("data", chunk => {err += chunk;});

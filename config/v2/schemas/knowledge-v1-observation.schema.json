@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/knowledge/v1/observation",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "device_execution"
+    },
+    "claim_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "baseline_ref": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "platform": {
+      "enum": [
+        "android",
+        "ios",
+        "harmonyos"
+      ]
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "executed_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "imported_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "environment": {
+      "type": "object",
+      "properties": {
+        "device": {
+          "type": "string",
+          "minLength": 1
+        },
+        "system_build": {
+          "type": "string",
+          "minLength": 1
+        },
+        "app_build": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "device",
+        "system_build",
+        "app_build"
+      ],
+      "additionalProperties": false
+    },
+    "test_case": {
+      "type": "object",
+      "properties": {
+        "goal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "expected_result": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "goal",
+        "steps",
+        "conditions",
+        "expected_result"
+      ],
+      "additionalProperties": false
+    },
+    "observed_result": {
+      "type": "string",
+      "minLength": 1
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "object_ref": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "name",
+          "object_ref",
+          "sha256",
+          "bytes"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "claim_id",
+    "claim_hash",
+    "baseline_ref",
+    "platform",
+    "actor",
+    "executed_at",
+    "imported_at",
+    "environment",
+    "test_case",
+    "observed_result",
+    "materials"
+  ],
+  "additionalProperties": false
+}

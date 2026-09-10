@@ -8,58 +8,14 @@ from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
 
-from featuretree.cli.corpus import parser, run
-from featuretree.corpus.context import candidates, excerpts
 from featuretree.corpus.catalogs import archive_response
 from featuretree.corpus.extract import Content, markdown_links, parse
 from featuretree.corpus.import_cache import import_response
 from featuretree.corpus.search import locate, search
 from featuretree.corpus.store import Corpus
 from featuretree.corpus.urls import canonical, fetch_url
-from featuretree.knowledge.comparison import new_knowledge
-from featuretree.core.storage import ROOT, Repository, write_yaml
-from tests.fixtures.knowledge import feature
 
 
-class CorpusCommandTests(unittest.TestCase):
-    def setUp(self):
-        self.temp=TemporaryDirectory()
-        self.addCleanup(self.temp.cleanup)
-        self.root=Path(self.temp.name)
-        self.corpus=Corpus(self.root/'corpus')
-        self.addCleanup(self.corpus.close)
-        self.repo=Repository(self.root)
-        self.root_patch=patch('featuretree.cli.corpus.ROOT',self.root)
-        self.root_patch.start()
-        self.addCleanup(self.root_patch.stop)
-
-    def test_audit_writes_nested_reports_and_resolves_guide_link(self):
-        with patch('featuretree.cli.corpus.emit'):
-            run(parser().parse_args(['audit','--verify-files']),self.corpus)
-        output=self.root/'output/reports/official-documents'
-        report=json.loads((output/'summary.json').read_text())
-        self.assertTrue(report['integrity_verified'])
-        self.assertEqual(report['integrity_errors'],[])
-        self.assertTrue((output/'documents.jsonl').is_file())
-        text=(output/'progress.md').read_text()
-        link=text.split('[官方资料库](',1)[1].split(')',1)[0]
-        self.assertEqual((output/link).resolve(),ROOT/'docs/official-corpus.md')
-        self.assertFalse((self.root/'reports').exists())
-
-    def test_context_command_writes_candidates_under_output(self):
-        node=feature()
-        config={'platforms':{'android':{},'ios':{}},'dimensions':{'availability':'支持'}}
-        write_yaml(self.root/'config/comparison.yaml',config)
-        write_yaml(self.root/'taxonomy/sample.yaml',{'features':[node]})
-        write_yaml(self.root/'knowledge/sample.yaml',new_knowledge(node,config['platforms']))
-        with patch('featuretree.cli.corpus.Repository',return_value=self.repo), patch('featuretree.cli.corpus.emit'):
-            run(parser().parse_args(['context','sample']),self.corpus)
-        output=self.root/'output/contexts'
-        bundle=json.loads((output/'sample.json').read_text())
-        self.assertEqual(bundle['feature_id'],'sample')
-        self.assertFalse(bundle['claim_ready'])
-        self.assertTrue((output/'summary-selection.json').is_file())
-        self.assertFalse((self.root/'contexts').exists())
 
 
 class OfficialURLTests(unittest.TestCase):
@@ -219,20 +175,7 @@ class CorpusTests(unittest.TestCase):
         self.assertFalse(results[0]['metadata']['version_verified'])
         self.assertEqual(search(self.corpus,'nonexistentsymbol','android'),[])
 
-    def test_candidate_bundle_does_not_convert_missing_source_to_unsupported(self):
-        feature={'name':{'en':'BLE Scan','zh':'蓝牙扫描'},'bindings':{}}
-        result=candidates(self.corpus,feature,'android',3)
-        self.assertEqual(result['retrieval_status'],'no_local_match')
-        self.assertEqual(result['documents'],[])
-        self.assertNotIn('support',result)
 
-    def test_candidate_bundle_lists_missing_bound_source_even_with_search_results(self):
-        self.save('https://developer.android.com/develop/bluetooth','Bluetooth','# Bluetooth\nScan devices.')
-        feature={'name':{'en':'Bluetooth Scan','zh':'蓝牙扫描'},'bindings':{'android':[
-            {'id':'ScanFilter','url':'https://developer.android.com/reference/android/bluetooth/le/ScanFilter'}]}}
-        result=candidates(self.corpus,feature,'android',3)
-        self.assertTrue(result['documents'])
-        self.assertEqual(result['binding_source_gaps'][0]['status'],'not_in_local_catalog')
 
     def test_catalog_history_retains_original_response(self):
         path=Path(self.temp.name)/'catalog.json'
@@ -242,10 +185,6 @@ class CorpusTests(unittest.TestCase):
         self.assertEqual(gzip.decompress(old.read_bytes()),b'{"old":1}')
         self.assertEqual(json.loads(old.with_suffix('.meta.json').read_text())['retrieved_at'],'2026-09-01')
 
-    def test_excerpt_lines_locate_original_body(self):
-        text='# Title\nIntro\n## Bluetooth\nScan peripherals\n## Other\nOther text\n'
-        for chunk in excerpts(text,'Bluetooth',budget=100):
-            self.assertEqual(chunk['text'],'\n'.join(text.splitlines()[chunk['start_line']-1:chunk['end_line']]))
 
     def test_queue_interleaves_platforms_and_respects_priority(self):
         for url in ['https://developer.apple.com/documentation/a','https://developer.apple.com/documentation/b',

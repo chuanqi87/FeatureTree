@@ -283,6 +283,10 @@
           "assessor": {
             "type": "string",
             "minLength": 1
+          },
+          "input_fingerprint": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
           }
         },
         "required": [
@@ -294,7 +298,8 @@
           "requires_runtime_observation",
           "runtime_evidence_refs",
           "rule_id",
-          "assessor"
+          "assessor",
+          "input_fingerprint"
         ],
         "additionalProperties": false
       }
@@ -389,6 +394,16 @@
     "created_at": {
       "type": "string",
       "minLength": 1
+    },
+    "rating_context": {
+      "type": "object"
+    },
+    "observation_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
     }
   },
   "required": [
@@ -407,7 +422,9 @@
     "confidence_reasons",
     "dependencies",
     "draft",
-    "created_at"
+    "created_at",
+    "rating_context",
+    "observation_refs"
   ],
   "additionalProperties": false
 }

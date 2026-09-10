@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/source/v1/document",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "platform": {
+      "enum": [
+        "android",
+        "ios",
+        "harmonyos"
+      ]
+    },
+    "url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "unprocessed",
+        "verified",
+        "failed",
+        "hash_mismatch"
+      ]
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "body_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "raw_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "fetched_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "body_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "raw_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "actual_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "required": [
+    "id",
+    "platform",
+    "url",
+    "title",
+    "status",
+    "body_path",
+    "body_sha256",
+    "metadata"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "verified"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "body_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "body_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
+    }
+  ]
+}

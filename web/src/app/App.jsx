@@ -1,243 +1,34 @@
-import TreePage from "../features/tree/TreePage.jsx";
-import KnowledgeSearch from "../features/knowledge/KnowledgeSearch.jsx";
-import { useEffect, useState } from "react";
-import {
-  Alert,
-  Avatar,
-  Badge,
-  Breadcrumb,
-  Button,
-  ConfigProvider,
-  Layout,
-  Menu,
-  Space,
-  Typography,
-} from "antd";
-import {
-  ApartmentOutlined,
-  AppstoreOutlined,
-  FileSearchOutlined,
-  DatabaseOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-} from "@ant-design/icons";
+import { lazy, Suspense, useState } from "react";
+import { Alert, ConfigProvider, Layout, Menu, Space, Tag, Typography } from "antd";
+import { ApartmentOutlined, BookOutlined, DatabaseOutlined, DeploymentUnitOutlined, SafetyCertificateOutlined, SendOutlined } from "@ant-design/icons";
 import zhCN from "antd/locale/zh_CN";
-import { useExplorer } from "../features/tree/useExplorer.js";
-import NodeDetails from "../features/tree/NodeDetails.jsx";
-import { useWorkflow } from "../features/workflow/useWorkflow.js";
-import WorkflowPage from "../features/workflow/WorkflowPage.jsx";
-import AnalysisDialog from "../features/workflow/AnalysisDialog.jsx";
-
-const { Header, Sider, Content } = Layout;
-
+import { useResource } from "../shared/useResource.js";
+const TreePage = lazy(() => import("../features/tree/TreePage.jsx"));
+const SourcesPage = lazy(() => import("../features/sources/SourcesPage.jsx"));
+const WorkflowPage = lazy(() => import("../features/workflow/WorkflowPage.jsx"));
+const KnowledgePage = lazy(() => import("../features/knowledge/KnowledgePage.jsx"));
+const ReviewPage = lazy(() => import("../features/review/ReviewPage.jsx"));
+const ReleasePage = lazy(() => import("../features/release/ReleasePage.jsx"));
+const pages = [
+  ["tree", "特性树", ApartmentOutlined, TreePage], ["sources", "来源与 API", DatabaseOutlined, SourcesPage],
+  ["workflow", "Agent 工作流", DeploymentUnitOutlined, WorkflowPage], ["knowledge", "叶子知识", BookOutlined, KnowledgePage],
+  ["review", "人工审核", SafetyCertificateOutlined, ReviewPage], ["release", "发布版本", SendOutlined, ReleasePage],
+];
 export default function App() {
-  const [page, setPage] = useState(() => {
-    const selected = new URLSearchParams(location.hash.slice(1)).get("page");
-    return ["evaluation", "workflow"].includes(selected) ? selected : "tree";
-  });
-  const explorer = useExplorer();
-  const { model, loading, error } = explorer;
-  const workflow = useWorkflow();
-  const [analysis, setAnalysis] = useState(null);
-  function analyze(nodeId, action = "drilldown") {
-    setAnalysis({ nodeId, action });
-  }
-  function selectRun(id) {
-    workflow.select(id);
-    navigate("workflow");
-    history.replaceState(
-      null,
-      "",
-      `#page=workflow&run=${encodeURIComponent(id)}`,
-    );
-  }
-  useEffect(() => {
-    const onHash = () =>
-      setPage(
-        ["evaluation", "workflow"].includes(
-          new URLSearchParams(location.hash.slice(1)).get("page"),
-        )
-          ? new URLSearchParams(location.hash.slice(1)).get("page")
-          : "tree",
-      );
-    window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
-  }, []);
-  function navigate(next) {
-    setPage(next);
-    setTableMaximized(false);
-    explorer.setDrawerOpen(false);
-    history.replaceState(null, "", `#page=${next}`);
-  }
-  function openNode(id) {
-    setPage("tree");
-    explorer.selectNode(id);
-  }
-  const [collapsed, setCollapsed] = useState(false);
-  const [tableMaximized, setTableMaximized] = useState(false);
-  useEffect(() => {
-    if (!tableMaximized) return;
-    const onKey = (event) => {
-      if (event.key === "Escape" && !explorer.drawerOpen)
-        setTableMaximized(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [tableMaximized, explorer.drawerOpen]);
-  const navigation = [
-    { key: "tree", icon: <AppstoreOutlined />, label: "特性树" },
-    { key: "evaluation", icon: <FileSearchOutlined />, label: "知识评测" },
-    { key: "workflow", icon: <ApartmentOutlined />, label: "分析任务" },
-  ];
-  return (
-    <ConfigProvider
-      locale={zhCN}
-      theme={{
-        token: {
-          colorPrimary: "#1677ff",
-          borderRadius: 6,
-          fontSize: 14,
-          colorBgLayout: "#f0f2f5",
-          fontFamily:
-            '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif',
-        },
-        components: {
-          Layout: { headerBg: "#fff", siderBg: "#001529" },
-          Menu: { darkItemBg: "#001529", darkSubMenuItemBg: "#001529" },
-          Table: { headerBg: "#fafafa" },
-        },
-      }}
-    >
-      <Layout
-        className={`admin-layout${tableMaximized ? " table-maximized" : ""}`}
-      >
-        <Sider
-          width={224}
-          collapsedWidth={64}
-          collapsed={collapsed}
-          breakpoint="lg"
-          onBreakpoint={setCollapsed}
-          className="admin-sider"
-        >
-          <div className="admin-logo">
-            <ApartmentOutlined />
-            {!collapsed && <strong>FeatureTree</strong>}
-          </div>
-          {!collapsed && <div className="sider-caption">跨平台特性管理</div>}
-          <Menu
-            theme="dark"
-            mode="inline"
-            selectedKeys={[page]}
-            items={navigation}
-            onClick={({ key }) => navigate(key)}
-            className="domain-menu"
-          />
-          {!collapsed && (
-            <div className="sider-footer">
-              <DatabaseOutlined />
-              <span>本地知识库 · 任务执行</span>
-            </div>
-          )}
-        </Sider>
-        <Layout className="admin-main">
-          <Header className="admin-header">
-            <Space size={20}>
-              <Button
-                type="text"
-                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                onClick={() => setCollapsed(!collapsed)}
-                aria-label={collapsed ? "展开导航" : "收起导航"}
-              />
-              <Breadcrumb
-                items={[
-                  { title: "工作空间" },
-                  { title: "特性管理" },
-                  {
-                    title: {
-                      tree: "特性树",
-                      evaluation: "知识评测",
-                      workflow: "分析任务",
-                    }[page],
-                  },
-                ]}
-              />
-            </Space>
-            <Space size={20}>
-              <Badge status="success" text="本地数据" />
-              <span className="header-divider" />
-              <Space>
-                <Avatar
-                  size="small"
-                  shape="square"
-                  icon={<DatabaseOutlined />}
-                  className="workspace-avatar"
-                />
-                <Typography.Text>当前项目</Typography.Text>
-              </Space>
-            </Space>
-          </Header>
-          <Content className="admin-content">
-            <section className="content-page" hidden={page !== "tree"}>
-              {page === "tree" && (
-                <TreePage
-                  explorer={explorer}
-                  onAnalyze={analyze}
-                  tableMaximized={tableMaximized}
-                  onToggleMaximize={() =>
-                    setTableMaximized((current) => !current)
-                  }
-                />
-              )}
-            </section>
-            {page === "workflow" && (
-              <section className="content-page">
-                <WorkflowPage
-                  workflow={workflow}
-                  model={model}
-                  onSelect={selectRun}
-                  onPublished={explorer.refresh}
-                  onCreate={() => analyze(explorer.selected || model.roots[0])}
-                />
-              </section>
-            )}
-            <section className="content-page" hidden={page !== "evaluation"}>
-              {error && (
-                <Alert
-                  type="error"
-                  showIcon
-                  title="知识数据读取失败"
-                  description={error}
-                  action={<Button onClick={explorer.refresh}>重试</Button>}
-                />
-              )}
-              <KnowledgeSearch
-                model={model}
-                loading={loading}
-                onOpenNode={openNode}
-              />
-            </section>
-          </Content>
-        </Layout>
-      </Layout>
-      <NodeDetails
-        explorer={explorer}
-        workflow={workflow}
-        onAnalyze={analyze}
-        onSelectRun={selectRun}
-      />
-      {analysis && model && (
-        <AnalysisDialog
-          key={`${analysis.nodeId}-${analysis.action}`}
-          selection={analysis}
-          model={model}
-          workflow={workflow}
-          onClose={() => setAnalysis(null)}
-          onCreated={(id) => {
-            setAnalysis(null);
-            selectRun(id);
-          }}
-        />
-      )}
-    </ConfigProvider>
-  );
+  const [page, setPage] = useState("tree");
+  const [context, setContext] = useState(null);
+  function navigate(target, nextContext = null) { setContext(nextContext); setPage(target); }
+  const current = useResource("current", 10000);
+  const releaseId = current.data?.release_id ?? null;
+  const Component = pages.find(row => row[0] === page)[3];
+  return <ConfigProvider locale={zhCN} theme={{ token: { colorPrimary: "#2463b4", borderRadius: 7 } }}>
+    <Layout className="admin-layout"><Layout.Sider width={220} breakpoint="lg" collapsedWidth={64}>
+      <div className="logo"><ApartmentOutlined /><strong>FeatureTree <small>v2</small></strong></div>
+      <Menu theme="dark" selectedKeys={[page]} items={pages.map(([key, label, Icon]) => ({ key, label, icon: <Icon /> }))} onClick={({ key }) => navigate(key)} />
+      <div className="sider-note">API → 公共叶子 → 三端知识<br />证据 · 审查 · 可信度</div>
+    </Layout.Sider><Layout><Layout.Header className="topbar"><Typography.Text strong>跨平台能力知识工作台</Typography.Text><Space><Tag>{releaseId ? "正式发布" : "尚未正式发布"}</Tag><Typography.Text type="secondary">{releaseId?.slice(0, 14) || "校准与架构切换阶段"}</Typography.Text></Space></Layout.Header>
+      <Layout.Content className="workspace">{current.error && <Alert type="error" title={current.error} />}
+        <Suspense fallback={<p>正在加载功能区…</p>}><Component releaseId={releaseId} onPublished={current.refresh} navigate={navigate} context={context} /></Suspense>
+      </Layout.Content></Layout></Layout>
+  </ConfigProvider>;
 }

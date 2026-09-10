@@ -19,3 +19,6 @@ output/
 # Durable workflow artifacts and raw model events; keep locally for resume/audit.
 .workflow/
 data/
+tools/sdk/node_modules/
+tools/sdk/swift/.build/
+tools/opencode/node_modules/

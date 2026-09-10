@@ -35,7 +35,8 @@ class PipelineTests(unittest.TestCase):
     def plan(self, pipeline, key, inputs=None):
         return self.planner.create({"pipeline": pipeline, "model": "test/fake", "scopes": [{
             "definition": "Fixture scope", "snapshot_id": self.snapshot["id"], "selection": {},
-            "topic_selection": {}, "inputs": inputs or {}, "mode": "calibration", "work_type": "refine"}]}, key)
+        "topic_selection": {}, "inputs": inputs or {"baseline_ref": self.objects.put(baseline())}, "mode": "calibration", "work_type": "refine",
+            "enumeration_complete": True}]}, key)
 
     def pipeline_article(self):
         tree_run = self.plan("taxonomy", "tree")
@@ -104,3 +105,32 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(original, revised["tasks"]["w_0000--ft-android"]["result_ref"])
         self.assertIsNone(revised["tasks"]["w_0000--ft-bind"]["result_ref"])
         self.assertTrue(revised["tasks"]["w_0000--ft-bind"]["history"])
+
+    def test_machine_semantic_failure_repairs_only_responsible_stage(self):
+        original = self.backend.execute
+        failed = []
+        def execute(root, agent, packet, folder, timeout, model, variant):
+            result, metadata = original(root, agent, packet, folder, timeout, model, variant)
+            if agent == 'ft-bind' and not failed:
+                failed.append(True)
+                result['payload']['bindings'][0]['role'] = 'supporting'
+            return result, metadata
+        self.backend.execute = execute
+        planned = self.plan('taxonomy', 'semantic-machine')
+        state = self.runner.run(planned['run_id'])
+        self.assertTrue(all(task['status'] == 'completed' for task in state['tasks'].values()), str(state))
+        self.assertEqual(2, len(state['tasks']['w_0000--ft-bind']['attempts']))
+        self.assertEqual(1, len(state['tasks']['w_0000--ft-android']['attempts']))
+        self.assertEqual(1, state['semantic_rounds']['w_0000--ft-bind'])
+
+    def test_cross_domain_integration_waits_for_all_local_reviews_and_is_invalidated(self):
+        scope = {'definition': 'Fixture', 'snapshot_id': self.snapshot['id'], 'selection': {},
+                 'inputs': {'baseline_ref': self.objects.put(baseline())}, 'enumeration_complete': True, 'mode': 'calibration'}
+        planned = self.planner.create({'pipeline': 'taxonomy', 'model': 'test/fake', 'scopes': [scope, scope]}, 'two-domains')
+        state = self.runner.run(planned['run_id'])
+        calls = [name for name, _ in self.backend.calls]
+        self.assertGreater(calls.index('ft-integrate'), max(index for index, name in enumerate(calls) if name == 'ft-review'))
+        original = state['tasks']['w_0001--ft-android']['result_ref']
+        revised = self.runner.action(planned['run_id'], 'revise', task_id='w_0000--ft-design', feedback=[{'reason': 'Boundary changed'}])
+        self.assertIsNone(revised['tasks']['w_0001--ft-integrate']['result_ref'])
+        self.assertEqual(original, revised['tasks']['w_0001--ft-android']['result_ref'])

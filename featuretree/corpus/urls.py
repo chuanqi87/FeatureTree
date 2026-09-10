@@ -15,7 +15,7 @@ ANDROID_PREFIXES = ('/reference', '/develop', '/guide', '/training', '/topic', '
                     '/developer-verification','/design-for-safety','/guides','/google-play',
                     '/health-ai-developer-foundations','/quality-guidelines','/googlebook',
                     '/compose-camp','/multidevice-development','/ai-in-android','/health-connect',
-                    '/security-and-privacy')
+                    '/security-and-privacy','/blog')
 VERSION_PARAMS = {'language', 'version', 'versionId', 'topicVersion', 'apiLevel'}
 
 
@@ -37,7 +37,7 @@ def canonical(url, base=''):
             path = path.removeprefix('/tutorials/data').removesuffix('.json')
         if path.endswith('.md'):
             path = path[:-3]
-        if not path.startswith('/documentation/'):
+        if not path.startswith('/documentation/') and path not in ('/news', '/news/releases'):
             return None
     elif host == 'developer.android.com':
         if not any(path == prefix or path.startswith(prefix + '/') for prefix in ANDROID_PREFIXES):
@@ -60,7 +60,7 @@ def canonical(url, base=''):
     params = dict(parse_qsl(parsed.query))
     if params.get('hl', 'en') not in ('en', 'en-US'):
         return None
-    query = urlencode(sorted((k, v) for k, v in params.items() if k in VERSION_PARAMS))
+    query = urlencode(sorted((k, v) for k, v in params.items() if k in VERSION_PARAMS or (path == '/news' and k == 'id')))
     path = quote(unquote(path), safe="/():@,$!+'=-._~")
     return urlunsplit(('https', host, path, query, ''))
 
@@ -78,7 +78,7 @@ def document_id(url):
 
 def fetch_url(url):
     parsed = urlsplit(url)
-    if parsed.hostname in ('developer.apple.com', 'developer.huawei.com'):
+    if parsed.hostname == 'developer.huawei.com' or (parsed.hostname == 'developer.apple.com' and parsed.path.startswith('/documentation/')):
         return urlunsplit(parsed._replace(path=parsed.path + '.md'))
     return url
 

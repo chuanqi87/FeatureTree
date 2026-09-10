@@ -175,12 +175,19 @@
             ],
             "additionalProperties": false
           }
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "https://featuretree.local/schema/business/v3/implementation-route"
+          }
         }
       },
       "required": [
         "bindings",
         "api_dispositions",
-        "topic_dispositions"
+        "topic_dispositions",
+        "routes"
       ],
       "additionalProperties": false
     },

@@ -1,28 +1,50 @@
-"""Discoverable command catalog; implementations are imported only when selected."""
+"""v2 command-line parsing and dependency assembly only."""
 
 import argparse
-from importlib import import_module
+import json
+from pathlib import Path
+from uuid import uuid4
 
+from featuretree.cli.commands import execute
+from featuretree.console.application import Application
 
-COMMANDS = {
-    "console": ("console", "启动本地管理台与节点执行 API"),
-    "workflow": ("workflow", "节点工作单：计划、执行、重试、返工、发布"),
-    "corpus": ("corpus", "官方文档下载、全文检索与上下文"),
-    "lint": ("tree_lint", "检查树层级、边界、命名与切分轴"),
-    "anchors": ("verify_anchors", "核实 API 锚点；显式 --write 才回写"),
-    "refresh": ("refresh", "补缺失知识空壳、重建导出并校验"),
-    "audit": ("audit", "检查数据完整性与知识确认进度"),
-    "design-inputs": ("design_inputs", "导出指定领域的现有树定义"),
-    "review-scope": ("review_scope", "筛选并导出待复核知识项"),
-    "evidence": ("evidence", "导出已下载文档的不可变证据快照"),
+GROUPS = {
+    'sources': ('import', 'extract', 'capture', 'seal', 'validate', 'query', 'report'),
+    'workflow': ('plan', 'replan', 'run', 'resume', 'retry', 'revise', 'revalidate', 'supplement', 'cancel', 'report'),
+    'taxonomy': ('check', 'diff', 'freeze', 'approve-calibration', 'policies'),
+    'knowledge': ('plan', 'show', 'check', 'impact', 'import-observation'),
+    'review': ('queue', 'show', 'decide', 'research'),
+    'release': ('prepare', 'publish', 'rebase', 'show', 'compare', 'rollback', 'export'),
+    'console': ('serve',),
 }
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="FeatureTree：公共特性树、标准 Agent 工作流与管理台")
-    commands = parser.add_subparsers(dest="command", required=True)
-    for name, (_, description) in COMMANDS.items():
-        commands.add_parser(name, help=description, add_help=False)
-    args, remaining = parser.parse_known_args(argv)
-    module, _ = COMMANDS[args.command]
-    return import_module(f"featuretree.cli.{module}").main(remaining)
+    parser = argparse.ArgumentParser(description='FeatureTree v2：来源、具名 Agent、叶子知识与人工审核')
+    parser.add_argument('--root', type=Path, default=Path(__file__).resolve().parents[2])
+    groups = parser.add_subparsers(dest='group', required=True)
+    for name, operations in GROUPS.items():
+        group = groups.add_parser(name)
+        group.add_argument('action', choices=operations)
+        group.add_argument('--id')
+        group.add_argument('--request', type=Path, help='包含完整工作单或操作参数的 JSON 文件')
+        group.add_argument('--key', default=None, help='重复操作使用相同幂等键')
+        group.add_argument('--expected', help='预期正式发布 ID；none 表示尚未发布')
+        group.add_argument('--snapshot')
+        group.add_argument('--query', default='')
+        group.add_argument('--platform', choices=('android', 'ios', 'harmonyos'))
+        group.add_argument('--cursor')
+        group.add_argument('--limit', type=int, default=50)
+        group.add_argument('--reference', type=Path)
+        group.add_argument('--before')
+        group.add_argument('--after')
+        group.add_argument('--port', type=int, default=8765)
+    args = parser.parse_args(argv)
+    application = Application(args.root)
+    try:
+        result = execute(application, args, args.key or uuid4().hex)
+    except (ValueError, KeyError, FileNotFoundError) as error:
+        parser.exit(2, f'{type(error).__name__}: {error}\n')
+    if result is not None:
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0

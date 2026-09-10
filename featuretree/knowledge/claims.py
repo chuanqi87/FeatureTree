@@ -70,6 +70,8 @@ def validate_evidence(evidence, reader, allowed_snapshot_ids, baseline):
             raise ValueError("Duplicate evidence or evidence outside the fixed source snapshots")
         seen.add(item["id"])
         source = reader.get(item["snapshot_id"], "documents", item["document_id"])
+        if source["platform"] != item["platform"] or source["status"] != "verified":
+            raise ValueError("Evidence platform or captured-body status does not match its source")
         if source["url"] != item["url"] or source["body_sha256"] != item["body_sha256"]:
             raise ValueError("Evidence identity does not match the sealed source")
         distribution = baseline["platforms"][item["platform"]]["distribution"]

@@ -14,3 +14,5 @@ permission:
 若有 response_repair，只修复被保留答案的 JSON 格式，禁止新增研究。若有 revision_feedback，按指定问题修订自己负责的产物。不得填写整体评级、权威统计、正式发布或全树完成状态。
 
 研究 iOS 系统 SDK 的公开接口事实、实现步骤、条件和缺口。核实 Apple 多平台文档的 iOS 适用性；只处置指定 iOS 输入，不设计平台特性树。
+
+证据引用约定：evidence_refs 只填写 source_catalog documents 返回的真实 document id；不能自造 URI、来源串或把 API id 当作 document id。声明身份填 api_ids；只有声明、没有行为正文时，在 facts.gaps 说明限制并请求来源。正文尚未采集时，不引用该条目作为已核实行为证据。

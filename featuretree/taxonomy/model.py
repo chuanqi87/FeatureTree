@@ -34,13 +34,31 @@ def validate_tree(tree):
         siblings = [nodes[child]["name"].casefold() for child in children[key]]
         if len(siblings) != len(set(siblings)):
             raise ValueError(f"Duplicate sibling names: {key}")
+    roots = [row["name"].casefold() for row in nodes.values() if row["parent_id"] is None]
+    if len(roots) != len(set(roots)):
+        raise ValueError("Duplicate root names")
+    successors = {}
+    for event in tree["lineage"]:
+        for old_id in event["old_ids"]:
+            if old_id in successors or old_id in nodes:
+                raise ValueError("Replaced identities cannot be reused or replaced twice")
+            successors[old_id] = event["new_ids"]
+    def resolve_history(key, visited):
+        if key in visited:
+            raise ValueError("Lineage cycle")
+        if key in nodes:
+            return
+        if key not in successors:
+            raise ValueError("Lineage destination has no current identity or successor")
+        for child in successors[key]:
+            resolve_history(child, visited | {key})
     for event in tree["lineage"]:
         if not event["old_ids"] or not event["new_ids"] or not event["reason"]:
             raise ValueError("Split/merge must preserve old and new identities and reason")
         if set(event["old_ids"]) & set(event["new_ids"]):
             raise ValueError("Split/merge must generate new identities")
-        if not set(event["new_ids"]) <= set(nodes):
-            raise ValueError("Lineage destinations missing")
+        for key in event["new_ids"]:
+            resolve_history(key, set())
     return nodes
 
 

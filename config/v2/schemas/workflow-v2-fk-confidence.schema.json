@@ -84,6 +84,10 @@
               "assessor": {
                 "type": "string",
                 "minLength": 1
+              },
+              "input_fingerprint": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
               }
             },
             "required": [
@@ -95,7 +99,8 @@
               "requires_runtime_observation",
               "runtime_evidence_refs",
               "rule_id",
-              "assessor"
+              "assessor",
+              "input_fingerprint"
             ],
             "additionalProperties": false
           }

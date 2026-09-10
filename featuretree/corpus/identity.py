@@ -5,7 +5,8 @@ from featuretree.core.content import digest
 
 
 def declaration_id(platform, distribution, language, qualified_name, signature):
-    normalized = re.sub(r"\s+", " ", signature).strip()
+    # Whitespace inside literal types can be semantically significant.
+    normalized = signature.strip()
     return "api_" + digest([platform, distribution, language, qualified_name, normalized])
 
 
@@ -13,6 +14,10 @@ def normalize_legacy(record, source_hash, language):
     platform = record["platform"]
     availability = record.get("availability") or {}
     path = record["source_path"]
+    module = record.get("module_id", "").split(":", 1)[-1]
+    qualified = record["qualified_name"]
+    if module and not qualified.startswith(module + "."):
+        qualified = module + "." + qualified
     ecosystem = availability.get("contract") not in (None, "os-sdk")
     distribution = {"android": "Android SDK", "ios": "Apple SDK", "harmonyos": "HarmonyOS SDK"}[platform]
     if ecosystem:
@@ -24,9 +29,9 @@ def normalize_legacy(record, source_hash, language):
         visibility = "public"
     # Legacy absence of a systemapi tag is insufficient to certify public application use.
     return {"schema_version": 3, "id": declaration_id(platform, distribution, language,
-            record["qualified_name"], record.get("signature") or ""), "platform": platform,
+            qualified, record.get("signature") or ""), "platform": platform,
             "distribution": distribution, "language": language,
-            "qualified_name": record["qualified_name"], "signature": record.get("signature") or "",
+            "qualified_name": qualified, "signature": record.get("signature") or "",
             "kind": record["kind"], "visibility": visibility,
             "availability": {**availability, "since": record.get("since"),
                              "deprecated_since": record.get("deprecated_since"),

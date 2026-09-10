@@ -93,7 +93,7 @@ def import_reference(reference, snapshots, import_directory, document_root):
                                   "Publicness, aliases, SDK file completeness and iOS applicability need audit"]}
     return snapshots.seal({"declarations": declarations(), "families": iter(families),
                            "topics": topics(), "documents": official_documents(document_root)},
-                          files=files, status="historical", extractor_versions={"legacy-normalizer": "1"},
+                          files=files, status="historical", extractor_versions={"legacy-normalizer": "2"},
                           provenance=provenance)
 
 

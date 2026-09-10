@@ -11,6 +11,14 @@ class MissingStructuredAnswer(ValueError):
     retryable = False
 
 
+class SemanticValidationError(ValueError):
+    retryable = False
+
+    def __init__(self, target_stage, reason, retained_ref):
+        super().__init__(reason)
+        self.target_stage, self.retained_ref = target_stage, retained_ref
+
+
 def has_repairable_answer(text):
     return (text.rstrip().endswith(("}", "```")) and
             all(re.search(r'"' + key + r'"\s*:', text) for key in

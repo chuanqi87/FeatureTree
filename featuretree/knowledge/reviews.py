@@ -24,16 +24,35 @@ class ReviewLedger:
             result.append(event)
         return result
 
+    def prior_request(self, article_ref, decision, key):
+        identifier(key)
+        allowed = {"claim_id", "claim_hash", "action", "reason", "actor", "evidence_refs", "target_stage", "replacement"}
+        if set(decision) != allowed:
+            raise ValueError("A human decision cannot change event identity, history or target article metadata")
+        fingerprint = digest({"article_ref": article_ref, "decision": decision})
+        path = self.directory / "requests" / f"{key}.json"
+        if path.exists():
+            receipt = read_json(path)
+            if receipt["request_hash"] != fingerprint:
+                raise ConflictError("Human decision key reused with different content")
+            return receipt
+        event_id = "human_" + digest(key)
+        event = next((row for row in self.events() if row["event_id"] == event_id), None)
+        if event:
+            if event["article_ref"] != article_ref or any(event[field] != value for field, value in decision.items()):
+                raise ConflictError("Recorded human event differs from retry")
+            return {"request_hash": fingerprint, "event_id": event_id, "event_ref": digest(event), "ticket_id": event["ticket_id"]}
+        return None
+
     def append(self, article_ref, current_article_ref, decision, key):
         identifier(key)
         with file_lock(self.directory / "review.lock"):
+            prior = self.prior_request(article_ref, decision, key)
+            if prior:
+                write_json(self.directory / "requests" / f"{key}.json", prior, immutable=True)
+                return prior
             receipt_path = self.directory / "requests" / f"{key}.json"
             request_hash = digest({"article_ref": article_ref, "decision": decision})
-            if receipt_path.exists():
-                receipt = read_json(receipt_path)
-                if receipt["request_hash"] != request_hash:
-                    raise ConflictError("Human decision key reused with different content")
-                return receipt
             if current_article_ref != article_ref:
                 raise ConflictError("Knowledge version changed; inspect the current version before submitting")
             article = self.artifacts.get(article_ref)
@@ -42,22 +61,15 @@ class ReviewLedger:
             if claim is None or claim_hash(claim) != decision["claim_hash"]:
                 raise ConflictError("Claim fingerprint changed")
             events = self.events()
-            # Recover an event appended before its receipt was durable.
             event_id = "human_" + digest(key)
-            existing = next((row for row in events if row["event_id"] == event_id), None)
-            if existing:
-                if any(existing.get(field) != value for field, value in decision.items()):
-                    raise ConflictError("Recorded human event differs from retry")
-                event = existing
-            else:
-                previous = digest(events[-1]) if events else None
-                event = {"schema_version": 3, "event_id": event_id, "ticket_id": ticket_id(article_ref),
-                         "article_ref": article_ref, "created_at": timestamp(),
-                         "previous_event_ref": previous, **decision}
-                self.schemas.validate("https://featuretree.local/schema/business/v3/review-event", event)
-                reference = self.artifacts.put(event)
-                write_json(self.directory / "events" / f"{len(events)+1:012d}.json",
-                           {"event_ref": reference}, immutable=True)
+            previous = digest(events[-1]) if events else None
+            event = {"schema_version": 3, "event_id": event_id, "ticket_id": ticket_id(article_ref),
+                     "article_ref": article_ref, "created_at": timestamp(),
+                     "previous_event_ref": previous, **decision}
+            self.schemas.validate("https://featuretree.local/schema/business/v3/review-event", event)
+            reference = self.artifacts.put(event)
+            write_json(self.directory / "events" / f"{len(events)+1:012d}.json",
+                       {"event_ref": reference}, immutable=True)
             receipt = {"request_hash": request_hash, "event_ref": digest(event),
                        "ticket_id": event["ticket_id"], "event_id": event["event_id"]}
             write_json(receipt_path, receipt, immutable=True)
@@ -91,6 +103,6 @@ def project_reviews(articles, events):
             state = next((state for state in ("research_requested", "in_review", "pending", "deferred")
                           if any(item["state"] == state for item in items)), "decided")
             tickets.append({"id": ticket_id(reference), "article_ref": reference,
-                            "feature_id": article["feature_id"], "state": state, "items": items})
+                            "feature_id": article["feature_id"], "draft": article["draft"], "state": state, "items": items})
     return {"tickets": tickets, "invalidated_claims": invalidated,
             "event_head": digest(events[-1]) if events else None, "event_count": len(events)}

@@ -4,3 +4,4 @@ requests>=2.32,<3
 beautifulsoup4>=4.13,<5
 markdownify>=1.2,<2
 lxml>=6,<7
+libclang==18.1.1

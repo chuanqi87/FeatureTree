@@ -77,7 +77,7 @@ def specification(packet):
                               "success_criteria": ["Compare the specified dimension"]})
     return {"schema_version": 3, "feature_id": packet["inputs"]["feature_ref"]["id"],
             "freeze_ref": packet["work"]["inputs"].get("freeze_ref"),
-            "candidate_tree_ref": packet["work"]["inputs"].get("tree_ref"),
+            "candidate_tree_ref": None if packet["work"]["inputs"].get("freeze_ref") else packet["work"]["inputs"].get("tree_ref"),
             "questions": questions, "scope": "Fixture knowledge sample", "rule_id": "confidence-v3-minimum-v1"}
 
 
@@ -110,7 +110,10 @@ class ModelSubstitute:
             payload = {"work_type": packet["work"]["work_type"], "features": [feature()],
                        "changes": [{"operation": "add", "subject_ids": [], "candidate_ids": ["candidate"], "reason": "One goal"}]}
         elif agent == "ft-bind":
-            payload = {"bindings": [{"declaration_id": "api_" + p, "feature_id": "candidate", "usage": "One outcome",
+            payload = {"routes": [{"id": "default", "feature_id": "candidate", "platform": p, "goal": "One outcome",
+                        "conditions": [], "steps": [{"description": "Invoke the fixture API", "api_ids": ["api_" + p]}],
+                        "completeness": "complete", "gaps": [], "evidence_refs": ["doc_" + p]} for p in PLATFORMS],
+                       "bindings": [{"declaration_id": "api_" + p, "feature_id": "candidate", "usage": "One outcome",
                         "role": "core", "route_id": "default", "evidence_refs": ["doc_" + p]} for p in PLATFORMS],
                        "api_dispositions": [disposition("api_" + p) for p in PLATFORMS],
                        "topic_dispositions": [disposition("topic_" + p) for p in PLATFORMS]}
@@ -141,6 +144,8 @@ class ModelSubstitute:
                         "gaps": ["Baseline unknown"], "requires_runtime_observation": False, "runtime_evidence_refs": [],
                         "rule_id": "confidence-v3-minimum-v1", "assessor": "fk-confidence"}
                                       for key, value in packet["fixed_claim_hashes"].items()]}
+            for assessment in payload["assessments"]:
+                assessment["input_fingerprint"] = packet["assessment_input_fingerprint"]
         else:
             raise AssertionError(agent)
         return envelope(packet, payload), {"model": model, "usage": [{"tokens": {"input": 1, "output": 1}}]}

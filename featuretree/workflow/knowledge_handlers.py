@@ -3,6 +3,7 @@
 from featuretree.core.content import digest, timestamp
 from featuretree.knowledge.claims import validate_claims, validate_evidence
 from featuretree.knowledge.ratings import rate_article
+from featuretree.knowledge.observations import validate_observation
 from featuretree.knowledge.specifications import validate_spec
 from featuretree.workflow.packaging import envelope
 
@@ -36,6 +37,8 @@ class KnowledgeHandlers:
         elif stage in ("fk-android", "fk-ios", "fk-harmonyos"):
             spec = packet["upstream"]["fk-scope"]["spec"]
             platform = payload["platform"]
+            if platform != packet["source_access"]["platform"]:
+                raise ValueError("Knowledge researcher changed its assigned platform")
             scoped = {**spec, "questions": [row for row in spec["questions"]
                                             if row["platforms"] == [platform] and row["kind"] != "comparison"]}
             validate_claims(scoped, payload["claims"])
@@ -60,7 +63,11 @@ class KnowledgeHandlers:
         elif stage == "fk-confidence":
             claims, evidence = collected(packet)
             rate_article(packet["upstream"]["fk-scope"]["spec"], claims,
-                         packet["upstream"]["fk-review"]["reviews"], payload["assessments"], evidence)
+                         packet["upstream"]["fk-review"]["reviews"], payload["assessments"], evidence, packet["rating_context"], self._observations(packet))
+
+    def _observations(self, packet):
+        return {ref: validate_observation(self.artifacts.get(ref), self.artifacts)
+                for ref in packet["inputs"].get("observations_ref", {}).get("observation_refs", [])}
 
     def _evidence(self, evidence, packet):
         return validate_evidence(evidence, self.catalog, {packet["work"]["snapshot_id"]},
@@ -72,14 +79,18 @@ class KnowledgeHandlers:
         reviews = packet["upstream"]["fk-review"]["reviews"]
         assessments = packet["upstream"]["fk-confidence"]["assessments"]
         self._evidence(evidence, packet)
-        overall, reasons = rate_article(spec, claims, reviews, assessments, evidence)
+        observations = self._observations(packet)
+        overall, reasons = rate_article(spec, claims, reviews, assessments, evidence, packet["rating_context"], observations)
         inputs = packet["work"]["inputs"]
         article = {"schema_version": 3, "feature_id": spec["feature_id"],
                    "spec_ref": self.artifacts.put(spec), "freeze_ref": spec["freeze_ref"],
                    "candidate_tree_ref": spec["candidate_tree_ref"], "baseline_ref": inputs["baseline_ref"],
                    "snapshot_id": packet["work"]["snapshot_id"], "claims": claims, "reviews": reviews,
                    "assessments": assessments, "evidence": evidence, "overall_confidence": overall,
+                   "rating_context": packet["rating_context"],
+                   "observation_refs": sorted(observations),
                    "confidence_reasons": reasons, "dependencies": {**inputs, **packet["upstream_refs"]},
                    "draft": spec["freeze_ref"] is None, "created_at": timestamp()}
         return envelope(packet, {"article_ref": self.artifacts.put(article), "overall_confidence": overall,
+                                 "feature_id": article["feature_id"],
                                  "confidence_reasons": reasons, "draft": article["draft"]})

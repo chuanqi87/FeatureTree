@@ -37,6 +37,11 @@ class SnapshotStore:
         for kind, expected in manifest["records"].items():
             if file_digest(self.path(snapshot_id, kind)) != expected:
                 raise IntegrityError(f"Corrupt source collection: {kind}")
+        project = self.directory.resolve().parent.parent
+        for source in manifest["provenance"].get("retained_files", []):
+            path = (project / source["path"]).resolve()
+            if not path.is_relative_to(project / "data/imports") or file_digest(path) != source["sha256"]:
+                raise IntegrityError("Retained SDK source is missing, altered or outside the import store")
         return manifest
 
     def seal(self, collections, *, files, status="candidate", baseline_ref=None,
@@ -53,9 +58,8 @@ class SnapshotStore:
                         if row["id"] in seen:
                             raise ValueError(f"Duplicate {kind} identity: {row['id']}")
                         seen.add(row["id"])
-                        if kind != "documents":
-                            schema = {"declarations": "declaration", "families": "family", "topics": "topic"}[kind]
-                            self.schemas.validate(f"https://featuretree.local/schema/source/v1/{schema}", row)
+                        schema = {"declarations": "declaration", "families": "family", "topics": "topic", "documents": "document"}[kind]
+                        self.schemas.validate(f"https://featuretree.local/schema/source/v1/{schema}", row)
                         stream.write(canonical_bytes(row) + b"\n")
                     stream.flush()
                     os.fsync(stream.fileno())

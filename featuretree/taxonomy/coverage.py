@@ -48,7 +48,7 @@ def validate_bindings(features, declarations, bindings, dispositions):
     return report
 
 
-def size_report(declarations, families, bindings, *, enumeration_complete):
+def size_report(declarations, families, bindings, *, enumeration_complete, routes=()):
     family_of = {}
     for family in families:
         for api_id in family["declaration_ids"]:
@@ -70,7 +70,8 @@ def size_report(declarations, families, bindings, *, enumeration_complete):
             route.add(family_of[api_id])
     return {feature_id: {"all_api_count": len(value["all_api_ids"]),
                          "supporting_api_count": len(value["supporting_api_ids"]),
-                         "counts_are_lower_bounds": not enumeration_complete,
+                         "counts_are_lower_bounds": not enumeration_complete or any(
+                             row["feature_id"] == feature_id and row["completeness"] != "complete" for row in routes),
                          "routes": [{"platform": platform, "route_id": route,
                                      "core_family_count": len(ids), "family_ids": sorted(ids)}
                                     for (platform, route), ids in sorted(value["routes"].items())]}

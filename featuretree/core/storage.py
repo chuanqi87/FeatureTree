@@ -60,37 +60,3 @@ def contained_path(root: Path, relative: str, directory: str) -> Path:
     if not path.is_relative_to((root / directory).resolve()):
         raise ValueError(f"Path must stay under {directory}/: {relative}")
     return path
-
-
-class Repository:
-    def __init__(self, root: Path = ROOT):
-        self.root = root.resolve()
-
-    def config(self):
-        return read_yaml(self.root / "config/comparison.yaml")
-
-    def features(self):
-        features = {}
-        for path in sorted((self.root / "taxonomy").glob("*.yaml")):
-            if path.name.startswith("_"):
-                continue
-            for feature in read_yaml(path)["features"]:
-                fid = feature["id"]
-                if fid in features:
-                    raise ValueError(f"Duplicate feature id: {fid} ({path})")
-                if fid.split(".")[0] != path.stem:
-                    raise ValueError(f"Feature in wrong domain file: {fid} ({path})")
-                features[fid] = feature
-        return features
-
-    def knowledge(self):
-        records = {}
-        paths = {}
-        for path in sorted((self.root / "knowledge").rglob("*.yaml")):
-            doc = read_yaml(path)
-            fid = doc["feature_id"]
-            if fid in records:
-                raise ValueError(f"Duplicate knowledge feature_id: {fid} ({path})")
-            records[fid] = doc
-            paths[fid] = path.relative_to(self.root).as_posix()
-        return records, paths

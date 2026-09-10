@@ -9,12 +9,12 @@ from featuretree.core.storage import ROOT
 
 ALLOWED = {
     "core": set(),
-    "taxonomy": {"core"},
-    "knowledge": {"core", "taxonomy"},
-    "corpus": {"core", "knowledge"},
-    "reporting": {"core", "taxonomy", "knowledge"},
+    "taxonomy": {"core", "corpus"},
+    "knowledge": {"core", "taxonomy", "corpus"},
+    "corpus": {"core"},
+    "reporting": {"core", "taxonomy", "knowledge", "corpus"},
     "workflow": {"core", "taxonomy", "knowledge", "corpus"},
-    "console": {"core", "taxonomy", "knowledge", "reporting", "workflow"},
+    "console": {"core", "taxonomy", "knowledge", "corpus", "reporting", "workflow"},
     "cli": {"core", "taxonomy", "knowledge", "corpus", "reporting", "workflow", "console"},
 }
 

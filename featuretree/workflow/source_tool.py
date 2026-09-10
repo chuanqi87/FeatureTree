@@ -8,8 +8,9 @@ import sys
 from featuretree.core.content import digest, timestamp
 from featuretree.core.contracts import SchemaRegistry
 from featuretree.core.io import file_lock, read_json, write_json
-from featuretree.corpus.catalog import IndexedCatalog
+from featuretree.corpus.catalog import IndexedCatalog, SourceUnavailable
 from featuretree.corpus.snapshots import SnapshotStore
+from featuretree.workflow.implementation import verify_implementation
 
 
 def query(catalog, packet, request):
@@ -22,8 +23,15 @@ def query(catalog, packet, request):
         record = catalog.get(access["snapshot_id"], "documents", request["id"])
         if access["platform"] and record["platform"] != access["platform"]:
             raise ValueError("Platform researcher cannot read another platform's source")
-        return catalog.read_body(access["snapshot_id"], request["id"],
-                                 request.get("offset", 0), min(request.get("limit", 12000), 24000))
+        try:
+            if request.get("query"):
+                return catalog.find_body(access["snapshot_id"], request["id"], request["query"],
+                                         request.get("offset", 0), min(request.get("limit", 3), 10))
+            return catalog.read_body(access["snapshot_id"], request["id"],
+                                     request.get("offset", 0), min(request.get("limit", 12000), 24000))
+        except SourceUnavailable as error:
+            return {"status": "needs_sources", "snapshot_id": access["snapshot_id"],
+                    "document_id": request["id"], "url": record["url"], "reason": str(error)}
     kind = {"apis": "declarations", "topics": "topics", "documents": "documents"}.get(operation)
     if kind is None:
         raise ValueError("Unsupported source operation")
@@ -49,6 +57,7 @@ def main(argv=None):
     if digest({key: value for key, value in packet.items() if key != "input_hash"}) != fingerprint:
         raise ValueError("Source tool packet was modified")
     request = json.load(sys.stdin)
+    verify_implementation(packet["stage_id"], packet.get("implementation_files"))
     schemas = SchemaRegistry(args.root / "config/v2/schemas")
     snapshots = SnapshotStore(args.root / "data/sources", schemas)
     catalog = IndexedCatalog(snapshots, args.root / "data/indexes", args.root / "docs-raw/official")
@@ -57,7 +66,10 @@ def main(argv=None):
         number = len(list(folder.glob("*.json"))) + 1
         if number > packet["limits"]["max_tool_calls"]:
             raise ValueError("Source tool call budget exhausted; return explicit remaining gaps")
-        result = query(catalog, packet, request)
+        try:
+            result = query(catalog, packet, request)
+        except (ValueError, KeyError, OSError) as error:
+            result = {"status": "rejected", "error_type": type(error).__name__, "reason": str(error)}
         write_json(folder / f"{number:04d}.json", {"input_hash": fingerprint, "request": request,
                     "result_hash": digest(result), "returned_ids": [row["id"] for row in result.get("items", [])],
                     "next_cursor": result.get("next_cursor"), "created_at": timestamp()}, immutable=True)

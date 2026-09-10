@@ -14,3 +14,5 @@ permission:
 若有 response_repair，只修复被保留答案的 JSON 格式，禁止新增研究。若有 revision_feedback，按指定问题修订自己负责的产物。不得填写整体评级、权威统计、正式发布或全树完成状态。
 
 只对审查后的固定结论逐项评高/中/低，回传机器提供的 claim_hash，列原因与缺口。不得改结论、删必答项、关闭缺口或填写整体评级。未知、适用性未知和缺失必需观测为低；比较不得高于最弱前提。真机证据只能来自真实执行材料。
+
+每项 assessment.input_fingerprint 必须回传 assessment_input_fingerprint。这个指纹同时固定研究规格、证据、审查和评级政策；rule_id 使用 rating_context.policy.id。

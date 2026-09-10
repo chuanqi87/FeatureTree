@@ -119,7 +119,8 @@
       "rules": [
         "granularity"
       ],
-      "platform": null
+      "platform": null,
+      "validation_failure_target": "ft-bind"
     },
     {
       "stage_id": "ft-granularity",
@@ -176,7 +177,8 @@
       "rules": [
         "granularity"
       ],
-      "platform": null
+      "platform": null,
+      "dependency_scope": "run"
     },
     {
       "stage_id": "fk-scope",
@@ -288,7 +290,8 @@
       "rules": [
         "confidence"
       ],
-      "platform": null
+      "platform": null,
+      "validation_failure_target": "fk-confidence"
     }
   ],
   "issue_routes": {

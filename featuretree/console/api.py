@@ -2,6 +2,7 @@
 
 from featuretree.core.io import ConflictError
 from featuretree.console.launcher import launch
+from featuretree.console.recovery import recover_committed
 
 
 class Api:
@@ -75,6 +76,9 @@ class Api:
             raise ValueError('Write commands require expected_release_id, including null before first publication')
         def operation(request_key):
             if app.versions.current_id() != body['expected_release_id']:
+                recovered, result = recover_committed(app, parts, body, request_key)
+                if recovered:
+                    return result
                 raise ConflictError('Current release changed; refresh the proposed operation')
             return self._post(parts, body, request_key)
         return app.requests.execute(key, {'route': parts, 'body': body}, operation)

@@ -93,6 +93,18 @@ class ReleaseIntegrationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'matching independently reviewed'):
             self.app.releases.prepare(candidate, None, 'unreviewed-tree')
 
+    def test_outer_http_receipt_recovers_after_publication_changed_current(self):
+        from featuretree.console.api import Api
+        from featuretree.core.io import write_json
+        app = self.app
+        app.releases.prepare(self.candidate, None, 'transaction')
+        body = {'transaction_key': 'transaction', 'expected_release_id': None}
+        write_json(app.requests.directory / 'http-commit.json', {
+            'command_hash': digest({'route': ['releases', 'publish'], 'body': body}), 'state': 'started'})
+        receipt = app.releases.publish('transaction')
+        self.assertEqual(receipt, Api(app).post(['releases', 'publish'], body, 'http-commit'))
+        self.assertEqual(receipt, Api(app).post(['releases', 'publish'], body, 'http-commit'))
+
     def test_structural_review_creates_an_executable_scoped_tree_order(self):
         app = self.app
         app.releases.prepare(self.candidate, None, 'first'); app.releases.publish('first')

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/business/v3/evidence",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "snapshot_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "document_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "body_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "excerpt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "platform": {
+      "enum": [
+        "android",
+        "ios",
+        "harmonyos"
+      ]
+    },
+    "applicability": {
+      "enum": [
+        "verified",
+        "unknown",
+        "unavailable"
+      ]
+    },
+    "source_revision": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "id",
+    "snapshot_id",
+    "document_id",
+    "url",
+    "body_sha256",
+    "excerpt",
+    "locator",
+    "platform",
+    "applicability",
+    "source_revision"
+  ],
+  "additionalProperties": false
+}

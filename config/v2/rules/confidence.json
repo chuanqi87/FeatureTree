@@ -1,0 +1,11 @@
+{
+  "id": "confidence-v3-minimum-v1",
+  "status": "awaiting_user_confirmation",
+  "overall": "minimum_required_claim",
+  "comparison_ceiling": "weakest_critical_premise",
+  "unknown": "low",
+  "unknown_applicability": "low",
+  "known_error": "reject",
+  "required_runtime_observation_missing": "low",
+  "human_acceptance_does_not_raise_confidence": true
+}

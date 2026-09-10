@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/source/v1/declaration",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 3
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "platform": {
+      "enum": [
+        "android",
+        "ios",
+        "harmonyos"
+      ]
+    },
+    "distribution": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language": {
+      "type": "string",
+      "minLength": 1
+    },
+    "qualified_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "signature": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "visibility": {
+      "enum": [
+        "public",
+        "nonpublic",
+        "unknown"
+      ]
+    },
+    "availability": {
+      "type": "object"
+    },
+    "sdk_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_line": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "source_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "original_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "documentation": {
+      "type": "string"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "platform",
+    "distribution",
+    "language",
+    "qualified_name",
+    "signature",
+    "kind",
+    "visibility",
+    "availability",
+    "sdk_version",
+    "source_path",
+    "source_line",
+    "source_hash",
+    "original_id",
+    "documentation",
+    "evidence_refs"
+  ],
+  "additionalProperties": false
+}

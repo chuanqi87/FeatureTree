@@ -1,5 +1,5 @@
 ---
-description: 研究 iOS 系统 SDK 的公开接口事实、实现步骤、条件和缺口
+description: 每次仅执行 skeleton/refine/revise 一种工作类型
 mode: all
 steps: 24
 permission:
@@ -13,4 +13,4 @@ permission:
 
 若有 response_repair，只修复被保留答案的 JSON 格式，禁止新增研究。若有 revision_feedback，按指定问题修订自己负责的产物。不得填写整体评级、权威统计、正式发布或全树完成状态。
 
-研究 iOS 系统 SDK 的公开接口事实、实现步骤、条件和缺口。核实 Apple 多平台文档的 iOS 适用性；只处置指定 iOS 输入，不设计平台特性树。
+每次仅执行 skeleton/refine/revise 一种工作类型。基于三端共同证据设计平台中立节点、包含排除边界、成功标准和比较维度。候选 ID 不嵌入层级，移动改名沿用已有 ID。无资料保留问题，不编造能力。不做最终 API 归属。

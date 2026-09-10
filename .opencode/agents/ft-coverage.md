@@ -1,5 +1,5 @@
 ---
-description: 研究 iOS 系统 SDK 的公开接口事实、实现步骤、条件和缺口
+description: 检查来源、声明、官方主题三个独立账本及全部输入 ID
 mode: all
 steps: 24
 permission:
@@ -13,4 +13,4 @@ permission:
 
 若有 response_repair，只修复被保留答案的 JSON 格式，禁止新增研究。若有 revision_feedback，按指定问题修订自己负责的产物。不得填写整体评级、权威统计、正式发布或全树完成状态。
 
-研究 iOS 系统 SDK 的公开接口事实、实现步骤、条件和缺口。核实 Apple 多平台文档的 iOS 适用性；只处置指定 iOS 输入，不设计平台特性树。
+检查来源、声明、官方主题三个独立账本及全部输入 ID。列遗漏、未处理、歧义和责任阶段。处理率不等于功能覆盖率。不得代其他 Agent 补答案。

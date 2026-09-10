@@ -1,0 +1,315 @@
+{
+  "protocol_version": 2,
+  "executor_version": "2.0.0",
+  "pipelines": {
+    "taxonomy": [
+      "ft-android",
+      "ft-ios",
+      "ft-harmonyos",
+      "ft-align",
+      "ft-design",
+      "ft-bind",
+      "ft-check",
+      "ft-granularity",
+      "ft-coverage",
+      "ft-review",
+      "ft-integrate"
+    ],
+    "knowledge": [
+      "fk-scope",
+      "fk-android",
+      "fk-ios",
+      "fk-harmonyos",
+      "fk-compare",
+      "fk-review",
+      "fk-confidence",
+      "fk-assemble"
+    ]
+  },
+  "stages": [
+    {
+      "stage_id": "ft-android",
+      "agent_name": "ft-android",
+      "executor": "agent",
+      "dependencies": [],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/ft-android",
+      "accepts_gaps": true,
+      "rules": [
+        "granularity"
+      ],
+      "platform": "android"
+    },
+    {
+      "stage_id": "ft-ios",
+      "agent_name": "ft-ios",
+      "executor": "agent",
+      "dependencies": [],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/ft-ios",
+      "accepts_gaps": true,
+      "rules": [
+        "granularity"
+      ],
+      "platform": "ios"
+    },
+    {
+      "stage_id": "ft-harmonyos",
+      "agent_name": "ft-harmonyos",
+      "executor": "agent",
+      "dependencies": [],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/ft-harmonyos",
+      "accepts_gaps": true,
+      "rules": [
+        "granularity"
+      ],
+      "platform": "harmonyos"
+    },
+    {
+      "stage_id": "ft-align",
+      "agent_name": "ft-align",
+      "executor": "agent",
+      "dependencies": [
+        "ft-android",
+        "ft-ios",
+        "ft-harmonyos"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/ft-align",
+      "accepts_gaps": true,
+      "rules": [
+        "granularity"
+      ],
+      "platform": null
+    },
+    {
+      "stage_id": "ft-design",
+      "agent_name": "ft-design",
+      "executor": "agent",
+      "dependencies": [
+        "ft-align"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/ft-design",
+      "accepts_gaps": true,
+      "rules": [
+        "granularity"
+      ],
+      "platform": null
+    },
+    {
+      "stage_id": "ft-bind",
+      "agent_name": "ft-bind",
+      "executor": "agent",
+      "dependencies": [
+        "ft-design"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/ft-bind",
+      "accepts_gaps": true,
+      "rules": [
+        "granularity"
+      ],
+      "platform": null
+    },
+    {
+      "stage_id": "ft-check",
+      "agent_name": null,
+      "executor": "ft-check",
+      "dependencies": [
+        "ft-bind"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/ft-check",
+      "accepts_gaps": true,
+      "rules": [
+        "granularity"
+      ],
+      "platform": null
+    },
+    {
+      "stage_id": "ft-granularity",
+      "agent_name": "ft-granularity",
+      "executor": "agent",
+      "dependencies": [
+        "ft-check"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/ft-granularity",
+      "accepts_gaps": true,
+      "rules": [
+        "granularity"
+      ],
+      "platform": null
+    },
+    {
+      "stage_id": "ft-coverage",
+      "agent_name": "ft-coverage",
+      "executor": "agent",
+      "dependencies": [
+        "ft-check"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/ft-coverage",
+      "accepts_gaps": true,
+      "rules": [
+        "granularity"
+      ],
+      "platform": null
+    },
+    {
+      "stage_id": "ft-review",
+      "agent_name": "ft-review",
+      "executor": "agent",
+      "dependencies": [
+        "ft-granularity",
+        "ft-coverage"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/ft-review",
+      "accepts_gaps": true,
+      "rules": [
+        "granularity"
+      ],
+      "platform": null
+    },
+    {
+      "stage_id": "ft-integrate",
+      "agent_name": "ft-integrate",
+      "executor": "agent",
+      "dependencies": [
+        "ft-review"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/ft-integrate",
+      "accepts_gaps": true,
+      "rules": [
+        "granularity"
+      ],
+      "platform": null
+    },
+    {
+      "stage_id": "fk-scope",
+      "agent_name": "fk-scope",
+      "executor": "agent",
+      "dependencies": [],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/fk-scope",
+      "accepts_gaps": true,
+      "rules": [
+        "confidence"
+      ],
+      "platform": null
+    },
+    {
+      "stage_id": "fk-android",
+      "agent_name": "fk-android",
+      "executor": "agent",
+      "dependencies": [
+        "fk-scope"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/fk-android",
+      "accepts_gaps": true,
+      "rules": [
+        "confidence"
+      ],
+      "platform": "android"
+    },
+    {
+      "stage_id": "fk-ios",
+      "agent_name": "fk-ios",
+      "executor": "agent",
+      "dependencies": [
+        "fk-scope"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/fk-ios",
+      "accepts_gaps": true,
+      "rules": [
+        "confidence"
+      ],
+      "platform": "ios"
+    },
+    {
+      "stage_id": "fk-harmonyos",
+      "agent_name": "fk-harmonyos",
+      "executor": "agent",
+      "dependencies": [
+        "fk-scope"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/fk-harmonyos",
+      "accepts_gaps": true,
+      "rules": [
+        "confidence"
+      ],
+      "platform": "harmonyos"
+    },
+    {
+      "stage_id": "fk-compare",
+      "agent_name": "fk-compare",
+      "executor": "agent",
+      "dependencies": [
+        "fk-android",
+        "fk-ios",
+        "fk-harmonyos"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/fk-compare",
+      "accepts_gaps": true,
+      "rules": [
+        "confidence"
+      ],
+      "platform": null
+    },
+    {
+      "stage_id": "fk-review",
+      "agent_name": "fk-review",
+      "executor": "agent",
+      "dependencies": [
+        "fk-compare"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/fk-review",
+      "accepts_gaps": true,
+      "rules": [
+        "confidence"
+      ],
+      "platform": null
+    },
+    {
+      "stage_id": "fk-confidence",
+      "agent_name": "fk-confidence",
+      "executor": "agent",
+      "dependencies": [
+        "fk-review"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/fk-confidence",
+      "accepts_gaps": true,
+      "rules": [
+        "confidence"
+      ],
+      "platform": null
+    },
+    {
+      "stage_id": "fk-assemble",
+      "agent_name": null,
+      "executor": "fk-assemble",
+      "dependencies": [
+        "fk-confidence"
+      ],
+      "output_schema": "https://featuretree.local/schema/workflow/v2/fk-assemble",
+      "accepts_gaps": true,
+      "rules": [
+        "confidence"
+      ],
+      "platform": null
+    }
+  ],
+  "issue_routes": {
+    "alignment": "ft-align",
+    "structure": "ft-design",
+    "binding": "ft-bind",
+    "granularity": "ft-design",
+    "coverage": "ft-bind",
+    "specification": "fk-scope",
+    "comparison": "fk-compare",
+    "confidence": "fk-confidence"
+  },
+  "defaults": {
+    "workers": 3,
+    "project_capacity": 6,
+    "timeout_seconds": 600,
+    "first_response_timeout": 120,
+    "max_attempts": 2,
+    "max_semantic_rounds": 2,
+    "max_source_rounds": 2,
+    "max_input_characters": 500000,
+    "max_tool_calls": 24
+  }
+}

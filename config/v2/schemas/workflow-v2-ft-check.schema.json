@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/workflow/v2/ft-check",
+  "type": "object",
+  "required": [
+    "protocol_version",
+    "run_id",
+    "work_id",
+    "task_id",
+    "stage_id",
+    "input_hash",
+    "outcome",
+    "payload",
+    "issues",
+    "source_requests"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "protocol_version": {
+      "const": 2
+    },
+    "stage_id": {
+      "const": "ft-check"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "work_id": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "input_hash": {
+      "type": "string"
+    },
+    "outcome": {
+      "enum": [
+        "pass",
+        "completed_with_gaps",
+        "revise",
+        "needs_sources"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "issues": {
+      "type": "array"
+    },
+    "source_requests": {
+      "type": "array"
+    }
+  }
+}

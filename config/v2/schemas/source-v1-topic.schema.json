@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/source/v1/topic",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "platform": {
+      "enum": [
+        "android",
+        "ios",
+        "harmonyos"
+      ]
+    },
+    "original_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "path": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string"
+    },
+    "summary_strength": {
+      "enum": [
+        "body",
+        "summary",
+        "title_only"
+      ]
+    },
+    "declaration_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "id",
+    "platform",
+    "original_id",
+    "path",
+    "title",
+    "url",
+    "summary",
+    "summary_strength",
+    "declaration_ids",
+    "evidence_refs"
+  ],
+  "additionalProperties": false
+}

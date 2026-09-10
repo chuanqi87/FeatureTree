@@ -1,0 +1,16 @@
+{
+  "id": "granularity-candidate-v1",
+  "status": "awaiting_calibration",
+  "calibration_scopes": [
+    "camera-capture",
+    "file-directory-access",
+    "background-scheduling"
+  ],
+  "principles": [
+    "independent_comparison_goal",
+    "count_core_families_per_platform_per_route",
+    "do_not_add_alternative_routes",
+    "incomplete_enumeration_is_lower_bound"
+  ],
+  "domain_ranges": {}
+}

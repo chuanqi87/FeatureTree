@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/business/v3/spec",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 3
+    },
+    "feature_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "freeze_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "candidate_tree_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "support",
+              "fact",
+              "comparison"
+            ]
+          },
+          "platforms": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "android",
+                "ios",
+                "harmonyos"
+              ]
+            }
+          },
+          "dimension": {
+            "type": "string",
+            "minLength": 1
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "applicability_reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scenario": {
+            "type": "string",
+            "minLength": 1
+          },
+          "success_criteria": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "platforms",
+          "dimension",
+          "question",
+          "required",
+          "applicability_reason",
+          "scenario",
+          "success_criteria"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rule_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "feature_id",
+    "freeze_ref",
+    "candidate_tree_ref",
+    "questions",
+    "scope",
+    "rule_id"
+  ],
+  "additionalProperties": false
+}

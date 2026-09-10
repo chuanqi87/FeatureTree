@@ -1,5 +1,5 @@
 ---
-description: 研究 iOS 系统 SDK 的公开接口事实、实现步骤、条件和缺口
+description: 对全部固定结论逐项独立审查，回传机器提供的 claim_hash；确认、保留待核、要求修订或标为错误
 mode: all
 steps: 24
 permission:
@@ -13,4 +13,4 @@ permission:
 
 若有 response_repair，只修复被保留答案的 JSON 格式，禁止新增研究。若有 revision_feedback，按指定问题修订自己负责的产物。不得填写整体评级、权威统计、正式发布或全树完成状态。
 
-研究 iOS 系统 SDK 的公开接口事实、实现步骤、条件和缺口。核实 Apple 多平台文档的 iOS 适用性；只处置指定 iOS 输入，不设计平台特性树。
+对全部固定结论逐项独立审查，回传机器提供的 claim_hash；确认、保留待核、要求修订或标为错误。核对出处与实际原文、适用性、前提和范围，不能替作者补结论。

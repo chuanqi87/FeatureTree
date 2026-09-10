@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/business/v3/tree",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 3
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "$ref": "https://featuretree.local/schema/business/v3/feature"
+      }
+    },
+    "lineage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "operation": {
+            "enum": [
+              "split",
+              "merge"
+            ]
+          },
+          "old_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "new_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "operation",
+          "old_ids",
+          "new_ids",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "features",
+    "lineage"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,336 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/workflow/v2/ft-ios",
+  "type": "object",
+  "properties": {
+    "protocol_version": {
+      "const": 2
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "work_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stage_id": {
+      "const": "ft-ios"
+    },
+    "input_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "outcome": {
+      "enum": [
+        "pass",
+        "needs_sources",
+        "revise",
+        "completed_with_gaps"
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "const": "ios"
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "api_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "goal": {
+                "type": "string",
+                "minLength": 1
+              },
+              "statement": {
+                "type": "string",
+                "minLength": 1
+              },
+              "conditions": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "implementation_steps": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "gaps": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "required": [
+              "id",
+              "api_ids",
+              "goal",
+              "statement",
+              "conditions",
+              "implementation_steps",
+              "evidence_refs",
+              "gaps"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "api_dispositions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "enum": [
+                  "unprocessed",
+                  "researching",
+                  "assigned",
+                  "supporting",
+                  "excluded",
+                  "insufficient_evidence",
+                  "ambiguous",
+                  "failed"
+                ]
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              },
+              "rule": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "required": [
+              "id",
+              "status",
+              "reason",
+              "rule",
+              "evidence_refs"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "topic_dispositions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "enum": [
+                  "unprocessed",
+                  "researching",
+                  "assigned",
+                  "supporting",
+                  "excluded",
+                  "insufficient_evidence",
+                  "ambiguous",
+                  "failed"
+                ]
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              },
+              "rule": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "required": [
+              "id",
+              "status",
+              "reason",
+              "rule",
+              "evidence_refs"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "platform",
+        "facts",
+        "api_dispositions",
+        "topic_dispositions"
+      ],
+      "additionalProperties": false
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "source",
+              "fact",
+              "alignment",
+              "structure",
+              "binding",
+              "granularity",
+              "coverage",
+              "specification",
+              "comparison",
+              "confidence",
+              "execution"
+            ]
+          },
+          "severity": {
+            "enum": [
+              "blocking",
+              "gap",
+              "advisory"
+            ]
+          },
+          "target_stage": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subject_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "severity",
+          "target_stage",
+          "subject_ids",
+          "reason",
+          "evidence_refs"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "source_requests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "enum": [
+              "android",
+              "ios",
+              "harmonyos"
+            ]
+          },
+          "query": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subject_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "source_urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "platform",
+          "query",
+          "reason",
+          "subject_ids",
+          "source_urls"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "protocol_version",
+    "run_id",
+    "work_id",
+    "task_id",
+    "stage_id",
+    "input_hash",
+    "outcome",
+    "payload",
+    "issues",
+    "source_requests"
+  ],
+  "additionalProperties": false
+}

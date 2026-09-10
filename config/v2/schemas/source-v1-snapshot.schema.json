@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/source/v1/snapshot",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseline_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "historical",
+        "candidate",
+        "verified"
+      ]
+    },
+    "extractor_versions": {
+      "type": "object"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status": {
+            "enum": [
+              "extracted",
+              "failed",
+              "excluded",
+              "unprocessed"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "bytes",
+          "status",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "records": {
+      "type": "object",
+      "properties": {
+        "declarations": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "families": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "topics": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "documents": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "declarations",
+        "families",
+        "topics",
+        "documents"
+      ],
+      "additionalProperties": false
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "declarations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "families": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "topics": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "documents": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "declarations",
+        "families",
+        "topics",
+        "documents"
+      ],
+      "additionalProperties": false
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "source",
+              "fact",
+              "alignment",
+              "structure",
+              "binding",
+              "granularity",
+              "coverage",
+              "specification",
+              "comparison",
+              "confidence",
+              "execution"
+            ]
+          },
+          "severity": {
+            "enum": [
+              "blocking",
+              "gap",
+              "advisory"
+            ]
+          },
+          "target_stage": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subject_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "severity",
+          "target_stage",
+          "subject_ids",
+          "reason",
+          "evidence_refs"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "provenance": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "created_at",
+    "baseline_ref",
+    "status",
+    "extractor_versions",
+    "files",
+    "records",
+    "counts",
+    "gaps",
+    "provenance"
+  ],
+  "additionalProperties": false
+}

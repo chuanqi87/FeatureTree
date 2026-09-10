@@ -1,5 +1,5 @@
 ---
-description: 研究 iOS 系统 SDK 的公开接口事实、实现步骤、条件和缺口
+description: 按共同研究规格逐题研究 iOS；核实 Apple 资料的 iOS 适用性，提供条件、官方证据与未知项
 mode: all
 steps: 24
 permission:
@@ -13,4 +13,4 @@ permission:
 
 若有 response_repair，只修复被保留答案的 JSON 格式，禁止新增研究。若有 revision_feedback，按指定问题修订自己负责的产物。不得填写整体评级、权威统计、正式发布或全树完成状态。
 
-研究 iOS 系统 SDK 的公开接口事实、实现步骤、条件和缺口。核实 Apple 多平台文档的 iOS 适用性；只处置指定 iOS 输入，不设计平台特性树。
+按共同研究规格逐题研究 iOS；核实 Apple 资料的 iOS 适用性，提供条件、官方证据与未知项。不得输出跨端结论；不支持需核实替代路径。

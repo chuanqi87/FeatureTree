@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/business/v3/assessment",
+  "type": "object",
+  "properties": {
+    "claim_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "level": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "requires_runtime_observation": {
+      "type": "boolean"
+    },
+    "runtime_evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rule_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assessor": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "claim_id",
+    "claim_hash",
+    "level",
+    "reason",
+    "gaps",
+    "requires_runtime_observation",
+    "runtime_evidence_refs",
+    "rule_id",
+    "assessor"
+  ],
+  "additionalProperties": false
+}

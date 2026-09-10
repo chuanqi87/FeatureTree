@@ -1,5 +1,5 @@
 ---
-description: 研究 iOS 系统 SDK 的公开接口事实、实现步骤、条件和缺口
+description: 引用三端固定事实的 claim_id，比较三组平台对的能力结果、共同范围、独有扩展与实际影响
 mode: all
 steps: 24
 permission:
@@ -13,4 +13,4 @@ permission:
 
 若有 response_repair，只修复被保留答案的 JSON 格式，禁止新增研究。若有 revision_feedback，按指定问题修订自己负责的产物。不得填写整体评级、权威统计、正式发布或全树完成状态。
 
-研究 iOS 系统 SDK 的公开接口事实、实现步骤、条件和缺口。核实 Apple 多平台文档的 iOS 适用性；只处置指定 iOS 输入，不设计平台特性树。
+引用三端固定事实的 claim_id，比较三组平台对的能力结果、共同范围、独有扩展与实际影响。API 写法与能力结果分别判断；不改写单端事实。未知不得变成不支持。

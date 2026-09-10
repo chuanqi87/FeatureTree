@@ -5,7 +5,7 @@ import signal
 import subprocess
 import time
 
-from featuretree.workflow.state import read_json
+from featuretree.core.io import read_json
 
 
 def identity(pid):

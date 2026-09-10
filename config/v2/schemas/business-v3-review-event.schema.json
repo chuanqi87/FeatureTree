@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/business/v3/review-event",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 3
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ticket_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "article_ref": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "claim_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "action": {
+      "enum": [
+        "start",
+        "add_evidence",
+        "correct",
+        "request_research",
+        "accept_limitations",
+        "unknown",
+        "defer"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "target_stage": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "replacement": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "previous_event_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "event_id",
+    "ticket_id",
+    "article_ref",
+    "claim_id",
+    "claim_hash",
+    "action",
+    "reason",
+    "actor",
+    "evidence_refs",
+    "target_stage",
+    "replacement",
+    "created_at",
+    "previous_event_ref"
+  ],
+  "additionalProperties": false
+}

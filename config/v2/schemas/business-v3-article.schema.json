@@ -1,0 +1,413 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/business/v3/article",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 3
+    },
+    "feature_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "spec_ref": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "freeze_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "candidate_tree_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "baseline_ref": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "question_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "support",
+              "fact",
+              "comparison"
+            ]
+          },
+          "platforms": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "android",
+                "ios",
+                "harmonyos"
+              ]
+            }
+          },
+          "dimension": {
+            "type": "string",
+            "minLength": 1
+          },
+          "result": {
+            "enum": [
+              "supported",
+              "conditional",
+              "unsupported",
+              "unknown",
+              "same",
+              "different",
+              "not_applicable",
+              "fact"
+            ]
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "premise_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "coverage_note": {
+            "type": "string"
+          },
+          "alternative_paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "gaps": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "release": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sdk": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "distribution": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "device_forms": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "conditions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "applicability": {
+                  "enum": [
+                    "verified",
+                    "unknown",
+                    "unavailable"
+                  ]
+                }
+              },
+              "required": [
+                "release",
+                "sdk",
+                "distribution",
+                "device_forms",
+                "conditions",
+                "applicability"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "claim_id",
+          "question_id",
+          "kind",
+          "platforms",
+          "dimension",
+          "result",
+          "statement",
+          "conditions",
+          "evidence_refs",
+          "premise_ids",
+          "coverage_note",
+          "alternative_paths",
+          "gaps",
+          "context"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "claim_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "verdict": {
+            "enum": [
+              "confirmed",
+              "tentative",
+              "revise",
+              "invalid"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "claim_id",
+          "claim_hash",
+          "verdict",
+          "reason",
+          "evidence_refs"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "claim_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "level": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "gaps": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "requires_runtime_observation": {
+            "type": "boolean"
+          },
+          "runtime_evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "rule_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "assessor": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "claim_id",
+          "claim_hash",
+          "level",
+          "reason",
+          "gaps",
+          "requires_runtime_observation",
+          "runtime_evidence_refs",
+          "rule_id",
+          "assessor"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "snapshot_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "document_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "body_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "excerpt": {
+            "type": "string",
+            "minLength": 1
+          },
+          "locator": {
+            "type": "string",
+            "minLength": 1
+          },
+          "platform": {
+            "enum": [
+              "android",
+              "ios",
+              "harmonyos"
+            ]
+          },
+          "applicability": {
+            "enum": [
+              "verified",
+              "unknown",
+              "unavailable"
+            ]
+          },
+          "source_revision": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "snapshot_id",
+          "document_id",
+          "url",
+          "body_sha256",
+          "excerpt",
+          "locator",
+          "platform",
+          "applicability",
+          "source_revision"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "overall_confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "confidence_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "dependencies": {
+      "type": "object"
+    },
+    "draft": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "feature_id",
+    "spec_ref",
+    "freeze_ref",
+    "candidate_tree_ref",
+    "baseline_ref",
+    "snapshot_id",
+    "claims",
+    "reviews",
+    "assessments",
+    "evidence",
+    "overall_confidence",
+    "confidence_reasons",
+    "dependencies",
+    "draft",
+    "created_at"
+  ],
+  "additionalProperties": false
+}

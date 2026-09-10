@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://featuretree.local/schema/business/v3/baseline",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 3
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "platforms": {
+      "type": "object",
+      "properties": {
+        "android": {
+          "type": "object",
+          "properties": {
+            "release": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sdk": {
+              "type": "string",
+              "minLength": 1
+            },
+            "distribution": {
+              "type": "string",
+              "minLength": 1
+            },
+            "device_forms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "verified_at": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "status": {
+              "enum": [
+                "verified_stable",
+                "historical",
+                "unknown"
+              ]
+            }
+          },
+          "required": [
+            "release",
+            "sdk",
+            "distribution",
+            "device_forms",
+            "verified_at",
+            "evidence_refs",
+            "status"
+          ],
+          "additionalProperties": false
+        },
+        "ios": {
+          "type": "object",
+          "properties": {
+            "release": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sdk": {
+              "type": "string",
+              "minLength": 1
+            },
+            "distribution": {
+              "type": "string",
+              "minLength": 1
+            },
+            "device_forms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "verified_at": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "status": {
+              "enum": [
+                "verified_stable",
+                "historical",
+                "unknown"
+              ]
+            }
+          },
+          "required": [
+            "release",
+            "sdk",
+            "distribution",
+            "device_forms",
+            "verified_at",
+            "evidence_refs",
+            "status"
+          ],
+          "additionalProperties": false
+        },
+        "harmonyos": {
+          "type": "object",
+          "properties": {
+            "release": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sdk": {
+              "type": "string",
+              "minLength": 1
+            },
+            "distribution": {
+              "type": "string",
+              "minLength": 1
+            },
+            "device_forms": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "verified_at": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "status": {
+              "enum": [
+                "verified_stable",
+                "historical",
+                "unknown"
+              ]
+            }
+          },
+          "required": [
+            "release",
+            "sdk",
+            "distribution",
+            "device_forms",
+            "verified_at",
+            "evidence_refs",
+            "status"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "android",
+        "ios",
+        "harmonyos"
+      ],
+      "additionalProperties": false
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "created_at",
+    "platforms",
+    "scope"
+  ],
+  "additionalProperties": false
+}

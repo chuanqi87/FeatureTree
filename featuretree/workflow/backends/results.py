@@ -1,4 +1,4 @@
-"""Read completed files or legacy chat envelopes; retain diagnostics on every failure."""
+"""Accept normal process exits and retain files for the stage's full business validation."""
 
 import hashlib
 import json
@@ -14,6 +14,10 @@ from featuretree.workflow.backends.provider_errors import provider_error
 def chat_response(lines, root, folder, packet, metadata):
     final, usage = parse_events(lines)
     metadata.update(usage, output_chars=len(final), transport="chat")
+    return decode_response(final, root, folder, packet, metadata)
+
+
+def decode_response(final, root, folder, packet, metadata):
     (folder / "response.json").write_text(final, encoding="utf-8")
     try:
         result = read_json(folder / "response.json")
@@ -34,19 +38,26 @@ def chat_response(lines, root, folder, packet, metadata):
 def collect_result(root, folder, packet, returncode, metadata):
     lines = (folder / "events.jsonl").read_text().splitlines()
     metadata.update(event_summary(lines))
+    metadata["exit_code"] = returncode
     try:
-        if (root / "delivery/completed.json").is_file():
+        if returncode < 0:
+            raise ExecutionInterrupted(f"OpenCode terminated by signal {-returncode}; automatic retry stopped")
+        error = provider_error(lines)
+        if error:
+            metadata["provider_status"] = error.status_code
+            raise error
+        if any(step.get("reason") in ("error", "content-filter") for step in metadata["usage"]):
+            raise ValueError("OpenCode reported an unsuccessful model step; inspect retained events")
+        if returncode:
+            raise ValueError(f"OpenCode exited {returncode}; inspect {folder / 'stderr.log'}")
+        if (root / "delivery/result.json").is_file():
+            final = (root / "delivery/result.json").read_text(encoding="utf-8")
+            metadata.update(transport="workspace_file", output_chars=len(final))
+            result = decode_response(final, root, folder, packet, metadata)
+        elif (root / "delivery/completed.json").is_file():
             result, references = read_delivery(root, packet)
             metadata.update(payload_chunk_refs=references, transport="file")
         else:
-            if returncode < 0:
-                raise ExecutionInterrupted(f"OpenCode terminated by signal {-returncode}; automatic retry stopped")
-            error = provider_error(lines)
-            if error:
-                metadata["provider_status"] = error.status_code
-                raise error
-            if returncode:
-                raise ValueError(f"OpenCode exited {returncode}; inspect {folder / 'stderr.log'}")
             result = chat_response(lines, root, folder, packet, metadata)
         metadata["recovery"] = "format_repair" if packet.get("response_repair") else None
         write_json(folder / "response.json", result)

@@ -31,7 +31,7 @@ class Planner:
             raise ValueError("A resolved provider/model identifier is required for reproducible execution")
         budget = {**self.registry.configuration["defaults"], **request.get("budget", {})}
         if set(budget) != set(self.registry.configuration["defaults"]) or any(
-                (value is None and key not in {"timeout_seconds", "first_response_timeout", "max_input_characters", "max_tool_calls", "max_output_tokens", "max_agent_steps", "max_delivery_chunks", "batch_timeout_seconds", "batch_max_tool_calls", "max_attempts", "max_semantic_rounds", "max_source_rounds"}) or (value is not None and (type(value) is not int or value < 1)) for key, value in budget.items()):
+                (value is None and key not in {"timeout_seconds", "first_response_timeout", "max_input_characters", "max_tool_calls", "max_output_tokens", "max_agent_steps", "max_delivery_chunks", "batch_timeout_seconds", "batch_max_tool_calls", "max_attempts", "max_semantic_rounds", "max_source_rounds", "source_batch_size"}) or (value is not None and (type(value) is not int or value < 1)) for key, value in budget.items()):
             raise ValueError("Invalid execution budget")
         if budget["workers"] > budget["project_capacity"] or budget["project_capacity"] != 6:
             raise ValueError("Project capacity is fixed at six; workers cannot exceed it")

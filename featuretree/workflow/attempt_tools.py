@@ -12,11 +12,8 @@ def configure_agent(text, steps):
     if not re.search(r"^steps:\s*\d+\s*$", header, re.MULTILINE):
         raise ValueError("Agent must declare its step budget")
     header = re.sub(r"^steps:\s*\d+\s*$", f"steps: {steps}" if steps is not None else "", header, flags=re.MULTILINE)
-    if "  submit_payload: allow" not in header:
-        header = header.replace("  source_catalog: allow", "  source_catalog: allow\n  submit_payload: allow\n  finish_payload: allow")
-    body = parts[2].replace("只输出一个符合 output_schema 的 JSON 信封", "使用 submit_payload 分批写入内容，再用 finish_payload 写入符合 output_schema 的 JSON 信封；最终聊天只简短说明完成")
-    body = body.replace("禁止写文件", "禁止任意写文件，仅允许 submit_payload 和 finish_payload 写当前交付文件")
-    return "---" + header + "---" + body
+    return "---" + header + "---" + parts[2]
+
 
 
 def delivery_adapter(root, *, finalize=False):

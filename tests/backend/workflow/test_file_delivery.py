@@ -12,8 +12,9 @@ from jsonschema import ValidationError
 from featuretree.core.io import IntegrityError, read_json
 from featuretree.workflow.attempt_tools import configure_agent
 from featuretree.workflow.backends.delivery import save_chunk, finalize_delivery, read_delivery
-from featuretree.workflow.backends.errors import OutputLimitError
-from featuretree.workflow.backends.opencode import OpenCodeBackend, parse_events
+from featuretree.workflow.backends.errors import MissingStructuredAnswer
+from featuretree.workflow.backends.opencode import OpenCodeBackend
+from featuretree.workflow.backends.events import parse_events
 from tests.fixtures.v2_application import application, run
 from tests.fixtures.v2_pipeline import ModelSubstitute
 
@@ -96,7 +97,7 @@ class FileDeliveryTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 save_chunk(root, p, ["../outside"], "No")
 
-    def test_backend_accepts_file_and_stops_waiting_for_chat(self):
+    def test_backend_accepts_optional_chunk_delivery_after_normal_exit(self):
         with tempfile.TemporaryDirectory() as directory:
             root, p = Path(directory), packet()
             p["limits"]["first_response_timeout"] = None
@@ -114,23 +115,25 @@ p = json.loads((root / "task.json").read_text())
 (root / "observed-limit.txt").write_text(os.environ["OPENCODE_EXPERIMENTAL_OUTPUT_TOKEN_MAX"])
 refs = [save_chunk(root, p, ["rows"], ["one", "two"])["chunk_ref"], save_chunk(root, p, ["spec", "title"], "Title")["chunk_ref"]]
 finalize_delivery(root, p, refs, "pass", [], [])
-time.sleep(20)
+time.sleep(0.1)
+(root / "normal-exit.txt").write_text("finished")
 ''')
             executable.chmod(0o755)
             result, metadata = OpenCodeBackend(str(executable)).execute(root, "ft-android", p, root, None, "test/model", None)
             self.assertEqual(["one", "two"], result["payload"]["rows"])
             self.assertEqual("file", metadata["transport"])
-            self.assertTrue(metadata["delivery_completed"])
+            self.assertEqual(0, metadata["exit_code"])
+            self.assertTrue((root / "normal-exit.txt").exists())
             self.assertEqual("16000", (root / "observed-limit.txt").read_text())
 
     def test_agent_budget_and_permissions_are_pinned_without_changing_source(self):
-        source = '---\nsteps: 24\npermission:\n  "*": deny\n  source_catalog: allow\n---\n禁止写文件'
+        source = '---\nsteps: 24\npermission:\n  "*": allow\n---\n常规工具写文件'
         configured = configure_agent(source, 96)
         self.assertIn("steps: 96", configured)
-        self.assertIn("finish_payload: allow", configured)
+        self.assertIn('"*": allow', configured)
         self.assertIn("steps: 24", source)
 
-    def test_output_limit_has_a_distinct_non_retryable_failure(self):
-        with self.assertRaises(OutputLimitError) as failure:
+    def test_output_limit_without_delivery_reports_missing_result(self):
+        with self.assertRaises(MissingStructuredAnswer) as failure:
             parse_events([json.dumps({"part": {"type": "step-finish", "reason": "length"}})])
         self.assertFalse(failure.exception.retryable)

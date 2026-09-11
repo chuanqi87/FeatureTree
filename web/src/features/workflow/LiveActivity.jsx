@@ -26,7 +26,7 @@ export default function LiveActivity({ activity, onArtifact }) {
       { key: "time", label: "最新日志", children: new Date(live.last_activity_at).toLocaleString() },
       { key: "sources", label: "来源工具调用", children: live.source_calls },
       { key: "chunks", label: "已写交付块", children: live.payload_chunks },
-      { key: "file", label: "交付文件", children: live.file_completed ? "已提交，校验状态见下表" : "尚未完成" },
+      { key: "file", label: "交付文件", children: live.file_completed ? "已写入，验收状态见下表" : "尚未完成" },
     ]} />}
     {live && <Collapse items={[
       { key: "inputs", label: `当前研究输入：${live.api_ids.length} 个 API、${live.topic_ids.length} 个主题`, children: <div style={{ maxHeight: 260, overflow: "auto" }}>{[...live.api_ids, ...live.topic_ids].map(id => <Typography.Paragraph key={id} copyable>{id}</Typography.Paragraph>)}</div> },

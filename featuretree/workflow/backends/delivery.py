@@ -100,14 +100,3 @@ def read_delivery(workspace, packet):
         raise IntegrityError("Completed delivery differs from its immutable payload chunks")
     Draft202012Validator(packet["output_schema"]).validate(response)
     return response, references
-
-
-def delivery_prompt():
-    return """使用文件交付模式：submit_payload 分批写 JSON 内容，finish_payload 写成最终交付文件。
-工具 path 是 payload 内字段路径（如 ["facts"]、["api_dispositions"] 或 ["spec","questions"]）；
-value_json 是该字段的 JSON 值。建议数组按每批约 20 项提交，可多次追加同一数组。
-非数组字段只提交一次，不能同时提交父字段及其子字段。每次工具返回不可变 chunk_ref。
-最后调用 finish_payload，chunk_refs 填所有选用的 chunk_ref（按追加顺序），填写 outcome、issues_json、source_requests_json。
-代码自动填写固定任务身份并将完整 JSON 写入 delivery/completed.json，执行同一完整 schema、输入守恒和证据校验。
-最终聊天仅需说已完成，不要返回整份 JSON 或复述文件。分批存入不表示通过审核；不得遗漏输入，不得用空列表冒充已分析。
-必须预留最后一步调用 finish_payload。文件完成后无需继续检索或解释。\n"""

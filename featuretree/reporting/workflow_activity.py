@@ -74,8 +74,9 @@ def stage_activity(folder, task, artifacts, process_identity):
                 'last_activity_at': datetime.fromtimestamp(current.stat().st_mtime, timezone.utc).isoformat(),
                 'api_ids': ids.get('api_ids', []), 'topic_ids': ids.get('topic_ids', []),
                 'source_calls': len(list((workspace / 'source_calls').glob('*.json'))),
-                'payload_chunks': len([p for p in (workspace / 'delivery').glob('*.json') if p.name != 'completed.json']),
-                'file_completed': (workspace / 'delivery/completed.json').exists(),
+                'payload_chunks': len([p for p in (workspace / 'delivery').glob('*.json') if len(p.stem) == 64]),
+                'file_completed': ((workspace / 'delivery/result.json').exists() or
+                                   (workspace / 'delivery/completed.json').exists()),
                 'events': event_tail(current)}
     status = 'running' if live and live['process_alive'] else progress.get('status', task['status'])
     if status == 'running' and live and not live['process_alive']:

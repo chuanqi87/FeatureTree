@@ -48,7 +48,7 @@ def research_batches(packet):
         child["work"]["enumeration_complete"] = False
         child["batch"] = {"index": index, "count": count,
                           "parent_scope_hash": digest(packet["work"]),
-                          "instruction": "这是代码分配的单批研究，只处置本批 API/主题，勿尝试遍历整个领域。批次不是叶子边界；跨批实现链留待对齐阶段整合。范围外依赖记缺口，不猜测不支持。使用交付工具写文件。"}
+                          "instruction": "这是代码分配的单批研究，只处置本批 API/主题，勿尝试遍历整个领域。批次不是叶子边界；跨批实现链留待对齐阶段整合。范围外依赖记缺口，不猜测不支持。使用常规工具将交付写入 delivery/result.json。"}
         child["limits"]["timeout_seconds"] = minimum_limit(packet["limits"]["timeout_seconds"], packet["limits"]["batch_timeout_seconds"])
         child["limits"]["max_tool_calls"] = minimum_limit(packet["limits"]["max_tool_calls"], packet["limits"]["batch_max_tool_calls"])
         child["input_hash"] = digest(child)

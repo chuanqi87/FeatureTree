@@ -1,6 +1,6 @@
 {
   "protocol_version": 2,
-  "executor_version": "2.0.0",
+  "executor_version": "2.0.0-native-files",
   "pipelines": {
     "taxonomy": [
       "ft-android",
@@ -317,7 +317,7 @@
     "max_output_tokens": null,
     "max_agent_steps": null,
     "max_delivery_chunks": null,
-    "source_batch_size": 32,
+    "source_batch_size": null,
     "batch_timeout_seconds": null,
     "batch_max_tool_calls": null
   }
